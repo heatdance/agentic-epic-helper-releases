@@ -1,0 +1,318 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-639",
+  "sources": {
+    "jira_fetched_at": "2026-04-13T18:30:00Z",
+    "ref_path": "epics/CRT-639/CRT-639-ref.json",
+    "ref_loaded": true,
+    "epic_ref_loaded_at": "2026-04-13T18:30:00Z",
+    "coverage_path": "epics/CRT-639/CRT-639-coverage.json",
+    "coverage_loaded": true,
+    "note": "ANALYSE run: ref + coverage read from disk; Jira refresh via user-mcp-atlassian."
+  },
+  "summary": {
+    "text": "CRT-639 validates FX Spot moving from FIFO to weighted-average costing for average fill, open P/L, % P/L gross, and realized P/L in cash settlement, driven by associated-data FIFO vs WeightedAvg mapping (CRT-1741) and the formula ladder in CRT-1740/1743/1742/1738. QA proves configuration read, metric ladders (including cross-through-zero paths), and numeric parity across dxTrade5, WebBroker, Adaptive, and API/statement truth sources. Open rounding clarification on XT-7911 remains the main acceptance risk before hard numeric sign-off.",
+    "derived_from": [
+      "jira_summary",
+      "jira_description",
+      "ref.business_context",
+      "ref.synthesis",
+      "coverage.epic_verification_focus"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "summary": "No code-level implementation hits: Bitbucket/Stash code search returned HTTP 404; epic-ref implementation.hits empty.",
+      "source": "ref",
+      "type": "grounding",
+      "evidence": "CRT-639-ref.json implementation.hits, skipped_reason; CRT-639-coverage.json anti_pattern_findings (bitbucket_search_unavailable)"
+    },
+    {
+      "id": "gap-002",
+      "summary": "Rounding rules for average price vs realized P/L reference nested requirements not present in epic-ref requirements[]; acceptance deferred on chk-007.",
+      "source": "coverage",
+      "type": "ambiguity",
+      "evidence": "CRT-639-coverage.json checks[].id chk-007 (ambiguity, calculation_contract deferred_ambiguous); nested_requirement_refs CRT-1921/CRT-1922/DXINV-326"
+    },
+    {
+      "id": "gap-003",
+      "summary": "client_shell_impact marks both shells affected under qa_default_both with evidence none_found—confirm product signal if Jira later excludes a shell.",
+      "source": "ref",
+      "type": "other",
+      "evidence": "CRT-639-ref.json client_shell_impact.corner_trader.evidence, adaptive.evidence, source"
+    },
+    {
+      "id": "gap-004",
+      "summary": "Epic-linked XT-7651 (prospective accounts settlement) is adjacent to cash-settlement scope; test slice not explicit in coverage matrix.",
+      "source": "jira",
+      "type": "other",
+      "evidence": "jira_search Epic Link = CRT-639 → XT-7651 summary"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-001",
+      "text": "Which feed or service is the authoritative mark price for Open P/L on each target environment (dxTrade5/WebBroker/API), given the checklist warns not to infer from UI column labels?",
+      "kind": "grounded",
+      "dimension": "testability",
+      "evidence": "CRT-639-coverage.json checks chk-004 scenario_line (mark price source)"
+    },
+    {
+      "id": "q-002",
+      "text": "Before locking expected numeric outputs for the CRT-1738 ladder, will XT-7911 and linked CRT-1921, CRT-1922, DXINV-326 supply final rounding contracts?",
+      "kind": "grounded",
+      "dimension": "completeness",
+      "evidence": "CRT-639-coverage.json chk-007; nested_requirement_refs from XT-7911"
+    },
+    {
+      "id": "q-003",
+      "text": "Does XT-7651 require an explicit prospective-account or account-type slice in Corner validation, or is standard FX Spot WeightedAvg coverage sufficient?",
+      "kind": "hypothesis",
+      "dimension": "cross_surface",
+      "evidence": null
+    },
+    {
+      "id": "q-004",
+      "text": "For Adaptive, which of average fill, open P/L, % P/L gross, and realized P/L are actually exposed for FX Spot WeightedAvg positions in the bank build under test?",
+      "kind": "grounded",
+      "dimension": "cross_surface",
+      "evidence": "CRT-639-coverage.json chk-010 scenario_line (N/A with product evidence)"
+    },
+    {
+      "id": "q-005",
+      "text": "Should resolved upstream CRs XT-7312, XT-7325–XT-7328, XT-7552 be cited as regression anchors in execution notes even though they are closed and not duplicated as new checklist > lines?",
+      "kind": "hypothesis",
+      "dimension": "operational",
+      "evidence": null
+    }
+  ],
+  "known_issues_search": {
+    "at": "2026-04-13T18:30:00Z",
+    "queries": [
+      {
+        "jql": "parent = CRT-639 ORDER BY updated DESC",
+        "purpose": "epic_link",
+        "result_count": 0
+      },
+      {
+        "jql": "\"Epic Link\" = CRT-639 ORDER BY updated DESC",
+        "purpose": "epic_link",
+        "result_count": 13
+      },
+      {
+        "jql": "text ~ \"CRT-639\" AND project in (CRTQA, CRT, CRTBL, SUPXT, CAN, XT) ORDER BY updated DESC",
+        "purpose": "epic_text",
+        "result_count": 22
+      },
+      {
+        "jql": "project = XT AND summary ~ \"WEIGHTED_AVERAGE\" AND updated >= -90d ORDER BY updated DESC",
+        "purpose": "keyword_semantic",
+        "result_count": 4
+      }
+    ]
+  },
+  "known_issues": [
+    {
+      "key": "CRTQA-10132",
+      "summary": "[Corner][Test Case Development] CRT-639: Cash Settlement based on Average Price",
+      "status": "In Progress",
+      "issuetype": "Test Execution",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10132",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "QA workflow task for test case development, not a product defect mapped to metric scenarios."
+      }
+    },
+    {
+      "key": "CRTQA-10042",
+      "summary": "[Corner][Requirement Analysis] CRT-639: Cash Settlement based on Average Price",
+      "status": "Closed",
+      "issuetype": "QA Task",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10042",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "Closed QA analysis task; not a runtime defect for checklist mapping."
+      }
+    },
+    {
+      "key": "XT-7911",
+      "summary": "Apply rounding rules to Avg Price and Realized PL calculations",
+      "status": "Waiting for clarification",
+      "issuetype": "Change Request",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/XT-7911",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Directly blocks rounding acceptance for avg price and realized P/L tied to CRT-1738 and checklist chk-007."
+      }
+    },
+    {
+      "key": "XT-7651",
+      "summary": "Support Settlement Calculations For Prospective accounts",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7651",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "questionable",
+        "rationale": "Settlement scope may overlap epic cash settlement but account-type focus is not explicit in coverage matrix or epic_verification_focus."
+      }
+    },
+    {
+      "key": "XT-7649",
+      "summary": "Remain using position when it needs to calculate average price",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7649",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Average price calculation behavior aligns with WeightedAvg average fill / position ladder (chk-003, chk-006)."
+      }
+    },
+    {
+      "key": "XT-7328",
+      "summary": "Update Settlement for WEIGHTED_AVERAGE instruments",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7328",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Weighted-average settlement is core to CRT-1738 / cash settlement checks (chk-006)."
+      }
+    },
+    {
+      "key": "XT-7326",
+      "summary": "Update OpenPL calculation for weighted-average-instruments",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7326",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Maps to open P/L WeightedAvg branch (chk-004, cross-surface checks)."
+      }
+    },
+    {
+      "key": "XT-7325",
+      "summary": "Update calculation of AveragePrice for Position",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7325",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Maps to average fill / CRT-1740 ladder (chk-003)."
+      }
+    },
+    {
+      "key": "XT-7327",
+      "summary": "Update Percent PL Gross calculation for WEIGHTED_AVERAGE instruments",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7327",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Maps to % P/L gross WeightedAvg (chk-005)."
+      }
+    },
+    {
+      "key": "XT-7552",
+      "summary": "Override PLRelatedPositionData to support weighted average calculations",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7552",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Platform data path for weighted-average P/L supports API/statement parity scenarios (chk-008)."
+      }
+    },
+    {
+      "key": "CRTQA-10133",
+      "summary": "[Corner][Test Case Review] CRT-639: Cash Settlement based on Average Price",
+      "status": "Open",
+      "issuetype": "QA Task",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10133",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "QA review workflow task, not a product defect line item."
+      }
+    },
+    {
+      "key": "CRTQA-10134",
+      "summary": "[Corner][Epic Validation] CRT-639: Cash Settlement based on Average Price",
+      "status": "Open",
+      "issuetype": "Test Execution",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10134",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "Epic validation execution container, not a metric scenario defect."
+      }
+    },
+    {
+      "key": "XT-7312",
+      "summary": "Introduce global associated data PlCalculationMode",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7312",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Configuration primitive for FIFO vs WeightedAvg aligns with CRT-1741 / chk-002."
+      }
+    }
+  ],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [
+    {
+      "check_id": "chk-007",
+      "appended_lines": [],
+      "skipped_duplicates": ["XT-7911"]
+    }
+  ],
+  "validation_log": [
+    { "step": "1", "at": "2026-04-13T18:30:00Z", "action": "Parsed CRT-639; include_closed default (open-only mutation); loaded ref + coverage from disk." },
+    { "step": "2", "at": "2026-04-13T18:30:00Z", "action": "jira_get_issue CRT-639 (summary, description, status Validation)." },
+    { "step": "3", "at": "2026-04-13T18:30:00Z", "action": "Mined gaps from ref implementation empty, client_shell evidence, coverage anti_pattern, chk-007 deferred_ambiguous, nested_requirement_refs; epic-linked XT-7651 scope gap." },
+    { "step": "4", "at": "2026-04-13T18:30:00Z", "action": "Populated questions[] (5) — mark price, rounding traceability, XT-7651 slice, Adaptive exposure, closed CR anchors." },
+    { "step": "5", "at": "2026-04-13T18:30:00Z", "action": "Summary from Jira + ref.synthesis + coverage epic_verification_focus." },
+    { "step": "6", "at": "2026-04-13T18:30:00Z", "action": "jira_search: parent=0; Epic Link 13; text mention 22 (includes non-linked deliveries—excluded from known_issues[]); keyword WEIGHTED_AVERAGE 4." },
+    { "step": "7", "at": "2026-04-13T18:30:00Z", "action": "Coverage reconciliation for 13 epic-linked issues vs epic_verification_focus, checks, explicitly_out_of_scope." },
+    { "step": "8", "at": "2026-04-13T18:30:00Z", "action": "Mutation: no new > lines; XT-7911 already present under chk-007 detail_lines (dedupe)." },
+    { "step": "9", "at": "2026-04-13T18:30:00Z", "action": "Emitted CRT-639-analysis.json and CRT-639-analysis.md; no temp/ created." }
+  ]
+}

@@ -1,0 +1,822 @@
+{
+  "suite_id": "20260413-qa9f",
+  "epic_key": "CRT-638",
+  "phase": "coverage",
+  "attempt": 3,
+  "seq": "006",
+  "iso_timestamp": "2026-04-13T10:47:55Z",
+  "meta": {
+    "source_playbook": ".cursor/benchmark/pipeline/benchmark-coverage.md",
+    "delegates": ".cursor/pipelines/coverage.md",
+    "repo_token": null,
+    "focus_token": null,
+    "agent_summary": "Attempt 3: verification focus from prep attempt 3 synthesis; 6 XT hits (keep); Bitbucket skipped; primary checklist line + m-003 note updated."
+  },
+  "artifact": {
+    "schema_version": 1,
+    "epic_key": "CRT-638",
+    "epic_ref_path": "epics/CRT-638/CRT-638-ref.json",
+    "sources": {
+      "jira_fetched_at": "2026-04-13T10:47:55Z",
+      "epic_ref_loaded_at": "2026-04-13T10:47:55Z",
+      "bitbucket_repo": null,
+      "note": "Suite meta repo=null; Bitbucket implementation search skipped per coverage.md phase 7."
+    },
+    "archetype": "widget_ui",
+    "epic_verification_focus": {
+      "statement": "Ensure new FX_SPOT instruments participate in dxTrade5/WebBroker instrument suggestion: they must appear under **All** alongside other tradable types, appear **only** under the **FX Spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per Jira AC. Adaptive not in scope per Jira (CRT-632).",
+      "source": "epic_ref_synthesis",
+      "keywords": [
+        "FX_SPOT",
+        "FX Spot",
+        "instrument suggestion",
+        "All tab",
+        "column filter",
+        "CRT-1744",
+        "CRT-1745",
+        "WebTrader",
+        "dxTrade5",
+        "WebBroker"
+      ]
+    },
+    "coverage_matrix": [
+      {
+        "id": "m-001",
+        "capability": "Instrument suggestion All tab includes FX_SPOT",
+        "semantic_variants": [
+          "search by symbol/description/partial",
+          "case/whitespace"
+        ],
+        "verification_role": "primary",
+        "aggregation_level": null,
+        "surfaces": [
+          "dxtrade5",
+          "webbroker"
+        ],
+        "requirement_keys": [
+          "CRT-1745",
+          "CRT-1875"
+        ],
+        "notes_from_epic": "Jira AC: FX_Spot in tab All; CRT-1745 link; column Type FX Spot; exchange empty per nested FOREX note."
+      },
+      {
+        "id": "m-002",
+        "capability": "Dedicated FX Spot tab lists only FX_SPOT",
+        "semantic_variants": [
+          "empty search",
+          "no-match message",
+          "consistency vs All"
+        ],
+        "verification_role": "primary",
+        "aggregation_level": null,
+        "surfaces": [
+          "dxtrade5",
+          "webbroker"
+        ],
+        "requirement_keys": [
+          "CRT-1744",
+          "CRT-1875"
+        ],
+        "notes_from_epic": "Jira AC: only FX_Spot in FX Spot tab; CRT-1744 link."
+      },
+      {
+        "id": "m-003",
+        "capability": "Column filters by instrument / symbol / instrument type",
+        "semantic_variants": [
+          "multi-select type",
+          "alphabetical order"
+        ],
+        "verification_role": "primary",
+        "aggregation_level": null,
+        "surfaces": [
+          "dxtrade5",
+          "webbroker"
+        ],
+        "requirement_keys": [
+          "CRT-1745",
+          "CRT-1744"
+        ],
+        "notes_from_epic": "Jira AC + ref: filters for instrument type, instrument, and symbol; FX_Spot visibility."
+      },
+      {
+        "id": "m-004",
+        "capability": "Account-level gating of FX_SPOT in suggestion",
+        "semantic_variants": [],
+        "verification_role": "supporting",
+        "aggregation_level": null,
+        "surfaces": [
+          "dxtrade5",
+          "webbroker"
+        ],
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "notes_from_epic": "Instruments availability / account permissions interplay when listing FX_SPOT."
+      },
+      {
+        "id": "m-005",
+        "capability": "Adaptive mobile instrument suggestion",
+        "semantic_variants": [],
+        "verification_role": "out_of_epic",
+        "aggregation_level": null,
+        "surfaces": [
+          "adaptive"
+        ],
+        "requirement_keys": [],
+        "notes_from_epic": "Jira: Adaptive not part of this epic; see CRT-632."
+      }
+    ],
+    "xt_confluence_hits": [
+      {
+        "page_id": "402589545",
+        "url": "https://confluence.in.devexperts.com/spaces/XT/pages/402589545/DXtrade+XT+Home",
+        "title": "DXtrade XT Home",
+        "why_relevant": "Upstream XT landing; fork context for instrument lookup vs Corner FX_SPOT tabs.",
+        "summary": "Authoritative XT entry; token-light"
+      },
+      {
+        "page_id": "439947962",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=439947962",
+        "title": "DXtrade XT Applications",
+        "why_relevant": "Lists dx-ipfservice and instrument suggest in application map.",
+        "summary": "Named instrument suggest in inventory; token-light"
+      },
+      {
+        "page_id": "411382169",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=411382169",
+        "title": "UX Review - XT Scenarios",
+        "why_relevant": "OE Symbol Suggest positioning and interaction regressions.",
+        "summary": "Suggest-specific UX; token-light"
+      },
+      {
+        "page_id": "505943060",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505943060",
+        "title": "[In Review] Trade from Option Chain",
+        "why_relevant": "Instrument suggest flows into option chain selection.",
+        "summary": "Instrument type + suggest; token-light"
+      },
+      {
+        "page_id": "474712291",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=474712291",
+        "title": "Combined Future/Equity Accounts",
+        "why_relevant": "Unified lookup lists instruments across asset classes.",
+        "summary": "Lookup behaviour; token-light"
+      },
+      {
+        "page_id": "480861677",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=480861677",
+        "title": "DXtrade (XT) based clients segments",
+        "why_relevant": "Corner Bank multi-asset profile including FX.",
+        "summary": "Named Corner + FX; token-light"
+      }
+    ],
+    "implementation_hits": [],
+    "nested_requirement_refs": [
+      {
+        "key": "CRT-1875",
+        "page_id": "342174235",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1875",
+        "source": "epic_ref"
+      }
+    ],
+    "checks": [
+      {
+        "id": "chk-001",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": null,
+        "scenario_line": "- Primary focus: Ensure new FX_SPOT instruments participate in dxTrade5/WebBroker instrument suggestion: they must appear under **All** alongside other tradable types, appear **only** under the **FX Spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per Jira AC. **Adaptive** excluded (**CRT-632**). Display: Type **FX Spot**; **Exchange** column empty for FOREX spot rows (**CRT-1875**, CT page 342174235).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745",
+          "CRT-1744",
+          "CRT-1875"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-002",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] **dxTrade5** — In each instrument suggestion widget with search, **All** tab lists FX_SPOT instruments together with other allowed types when user types a symbol query.",
+        "detail_lines": [
+          "> Design: https://www.figma.com/design/DNmyG15cyGltqx7x5GY9C1/CornerBank-WebTrader-Dark?node-id=15389-94878&t=G2bA6rhQxQ6A2mYs-0",
+          "> Widgets: Order Entry, Time and Sales, Watchlist, Alerts, Derivatives, Risk Profile."
+        ],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-003",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] **WebBroker** — Same **All** tab behaviour where dxTrade5 widgets are embedded in WebBroker per platform configuration.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-004",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] Search matches by **Symbol**, **Description**, partial string; matching substrings highlighted per platform UX.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-005",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] Search is **case-insensitive** (lower / upper / mixed) and tolerates **whitespace** in description (e.g. partial \"Euro vs\").",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-006",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] Result columns include **Symbol**, **Description**, **Type** showing **FX Spot** for FX_SPOT rows.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-007",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1875] **Exchange** column for FOREX / FX_SPOT rows in suggestion results is **empty** (per requirement block bundled under FX Spot section on CT page 342174235).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1875"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-008",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### All tab",
+        "scenario_line": "- [CRT-1745] Row data for symbol and description is **consistent with IPF** (no stale or duplicate rows for same instrument).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-009",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] Tab labelled **FX Spot** exists and is selectable wherever instrument suggestion tabs are shown (dxTrade5 / embedded WebBroker).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-010",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] **FX Spot** tab lists **only** FX_SPOT instruments (no CFD_FOREX-only rows, no conversion-rate FOREX rows).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-011",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] With **no search text**, placeholder / empty-search behaviour matches spec (e.g. \"Start typing to find instruments…\") and still restricts tab content to FX_SPOT family.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-012",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] Search behaviour (symbol, description, partial, case, whitespace) mirrors **All** tab expectations **within** FX Spot tab.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-013",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1875] Columns **Symbol**, **Description**, **Exchange** empty for spot rows; **Type** / labels show **FX Spot** where applicable.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1875",
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-014",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] When no FX_SPOT matches query, user sees **no-match** messaging (e.g. \"No symbol matches your search criteria…\").",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-015",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### FX Spot tab",
+        "scenario_line": "- [CRT-1744] Instruments shown under **All** vs **FX Spot** for the same query are **consistent** (same instrument metadata where both lists include it).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-016",
+        "section": "## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)",
+        "subsection": "### Account permissions",
+        "scenario_line": "- [CRT-1745] FX_SPOT remains visible/selectable per **account trading permissions** where instrument suggestion respects allowed instruments (full trading, close-only, no trading, subtype not allowed) — expected gating matches account configuration.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "supporting",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-017",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument column",
+        "scenario_line": "- [CRT-1745] **dxTrade5** widgets with column filters: Account Transactions, Orders, Positions, Trades, Trading Journal — filter by instrument finds FX_SPOT instruments; **FX Spot** type label shown in results.",
+        "detail_lines": [
+          "> Filter by full symbol and partial string; **Found** list shows expected rows only."
+        ],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-018",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument column",
+        "scenario_line": "- [CRT-1745] **WebBroker**: Order Book, Position Book, Transactions — same filter behaviour for FX_SPOT.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-019",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Symbol column",
+        "scenario_line": "- [CRT-1745] **dxTrade5** and **WebBroker** symbol column filters (same widget set as above) resolve FX_SPOT instruments and show **FX Spot** type label.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1745"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-020",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument type column",
+        "scenario_line": "- [CRT-1744] **Instrument Type** filter offers **FX Spot** (or equivalent label) in dropdown on Orders, Positions, Trades, Trading Journal (dxTrade5) and Order Book, Position Book, Transactions (WebBroker).",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-021",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument type column",
+        "scenario_line": "- [CRT-1744] **FX Spot** entry is in correct **alphabetical** position in the type list.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-022",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument type column",
+        "scenario_line": "- [CRT-1744] Selecting **FX Spot** alone filters grid to **only** FX_SPOT instruments.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-023",
+        "section": "## Column filters (instrument / symbol / instrument type)",
+        "subsection": "### Instrument type column",
+        "scenario_line": "- [CRT-1744] Multi-select **FX Spot** + other types returns **union** of rows with correct per-row type labels.",
+        "detail_lines": [],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-1744"
+        ],
+        "implementation_hit_ids": []
+      },
+      {
+        "id": "chk-024",
+        "section": "## Jira validation notes (retest targets)",
+        "subsection": null,
+        "scenario_line": "- [CRT-638] Epic validation v403: verify fixes for **XT-7667** (instrument suggest exchange column cut-off), **XT-7668** (FX Spot tab label casing), **XT-7530** (instrument type column naming for FX_SPOT).",
+        "detail_lines": [
+          "> Retest when build contains fixes; link defects in test report."
+        ],
+        "ambiguity": null,
+        "verification_role": "primary",
+        "calculation_contract": null,
+        "requirement_keys": [
+          "CRT-638"
+        ],
+        "implementation_hit_ids": []
+      }
+    ],
+    "explicitly_out_of_scope": [
+      {
+        "item": "Adaptive instrument suggestion and order entry for FX_SPOT",
+        "rationale": "Jira description excludes Adaptive; tracked under CRT-632."
+      },
+      {
+        "item": "Full enumeration of non-FX_SPOT instrument families (Equities, CFDs, Futures, Options tabs) as standalone primary scenarios",
+        "rationale": "CRT-1745 describes tab taxonomy; epic change is FX_SPOT visibility — fold non-target families under supporting context only."
+      }
+    ],
+    "grounding_audit": {
+      "by_check_id": [
+        {
+          "check_id": "chk-001",
+          "evidence_keys": [
+            "CRT-1745",
+            "CRT-1744",
+            "CRT-1875"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-002",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-003",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-004",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-005",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-006",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-007",
+          "evidence_keys": [
+            "CRT-1875"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-008",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-009",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-010",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-011",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-012",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-013",
+          "evidence_keys": [
+            "CRT-1875",
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-014",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-015",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-016",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-017",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-018",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-019",
+          "evidence_keys": [
+            "CRT-1745"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-020",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-021",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-022",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-023",
+          "evidence_keys": [
+            "CRT-1744"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        },
+        {
+          "check_id": "chk-024",
+          "evidence_keys": [
+            "CRT-638"
+          ],
+          "evidence_impl_ids": [],
+          "status": "grounded"
+        }
+      ],
+      "ungrounded_check_ids": []
+    },
+    "anti_pattern_findings": [
+      {
+        "pattern": "bitbucket_skipped_no_repo",
+        "check_id": null,
+        "fix_hint": "Re-run COVERAGE with repo=WORKSPACE/SLUG when implementation traceability is required."
+      }
+    ],
+    "validation_log": [
+      {
+        "step": "1",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "CRT-638-ref.json loaded (BENCHMARK-EPIC-PREP attempt 3); MCP jira_get_issue refresh."
+      },
+      {
+        "step": "2",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Link hygiene CRT-1744/CRT-1745 unchanged."
+      },
+      {
+        "step": "3",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Archetype widget_ui."
+      },
+      {
+        "step": "3a",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "epic_verification_focus from ref synthesis + Adaptive exclusion."
+      },
+      {
+        "step": "4",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Matrix aligned with ref impact_areas (tabs, filters, defect retest)."
+      },
+      {
+        "step": "5",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Snippets from epic-ref; nested CRT-1875 on 342174235."
+      },
+      {
+        "step": "6",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "xt_confluence_hits: six keep rows from prep attempt 3."
+      },
+      {
+        "step": "7",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Bitbucket skipped (repo null)."
+      },
+      {
+        "step": "8",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "E2E spine: suggestion then filters then Jira validation notes."
+      },
+      {
+        "step": "9",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "chk-001 + markdown primary line synced to attempt 3 gist."
+      },
+      {
+        "step": "10",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Account permission check retained."
+      },
+      {
+        "step": "11",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "explicitly_out_of_scope unchanged (Adaptive; tab taxonomy)."
+      },
+      {
+        "step": "12",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "Grounding audit chk-001 keys refreshed."
+      },
+      {
+        "step": "13",
+        "at": "2026-04-13T10:47:55Z",
+        "action": "adaptive not_applicable in epic-ref — no Adaptive checklist lines."
+      }
+    ],
+    "smart_checklist_markdown": "# CRT-638 — Smart Checklist (draft)\n\n## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)\n- Primary focus: Ensure new FX_SPOT instruments participate in dxTrade5/WebBroker instrument suggestion: they must appear under **All** alongside other tradable types, appear **only** under the **FX Spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per Jira AC. **Adaptive** excluded (**CRT-632**). Display: Type **FX Spot**; **Exchange** column empty for FOREX spot rows (**CRT-1875**, CT page 342174235).\n\n### All tab\n- [CRT-1745] **dxTrade5** — In each instrument suggestion widget with search, **All** tab lists FX_SPOT instruments together with other allowed types when user types a symbol query.\n- [CRT-1745] **WebBroker** — Same **All** tab behaviour where dxTrade5 widgets are embedded in WebBroker per platform configuration.\n> Design: https://www.figma.com/design/DNmyG15cyGltqx7x5GY9C1/CornerBank-WebTrader-Dark?node-id=15389-94878&t=G2bA6rhQxQ6A2mYs-0\n> Widgets called out in validation practice: Order Entry, Time and Sales, Watchlist, Alerts, Derivatives, Risk Profile (scope to those with instrument search).\n- [CRT-1745] Search matches by **Symbol**, **Description**, partial string; matching substrings highlighted per platform UX.\n- [CRT-1745] Search is **case-insensitive** (lower / upper / mixed) and tolerates **whitespace** in description (e.g. partial \"Euro vs\").\n- [CRT-1745] Result columns include **Symbol**, **Description**, **Type** showing **FX Spot** for FX_SPOT rows.\n- [CRT-1875] **Exchange** column for FOREX / FX_SPOT rows in suggestion results is **empty** (per requirement block bundled under FX Spot section on CT page 342174235).\n- [CRT-1745] Row data for symbol and description is **consistent with IPF** (no stale or duplicate rows for same instrument).\n\n### FX Spot tab\n- [CRT-1744] Tab labelled **FX Spot** exists and is selectable wherever instrument suggestion tabs are shown (dxTrade5 / embedded WebBroker).\n- [CRT-1744] **FX Spot** tab lists **only** FX_SPOT instruments (no CFD_FOREX-only rows, no conversion-rate FOREX rows).\n- [CRT-1744] With **no search text**, placeholder / empty-search behaviour matches spec (e.g. \"Start typing to find instruments…\") and still restricts tab content to FX_SPOT family.\n- [CRT-1744] Search behaviour (symbol, description, partial, case, whitespace) mirrors **All** tab expectations **within** FX Spot tab.\n- [CRT-1875] Columns **Symbol**, **Description**, **Exchange** empty for spot rows; **Type** / labels show **FX Spot** where applicable.\n- [CRT-1744] When no FX_SPOT matches query, user sees **no-match** messaging (e.g. \"No symbol matches your search criteria…\").\n- [CRT-1744] Instruments shown under **All** vs **FX Spot** for the same query are **consistent** (same instrument metadata where both lists include it).\n\n### Account permissions\n- [CRT-1745] FX_SPOT remains visible/selectable per **account trading permissions** where instrument suggestion respects allowed instruments (full trading, close-only, no trading, subtype not allowed) — expected gating matches account configuration.\n\n## Column filters (instrument / symbol / instrument type)\n### Instrument column\n- [CRT-1745] **dxTrade5** widgets with column filters: Account Transactions, Orders, Positions, Trades, Trading Journal — filter by instrument finds FX_SPOT instruments; **FX Spot** type label shown in results.\n- [CRT-1745] **WebBroker**: Order Book, Position Book, Transactions — same filter behaviour for FX_SPOT.\n> Filter by full symbol and partial string; **Found** list shows expected rows only.\n\n### Symbol column\n- [CRT-1745] **dxTrade5** and **WebBroker** symbol column filters (same widget set as above) resolve FX_SPOT instruments and show **FX Spot** type label.\n\n### Instrument type column\n- [CRT-1744] **Instrument Type** filter offers **FX Spot** (or equivalent label) in dropdown on Orders, Positions, Trades, Trading Journal (dxTrade5) and Order Book, Position Book, Transactions (WebBroker).\n- [CRT-1744] **FX Spot** entry is in correct **alphabetical** position in the type list.\n- [CRT-1744] Selecting **FX Spot** alone filters grid to **only** FX_SPOT instruments.\n- [CRT-1744] Multi-select **FX Spot** + other types returns **union** of rows with correct per-row type labels.\n\n## Jira validation notes (retest targets)\n- [CRT-638] Epic validation v403: verify fixes for **XT-7667** (instrument suggest exchange column cut-off), **XT-7668** (FX Spot tab label casing), **XT-7530** (instrument type column naming for FX_SPOT).\n> Retest when build contains fixes; link defects in test report.\n"
+  },
+  "checklist_markdown": "# CRT-638 — Smart Checklist (draft)\n\n## Instrument suggestion — FX_SPOT on Corner Trader (dxTrade5 / WebBroker)\n- Primary focus: Ensure new FX_SPOT instruments participate in dxTrade5/WebBroker instrument suggestion: they must appear under **All** alongside other tradable types, appear **only** under the **FX Spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per Jira AC. **Adaptive** excluded (**CRT-632**). Display: Type **FX Spot**; **Exchange** column empty for FOREX spot rows (**CRT-1875**, CT page 342174235).\n\n### All tab\n- [CRT-1745] **dxTrade5** — In each instrument suggestion widget with search, **All** tab lists FX_SPOT instruments together with other allowed types when user types a symbol query.\n- [CRT-1745] **WebBroker** — Same **All** tab behaviour where dxTrade5 widgets are embedded in WebBroker per platform configuration.\n> Design: https://www.figma.com/design/DNmyG15cyGltqx7x5GY9C1/CornerBank-WebTrader-Dark?node-id=15389-94878&t=G2bA6rhQxQ6A2mYs-0\n> Widgets called out in validation practice: Order Entry, Time and Sales, Watchlist, Alerts, Derivatives, Risk Profile (scope to those with instrument search).\n- [CRT-1745] Search matches by **Symbol**, **Description**, partial string; matching substrings highlighted per platform UX.\n- [CRT-1745] Search is **case-insensitive** (lower / upper / mixed) and tolerates **whitespace** in description (e.g. partial \"Euro vs\").\n- [CRT-1745] Result columns include **Symbol**, **Description**, **Type** showing **FX Spot** for FX_SPOT rows.\n- [CRT-1875] **Exchange** column for FOREX / FX_SPOT rows in suggestion results is **empty** (per requirement block bundled under FX Spot section on CT page 342174235).\n- [CRT-1745] Row data for symbol and description is **consistent with IPF** (no stale or duplicate rows for same instrument).\n\n### FX Spot tab\n- [CRT-1744] Tab labelled **FX Spot** exists and is selectable wherever instrument suggestion tabs are shown (dxTrade5 / embedded WebBroker).\n- [CRT-1744] **FX Spot** tab lists **only** FX_SPOT instruments (no CFD_FOREX-only rows, no conversion-rate FOREX rows).\n- [CRT-1744] With **no search text**, placeholder / empty-search behaviour matches spec (e.g. \"Start typing to find instruments…\") and still restricts tab content to FX_SPOT family.\n- [CRT-1744] Search behaviour (symbol, description, partial, case, whitespace) mirrors **All** tab expectations **within** FX Spot tab.\n- [CRT-1875] Columns **Symbol**, **Description**, **Exchange** empty for spot rows; **Type** / labels show **FX Spot** where applicable.\n- [CRT-1744] When no FX_SPOT matches query, user sees **no-match** messaging (e.g. \"No symbol matches your search criteria…\").\n- [CRT-1744] Instruments shown under **All** vs **FX Spot** for the same query are **consistent** (same instrument metadata where both lists include it).\n\n### Account permissions\n- [CRT-1745] FX_SPOT remains visible/selectable per **account trading permissions** where instrument suggestion respects allowed instruments (full trading, close-only, no trading, subtype not allowed) — expected gating matches account configuration.\n\n## Column filters (instrument / symbol / instrument type)\n### Instrument column\n- [CRT-1745] **dxTrade5** widgets with column filters: Account Transactions, Orders, Positions, Trades, Trading Journal — filter by instrument finds FX_SPOT instruments; **FX Spot** type label shown in results.\n- [CRT-1745] **WebBroker**: Order Book, Position Book, Transactions — same filter behaviour for FX_SPOT.\n> Filter by full symbol and partial string; **Found** list shows expected rows only.\n\n### Symbol column\n- [CRT-1745] **dxTrade5** and **WebBroker** symbol column filters (same widget set as above) resolve FX_SPOT instruments and show **FX Spot** type label.\n\n### Instrument type column\n- [CRT-1744] **Instrument Type** filter offers **FX Spot** (or equivalent label) in dropdown on Orders, Positions, Trades, Trading Journal (dxTrade5) and Order Book, Position Book, Transactions (WebBroker).\n- [CRT-1744] **FX Spot** entry is in correct **alphabetical** position in the type list.\n- [CRT-1744] Selecting **FX Spot** alone filters grid to **only** FX_SPOT instruments.\n- [CRT-1744] Multi-select **FX Spot** + other types returns **union** of rows with correct per-row type labels.\n\n## Jira validation notes (retest targets)\n- [CRT-638] Epic validation v403: verify fixes for **XT-7667** (instrument suggest exchange column cut-off), **XT-7668** (FX Spot tab label casing), **XT-7530** (instrument type column naming for FX_SPOT).\n> Retest when build contains fixes; link defects in test report.\n"
+}

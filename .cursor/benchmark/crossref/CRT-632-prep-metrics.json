@@ -1,0 +1,178 @@
+{
+  "runs": [
+    "run-001",
+    "run-002",
+    "run-003",
+    "run-004",
+    "run-005",
+    "run-006"
+  ],
+  "per_run": {
+    "run-001": {
+      "requirement_keys": [
+        "DXINV-174",
+        "DXINV-285",
+        "DXINV-CB-206",
+        "DXINV-CB-25",
+        "DXINV-CB-27",
+        "DXINV-CB-29",
+        "DXINV-CB-308",
+        "DXINV-CB-309",
+        "DXINV-CB-315",
+        "DXINV-CB-34",
+        "DXINV-CB-4",
+        "DXINV-CB-91"
+      ],
+      "snippet_sha256": {
+        "DXINV-174": "0fd530966d1a11501d4610f66ac77ab39240c794be055035c0d4ae2ae0be02c2",
+        "DXINV-CB-206": "602d429e12fcab976811f59339c68b1509edd3873e44adf718f5e8f451b25b81",
+        "DXINV-CB-29": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-34": "3ac1a9ec4fa7a9fa612a30803f3d88fa479a45431f644190ebcc18d3eaafdb3a",
+        "DXINV-CB-27": "29df4f02b24a3f78b1ab59ee4c97196d1cb34c56e461aff685f2ae3a7eaa8300",
+        "DXINV-CB-308": "453a67ab5ca46237d79ab56d3d07d412c1c96df2add4e5e802abf39eb7969681",
+        "DXINV-CB-25": "5fe94a9c81299142d635754e895e2c12f4f707875b0351c3a91247b59617cc15",
+        "DXINV-CB-315": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-4": null,
+        "DXINV-CB-91": null,
+        "DXINV-285": null,
+        "DXINV-CB-309": null
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "not_applicable",
+          "note": "Epic text and labels target Adaptive mobile widgets only (Search, Recently Viewed, Watchlist, Instrument); no dxTrade5/WebBroker scope stated.",
+          "evidence": "Jira description: 'Adaptive widgets'; labels include ct_adaptive_new."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Primary delivery surface for FX_SPOT search, watchlist, recently viewed, and instrument layout per acceptance criteria.",
+          "evidence": "Jira description and AC sections name Adaptive widgets and Instrument page; Figma links under Corner Adaptive designs."
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-002": {
+      "error": "not a prep phase record"
+    },
+    "run-003": {
+      "requirement_keys": [
+        "DXINV-174",
+        "DXINV-285",
+        "DXINV-CB-206",
+        "DXINV-CB-25",
+        "DXINV-CB-27",
+        "DXINV-CB-29",
+        "DXINV-CB-308",
+        "DXINV-CB-309",
+        "DXINV-CB-315",
+        "DXINV-CB-34",
+        "DXINV-CB-4",
+        "DXINV-CB-91"
+      ],
+      "snippet_sha256": {
+        "DXINV-174": "0fd530966d1a11501d4610f66ac77ab39240c794be055035c0d4ae2ae0be02c2",
+        "DXINV-CB-206": "602d429e12fcab976811f59339c68b1509edd3873e44adf718f5e8f451b25b81",
+        "DXINV-CB-29": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-34": "3ac1a9ec4fa7a9fa612a30803f3d88fa479a45431f644190ebcc18d3eaafdb3a",
+        "DXINV-CB-27": "29df4f02b24a3f78b1ab59ee4c97196d1cb34c56e461aff685f2ae3a7eaa8300",
+        "DXINV-CB-308": "453a67ab5ca46237d79ab56d3d07d412c1c96df2add4e5e802abf39eb7969681",
+        "DXINV-CB-25": "5fe94a9c81299142d635754e895e2c12f4f707875b0351c3a91247b59617cc15",
+        "DXINV-CB-315": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-4": "c5a88c9027d06520f5bad4100fac69db55d425b58cab87cedc6cc7030f8a0fd7",
+        "DXINV-CB-91": "8db4d0bef1d17a3fb08577d028dbb3742f09bd4e4eaa1f370b6baa9bd044c2b0",
+        "DXINV-285": "3b3bbb4392a6a99e0665664b20e2efa274f8da491f8aaa33ebfb371837c5311e",
+        "DXINV-CB-309": "f82c16973a33c0e9dee0033ef9a176b35102e8ebb8cf7b07e56620f10cb14073"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "not_applicable",
+          "note": "Epic text and labels target Adaptive mobile widgets only (Search, Recently Viewed, Watchlist, Instrument); no dxTrade5/WebBroker scope stated.",
+          "evidence": "Jira description: 'Adaptive widgets'; labels include ct_adaptive_new."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Primary delivery surface for FX_SPOT search, watchlist, recently viewed, and instrument layout per acceptance criteria.",
+          "evidence": "Jira description and AC sections name Adaptive widgets and Instrument page; Figma links under Corner Adaptive designs."
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-004": {
+      "error": "not a prep phase record"
+    },
+    "run-005": {
+      "requirement_keys": [
+        "DXINV-174",
+        "DXINV-285",
+        "DXINV-CB-206",
+        "DXINV-CB-25",
+        "DXINV-CB-27",
+        "DXINV-CB-29",
+        "DXINV-CB-308",
+        "DXINV-CB-309",
+        "DXINV-CB-315",
+        "DXINV-CB-34",
+        "DXINV-CB-4",
+        "DXINV-CB-91"
+      ],
+      "snippet_sha256": {
+        "DXINV-174": "0fd530966d1a11501d4610f66ac77ab39240c794be055035c0d4ae2ae0be02c2",
+        "DXINV-CB-206": "602d429e12fcab976811f59339c68b1509edd3873e44adf718f5e8f451b25b81",
+        "DXINV-CB-29": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-34": "3ac1a9ec4fa7a9fa612a30803f3d88fa479a45431f644190ebcc18d3eaafdb3a",
+        "DXINV-CB-27": "29df4f02b24a3f78b1ab59ee4c97196d1cb34c56e461aff685f2ae3a7eaa8300",
+        "DXINV-CB-308": "453a67ab5ca46237d79ab56d3d07d412c1c96df2add4e5e802abf39eb7969681",
+        "DXINV-CB-25": "5fe94a9c81299142d635754e895e2c12f4f707875b0351c3a91247b59617cc15",
+        "DXINV-CB-315": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+        "DXINV-CB-4": "c5a88c9027d06520f5bad4100fac69db55d425b58cab87cedc6cc7030f8a0fd7",
+        "DXINV-CB-91": "8db4d0bef1d17a3fb08577d028dbb3742f09bd4e4eaa1f370b6baa9bd044c2b0",
+        "DXINV-285": "3b3bbb4392a6a99e0665664b20e2efa274f8da491f8aaa33ebfb371837c5311e",
+        "DXINV-CB-309": "f82c16973a33c0e9dee0033ef9a176b35102e8ebb8cf7b07e56620f10cb14073"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "not_applicable",
+          "note": "Epic text and labels target Adaptive mobile widgets only (Search, Recently Viewed, Watchlist, Instrument); no dxTrade5/WebBroker scope stated.",
+          "evidence": "Jira description: 'Adaptive widgets'; labels include ct_adaptive_new."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Primary delivery surface for FX_SPOT search, watchlist, recently viewed, and instrument layout per acceptance criteria.",
+          "evidence": "Jira description and AC sections name Adaptive widgets and Instrument page; Figma links under Corner Adaptive designs."
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-006": {
+      "error": "not a prep phase record"
+    }
+  },
+  "key_intersection_all_runs": [
+    "DXINV-174",
+    "DXINV-285",
+    "DXINV-CB-206",
+    "DXINV-CB-25",
+    "DXINV-CB-27",
+    "DXINV-CB-29",
+    "DXINV-CB-308",
+    "DXINV-CB-309",
+    "DXINV-CB-315",
+    "DXINV-CB-34",
+    "DXINV-CB-4",
+    "DXINV-CB-91"
+  ],
+  "snippet_hash_stable_across_all_runs": {
+    "DXINV-174": "0fd530966d1a11501d4610f66ac77ab39240c794be055035c0d4ae2ae0be02c2",
+    "DXINV-CB-206": "602d429e12fcab976811f59339c68b1509edd3873e44adf718f5e8f451b25b81",
+    "DXINV-CB-25": "5fe94a9c81299142d635754e895e2c12f4f707875b0351c3a91247b59617cc15",
+    "DXINV-CB-27": "29df4f02b24a3f78b1ab59ee4c97196d1cb34c56e461aff685f2ae3a7eaa8300",
+    "DXINV-CB-29": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+    "DXINV-CB-308": "453a67ab5ca46237d79ab56d3d07d412c1c96df2add4e5e802abf39eb7969681",
+    "DXINV-CB-315": "87a8d3cd1a578c3c5871fe9594746733890878d9268d21bcff893f3b08390d4c",
+    "DXINV-CB-34": "3ac1a9ec4fa7a9fa612a30803f3d88fa479a45431f644190ebcc18d3eaafdb3a"
+  },
+  "unstable_keys": [],
+  "client_shell_impact_drift": false,
+  "epic_key": "CRT-632",
+  "suite_id": "20260413-qa9f"
+}

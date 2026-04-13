@@ -1,0 +1,101 @@
+{
+  "_comment": "Regression test draft handoff for TEST-PREP: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-tests.json. Pair with <KEY>-tests.md. Do not reference epics/<KEY>/temp/ in durable JSON. Full draft prose: one subprocess per test_bundles[] row (see .cursor/pipelines/test-prep.md phase 8b). Step format norms: docs/tc-ref and docs/temp/tc-template.txt. No Playwright/DB/SSH in v1.",
+  "schema_version": 1,
+  "epic_key": null,
+  "taxonomy_note": "Internal workflow: compliance/coverage checklist first; Jira 'regression' type is client-facing taxonomy. Draft bundles are E2E combinatoric human-executable tests that operationalize the checklist. See QAPORTAL Test Repository (page 497097317) via Confluence.",
+  "sources": {
+    "jira_fetched_at": null,
+    "ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
+    "ref_loaded": false,
+    "coverage_path": "epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json",
+    "coverage_loaded": false,
+    "coverage_md_path": "epics/<EPIC-KEY>/<EPIC-KEY>-coverage.md",
+    "analysis_path": "epics/<EPIC-KEY>/<EPIC-KEY>-analysis.json",
+    "analysis_loaded": false,
+    "map_only": false,
+    "note": "coverage_loaded required true to run; ref_loaded/analysis_loaded optional. map_only=true: mapping + titles only, skip phase 8b subprocesses. Full drafts: one subprocess per bundle (phase 8b); durable JSON must not contain /temp/ paths."
+  },
+  "jira_test_search": {
+    "at": null,
+    "queries": []
+  },
+  "_jira_test_search_query": {
+    "jql": "JQL string",
+    "purpose": "epic_link | epic_key_text | summary_keyword | issuetype_test",
+    "result_count": 0
+  },
+  "existing_tests_considered": [],
+  "_existing_tests_considered_item": {
+    "key": "CRTQA-10080",
+    "summary": null,
+    "status": null,
+    "issuetype": null,
+    "url": null,
+    "steps_provenance": "fetched_from_issue | not_fetched",
+    "fields_used": ["description", "customfield_..."],
+    "reuse_recommendation": "adapt_steps | reference_only | none",
+    "note": "reuse_recommendation set only after jira_get_issue; never invent steps from title alone"
+  },
+  "excluded_checks_with_reason": [],
+  "_excluded_checks_with_reason_item": {
+    "check_id": "chk-001",
+    "reason": "explicitly_out_of_scope | ambiguity_flag | analysis_gap | user_map_only | other",
+    "evidence": "pointer to coverage.explicitly_out_of_scope, checks[].ambiguity, or analysis.gaps[]"
+  },
+  "test_bundles": [],
+  "_test_bundles_item": {
+    "bundle_id": "tb-001",
+    "proposed_title": "Short Jira-ready title",
+    "jira_issue_key": null,
+    "covers_check_ids": ["chk-001", "chk-002"],
+    "covers_sections": ["## Search", "### Search rules"],
+    "related_existing_tests": ["CRTQA-10080"],
+    "authoring": {
+      "subprocess": true,
+      "subprocess_completed": false,
+      "completed_at": null,
+      "temp_draft_file": null
+    },
+    "_authoring_note": "subprocess_completed + completed_at set after phase 8b merge. temp_draft_file: ephemeral only during run; MUST be null in committed -tests.json—never persist paths under temp/.",
+    "draft": {
+      "preconditions": ["1. ... (see Peculiarities 1)."],
+      "actions": ["1. ..."],
+      "results": ["1. ..."],
+      "peculiarities": ["1. ..."]
+    },
+    "_draft_note": "Strings may contain [TBD] or [REQUIRES: source]. No invented dxCore/SQL/example output unless pasted from fetched Jira. Populated by per-bundle subprocess when not map_only."
+  },
+  "reverse_validation": {
+    "coverage_gaps": [],
+    "orphan_bundles": [],
+    "notes": []
+  },
+  "_coverage_gaps_item": {
+    "check_id": "chk-099",
+    "scenario_excerpt": "optional short line from checks[].scenario_line",
+    "reason": "no_bundle_assigned | waiver_pending_review"
+  },
+  "_orphan_bundles_item": {
+    "bundle_id": "tb-010",
+    "reason": "zero_covers_check_ids | duplicate_coverage_conflict"
+  },
+  "draft_red_flags": [],
+  "_draft_red_flags_item": {
+    "code": "check_double_mapped | empty_bundle | invented_operational_detail_risk",
+    "detail": "human review note",
+    "check_ids": ["chk-001"],
+    "bundle_ids": ["tb-001"]
+  },
+  "validation_log": [],
+  "_validation_log_item": {
+    "step": "phase id or name",
+    "at": "ISO-8601",
+    "action": "short description"
+  },
+  "anti_pattern_findings": [],
+  "_anti_pattern_findings_item": {
+    "pattern": "e.g. one_bullet_one_test | missing_traceability | ungrounded_operational_detail | one_shot_all_bundle_drafts",
+    "bundle_id": null,
+    "fix_hint": "short"
+  }
+}

@@ -1,0 +1,31 @@
+---
+description: QA layout—docs/epics refs; automation/ for manual Python tests/tools and docs; pipelines in .cursor/pipelines/
+alwaysApply: true
+---
+
+# QA artifacts and locations
+
+## Templates and references
+
+- **Test case format reference**: [docs/tc-ref](docs/tc-ref)
+- **Defect report format reference**: [docs/dr-ref](docs/dr-ref)
+- **Epic handoff template** (copy per Epic): [epics/templates/epic-ref.json](epics/templates/epic-ref.json) → durable file `epics/<KEY>/<KEY>-ref.json` — layout: [epics/README.md](epics/README.md); pipeline: [`.cursor/pipelines/epic-prep.md`](../pipelines/epic-prep.md) (**`client_shell_impact`**, **`snippet_status`** on requirements)
+- **Epic coverage + Jira Smart Checklist norms**: [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) → `epics/<KEY>/<KEY>-coverage.json` + `<KEY>-coverage.md`; playbook: [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md) (*Smart Checklist markdown*, `epic_verification_focus`, `verification_role`, **`checks[].calculation_contract`**, optional `focus=`)
+- **Epic requirement analysis**: [epics/templates/analysis-ref.json](epics/templates/analysis-ref.json) → `epics/<KEY>/<KEY>-analysis.json` + `<KEY>-analysis.md`; playbook: [`.cursor/pipelines/analysis.md`](../pipelines/analysis.md) (**`ANALYSE:`**, Jira known issues, gaps/questions, optional **Known issue** **`>`** append to `-coverage` with dedupe)
+- **Epic regression test drafts**: [epics/templates/tests-ref.json](epics/templates/tests-ref.json) → `epics/<KEY>/<KEY>-tests.json` + `<KEY>-tests.md`; playbook: [`.cursor/pipelines/test-prep.md`](../pipelines/test-prep.md) (**`TEST-PREP:`**, checklist traceability, Jira test search + fetch, optional **`map_only=yes`**)
+
+Align new test cases and defect reports with tc-ref / dr-ref unless the task defines a different format. Epic Smart Checklist drafts follow **coverage.md**. Epic regression bundles follow **test-prep.md** after coverage exists.
+
+## Automation folder (`automation/`)
+
+Manual **Python tests and tools** (not “workspace automation”). Tool docs: [automation/docs/](automation/docs/) (e.g. Yogi). Agent playbooks: [`.cursor/pipelines/`](../pipelines/).
+
+- **Temporary / agent scratch**: [automation/temp/](automation/temp/) — short-lived only; promote outcomes to proper docs or handoff.
+
+## Project
+
+- This workspace supports **QA** for **Corner Trader** at **Devexperts**. Prefer repo-local conventions and pointers in [AGENTS.md](AGENTS.md) over duplicating external systems inside the repo.
+
+## QA process anchor
+
+- **Corner QA scope, environments, Jira mapping, and workflow pointers**: [docs/qa-project.json](docs/qa-project.json) (Confluence-backed; functional summaries only—no people, no secrets in repo).

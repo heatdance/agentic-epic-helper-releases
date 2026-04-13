@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-04-10",
+  "research_status": "ok",
+  "content_policy": "Functional and process context only. No individual names or role rosters. Do not store passwords or secrets here—use authenticated Confluence for credentials.",
+  "scope": {
+    "in_scope": "QA and project context under QAPORTAL page 'Corner' (page_id 497097273) and its descendant pages—Corner Trader, Adaptive, shared QA assets scoped to that subtree.",
+    "out_of_scope": "General QA Portal content outside the Corner subtree unless the user explicitly widens scope."
+  },
+  "confluence": {
+    "corner_qa_entry": {
+      "url": "https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097273/Corner",
+      "space_key": "QAPORTAL",
+      "page_id": "497097273",
+      "title": "Corner",
+      "mcp_scope_hint": "Prefer MCP search scoped to this page and its descendants; avoid treating unrelated QAPORTAL pages as default process for Corner."
+    }
+  },
+  "product_outline": [
+    "Corner Trader: multi-asset trading platform (equities US/EU, CFDs, FX rolling spot, futures, options) via dxTrade5 web and mobile; multi-currency multi-account model with per-account currency and cross-currency conversion.",
+    "Integrations: external liquidity/STP where applicable; connectivity to bank backoffice for lifecycle and reporting; user and account data via REST from bank CRM systems.",
+    "Adaptive: mobile-oriented trading UI (iframe-capable), core dxTrade5 widgets (watchlist, positions, orders, order entry, portfolio, instrument detail/chart); single-leg focus on mobile with fuller web for advanced flows; same multi-asset architecture and sync model."
+  ],
+  "jira_and_dashboards": [
+    "Dashboards (examples on page): Corner and Adaptive QA dashboard; Corner main dev board; Adaptive main dev board—use MCP or live Jira for current URLs.",
+    "CRTQA: primary QA tracker. CRT: epic backlog for Corner and Adaptive. CRTBL: feedback and backlog bank for Corner and Adaptive.",
+    "XT: development tracker for Corner. SUPXT: production support for Corner. CAN: development tracker for Adaptive."
+  ],
+  "workflow_outline": [
+    "QA Documentation (under this subtree): descriptions of QA processes for Corner and Adaptive; workflow policies; automation-related documents; smart checklist repository notes.",
+    "Educational plans and project documentation sections link requirements for the upstream product (fork base), Corner-specific requirements, and Adaptive—fetch via MCP when needed.",
+    "Environments (hostnames only in repo): CT QA, CT DEV, CT UAT, CT TEST, CT MOB—each provides dxTrade5, WebBroker, dxmc, dxweb, dxSCA, IPF, SSH targets as listed on the page; Adaptive path where applicable.",
+    "Components section: large table mapping application names to backend/front-end responsibilities (server, multiplexor, dxtrade5, webbroker, riskmonitor, fix routers, market data mappers, etc.)—use MCP to pull details for a subset when debugging or test design.",
+    "Layouts: linked automated application layout page for Corner Trader platforms (see Confluence child link from Corner page)."
+  ],
+  "workspace_mapping": {
+    "test_cases": "Align output structure with docs/tc-ref.",
+    "checklists": "Jira Smart Checklist: .cursor/pipelines/coverage.md (Smart Checklist markdown; epic_verification_focus; verification_role; calculation ladders; out_of_epic fork not in body; evidence-gated dimensions; Adaptive when client_shell_impact says affected). COVERAGE: → epics/<KEY>/<KEY>-coverage.md + -coverage.json (see epics/README.md).",
+    "defects": "Align with docs/dr-ref.",
+    "automation_docs": "automation/docs/",
+    "automation_temp": "automation/temp/",
+    "handoff": "qa-handoff.md at repository root"
+  },
+  "research_hints": [
+    "MCP: enumerate child pages under 497097273 for QA process depth (per-section folders).",
+    "MCP: open linked layout and STARTSUP pages when deployment topology matters.",
+    "EPIC-PREP / COVERAGE: treat Corner Trader and Adaptive as two client shells; epic-ref client_shell_impact and qa-project product_outline anchor which surfaces apply.",
+    "For credentials and DB connection values, read the Confluence page with proper access; do not replicate secrets into the repository."
+  ]
+}

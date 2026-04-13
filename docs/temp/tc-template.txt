@@ -1,0 +1,14 @@
+"Preconditions:
+1. Precondition 1 (see Peculiarities 1).
+
+Actions:
+1. Action 1 (see Peculiarities 2);
+2. Action 2.
+
+Results:
+1. Result 1 associated with Action 1;
+2. Result 2 associated with Action 2.
+
+Peculiarities:
+1. Peculiarity 1 that explains how to achieve Precondition 1.
+2. Peculiarity 2 that explains how to achieve Action 2."

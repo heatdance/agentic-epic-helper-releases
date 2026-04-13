@@ -1,0 +1,102 @@
+{
+  "_comment": "Coverage handoff for COVERAGE: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json. Copy this template; do not reference epics/<KEY>/temp/ in durable JSON. Pair with <KEY>-coverage.md (Jira Smart Checklist paste). Markdown norms: .cursor/pipelines/coverage.md. Optional trigger: focus=. Matrix: verification_role. Metrics: optional checks.calculation_contract (ladder_present | deferred_ambiguous). Seed surfaces from epic-ref client_shell_impact (Corner + Adaptive).",
+  "schema_version": 1,
+  "epic_key": null,
+  "epic_ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
+  "sources": {
+    "jira_fetched_at": null,
+    "epic_ref_loaded_at": null,
+    "bitbucket_repo": null,
+    "note": "bitbucket_repo: COVERAGE trigger repo= overrides epic-ref sources.bitbucket_repo and docs/project.json bitbucket.default_repo; see .cursor/pipelines/coverage.md phase 1. EPIC-PREP may populate epic-ref repo and implementation.hits for merge in phase 7."
+  },
+  "archetype": null,
+  "_archetype_enum": "widget_ui | metrics_calculation | mixed",
+  "epic_verification_focus": null,
+  "_epic_verification_focus": {
+    "statement": "1–3 sentences: what this epic primarily verifies (Jira narrative wins over broad requirement branching unless focus= override).",
+    "source": "jira_summary | jira_description | epic_ref_synthesis | user_trigger_focus",
+    "keywords": ["optional tokens e.g. FX_SPOT", "WeightedAvg"]
+  },
+  "coverage_matrix": [],
+  "_coverage_matrix_item": {
+    "id": "matrix-row-001",
+    "capability": "short name, e.g. Initial Margin",
+    "semantic_variants": ["e.g. midpoint vs order-time mark"],
+    "verification_role": "primary | supporting | out_of_epic",
+    "_verification_role": "primary: top-level checks; supporting: detail lines or one contrast subsection; out_of_epic: explicitly_out_of_scope only, no top-level - for this row alone",
+    "aggregation_level": "position | account | portfolio | null",
+    "surfaces": ["console", "webbroker", "dxtrade5", "adaptive", "api"],
+    "requirement_keys": ["CRT-593", "DXINV-CB-25"],
+    "notes_from_epic": "verbatim or paraphrase from Jira table/scenarios"
+  },
+  "xt_confluence_hits": [],
+  "_xt_confluence_hits_item": {
+    "page_id": null,
+    "url": null,
+    "title": null,
+    "why_relevant": "one line",
+    "summary": "no full body; token-light"
+  },
+  "implementation_hits": [],
+  "_implementation_hits_item": {
+    "id": "impl-001",
+    "search_query": null,
+    "path": null,
+    "fragment": null,
+    "note": "flags, collisions, metric naming",
+    "source_phase": "epic_prep | coverage | null"
+  },
+  "nested_requirement_refs": [],
+  "_nested_requirement_refs_item": {
+    "key": null,
+    "page_id": null,
+    "short_url": null,
+    "source": "yogi_snippet | epic_ref | jira_description"
+  },
+  "checks": [],
+  "_checks_item": {
+    "id": "chk-001",
+    "section": "## section heading",
+    "subsection": "### optional",
+    "scenario_line": "- [KEY] One observable outcome (platform prefix if needed)",
+    "detail_lines": ["> execution variant or formula expansion"],
+    "ambiguity": null,
+    "_ambiguity": "If set: { flag: '!', reason: 'not enough context | ambiguous spec | ...' } — model must not use vague TBD on executable lines.",
+    "verification_role": "primary | supporting | out_of_epic | null",
+    "_verification_role_check": "Mirror dominant matrix row; phase 12: top-level - with only supporting/out_of_epic → treat as ungrounded to epic focus unless justified",
+    "calculation_contract": "ladder_present | deferred_ambiguous | null",
+    "_calculation_contract": "metrics_calculation: ladder_present = executable preconditions + expected relation on primary metric; deferred_ambiguous = ! reason instead",
+    "requirement_keys": [],
+    "implementation_hit_ids": []
+  },
+  "explicitly_out_of_scope": [],
+  "_explicitly_out_of_scope_item": {
+    "item": "what is excluded",
+    "rationale": "one line"
+  },
+  "grounding_audit": {
+    "by_check_id": [],
+    "_by_check_id_item": {
+      "check_id": "chk-001",
+      "evidence_keys": ["CRT-856"],
+      "evidence_impl_ids": ["impl-001"],
+      "status": "grounded | ungrounded",
+      "_status_note": "Use ungrounded when check is misaligned with epic_verification_focus (e.g. top-level - for out_of_epic-only branch); note in validation_log step 12"
+    },
+    "ungrounded_check_ids": []
+  },
+  "anti_pattern_findings": [],
+  "_anti_pattern_findings_item": {
+    "pattern": "e.g. ui_only_no_formula",
+    "check_id": null,
+    "fix_hint": "short"
+  },
+  "validation_log": [],
+  "_validation_log_item": {
+    "step": "phase id or number",
+    "at": "ISO-8601",
+    "action": "short description"
+  },
+  "smart_checklist_markdown": null,
+  "_smart_checklist_markdown": "Full markdown for Jira Smart Checklist; duplicate of sibling <KEY>-coverage.md body."
+}

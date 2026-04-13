@@ -1,0 +1,9 @@
+{
+  "suite_id": "20260413-qa9f",
+  "created_at": "2026-04-13T00:00:00Z",
+  "epics": ["CRT-585", "CRT-632", "CRT-638", "CRT-669"],
+  "runs": 3,
+  "repo": null,
+  "focus": null,
+  "note": "BENCHMARK: CRT-585, CRT-632, CRT-638, CRT-669 — queue only; execute one step per message via BENCHMARK-NEXT or paste from support/QUEUE.md"
+}

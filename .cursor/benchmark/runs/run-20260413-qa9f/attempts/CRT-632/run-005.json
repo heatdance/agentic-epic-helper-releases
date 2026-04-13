@@ -1,0 +1,320 @@
+{
+  "suite_id": "20260413-qa9f",
+  "epic_key": "CRT-632",
+  "phase": "prep",
+  "attempt": 3,
+  "seq": "005",
+  "iso_timestamp": "2026-04-13T10:46:29Z",
+  "meta": {
+    "source_playbook": ".cursor/benchmark/pipeline/benchmark-epic-prep.md",
+    "delegates": ".cursor/pipelines/epic-prep.md",
+    "agent_summary": "Attempt 3: Jira MCP refresh; 3.4 reconciliation — no Jira delta; no Confluence re-fetch; snippets unchanged (all ok from attempt 2); validation_log benchmark_prep_attempt3."
+  },
+  "artifact": {
+    "schema_version": 2,
+    "epic": {
+      "key": "CRT-632",
+      "url": "https://jira.in.devexperts.com/browse/CRT-632",
+      "summary": "Support FX_SPOT in the widgets 'Search', 'Watchlist' and on the 'Instrument' page",
+      "status": "Pending resolution",
+      "labels": [
+        "ct_adaptive_new",
+        "ct_ph5"
+      ],
+      "issue_type": "Epic"
+    },
+    "business_context": null,
+    "synthesis": {
+      "problem_gist": "Expose FX_SPOT in Adaptive mobile: Search (rules, OPOL/currency/type filters including new FX Spot tab, result cards, All tab), Recently Viewed, Watchlist cards, and Instrument page (Simple Chart on midpoint, Instrument Info, Stats like CFD without maturity date; other widgets empty per epic).",
+      "problem_gist_source": "from_jira_field",
+      "impact_areas": [
+        {
+          "text": "Adaptive Search widget — search rules, filters, FX Spot tab, result cards and navigation to Instrument page",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Adaptive Recently Viewed — FX_SPOT appears after visiting Instrument page",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Adaptive Watchlist — FX_SPOT cards and navigation to Instrument page",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Adaptive Instrument page — Simple Chart (midpoint), Instrument Info, Stats (CFD-like); other widgets no data",
+          "source": "from_jira_field"
+        }
+      ],
+      "keywords": [
+        "FX_SPOT",
+        "Adaptive",
+        "Search",
+        "Watchlist",
+        "Instrument",
+        "OPOL",
+        "Simple Chart",
+        "Stats",
+        "DXINV"
+      ]
+    },
+    "client_shell_impact": {
+      "corner_trader": {
+        "status": "not_applicable",
+        "note": "Epic text and labels target Adaptive mobile widgets only (Search, Recently Viewed, Watchlist, Instrument); no dxTrade5/WebBroker scope stated.",
+        "evidence": "Jira description: 'Adaptive widgets'; labels include ct_adaptive_new."
+      },
+      "adaptive": {
+        "status": "affected",
+        "note": "Primary delivery surface for FX_SPOT search, watchlist, recently viewed, and instrument layout per acceptance criteria.",
+        "evidence": "Jira description and AC sections name Adaptive widgets and Instrument page; Figma links under Corner Adaptive designs."
+      },
+      "source": "jira_field"
+    },
+    "design": {
+      "figma": [
+        {
+          "url": "https://www.figma.com/design/pcmlBBNbiNL2qhCvbwQSgT/Corner?node-id=1761-107073&t=LLodB9AW7sJZUtP7-4",
+          "note": "Instrument page (Jira)"
+        },
+        {
+          "url": "https://www.figma.com/design/pcmlBBNbiNL2qhCvbwQSgT/Corner?node-id=1768-14179&t=LLodB9AW7sJZUtP7-4",
+          "note": "Search (Jira)"
+        },
+        {
+          "url": "https://www.figma.com/design/pcmlBBNbiNL2qhCvbwQSgT/Corner?node-id=1761-40258&t=LLodB9AW7sJZUtP7-4",
+          "note": "Watchlist (Jira)"
+        }
+      ],
+      "other_design": [],
+      "notes": "figma_urls_in_jira_description",
+      "ui_artifacts_in_jira": "figma"
+    },
+    "requirements": [
+      {
+        "key": "DXINV-174",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-174",
+        "anchor": "req-DXINV-174",
+        "page_id": "469053341",
+        "snippet_text": "It is possible to search instrument of any type by the following criteria via entering at least one character: Criterion Priority of search and display Datapoints company description",
+        "extract_mode": "after_th_td",
+        "jira_context": "Search rules (AC and Requirements) — symbol/description/ISIN behaviour",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-206",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-206",
+        "anchor": "req-DXINV-CB-206",
+        "page_id": "469053341",
+        "snippet_text": "The User can search for descriptions that include whitespace characters (e.g., spaces between words). Search Results Only instruments fully available for trading across all User's balances are displayed for the User. Instruments that are not fully available on any of the balances are not shown to the User in search results. Search results appear once at least one character has been entered. Each search result card should contain: Parameter Description Datapoints description",
+        "extract_mode": "inline_td",
+        "jira_context": "Search rules — whitespace in descriptions",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-29",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-29",
+        "anchor": "req-DXINV-CB-29",
+        "page_id": "469053341",
+        "snippet_text": "OPOL acronym",
+        "extract_mode": "inline_td",
+        "jira_context": "OPOL filter on Search",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-34",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-34",
+        "anchor": "req-DXINV-CB-34",
+        "page_id": "469053341",
+        "snippet_text": "Currency",
+        "extract_mode": "inline_td",
+        "jira_context": "Currency filter on Search (Jira markdown mistakenly linked currency text to DXINV-CB-29 URL; canonical key DXINV-CB-34 used here)",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-27",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-27",
+        "anchor": "req-DXINV-CB-27",
+        "page_id": "469053341",
+        "snippet_text": "Instrument type",
+        "extract_mode": "inline_td",
+        "jira_context": "Instrument type filter / All tab inclusion of FX_SPOT",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-308",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-308",
+        "anchor": "req-DXINV-CB-308",
+        "page_id": "469053341",
+        "snippet_text": "FX Spot",
+        "extract_mode": "inline_td",
+        "jira_context": "New FX Spot tab in instrument type filter",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-25",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-25",
+        "anchor": "req-DXINV-CB-25",
+        "page_id": "469053341",
+        "snippet_text": "should contain: Parameter Description Datapoints description",
+        "extract_mode": "after_th_td",
+        "jira_context": "Search result card and navigation to Instrument page",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-315",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-315",
+        "anchor": "req-DXINV-CB-315",
+        "page_id": "469053341",
+        "snippet_text": "OPOL acronym",
+        "extract_mode": "inline_td",
+        "jira_context": "Search result card OPOL / market state behaviour (incl. FX_Spot note in requirement table)",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-4",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-4",
+        "anchor": "req-DXINV-CB-4",
+        "page_id": "469053340",
+        "snippet_text": "The widget provides the User with the list of recently viewed instruments. It is located on the 'Search' page DXINV-042.",
+        "extract_mode": "after_th_td",
+        "jira_context": "Recently Viewed widget — Overview prose + nested requirement link folded to key (verbatim strip from MCP confluence_get_page storage, page 469053340; attempt 2)",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-91",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-91",
+        "anchor": "req-DXINV-CB-91",
+        "page_id": "469055241",
+        "snippet_text": "Each instrument in the widget is displayed as a card with the following parameters:",
+        "extract_mode": "after_th_td",
+        "jira_context": "Watchlist instrument card — lead-in before parameter table (verbatim strip from MCP confluence_get_page storage, page 469055241; attempt 2)",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-285",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-285",
+        "anchor": "req-DXINV-285",
+        "page_id": "469053342",
+        "snippet_text": "Modal form 1. Candle 2. Mountain 3. Line 4. Volume 5. Baseline. The base is previous day last candle DXINV-DP-211 ( DXINV-CB-45 info about the base is displayed in the modal form). Coloring: green for the area above the baseline, red for the area below the baseline. Price type for different instrument types see CRT-1180.",
+        "extract_mode": "after_th_td",
+        "jira_context": "Simple Chart — Visualization type / chart options + price-type pointer (verbatim right-column strip from MCP confluence_get_page storage, page 469053342; yogi_extract empty for DEFINITION-in-left-td pattern; attempt 2)",
+        "snippet_status": "ok"
+      },
+      {
+        "key": "DXINV-CB-309",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-309",
+        "anchor": "req-DXINV-CB-309",
+        "page_id": "469053345",
+        "snippet_text": "FX_SPOT Multiplier DXINV-DP-114 Previous close DXINV-DP-118 Open DXINV-DP-076 Day range DXINV-DP-119",
+        "extract_mode": "after_th_td",
+        "jira_context": "Stats widget — FX_SPOT metrics row (verbatim table strip from MCP confluence_get_page storage, page 469053345; rowspan DEFINITION layout not handled by offline yogi_extract fragment; attempt 2)",
+        "snippet_status": "ok"
+      }
+    ],
+    "traversal": {
+      "nested_refs": [],
+      "cross_epic": [],
+      "xt_refs": [
+        {
+          "page_id": "402589545",
+          "url": "https://confluence.in.devexperts.com/spaces/XT/pages/402589545/DXtrade+XT+Home",
+          "title": "DXtrade XT Home",
+          "why_relevant": "Upstream DXtrade XT entry; baseline mobile/web platform context vs Corner Adaptive fork.",
+          "source_query_or_link": "seed: docs/project.json XT home page_id 402589545",
+          "status": "keep",
+          "reason": "Harness anchor for XT fork baseline"
+        },
+        {
+          "page_id": "474722024",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=474722024",
+          "title": "dxTrade XT Mobile",
+          "why_relevant": "XT native mobile app overview — closest upstream analogue to Adaptive shell capabilities.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "Mobile trading shell context"
+        },
+        {
+          "page_id": "402591246",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=402591246",
+          "title": "DXtradeXT - Mobile",
+          "why_relevant": "XT mobile documentation hub for widget-style mobile UX.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "Mobile feature area index"
+        },
+        {
+          "page_id": "396607111",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=396607111",
+          "title": "XT Mobile Demo Delivery Process",
+          "why_relevant": "How XT mobile builds reach demo channels — delivery context for mobile regressions.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "Delivery / QA environment context"
+        },
+        {
+          "page_id": "416527111",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=416527111",
+          "title": "XT Mobile applications how-to",
+          "why_relevant": "Compatibility and gateway notes for XT mobile applications.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "Technical mobile integration hints"
+        },
+        {
+          "page_id": "416527067",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=416527067",
+          "title": "XT Setting up Mobile devices for testing DXTradeXT, Adaptive, WHS and Investimental",
+          "why_relevant": "Explicit Adaptive mobile test setup under XT space.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "QA device setup for Adaptive"
+        },
+        {
+          "page_id": "387531143",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=387531143",
+          "title": "Mobile Gateway White Labelling",
+          "why_relevant": "MGW role for mobile clients — infrastructure context for mobile widget behaviour.",
+          "source_query_or_link": "confluence_search: FX_SPOT Adaptive mobile space=XT",
+          "status": "keep",
+          "reason": "Mobile gateway architecture"
+        }
+      ]
+    },
+    "validation_log": [
+      {
+        "step": "3.4",
+        "at": "2026-04-13T13:22:00Z",
+        "action": "Tightened synthesis to Jira Adaptive-only scope; client_shell_impact set from labels and description. Requirement rows use CT Confluence page_ids from MCP; snippets for Search page via offline yogi_snippet on MCP storage export file."
+      },
+      {
+        "step": "3.4",
+        "at": "2026-04-13T13:22:30Z",
+        "action": "Documented Jira markdown error: currency requirement links to DXINV-CB-29 URL while text reads DXINV-CB-34."
+      },
+      {
+        "step": "3.6",
+        "at": "2026-04-13T13:23:00Z",
+        "action": "Pruned XT search noise: retained seven mobile/platform pages; omitted generic sales-enablement hit not needed for widget-level verification."
+      },
+      {
+        "step": "snippet_backfill",
+        "at": "2026-04-13T13:23:30Z",
+        "action": "DXINV-CB-4, DXINV-CB-91, DXINV-285, DXINV-CB-309: page_ids resolved via MCP get_page titles; storage not persisted to workspace for yogi_snippet in this run — snippet_status failed / mcp_export_failed."
+      },
+      {
+        "step": "benchmark_prep_attempt2",
+        "at": "2026-04-13T15:45:00Z",
+        "action": "jira_get_issue CRT-632 refresh; confluence_get_page (storage) for 469053340, 469055241, 469053342, 469053345. Snippets: CB-4/CB-91/285/CB-309 filled from authoritative MCP storage via controlled HTML fragments + manual verbatim strips where yogi_extract TD window misses DEFINITION-in-label-cell / rowspan rows; all snippet_status ok."
+      },
+      {
+        "step": "benchmark_prep_attempt3",
+        "at": "2026-04-13T10:46:29Z",
+        "action": "jira_get_issue CRT-632 (MCP); Jira fields unchanged vs prior prep. Precision pass 3.4: synthesis, client_shell_impact, design.figma, requirements[], traversal.xt_refs left aligned with current Jira text — no Confluence re-fetch; all requirements remain snippet_status ok from attempt 2. Jira issue updated timestamp per server: 2026-03-12T14:10:11.322+0000."
+      }
+    ],
+    "sources": {
+      "jira_fetched_at": "2026-04-13T10:46:29Z",
+      "confluence_method": "mixed"
+    }
+  }
+}

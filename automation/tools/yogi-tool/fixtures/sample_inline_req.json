@@ -1,0 +1,5 @@
+{
+  "content": {
+    "value": "<table><tr><td><ac:structured-macro ac:name=\"requirement\"><ac:parameter ac:name=\"type\">DEFINITION</ac:parameter><ac:parameter ac:name=\"key\">CRT-1730</ac:parameter></ac:structured-macro>For FX_SPOT <em>mark_price</em> is taken from the reference price.</td></tr></table>"
+  }
+}

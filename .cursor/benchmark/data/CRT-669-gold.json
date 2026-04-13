@@ -1,0 +1,18 @@
+{
+  "epic_key": "CRT-669",
+  "pipeline": "both",
+  "scope_statement": "This change enforces orders to be split by notional when liquidation is triggered.",
+  "required_requirement_keys_in_snippets": [],
+  "prep_snippet_requirements_note": "Epic has Confluence links only; no Yogi keys required for prep gold.",
+  "checklist_notes": "  Good:\n  - great focus on functional implementation, how the system works dynamically\n  - examples of use as > comments\n  - short and concise\n\n  Bad: overall epic name is referenced in each scenario for some reason instead of actual yogi-tags/reqs",
+  "reference_checklist": "- Liquidation in chunks for CFDs - Check default max liquidation qty for CFD_FOREX_OTC\n>all instruments with CFD_FOREX_OTC subtype should have default max liquidation qty = 200\n- Liquidation in chunks for CFDs - Check default max liquidation qty for CFD_FOREX_DMA\n>all instruments with CFD_FOREX_DMA subtype should have default max liquidation qty = 20 000 000\n- Liquidation in chunks for CFDs - Check there is no default max liquidation qty for CFD/CFD_STOCK\n>No defaults for CFD and CFD Stock -> they shouldn't be liquidated in chunks -> the value is empty \n- Liquidation in chunks for CFDs - Change max liquidation qty for CFD/CFD_STOCK/CFD_FOREX\n- Liquidation in chunks for CFDs - Check that MAX_LIQUIDATION_QTY used on liquidation\n- Liquidation in chunks for CFDs - Check that Position with qty ≤ max liquidation qty not split\n- Liquidation in chunks for CFDs - Check Liquidation when MAX_LIQUIDATION_QTY is not set\n- Liquidation in chunks for CFDs - Orders with qty > max liquidation qty are allowed\n>User can open a position with quantity greater than the instrument’s MAX_LIQUIDATION_QTY (e.g. 500 when max = 200). No validation error\n>Opening/closing orders are not rejected or limited by MAX_LIQUIDATION_QTY; restriction applies only during liquidation\n>If MAX_LIQUIDATION_QTY is not set, full position is closed with one order (no chunking)\n- Liquidation in chunks for CFDs - Orders sent without waiting for fill and sent simultaneously\n- Liquidation in chunks for CFDs - Liquidation is completed only after all liq orders are completed\n- Liquidation in chunks for CFDs - Liquidation waits for trading hours\n- Liquidation in chunks for CFDs - Check liquidation status in review when one order is not executed\n- Liquidation in chunks for CFDs - Check Liquidation retries\n>show order <STRATEGY_order_id>",
+  "reference_checklist_source_file": "data/CRT-669-gold.txt",
+  "required_smart_checklist_substrings": [
+    "Liquidation",
+    "MAX_LIQUIDATION",
+    "CFD_FOREX_OTC",
+    "CFD_FOREX_DMA",
+    "CFD_FOREX"
+  ],
+  "forbidden_checklist_regex": []
+}

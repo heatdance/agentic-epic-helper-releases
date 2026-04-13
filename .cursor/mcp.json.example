@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "postgres-ctqa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sarmadparvez/postgresql-mcp",
+        "postgresql://USER:PASSWORD@127.0.0.1:15432/ctqa?mode=readonly&sslmode=disable"
+      ]
+    }
+  }
+}

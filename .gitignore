@@ -1,0 +1,10 @@
+# Large vendor clones must not land in the repo (see automation/temp/README.md)
+automation/temp/aurora-remote-cli/
+
+# Local MCP config (often contains credentials); use mcp.json.example
+.cursor/mcp.json
+
+# Python / tooling noise
+__pycache__/
+*.py[cod]
+.playwright-mcp/

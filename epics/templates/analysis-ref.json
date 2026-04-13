@@ -1,0 +1,77 @@
+{
+  "_comment": "Requirement analysis handoff for ANALYSE: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-analysis.json. Pair with <KEY>-analysis.md. Do not reference epics/<KEY>/temp/ in durable JSON. May append Known issue > lines to sibling -coverage.json/-coverage.md when coverage loaded and reconciliation verdict is in_scope_relevant.",
+  "schema_version": 1,
+  "epic_key": null,
+  "sources": {
+    "jira_fetched_at": null,
+    "ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
+    "ref_loaded": false,
+    "coverage_path": "epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json",
+    "coverage_loaded": false,
+    "note": "ref_loaded/coverage_loaded: true only when file was read successfully for this run."
+  },
+  "summary": null,
+  "_summary": {
+    "text": "1–4 sentences: what we test and why (practical).",
+    "derived_from": ["jira_summary", "jira_description", "ref.synthesis", "ref.business_context"]
+  },
+  "gaps": [],
+  "_gaps_item": {
+    "id": "gap-001",
+    "summary": "Short gap description",
+    "source": "ref | coverage | jira | inferred",
+    "type": "unverifiable | snippet_missing | ambiguity | client_shell_unknown | grounding | other",
+    "evidence": "Optional pointer, e.g. requirements[].key CRT-123 snippet_status=missing, or checks[].id chk-002"
+  },
+  "questions": [],
+  "_questions_item": {
+    "id": "q-001",
+    "text": "Review question",
+    "kind": "grounded | hypothesis",
+    "dimension": "testability | completeness | consistency | cross_surface | operational | other",
+    "evidence": "Quote or artifact path when kind=grounded; null when hypothesis"
+  },
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "_known_issues_search_query": {
+    "jql": "JQL string",
+    "purpose": "epic_link | epic_text | keyword_semantic",
+    "result_count": 0
+  },
+  "known_issues": [],
+  "_known_issues_item": {
+    "key": "CRTQA-1234",
+    "summary": null,
+    "status": null,
+    "issuetype": null,
+    "resolution": null,
+    "url": null,
+    "relevance": "epic_mention | keyword | linked | jql_hit",
+    "status_category": "open | closed | aborted_other",
+    "coverage_reconciliation": null,
+    "_coverage_reconciliation": {
+      "verdict": "in_scope_relevant | out_of_epic | questionable | skipped_no_coverage",
+      "rationale": "one line"
+    }
+  },
+  "unmapped_known_issues": [],
+  "_unmapped_known_issues_item": {
+    "issue_key": "CRTQA-1234",
+    "suggested_check_ids": ["chk-001", "chk-002"],
+    "reason": "ambiguous_mapping | no_check_overlap"
+  },
+  "coverage_mutations": [],
+  "_coverage_mutations_item": {
+    "check_id": "chk-001",
+    "appended_lines": ["> Known issue: CRTQA-123 — summary (status: Open)"],
+    "skipped_duplicates": ["CRTQA-123"]
+  },
+  "validation_log": [],
+  "_validation_log_item": {
+    "step": "phase id or name",
+    "at": "ISO-8601",
+    "action": "short description"
+  }
+}

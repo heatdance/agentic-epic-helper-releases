@@ -1,0 +1,308 @@
+{
+  "runs": [
+    "run-001",
+    "run-002",
+    "run-003",
+    "run-004",
+    "run-005",
+    "run-006"
+  ],
+  "per_run": {
+    "run-001": {
+      "error": "not a coverage phase record"
+    },
+    "run-002": {
+      "bullet_count": 22,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        }
+      ]
+    },
+    "run-003": {
+      "error": "not a coverage phase record"
+    },
+    "run-004": {
+      "bullet_count": 18,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        }
+      ]
+    },
+    "run-005": {
+      "error": "not a coverage phase record"
+    },
+    "run-006": {
+      "bullet_count": 18,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        }
+      ]
+    }
+  },
+  "pairwise_jaccard": {
+    "run-002": {
+      "run-004": 0.8182,
+      "run-006": 0.8182
+    },
+    "run-004": {
+      "run-006": 1.0
+    },
+    "run-006": {}
+  },
+  "bullet_frequency": {
+    "[dxinv-285] simple chart for fx_spot is driven by midpoint prices (not bid) per jira ac.": 3,
+    "! reason: snippet_text missing for dxinv-285 (epic_ref mcp_export_failed); confirm midpoint vs bid with full requirement text or implementation.": 1,
+    "[dxinv-cb-315] fx_spot search result card shows opol/market-state parameters per requirement (including fx_spot notes in the requirement table).": 3,
+    "corner trader dxtrade5 / webbroker configuration and desktop flows — client_shell_impact.corner_trader not_applicable; adaptive-only epic.": 3,
+    "[dxinv-cb-25] fx_spot search result card matches required fields/behaviour and opens the instrument page on tap.": 3,
+    "! reason: snippet_text missing for dxinv-cb-4 (epic_ref snippet_status failed / mcp_export_failed) — pull yogi snippet or confluence row before final sign-off.": 1,
+    "[dxinv-cb-27] instrument type filter supports fx_spot; with all tab selected, fx_spot instruments appear in combined results.": 3,
+    "[crt-632] adaptive fx_spot: search (rules, opol/currency/type filters, fx spot tab, all tab, cards to instrument), recently viewed after visit, watchlist cards to instrument, instrument page (midpoint chart, info, cfd-like stats without maturity; other widgets no data).": 3,
+    "bid-based simple chart for cfd, cfd*forex, cfd*stock (hong kong) per dxinv-285 — epic primary scope is fx_spot; non-fx_spot branches are contrast only in jira, not peer test threads.": 3,
+    "[dxinv-cb-4] after viewing an fx_spot instrument page, the instrument appears in recently viewed when returning to search.": 3,
+    "[dxinv-cb-91] watchlist shows an fx_spot instrument card and navigates to the instrument page on tap.": 3,
+    "[dxinv-174] fx_spot instruments are discoverable via search using the same minimum-input and display rules as other types (symbol/description criteria per requirement).": 3,
+    "[dxinv-cb-308] instrument type filter exposes an fx spot tab; user can search fx_spot specifically from that tab.": 3,
+    "[crt-632] instrument info for fx_spot matches the design and parity expectations for other instrument types (header, symbol, type, currency, market state; no trading-conditions block where epic excludes it).": 3,
+    "[dxinv-cb-29] opol (exchange) filter is available on search and constrains fx_spot results to selected opol values.": 3,
+    "[dxinv-cb-206] search supports descriptions with whitespace; results only include fx_spot instruments fully tradable on user balances; each result card exposes description datapoints per requirement.": 3,
+    "! reason: snippet_text missing for dxinv-cb-309 (epic_ref snippet_status failed / mcp_export_failed).": 1,
+    "full functional depth for portfolio, transactions, news, events widgets on instrument page — jira states other widgets display no data and will be elaborated in other epics — limit to empty/no-data expectations here.": 3,
+    "[crt-632] fx_spot instrument page loads with simple chart, instrument info, and stats visible; other widgets show no meaningful data in this epic.": 3,
+    "! reason: snippet_text missing for dxinv-cb-91 (epic_ref snippet_status failed / mcp_export_failed).": 1,
+    "[dxinv-cb-309] stats widget for fx_spot follows cfd-like rows and omits maturity date as required for this type.": 3,
+    "[dxinv-cb-34] currency filter is available on search and constrains fx_spot results to selected currencies (verify confluence key dxinv-cb-34; jira url once pointed at dxinv-cb-29).": 3
+  },
+  "strong_bullets_all_runs": [
+    "[crt-632] adaptive fx_spot: search (rules, opol/currency/type filters, fx spot tab, all tab, cards to instrument), recently viewed after visit, watchlist cards to instrument, instrument page (midpoint chart, info, cfd-like stats without maturity; other widgets no data).",
+    "[crt-632] fx_spot instrument page loads with simple chart, instrument info, and stats visible; other widgets show no meaningful data in this epic.",
+    "[crt-632] instrument info for fx_spot matches the design and parity expectations for other instrument types (header, symbol, type, currency, market state; no trading-conditions block where epic excludes it).",
+    "[dxinv-174] fx_spot instruments are discoverable via search using the same minimum-input and display rules as other types (symbol/description criteria per requirement).",
+    "[dxinv-285] simple chart for fx_spot is driven by midpoint prices (not bid) per jira ac.",
+    "[dxinv-cb-206] search supports descriptions with whitespace; results only include fx_spot instruments fully tradable on user balances; each result card exposes description datapoints per requirement.",
+    "[dxinv-cb-25] fx_spot search result card matches required fields/behaviour and opens the instrument page on tap.",
+    "[dxinv-cb-27] instrument type filter supports fx_spot; with all tab selected, fx_spot instruments appear in combined results.",
+    "[dxinv-cb-29] opol (exchange) filter is available on search and constrains fx_spot results to selected opol values.",
+    "[dxinv-cb-308] instrument type filter exposes an fx spot tab; user can search fx_spot specifically from that tab.",
+    "[dxinv-cb-309] stats widget for fx_spot follows cfd-like rows and omits maturity date as required for this type.",
+    "[dxinv-cb-315] fx_spot search result card shows opol/market-state parameters per requirement (including fx_spot notes in the requirement table).",
+    "[dxinv-cb-34] currency filter is available on search and constrains fx_spot results to selected currencies (verify confluence key dxinv-cb-34; jira url once pointed at dxinv-cb-29).",
+    "[dxinv-cb-4] after viewing an fx_spot instrument page, the instrument appears in recently viewed when returning to search.",
+    "[dxinv-cb-91] watchlist shows an fx_spot instrument card and navigates to the instrument page on tap.",
+    "bid-based simple chart for cfd, cfd*forex, cfd*stock (hong kong) per dxinv-285 — epic primary scope is fx_spot; non-fx_spot branches are contrast only in jira, not peer test threads.",
+    "corner trader dxtrade5 / webbroker configuration and desktop flows — client_shell_impact.corner_trader not_applicable; adaptive-only epic.",
+    "full functional depth for portfolio, transactions, news, events widgets on instrument page — jira states other widgets display no data and will be elaborated in other epics — limit to empty/no-data expectations here."
+  ],
+  "weak_bullets": [
+    "! reason: snippet_text missing for dxinv-285 (epic_ref mcp_export_failed); confirm midpoint vs bid with full requirement text or implementation.",
+    "! reason: snippet_text missing for dxinv-cb-309 (epic_ref snippet_status failed / mcp_export_failed).",
+    "! reason: snippet_text missing for dxinv-cb-4 (epic_ref snippet_status failed / mcp_export_failed) — pull yogi snippet or confluence row before final sign-off.",
+    "! reason: snippet_text missing for dxinv-cb-91 (epic_ref snippet_status failed / mcp_export_failed)."
+  ],
+  "matrix_intersection": [
+    [
+      "m-001",
+      "primary"
+    ],
+    [
+      "m-002",
+      "primary"
+    ],
+    [
+      "m-003",
+      "primary"
+    ],
+    [
+      "m-004",
+      "primary"
+    ],
+    [
+      "m-005",
+      "primary"
+    ],
+    [
+      "m-006",
+      "primary"
+    ],
+    [
+      "m-007",
+      "primary"
+    ],
+    [
+      "m-008",
+      "primary"
+    ],
+    [
+      "m-009",
+      "primary"
+    ],
+    [
+      "m-010",
+      "out_of_epic"
+    ],
+    [
+      "m-011",
+      "primary"
+    ],
+    [
+      "m-012",
+      "primary"
+    ],
+    [
+      "m-013",
+      "primary"
+    ]
+  ],
+  "epic_key": "CRT-632",
+  "suite_id": "20260413-qa9f"
+}

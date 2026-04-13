@@ -1,0 +1,30 @@
+---
+description: When adding docs or refs, keep AGENTS, README, harness-map, and rules/prompts consistent; no people or secrets in summaries
+alwaysApply: true
+---
+
+# Harness maintenance
+
+## When this applies
+
+Whenever you **add or materially change** durable documentation under:
+
+- `docs/` (except transient scratch),
+- `automation/docs/`,
+- or cross-references / new paths under `.cursor/` (including `.cursor/pipelines/`),
+
+you must **in the same change** (or an immediate follow-up) update:
+
+- [AGENTS.md](AGENTS.md) — “Where things live” and any pointers that agents rely on.
+- [README.md](README.md) — quick links if a new top-level artifact matters to humans.
+- [docs/harness-map.json](docs/harness-map.json) — tiers, keyword packages, or `read` paths if discovery behavior changes.
+- Any affected [.cursor/rules/](.cursor/rules/) or [.cursor/prompts/](.cursor/prompts/) files.
+
+Goal: **no orphan references** and no drift between “what exists” and “what the harness says.”
+
+## Content policy (summaries)
+
+Updates to [docs/project.json](docs/project.json), [docs/qa-project.json](docs/qa-project.json), or process blurbs in AGENTS/README/rules must stay **functional and process-oriented**:
+
+- **Do not** add individual names, PM/BA/QA rosters, or ownership contact lists.
+- **Do not** copy **passwords, tokens, or secrets** from Confluence or Jira into the repository; point to authenticated sources instead.

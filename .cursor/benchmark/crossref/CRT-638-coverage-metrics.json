@@ -1,0 +1,188 @@
+{
+  "runs": [
+    "run-001",
+    "run-002",
+    "run-003",
+    "run-004",
+    "run-005",
+    "run-006"
+  ],
+  "per_run": {
+    "run-001": {
+      "error": "not a coverage phase record"
+    },
+    "run-002": {
+      "bullet_count": 24,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    },
+    "run-003": {
+      "error": "not a coverage phase record"
+    },
+    "run-004": {
+      "bullet_count": 24,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    },
+    "run-005": {
+      "error": "not a coverage phase record"
+    },
+    "run-006": {
+      "bullet_count": 24,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    }
+  },
+  "pairwise_jaccard": {
+    "run-002": {
+      "run-004": 0.92,
+      "run-006": 0.92
+    },
+    "run-004": {
+      "run-006": 0.92
+    },
+    "run-006": {}
+  },
+  "bullet_frequency": {
+    "[crt-1744] selecting **fx spot** alone filters grid to **only** fx_spot instruments.": 3,
+    "[crt-1744] with **no search text**, placeholder / empty-search behaviour matches spec (e.g. \"start typing to find instruments…\") and still restricts tab content to fx_spot family.": 3,
+    "[crt-1744] multi-select **fx spot** + other types returns **union** of rows with correct per-row type labels.": 3,
+    "[crt-1745] search is **case-insensitive** (lower / upper / mixed) and tolerates **whitespace** in description (e.g. partial \"euro vs\").": 3,
+    "[crt-1875] **exchange** column for forex / fx_spot rows in suggestion results is **empty** (per requirement block bundled under fx spot section on ct page 342174235).": 3,
+    "[crt-1744] search behaviour (symbol, description, partial, case, whitespace) mirrors **all** tab expectations **within** fx spot tab.": 3,
+    "[crt-1744] **fx spot** tab lists **only** fx_spot instruments (no cfd_forex-only rows, no conversion-rate forex rows).": 3,
+    "[crt-1745] **webbroker** — same **all** tab behaviour where dxtrade5 widgets are embedded in webbroker per platform configuration.": 3,
+    "[crt-1745] **dxtrade5** widgets with column filters: account transactions, orders, positions, trades, trading journal — filter by instrument finds fx_spot instruments; **fx spot** type label shown in results.": 3,
+    "[crt-1745] search matches by **symbol**, **description**, partial string; matching substrings highlighted per platform ux.": 3,
+    "[crt-1745] result columns include **symbol**, **description**, **type** showing **fx spot** for fx_spot rows.": 3,
+    "[crt-1744] instruments shown under **all** vs **fx spot** for the same query are **consistent** (same instrument metadata where both lists include it).": 3,
+    "[crt-1745] **dxtrade5** and **webbroker** symbol column filters (same widget set as above) resolve fx_spot instruments and show **fx spot** type label.": 3,
+    "[crt-1744] tab labelled **fx spot** exists and is selectable wherever instrument suggestion tabs are shown (dxtrade5 / embedded webbroker).": 3,
+    "[crt-1744] **instrument type** filter offers **fx spot** (or equivalent label) in dropdown on orders, positions, trades, trading journal (dxtrade5) and order book, position book, transactions (webbroker).": 3,
+    "[crt-1875] columns **symbol**, **description**, **exchange** empty for spot rows; **type** / labels show **fx spot** where applicable.": 3,
+    "[crt-1745] row data for symbol and description is **consistent with ipf** (no stale or duplicate rows for same instrument).": 3,
+    "[crt-1745] **webbroker**: order book, position book, transactions — same filter behaviour for fx_spot.": 3,
+    "[crt-1744] when no fx_spot matches query, user sees **no-match** messaging (e.g. \"no symbol matches your search criteria…\").": 3,
+    "primary focus: fx_spot instruments appear in instrument suggestion **all** tab, dedicated **fx spot** tab, and relevant **column filters**; labels and columns match spec (type **fx spot**, exchange empty for forex spot).": 1,
+    "[crt-638] epic validation v403: verify fixes for **xt-7667** (instrument suggest exchange column cut-off), **xt-7668** (fx spot tab label casing), **xt-7530** (instrument type column naming for fx_spot).": 3,
+    "[crt-1744] **fx spot** entry is in correct **alphabetical** position in the type list.": 3,
+    "[crt-1745] **dxtrade5** — in each instrument suggestion widget with search, **all** tab lists fx_spot instruments together with other allowed types when user types a symbol query.": 3,
+    "[crt-1745] fx_spot remains visible/selectable per **account trading permissions** where instrument suggestion respects allowed instruments (full trading, close-only, no trading, subtype not allowed) — expected gating matches account configuration.": 3,
+    "primary focus: surface fx_spot in dxtrade5/webtrader instrument suggestion: all tab includes fx spot instruments; fx spot tab shows only fx_spot; column filters expose forex type and fx_spot for instrument/symbol/instrument-type filters. **adaptive** not in scope (crt-632). labels: type **fx spot**; **exchange** empty for spot rows per crt-1875 / forex note on ct page 342174235.": 1,
+    "primary focus: ensure new fx_spot instruments participate in dxtrade5/webbroker instrument suggestion: they must appear under **all** alongside other tradable types, appear **only** under the **fx spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per jira ac. **adaptive** excluded (**crt-632**). display: type **fx spot**; **exchange** column empty for forex spot rows (**crt-1875**, ct page 342174235).": 1
+  },
+  "strong_bullets_all_runs": [
+    "[crt-1744] **fx spot** entry is in correct **alphabetical** position in the type list.",
+    "[crt-1744] **fx spot** tab lists **only** fx_spot instruments (no cfd_forex-only rows, no conversion-rate forex rows).",
+    "[crt-1744] **instrument type** filter offers **fx spot** (or equivalent label) in dropdown on orders, positions, trades, trading journal (dxtrade5) and order book, position book, transactions (webbroker).",
+    "[crt-1744] instruments shown under **all** vs **fx spot** for the same query are **consistent** (same instrument metadata where both lists include it).",
+    "[crt-1744] multi-select **fx spot** + other types returns **union** of rows with correct per-row type labels.",
+    "[crt-1744] search behaviour (symbol, description, partial, case, whitespace) mirrors **all** tab expectations **within** fx spot tab.",
+    "[crt-1744] selecting **fx spot** alone filters grid to **only** fx_spot instruments.",
+    "[crt-1744] tab labelled **fx spot** exists and is selectable wherever instrument suggestion tabs are shown (dxtrade5 / embedded webbroker).",
+    "[crt-1744] when no fx_spot matches query, user sees **no-match** messaging (e.g. \"no symbol matches your search criteria…\").",
+    "[crt-1744] with **no search text**, placeholder / empty-search behaviour matches spec (e.g. \"start typing to find instruments…\") and still restricts tab content to fx_spot family.",
+    "[crt-1745] **dxtrade5** and **webbroker** symbol column filters (same widget set as above) resolve fx_spot instruments and show **fx spot** type label.",
+    "[crt-1745] **dxtrade5** widgets with column filters: account transactions, orders, positions, trades, trading journal — filter by instrument finds fx_spot instruments; **fx spot** type label shown in results.",
+    "[crt-1745] **dxtrade5** — in each instrument suggestion widget with search, **all** tab lists fx_spot instruments together with other allowed types when user types a symbol query.",
+    "[crt-1745] **webbroker** — same **all** tab behaviour where dxtrade5 widgets are embedded in webbroker per platform configuration.",
+    "[crt-1745] **webbroker**: order book, position book, transactions — same filter behaviour for fx_spot.",
+    "[crt-1745] fx_spot remains visible/selectable per **account trading permissions** where instrument suggestion respects allowed instruments (full trading, close-only, no trading, subtype not allowed) — expected gating matches account configuration.",
+    "[crt-1745] result columns include **symbol**, **description**, **type** showing **fx spot** for fx_spot rows.",
+    "[crt-1745] row data for symbol and description is **consistent with ipf** (no stale or duplicate rows for same instrument).",
+    "[crt-1745] search is **case-insensitive** (lower / upper / mixed) and tolerates **whitespace** in description (e.g. partial \"euro vs\").",
+    "[crt-1745] search matches by **symbol**, **description**, partial string; matching substrings highlighted per platform ux.",
+    "[crt-1875] **exchange** column for forex / fx_spot rows in suggestion results is **empty** (per requirement block bundled under fx spot section on ct page 342174235).",
+    "[crt-1875] columns **symbol**, **description**, **exchange** empty for spot rows; **type** / labels show **fx spot** where applicable.",
+    "[crt-638] epic validation v403: verify fixes for **xt-7667** (instrument suggest exchange column cut-off), **xt-7668** (fx spot tab label casing), **xt-7530** (instrument type column naming for fx_spot)."
+  ],
+  "weak_bullets": [
+    "primary focus: ensure new fx_spot instruments participate in dxtrade5/webbroker instrument suggestion: they must appear under **all** alongside other tradable types, appear **only** under the **fx spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per jira ac. **adaptive** excluded (**crt-632**). display: type **fx spot**; **exchange** column empty for forex spot rows (**crt-1875**, ct page 342174235).",
+    "primary focus: fx_spot instruments appear in instrument suggestion **all** tab, dedicated **fx spot** tab, and relevant **column filters**; labels and columns match spec (type **fx spot**, exchange empty for forex spot).",
+    "primary focus: surface fx_spot in dxtrade5/webtrader instrument suggestion: all tab includes fx spot instruments; fx spot tab shows only fx_spot; column filters expose forex type and fx_spot for instrument/symbol/instrument-type filters. **adaptive** not in scope (crt-632). labels: type **fx spot**; **exchange** empty for spot rows per crt-1875 / forex note on ct page 342174235."
+  ],
+  "matrix_intersection": [
+    [
+      "m-001",
+      "primary"
+    ],
+    [
+      "m-002",
+      "primary"
+    ],
+    [
+      "m-003",
+      "primary"
+    ],
+    [
+      "m-004",
+      "supporting"
+    ],
+    [
+      "m-005",
+      "out_of_epic"
+    ]
+  ],
+  "epic_key": "CRT-638",
+  "suite_id": "20260413-qa9f"
+}

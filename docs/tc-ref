@@ -1,0 +1,18 @@
+# Test case format (Corner QA)
+
+Normative structure for **human-executable** regression tests drafted after epic **coverage** (Smart Checklist). Aligns with Jira **Test** issues and QAPORTAL **Test Repository** taxonomy ([Test Repository](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097317/Test+Repository)): internally, **compliance/coverage** is the matrix; **regression** tests are client-facing labels for E2E bundles that operationalize that matrix.
+
+## Sections (required order)
+
+1. **Preconditions** — numbered list; reference **Peculiarities** for setup detail (`see Peculiarities N`).
+2. **Actions** — numbered list; linear user steps; reference Peculiarities when setup is non-obvious.
+3. **Results** — numbered list; each item maps to the **Action** with the same index (expected observable outcome).
+4. **Peculiarities** — numbered list; formulas, links (Figma, Slack, Confluence), environment notes, data setup, **copy-paste only** when sourced from Jira or an approved runbook. Use **`[TBD]`** or **`[REQUIRES: …]`** when unknown—do not invent SQL, dxCore commands, or sample outputs.
+
+## Inline example
+
+See repository example layout: [`docs/temp/tc-template.txt`](temp/tc-template.txt) (quoted string illustrates block order and cross-references).
+
+## Pipeline
+
+Epic-scoped drafts: **`TEST-PREP:`** + Epic key → [`.cursor/pipelines/test-prep.md`](../.cursor/pipelines/test-prep.md) → `epics/<KEY>/<KEY>-tests.json` + `-tests.md`. Schema template: [`epics/templates/tests-ref.json`](../epics/templates/tests-ref.json). Full **draft** text for each bundle is produced in a **separate subprocess** (one bundle per run); see playbook phases **8a** / **8b**.

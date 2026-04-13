@@ -1,0 +1,30 @@
+---
+description: Mandatory Atlassian MCP for Jira/Confluence discovery and retrieval; no invented ticket or page content
+alwaysApply: true
+---
+
+# MCP — Jira and Confluence
+
+## Mandatory use
+
+For **any** Jira issue lookup, Confluence page retrieval, Confluence search, or Atlassian-side discovery related to Corner Trader QA work, use the **user-mcp-atlassian** MCP server.
+
+Do **not**:
+
+- Guess or assume issue descriptions, acceptance criteria, comments, or Confluence body text from memory.
+- Substitute web search or generic knowledge for live Jira/Confluence content when the task depends on **your** project's tickets or pages.
+
+## Tool usage
+
+- **Before** calling an MCP tool, **read that tool’s schema/descriptor** (required parameters, types) and call it with correct arguments.
+- When the user provides issue keys, page IDs, or URLs, use MCP to **fetch** authoritative content, then summarize in your own words for the reply.
+
+## Human input
+
+- Ask for **issue keys**, **space/page identifiers**, or links when they are missing and required to proceed.
+
+## Confluence scoping (Corner Trader QA)
+
+- **Product / upstream**: **CT** space for Corner Trader entry; **XT** space for DXtrade XT (fork base) when the task involves platform/upstream behavior—see [docs/project.json](docs/project.json).
+- **Corner QA processes**: **QAPORTAL** content under page **497097273** (“Corner”) and **its descendants** only; do **not** assume unrelated QAPORTAL pages define Corner QA unless the user expands scope—see [docs/qa-project.json](docs/qa-project.json).
+- Narrow Confluence search to the relevant space/subtree before pulling large result sets.

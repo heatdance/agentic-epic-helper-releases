@@ -1,0 +1,195 @@
+{
+  "suite_id": "20260413-qa9f",
+  "epic_key": "CRT-669",
+  "phase": "prep",
+  "attempt": 2,
+  "seq": "003",
+  "iso_timestamp": "2026-04-13T10:30:36Z",
+  "meta": {
+    "source_playbook": ".cursor/benchmark/pipeline/benchmark-epic-prep.md",
+    "delegates": ".cursor/pipelines/epic-prep.md",
+    "agent_summary": "Attempt 2: Jira+MCP refresh; snippets from Confluence markdown (IPF + Margin page); XT refs pruned to 5 (removed PROP/FAQ/cross-asset from attempt 1); cross_epic XT-7765 from validation comment; synthesis/keywords reordered; no yogi storage retry."
+  },
+  "artifact": {
+    "schema_version": 2,
+    "epic": {
+      "key": "CRT-669",
+      "url": "https://jira.in.devexperts.com/browse/CRT-669",
+      "summary": "Liquidation in chunks for CFDs",
+      "status": "Pending resolution",
+      "labels": [
+        "ct_ph5"
+      ],
+      "issue_type": "Epic"
+    },
+    "business_context": null,
+    "synthesis": {
+      "problem_gist": "Instrument-level MAX_LIQUIDATION_QTY for CFD, CFD_FOREX, and CFD_STOCK (CRT-1891), maintained in dxMC, drives margin-liquidation order chunking per CRT-1785 when the cap is set. Defaults: CFD_FOREX_OTC=200, CFD_FOREX_DMA=20 000 000; plain CFD/CFD_STOCK have no default so chunking does not apply until configured. Jira E2E: oversized discretionary position allowed; at margin liquidation, 500 vs cap 200 produces three simultaneous child orders; completion waits for all; off-hours defers to session open; rejections follow CRT-1126 step 4 to in-review. Deliver on 270 branch.",
+      "problem_gist_source": "from_jira_field",
+      "impact_areas": [
+        {
+          "text": "IPF: MAX_LIQUIDATION_QTY field, subtype defaults (CFD_FOREX_OTC / CFD_FOREX_DMA), empty default for CFD and CFD_STOCK",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "dxMC: expose and persist MAX_LIQUIDATION_QTY on instrument widgets",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Liquidation service: split sizing, concurrent child market orders, session gating, terminal completion, CRT-1126 retry/IN REVIEW",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "WebBroker: margin utilization trigger, order book / liquidation status including in-review",
+          "source": "from_jira_field"
+        }
+      ],
+      "keywords": [
+        "liquidation",
+        "MAX_LIQUIDATION_QTY",
+        "CFD_FOREX_OTC",
+        "CFD_FOREX_DMA",
+        "CFD_STOCK",
+        "dxMC",
+        "margin utilization",
+        "CRT-1891",
+        "CRT-1785",
+        "CRT-1126",
+        "270"
+      ]
+    },
+    "client_shell_impact": {
+      "corner_trader": {
+        "status": "affected",
+        "note": "Epic text and validation comment reference WebBroker margin liquidation, order states, and dxMC configuration.",
+        "evidence": "Jira description (Webbroker, dxMC, Margin Utilization); comment cites XT-7765 WebBroker-side retest context."
+      },
+      "adaptive": {
+        "status": "affected",
+        "note": "qa_default_both: shared order/liquidation stack unless product excludes Adaptive; Jira silent.",
+        "evidence": "none_found"
+      },
+      "source": "qa_default_both"
+    },
+    "design": {
+      "figma": [],
+      "other_design": [],
+      "notes": "no_figma_urls_in_jira_description",
+      "ui_artifacts_in_jira": "none"
+    },
+    "requirements": [
+      {
+        "key": "CRT-1891",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1891",
+        "anchor": "req-CRT-1891",
+        "page_id": "354975755",
+        "snippet_text": "Max order quantity during liquidation, integer. Position should be split by orders with quantity not exceeding max liquidation qty (see LinkLINKCRT-1785)   * all instruments with CFD_FOREX_OTC subtype should have default max liquidation qty = 200 * all instruments with CFD_FOREX_DMA subtype should have default max liquidation qty = 20 000 000",
+        "extract_mode": null,
+        "jira_context": "Epic requirement link; IPF table row from Confluence MCP markdown export.",
+        "snippet_status": "ok",
+        "snippet_failure_reason": null
+      },
+      {
+        "key": "CRT-1785",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1785",
+        "anchor": "req-CRT-1785",
+        "page_id": "345714164",
+        "snippet_text": "If position quantity exceeds max liquidation quantity (LinkLINKCRT-1891), then several orders should be sent where each order's quantity does not exceed the maximum tradable amount and the final order contains any residual quantity.  The orders should be sent simultaneously.",
+        "extract_mode": null,
+        "jira_context": "Epic link CRT-1785; Margin Call and Liquidations page MCP markdown.",
+        "snippet_status": "ok",
+        "snippet_failure_reason": null
+      },
+      {
+        "key": "CRT-1126",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1126",
+        "anchor": "req-CRT-1126",
+        "page_id": "345714164",
+        "snippet_text": "For each **started** liquidation from the list above the system should perfom the following steps. Logic should be performed only for the positions, that should be liquidated acording to the type of started liquidation:",
+        "extract_mode": null,
+        "jira_context": "Epic scenario step 4 references CRT-1126; same Confluence page.",
+        "snippet_status": "ok",
+        "snippet_failure_reason": null
+      }
+    ],
+    "traversal": {
+      "nested_refs": [],
+      "cross_epic": [
+        {
+          "issue_key": "XT-7765",
+          "relation": "validation_finding",
+          "note": "Epic validation comment: liquidation in chunks does not work for CFD and CFD_STOCK; tested 270.23 cttest; retest expected.",
+          "source": "jira_comment_2026-03-23"
+        }
+      ],
+      "xt_refs": [
+        {
+          "page_id": "402589545",
+          "url": "https://confluence.in.devexperts.com/spaces/XT/pages/402589545/DXtrade+XT+Home",
+          "title": "DXtrade XT Home",
+          "why_relevant": "XT fork baseline per docs/project.json.",
+          "source_query_or_link": "seed: project.json page_id 402589545",
+          "status": "keep",
+          "reason": "Harness fork anchor"
+        },
+        {
+          "page_id": "469051210",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=469051210",
+          "title": "Margining overview",
+          "why_relevant": "XT margin call vs liquidation overview.",
+          "source_query_or_link": "confluence_search XT margin call",
+          "status": "keep",
+          "reason": "Liquidation vocabulary alignment"
+        },
+        {
+          "page_id": "497105148",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=497105148",
+          "title": "Web Broker Product Manual 2026.2",
+          "why_relevant": "Product manual index for liquidation settings.",
+          "source_query_or_link": "confluence_search XT margin",
+          "status": "keep",
+          "reason": "WebBroker-facing doc cross-check"
+        },
+        {
+          "page_id": "505947764",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505947764",
+          "title": "GigaTrade Configuration",
+          "why_relevant": "Configuration mentions Market TIF defaults for liquidation orders.",
+          "source_query_or_link": "confluence_search XT liquidation",
+          "status": "keep",
+          "reason": "Order-parameter context"
+        },
+        {
+          "page_id": "518009763",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=518009763",
+          "title": "Risk Settings and Groups admin guide 2026.2",
+          "why_relevant": "Risk admin guide snippets on liquidation validation.",
+          "source_query_or_link": "confluence_search XT liquidation",
+          "status": "keep",
+          "reason": "Admin risk controls"
+        }
+      ]
+    },
+    "validation_log": [
+      {
+        "step": "3.4",
+        "at": "2026-04-13T10:30:36Z",
+        "action": "Second benchmark prep pass: tightened problem_gist; impact_areas deduped to four bullets grounded in Jira description + validation comment cross-epic XT-7765."
+      },
+      {
+        "step": "3.6",
+        "at": "2026-04-13T10:30:36Z",
+        "action": "XT relevance pass stricter than attempt 1: dropped PROP metrics (518021342), raw FAQ (474721001), and combined futures/equity margin note (474712291); retained five strongest CT/XT bank-relevant hits."
+      },
+      {
+        "step": "requirements",
+        "at": "2026-04-13T10:30:36Z",
+        "action": "Refreshed Confluence MCP markdown for IPF 354975755 and Margin/Liquidations 345714164; snippet_text verbatim substrings for CRT-1891/1785/1126."
+      }
+    ],
+    "sources": {
+      "jira_fetched_at": "2026-04-13T10:30:36Z",
+      "confluence_method": "mixed"
+    }
+  }
+}

@@ -1,0 +1,202 @@
+{
+  "suite_id": "20260413-qa9f",
+  "epic_key": "CRT-638",
+  "phase": "prep",
+  "attempt": 3,
+  "seq": "005",
+  "iso_timestamp": "2026-04-13T10:46:18Z",
+  "meta": {
+    "source_playbook": ".cursor/benchmark/pipeline/benchmark-epic-prep.md",
+    "delegates": ".cursor/pipelines/epic-prep.md",
+    "agent_summary": "Attempt 3: Jira MCP; MCP storage page 342174235 + yogi_snippet CRT-1744/1745; 8 XT refs (6 keep, 2 flagged); Adaptive N/A."
+  },
+  "artifact": {
+    "schema_version": 2,
+    "epic": {
+      "key": "CRT-638",
+      "url": "https://jira.in.devexperts.com/browse/CRT-638",
+      "summary": "Add FX Spot to instrument suggestion",
+      "status": "Pending resolution",
+      "labels": [
+        "ct_ph5"
+      ],
+      "issue_type": "Epic"
+    },
+    "business_context": null,
+    "synthesis": {
+      "problem_gist": "Ensure new FX_SPOT instruments participate in dxTrade5/WebBroker instrument suggestion: they must appear under **All** alongside other tradable types, appear **only** under the **FX Spot** tab, and be selectable in column filters (instrument type / instrument / symbol) per Jira AC.",
+      "problem_gist_source": "from_jira_field",
+      "impact_areas": [
+        {
+          "text": "Tabbed instrument suggestion UX (All vs FX Spot) and search",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Table column filters in dxTrade5 and WebBroker grids tied to instrument/symbol/type",
+          "source": "from_jira_field"
+        },
+        {
+          "text": "Defect retest scope: XT-7667, XT-7668, XT-7530 (exchange column, tab label casing, type column naming)",
+          "source": "from_jira_field"
+        }
+      ],
+      "keywords": [
+        "FX_SPOT",
+        "FX Spot",
+        "instrument suggestion",
+        "All tab",
+        "column filter",
+        "CRT-1744",
+        "CRT-1745",
+        "WebTrader"
+      ]
+    },
+    "client_shell_impact": {
+      "corner_trader": {
+        "status": "affected",
+        "note": "dxTrade5 + WebBroker surfaces with instrument search and filters; Figma CornerBank WebTrader Dark referenced in Jira.",
+        "evidence": "Jira AC; Design Figma link; Requirements 1–2."
+      },
+      "adaptive": {
+        "status": "not_applicable",
+        "note": "Out of epic; follow CRT-632 for Adaptive.",
+        "evidence": "Jira description: Adaptive: not a part of this epic, see CRT-632"
+      },
+      "source": "jira_field"
+    },
+    "design": {
+      "figma": [
+        {
+          "url": "https://www.figma.com/design/DNmyG15cyGltqx7x5GY9C1/CornerBank-WebTrader-Dark?node-id=15389-94878&t=G2bA6rhQxQ6A2mYs-0",
+          "note": "CornerBank WebTrader Dark (node from Jira)."
+        }
+      ],
+      "other_design": [],
+      "notes": "figma.com link in Epic description.",
+      "ui_artifacts_in_jira": "figma"
+    },
+    "requirements": [
+      {
+        "key": "CRT-1744",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1744",
+        "anchor": "req-CRT-1744",
+        "page_id": "342174235",
+        "snippet_text": "FOREX Note : Exchange column for FOREX instruments should be empty On UI 'Instrument type' filter suggests and displays 'FX Spot' 5.2 Instrument suggestion search It should be possible to search instrument by the following instrument fields via entering at least one symbol: Symbol Description ISIN (searchable, but not shown) 5.3 Derivatives (Option Chain) & Risk Profile 5.3.1 Derivatives (Option Chain) Derivatives (Option Chain) widget should be shown if one of the conditions is satisfied: options are available on at least one account in the portfolio ( ) + Option Level is >0 on this account ( ) futures are available on at least one account in the portfolio ( ) If there are multiple portfolios visible for the User, the Derivatives widget should be shown if it's available for at least one of the portfolios. The widget represents a tool to trade derivatives such as Options and Futures based on the selected underlying. The widget contains 2 sections: Underlying Instruments (with position info) table Option Chain based on underlying instruments Underlying Instruments in the table are shown based on the type of selected instrument in the header of the widget: If an instrument with type other than PRODUCT is selected, then only selected instrument is shown in the table, options in the option chain section are shown based on this instrument. If an instrument with type PRODUCT is selected, then the table should contain the instruments with the following types: FUTURE instruments related to the selected product; SPREAD instruments (future spreads) related to the selected product. If the selected PRODUCT instrument has OPOL that supports only single futures according to the configuration , then SPREAD instruments should be hidden. Bid and Ask columns in the Underlying Instruments section are clickable buttons, and on hover Sell and Buy tooltips are shown. After clicking Sell or Buy an order entry with the selected instrument (underlying) and Side is opened. For the instruments with type SPREAD multileg order entry should be opened with pre-selected Futures in each leg according to the formula of the selected symbol ( ). Spread - only Fut Calendar spread is supported in ph2: Spread Name Number of legs Description Related SPREAD instrument Ratio Single",
+        "extract_mode": "inline_td",
+        "jira_context": null,
+        "snippet_status": "ok",
+        "snippet_failure_reason": null
+      },
+      {
+        "key": "CRT-1745",
+        "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1745",
+        "anchor": "req-CRT-1745",
+        "page_id": "342174235",
+        "snippet_text": "ALL Stocks, ETFs with the link to Options CFD, CFD_FOREX, CFD_STOCK Product instruments with the link to Futures FOREX (on UI 'Type' column displays 'FX Spot') Equities Stocks, ETFs with the link to Options CFDs CFD CFD_FOREX CFD_STOCK Futures Futures aggregated under Product instruments Future spreads are not shown in instrument suggestion - they are shown only in Derivatives widget Options Options aggregated under Underlying FX Spot FOREX Note : Exchange column for FOREX instruments should be empty On UI 'Instrument type' filter suggests and displays 'FX Spot' 5.2 Instrument suggestion search It should be possible to search instrument by the following instrument fields via entering at least one symbol: Symbol Description ISIN (searchable, but not shown) 5.3 Derivatives (Option Chain) & Risk Profile 5.3.1 Derivatives (Option Chain) Derivatives (Option Chain) widget should be shown if one of the conditions is satisfied: options are available on at least one account in the portfolio ( ) + Option Level is >0 on this account ( ) futures are available on at least one account in the portfolio ( ) If there are multiple portfolios visible for the User, the Derivatives widget should be shown if it's available for at least one of the portfolios. The widget represents a tool to trade derivatives such as Options and Futures based on the selected underlying. The widget contains 2 sections: Underlying Instruments (with position info) table Option Chain based on underlying instruments Underlying Instruments in the table are shown based on the type of selected instrument in the header of the widget: If an instrument with type other than PRODUCT is selected, then only selected instrument is shown in the table, options in the option chain section are shown based on this instrument. If an instrument with type PRODUCT is selected, then the table should contain the instruments with the following types: FUTURE instruments related to the selected product; SPREAD instruments (future spreads) related to the selected product. If the selected PRODUCT instrument has OPOL that supports only single futures according to the configuration , then SPREAD instruments should be hidden. Bid and Ask columns in the Underlying Instruments section are clickable buttons, and on hover Sell and Buy tooltips are shown. After clicking Sell or Buy an order entry with the selected instrument (underlying) and Side is opened. For the instruments with type SPREAD multileg order entry should be opened with pre-selected Futures in each leg according to the formula of the selected symbol ( ). Spread - only Fut Calendar spread is supported in ph2: Spread Name Number of legs Description Related SPREAD instrument Ratio Single",
+        "extract_mode": "inline_td",
+        "jira_context": null,
+        "snippet_status": "ok",
+        "snippet_failure_reason": null
+      }
+    ],
+    "traversal": {
+      "nested_refs": [],
+      "cross_epic": [
+        {
+          "key": "CRT-632",
+          "relation": "Adaptive scope for FX_SPOT / suggestion is separate epic per Jira."
+        }
+      ],
+      "xt_refs": [
+        {
+          "page_id": "402589545",
+          "url": "https://confluence.in.devexperts.com/spaces/XT/pages/402589545/DXtrade+XT+Home",
+          "title": "DXtrade XT Home",
+          "why_relevant": "Upstream XT landing; fork context for instrument lookup vs Corner FX_SPOT tabs.",
+          "source_query_or_link": "seed docs/project.json XT home 402589545",
+          "status": "keep",
+          "reason": "Authoritative XT entry"
+        },
+        {
+          "page_id": "439947962",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=439947962",
+          "title": "DXtrade XT Applications",
+          "why_relevant": "Lists dx-ipfservice and instrument suggest in application map.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "keep",
+          "reason": "Named instrument suggest in inventory"
+        },
+        {
+          "page_id": "411382169",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=411382169",
+          "title": "UX Review - XT Scenarios",
+          "why_relevant": "OE Symbol Suggest positioning and interaction regressions.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "keep",
+          "reason": "Suggest-specific UX"
+        },
+        {
+          "page_id": "505943060",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505943060",
+          "title": "[In Review] Trade from Option Chain",
+          "why_relevant": "Instrument suggest flows into option chain selection.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "keep",
+          "reason": "Instrument type + suggest"
+        },
+        {
+          "page_id": "474712291",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=474712291",
+          "title": "Combined Future/Equity Accounts",
+          "why_relevant": "Unified lookup lists instruments across asset classes.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "keep",
+          "reason": "Lookup behaviour"
+        },
+        {
+          "page_id": "480861677",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=480861677",
+          "title": "DXtrade (XT) based clients segments",
+          "why_relevant": "Corner Bank multi-asset profile including FX.",
+          "source_query_or_link": "CQL space=XT Corner Bank",
+          "status": "keep",
+          "reason": "Named Corner + FX"
+        },
+        {
+          "page_id": "457020137",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=457020137",
+          "title": "Release Notes (2025.2) - text version",
+          "why_relevant": "Historical instrument search / Futures tab notes.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "flagged",
+          "reason": "Release-notes noise vs epic-specific FX_SPOT tabs"
+        },
+        {
+          "page_id": "505938406",
+          "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505938406",
+          "title": "[In Progress] How-To Guide",
+          "why_relevant": "Generic instruments how-to.",
+          "source_query_or_link": "CQL space=XT instrument suggest",
+          "status": "flagged",
+          "reason": "Low precision for engineering checklist"
+        }
+      ]
+    },
+    "validation_log": [
+      {
+        "step": "3.4",
+        "at": "2026-04-13T10:46:18Z",
+        "action": "Precision pass: synthesis and client_shell_impact tied to Jira + Yogi; no Adaptive claims."
+      },
+      {
+        "step": "3.6",
+        "at": "2026-04-13T10:46:18Z",
+        "action": "Benchmark attempt 3: capped 8 XT refs; omitted broperf-only pages; flagged release + how-to."
+      }
+    ],
+    "sources": {
+      "jira_fetched_at": "2026-04-13T10:46:18Z",
+      "confluence_method": "mixed"
+    }
+  }
+}

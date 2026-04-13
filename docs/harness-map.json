@@ -1,0 +1,214 @@
+{
+  "schema_version": 1,
+  "description": "Tiered context escalation: read only packages that match task language. Do not load every doc by default.",
+  "content_policy": "Repo summaries stay functional/process-only; no people rosters. Secrets stay on Confluence, not in JSON.",
+  "tiers": [
+    {
+      "id": "T0",
+      "name": "session_anchor",
+      "read": ["qa-handoff.md", "AGENTS.md"],
+      "when": "Substantive QA or multi-step work; always skim T0 first.",
+      "skip_deep_read_when": "Trivial, explicitly local edits (e.g. scratch only under automation/temp/) with no product/QA/process context."
+    },
+    {
+      "id": "T1",
+      "name": "domain_packages",
+      "match_any_package": [
+        {
+          "id": "product_fork_platform",
+          "keywords": [
+            "corner",
+            "corner trader",
+            "trader",
+            "CT",
+            "CT space",
+            "fork",
+            "XT",
+            "dxtrade",
+            "dxtradext",
+            "upstream",
+            "platform",
+            "baseline",
+            "demo-xt"
+          ],
+          "read": ["docs/project.json"],
+          "mcp_hint": "Confluence: CT home (342168339) for space entry; XT home (402589545) for upstream platform, boards, demo hosts. Strip contacts/people from summaries."
+        },
+        {
+          "id": "corner_qa_process",
+          "keywords": [
+            "qa process",
+            "QAPORTAL",
+            "corner qa",
+            "qa portal",
+            "CRTQA",
+            "CRT",
+            "CRTBL",
+            "adaptive",
+            "environment",
+            "ctqa",
+            "ctdev",
+            "ctuat",
+            "cttest",
+            "ctmob",
+            "regression",
+            "release",
+            "test policy"
+          ],
+          "read": ["docs/qa-project.json"],
+          "mcp_hint": "Confluence: QAPORTAL page Corner (497097273) and descendants only—not the whole QA space unless user widens scope."
+        },
+        {
+          "id": "deliverable_shape",
+          "keywords": [
+            "test case",
+            "test cases",
+            "TC",
+            "checklist",
+            "coverage",
+            "defect",
+            "DR",
+            "bug report"
+          ],
+          "read": ["docs/tc-ref", ".cursor/pipelines/coverage.md", "docs/dr-ref"],
+          "note": "Open only the ref that matches the deliverable (e.g. TC vs Smart Checklist/coverage vs DR), not necessarily all three."
+        },
+        {
+          "id": "figma_design",
+          "keywords": [
+            "figma",
+            "frame",
+            "layer",
+            "node-id",
+            "design file",
+            "mockup",
+            "UI spec",
+            "design system"
+          ],
+          "read": ["automation/docs/figma-mcp.md"],
+          "mcp_hint": "Use Figma MCP if enabled in Cursor; paste figma.com links with node-id. Access matches the OAuth user’s file permissions."
+        },
+        {
+          "id": "yogi_requirement",
+          "keywords": [
+            "yogi",
+            "requirement yogi",
+            "requirements/CT",
+            "/requirements/",
+            "req-CRT",
+            "confluence requirement link"
+          ],
+          "read": ["automation/docs/yogi-url-resolve.md"],
+          "mcp_hint": "automation/tools/yogi-tool/yogi_resolve.py for URL/page_id; yogi_snippet.py (REST + extract) for small snippet_text—avoid pasting full confluence_get_page bodies per tag. --storage-file accepts metadata.content.value (MCP). Extractor disambiguates duplicate keys (DEFINITION vs LINK). --follow --cookie --snippet for one-shot; exit 3 if key missing in storage."
+        },
+        {
+          "id": "epic_ref",
+          "keywords": [
+            "EPIC-PREP",
+            "epic prep",
+            "epic preflight",
+            "corner epic gather",
+            "epic-ref",
+            "epic ref",
+            "epic-ref.json",
+            "epic context json",
+            "requirement snippets epic"
+          ],
+          "read": [
+            ".cursor/pipelines/epic-prep.md",
+            "epics/templates/epic-ref.json",
+            "epics/README.md",
+            "docs/project.json",
+            "docs/qa-project.json",
+            "automation/docs/yogi-url-resolve.md"
+          ],
+          "mcp_hint": "Epic artifact: epics/<EPIC-KEY>/<EPIC-KEY>-ref.json; schema_version 3 adds sources.bitbucket_repo, implementation.hits (EPIC-PREP step 5b). Optional EPIC-PREP repo=; repo resolution: trigger > prior ref > docs/project.json bitbucket.default_repo. step 2b client_shell_impact (Corner Trader vs Adaptive per qa-project.json). requirements[]: snippet_status + snippet_failure_reason when snippet missing. epic-prep uses epics/<KEY>/temp/ then delete temp/. Yogi: yogi_resolve + yogi_snippet. Bitbucket: bitbucket_search_code capped (~8 queries); Stash DC repo token PROJECT_KEY/repo_slug (see docs/project.json bitbucket); code search may fail with 404—browse/list still valid. XT: cap ~8 xt_refs, XT home 402589545—no full page bodies in ref."
+        },
+        {
+          "id": "coverage_pipeline",
+          "keywords": [
+            "COVERAGE",
+            "COVERAGE:",
+            "coverage pipeline",
+            "test coverage",
+            "smart checklist",
+            "coverage checklist",
+            "epic coverage",
+            "-coverage.json",
+            "coverage-ref"
+          ],
+          "read": [
+            ".cursor/pipelines/coverage.md",
+            "epics/templates/coverage-ref.json",
+            "epics/README.md",
+            "docs/project.json",
+            "docs/qa-project.json",
+            "automation/docs/yogi-url-resolve.md"
+          ],
+          "mcp_hint": "Requires -ref.json with client_shell_impact. Phase 7 merges epic-ref implementation.hits (epic_prep), dedupes, renumbers impl-001…, then Bitbucket search from matrix/snippets when repo resolved (COVERAGE repo= overrides ref and project.json bitbucket.default_repo). calculation_contract ladders, out_of_epic fork not in body, evidence-gated dimensions, per-surface lines (Adaptive when affected), epic_verification_focus + verification_role. focus= optional. Durable: -coverage.json + .md; delete epics/<KEY>/temp/ after run."
+        },
+        {
+          "id": "analysis_pipeline",
+          "keywords": [
+            "ANALYSE",
+            "ANALYSE:",
+            "analysis pipeline",
+            "requirement analysis",
+            "requirements analysis",
+            "-analysis.json",
+            "analysis-ref",
+            "known issues epic",
+            "coverage reconciliation"
+          ],
+          "read": [
+            ".cursor/pipelines/analysis.md",
+            "epics/templates/analysis-ref.json",
+            "epics/README.md",
+            ".cursor/pipelines/coverage.md",
+            "docs/project.json",
+            "docs/qa-project.json"
+          ],
+          "mcp_hint": "Jira jira_get_issue + jira_search (CRTQA, CRTBL, SUPXT, CAN per qa-project). Loads -ref.json and -coverage.json when on disk; emits -analysis.json + .md; optional append Known issue > to checks[].detail_lines with dedupe; include_closed=yes for closed regression anchors. delete epics/<KEY>/temp/ after run."
+        },
+        {
+          "id": "test_prep_pipeline",
+          "keywords": [
+            "TEST-PREP",
+            "TEST-PREP:",
+            "test prep",
+            "test-prep",
+            "regression test draft",
+            "regression tests epic",
+            "draft test cases",
+            "-tests.json",
+            "tests-ref",
+            "test bundle",
+            "coverage to tests"
+          ],
+          "read": [
+            ".cursor/pipelines/test-prep.md",
+            "epics/templates/tests-ref.json",
+            "epics/README.md",
+            ".cursor/pipelines/coverage.md",
+            "docs/tc-ref",
+            "docs/qa-project.json"
+          ],
+          "mcp_hint": "Requires -coverage.json. Phase 8a: bundle shells only. Phase 8b: one subprocess per bundle (e.g. Task generalPurpose)—MUST NOT one-shot all draft prose; prefer temp/test-prep-draft-<bundle_id>.json merge. Jira steps only from fetched fields. Emits -tests.json + -tests.md; authoring.subprocess_completed per bundle; no /temp/ in durable JSON. map_only=yes skips 8b. delete epics/<KEY>/temp/ after run."
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "name": "external_truth",
+      "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when .cursor/mcp.json is configured and tunnel is up",
+      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and mcp.json—see automation/tools/tunnel/README.md and .cursor/HOW-TO.md.",
+      "mcp_scope": "Scope Atlassian searches using docs/project.json and docs/qa-project.json (CT, XT, QAPORTAL subtree rooted at 497097273)."
+    }
+  ],
+  "rules": [
+    "Do not read all JSON and ref files for every task; match keywords to one T1 package when possible.",
+    "After T1, use MCP for authoritative Atlassian content; do not invent ticket or page text.",
+    "Never copy passwords or secrets from Confluence into repo files.",
+    "When adding new durable docs or paths, update AGENTS.md, README.md, and this map per harness-maintenance rule."
+  ]
+}

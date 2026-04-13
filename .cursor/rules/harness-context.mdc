@@ -1,0 +1,31 @@
+---
+description: Context hygiene for LM agents—narrow search, bounded reads, summaries, handoff continuity
+alwaysApply: true
+---
+
+# Harness — context and cognition
+
+The interface shapes reasoning. Treat the context window as finite working memory, not unlimited RAM.
+
+## Search and reads
+
+- Prefer **narrow, specific** queries over broad grep that returns huge result sets. If results are large, **refine the query** before pulling more.
+- Read source in **slices** (offsets/limits) when files are long. Do not paste entire large files or thousands of lines into chat.
+- **Summarize** findings (tables, bullet lists) instead of dumping raw blobs. Quote only the minimum lines needed for decisions.
+
+## Continuity
+
+- For substantive QA work, **read [qa-handoff.md](qa-handoff.md)** at the start of a session and **update it** before ending with what changed, current focus, and next steps.
+- Treat **[AGENTS.md](AGENTS.md)** as the short map; follow pointers to deeper docs rather than loading everything at once (**progressive disclosure**).
+
+## Tiered context ([docs/harness-map.json](docs/harness-map.json))
+
+- After T0 (`qa-handoff.md`, `AGENTS.md`), match the user’s task language to **at most one** relevant T1 package in [docs/harness-map.json](docs/harness-map.json); read only those files—do not load every doc under `docs/` by default.
+- Use **T2** (`user-mcp-atlassian`) for live Jira/Confluence once you know which space/subtree applies (`project.json` vs `qa-project.json` scope hints).
+- For **Figma** URLs, use the workspace **Figma MCP** when the task needs design context and the server is enabled—see [automation/docs/figma-mcp.md](automation/docs/figma-mcp.md) and the `figma_design` T1 package in [docs/harness-map.json](docs/harness-map.json).
+- For **Yogi** requirement links (`/requirements/{space}/{KEY}`, `#req-…`), use [yogi-tool/yogi_resolve.py](automation/tools/yogi-tool/yogi_resolve.py) + [yogi-tool/yogi_snippet.py](automation/tools/yogi-tool/yogi_snippet.py) for **small** `snippet_text`; see [automation/docs/yogi-url-resolve.md](automation/docs/yogi-url-resolve.md) (`yogi_requirement` T1). Avoid loading full Confluence page bodies into the model for every tag.
+
+## Outputs
+
+- Tie work to **verifiable** checks when possible (acceptance criteria, repro steps, expected vs actual).
+- Keep **scratch** and ephemeral notes under [automation/temp/](automation/temp/). Durable conclusions belong in proper docs or the handoff file.
