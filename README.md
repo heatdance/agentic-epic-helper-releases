@@ -2,6 +2,13 @@
 
 Devexperts QA working area for **Corner Trader**: templates, automation docs, and a Cursor harness for agent-assisted work (this repo is not necessarily the application source tree).
 
+## Branches (GitHub: [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper))
+
+| Branch | Role |
+|--------|------|
+| **`main`** | **Default** on GitHub — **stable** snapshots. Merge from `develop` (e.g. via PR) when a harness change set is ready to publish. |
+| **`develop`** | Integration branch for **new work**; commit and push here first, then promote to `main` when stable. |
+
 ## Start here
 
 | Who | First reads |
