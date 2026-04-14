@@ -84,7 +84,7 @@ When tasks include **Figma file/frame/layer** URLs, use the **workspace-configur
 ### PostgreSQL / CTQA (optional)
 
 1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[.cursor/HOW-TO.md](.cursor/HOW-TO.md)** and **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
-2. **Global `~/.cursor/mcp.json`** (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) — add **`postgres-ctqa`** from the repo template [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json). It uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`** (write tools disabled at MCP layer). Use **`sslmode=disable`** on `127.0.0.1` through SSH as documented. Optional project **`.cursor/mcp.json`** remains gitignored if you use project-specific MCP servers.
+2. **Global `~/.cursor/mcp.json`** (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) — add **`postgres-ctqa`** from the repo template [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json). It uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`** (write tools disabled at MCP layer). Use **`sslmode=disable`** on `127.0.0.1` through SSH as documented. Do not duplicate the same server in gitignored project **`.cursor/mcp.json`** unless you intentionally keep MCP project-local; see [.cursor/HOW-TO.md](.cursor/HOW-TO.md).
 3. **Do not** commit real passwords; keep credentials in global MCP or local-only files.
 
 When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**. Optional pipeline **`TEST-EXEC:`** may use the same server for **readonly** SQL checks when bundles require DB verification.

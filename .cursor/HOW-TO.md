@@ -64,7 +64,7 @@ Org-wide MCP and tokens: **[AI with Cursor](https://confluence.in.devexperts.com
 4. **SSL** — Use **`sslmode=disable`** for `127.0.0.1` through SSH (encrypted in the tunnel; avoids Node/pg self-signed cert errors with MCP). Do not disable SSL for direct internet DB connections.
 5. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**), after any org-wide MCP steps from Confluence. Check **MCP Logs** if the server fails to start (`npx` must be on PATH for the Cursor process, same as Playwright MCP).
 
-**Project `.cursor/mcp.json`** is gitignored for optional **project-only** MCP servers; CTQA Postgres is **not** required there if you use the global file.
+**Project `.cursor/mcp.json`** is gitignored and is **not** part of the repo (avoid duplicating **`postgres-ctqa`** here if it is already in **global** `mcp.json`). Committed snippets live only under **`.cursor/mcp/*.mcp.json`** — merge those into **global** `mcp.json` unless you deliberately use a project-only server list.
 
 ## `.cursor/prompts/` (paste starters)
 

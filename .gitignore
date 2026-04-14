@@ -1,4 +1,4 @@
-# Local project MCP (optional; CTQA postgres-ctqa is configured in global ~/.cursor/mcp.json — see .cursor/mcp/postgres-ctqa.mcp.json template)
+# Optional project-level MCP (never committed). Prefer global ~/.cursor/mcp.json + template .cursor/mcp/postgres-ctqa.mcp.json
 .cursor/mcp.json
 
 # Local benchmark / timing data
