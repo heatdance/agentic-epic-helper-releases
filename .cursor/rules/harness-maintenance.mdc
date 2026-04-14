@@ -11,7 +11,7 @@ Whenever you **add or materially change** durable documentation under:
 
 - `docs/` (except transient scratch),
 - `automation/docs/`,
-- or cross-references / new paths under `.cursor/` (including `.cursor/pipelines/` and **committed** `.cursor/mcp/*.json` templates),
+- or cross-references / new paths under `.cursor/` (including `.cursor/pipelines/` and **MCP** guidance in `.cursor/HOW-TO.md` when postgres-ctqa or `mcp.json` layout changes),
 
 you must **in the same change** (or an immediate follow-up) update:
 

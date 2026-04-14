@@ -31,7 +31,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `mcp` / `tools` — **develop** / **`main`** only; not for **`release`**) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `prompts` / `templates` / `tools` / `mcp` — **develop** / **`main`** only; not for **`release`**) |
 
 ### Epics
 
@@ -58,7 +58,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
 | Humans: Cursor + MCP + tunnel how-to | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) |
-| CTQA Postgres MCP (template) | [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) — merge **`postgres-ctqa`** into **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) |
+| CTQA Postgres MCP | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
 
 ## Context escalation
 
@@ -86,8 +86,8 @@ When tasks include **Figma file/frame/layer** URLs, use the **workspace-configur
 ### PostgreSQL / CTQA (optional)
 
 1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[.cursor/HOW-TO.md](.cursor/HOW-TO.md)** and **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
-2. **Global `~/.cursor/mcp.json`** (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) — add **`postgres-ctqa`** from the repo template [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json). It uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`** (write tools disabled at MCP layer). Use **`sslmode=disable`** on `127.0.0.1` through SSH as documented. Do not duplicate the same server in gitignored project **`.cursor/mcp.json`** unless you intentionally keep MCP project-local; see [.cursor/HOW-TO.md](.cursor/HOW-TO.md).
-3. **Do not** commit real passwords; keep credentials in global MCP or local-only files.
+2. **Cursor `mcp.json`** — add **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) per the snippet in [.cursor/HOW-TO.md](.cursor/HOW-TO.md). Cursor merges project and global; do not define the same server twice with conflicting URLs. Uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`**; use **`sslmode=disable`** on `127.0.0.1` through SSH.
+3. **Do not** commit real passwords; credentials live only in ignored `.cursor/mcp.json` and/or global MCP.
 
 When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**. Optional pipeline **`TEST-EXEC:`** may use the same server for **readonly** SQL checks when bundles require DB verification.
 

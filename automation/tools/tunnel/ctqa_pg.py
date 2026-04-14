@@ -11,9 +11,9 @@ Typical flow (two Cursor terminal tabs; same stack for all QA):
     set CTQA_PG_PASSWORD=your_db_password
     python automation/tools/tunnel/ctqa_pg.py --probe-only
 
-  Cursor MCP: add postgres-ctqa to global Cursor mcp.json (~/.cursor/mcp.json;
-  on Windows, under %USERPROFILE%/.cursor/mcp.json). Template: repo file
-  .cursor/mcp/postgres-ctqa.mcp.json. URI: 127.0.0.1:15432, sslmode=disable
+  Cursor MCP: add postgres-ctqa to gitignored .cursor/mcp.json and/or global
+  ~/.cursor/mcp.json (Windows: %USERPROFILE%/.cursor/mcp.json). JSON snippet:
+  .cursor/HOW-TO.md (MCP — PostgreSQL). URI: 127.0.0.1:15432, sslmode=disable
   (encrypted inside SSH).
 
 Requires: Python 3.10+, PuTTY (plink) on Windows at default paths or PATH.

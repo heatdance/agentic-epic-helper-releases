@@ -9,7 +9,7 @@ For QA engineers using the same stack (Cursor, MCP, CTQA DB over SSH). **PuTTY**
 | Python | 3.10+ on PATH |
 | PuTTY | `plink.exe` (default install: `C:\Program Files\PuTTY\`) |
 | Node.js | For Cursor MCP `npx` (postgres-ctqa) |
-| Cursor | Global `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) with `postgres-ctqa` — snippet from [.cursor/mcp/postgres-ctqa.mcp.json](../../.cursor/mcp/postgres-ctqa.mcp.json) |
+| Cursor | **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [.cursor/HOW-TO.md](../../.cursor/HOW-TO.md) (*MCP — PostgreSQL*) |
 
 Optional for `--probe-only`:
 
@@ -57,13 +57,13 @@ python automation/tools/tunnel/ctqa_pg.py --probe-only --probe-sql "SELECT COUNT
 
 ## MCP (Cursor)
 
-Your **global Cursor `mcp.json`** (see **[postgres-ctqa.mcp.json](../../.cursor/mcp/postgres-ctqa.mcp.json)**) should use **`127.0.0.1:15432`** and **`sslmode=disable`** on the URL (traffic is already inside SSH; avoids Node `self-signed certificate` errors). Reload MCP after editing.
+Your **Cursor MCP** config for `postgres-ctqa` (see **[.cursor/HOW-TO.md](../../.cursor/HOW-TO.md)** — *MCP — PostgreSQL*), whether in **`.cursor/mcp.json`** or **global** `mcp.json`, should use **`127.0.0.1:15432`** and **`sslmode=disable`** on the URL (traffic is already inside SSH; avoids Node `self-signed certificate` errors). Reload MCP after editing.
 
 ## Zipping this workspace for other QA projects
 
 1. Zip the repo (or your standard QA harness subtree).
 2. Each engineer installs **Python**, **Node**, **PuTTY**, **Cursor**.
-3. Merge **`postgres-ctqa`** from **[`.cursor/mcp/postgres-ctqa.mcp.json`](../../.cursor/mcp/postgres-ctqa.mcp.json)** into **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); set the Postgres user/password in the URI and omit secrets from shared zips.
+3. Add **`postgres-ctqa`** using the JSON snippet in **[`.cursor/HOW-TO.md`](../../.cursor/HOW-TO.md)** (*MCP — PostgreSQL*) to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); set the Postgres user/password in the URI and omit secrets from shared zips.
 4. Document **Tab 1** = tunnel, **Tab 2** = probe / Cursor with MCP.
 5. Do **not** commit real passwords; use env vars for probes and local-only MCP edits.
 

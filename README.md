@@ -35,7 +35,7 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
 | `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
 | `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
-| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, MCP templates, rules, AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
+| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in HOW-TO), AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
@@ -57,7 +57,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 - Rules: [.cursor/rules/](.cursor/rules/).
 - Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for ad-hoc ticket/incident Q&A).
-- Optional **postgres-ctqa** MCP: merge the snippet from [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) into **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — see [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
+- Optional **postgres-ctqa** MCP: add to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
 
 ## Reference docs
 

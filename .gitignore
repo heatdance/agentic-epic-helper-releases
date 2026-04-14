@@ -1,5 +1,8 @@
-# Optional project-level MCP (never committed). Prefer global ~/.cursor/mcp.json + template .cursor/mcp/postgres-ctqa.mcp.json
+# Optional workspace MCP (never committed). Add postgres-ctqa here or in global ~/.cursor/mcp.json — see .cursor/HOW-TO.md
 .cursor/mcp.json
+
+# Transient notes under docs/ (not durable harness JSON)
+docs/temp/
 
 # Local benchmark / timing data
 .cursor/benchmark
