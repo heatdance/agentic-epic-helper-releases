@@ -14,6 +14,8 @@ Do **not**:
 - Guess or assume issue descriptions, acceptance criteria, comments, or Confluence body text from memory.
 - Substitute web search or generic knowledge for live Jira/Confluence content when the task depends on **your** project's tickets or pages.
 
+When **uncertain** (missing page id, wrong space, unknown env host): **search then fetch** — use `confluence_search` with **narrow** CQL (e.g. `space=QAPORTAL` + `ancestor=497097273`, or `space=CT` / `space=XT` as appropriate), then `confluence_get_page` for the specific `page_id`. Do **not** crawl an entire Confluence space by default.
+
 ## Tool usage
 
 - **Before** calling an MCP tool, **read that tool’s schema/descriptor** (required parameters, types) and call it with correct arguments.

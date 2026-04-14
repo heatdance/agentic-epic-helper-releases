@@ -31,4 +31,5 @@ Manual **Python tests and tools** (not “workspace automation”). Tool docs: [
 
 ## QA process anchor
 
-- **Corner QA scope, environments, Jira mapping, and workflow pointers**: [docs/qa-project.json](docs/qa-project.json) (Confluence-backed; functional summaries only—no people, no secrets in repo).
+- **Corner QA scope, workflow pointers**: [docs/qa-project.json](docs/qa-project.json) (Confluence-backed; functional summaries only—no people, no secrets in repo).
+- **Environment URLs, Jira project/dashboard links, Stash code-stream ladder, Confluence child index**: [docs/corner-platform-map.json](docs/corner-platform-map.json) (SoT for hosts/paths; credentials on Confluence only).

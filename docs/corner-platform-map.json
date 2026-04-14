@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "last_reviewed": "2026-04-14",
+  "research_status": "ok",
+  "content_policy": "Functional and process context only. No passwords, tokens, or DB credentials—those live on authenticated Confluence (Corner page). No people rosters.",
+  "sources": [
+    {
+      "type": "confluence",
+      "page_id": "497097273",
+      "space_key": "QAPORTAL",
+      "title": "Corner",
+      "url": "https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097273/Corner",
+      "used_for": [
+        "environments[] hostnames and application paths",
+        "jira_index[] project links and dashboard URLs",
+        "components summary pointer",
+        "layout page link"
+      ]
+    },
+    {
+      "type": "confluence_cql",
+      "query": "type=page AND space=QAPORTAL AND ancestor=497097273",
+      "used_for": "confluence_index[] child pages (sample of high-traffic QA/process pages)"
+    },
+    {
+      "type": "stash_mcp",
+      "method": "bitbucket_list_repositories",
+      "args": { "project_key": "BRO", "query": "xt" },
+      "used_for": "code_streams[] BRO/xt repo confirmation; bitbucket_search_code 404 reproduced"
+    }
+  ],
+  "mcp_scope_recap": {
+    "corner_qa_process": "QAPORTAL space, page 497097273 (Corner) and descendants only unless the user widens scope.",
+    "product_bank_specific": "CT space — Corner Trader Home 342168339; use for bank-specific product pages.",
+    "upstream_platform": "XT space — DXtrade XT Home 402589545; platform-line demos, baseline docs, XT Jira program.",
+    "stash_host": "https://stash.in.devexperts.com — repo token PROJECT_KEY/repo_slug (see docs/project.json bitbucket)."
+  },
+  "stash_notes": {
+    "host": "https://stash.in.devexperts.com",
+    "default_corner_xt_repo": "BRO/xt",
+    "tool_ladder": [
+      "Prefer bitbucket_list_repositories (project_key + query) to confirm repo slugs and browse URLs.",
+      "Try bitbucket_search_code for symbol search when available.",
+      "On HTTP 404 from code search (Stash Server plugin/API mismatch), use bitbucket_browse_directory and bitbucket_get_file_content with known paths; keep queries shallow and capped."
+    ],
+    "code_search_status": {
+      "bitbucket_search_code": "unavailable_404",
+      "last_checked": "2026-04-14",
+      "sample_error": "rest/api/1.0/search returns 404 for BRO/xt content search"
+    },
+    "branch_and_fork_discovery": "MCP list for BRO + query 'xt' shows a single non-fork repo slug `xt` under BRO. Long-lived branches (e.g. master for internal integration, release/prep lines) are not exposed as separate repos in that listing—confirm active branch conventions in Stash UI or release docs when tasks depend on prep vs prod material."
+  },
+  "environments": [
+    {
+      "id": "ct_qa",
+      "label": "CT QA",
+      "purpose": "Primary QA environment for Corner Trader and Adaptive (default for regression and CRTQA work unless a task names another env).",
+      "confluence_anchor": {
+        "page_id": "497097273",
+        "space_key": "QAPORTAL",
+        "section": "Credentials and Connections — CT QA"
+      },
+      "base_host": "ctqa.prosp.devexperts.com",
+      "application_urls": {
+        "ipf": "https://ctqa.prosp.devexperts.com/ipf",
+        "dxtrade5": "https://ctqa.prosp.devexperts.com/",
+        "webbroker": "https://ctqa.prosp.devexperts.com/webbroker/",
+        "dxmc": "https://ctqa.prosp.devexperts.com/dxmc/",
+        "dxweb": "https://ctqa.prosp.devexperts.com/dxweb/",
+        "dxsca_swagger": "https://ctqa.prosp.devexperts.com/dxsca-web/api/swagger.html",
+        "adaptive": "https://ctqa.prosp.devexperts.com/adaptive/"
+      },
+      "ssh_host": "ctqa.prosp.devexperts.com",
+      "postgres_db_name": "ctqa",
+      "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT QA credentials and DB parameters. Do not copy into the repository.",
+      "typical_jira_projects": ["CRTQA", "CRT", "XT", "SUPXT", "CAN"],
+      "client_shells": ["corner_trader", "adaptive"]
+    },
+    {
+      "id": "ct_dev",
+      "label": "CT DEV",
+      "purpose": "Development integration environment; same application stack as QA without Adaptive URL on the parent page section (verify current Confluence if Adaptive is added).",
+      "confluence_anchor": {
+        "page_id": "497097273",
+        "space_key": "QAPORTAL",
+        "section": "CT DEV"
+      },
+      "base_host": "ctdev.prosp.devexperts.com",
+      "application_urls": {
+        "ipf": "https://ctdev.prosp.devexperts.com/ipf",
+        "dxtrade5": "https://ctdev.prosp.devexperts.com/",
+        "webbroker": "https://ctdev.prosp.devexperts.com/webbroker/",
+        "dxmc": "https://ctdev.prosp.devexperts.com/dxmc/",
+        "dxweb": "https://ctdev.prosp.devexperts.com/dxweb/",
+        "dxsca_swagger": "https://ctdev.prosp.devexperts.com/dxsca-web/api/swagger.html"
+      },
+      "ssh_host": "ctdev.prosp.devexperts.com",
+      "postgres_db_name": "ctdev",
+      "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT DEV.",
+      "typical_jira_projects": ["CRT", "XT", "CAN"],
+      "client_shells": ["corner_trader"]
+    },
+    {
+      "id": "ct_uat",
+      "label": "CT UAT",
+      "purpose": "User acceptance / bank-facing validation environment.",
+      "confluence_anchor": {
+        "page_id": "497097273",
+        "space_key": "QAPORTAL",
+        "section": "CT UAT"
+      },
+      "base_host": "ctuat.prosp.devexperts.com",
+      "application_urls": {
+        "ipf": "https://ctuat.prosp.devexperts.com/ipf",
+        "dxtrade5": "https://ctuat.prosp.devexperts.com/",
+        "webbroker": "https://ctuat.prosp.devexperts.com/webbroker/",
+        "dxmc": "https://ctuat.prosp.devexperts.com/dxmc/",
+        "dxweb": "https://ctuat.prosp.devexperts.com/dxweb/",
+        "dxsca_swagger": "https://ctuat.prosp.devexperts.com/dxsca-web/api/swagger.html",
+        "adaptive": "https://ctuat.prosp.devexperts.com/adaptive/"
+      },
+      "ssh_host": "ctuat.prosp.devexperts.com",
+      "postgres_db_name": "ctuat",
+      "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT UAT.",
+      "typical_jira_projects": ["CRTQA", "CRT", "SUPXT"],
+      "client_shells": ["corner_trader", "adaptive"]
+    },
+    {
+      "id": "ct_test",
+      "label": "CT TEST",
+      "purpose": "Dedicated test environment; some table cells on the parent page reference alternate SSH/DB hostnames—treat Confluence as SoT.",
+      "confluence_anchor": {
+        "page_id": "497097273",
+        "space_key": "QAPORTAL",
+        "section": "CT TEST"
+      },
+      "base_host": "cttest.prosp.devexperts.com",
+      "application_urls": {
+        "ipf": "https://cttest.prosp.devexperts.com/ipf",
+        "dxtrade5": "https://cttest.prosp.devexperts.com/",
+        "webbroker": "https://cttest.prosp.devexperts.com/webbroker/",
+        "dxmc": "https://cttest.prosp.devexperts.com/dxmc/",
+        "dxweb": "https://cttest.prosp.devexperts.com/dxweb/",
+        "dxsca_swagger": "https://cttest.prosp.devexperts.com/dxsca-web/api/swagger.html",
+        "adaptive": "https://cttest.prosp.devexperts.com/adaptive/"
+      },
+      "ssh_host": "cttest.prosp.devexperts.com",
+      "postgres_db_name": "cttest",
+      "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT TEST (verify SSH/DB rows).",
+      "typical_jira_projects": ["CRTQA", "CRT"],
+      "client_shells": ["corner_trader", "adaptive"]
+    },
+    {
+      "id": "ct_mob",
+      "label": "CT MOB",
+      "purpose": "Mobile-focused environment; Adaptive may point to a different host than other apps.",
+      "confluence_anchor": {
+        "page_id": "497097273",
+        "space_key": "QAPORTAL",
+        "section": "CT MOB"
+      },
+      "base_host": "ctmob.prosp.devexperts.com",
+      "application_urls": {
+        "ipf": "https://ctmob.prosp.devexperts.com/ipf",
+        "dxtrade5": "https://ctmob.prosp.devexperts.com/",
+        "webbroker": "https://ctmob.prosp.devexperts.com/webbroker/",
+        "dxmc": "https://ctmob.prosp.devexperts.com/dxmc/",
+        "dxweb": "https://ctmob.prosp.devexperts.com/dxweb/",
+        "dxsca_swagger": "https://ctmob.prosp.devexperts.com/dxsca-web/api/swagger.html",
+        "adaptive": "https://corner-develop.display-dev.dxfeed.com/adaptive/"
+      },
+      "ssh_host": "ctmob.prosp.devexperts.com",
+      "postgres_db_name": "ctmob",
+      "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT MOB.",
+      "typical_jira_projects": ["CRTQA", "CAN"],
+      "client_shells": ["corner_trader", "adaptive"]
+    }
+  ],
+  "code_streams": [
+    {
+      "id": "bro_xt",
+      "stash_repo": "BRO/xt",
+      "role": "internal_dev",
+      "summary": "Brotherhood DXtrade XT monorepo (dxCore, webbroker, platform). Default for EPIC-PREP/COVERAGE when repo= is omitted.",
+      "primary_branches_note": "Confirm prep vs prod integration branches in Stash; harness defaults to this repo only—not a specific branch.",
+      "mcp_browse": "https://stash.in.devexperts.com/projects/BRO/repos/xt/browse",
+      "related_docs": ["docs/project.json bitbucket"]
+    },
+    {
+      "id": "can_corner",
+      "stash_repo": "CAN/corner",
+      "role": "adaptive",
+      "summary": "Adaptive / Candelabra Nx workspace; references Corner Jira. Use when tasks are Adaptive-shell or mobile-web specific.",
+      "related_docs": ["docs/project.json bitbucket.adaptive_repo"]
+    },
+    {
+      "id": "dxrel_cornertrader",
+      "stash_repo": "DXREL/cornertrader",
+      "role": "packaging",
+      "summary": "Separate cornerTrader release/packaging line—confirm with team before treating as primary application source.",
+      "related_docs": ["docs/project.json bitbucket.note"]
+    }
+  ],
+  "jira_index": [
+    {
+      "project_key": "CRTQA",
+      "use": "Primary QA tracker (tests, execution, defects in QA flow).",
+      "url": "https://jira.in.devexperts.com/projects/CRTQA/summary"
+    },
+    {
+      "project_key": "CRT",
+      "use": "Epic backlog for Corner Trader and Adaptive features.",
+      "url": "https://jira.in.devexperts.com/projects/CRT/summary"
+    },
+    {
+      "project_key": "CRTBL",
+      "use": "Feedback and backlog bank for Corner and Adaptive.",
+      "url": "https://jira.in.devexperts.com/projects/CRTBL/summary"
+    },
+    {
+      "project_key": "XT",
+      "use": "DXtrade XT development work that feeds Corner platform line.",
+      "url": "https://jira.in.devexperts.com/projects/XT/summary/statistics"
+    },
+    {
+      "project_key": "SUPXT",
+      "use": "Production support for Corner-related XT deliveries.",
+      "url": "https://jira.in.devexperts.com/projects/SUPXT/queues/custom/75"
+    },
+    {
+      "project_key": "CAN",
+      "use": "Adaptive development tracker.",
+      "url": "https://jira.in.devexperts.com/projects/CAN/summary"
+    }
+  ],
+  "jira_dashboards": [
+    {
+      "label": "Corner and Adaptive QA Dashboard",
+      "url": "https://jira.in.devexperts.com/secure/Dashboard.jspa?selectPageId=41000"
+    },
+    {
+      "label": "Corner Main Dev Dashboard",
+      "url": "https://jira.in.devexperts.com/secure/RapidBoard.jspa?rapidView=1705&quickFilter=10100"
+    },
+    {
+      "label": "Adaptive Main Dev Dashboard",
+      "url": "https://jira.in.devexperts.com/secure/RapidBoard.jspa?rapidView=1760"
+    }
+  ],
+  "confluence_index": [
+    {
+      "page_id": "497097273",
+      "space_key": "QAPORTAL",
+      "title": "Corner",
+      "role": "Root for Corner QA scope: environments, Jira links, components summary, layout link."
+    },
+    {
+      "page_id": "374051444",
+      "space_key": "STARTSUP",
+      "title": "Automated Application Layout for Corner Trader platforms",
+      "role": "Deployment topology / application layout for Corner (linked from Corner page)."
+    },
+    {
+      "page_id": "497110371",
+      "space_key": "QAPORTAL",
+      "title": "Corner QA Workflow",
+      "role": "QA process split (incident, coverage, regression, smoke, etc.)."
+    },
+    {
+      "page_id": "497112283",
+      "space_key": "QAPORTAL",
+      "title": "Defect Management",
+      "role": "Issue types, defect vs CR expectations for QA."
+    },
+    {
+      "page_id": "497097317",
+      "space_key": "QAPORTAL",
+      "title": "Test Repository",
+      "role": "Compliance vs regression repository structure, Smart Checklist ties."
+    },
+    {
+      "page_id": "497115657",
+      "space_key": "QAPORTAL",
+      "title": "Coverage Checklists",
+      "role": "Index of regression checklist pages by component (dxTrade5, WebBroker, Adaptive, …)."
+    },
+    {
+      "page_id": "497112548",
+      "space_key": "QAPORTAL",
+      "title": "Start Guide",
+      "role": "Cursor MCP setup and onboarding steps."
+    },
+    {
+      "page_id": "497112528",
+      "space_key": "QAPORTAL",
+      "title": "AI with Cursor",
+      "role": "Org-wide Cursor MCP tokens and configuration (linked from HOW-TO)."
+    },
+    {
+      "page_id": "497102714",
+      "space_key": "QAPORTAL",
+      "title": "In-Sprint",
+      "role": "In-sprint UI testing policy before merge to master."
+    },
+    {
+      "page_id": "511443538",
+      "space_key": "QAPORTAL",
+      "title": "QA Release Calendar",
+      "role": "Release planning and PREP delivery expectations."
+    },
+    {
+      "page_id": "505945965",
+      "space_key": "QAPORTAL",
+      "title": "Stage 1: System Overview",
+      "role": "Onboarding track — architecture and components intro."
+    },
+    {
+      "page_id": "505946902",
+      "space_key": "QAPORTAL",
+      "title": "Stage 2: Platform Configuration",
+      "role": "Platform-level configuration and settings domains."
+    },
+    {
+      "page_id": "505946970",
+      "space_key": "QAPORTAL",
+      "title": "Working with Jazz items",
+      "role": "Bank-side Jazz vs Devexperts Jira—scope limits for agent search."
+    }
+  ],
+  "components_pointer": {
+    "summary": "Large application→responsibility table on QAPORTAL Corner page (497097273) under Components; fetch a subset via MCP when debugging a specific service.",
+    "confluence_page_id": "497097273"
+  }
+}

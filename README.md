@@ -20,7 +20,8 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 ## Product and QA context (JSON)
 
 - [docs/project.json](docs/project.json) — product / **fork-of DXtrade XT** Confluence anchors (CT / XT), Bitbucket defaults.
-- [docs/qa-project.json](docs/qa-project.json) — Corner QA scope (QAPORTAL Corner subtree), environments, Jira mapping (functional summaries only).
+- [docs/qa-project.json](docs/qa-project.json) — Corner QA scope (QAPORTAL Corner subtree), workflow pointers (functional summaries only).
+- [docs/corner-platform-map.json](docs/corner-platform-map.json) — **SoT** for environment hostnames/paths, Jira project/dashboard links, Stash repo ladder, QAPORTAL child index (no secrets in repo).
 
 ## Pipelines (chat triggers)
 
@@ -55,7 +56,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 ## Rules, prompts, MCP config
 
 - Rules: [.cursor/rules/](.cursor/rules/).
-- Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/).
+- Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for ad-hoc ticket/incident Q&A).
 - Optional **postgres-ctqa** MCP: merge the snippet from [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) into **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — see [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
 
 ## Reference docs

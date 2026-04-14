@@ -22,7 +22,7 @@
 ## Preconditions
 
 - **user-mcp-atlassian**: `jira_get_issue`, `jira_search` — read each tool’s schema before calls.
-- **Context anchors**: [`docs/project.json`](../../docs/project.json), [`docs/qa-project.json`](../../docs/qa-project.json) — Jira projects (e.g. **CRTQA**, **CRT**, **CRTBL**, **XT**, **SUPXT**, **CAN**) per `jira_and_dashboards`; use for JQL scoping, not invented ticket text.
+- **Context anchors**: [`docs/project.json`](../../docs/project.json), [`docs/qa-project.json`](../../docs/qa-project.json), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) — Jira projects and dashboards per **`jira_index`** / **`jira_dashboards`** in the platform map (and `qa-project.json` pointer); use for JQL scoping, not invented ticket text.
 - **Optional repo inputs** (grounding): `epics/<KEY>/<KEY>-ref.json`, `epics/<KEY>/<KEY>-coverage.json`. **If paths exist on disk**, load them without asking the user. If **missing**, append **`validation_log`**, **prompt once** to run `EPIC-PREP:` / `COVERAGE:` or provide files, and **stop** unless the user explicitly agrees to **Jira-only** degraded analysis (then set `coverage_loaded` / `ref_loaded` false and skip phases 7–8).
 
 **Format norms for appended coverage lines**: [`.cursor/pipelines/coverage.md`](coverage.md) — **`>`** = details under a scenario; do not break Smart Checklist structure.

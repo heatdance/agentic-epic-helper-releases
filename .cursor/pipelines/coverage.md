@@ -23,9 +23,9 @@
 - **user-mcp-atlassian**: Jira, Confluence, Bitbucket tools — read each tool’s schema before calls.
 - **Yogi** (optional live REST): [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md) — `yogi_resolve.py`, `yogi_snippet.py`; cookie or `--storage-file` into `temp/` when needed.
 - **Figma MCP** (optional): when `figma.com` links exist and archetype is UI-heavy, [`automation/docs/figma-mcp.md`](../../automation/docs/figma-mcp.md).
-- **Bitbucket**: **Recommended** when `sources.bitbucket_repo` can be resolved (see phase **1**). Parse `repo=WORKSPACE/SLUG` from the user message when present. If **no** repo is known after phase **1**, **skip** phase **7** searches with `validation_log` + `anti_pattern_findings` — do **not** invent a workspace/slug. Team default: [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** (optional; no secrets in repo).
+- **Bitbucket**: **Recommended** when `sources.bitbucket_repo` can be resolved (see phase **1**). Parse `repo=WORKSPACE/SLUG` from the user message when present. If **no** repo is known after phase **1**, **skip** phase **7** searches with `validation_log` + `anti_pattern_findings` — do **not** invent a workspace/slug. Team default: [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`**; Stash tool ladder and repo roles: [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) **`stash_notes`** / **`code_streams`** (optional; no secrets in repo).
 
-**Context anchors**: [`docs/project.json`](../../docs/project.json) (CT **342168339**, XT **402589545**), [`docs/qa-project.json`](../../docs/qa-project.json) (QAPORTAL Corner **497097273** subtree; **Corner Trader + Adaptive** client shells per `product_outline`).
+**Context anchors**: [`docs/project.json`](../../docs/project.json) (CT **342168339**, XT **402589545**), [`docs/qa-project.json`](../../docs/qa-project.json) (QAPORTAL Corner **497097273** subtree; **Corner Trader + Adaptive** client shells per `product_outline`), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) (environment hosts, Jira index, Stash defaults).
 
 **Epic ref**: Read **`client_shell_impact`** from `epics/<KEY>/<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note.
 
@@ -77,10 +77,15 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 - Read `epics/<KEY>/<KEY>-ref.json` (template source for `requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
 - MCP `jira_get_issue` for `<KEY>`; optional save raw JSON to `temp/jira-epic.json`.
-- **`sources.bitbucket_repo`** (first match wins): **`repo=`** on the **COVERAGE** trigger → epic-ref **`sources.bitbucket_repo`** → [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** if non-null → otherwise null. Trigger **`repo=`** **overrides** ref and project defaults for **this run only** (do not rewrite the epic-ref file unless the user also re-runs EPIC-PREP).
-- Set `sources.jira_fetched_at`, `sources.epic_ref_loaded_at` (ISO-8601), `epic_key`, `epic_ref_path`, and the resolved `sources.bitbucket_repo` above. Set optional `sources.note` if repo came from ref vs project default (audit only).
+- **`sources.bitbucket_repo`** (resolve in order; **`repo=`** on the trigger **wins** and **short-circuits** the rest for **this run only**):
+  1. **`repo=`** on the **COVERAGE** trigger when present.
+  2. Else epic-ref **`sources.bitbucket_repo`** when non-null **unless** **Adaptive-only** applies: **`client_shell_impact.adaptive.status`** **`affected`** **and** **`client_shell_impact.corner_trader.status`** **`not_applicable`** **and** the ref’s repo is **`BRO/xt`** (stale default)—then use **`CAN/corner`** from [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) **`code_streams`** **`can_corner`** **`stash_repo`**.
+  3. Else if **Adaptive-only** (same shell test) and ref repo is null → **`CAN/corner`** from that map entry.
+  4. Else [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** if non-null.
+  5. Else null.
+- Set `sources.jira_fetched_at`, `sources.epic_ref_loaded_at` (ISO-8601), `epic_key`, `epic_ref_path`, and the resolved `sources.bitbucket_repo` above. Set optional `sources.note` if repo came from ref vs map vs project default (audit only).
 - Parse optional **`focus=`** from the user message (free text after `focus=` until next space-delimited token or end of line). Preserve Jira **summary**, **description**, and `synthesis.problem_gist` (if present) as inputs for phase **3a**.
-- Append `validation_log`: step `1`, action summary (include Bitbucket repo **source**: `trigger` | `epic_ref` | `project_default` | `none`).
+- Append `validation_log`: step `1`, action summary (include Bitbucket repo **source**: `trigger` | `epic_ref` | `adaptive_map` | `project_default` | `none`).
 
 ### 2. Jira link–key hygiene
 

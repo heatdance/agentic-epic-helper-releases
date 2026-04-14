@@ -9,7 +9,7 @@ Copy or adapt this into chat. **All Jira discovery and retrieval must go through
 
 ## Instructions for the agent
 
-1. Follow [docs/harness-map.json](../../docs/harness-map.json): **T0**; include **T1** [docs/qa-project.json](../../docs/qa-project.json) for Corner Jira project hints (CRTQA, CRT, etc.) when relevant.
+1. Follow [docs/harness-map.json](../../docs/harness-map.json): **T0**; include **T1** [docs/qa-project.json](../../docs/qa-project.json) for Corner Jira project hints (CRTQA, CRT, etc.) when relevant. If the **Goal** mentions **environment**, **repro URL**, **where to test**, **which host**, **WebBroker**, **dxTrade5**, **Adaptive**, **Stash repo**, or **which Jira project**, also read [docs/corner-platform-map.json](../../docs/corner-platform-map.json).
 2. Read [qa-handoff.md](../../qa-handoff.md) if continuing a multi-session task.
 3. Use **user-mcp-atlassian** to fetch each issue’s authoritative data (summary, description, acceptance criteria, status, links as available).
 4. Produce:

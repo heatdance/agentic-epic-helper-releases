@@ -59,6 +59,56 @@
           "mcp_hint": "Confluence: QAPORTAL page Corner (497097273) and descendants only—not the whole QA space unless user widens scope."
         },
         {
+          "id": "corner_platform_map",
+          "keywords": [
+            "environment",
+            "environments",
+            "CT QA",
+            "CTQA",
+            "CT DEV",
+            "CTDEV",
+            "CT UAT",
+            "CTUAT",
+            "CT TEST",
+            "CTTEST",
+            "CT MOB",
+            "CTMOB",
+            "prosp.devexperts.com",
+            "fork",
+            "branch",
+            "BRO/xt",
+            "stash",
+            "bitbucket",
+            "deploy",
+            "deployment",
+            "prep",
+            "PREP",
+            "prod",
+            "production",
+            "code stream",
+            "codebase",
+            "which repo",
+            "dxfeed",
+            "jira dashboard",
+            "CRTQA",
+            "SUPXT",
+            "metric",
+            "metrics",
+            "incident",
+            "investigation",
+            "repro",
+            "reproduction",
+            "console",
+            "dxcore"
+          ],
+          "read": [
+            "docs/corner-platform-map.json",
+            "docs/project.json",
+            "docs/qa-project.json"
+          ],
+          "mcp_hint": "Structured env URLs, Jira project index, Stash repo ladder, QAPORTAL/CT/XT scope recap—do not invent hosts or branches. Gaps: confluence_search scoped (ancestor=497097273 or space CT/XT) then confluence_get_page; Stash: bitbucket_list_repositories / browse / get_file; never copy credentials from Confluence into repo files."
+        },
+        {
           "id": "deliverable_shape",
           "keywords": [
             "test case",
@@ -271,11 +321,13 @@
       "name": "external_truth",
       "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when global ~/.cursor/mcp.json includes postgres-ctqa and tunnel is up; optional user-mcp-playwright for TEST-EXEC UI steps",
       "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration or TEST-EXEC DB checks, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and global Cursor MCP—see .cursor/mcp/postgres-ctqa.mcp.json, automation/tools/tunnel/README.md, and .cursor/HOW-TO.md.",
-      "mcp_scope": "Scope Atlassian searches using docs/project.json and docs/qa-project.json (CT, XT, QAPORTAL subtree rooted at 497097273)."
+      "mcp_scope": "Scope Atlassian searches using docs/project.json, docs/qa-project.json, and docs/corner-platform-map.json mcp_scope_recap (CT, XT, QAPORTAL subtree rooted at 497097273)."
     }
   ],
   "rules": [
-    "Do not read all JSON and ref files for every task; match keywords to one T1 package when possible.",
+    "Do not read all JSON and ref files for every task. Match the user's language to T1 match_any_package entries; when one package is the clear best fit, read primarily its read[] list.",
+    "If the user message names a Jira issue key in Corner families (CRT, CRTQA, CRTBL, XT, SUPXT, CAN), use user-mcp-atlassian (jira_get_issue or jira_search) to fetch it before substantive ticket-specific prose—do not invent fields or comments.",
+    "When multiple T1 packages could apply, also read docs/corner-platform-map.json if the task involves where to reproduce (environment, hostname, database name, WebBroker vs dxTrade5 vs Adaptive), which Jira project or dashboard, or which Stash repo—unless scope is unrelated (e.g. Figma-only).",
     "After T1, use MCP for authoritative Atlassian content; do not invent ticket or page text.",
     "Never copy passwords or secrets from Confluence into repo files.",
     "When adding new durable docs or paths, update AGENTS.md, README.md, and this map per harness-maintenance rule."

@@ -20,10 +20,15 @@ The interface shapes reasoning. Treat the context window as finite working memor
 
 ## Tiered context ([docs/harness-map.json](docs/harness-map.json))
 
-- After T0 (`qa-handoff.md`, `AGENTS.md`), match the user’s task language to **at most one** relevant T1 package in [docs/harness-map.json](docs/harness-map.json); read only those files—do not load every doc under `docs/` by default.
-- Use **T2** (`user-mcp-atlassian`) for live Jira/Confluence once you know which space/subtree applies (`project.json` vs `qa-project.json` scope hints).
+- After T0 (`qa-handoff.md`, `AGENTS.md`), match the user’s task language to T1 `match_any_package` entries in [docs/harness-map.json](docs/harness-map.json). Prefer the **clearest single** package when one fits; if several fit or repro/env/repo questions appear, follow the **`rules`** in that file (Jira-key fetch, optional extra read of [docs/corner-platform-map.json](docs/corner-platform-map.json)). Do not load every doc under `docs/` by default.
+- For **environment hostnames**, **which Stash repo**, **Jira project choice**, or **prep vs prod code line** questions, open [docs/corner-platform-map.json](docs/corner-platform-map.json) (T1 `corner_platform_map`) **before** guessing; then use MCP to fill gaps.
+- Use **T2** (`user-mcp-atlassian`) for live Jira/Confluence once you know which space/subtree applies (`project.json` vs `qa-project.json` vs `corner-platform-map.json` `mcp_scope_recap`).
 - For **Figma** URLs, use the workspace **Figma MCP** when the task needs design context and the server is enabled—see [automation/docs/figma-mcp.md](automation/docs/figma-mcp.md) and the `figma_design` T1 package in [docs/harness-map.json](docs/harness-map.json).
 - For **Yogi** requirement links (`/requirements/{space}/{KEY}`, `#req-…`), use [yogi-tool/yogi_resolve.py](automation/tools/yogi-tool/yogi_resolve.py) + [yogi-tool/yogi_snippet.py](automation/tools/yogi-tool/yogi_snippet.py) for **small** `snippet_text`; see [automation/docs/yogi-url-resolve.md](automation/docs/yogi-url-resolve.md) (`yogi_requirement` T1). Avoid loading full Confluence page bodies into the model for every tag.
+
+## Multi-turn (clarifications)
+
+- When the user **corrects** or **narrows** a prior message, start your reply with a **one-line restatement of the original task** (from earlier in the thread), then address the correction. Do not drop the parent question or answer **only** the last sentence.
 
 ## Outputs
 

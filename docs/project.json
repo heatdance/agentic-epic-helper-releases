@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "last_reviewed": "2026-04-13",
+  "last_reviewed": "2026-04-14",
   "research_status": "ok",
   "content_policy": "Functional and process context only. No individual names, role rosters, or ownership lists. Do not copy credentials or secrets from Confluence into this file.",
   "product": {
@@ -47,6 +47,8 @@
     "MCP: list/fetch linked pages from XT home (product card, release packages, demo platform rows) when expanding platform context.",
     "MCP: fetch QAPORTAL Corner page children for QA processes, project documentation, and automation pointers.",
     "Jira program references appear on XT and Corner pages; resolve issue and board URLs via MCP when tasks mention specific keys.",
-    "MCP Bitbucket (Stash): bitbucket_list_repositories with query (e.g. xt, corner, dxtrade) discovers project keys; Corner+XT platform default in bitbucket.default_repo; Adaptive-oriented repos under CAN (see project.json bitbucket.note)."
-  ]
+    "MCP Bitbucket (Stash): bitbucket_list_repositories with query (e.g. xt, corner, dxtrade) discovers project keys; Corner+XT platform default in bitbucket.default_repo; Adaptive-oriented repos under CAN (see project.json bitbucket.note).",
+    "Structured environment hosts, Jira project URLs, Stash tool ladder, and QAPORTAL page index: docs/corner-platform-map.json (no secrets in repo)."
+  ],
+  "platform_map": "docs/corner-platform-map.json"
 }

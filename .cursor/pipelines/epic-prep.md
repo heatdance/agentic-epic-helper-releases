@@ -2,7 +2,7 @@
 
 **Trigger**: user message starts with `EPIC-PREP:` and includes a Jira **Epic key** (e.g. `EPIC-PREP: CRT-1234`). Optional token on the same line:
 
-- **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`**.
+- **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`** (see also [docs/corner-platform-map.json](../../docs/corner-platform-map.json) **`code_streams`** for `BRO/xt` vs `CAN/corner` vs packaging repos).
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
@@ -65,6 +65,7 @@
   - **`qa_default_both`** — use when Jira is **silent** on client split but the epic is **metrics, portfolio, orders, or shared backend** likely to surface in **both** shells: set both to **`affected`** and use **this exact sentence** for **`corner_trader.note`** and **`adaptive.note`** (both): `Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.` For **pure backend-only** epics with **no user-visible metric/UI** in either client, set **`not_applicable`** with Jira evidence in **`evidence`** and a short factual **`note`**.
 - Append **`validation_log`** if either shell remains **`unknown`** after reasonable parse.
 - **COVERAGE** consumes this object to seed **metric × surface** checks (including Adaptive).
+- **Bitbucket repo (post–client-shell)**: If **`sources.bitbucket_repo`** was set **only** from [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** (no **`repo=`** trigger, no **prior** ref override) **and** **`client_shell_impact.adaptive.status`** is **`affected`** **and** **`client_shell_impact.corner_trader.status`** is **`not_applicable`**, set **`sources.bitbucket_repo`** to **`CAN/corner`** (see [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) **`code_streams`** id **`can_corner`**; same value as **`bitbucket.adaptive_repo`** in `project.json`). Append **`validation_log`**. Do **not** override an explicit **`repo=`** or a **prior** ref repo.
 
 ### 3. Requirements (3.2) — Yogi
 

@@ -14,6 +14,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Product / fork context (Confluence-backed) | [docs/project.json](docs/project.json) |
 | Corner QA scope, envs, Jira mapping (Confluence-backed) | [docs/qa-project.json](docs/qa-project.json) |
+| Environments, code streams (Stash), Jira index, Confluence index (MCP-backed) | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Tiered context escalation (keywords → which files to read) | [docs/harness-map.json](docs/harness-map.json) |
 | Public export manifest (example; live file on `release` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
@@ -55,15 +56,16 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Area | Path |
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
-| Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) |
+| Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
 | Humans: Cursor + MCP + tunnel how-to | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) |
 | CTQA Postgres MCP (template) | [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) — merge **`postgres-ctqa`** into **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) |
 
 ## Context escalation
 
-1. Follow **[docs/harness-map.json](docs/harness-map.json)**: **T0** (`qa-handoff.md`, this file), then only **T1** packages whose keywords match the task—do not open every doc by default.
+1. Follow **[docs/harness-map.json](docs/harness-map.json)**: **T0** (`qa-handoff.md`, this file), then T1 `match_any_package` keywords; prefer the clearest single package, and follow that file’s **`rules`** (Jira-key MCP fetch, extra [docs/corner-platform-map.json](docs/corner-platform-map.json) when repro/env/repo scope applies)—do not open every doc by default.
 2. **Corner QA on Confluence** is scoped to **QAPORTAL** page **497097273** (“Corner”) **and descendants** unless the user widens scope—see [docs/qa-project.json](docs/qa-project.json).
 3. **Fork / platform** context: [docs/project.json](docs/project.json) → **CT** and **XT** Confluence spaces via MCP when needed.
+4. **Hosts, repos, Jira projects** (which env, which Stash repo): [docs/corner-platform-map.json](docs/corner-platform-map.json) — credentials stay on Confluence only.
 
 ## How to start a session
 

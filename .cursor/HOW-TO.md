@@ -1,8 +1,34 @@
 # Cursor — how-to
 
+## Quick prompt for Auto mode (best results)
+
+Auto mode works better when the **first message** is structured. Copy and fill in:
+
+```
+**Issue / keys:** <!-- e.g. CRTQA-1234, CRT-639, XT-5678 — or "none" -->
+**Environment:** <!-- e.g. CT QA, CT UAT, CT DEV — or "unknown" -->
+**Goal:** <!-- one sentence: what you want decided, verified, or drafted -->
+**Constraints:** <!-- optional: timebox, surfaces dxTrade5/WebBroker/Adaptive, no DB, etc. -->
+```
+
+**Also:**
+
+- Turn on **user-mcp-atlassian** (Jira / Confluence / Stash) — see [AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor) if tools fail.
+- For **unstructured** Q&A (incidents, metrics, “why does this ticket…”), paste [corner-adhoc-qa.md](prompts/corner-adhoc-qa.md) or keep the four lines above in every follow-up so the agent does not lose the thread.
+
+Epic-sized work: use chat triggers (`EPIC-PREP:`, `COVERAGE:`, …) per **Keywords → pipelines** below instead of a vague question.
+
+---
+
 ## Cursor MCP (org-wide)
 
 For **general** Cursor MCP setup—**tokens**, **global MCP layout**, and org-wide configuration—use Confluence: **[AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor)** (QAPORTAL). This HOW-TO only documents **Corner-specific** steps (pipelines, CTQA tunnel, **postgres-ctqa** connection string).
+
+## Before Corner QA agent chats (checklist)
+
+1. **user-mcp-atlassian** enabled in Cursor (Jira, Confluence, Bitbucket/Stash tools)—see **AI with Cursor** above if tokens need refresh.
+2. Optional per task: **user-mcp-playwright** (TEST-EXEC), **postgres-ctqa** + SSH tunnel (DB checks)—see sections below.
+3. Skim [docs/corner-platform-map.json](../docs/corner-platform-map.json) when the task involves **which environment**, **which repo**, or **which Jira project**; agents use it as the structured map (secrets stay on Confluence).
 
 ## Pipelines (human-run playbooks)
 
@@ -70,6 +96,7 @@ Org-wide MCP and tokens: **[AI with Cursor](https://confluence.in.devexperts.com
 
 - `codebase-context.md` — Scoped codebase exploration.
 - `combined-qa-task.md` — Full QA workflow + optional epic ref / EPIC-PREP / COVERAGE.
+- `corner-adhoc-qa.md` — Ad-hoc Corner Q&A (tickets, incidents, metrics; MCP-first; restate goal on clarifications).
 - `confluence-spec-work.md` — Confluence-first spec work.
 - `jira-ticket-work.md` — Jira ticket work.
 - `epic-prep.md` — Shortcut to EPIC-PREP + epic-prep playbook.
