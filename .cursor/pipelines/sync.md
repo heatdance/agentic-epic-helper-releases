@@ -2,13 +2,14 @@
 
 **Trigger**: user message starts with **`SYNC:`**. Optional token on the same line:
 
-- **`scope=full`** (default) — run all tiers **T0–T5** below.
+- **`scope=full`** (default) — run all tiers **T0–T6** below.
 - **`scope=pipelines`** — **T0**, **T1** only (router, harness-map, AGENTS, README, HOW-TO, qa-artifacts tables).
 - **`scope=prompts`** — **T2** only ([`.cursor/prompts/`](../prompts/)).
 - **`scope=templates`** — **T3** only ([`epics/templates/`](../../epics/templates/), [`epics/README.md`](../../epics/README.md)).
-- **`scope=tools`** — **T4** only ([`automation/tools/`](../../automation/tools/), [`automation/docs/`](../../automation/docs/), harness **T2** hints if MCP/tunnel docs change).
+- **`scope=tools`** — **T4** only: [`automation/tools/`](../../automation/tools/), [`automation/docs/`](../../automation/docs/), **committed** [`.cursor/mcp/*.json`](../../.cursor/mcp/) templates, harness **T2** hints if MCP/tunnel docs change.
+- **`scope=mcp`** — **T4** **MCP sub-tier only** (`.cursor/mcp/` + global vs project `mcp.json` paragraph parity across HOW-TO / AGENTS / README / tunnel README).
 
-**Scope**: Reconcile **harness pointers** after adding or changing a pipeline, template, tool, or test surface. Complements **`PUBLIC-SCRUB:`** ([`public-scrub.md`](public-scrub.md)) which runs only on **`release`**. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
+**Scope**: Reconcile **harness pointers** after adding or changing a pipeline, template, tool, test surface, **MCP template**, or **rule** file. Complements **`PUBLIC-SCRUB:`** ([`public-scrub.md`](public-scrub.md)) which runs only on **`release`**. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
 **Hard invariant**: Run **`SYNC:`** only on **`develop`** or **`main`**. If the current branch is **`release`**, **stop** — use **`PUBLIC-SCRUB:`** there; do not use **`SYNC:`** as a release workflow.
 
@@ -90,22 +91,44 @@ Align:
 
 ---
 
-## Tier T4 — Tools and automation docs
+## Tier T4 — Tools, automation docs, and Cursor MCP templates
 
-**Scope**: `full`, `tools`
+**Scope**: `full`, `tools`, `mcp`
+
+### T4a — Automation tools
+
+**Scope**: `full`, `tools` (includes **`scope=mcp`**-only runs: skip)
 
 1. New or renamed tools under [`automation/tools/`](../../automation/tools/) have docs under [`automation/docs/`](../../automation/docs/) and/or a **README** in the tool folder.
 2. [`AGENTS.md`](../../AGENTS.md) and [`README.md`](../../README.md) **Automation** sections link discoverable tools when relevant.
-3. If MCP or tunnel behavior changes, update [`docs/harness-map.json`](../../docs/harness-map.json) **T2** / package **`mcp_hint`** and [`.cursor/HOW-TO.md`](../HOW-TO.md) as needed.
+
+### T4b — `.cursor/mcp/` (committed JSON templates)
+
+**Scope**: `full`, `tools`, `mcp`
+
+1. List **committed** files matching **`.cursor/mcp/*.json`** (do not require a local **project** [`.cursor/mcp.json`](../../.cursor/mcp.json) in git — it may be gitignored).
+2. Each **committed** template must appear by **basename** (or path) in at least one of: [**`AGENTS.md`**](../../AGENTS.md), [**`README.md`**](../../README.md), [`.cursor/HOW-TO.md`](../HOW-TO.md), and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) when the template relates to Postgres/tunnel/MCP.
+3. Reconcile **one canonical story** for **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) vs **project** `.cursor/mcp.json` (optional, often gitignored) across HOW-TO, AGENTS, README — no contradictory instructions.
+4. If MCP or tunnel **behavior** changes, update [`docs/harness-map.json`](../../docs/harness-map.json) **T2** / relevant **`mcp_hint`** and [`.cursor/HOW-TO.md`](../HOW-TO.md).
 
 ---
 
-## Tier T5 — Harness maintenance and orphans
+## Tier T5 — `.cursor/rules` inventory
+
+**Scope**: `full` only (not `tools` / `mcp` / `pipelines` alone — run **`scope=full`** or add explicit passes)
+
+1. Enumerate **`.cursor/rules/*.mdc`**.
+2. Align with [**`AGENTS.md`**](../../AGENTS.md) *Rules in this repo* list and [`.cursor/HOW-TO.md`](../HOW-TO.md) **`.cursor/rules/`** bullets when a new rule file is added or renamed.
+
+---
+
+## Tier T6 — Harness maintenance and orphans
 
 **Scope**: `full` only
 
 1. Re-read [`.cursor/rules/harness-maintenance.mdc`](../rules/harness-maintenance.mdc).
 2. Targeted **`rg`**: stale playbook filenames, removed triggers still mentioned, broken relative links to `.cursor/pipelines/` (fix or remove).
+3. Optional: **`rg`** for **`.cursor/mcp/`** basenames — each must appear in consumer docs (see [V1](#v1--verification)); **`rg`** for obsolete paths (e.g. removed **`docs/tc-ref`** after migration to **`epics/templates/tests-ref.json`**).
 
 ---
 
@@ -115,6 +138,7 @@ After edits:
 
 1. Each **trigger** in the [registry](#normative-pipeline-registry-v1) appears in **`pipeline-router.mdc`** and in **HOW-TO** **Keywords → pipelines** (except if a future exemption is documented).
 2. **`docs/harness-map.json`** parses as JSON; no duplicate **`id`** values inside **`match_any_package`**.
+3. Every **committed** **`.cursor/mcp/*.json`** **basename** appears in at least one of: AGENTS, README, HOW-TO, tunnel README (when applicable).
 
 ---
 
@@ -134,11 +158,13 @@ After edits:
 | 2 | T1 | full, pipelines | AGENTS, README, HOW-TO, qa-artifacts aligned |
 | 3 | T2 | full, prompts | Prompts list triggers / links |
 | 4 | T3 | full, templates | Templates + epics README aligned |
-| 5 | T4 | full, tools | Tool docs + AGENTS/README/harness-map T2 if needed |
-| 6 | T5 | full only | harness-maintenance satisfied; orphan `rg` clean |
-| 7 | V1 | all applicable | Trigger + JSON checks pass |
-| 8 | V2 | all applicable | Second pass + log |
-| 9 | Cleanup | all | **`automation/temp/sync/`** deleted |
+| 5 | T4a | full, tools | Tool docs + AGENTS/README |
+| 6 | T4b | full, tools, mcp | MCP templates + global vs project story + harness-map T2 if needed |
+| 7 | T5 | full only | Rules inventory vs AGENTS / HOW-TO |
+| 8 | T6 | full only | harness-maintenance + orphan `rg` clean |
+| 9 | V1 | all applicable | Trigger + JSON + MCP basename checks pass |
+| 10 | V2 | all applicable | Second pass + log |
+| 11 | Cleanup | all | **`automation/temp/sync/`** deleted |
 
 ---
 

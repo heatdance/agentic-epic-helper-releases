@@ -34,7 +34,7 @@
 
 ### Step format
 
-- **MUST** structure each bundle’s executable text as **Preconditions → Actions → Results → Peculiarities**, per [docs/tc-ref](../../docs/tc-ref) and the inline example [`docs/temp/tc-template.txt`](../../docs/temp/tc-template.txt): cross-reference Preconditions/Actions to Peculiarities (`see Peculiarities N`).
+- **MUST** structure each bundle’s executable text as **Preconditions → Actions → Results → Peculiarities**, per [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **format_norms.markdown** and the inline example [`docs/temp/tc-template.txt`](../../docs/temp/tc-template.txt): cross-reference Preconditions/Actions to Peculiarities (`see Peculiarities N`).
 - **MUST** put formulas, Figma/Slack links, scope caveats, setup detail, and copy-paste **evidence** in **Peculiarities**, not in the main **Actions** list when that keeps Actions linear.
 
 ### Jira reuse (anti-hallucination)
@@ -84,7 +84,7 @@
 1. `epic_key`, `bundle_id`, `proposed_title`.
 2. **Coverage slice**: for each id in `covers_check_ids`, the full matching **`checks[]`** object from `-coverage.json` (`id`, `section`, `subsection`, `scenario_line`, `detail_lines`, `verification_role`, `ambiguity`, `requirement_keys`).
 3. **`existing_tests_considered[]`** rows whose `key` appears in `related_existing_tests` — include **verbatim** fetched step/description fields when `steps_provenance == fetched_from_issue`; otherwise one line per key: not fetched, do not invent.
-4. Pointers: [docs/tc-ref](../../docs/tc-ref), [docs/temp/tc-template.txt](../../docs/temp/tc-template.txt), and this playbook’s **Jira reuse**, **Unknowns**, **Exclusions** bullets (or a one-line “obey test-prep.md MUST NOT invent”).
+4. Pointers: [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) (**format_norms**), [docs/temp/tc-template.txt](../../docs/temp/tc-template.txt), and this playbook’s **Jira reuse**, **Unknowns**, **Exclusions** bullets (or a one-line “obey test-prep.md MUST NOT invent”).
 5. Output schema (subprocess must return or write — see below).
 
 **Subprocess → orchestrator — output**:

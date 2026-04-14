@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Templates and references
 
-- **Test case format reference**: [docs/tc-ref](docs/tc-ref)
+- **Test case draft format (norms + schema template)**: [epics/templates/tests-ref.json](../../epics/templates/tests-ref.json) (**format_norms**); pipeline [`.cursor/pipelines/test-prep.md`](../pipelines/test-prep.md)
 - **Defect report format reference**: [docs/dr-ref](docs/dr-ref)
 - **Epic handoff template** (copy per Epic): [epics/templates/epic-ref.json](epics/templates/epic-ref.json) → durable file `epics/<KEY>/<KEY>-ref.json` — layout: [epics/README.md](epics/README.md); pipeline: [`.cursor/pipelines/epic-prep.md`](../pipelines/epic-prep.md) (**`client_shell_impact`**, **`snippet_status`** on requirements)
 - **Epic coverage + Jira Smart Checklist norms**: [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) → `epics/<KEY>/<KEY>-coverage.json` + `<KEY>-coverage.md`; playbook: [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md) (*Smart Checklist markdown*, `epic_verification_focus`, `verification_role`, **`checks[].calculation_contract`**, optional `focus=`)
@@ -17,7 +17,7 @@ alwaysApply: true
 - **Public scrub / export (release branch only)**: playbook [`.cursor/pipelines/public-scrub.md`](../pipelines/public-scrub.md) (**`PUBLIC-SCRUB:`**); durable on **`release`**: `docs/public-export-manifest.json`, optional `.agents/`; example manifest on internal branches: [docs/public-export-manifest.example.json](../../docs/public-export-manifest.example.json)
 - **Harness SYNC (develop / main only)**: playbook [`.cursor/pipelines/sync.md`](../pipelines/sync.md) (**`SYNC:`**); reconciles router, harness-map, AGENTS, README, HOW-TO, this file, prompts, templates, tool docs per [harness-maintenance.mdc](harness-maintenance.mdc); ephemeral **`automation/temp/sync/`** then delete — **not** for **`release`**
 
-Align new test cases and defect reports with tc-ref / dr-ref unless the task defines a different format. Epic Smart Checklist drafts follow **coverage.md**. Epic regression bundles follow **test-prep.md** after coverage exists.
+Align new test case drafts with [epics/templates/tests-ref.json](../../epics/templates/tests-ref.json) / **dr-ref** unless the task defines a different format. Epic Smart Checklist drafts follow **coverage.md**. Epic regression bundles follow **test-prep.md** after coverage exists.
 
 ## Automation folder (`automation/`)
 

@@ -15,7 +15,7 @@ Copy or adapt this into chat. **All Confluence search and page retrieval must go
 4. Deliver:
    - **Decision / requirement summary** (bullets; functional/process only—omit people rosters from Confluence).
    - **Open questions** or contradictions vs other sources.
-   - **Suggested traceability**: how this ties to Jira issues or test artifacts (reference [docs/tc-ref](../../docs/tc-ref) or Epic coverage / Smart Checklist via [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md) when producing outputs).
+   - **Suggested traceability**: how this ties to Jira issues or test artifacts (reference [epics/templates/tests-ref.json](../../epics/templates/tests-ref.json) **format_norms** or Epic coverage / Smart Checklist via [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md) when producing outputs).
 5. Keep excerpts **short**; prefer synthesis over pasting full page HTML or markdown walls. Do **not** paste credentials or secrets into chat or repo files.
 
 ## Forbidden

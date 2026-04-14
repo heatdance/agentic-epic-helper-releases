@@ -34,7 +34,7 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
 | `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
 | `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
-| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools`; **develop** or **`main`** only — reconciles router, harness-map, AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
+| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, MCP templates, rules, AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
@@ -60,7 +60,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 ## Reference docs
 
-- Test case format: [docs/tc-ref](docs/tc-ref).
+- Test case draft format: [epics/templates/tests-ref.json](epics/templates/tests-ref.json) (**format_norms**); workflow [test-prep.md](.cursor/pipelines/test-prep.md).
 - Defect report format: [docs/dr-ref](docs/dr-ref).
 
 Template references under [docs/](docs/). Automation under [automation/](automation/).

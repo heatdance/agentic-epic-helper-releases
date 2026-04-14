@@ -34,7 +34,7 @@
     "Layouts: linked automated application layout page for Corner Trader platforms (see Confluence child link from Corner page)."
   ],
   "workspace_mapping": {
-    "test_cases": "Align output structure with docs/tc-ref.",
+    "test_cases": "Align regression test draft structure with epics/templates/tests-ref.json (format_norms + test_bundles[].draft); TEST-PREP: .cursor/pipelines/test-prep.md.",
     "checklists": "Jira Smart Checklist: .cursor/pipelines/coverage.md (Smart Checklist markdown; epic_verification_focus; verification_role; calculation ladders; out_of_epic fork not in body; evidence-gated dimensions; Adaptive when client_shell_impact says affected). COVERAGE: → epics/<KEY>/<KEY>-coverage.md + -coverage.json (see epics/README.md).",
     "defects": "Align with docs/dr-ref.",
     "automation_docs": "automation/docs/",

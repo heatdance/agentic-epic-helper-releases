@@ -76,7 +76,7 @@
 2. **Draft slice**: `draft.preconditions`, `actions`, `results`, `peculiarities` for this bundle only.
 3. **`automation`** object from `-tests.json` when present.
 4. **Environment flags**: `skip_postgres`, whether Postgres MCP is usable.
-5. Pointers: [`.cursor/pipelines/test-exec.md`](test-exec.md) **Feasibility**, **Self-healing**, **MUST NOT** list; [docs/tc-ref](../../docs/tc-ref) for intent only — codegen is Playwright.
+5. Pointers: [`.cursor/pipelines/test-exec.md`](test-exec.md) **Feasibility**, **Self-healing**, **MUST NOT** list; [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **format_norms** for human-step intent only — codegen is Playwright.
 6. Output: updated spec file content **or** explicit **blocked** / **skipped** JSON for orchestrator merge.
 
 **Subprocess → orchestrator — output**:

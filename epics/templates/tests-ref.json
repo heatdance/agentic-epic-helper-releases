@@ -1,5 +1,8 @@
 {
-  "_comment": "Regression test draft handoff for TEST-PREP: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-tests.json. Pair with <KEY>-tests.md. Do not reference epics/<KEY>/temp/ in durable JSON. Full draft prose: one subprocess per test_bundles[] row (see .cursor/pipelines/test-prep.md phase 8b). Step format norms: docs/tc-ref and docs/temp/tc-template.txt. TEST-PREP does not run Playwright/DB/SSH; optional downstream TEST-EXEC: see .cursor/pipelines/test-exec.md. automation.* hints optional; feasibility may stay unknown until TEST-EXEC or manual edit. TEST-EXEC must not run blocked bundles without explicit include_blocked=yes.",
+  "_comment": "Regression test draft handoff for TEST-PREP: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-tests.json. Pair with <KEY>-tests.md. Do not reference epics/<KEY>/temp/ in durable JSON. Human step norms: top-level format_norms.markdown (template only; not copied into each epic instance). Full draft prose: one subprocess per test_bundles[] row (see .cursor/pipelines/test-prep.md phase 8b). Inline example layout: docs/temp/tc-template.txt. TEST-PREP does not run Playwright/DB/SSH; optional downstream TEST-EXEC: see .cursor/pipelines/test-exec.md. automation.* hints optional; feasibility may stay unknown until TEST-EXEC or manual edit. TEST-EXEC must not run blocked bundles without explicit include_blocked=yes.",
+  "format_norms": {
+    "markdown": "# Test case format (Corner QA)\n\nNormative structure for **human-executable** regression tests drafted after epic **coverage** (Smart Checklist). Aligns with Jira **Test** issues and QAPORTAL **Test Repository** taxonomy ([Test Repository](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097317/Test+Repository)): internally, **compliance/coverage** is the matrix; **regression** tests are client-facing labels for E2E bundles that operationalize that matrix.\n\n## Sections (required order)\n\n1. **Preconditions** — numbered list; reference **Peculiarities** for setup detail (`see Peculiarities N`).\n2. **Actions** — numbered list; linear user steps; reference Peculiarities when setup is non-obvious.\n3. **Results** — numbered list; each item maps to the **Action** with the same index (expected observable outcome).\n4. **Peculiarities** — numbered list; formulas, links (Figma, Slack, Confluence), environment notes, data setup, **copy-paste only** when sourced from Jira or an approved runbook. Use **`[TBD]`** or **`[REQUIRES: …]`** when unknown—do not invent SQL, dxCore commands, or sample outputs.\n\n## Inline example\n\nSee repository example layout: **docs/temp/tc-template.txt** (quoted string illustrates block order and cross-references).\n\n## Pipeline\n\nEpic-scoped drafts: **TEST-PREP:** + Epic key → **.cursor/pipelines/test-prep.md** → `epics/<KEY>/<KEY>-tests.json` + `-tests.md`. **Source of truth for norms and schema:** this template file (**epics/templates/tests-ref.json**): top-level **format_norms.markdown**, **test_bundles[].draft**, and **_draft_note**. Instance files under `epics/<KEY>/` omit **format_norms**; inherit norms from this template + test-prep. Full **draft** text for each bundle is produced in a **separate subprocess** (one bundle per run); see test-prep playbook phases **8a** / **8b**."
+  },
   "schema_version": 2,
   "epic_key": null,
   "taxonomy_note": "Internal workflow: compliance/coverage checklist first; Jira 'regression' type is client-facing taxonomy. Draft bundles are E2E combinatoric human-executable tests that operationalize the checklist. See QAPORTAL Test Repository (page 497097317) via Confluence.",
@@ -32,7 +35,10 @@
     "issuetype": null,
     "url": null,
     "steps_provenance": "fetched_from_issue | not_fetched",
-    "fields_used": ["description", "customfield_..."],
+    "fields_used": [
+      "description",
+      "customfield_..."
+    ],
     "reuse_recommendation": "adapt_steps | reference_only | none",
     "note": "reuse_recommendation set only after jira_get_issue; never invent steps from title alone"
   },
@@ -47,9 +53,17 @@
     "bundle_id": "tb-001",
     "proposed_title": "Short Jira-ready title",
     "jira_issue_key": null,
-    "covers_check_ids": ["chk-001", "chk-002"],
-    "covers_sections": ["## Search", "### Search rules"],
-    "related_existing_tests": ["CRTQA-10080"],
+    "covers_check_ids": [
+      "chk-001",
+      "chk-002"
+    ],
+    "covers_sections": [
+      "## Search",
+      "### Search rules"
+    ],
+    "related_existing_tests": [
+      "CRTQA-10080"
+    ],
     "authoring": {
       "subprocess": true,
       "subprocess_completed": false,
@@ -58,10 +72,18 @@
     },
     "_authoring_note": "subprocess_completed + completed_at set after phase 8b merge. temp_draft_file: ephemeral only during run; MUST be null in committed -tests.json—never persist paths under temp/.",
     "draft": {
-      "preconditions": ["1. ... (see Peculiarities 1)."],
-      "actions": ["1. ..."],
-      "results": ["1. ..."],
-      "peculiarities": ["1. ..."]
+      "preconditions": [
+        "1. ... (see Peculiarities 1)."
+      ],
+      "actions": [
+        "1. ..."
+      ],
+      "results": [
+        "1. ..."
+      ],
+      "peculiarities": [
+        "1. ..."
+      ]
     },
     "_draft_note": "Strings may contain [TBD] or [REQUIRES: source]. No invented dxCore/SQL/example output unless pasted from fetched Jira. Populated by per-bundle subprocess when not map_only.",
     "automation": {
@@ -89,8 +111,12 @@
   "_draft_red_flags_item": {
     "code": "check_double_mapped | empty_bundle | invented_operational_detail_risk",
     "detail": "human review note",
-    "check_ids": ["chk-001"],
-    "bundle_ids": ["tb-001"]
+    "check_ids": [
+      "chk-001"
+    ],
+    "bundle_ids": [
+      "tb-001"
+    ]
   },
   "validation_log": [],
   "_validation_log_item": {

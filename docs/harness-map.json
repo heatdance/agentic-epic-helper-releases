@@ -70,8 +70,8 @@
             "DR",
             "bug report"
           ],
-          "read": ["docs/tc-ref", ".cursor/pipelines/coverage.md", "docs/dr-ref"],
-          "note": "Open only the ref that matches the deliverable (e.g. TC vs Smart Checklist/coverage vs DR), not necessarily all three."
+          "read": ["epics/templates/tests-ref.json", ".cursor/pipelines/coverage.md", "docs/dr-ref"],
+          "note": "Open only the ref that matches the deliverable (e.g. test draft norms/schema vs Smart Checklist/coverage vs DR), not necessarily all three."
         },
         {
           "id": "figma_design",
@@ -190,7 +190,6 @@
             "epics/templates/tests-ref.json",
             "epics/README.md",
             ".cursor/pipelines/coverage.md",
-            "docs/tc-ref",
             "docs/qa-project.json"
           ],
           "mcp_hint": "Requires -coverage.json. Phase 8a: bundle shells only. Phase 8b: one subprocess per bundle (e.g. Task generalPurpose)—MUST NOT one-shot all draft prose; prefer temp/test-prep-draft-<bundle_id>.json merge. Jira steps only from fetched fields. Emits -tests.json + -tests.md; authoring.subprocess_completed per bundle; no /temp/ in durable JSON. map_only=yes skips 8b. delete epics/<KEY>/temp/ after run."
@@ -250,17 +249,20 @@
             "harness-registry",
             "harness maintenance",
             "keep AGENTS README in sync",
-            "pipeline router sync"
+            "pipeline router sync",
+            "scope=mcp",
+            ".cursor/mcp"
           ],
           "read": [
             ".cursor/pipelines/sync.md",
             ".cursor/rules/harness-maintenance.mdc",
             ".cursor/rules/pipeline-router.mdc",
+            ".cursor/mcp/postgres-ctqa.mcp.json",
             "AGENTS.md",
             "README.md",
             ".cursor/HOW-TO.md"
           ],
-          "mcp_hint": "No MCP. develop/main only—not release. Optional scope=pipelines|prompts|templates|tools|full. Tiers T0-T5: router + harness-map + AGENTS + README + HOW-TO + qa-artifacts + prompts + epics templates + automation docs; V1/V2 verification. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
+          "mcp_hint": "No Atlassian MCP. develop/main only—not release. scope=pipelines|prompts|templates|tools|mcp|full. Tiers T0-T6: router + harness-map + AGENTS + README + HOW-TO + qa-artifacts + prompts + epics templates + automation/tools + .cursor/mcp/*.json templates + rules inventory + harness-maintenance rg. V1 includes each committed .cursor/mcp/*.json basename in consumer docs. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
         }
       ]
     },

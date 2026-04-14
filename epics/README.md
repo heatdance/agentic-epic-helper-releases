@@ -33,7 +33,7 @@ Playbook: [`.cursor/pipelines/analysis.md`](../.cursor/pipelines/analysis.md).
 After **`epics/<KEY>/<KEY>-coverage.json`** exists, pipeline **`TEST-PREP:`** + key (optional **`map_only=yes`**) produces:
 
 - **`epics/<KEY>/<KEY>-tests.json`** — `test_bundles[]` (minimal Jira-ready titles + `covers_check_ids` from coverage `checks[].id`), `jira_test_search`, `existing_tests_considered[]`, `excluded_checks_with_reason[]`, **`reverse_validation`** (coverage gaps, orphan bundles), `validation_log` (from [templates/tests-ref.json](templates/tests-ref.json)).
-- **`epics/<KEY>/<KEY>-tests.md`** — mapping table + draft **Preconditions / Actions / Results / Peculiarities** per [docs/tc-ref](../docs/tc-ref) (or map-only stub).
+- **`epics/<KEY>/<KEY>-tests.md`** — mapping table + draft **Preconditions / Actions / Results / Peculiarities** per [templates/tests-ref.json](templates/tests-ref.json) **format_norms** (or map-only stub).
 
 **Compliance first**: internal workflow uses the Smart Checklist as the matrix; Jira **regression** classification is client-facing. Bundles are E2E combinatoric instructions for humans—not one test per bullet when one session suffices. **Full draft prose** (when not `map_only`) is authored **one bundle per subprocess** (e.g. Cursor Task), after shells are planned in phase 8a—see playbook. **Jira reuse**: steps only from **`jira_get_issue`** fields; otherwise `[GAP]` / `[TBD]`. **v1** does not use Playwright, QA DB, or SSH/console execution for verification.
 

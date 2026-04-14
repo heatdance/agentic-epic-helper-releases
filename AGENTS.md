@@ -22,7 +22,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Area | Path |
 |------|------|
 | Jira Smart Checklist norms + COVERAGE playbook | [`.cursor/pipelines/coverage.md`](.cursor/pipelines/coverage.md) (*Smart Checklist markdown*) |
-| Test case format reference | [docs/tc-ref](docs/tc-ref) |
+| Test case draft format (norms + schema template) | [epics/templates/tests-ref.json](epics/templates/tests-ref.json) (**format_norms**); pipeline [`.cursor/pipelines/test-prep.md`](.cursor/pipelines/test-prep.md) |
 | Defect report format reference | [docs/dr-ref](docs/dr-ref) |
 | Automation documentation | [automation/docs/](automation/docs/) |
 
@@ -30,7 +30,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` — **develop** / **`main`** only; harness drift reconciliation; not for **`release`**) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `mcp` / `tools` — **develop** / **`main`** only; not for **`release`**) |
 
 ### Epics
 

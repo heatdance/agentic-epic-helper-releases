@@ -114,7 +114,7 @@ Preserve structure and templates that are product-agnostic:
 
 - [`epics/templates/`](../../epics/templates/) (schemas / `_comment` guidance).
 - Playbook **shapes** under [`.cursor/pipelines/`](.) (may later be generalized in tier B text).
-- [`docs/tc-ref`](../../docs/tc-ref), [`docs/dr-ref`](../../docs/dr-ref) (or neutral replacements).
+- [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) (or neutral replacement), [`docs/dr-ref`](../../docs/dr-ref) (or neutral replacements).
 - [`docs/harness-map.json`](../../docs/harness-map.json) only if scrubbed in tier B/C to remove org-specific keyword payloads — otherwise transform, don’t blindly delete.
 
 **Self-check**: templates remain valid JSON where applicable; no broken links introduced in top-level README for retained paths.
