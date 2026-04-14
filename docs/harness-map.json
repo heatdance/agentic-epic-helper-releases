@@ -217,6 +217,50 @@
             ".cursor/pipelines/test-prep.md"
           ],
           "mcp_hint": "Optional; requires -tests.json from TEST-PREP. user-mcp-playwright + optional postgres-ctqa (tunnel up). One subprocess per bundle for spec materialization; epics/<KEY>/tests/*.spec.ts + -test-exec.json; temp/test-exec-* then delete epics/<KEY>/temp/. No console/SSH/webbroker-only setup—blocked bundles unless include_blocked=yes."
+        },
+        {
+          "id": "public_scrub_pipeline",
+          "keywords": [
+            "PUBLIC-SCRUB",
+            "PUBLIC-SCRUB:",
+            "public scrub",
+            "public export",
+            "sanitize repo",
+            "release branch",
+            "public-export-manifest",
+            ".agents",
+            "dotagents",
+            "vendor neutral agent config"
+          ],
+          "read": [
+            ".cursor/pipelines/public-scrub.md",
+            "docs/public-export-manifest.example.json",
+            "README.md"
+          ],
+          "mcp_hint": "No MCP. Git only: checkout release, merge origin/develop or origin/main (source=), tiers A-D scrub, write docs/public-export-manifest.json on release only, .agents/ per dotagentsprotocol.com, V1 rg blocklist then V2 worktree re-run. version= sets semver; else patch bump from manifest. Never commit scrub on main/develop. Ephemeral automation/temp/public-scrub/ then delete."
+        },
+        {
+          "id": "sync_pipeline",
+          "keywords": [
+            "SYNC",
+            "SYNC:",
+            "harness sync",
+            "harness drift",
+            "drift",
+            "harness-registry",
+            "harness maintenance",
+            "keep AGENTS README in sync",
+            "pipeline router sync"
+          ],
+          "read": [
+            ".cursor/pipelines/sync.md",
+            ".cursor/rules/harness-maintenance.mdc",
+            ".cursor/rules/pipeline-router.mdc",
+            "AGENTS.md",
+            "README.md",
+            ".cursor/HOW-TO.md"
+          ],
+          "mcp_hint": "No MCP. develop/main only—not release. Optional scope=pipelines|prompts|templates|tools|full. Tiers T0-T5: router + harness-map + AGENTS + README + HOW-TO + qa-artifacts + prompts + epics templates + automation docs; V1/V2 verification. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
         }
       ]
     },

@@ -51,3 +51,10 @@ After **`epics/<KEY>/<KEY>-tests.json`** exists (from **`TEST-PREP:`**), pipelin
 `-tests.json` **schema_version 2** adds optional **`test_bundles[].automation`** (`feasibility`, `blocked_reason`) for alignment with exec; older files remain valid.
 
 Playbook: [`.cursor/pipelines/test-exec.md`](../.cursor/pipelines/test-exec.md). **Router**: [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc).
+
+# Repo-wide harness (no Epic key)
+
+These chat triggers are defined in [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc); they reconcile or export the **repository** rather than a single `epics/<KEY>/` tree.
+
+- **`PUBLIC-SCRUB:`** — sanitize for public export; run only on branch **`release`** — [`.cursor/pipelines/public-scrub.md`](../.cursor/pipelines/public-scrub.md).
+- **`SYNC:`** — keep router, harness-map, AGENTS, README, HOW-TO, and related pointers aligned; run only on **`develop`** or **`main`** — [`.cursor/pipelines/sync.md`](../.cursor/pipelines/sync.md).

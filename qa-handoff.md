@@ -5,7 +5,9 @@ Agents and humans: **read this at the start** of a substantive QA session and **
 ## Last updated
 
 - **Date**: 2026-04-14
-- **Author**: **`.cursor/benchmark/`** removed from Git tracking (**`git rm -r --cached`**); directory stays on disk and is covered by **`.gitignore`**; handoff links adjusted so GitHub does not point at missing paths.
+- **Author**: **`SYNC:`** harness pipeline (full scope, `develop`) — [`.cursor/pipelines/sync.md`](.cursor/pipelines/sync.md). **Preflight**: on `develop` ✓. **V1**: all seven triggers in [`.cursor/rules/pipeline-router.mdc`](.cursor/rules/pipeline-router.mdc) and [.cursor/HOW-TO.md](.cursor/HOW-TO.md) *Keywords → pipelines*; `docs/harness-map.json` parses, T1 `match_any_package` ids unique ✓. **V2**: AGENTS / README pipeline tables row-checked vs [sync registry](.cursor/pipelines/sync.md#normative-pipeline-registry-v1) ✓. **T3**: [epics/README.md](epics/README.md) adds *Repo-wide harness* (`PUBLIC-SCRUB:` / `SYNC:`). **T5**: no stale `.cursor/pipelines/*.md` references in tracked harness docs (spot `rg`). **`automation/temp/sync/`**: absent (nothing to delete). **Branches**: after `git fetch origin main develop`, **`origin/main`** and **`origin/develop`** both **`2214d0abc7c93a125945bb4ce8f50e8d3518b940`** — already aligned on the remote; local `develop` still had uncommitted harness edits at run time — **commit + push `develop`, then PR merge to `main`** before relying on GitHub default branch for **`PUBLIC-SCRUB:`** `source=main`.
+- **Author** (prior): **`PUBLIC-SCRUB:`** pipeline added — [`.cursor/pipelines/public-scrub.md`](.cursor/pipelines/public-scrub.md) (release-only commits; semver manifest; tiers A–D; V1/V2; `.agents/`). Router, [docs/harness-map.json](docs/harness-map.json) package `public_scrub_pipeline`, [AGENTS.md](AGENTS.md), [README.md](README.md) **`release`** branch row, [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json), [qa-artifacts.mdc](.cursor/rules/qa-artifacts.mdc). No `release` branch created in-repo by this change — operator creates per playbook.
+- **Author** (prior): **`.cursor/benchmark/`** removed from Git tracking (**`git rm -r --cached`**); directory stays on disk and is covered by **`.gitignore`**; handoff links adjusted so GitHub does not point at missing paths.
 - **Author** (prior): **Removed vendored local dxCore helper** — Deleted the Gradle/SUT tree that lived under `automation/tools/` (path removed from harness); updated [AGENTS.md](AGENTS.md), [README.md](README.md), [automation/temp/README.md](automation/temp/README.md), [`.gitignore`](.gitignore). If an empty directory is left behind, close IDE handles and delete it manually. **CTQA Postgres MCP** unchanged: global `~/.cursor/mcp.json` + template [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json).
 
 ## Last session summary
@@ -51,10 +53,11 @@ Agents and humans: **read this at the start** of a substantive QA session and **
 
 ## Next steps
 
-1. New chat: start with **T0** — re-read this file + [AGENTS.md](AGENTS.md), then [docs/harness-map.json](docs/harness-map.json) for **T1** packages matching the next task.
-2. When starting real ticket/spec work: add **Jira keys** and Confluence targets under **Current focus** above.
-3. Optional: if Confluence pages changed materially, re-run MCP and refresh bullets in `project.json` / `qa-project.json` (keep content policy).
-4. Optional: **`COVERAGE: CRT-639 repo=WORKSPACE/REPO_SLUG`** to fill `implementation_hits` in [epics/CRT-639/CRT-639-coverage.json](epics/CRT-639/CRT-639-coverage.json); add **`focus=...`** only if Jira scope needs an explicit narrow override.
+1. **Before public release**: commit and push harness changes on **`develop`**, open PR to **`main`**, merge when green so GitHub **`main`** matches the scrub source you will pass to **`PUBLIC-SCRUB:`** (`source=develop` or `source=main`). Remote **`origin/main`** and **`origin/develop`** were already at the same commit before this local edit set; publishing requires pushing these commits.
+2. New chat: start with **T0** — re-read this file + [AGENTS.md](AGENTS.md), then [docs/harness-map.json](docs/harness-map.json) for **T1** packages matching the next task.
+3. When starting real ticket/spec work: add **Jira keys** and Confluence targets under **Current focus** above.
+4. Optional: if Confluence pages changed materially, re-run MCP and refresh bullets in `project.json` / `qa-project.json` (keep content policy).
+5. Optional: **`COVERAGE: CRT-639 repo=WORKSPACE/REPO_SLUG`** to fill `implementation_hits` in [epics/CRT-639/CRT-639-coverage.json](epics/CRT-639/CRT-639-coverage.json); add **`focus=...`** only if Jira scope needs an explicit narrow override.
 
 ## Notes
 

@@ -8,6 +8,7 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 |--------|------|
 | **`main`** | **Default** on GitHub — **stable** snapshots. Merge from `develop` (e.g. via PR) when a harness change set is ready to publish. |
 | **`develop`** | Integration branch for **new work**; commit and push here first, then promote to `main` when stable. |
+| **`release`** | **Public export** line: sanitized tree + semver manifest ([`docs/public-export-manifest.json`](docs/public-export-manifest.json), not on `main`/`develop`). Updated only via agent playbook [`PUBLIC-SCRUB:`](.cursor/pipelines/public-scrub.md) while checked out on **`release`** — do not commit scrub results on `main` or `develop`. First-time: `git fetch origin && git checkout -b release origin/develop` (see playbook). |
 
 ## Start here
 
@@ -32,8 +33,12 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) |
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
 | `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
+| `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
+| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools`; **develop** or **`main`** only — reconciles router, harness-map, AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
+
+**Public export**: Manifest field reference for automation — [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on internal branches; live `docs/public-export-manifest.json` exists only on **`release`** after a scrub run).
 
 ## Epics and templates
 

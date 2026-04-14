@@ -15,6 +15,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Product / fork context (Confluence-backed) | [docs/project.json](docs/project.json) |
 | Corner QA scope, envs, Jira mapping (Confluence-backed) | [docs/qa-project.json](docs/qa-project.json) |
 | Tiered context escalation (keywords → which files to read) | [docs/harness-map.json](docs/harness-map.json) |
+| Public export manifest (example; live file on `release` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
 ### Deliverables and references
 
@@ -29,7 +30,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` — **develop** / **`main`** only; harness drift reconciliation; not for **`release`**) |
 
 ### Epics
 

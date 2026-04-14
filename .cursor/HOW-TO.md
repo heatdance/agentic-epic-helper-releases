@@ -13,6 +13,8 @@ All playbooks live under `.cursor/pipelines/`. Open the file and follow it, or s
 - **`.cursor/pipelines/analysis.md`** — Trigger: **`ANALYSE:`** + Epic key (example: `ANALYSE: CRT-639 include_closed=yes`). Loads **`-ref.json`** and **`-coverage.json`** from disk when present. Output: **`epics/<KEY>/<KEY>-analysis.json`** and **`<KEY>-analysis.md`**; may append **Known issue** **`>`** lines to coverage when reconciliation is `in_scope_relevant`. Same **`epics/<KEY>/temp/`** rule: delete when done.
 - **`.cursor/pipelines/test-prep.md`** — Trigger: **`TEST-PREP:`** + Epic key (optional **`map_only=yes`**). Requires **`epics/<KEY>/<KEY>-coverage.json`**. Output: **`epics/<KEY>/<KEY>-tests.json`** and **`<KEY>-tests.md`**. Same **`epics/<KEY>/temp/`** rule: delete when done.
 - **`.cursor/pipelines/test-exec.md`** — Trigger: **`TEST-EXEC:`** + Epic key (optional **`base_url=…`**, **`skip_postgres=yes`**, **`include_blocked=yes`**, **`max_bundles=N`**). **Optional**, environment-dependent; requires **`epics/<KEY>/<KEY>-tests.json`**. May emit **`epics/<KEY>/tests/*.spec.ts`** and **`<KEY>-test-exec.json`**. Scratch only in **`epics/<KEY>/temp/`** (`test-exec-*`), then delete that folder.
+- **`.cursor/pipelines/public-scrub.md`** — Trigger: **`PUBLIC-SCRUB:`** (optional **`version=X.Y.Z`**, optional **`source=develop`** default or **`source=main`**). **Public export / sanitize**: run only while **`git checkout release`** — merges upstream into **`release`**, applies tiers A–D, writes **`docs/public-export-manifest.json`**, optional **`.agents/`** layer, V1/V2 checks; **do not** scrub or commit on **`main`** or **`develop`**. Example manifest on internal branches: [docs/public-export-manifest.example.json](../docs/public-export-manifest.example.json). Scratch only in **`automation/temp/public-scrub/`**, then delete before commit. See [README.md](../README.md) **`release`** branch row.
+- **`.cursor/pipelines/sync.md`** — Trigger: **`SYNC:`** (optional **`scope=full`**, or **`pipelines`** / **`prompts`** / **`templates`** / **`tools`**). **Harness reconciliation** on **`develop`** or **`main`** only — keeps router, [docs/harness-map.json](../docs/harness-map.json), [AGENTS.md](../AGENTS.md), [README.md](../README.md), HOW-TO, [qa-artifacts.mdc](rules/qa-artifacts.mdc), prompts, templates, and tool pointers aligned per [harness-maintenance.mdc](rules/harness-maintenance.mdc). **Do not** run on **`release`** (use **`PUBLIC-SCRUB:`** there). Scratch only in **`automation/temp/sync/`**, then delete when done.
 
 **Jira Smart Checklist markdown** (`-` / `>` / `!`, trace tags, scope rules) is defined in **coverage.md** under *Smart Checklist markdown (normative)*.
 
@@ -27,6 +29,8 @@ These are the **chat triggers** for pipelines (not the harness-map T1 packages):
 - `ANALYSE:` → **analysis** → `.cursor/pipelines/analysis.md`
 - `TEST-PREP:` → **test-prep** → `.cursor/pipelines/test-prep.md`
 - `TEST-EXEC:` → **test-exec** → `.cursor/pipelines/test-exec.md`
+- `PUBLIC-SCRUB:` → **public-scrub** → `.cursor/pipelines/public-scrub.md` (**`release`** branch only)
+- `SYNC:` → **sync** → `.cursor/pipelines/sync.md` (**`develop`** / **`main`** only)
 
 ## `automation/` folder
 
@@ -38,7 +42,7 @@ Manual **Python tests and tools** you write. Docs for tools (e.g. Yogi) live in 
 - `mcp-atlassian-search.mdc` — Jira/Confluence via MCP only.
 - `qa-artifacts.mdc` — QA refs, epics layout, automation docs path.
 - `harness-maintenance.mdc` — Keep AGENTS, README, harness-map, rules/prompts in sync when docs change.
-- `pipeline-router.mdc` — Maps triggers to pipeline files; temp cleanup for **epic-prep**, **coverage**, **analysis**, **test-prep**, and **test-exec** under `epics/<KEY>/temp/`.
+- `pipeline-router.mdc` — Maps triggers to pipeline files; temp cleanup for **epic-prep**, **coverage**, **analysis**, **test-prep**, and **test-exec** under `epics/<KEY>/temp/`; **public-scrub** uses **`automation/temp/public-scrub/`** then delete (commits only on **`release`**); **sync** uses **`automation/temp/sync/`** then delete (**develop** / **`main`** only).
 
 ## MCP — PostgreSQL (CTQA, optional)
 

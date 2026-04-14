@@ -1,0 +1,10 @@
+{
+  "_comment": "Example shape for docs/public-export-manifest.json on the release branch only. On main/develop, commit this file as documentation; do not commit a live manifest with real SHAs here.",
+  "schema_version": 1,
+  "export_version": "1.0.0",
+  "last_source_branch": "develop",
+  "last_source_sha": "0000000000000000000000000000000000000000",
+  "last_run_utc": "2026-04-14T12:00:00Z",
+  "validation_log": "V1: rg blocklist exit 0; V2: worktree re-run exit 0",
+  "notes": "Optional free text; append V2 command summaries per public-scrub playbook."
+}
