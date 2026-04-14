@@ -50,7 +50,7 @@ Agents and humans: **read this at the start** of a substantive QA session and **
 - **Confluence page(s) / topic** (if any): Harness anchored to QAPORTAL **Corner** subtree (page **497097273**); product refs in **CT** / **XT** per `project.json`
 - **Figma**: MCP enabled; use frame/layer URLs + Figma MCP tools for design-backed QA tasks
 - **Yogi**: `automation/tools/yogi-tool/yogi_resolve.py` for `/requirements/…` → `page_id` / `#req-…`; use `yogi_snippet.py` for token-light text; pair with Atlassian MCP when needed
-- **Code area / branch** (if any): Repo `cursor.corner` QA workspace; **`main`**/**`develop`** tip **`bf5649d`** (harness SYNC payload **`8aa5728`**). Local session ended on **`release-1.0.0`** when requested (older snapshot **`2214d0a`**).
+- **Code area / branch** (if any): Repo `cursor.corner` QA workspace; **`main`**/**`develop`** pushed in sync with **`origin`** (harness **`SYNC:`** payload **`8aa5728`**; `git log -1` for current tip). Local session ended on **`release-1.0.0`** when requested (older snapshot **`2214d0a`**).
 
 ## Blockers
 
@@ -59,7 +59,7 @@ Agents and humans: **read this at the start** of a substantive QA session and **
 
 ## Next steps
 
-1. **Before public release**: **`main`**/**`develop`** at **`bf5649d`** (SYNC payload **`8aa5728`**). Recreate branch **`release`** from **`main`** before **`PUBLIC-SCRUB:`** (the previous **`origin/release`** was deleted per operator request).
+1. **Before public release**: **`main`**/**`develop`** match **`origin`** after this **`SYNC:`** run. Recreate branch **`release`** from **`main`** before **`PUBLIC-SCRUB:`** (the previous **`origin/release`** was deleted per operator request).
 2. New chat: start with **T0** — re-read this file + [AGENTS.md](AGENTS.md), then [docs/harness-map.json](docs/harness-map.json) for **T1** packages matching the next task.
 3. When starting real ticket/spec work: add **Jira keys** and Confluence targets under **Current focus** above.
 4. Optional: if Confluence **Corner** page **497097273** environments or Jira dashboard URLs changed materially, re-run MCP and bump **`last_reviewed`** in [docs/corner-platform-map.json](docs/corner-platform-map.json) (keep content policy—no credentials in git).
