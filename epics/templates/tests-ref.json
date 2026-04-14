@@ -1,6 +1,6 @@
 {
-  "_comment": "Regression test draft handoff for TEST-PREP: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-tests.json. Pair with <KEY>-tests.md. Do not reference epics/<KEY>/temp/ in durable JSON. Full draft prose: one subprocess per test_bundles[] row (see .cursor/pipelines/test-prep.md phase 8b). Step format norms: docs/tc-ref and docs/temp/tc-template.txt. No Playwright/DB/SSH in v1.",
-  "schema_version": 1,
+  "_comment": "Regression test draft handoff for TEST-PREP: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-tests.json. Pair with <KEY>-tests.md. Do not reference epics/<KEY>/temp/ in durable JSON. Full draft prose: one subprocess per test_bundles[] row (see .cursor/pipelines/test-prep.md phase 8b). Step format norms: docs/tc-ref and docs/temp/tc-template.txt. TEST-PREP does not run Playwright/DB/SSH; optional downstream TEST-EXEC: see .cursor/pipelines/test-exec.md. automation.* hints optional; feasibility may stay unknown until TEST-EXEC or manual edit. TEST-EXEC must not run blocked bundles without explicit include_blocked=yes.",
+  "schema_version": 2,
   "epic_key": null,
   "taxonomy_note": "Internal workflow: compliance/coverage checklist first; Jira 'regression' type is client-facing taxonomy. Draft bundles are E2E combinatoric human-executable tests that operationalize the checklist. See QAPORTAL Test Repository (page 497097317) via Confluence.",
   "sources": {
@@ -63,7 +63,13 @@
       "results": ["1. ..."],
       "peculiarities": ["1. ..."]
     },
-    "_draft_note": "Strings may contain [TBD] or [REQUIRES: source]. No invented dxCore/SQL/example output unless pasted from fetched Jira. Populated by per-bundle subprocess when not map_only."
+    "_draft_note": "Strings may contain [TBD] or [REQUIRES: source]. No invented dxCore/SQL/example output unless pasted from fetched Jira. Populated by per-bundle subprocess when not map_only.",
+    "automation": {
+      "feasibility": "unknown",
+      "blocked_reason": null,
+      "notes": null
+    },
+    "_automation_note": "Optional. feasibility: ui_db_only | unknown | blocked. blocked_reason when feasibility is blocked: requires_console | requires_webbroker | missing_operational_detail | other. TEST-PREP may set unknown; set blocked when draft implies console/webbroker-only setup. TEST-EXEC updates allowed only with pipeline rules."
   },
   "reverse_validation": {
     "coverage_gaps": [],

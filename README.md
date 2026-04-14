@@ -31,13 +31,14 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `COVERAGE:` + Epic key | [coverage.md](.cursor/pipelines/coverage.md) |
 | `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) |
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
+| `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 ## Epics and templates
 
 - Layout and workflow: [epics/README.md](epics/README.md).
-- Schemas: [epics/templates/](epics/templates/) (`epic-ref.json`, `coverage-ref.json`, `analysis-ref.json`, `tests-ref.json`).
+- Schemas: [epics/templates/](epics/templates/) (`epic-ref.json`, `coverage-ref.json`, `analysis-ref.json`, `tests-ref.json`, `test-exec-ref.json`).
 - Per-Epic artifacts live under `epics/<KEY>/`.
 
 ## Automation
@@ -50,7 +51,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 - Rules: [.cursor/rules/](.cursor/rules/).
 - Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/).
-- Optional **postgres-ctqa** MCP: copy [.cursor/mcp.json.example](.cursor/mcp.json.example) to `.cursor/mcp.json` — see [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
+- Optional **postgres-ctqa** MCP: merge the snippet from [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) into **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — see [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
 
 ## Reference docs
 

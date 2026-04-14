@@ -17,6 +17,8 @@
 
 **Explicitly out of scope (v1)**: Playwright MCP, QA database access, SSH / dxCore console execution. Operational examples (SQL, console commands, sample outputs) **must not** be invented; use **`[TBD]`** or **`[REQUIRES: <source>]`** unless text is **copied** from a **fetched** Jira issue field or an attached runbook excerpt the user provided in-chat (then cite source).
 
+**Downstream (optional)**: [`TEST-EXEC:`](test-exec.md) may materialize Playwright specs from this artifact when the environment allows. **`test_bundles[].automation`** (schema_version **2**) lets you flag **`feasibility: blocked`** when a bundle **requires** console-only, webbroker-only, or otherwise non-UI/non-readonly-DB setup—**TEST-EXEC** skips those by default. **`TEST-PREP`** may leave **`feasibility: unknown`**; it still **must not** run Playwright or DB verification here.
+
 **Ephemeral**: `epics/<KEY>/temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain the substring `/temp/`.
 
 ---

@@ -1,8 +1,11 @@
-# Large vendor clones must not land in the repo (see automation/temp/README.md)
-automation/temp/aurora-remote-cli/
-
-# Local MCP config (often contains credentials); use mcp.json.example
+# Local project MCP (optional; CTQA postgres-ctqa is configured in global ~/.cursor/mcp.json — see .cursor/mcp/postgres-ctqa.mcp.json template)
 .cursor/mcp.json
+
+# Local benchmark / timing data
+.cursor/benchmark
+
+# Local env file (do not commit secrets)
+.env
 
 # Python / tooling noise
 __pycache__/

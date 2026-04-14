@@ -1,0 +1,47 @@
+{
+  "_comment": "TEST-EXEC: durable manifest after optional test-exec pipeline. Instance: epics/<EPIC-KEY>/<EPIC-KEY>-test-exec.json. Pair with generated specs under epics/<KEY>/tests/*.spec.ts. Do not reference epics/<KEY>/temp/ in durable JSON. Input: <KEY>-tests.json (TEST-PREP). See .cursor/pipelines/test-exec.md.",
+  "schema_version": 1,
+  "epic_key": null,
+  "sources": {
+    "tests_path": "epics/<EPIC-KEY>/<EPIC-KEY>-tests.json",
+    "tests_loaded": false,
+    "note": "tests_loaded true after successful read; schema_version on -tests.json should be >= 2 for automation hints (optional)."
+  },
+  "environment": {
+    "base_url": null,
+    "build_id": null,
+    "playwright_mcp_ok": false,
+    "postgres_mcp_ok": false,
+    "tunnel_probe_ok": false,
+    "note": "Flags are observational only; no secrets, cookies, or connection strings. base_url/build_id only if user supplied in trigger or session."
+  },
+  "trigger_options": {
+    "skip_postgres": false,
+    "include_blocked": false,
+    "max_bundles": null,
+    "note": "Echo parsed optional tokens from TEST-EXEC: line for audit; null max_bundles means no cap."
+  },
+  "bundles": [],
+  "_bundles_item": {
+    "bundle_id": "tb-001",
+    "covers_check_ids": ["chk-001"],
+    "proposed_title": null,
+    "status": "skipped_env | skipped_map_only | blocked | skipped_feasibility | generated | passed | failed_clear | failed_ambiguous | skipped_empty_draft",
+    "blocked_reason": "requires_console | requires_webbroker | missing_operational_detail | not_ui_db_only | other | null",
+    "spec_path": "tests/tb-001.spec.ts",
+    "_spec_path_note": "Path relative to epics/<KEY>/; no leading temp/.",
+    "last_run_at": null,
+    "heal_attempts": 0,
+    "oracle_change_recorded": false,
+    "notes": []
+  },
+  "validation_log": [],
+  "_validation_log_item": {
+    "step": "phase id or name",
+    "at": "ISO-8601",
+    "action": "short description"
+  },
+  "run_completed_at": null,
+  "skip_reason": null,
+  "_skip_reason_note": "e.g. environment_not_ready when base_url missing or MCP probes false; distinct from per-bundle failed_*."
+}

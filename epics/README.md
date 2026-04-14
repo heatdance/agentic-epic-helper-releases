@@ -38,3 +38,16 @@ After **`epics/<KEY>/<KEY>-coverage.json`** exists, pipeline **`TEST-PREP:`** + 
 **Compliance first**: internal workflow uses the Smart Checklist as the matrix; Jira **regression** classification is client-facing. Bundles are E2E combinatoric instructions for humans—not one test per bullet when one session suffices. **Full draft prose** (when not `map_only`) is authored **one bundle per subprocess** (e.g. Cursor Task), after shells are planned in phase 8a—see playbook. **Jira reuse**: steps only from **`jira_get_issue`** fields; otherwise `[GAP]` / `[TBD]`. **v1** does not use Playwright, QA DB, or SSH/console execution for verification.
 
 Playbook: [`.cursor/pipelines/test-prep.md`](../.cursor/pipelines/test-prep.md). **Router**: [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc).
+
+# Per-epic test exec (`<EPIC-KEY>-test-exec.json`, `tests/*.spec.ts`)
+
+After **`epics/<KEY>/<KEY>-tests.json`** exists (from **`TEST-PREP:`**), pipeline **`TEST-EXEC:`** + key (optional **`base_url=…`**, **`skip_postgres=yes`**, **`include_blocked=yes`**, **`max_bundles=N`**) may produce:
+
+- **`epics/<KEY>/<KEY>-test-exec.json`** — run/manifest per [templates/test-exec-ref.json](templates/test-exec-ref.json) (per-bundle status, traceability to `covers_check_ids`, no `/temp/` paths).
+- **`epics/<KEY>/tests/*.spec.ts`** — Playwright specs (one per materialized `bundle_id`, e.g. `tb-001.spec.ts`).
+
+**Optional and non-gating**: depends on app URL, **user-mcp-playwright**, and optionally **postgres-ctqa** (SSH tunnel + global MCP). Does **not** use dxCore console, SSH to hosts, or webbroker-only setup; such bundles are **`blocked`** unless the user passes **`include_blocked=yes`**. Raw scratch lives only in **`epics/<KEY>/temp/`** (`test-exec-*`); **delete `temp/`** when finished—same lifecycle as other epic pipelines.
+
+`-tests.json` **schema_version 2** adds optional **`test_bundles[].automation`** (`feasibility`, `blocked_reason`) for alignment with exec; older files remain valid.
+
+Playbook: [`.cursor/pipelines/test-exec.md`](../.cursor/pipelines/test-exec.md). **Router**: [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc).

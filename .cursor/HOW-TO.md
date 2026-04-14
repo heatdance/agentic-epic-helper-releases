@@ -1,5 +1,9 @@
 # Cursor — how-to
 
+## Cursor MCP (org-wide)
+
+For **general** Cursor MCP setup—**tokens**, **global MCP layout**, and org-wide configuration—use Confluence: **[AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor)** (QAPORTAL). This HOW-TO only documents **Corner-specific** steps (pipelines, CTQA tunnel, **postgres-ctqa** connection string).
+
 ## Pipelines (human-run playbooks)
 
 All playbooks live under `.cursor/pipelines/`. Open the file and follow it, or start chat with the trigger phrase.
@@ -7,10 +11,12 @@ All playbooks live under `.cursor/pipelines/`. Open the file and follow it, or s
 - **`.cursor/pipelines/epic-prep.md`** — Trigger: prefix **`EPIC-PREP:`** then the Jira Epic key (example: `EPIC-PREP: CRT-1234`; optional **`repo=`** for Bitbucket prep — Stash `PROJECT_KEY/repo_slug` e.g. **`BRO/xt`**, see [docs/project.json](../docs/project.json) `bitbucket`). Output: `epics/<KEY>/<KEY>-ref.json`; scratch only in `epics/<KEY>/temp/`, then delete that folder.
 - **`.cursor/pipelines/coverage.md`** — Trigger: **`COVERAGE:`** + Epic key (example: `COVERAGE: CRT-639 repo=myworkspace/dxtrade-xt focus=FX_SPOT_WeightedAvg_metrics`). Optional **`focus=...`** narrows `epic_verification_focus` when Jira is ambiguous. Requires **`epics/<KEY>/<KEY>-ref.json`** from epic-prep first. Output: `epics/<KEY>/<KEY>-coverage.json` and `<KEY>-coverage.md` (Jira Smart Checklist paste). Same **`epics/<KEY>/temp/`** rule: delete when done.
 - **`.cursor/pipelines/analysis.md`** — Trigger: **`ANALYSE:`** + Epic key (example: `ANALYSE: CRT-639 include_closed=yes`). Loads **`-ref.json`** and **`-coverage.json`** from disk when present. Output: **`epics/<KEY>/<KEY>-analysis.json`** and **`<KEY>-analysis.md`**; may append **Known issue** **`>`** lines to coverage when reconciliation is `in_scope_relevant`. Same **`epics/<KEY>/temp/`** rule: delete when done.
+- **`.cursor/pipelines/test-prep.md`** — Trigger: **`TEST-PREP:`** + Epic key (optional **`map_only=yes`**). Requires **`epics/<KEY>/<KEY>-coverage.json`**. Output: **`epics/<KEY>/<KEY>-tests.json`** and **`<KEY>-tests.md`**. Same **`epics/<KEY>/temp/`** rule: delete when done.
+- **`.cursor/pipelines/test-exec.md`** — Trigger: **`TEST-EXEC:`** + Epic key (optional **`base_url=…`**, **`skip_postgres=yes`**, **`include_blocked=yes`**, **`max_bundles=N`**). **Optional**, environment-dependent; requires **`epics/<KEY>/<KEY>-tests.json`**. May emit **`epics/<KEY>/tests/*.spec.ts`** and **`<KEY>-test-exec.json`**. Scratch only in **`epics/<KEY>/temp/`** (`test-exec-*`), then delete that folder.
 
 **Jira Smart Checklist markdown** (`-` / `>` / `!`, trace tags, scope rules) is defined in **coverage.md** under *Smart Checklist markdown (normative)*.
 
-More pipelines: add a row here and a bullet in `.cursor/rules/pipeline-router.mdc`.
+Full trigger list and temp rules: [`.cursor/rules/pipeline-router.mdc`](rules/pipeline-router.mdc).
 
 ## Keywords → pipelines
 
@@ -19,6 +25,8 @@ These are the **chat triggers** for pipelines (not the harness-map T1 packages):
 - `EPIC-PREP:` → **epic-prep** → `.cursor/pipelines/epic-prep.md`
 - `COVERAGE:` → **coverage** → `.cursor/pipelines/coverage.md`
 - `ANALYSE:` → **analysis** → `.cursor/pipelines/analysis.md`
+- `TEST-PREP:` → **test-prep** → `.cursor/pipelines/test-prep.md`
+- `TEST-EXEC:` → **test-exec** → `.cursor/pipelines/test-exec.md`
 
 ## `automation/` folder
 
@@ -30,21 +38,29 @@ Manual **Python tests and tools** you write. Docs for tools (e.g. Yogi) live in 
 - `mcp-atlassian-search.mdc` — Jira/Confluence via MCP only.
 - `qa-artifacts.mdc` — QA refs, epics layout, automation docs path.
 - `harness-maintenance.mdc` — Keep AGENTS, README, harness-map, rules/prompts in sync when docs change.
-- `pipeline-router.mdc` — Maps triggers above to pipeline files; temp cleanup rules for **epic-prep**, **coverage**, and **analysis** under `epics/<KEY>/temp/`.
+- `pipeline-router.mdc` — Maps triggers to pipeline files; temp cleanup for **epic-prep**, **coverage**, **analysis**, **test-prep**, and **test-exec** under `epics/<KEY>/temp/`.
 
 ## MCP — PostgreSQL (CTQA, optional)
 
-Copy **[mcp.json.example](mcp.json.example)** to **`mcp.json`** (gitignored) and edit the connection string. That file registers **`postgres-ctqa`** using **`@sarmadparvez/postgresql-mcp`** (maintained alternative to deprecated `@modelcontextprotocol/server-postgres`). The URL includes **`?mode=readonly`** so write tools (`execute`, `transaction`) are disabled at the MCP layer; still use a **database role** limited to `SELECT` when possible.
+Org-wide MCP and tokens: **[AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor)**. Configure **`postgres-ctqa`** in **Cursor’s global** MCP file so the repo stays free of DB credentials.
 
-1. **SSH tunnel** — From repo root, **PuTTY `plink` is used by default on Windows** (avoids common OpenSSH “Corrupted MAC” issues against the same host).  
+**Global file paths**
+
+- **Windows:** `%USERPROFILE%\.cursor\mcp.json`
+- **macOS / Linux:** `~/.cursor/mcp.json`
+
+**Terminal checklist (order matters)**
+
+1. **Open a terminal at the repo root** and start the **SSH tunnel** (leave this window open). **PuTTY `plink` is the default on Windows** (avoids common OpenSSH “Corrupted MAC” issues against the same host):  
    `python automation/tools/tunnel/ctqa_pg.py YOUR_AD_USER@ctqa.prosp.devexperts.com`  
-   Leave the terminal open; enter **AD** password when prompted. Second tab: set `CTQA_PG_PASSWORD` and run `python automation/tools/tunnel/ctqa_pg.py --probe-only` to verify DB over the tunnel. Full checklist and zip handoff: **[automation/tools/tunnel/README.md](../automation/tools/tunnel/README.md)**.  
-   `-n` / `--dry-run` prints the exact command; `--backend ssh` forces OpenSSH. Default forward is **local `15432` → remote `127.0.0.1:5432`** (as on the SSH server); use `--remote-db-host` if your environment needs the DB hostname instead of loopback.
-2. **Edit the connection string** in `mcp.json`: replace **`REPLACE_WITH_PASSWORD`** with the real DB password (URL-encode special characters). Adjust **port** if you change the local forward.
-3. **SSL** — Use **`sslmode=disable`** for `127.0.0.1` through SSH (encrypted in the tunnel; avoids Node/pg self-signed cert errors with MCP). Do not disable SSL for direct internet DB connections.
-4. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**). Check **MCP Logs** if the server fails to start (`npx` must be on PATH for the Cursor process, same as Playwright MCP).
+   Enter **AD** password when prompted. `-n` / `--dry-run` prints the exact command; `--backend ssh` forces OpenSSH. Default forward is **local `15432` → remote `127.0.0.1:5432`**; use `--remote-db-host` if your environment needs the DB hostname instead of loopback. Full detail: **[automation/tools/tunnel/README.md](../automation/tools/tunnel/README.md)**.
+2. **Open a second terminal** (tunnel still running). Set **`CTQA_PG_PASSWORD`**, then verify DB connectivity:  
+   `python automation/tools/tunnel/ctqa_pg.py --probe-only`
+3. **Merge the server entry into global `mcp.json`**: use the repo template **[mcp/postgres-ctqa.mcp.json](mcp/postgres-ctqa.mcp.json)** (placeholders only)—copy the **`postgres-ctqa`** object under **`mcpServers`**. It uses **`@sarmadparvez/postgresql-mcp`** (maintained alternative to deprecated `@modelcontextprotocol/server-postgres`). The URL includes **`?mode=readonly`** so write tools (`execute`, `transaction`) are disabled at the MCP layer; still use a **database role** limited to `SELECT` when possible. Replace **`USER:PASSWORD`** with real credentials (**URL-encode** special characters). **Port** in the URL must match your local forward (default **15432**).
+4. **SSL** — Use **`sslmode=disable`** for `127.0.0.1` through SSH (encrypted in the tunnel; avoids Node/pg self-signed cert errors with MCP). Do not disable SSL for direct internet DB connections.
+5. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**), after any org-wide MCP steps from Confluence. Check **MCP Logs** if the server fails to start (`npx` must be on PATH for the Cursor process, same as Playwright MCP).
 
-To keep secrets out of git, you can instead define **`postgres-ctqa`** only in your **user** `~/.cursor/mcp.json` and delete the entry from the project file.
+**Project `.cursor/mcp.json`** is gitignored for optional **project-only** MCP servers; CTQA Postgres is **not** required there if you use the global file.
 
 ## `.cursor/prompts/` (paste starters)
 

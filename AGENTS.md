@@ -29,7 +29,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline) |
 
 ### Epics
 
@@ -39,6 +39,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Epic coverage (Smart Checklist draft + audit JSON) | [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) · `epics/<KEY>/<KEY>-coverage.json` · `epics/<KEY>/<KEY>-coverage.md` · trigger `COVERAGE:` |
 | Epic requirement analysis | [epics/templates/analysis-ref.json](epics/templates/analysis-ref.json) · `epics/<KEY>/<KEY>-analysis.json` · `epics/<KEY>/<KEY>-analysis.md` · trigger `ANALYSE:` |
 | Epic regression test drafts | [epics/templates/tests-ref.json](epics/templates/tests-ref.json) · `epics/<KEY>/<KEY>-tests.json` · `epics/<KEY>/<KEY>-tests.md` · trigger `TEST-PREP:` |
+| Epic optional E2E materialization | [epics/templates/test-exec-ref.json](epics/templates/test-exec-ref.json) · `epics/<KEY>/<KEY>-test-exec.json` · `epics/<KEY>/tests/*.spec.ts` · trigger `TEST-EXEC:` (requires `-tests.json`; environment-dependent) |
 
 ### Automation tools
 
@@ -55,7 +56,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) |
 | Humans: Cursor + MCP + tunnel how-to | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) |
-| Optional MCP server definitions | [.cursor/mcp.json.example](.cursor/mcp.json.example) → copy to **`.cursor/mcp.json`** (local, gitignored) |
+| CTQA Postgres MCP (template) | [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json) — merge **`postgres-ctqa`** into **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) |
 
 ## Context escalation
 
@@ -82,10 +83,10 @@ When tasks include **Figma file/frame/layer** URLs, use the **workspace-configur
 ### PostgreSQL / CTQA (optional)
 
 1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[.cursor/HOW-TO.md](.cursor/HOW-TO.md)** and **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
-2. **`.cursor/mcp.json`** (from [.cursor/mcp.json.example](.cursor/mcp.json.example)) — **`postgres-ctqa`** uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`** (write tools disabled at MCP layer). Use **`sslmode=disable`** on `127.0.0.1` through SSH as documented.
-3. **Do not** commit real passwords; use a user-level MCP config or local edits only.
+2. **Global `~/.cursor/mcp.json`** (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) — add **`postgres-ctqa`** from the repo template [.cursor/mcp/postgres-ctqa.mcp.json](.cursor/mcp/postgres-ctqa.mcp.json). It uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`** (write tools disabled at MCP layer). Use **`sslmode=disable`** on `127.0.0.1` through SSH as documented. Optional project **`.cursor/mcp.json`** remains gitignored if you use project-specific MCP servers.
+3. **Do not** commit real passwords; keep credentials in global MCP or local-only files.
 
-When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**.
+When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**. Optional pipeline **`TEST-EXEC:`** may use the same server for **readonly** SQL checks when bundles require DB verification.
 
 ## Codebase exploration
 

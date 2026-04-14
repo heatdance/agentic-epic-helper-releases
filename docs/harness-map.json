@@ -194,14 +194,37 @@
             "docs/qa-project.json"
           ],
           "mcp_hint": "Requires -coverage.json. Phase 8a: bundle shells only. Phase 8b: one subprocess per bundle (e.g. Task generalPurpose)—MUST NOT one-shot all draft prose; prefer temp/test-prep-draft-<bundle_id>.json merge. Jira steps only from fetched fields. Emits -tests.json + -tests.md; authoring.subprocess_completed per bundle; no /temp/ in durable JSON. map_only=yes skips 8b. delete epics/<KEY>/temp/ after run."
+        },
+        {
+          "id": "test_exec_pipeline",
+          "keywords": [
+            "TEST-EXEC",
+            "TEST-EXEC:",
+            "test exec",
+            "test-exec",
+            "playwright",
+            "e2e automation epic",
+            "epic playwright",
+            "-test-exec.json",
+            "test-exec-ref"
+          ],
+          "read": [
+            ".cursor/pipelines/test-exec.md",
+            "epics/templates/tests-ref.json",
+            "epics/templates/test-exec-ref.json",
+            "epics/README.md",
+            ".cursor/HOW-TO.md",
+            ".cursor/pipelines/test-prep.md"
+          ],
+          "mcp_hint": "Optional; requires -tests.json from TEST-PREP. user-mcp-playwright + optional postgres-ctqa (tunnel up). One subprocess per bundle for spec materialization; epics/<KEY>/tests/*.spec.ts + -test-exec.json; temp/test-exec-* then delete epics/<KEY>/temp/. No console/SSH/webbroker-only setup—blocked bundles unless include_blocked=yes."
         }
       ]
     },
     {
       "id": "T2",
       "name": "external_truth",
-      "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when .cursor/mcp.json is configured and tunnel is up",
-      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and mcp.json—see automation/tools/tunnel/README.md and .cursor/HOW-TO.md.",
+      "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when global ~/.cursor/mcp.json includes postgres-ctqa and tunnel is up; optional user-mcp-playwright for TEST-EXEC UI steps",
+      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration or TEST-EXEC DB checks, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and global Cursor MCP—see .cursor/mcp/postgres-ctqa.mcp.json, automation/tools/tunnel/README.md, and .cursor/HOW-TO.md.",
       "mcp_scope": "Scope Atlassian searches using docs/project.json and docs/qa-project.json (CT, XT, QAPORTAL subtree rooted at 497097273)."
     }
   ],
