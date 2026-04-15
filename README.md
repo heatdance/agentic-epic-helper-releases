@@ -22,6 +22,7 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 - [docs/project.json](docs/project.json) — product / **fork-of DXtrade XT** Confluence anchors (CT / XT), Bitbucket defaults.
 - [docs/qa-project.json](docs/qa-project.json) — Corner QA scope (QAPORTAL Corner subtree), workflow pointers (functional summaries only).
 - [docs/corner-platform-map.json](docs/corner-platform-map.json) — **SoT** for environment hostnames/paths, Jira project/dashboard links, Stash repo ladder, QAPORTAL child index (no secrets in repo).
+- [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md) — **`user-mcp-atlassian`** tool surface (read-only), Stash **browse-first** ladder, where server debugging lives (outside this repo).
 
 ## Pipelines (chat triggers)
 

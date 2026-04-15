@@ -106,7 +106,24 @@
             "docs/project.json",
             "docs/qa-project.json"
           ],
-          "mcp_hint": "Structured env URLs, Jira project index, Stash repo ladder, QAPORTAL/CT/XT scope recap—do not invent hosts or branches. Gaps: confluence_search scoped (ancestor=497097273 or space CT/XT) then confluence_get_page; Stash: bitbucket_list_repositories / browse / get_file; never copy credentials from Confluence into repo files."
+          "mcp_hint": "Structured env URLs, Jira project index, Stash repo ladder, QAPORTAL/CT/XT scope recap—do not invent hosts or branches. Gaps: confluence_search scoped (ancestor=497097273 or space CT/XT) then confluence_get_page; Stash: bitbucket_list_repositories / browse / get_file; bitbucket_search_code may 404 on stash—use epic-prep 5b browse fallback; never copy credentials from Confluence into repo files."
+        },
+        {
+          "id": "atlassian_mcp_tools",
+          "keywords": [
+            "mcp-atlassian",
+            "user-mcp-atlassian",
+            "atlassian mcp",
+            "mcp server debug",
+            "bitbucket mcp",
+            "stash mcp",
+            "bitbucket_search_code",
+            "safer mcp",
+            "mcp tools",
+            "which mcp tool"
+          ],
+          "read": ["docs/mcp-atlassian-tools.md", "docs/project.json"],
+          "mcp_hint": "All tools in the exposed set are read-only. Stash: project_key+repo_slug from PROJECT_KEY/repo_slug; prefer list/browse/get before bitbucket_search_code; search may 404 while browse works—see docs/mcp-atlassian-tools.md."
         },
         {
           "id": "deliverable_shape",
@@ -172,7 +189,7 @@
             "docs/qa-project.json",
             "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Epic artifact: epics/<EPIC-KEY>/<EPIC-KEY>-ref.json; schema_version 3 adds sources.bitbucket_repo, implementation.hits (EPIC-PREP step 5b). Optional EPIC-PREP repo=; repo resolution: trigger > prior ref > docs/project.json bitbucket.default_repo. step 2b client_shell_impact (Corner Trader vs Adaptive per qa-project.json). requirements[]: snippet_status + snippet_failure_reason when snippet missing. epic-prep uses epics/<KEY>/temp/ then delete temp/. Yogi: yogi_resolve + yogi_snippet. Bitbucket: bitbucket_search_code capped (~8 queries); Stash DC repo token PROJECT_KEY/repo_slug (see docs/project.json bitbucket); code search may fail with 404—browse/list still valid. XT: cap ~8 xt_refs, XT home 402589545—no full page bodies in ref."
+          "mcp_hint": "Epic artifact: epics/<EPIC-KEY>/<EPIC-KEY>-ref.json; schema_version 3 adds sources.bitbucket_repo, implementation.hits (EPIC-PREP step 5b). Optional EPIC-PREP repo=; repo resolution: trigger > prior ref > docs/project.json bitbucket.default_repo. step 2b client_shell_impact (Corner Trader vs Adaptive per qa-project.json). requirements[]: snippet_status + snippet_failure_reason when snippet missing. epic-prep uses epics/<KEY>/temp/ then delete temp/. Yogi: yogi_resolve + yogi_snippet. Bitbucket: map Stash BRO/xt → project_key=BRO, repo_slug=xt before bitbucket_search_code; capped search; on HTTP 404 for /rest/api/1.0/search use step 5b browse_directory fallback (~3 calls) per epic-prep.md. XT: cap ~8 xt_refs, XT home 402589545—no full page bodies in ref."
         },
         {
           "id": "coverage_pipeline",
@@ -195,7 +212,7 @@
             "docs/qa-project.json",
             "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Requires -ref.json with client_shell_impact. Phase 7 merges epic-ref implementation.hits (epic_prep), dedupes, renumbers impl-001…, then Bitbucket search from matrix/snippets when repo resolved (COVERAGE repo= overrides ref and project.json bitbucket.default_repo). calculation_contract ladders, out_of_epic fork not in body, evidence-gated dimensions, per-surface lines (Adaptive when affected), epic_verification_focus + verification_role. focus= optional. Durable: -coverage.json + .md; delete epics/<KEY>/temp/ after run."
+          "mcp_hint": "Requires -ref.json with client_shell_impact. Phase 7 merges epic-ref implementation.hits (epic_prep), dedupes, renumbers impl-001…, then Bitbucket search from matrix/snippets when repo resolved (COVERAGE repo= overrides ref and project.json bitbucket.default_repo); same Stash MCP mapping + search-404 browse fallback as epic-prep step 5b. calculation_contract ladders, out_of_epic fork not in body, evidence-gated dimensions, per-surface lines (Adaptive when affected), epic_verification_focus + verification_role. focus= optional. Durable: -coverage.json + .md; delete epics/<KEY>/temp/ after run."
         },
         {
           "id": "analysis_pipeline",

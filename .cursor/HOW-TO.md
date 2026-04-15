@@ -6,7 +6,7 @@ For **general** Cursor MCP setup—**tokens**, **global MCP layout**, and org-wi
 
 ## Before Corner QA agent chats (checklist)
 
-1. **user-mcp-atlassian** enabled in Cursor (Jira, Confluence, Bitbucket/Stash tools)—see **AI with Cursor** above if tokens need refresh.
+1. **user-mcp-atlassian** enabled in Cursor (Jira, Confluence, Bitbucket/Stash tools)—see **AI with Cursor** above if tokens need refresh. Tool surface is **read-only**; for Stash **browse-first** order and search-404 behavior see [docs/mcp-atlassian-tools.md](../docs/mcp-atlassian-tools.md).
 2. Optional per task: **user-mcp-playwright** (TEST-EXEC), **postgres-ctqa** + SSH tunnel (DB checks)—see sections below.
 3. Skim [docs/corner-platform-map.json](../docs/corner-platform-map.json) when the task involves **which environment**, **which repo**, or **which Jira project**; agents use it as the structured map (secrets stay on Confluence).
 
@@ -32,7 +32,7 @@ Epic-sized work: use chat triggers (`EPIC-PREP:`, `COVERAGE:`, …) per **Keywor
 
 All playbooks live under `.cursor/pipelines/`. Open the file and follow it, or start chat with the trigger phrase.
 
-- **`.cursor/pipelines/epic-prep.md`** — Trigger: prefix **`EPIC-PREP:`** then the Jira Epic key (example: `EPIC-PREP: CRT-1234`; optional **`repo=`** for Bitbucket prep — Stash `PROJECT_KEY/repo_slug` e.g. **`BRO/xt`**, see [docs/project.json](../docs/project.json) `bitbucket`). Output: `epics/<KEY>/<KEY>-ref.json`; scratch only in `epics/<KEY>/temp/`, then delete that folder.
+- **`.cursor/pipelines/epic-prep.md`** — Trigger: prefix **`EPIC-PREP:`** then the Jira Epic key (example: `EPIC-PREP: CRT-1234`; optional **`repo=`** for Bitbucket prep — Stash `PROJECT_KEY/repo_slug` e.g. **`BRO/xt`**, see [docs/project.json](../docs/project.json) `bitbucket`). MCP calls must split **`BRO/xt`** into **`project_key`** + **`repo_slug`**; if **`bitbucket_search_code`** returns **404**, use step **5b** capped **`bitbucket_browse_directory`** fallback. Output: `epics/<KEY>/<KEY>-ref.json`; scratch only in `epics/<KEY>/temp/`, then delete that folder.
 - **`.cursor/pipelines/coverage.md`** — Trigger: **`COVERAGE:`** + Epic key (example: `COVERAGE: CRT-639 repo=myworkspace/dxtrade-xt focus=FX_SPOT_WeightedAvg_metrics`). Optional **`focus=...`** narrows `epic_verification_focus` when Jira is ambiguous. Requires **`epics/<KEY>/<KEY>-ref.json`** from epic-prep first. Output: `epics/<KEY>/<KEY>-coverage.json` and `<KEY>-coverage.md` (Jira Smart Checklist paste). Same **`epics/<KEY>/temp/`** rule: delete when done.
 - **`.cursor/pipelines/analysis.md`** — Trigger: **`ANALYSE:`** + Epic key (example: `ANALYSE: CRT-639 include_closed=yes`). Loads **`-ref.json`** and **`-coverage.json`** from disk when present. Output: **`epics/<KEY>/<KEY>-analysis.json`** and **`<KEY>-analysis.md`**; may append **Known issue** **`>`** lines to coverage when reconciliation is `in_scope_relevant`. Same **`epics/<KEY>/temp/`** rule: delete when done.
 - **`.cursor/pipelines/test-prep.md`** — Trigger: **`TEST-PREP:`** + Epic key (optional **`map_only=yes`**). Requires **`epics/<KEY>/<KEY>-coverage.json`**. Output: **`epics/<KEY>/<KEY>-tests.json`** and **`<KEY>-tests.md`**. Same **`epics/<KEY>/temp/`** rule: delete when done.

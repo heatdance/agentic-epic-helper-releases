@@ -1,0 +1,257 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-642",
+  "sources": {
+    "jira_fetched_at": "2026-04-15T18:45:00Z",
+    "ref_path": "epics/CRT-642/CRT-642-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-642/CRT-642-coverage.json",
+    "coverage_loaded": true,
+    "note": "ANALYSE default include_closed=off; coverage Known-issue > lines only for open in_scope_relevant with unambiguous check mapping."
+  },
+  "summary": {
+    "text": "CRT-642 validates that FX_SPOT trading actions during instrument non-trading windows (including the Mon–Thu 17:00–17:15 NY ET reload segment in the schedule) are confirmable but rejected with messaging aligned to CRT-1749 (code 358) and CRT-1750, while web greys bid/ask in Watchlist and webbroker Client Area and adaptive greys quotes on open-position details—explicitly not requiring adaptive Watchlist or OE quote grey-out. Practical focus is reproducible schedule evidence, cross-surface rejection semantics, and separating deferred chart scope (DxFeed) from order/quote acceptance.",
+    "derived_from": [
+      "jira_get_issue.description",
+      "ref.synthesis",
+      "ref.business_context",
+      "coverage.epic_verification_focus",
+      "coverage.checks"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "summary": "Nested requirement CRT-1481 is referenced from CRT-1750 snippet text but coverage nested_requirement_refs leaves page_id and short_url null—upstream schedule definition is not tool-resolved in-repo.",
+      "source": "coverage",
+      "type": "grounding",
+      "evidence": "CRT-642-coverage.json nested_requirement_refs[0] key CRT-1481"
+    },
+    {
+      "id": "gap-002",
+      "summary": "Chart default trading-hours-only visibility remains calculation_contract deferred_ambiguous (DxFeed dependency); pass/fail criteria for that slice are environment-gated.",
+      "source": "coverage",
+      "type": "ambiguity",
+      "evidence": "checks[].id chk-015 ambiguity.flag ! calculation_contract deferred_ambiguous"
+    },
+    {
+      "id": "gap-003",
+      "summary": "Stash code search returns HTTP 404; implementation evidence is browse/layout anchors only, not symbol-level validation code pointers.",
+      "source": "coverage",
+      "type": "grounding",
+      "evidence": "anti_pattern_findings pattern stash_code_search_404; CRT-642-ref.json validation_log step 5b_bitbucket_prep"
+    }
+  ],
+  "questions": [
+    {
+      "id": "q-001",
+      "text": "Should CRT-1481 be resolved to a Confluence page_id (or Yogi snippet) so schedule preconditions (chk-002, chk-016) cite authoritative non-trading definitions beyond CRT-1750 prose?",
+      "kind": "grounded",
+      "dimension": "completeness",
+      "evidence": "CRT-642-coverage.json nested_requirement_refs CRT-1481 page_id null"
+    },
+    {
+      "id": "q-002",
+      "text": "Once DxFeed provides FX_SPOT chart data, what observable UI/time-range rule counts as satisfying Jira item 2 versus deferring again?",
+      "kind": "grounded",
+      "dimension": "testability",
+      "evidence": "checks[].id chk-015 scenario_line (deferred_ambiguous)"
+    },
+    {
+      "id": "q-003",
+      "text": "Does open XT-8043 (watchlist row exception) reproduce under FX_SPOT non-trading grey-quote flows on web, or is it a separate watchlist defect?",
+      "kind": "hypothesis",
+      "dimension": "cross_surface",
+      "evidence": null
+    },
+    {
+      "id": "q-004",
+      "text": "For XT-7451 (cancel completes during non-trading), which client shell and order state reproduce the bug—dxTrade5 web, webbroker paths, adaptive, or multiple?",
+      "kind": "hypothesis",
+      "dimension": "cross_surface",
+      "evidence": null
+    },
+    {
+      "id": "q-005",
+      "text": "Should closed upstream items (e.g. XT-7183 resolved localization for CRT-1749 token) be treated as regression anchors in TEST-PREP bundles even though ANALYSE does not mutate coverage for closed issues by default?",
+      "kind": "grounded",
+      "dimension": "operational",
+      "evidence": "known_issues XT-7183 status Resolved; pipeline default open-only coverage mutation"
+    }
+  ],
+  "known_issues_search": {
+    "at": "2026-04-15T18:42:00Z",
+    "queries": [
+      {
+        "jql": "parent = CRT-642 ORDER BY updated DESC",
+        "purpose": "epic_link",
+        "result_count": 0,
+        "note": "Jira returned no issues; epic linkage uses Epic Link / childIssuesOf on this instance."
+      },
+      {
+        "jql": "issue in childIssuesOf(\"CRT-642\") ORDER BY updated DESC",
+        "purpose": "epic_link",
+        "result_count": 8
+      },
+      {
+        "jql": "\"Epic Link\" = CRT-642 ORDER BY updated DESC",
+        "purpose": "epic_link",
+        "result_count": 8
+      },
+      {
+        "jql": "text ~ \"CRT-642\" AND project in (CRTQA, CRTBL, SUPXT, CAN) ORDER BY updated DESC",
+        "purpose": "epic_text",
+        "result_count": 13,
+        "note": "Noisy: version strings can match 642; not all rows promoted to known_issues[]."
+      },
+      {
+        "jql": "project = CRTQA AND text ~ \"CRT-642\" ORDER BY updated DESC",
+        "purpose": "epic_text",
+        "result_count": 1
+      },
+      {
+        "jql": "project = CRT AND issuetype = Bug AND (summary ~ \"non-trading\" OR summary ~ \"non trading\" OR description ~ \"non-trading\") ORDER BY updated DESC",
+        "purpose": "keyword_semantic",
+        "result_count": 0
+      },
+      {
+        "jql": "summary ~ \"FX_SPOT\" AND summary ~ \"non-trading\" AND project in (CRTQA, CRT, XT, CAN) ORDER BY updated DESC",
+        "purpose": "keyword_semantic",
+        "result_count": 4
+      }
+    ]
+  },
+  "known_issues": [
+    {
+      "key": "XT-7451",
+      "summary": "FX_SPOT - cancel order during non-trading hours is completed",
+      "status": "Reported",
+      "issuetype": "Defect Report",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/XT-7451",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Directly targets FX_SPOT cancel behavior during non-trading hours vs epic cancel AC and CRT-1749/1750."
+      }
+    },
+    {
+      "key": "XT-8043",
+      "summary": "Exception on watchlist row creation",
+      "status": "In development",
+      "issuetype": "Defect Report",
+      "resolution": null,
+      "url": "https://jira.in.devexperts.com/browse/XT-8043",
+      "relevance": "linked",
+      "status_category": "open",
+      "coverage_reconciliation": {
+        "verdict": "questionable",
+        "rationale": "Linked under epic but summary lacks FX_SPOT or non-trading signal; may or may not intersect chk-007 web Watchlist grey flows."
+      }
+    },
+    {
+      "key": "XT-7184",
+      "summary": "[DXTF] [RIA] Grey out FX_SPOT Quotes in UI in Non-Trading session",
+      "status": "Waiting for test",
+      "issuetype": "Change Request",
+      "resolution": "Waiting for test",
+      "url": "https://jira.in.devexperts.com/browse/XT-7184",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Upstream grey-quote work aligns with web/adaptive quote presentation themes in epic_verification_focus; not an open defect category for default checklist mutation."
+      }
+    },
+    {
+      "key": "XT-7183",
+      "summary": "[DXTF] [RIA] Add localization for FX_SPOT_TRADING_DURING_NON_TRADING_HOURS_IS_PROHIBITED",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7183",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "Touches CRT-1749 client string family exercised in chk-014; closed upstream change."
+      }
+    },
+    {
+      "key": "CRTQA-10044",
+      "summary": "[Corner][Requirement Analysis] CRT-642: Non-trading hours",
+      "status": "Closed",
+      "issuetype": "QA Task",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10044",
+      "relevance": "epic_mention",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "QA process / analysis task, not a product behavior defect under checklist scenarios."
+      }
+    },
+    {
+      "key": "XT-7182",
+      "summary": "Introduce FxSpot Trading Hours Validation Rule",
+      "status": "Resolved",
+      "issuetype": "Change Request",
+      "resolution": "Done",
+      "url": "https://jira.in.devexperts.com/browse/XT-7182",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "Platform feature introduction; epic assumes validation exists—track as upstream context, not Corner AC defect."
+      }
+    },
+    {
+      "key": "CAN-11914",
+      "summary": "[FX_SPOT] Add a new OE validation error message",
+      "status": "Waiting for build",
+      "issuetype": "Change Request",
+      "resolution": "Waiting for build",
+      "url": "https://jira.in.devexperts.com/browse/CAN-11914",
+      "relevance": "linked",
+      "status_category": "closed",
+      "coverage_reconciliation": {
+        "verdict": "in_scope_relevant",
+        "rationale": "CAN-side OE validation message work adjacent to CRT-1749 pre-trade messaging; closed pipeline state, not open Corner defect."
+      }
+    },
+    {
+      "key": "CAN-11918",
+      "summary": "[FX_SPOT] Grey out quotes on Positions Details for non-trading hours",
+      "status": "Aborted",
+      "issuetype": "Change Request",
+      "resolution": "Aborted",
+      "url": "https://jira.in.devexperts.com/browse/CAN-11918",
+      "relevance": "linked",
+      "status_category": "aborted_other",
+      "coverage_reconciliation": {
+        "verdict": "out_of_epic",
+        "rationale": "Aborted CAN item; Corner adaptive position-details grey is owned by CRT-642 AC directly."
+      }
+    }
+  ],
+  "unmapped_known_issues": [
+    {
+      "issue_key": "XT-7451",
+      "suggested_check_ids": ["chk-005", "chk-011"],
+      "reason": "ambiguous_mapping"
+    }
+  ],
+  "coverage_mutations": [],
+  "validation_log": [
+    { "step": "1", "at": "2026-04-15T18:40:00Z", "action": "Parsed CRT-642; loaded CRT-642-ref.json and CRT-642-coverage.json; include_closed not set (default)." },
+    { "step": "2", "at": "2026-04-15T18:45:00Z", "action": "jira_get_issue CRT-642 (summary, description, status)." },
+    { "step": "3", "at": "2026-04-15T18:41:00Z", "action": "Mined gaps from nested_requirement_refs, chk-015, anti_pattern stash 404 / ref bitbucket log." },
+    { "step": "4", "at": "2026-04-15T18:41:30Z", "action": "Populated questions[] (cap 20)." },
+    { "step": "5", "at": "2026-04-15T18:42:00Z", "action": "Wrote summary from Jira + ref + coverage." },
+    { "step": "6", "at": "2026-04-15T18:43:00Z", "action": "jira_search epic_link parent=0; childIssuesOf+Epic Link 8; epic_text broad 13 (noisy); CRTQA text 1; CRT bugs 0; keyword_semantic 4." },
+    { "step": "7", "at": "2026-04-15T18:44:00Z", "action": "Coverage reconciliation for 8 epic-linked unique keys vs epic_verification_focus and checks[]." },
+    { "step": "8", "at": "2026-04-15T18:44:30Z", "action": "Coverage mutation skipped: no open in_scope_relevant issue with single best check; XT-7451 ambiguous web vs adaptive cancel." },
+    { "step": "9", "at": "2026-04-15T18:45:00Z", "action": "Emitted CRT-642-analysis.json and CRT-642-analysis.md; no epics/CRT-642/temp/ used." }
+  ]
+}

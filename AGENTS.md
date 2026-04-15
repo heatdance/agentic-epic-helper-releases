@@ -15,6 +15,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Product / fork context (Confluence-backed) | [docs/project.json](docs/project.json) |
 | Corner QA scope, envs, Jira mapping (Confluence-backed) | [docs/qa-project.json](docs/qa-project.json) |
 | Environments, code streams (Stash), Jira index, Confluence index (MCP-backed) | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
+| Atlassian MCP — tool list, safety ladder, Stash search vs browse | [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md) |
 | Tiered context escalation (keywords → which files to read) | [docs/harness-map.json](docs/harness-map.json) |
 | Public export manifest (example; live file on `release` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
@@ -37,7 +38,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| Epic handoff JSON (one Epic at a time) | [epics/templates/epic-ref.json](epics/templates/epic-ref.json) · `epics/<KEY>/<KEY>-ref.json` · [epics/README.md](epics/README.md); **`client_shell_impact`** (Corner + Adaptive), **`snippet_status`** on requirements, optional **`implementation.hits`** + **`sources.bitbucket_repo`** (EPIC-PREP + Bitbucket); Stash default **`PROJECT_KEY/repo_slug`** in [docs/project.json](docs/project.json) `bitbucket` |
+| Epic handoff JSON (one Epic at a time) | [epics/templates/epic-ref.json](epics/templates/epic-ref.json) · `epics/<KEY>/<KEY>-ref.json` · [epics/README.md](epics/README.md); **`client_shell_impact`** (Corner + Adaptive), **`snippet_status`** on requirements, optional **`implementation.hits`** + **`sources.bitbucket_repo`** (EPIC-PREP + Bitbucket MCP: split Stash **`PROJECT_KEY/repo_slug`** for tools; **`bitbucket_search_code`** may 404 — use browse fallback in [epic-prep.md](.cursor/pipelines/epic-prep.md) step **5b**); defaults in [docs/project.json](docs/project.json) `bitbucket` |
 | Epic coverage (Smart Checklist draft + audit JSON) | [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) · `epics/<KEY>/<KEY>-coverage.json` · `epics/<KEY>/<KEY>-coverage.md` · trigger `COVERAGE:` |
 | Epic requirement analysis | [epics/templates/analysis-ref.json](epics/templates/analysis-ref.json) · `epics/<KEY>/<KEY>-analysis.json` · `epics/<KEY>/<KEY>-analysis.md` · trigger `ANALYSE:` |
 | Epic regression test drafts | [epics/templates/tests-ref.json](epics/templates/tests-ref.json) · `epics/<KEY>/<KEY>-tests.json` · `epics/<KEY>/<KEY>-tests.md` · trigger `TEST-PREP:` |

@@ -17,7 +17,7 @@
 - **Yogi** (optional live REST): [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md) — `CONFLUENCE_SESSION_COOKIE` or `--cookie` for `yogi_snippet`; without auth, use MCP storage export to `temp/` + `--storage-file`, or set `snippet_status` / `snippet_failure_reason` — **never fabricate** `snippet_text`.
 - **Figma MCP** (optional): if `figma.com` URLs appear in Jira text, [`automation/docs/figma-mcp.md`](../../automation/docs/figma-mcp.md).
 - **XT context**: [`docs/project.json`](../../docs/project.json) — XT home page id **402589545**, space **XT** (upstream fork / platform). Use **narrow** Confluence search; do not crawl the whole space.
-- **Bitbucket** (optional): same **user-mcp-atlassian** server as Jira/Confluence — read `bitbucket_search_code` (and `bitbucket_get_file_content` if needed) schemas before calls. Prep search is **non-blocking**: missing repo → skip with `validation_log` + `implementation.skipped_reason`; **do not** extend the Yogi finalize gate to Bitbucket.
+- **Bitbucket** (optional): same **user-mcp-atlassian** server as Jira/Confluence — read `bitbucket_search_code`, `bitbucket_browse_directory`, and `bitbucket_get_file_content` schemas before calls. Prep search is **non-blocking**: missing repo → skip with `validation_log` + `implementation.skipped_reason`; **do not** extend the Yogi finalize gate to Bitbucket. For **Bitbucket Server / DC** (`stash.in.devexperts.com`), `bitbucket_search_code` may return **HTTP 404** on `/rest/api/1.0/search` even when browse APIs work — use step **5b** browse fallback when that happens.
 
 ---
 
@@ -102,10 +102,12 @@
 - **When**: After validated synthesis and snippets (step **5**). Runs **before** XT Confluence so XT titles do not pollute query seeds on the first pass.
 - **Repo**: Use `sources.bitbucket_repo` from step **1** resolution. If null: set `implementation.skipped_reason` (e.g. `no_bitbucket_repo`), clear or leave `implementation.hits` empty, append `validation_log` — **skip** this step’s searches; continue to step **6**.
 - **Queries**: Seed from Epic **summary**, **validated** `synthesis.keywords`, and **token-light** phrases from `requirements[].snippet_text` (metric names, flags, feature toggles, collision-prone symbols). **Cap**: at most **8** `bitbucket_search_code` queries (same order of magnitude as XT ref cap). Pure UI epics with no implementation signal may use **minimal** queries or skip with `validation_log` reason in `implementation.skipped_reason` instead of burning the cap on noise.
-- **Execution**: `bitbucket_search_code` per query; optional `bitbucket_get_file_content` for short **fragments** only — **no** full files in durable JSON. Optionally save raw MCP JSON to `temp/bitbucket-<n>.json` until merged, then delete with `temp/`.
+- **MCP parameters (before any Bitbucket call)**: Map `sources.bitbucket_repo` to tool arguments. **Stash / Server** token **`PROJECT_KEY/repo_slug`** (e.g. `BRO/xt`): set **`project_key`** to the segment before the first `/` and **`repo_slug`** to the segment after (trim both). **Do not** pass the combined `BRO/xt` string as **`repo_slug`** alone — MCP requires **`project_key`** for Server/DC and will reject the call. **Bitbucket Cloud** token **`workspace/repository`**: use **`workspace`** + **`repo_slug`** per the tool schema (no `project_key`).
+- **Execution — code search**: Run `bitbucket_search_code` once per capped query with the mapped parameters.
+- **Execution — when code search is unavailable**: If the MCP reports **project key is required**, fix **`project_key`** / **`repo_slug`** mapping and retry **`bitbucket_search_code`** once per query. If, with correct parameters, calls fail with **HTTP 404** or a URL containing **`/rest/api/1.0/search`** (common on internal Stash when the code-search REST route is absent while browse APIs work): run a **browse fallback** — at most **3** `bitbucket_browse_directory` calls using the same `project_key` / `repo_slug` (e.g. `path` `""` for repo root, then up to two plausible top-level dirs inferred from Epic wording such as `dxcore`, `webbroker`, `common`). Optionally **one** `bitbucket_get_file_content` only if a listing yields an obvious single candidate path; keep stored **`fragment`** short — **no** full files in durable JSON. Add `implementation.hits[]` rows for meaningful listing or file evidence with **`note`** explaining browse-path relevance. Optionally save raw MCP JSON under `temp/bitbucket-*.json` until merged, then delete with `temp/`.
 - **Hits**: Append to `implementation.hits[]` with `id` (`prep-impl-001`, …), `search_query`, `path`, `fragment`, `note` (one-line **why_relevant**, mirror XT `why_relevant` discipline), **`source_phase`**: `epic_prep`.
-- **Timestamps**: Set `sources.bitbucket_searched_at` (ISO-8601) when at least one search runs; if skipped entirely, leave null.
-- Append `validation_log`: `{ "step": "5b_bitbucket_prep", "at": "<ISO8601>", "action": "<query count, hit count, or skip reason>" }`.
+- **Timestamps**: Set `sources.bitbucket_searched_at` (ISO-8601) when at least one **successful** `bitbucket_search_code` **or** browse fallback call completes; if skipped entirely, leave null.
+- Append **one** `validation_log` entry `{ "step": "5b_bitbucket_prep", "at": "<ISO8601>", "action": "<summary>" }` where **`action`** states query count, search hit count, `search_404_used_browse_fallback` when applicable, or skip reason (e.g. `no_bitbucket_repo`).
 
 ### 6. XT Confluence (3.5) — high risk, capped
 
@@ -134,6 +136,7 @@
 ## Pitfalls
 
 - **Bitbucket noise / rate limits** — Keep queries specific; cap at **8**; each hit needs a **`note`** explaining relevance; broad strings return junk.
+- **Bitbucket Server search 404 / MCP shape** — Always split `PROJECT_KEY/repo_slug` into **`project_key`** + **`repo_slug`** for Stash. If `bitbucket_search_code` still returns **404** on `/rest/api/1.0/search`, use step **5b** browse fallback (capped); do not treat browse-only grounding as “Bitbucket offline.”
 - **XT noise** — Small caps, keyword-seeded search, per-page `why_relevant`, pass 3.6 pruning.
 - **LLM “validation”** — Steps 3.4 / 3.6 are structured audits (delete uncited / weak links), not proof of truth.
 - **Yogi auth** — Skip live snippet or use MCP + `--storage-file` into `temp/` then merge; always set **`snippet_status`** / **`snippet_failure_reason`** when `snippet_text` is absent — do not leave unexplained nulls. Use step **3b** + finalize gate (step **8**) so first-pass flakiness does not ship silent gaps.

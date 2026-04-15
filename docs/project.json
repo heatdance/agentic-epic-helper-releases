@@ -40,7 +40,7 @@
   "bitbucket": {
     "default_repo": "BRO/xt",
     "stash_host": "https://stash.in.devexperts.com",
-    "note": "Internal Bitbucket Server (Stash): use repo token shape PROJECT_KEY/repo_slug (same string for EPIC-PREP/COVERAGE repo= and for epic-ref sources.bitbucket_repo). default_repo BRO/xt is the Brotherhood DXtrade XT monorepo (dxcore, webbroker, platform code) where Corner Trader bank logic lives on top of the XT line. Adaptive / Candelabra mobile work: primary repo CAN/corner (Nx apps/packages; description references Corner Jira). Related CAN repos: CAN/candelabra, CAN/candelabra-kmp. DXREL/cornertrader is a separate cornerTrader repo (often release/packaging—confirm with team before treating as primary app source). MCP bitbucket_list_repositories and bitbucket_browse_directory work against Stash; bitbucket_search_code may return HTTP 404 if the Stash code-search plugin/API path differs—in that case use browse/get_file or fix the MCP server mapping. No secrets in this file.",
+    "note": "Internal Bitbucket Server (Stash): use repo token shape PROJECT_KEY/repo_slug (same string for EPIC-PREP/COVERAGE repo= and for epic-ref sources.bitbucket_repo). MCP tools require splitting Stash repos into project_key + repo_slug (e.g. BRO/xt → BRO + xt); passing BRO/xt as a single repo_slug fails Server validation. default_repo BRO/xt is the Brotherhood DXtrade XT monorepo (dxcore, webbroker, platform code) where Corner Trader bank logic lives on top of the XT line. Adaptive / Candelabra mobile work: primary repo CAN/corner (Nx apps/packages; description references Corner Jira). Related CAN repos: CAN/candelabra, CAN/candelabra-kmp. DXREL/cornertrader is a separate cornerTrader repo (often release/packaging—confirm with team before treating as primary app source). Verified on stash.in.devexperts.com: bitbucket_browse_directory works; bitbucket_search_code can still return HTTP 404 on /rest/api/1.0/search (code-search REST route absent or incompatible). EPIC-PREP step 5b and COVERAGE phase 7 mandate a capped browse fallback when search 404s after correct parameters. No secrets in this file.",
     "adaptive_repo": "CAN/corner"
   },
   "research_hints": [
@@ -48,7 +48,8 @@
     "MCP: fetch QAPORTAL Corner page children for QA processes, project documentation, and automation pointers.",
     "Jira program references appear on XT and Corner pages; resolve issue and board URLs via MCP when tasks mention specific keys.",
     "MCP Bitbucket (Stash): bitbucket_list_repositories with query (e.g. xt, corner, dxtrade) discovers project keys; Corner+XT platform default in bitbucket.default_repo; Adaptive-oriented repos under CAN (see project.json bitbucket.note).",
-    "Structured environment hosts, Jira project URLs, Stash tool ladder, and QAPORTAL page index: docs/corner-platform-map.json (no secrets in repo)."
+    "Structured environment hosts, Jira project URLs, Stash tool ladder, and QAPORTAL page index: docs/corner-platform-map.json (no secrets in repo).",
+    "Atlassian MCP: read-only tool list + Stash browse-first ladder + where to debug the server (outside this repo): docs/mcp-atlassian-tools.md."
   ],
   "platform_map": "docs/corner-platform-map.json"
 }

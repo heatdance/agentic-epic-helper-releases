@@ -7,7 +7,7 @@ alwaysApply: true
 
 ## Mandatory use
 
-For **any** Jira issue lookup, Confluence page retrieval, Confluence search, or Atlassian-side discovery related to Corner Trader QA work, use the **user-mcp-atlassian** MCP server.
+For **any** Jira issue lookup, Confluence page retrieval, Confluence search, **Bitbucket/Stash** read operations, or Atlassian-side discovery related to Corner Trader QA work, use the **user-mcp-atlassian** MCP server.
 
 Do **not**:
 
@@ -20,6 +20,7 @@ When **uncertain** (missing page id, wrong space, unknown env host): **search th
 
 - **Before** calling an MCP tool, **read that tool’s schema/descriptor** (required parameters, types) and call it with correct arguments.
 - When the user provides issue keys, page IDs, or URLs, use MCP to **fetch** authoritative content, then summarize in your own words for the reply.
+- **Bitbucket / Stash**: exposed tools are **read-only**; prefer **list → browse directory → get file** before **`bitbucket_search_code`** (internal Stash may return **HTTP 404** on code search while browse still works). Map **`PROJECT_KEY/repo_slug`** to separate **`project_key`** and **`repo_slug`** MCP arguments. See [docs/mcp-atlassian-tools.md](../../docs/mcp-atlassian-tools.md).
 
 ## Human input
 
