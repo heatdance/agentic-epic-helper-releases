@@ -1,16 +1,8 @@
-# Optional workspace MCP (never committed). Add postgres-ctqa here or in global ~/.cursor/mcp.json — see .cursor/HOW-TO.md
 .cursor/mcp.json
 
-# Transient notes under docs/ (not durable harness JSON)
-docs/temp/
-
-# Local benchmark / timing data
-.cursor/benchmark
-
-# Local env file (do not commit secrets)
 .env
 
-# Python / tooling noise
 __pycache__/
-*.py[cod]
+*.pyc
+
 .playwright-mcp/
