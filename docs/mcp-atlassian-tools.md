@@ -4,7 +4,7 @@ Functional reference for **which tools exist**, **how safe they are**, and **whi
 
 ## Where the server is implemented
 
-This repository (**cursor.corner**) does **not** contain the MCP server source. Cursor loads **`user-mcp-atlassian`** (server label **`mcp-atlassian`**) from your **MCP configuration** (global and/or project — see [.cursor/HOW-TO.md](../.cursor/HOW-TO.md)).
+This repository (**cursor.corner**) does **not** contain the MCP server source. Cursor loads **`user-mcp-atlassian`** (server label **`mcp-atlassian`**) from your **MCP configuration** (global and/or project — see org-wide setup in [AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor) and [HOW-TO.md](../HOW-TO.md)).
 
 **Debugging or changing HTTP behavior** (wrong Stash search URL, auth, new REST routes) is done in the **MCP server’s own codebase or package**, then redeployed/upgraded in Cursor — not by editing QA playbooks alone.
 

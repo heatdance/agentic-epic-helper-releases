@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-639",
+  "purpose": "Jira Test issue snapshots for test-bench / TEST-PREP benchmark inputs (existing_tests_considered).",
+  "fetched_at": "2026-05-07T12:00:00Z",
+  "issues": [
+    {
+      "key": "CRTQA-10177",
+      "file": "CRTQA-10177.json",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10177"
+    },
+    {
+      "key": "CRTQA-10182",
+      "file": "CRTQA-10182.json",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10182"
+    },
+    {
+      "key": "CRTQA-10183",
+      "file": "CRTQA-10183.json",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10183"
+    },
+    {
+      "key": "CRTQA-10184",
+      "file": "CRTQA-10184.json",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10184"
+    }
+  ]
+}

@@ -13,7 +13,8 @@ Typical flow (two Cursor terminal tabs; same stack for all QA):
 
   Cursor MCP: add postgres-ctqa to gitignored .cursor/mcp.json and/or global
   ~/.cursor/mcp.json (Windows: %USERPROFILE%/.cursor/mcp.json). JSON snippet:
-  .cursor/HOW-TO.md (MCP — PostgreSQL). URI: 127.0.0.1:15432, sslmode=disable
+  automation/tools/tunnel/README.md (§ MCP — PostgreSQL). URI: 127.0.0.1:15432,
+  sslmode=disable
   (encrypted inside SSH).
 
 Requires: Python 3.10+, PuTTY (plink) on Windows at default paths or PATH.

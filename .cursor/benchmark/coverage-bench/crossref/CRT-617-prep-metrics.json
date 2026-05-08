@@ -1,0 +1,444 @@
+{
+  "schema_version": 4,
+  "runs": [
+    "run-001",
+    "run-003",
+    "run-005"
+  ],
+  "per_run": {
+    "run-001": {
+      "requirement_keys": [
+        "CRT-1756",
+        "CRT-1757",
+        "CRT-1759",
+        "CRT-1760",
+        "CRT-1765",
+        "CRT-1877",
+        "CRT-1881"
+      ],
+      "requirement_count": 7,
+      "snippet_present_count": 7,
+      "snippet_missing_count": 0,
+      "snippet_missing_keys": [],
+      "snippet_completion_rate": 1.0,
+      "snippet_sha256": {
+        "CRT-1756": "0d93fff99f46252c341d8f22e86e7a0b425092dc37f680fa19087be1325c0ae0",
+        "CRT-1757": "c293b2f5b1168b75089a0bfc3d16f2c715b4a9973ecbe525829a0ab2c5e5b18c",
+        "CRT-1765": "f5cbacc5003ffa9853c143ac3edb603150d4202adebd77aee116ac5dd893b059",
+        "CRT-1759": "f3b3b8e1d65103681f659c0a2025dffa34b1c92df32cc4e3aa6b9a7da63b9d68",
+        "CRT-1877": "a8bce44c43b0fa28dbbecda9ef7ce3430c54bd0246b56f35cf4c6f7696be117b",
+        "CRT-1881": "bb478556bc089adec9571578f07a6bc622aa7a656a88699752e77add12c7ae8d",
+        "CRT-1760": "50b35506bd02a6cce00a47bbfb9b561573f06d9a4f789d8b0f9fefecd1083c72"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "source": "qa_default_both"
+      }
+    },
+    "run-003": {
+      "requirement_keys": [
+        "CRT-1756",
+        "CRT-1757",
+        "CRT-1759",
+        "CRT-1760",
+        "CRT-1765",
+        "CRT-1877",
+        "CRT-1881"
+      ],
+      "requirement_count": 7,
+      "snippet_present_count": 7,
+      "snippet_missing_count": 0,
+      "snippet_missing_keys": [],
+      "snippet_completion_rate": 1.0,
+      "snippet_sha256": {
+        "CRT-1756": "0d93fff99f46252c341d8f22e86e7a0b425092dc37f680fa19087be1325c0ae0",
+        "CRT-1757": "c293b2f5b1168b75089a0bfc3d16f2c715b4a9973ecbe525829a0ab2c5e5b18c",
+        "CRT-1765": "f5cbacc5003ffa9853c143ac3edb603150d4202adebd77aee116ac5dd893b059",
+        "CRT-1759": "f3b3b8e1d65103681f659c0a2025dffa34b1c92df32cc4e3aa6b9a7da63b9d68",
+        "CRT-1877": "a8bce44c43b0fa28dbbecda9ef7ce3430c54bd0246b56f35cf4c6f7696be117b",
+        "CRT-1881": "bb478556bc089adec9571578f07a6bc622aa7a656a88699752e77add12c7ae8d",
+        "CRT-1760": "50b35506bd02a6cce00a47bbfb9b561573f06d9a4f789d8b0f9fefecd1083c72"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "source": "qa_default_both"
+      }
+    },
+    "run-005": {
+      "requirement_keys": [
+        "CRT-1756",
+        "CRT-1757",
+        "CRT-1759",
+        "CRT-1760",
+        "CRT-1765",
+        "CRT-1877",
+        "CRT-1881"
+      ],
+      "requirement_count": 7,
+      "snippet_present_count": 7,
+      "snippet_missing_count": 0,
+      "snippet_missing_keys": [],
+      "snippet_completion_rate": 1.0,
+      "snippet_sha256": {
+        "CRT-1756": "0d93fff99f46252c341d8f22e86e7a0b425092dc37f680fa19087be1325c0ae0",
+        "CRT-1757": "c293b2f5b1168b75089a0bfc3d16f2c715b4a9973ecbe525829a0ab2c5e5b18c",
+        "CRT-1765": "f5cbacc5003ffa9853c143ac3edb603150d4202adebd77aee116ac5dd893b059",
+        "CRT-1759": "f3b3b8e1d65103681f659c0a2025dffa34b1c92df32cc4e3aa6b9a7da63b9d68",
+        "CRT-1877": "a8bce44c43b0fa28dbbecda9ef7ce3430c54bd0246b56f35cf4c6f7696be117b",
+        "CRT-1881": "bb478556bc089adec9571578f07a6bc622aa7a656a88699752e77add12c7ae8d",
+        "CRT-1760": "50b35506bd02a6cce00a47bbfb9b561573f06d9a4f789d8b0f9fefecd1083c72"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+          "evidence": "none_found"
+        },
+        "source": "qa_default_both"
+      }
+    }
+  },
+  "key_intersection_all_runs": [
+    "CRT-1756",
+    "CRT-1757",
+    "CRT-1759",
+    "CRT-1760",
+    "CRT-1765",
+    "CRT-1877",
+    "CRT-1881"
+  ],
+  "snippet_hash_stable_across_all_runs": {
+    "CRT-1756": "0d93fff99f46252c341d8f22e86e7a0b425092dc37f680fa19087be1325c0ae0",
+    "CRT-1757": "c293b2f5b1168b75089a0bfc3d16f2c715b4a9973ecbe525829a0ab2c5e5b18c",
+    "CRT-1759": "f3b3b8e1d65103681f659c0a2025dffa34b1c92df32cc4e3aa6b9a7da63b9d68",
+    "CRT-1760": "50b35506bd02a6cce00a47bbfb9b561573f06d9a4f789d8b0f9fefecd1083c72",
+    "CRT-1765": "f5cbacc5003ffa9853c143ac3edb603150d4202adebd77aee116ac5dd893b059",
+    "CRT-1877": "a8bce44c43b0fa28dbbecda9ef7ce3430c54bd0246b56f35cf4c6f7696be117b",
+    "CRT-1881": "bb478556bc089adec9571578f07a6bc622aa7a656a88699752e77add12c7ae8d"
+  },
+  "unstable_keys": [],
+  "client_shell_impact_drift": false,
+  "kpis": {
+    "snippet_completion_rate_by_run": {
+      "run-001": 1.0,
+      "run-003": 1.0,
+      "run-005": 1.0
+    },
+    "snippet_completion_rate_avg": 1.0,
+    "snippet_missing_keys_by_run": {
+      "run-001": [],
+      "run-003": [],
+      "run-005": []
+    },
+    "client_shell_impact_drift": false
+  },
+  "epic_key": "CRT-617",
+  "suite_id": "20260415-qa4e",
+  "gold_checks": {
+    "gold_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/coverage-bench/data/CRT-617-gold.json",
+    "applied": true,
+    "pipeline": "both",
+    "legacy_checks": {
+      "required_requirement_keys_in_snippets": {
+        "configured_keys": [],
+        "pass": true,
+        "failures": []
+      }
+    },
+    "structured_checks": {
+      "required_snippet_keys": {
+        "configured_keys": [
+          "CRT-1756",
+          "CRT-1757",
+          "CRT-1759",
+          "CRT-1760",
+          "CRT-1765",
+          "CRT-1877",
+          "CRT-1881"
+        ],
+        "pass": true,
+        "failures": []
+      },
+      "min_snippet_completion_rate": {
+        "threshold": 1.0,
+        "pass": true,
+        "failures": []
+      },
+      "client_shell_source_in": {
+        "allowed_values": [
+          "jira_field",
+          "qa_default_both"
+        ],
+        "pass": true,
+        "failures": []
+      }
+    }
+  },
+  "thresholds": {
+    "evaluated": true,
+    "checks": [
+      {
+        "name": "min_snippet_completion_rate",
+        "actual": 1.0,
+        "expected": {
+          "op": ">=",
+          "value": 1.0
+        },
+        "pass": true
+      },
+      {
+        "name": "max_missing_snippet_keys",
+        "actual": 0,
+        "expected": {
+          "op": "<=",
+          "value": 0
+        },
+        "pass": true,
+        "details": {
+          "by_run": {
+            "run-001": 0,
+            "run-003": 0,
+            "run-005": 0
+          }
+        }
+      },
+      {
+        "name": "require_client_shell_impact_stable",
+        "actual": true,
+        "expected": {
+          "op": "==",
+          "value": true
+        },
+        "pass": true
+      }
+    ],
+    "summary": {
+      "pass_count": 3,
+      "fail_count": 0,
+      "status": "pass"
+    }
+  },
+  "sanitization": {
+    "evaluated": true,
+    "policy": {
+      "enabled": true,
+      "forbidden_regex": [
+        "(?i)\\b(api[_-]?key|token|secret|password)\\s*[:=]\\s*\\S+",
+        "(?i)\\bbearer\\s+[a-z0-9._-]{8,}"
+      ],
+      "forbidden_substrings": [
+        "jira.in.devexperts.com",
+        "confluence.in.devexperts.com",
+        "stash.in.devexperts.com",
+        "devexperts.slack.com"
+      ],
+      "allowed_exceptions": [
+        "none_found"
+      ],
+      "scan_targets": [
+        "client_shell_impact",
+        "checklist_markdown"
+      ]
+    },
+    "checks": [
+      {
+        "name": "forbidden_regex",
+        "configured_count": 2,
+        "violation_count": 0,
+        "pass": true
+      },
+      {
+        "name": "forbidden_substrings",
+        "configured_count": 4,
+        "violation_count": 0,
+        "pass": true
+      }
+    ],
+    "violations": [],
+    "summary": {
+      "pass_count": 2,
+      "fail_count": 0,
+      "status": "pass",
+      "violation_count": 0
+    }
+  },
+  "trend": {
+    "status": "ok",
+    "history_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/coverage-bench/history/CRT-617-prep-history.jsonl",
+    "latest_n": [
+      {
+        "at_utc": "2026-05-07T09:09:33Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "snippet_completion_rate_by_run": {
+            "run-001": 1.0,
+            "run-003": 1.0,
+            "run-005": 1.0
+          },
+          "snippet_completion_rate_avg": 1.0,
+          "snippet_missing_keys_by_run": {
+            "run-001": [],
+            "run-003": [],
+            "run-005": []
+          },
+          "client_shell_impact_drift": false
+        },
+        "thresholds_summary": {
+          "pass_count": 3,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": null
+      },
+      {
+        "at_utc": "2026-05-07T09:21:07Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "snippet_completion_rate_by_run": {
+            "run-001": 1.0,
+            "run-003": 1.0,
+            "run-005": 1.0
+          },
+          "snippet_completion_rate_avg": 1.0,
+          "snippet_missing_keys_by_run": {
+            "run-001": [],
+            "run-003": [],
+            "run-005": []
+          },
+          "client_shell_impact_drift": false
+        },
+        "thresholds_summary": {
+          "pass_count": 3,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T09:22:03Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "snippet_completion_rate_by_run": {
+            "run-001": 1.0,
+            "run-003": 1.0,
+            "run-005": 1.0
+          },
+          "snippet_completion_rate_avg": 1.0,
+          "snippet_missing_keys_by_run": {
+            "run-001": [],
+            "run-003": [],
+            "run-005": []
+          },
+          "client_shell_impact_drift": false
+        },
+        "thresholds_summary": {
+          "pass_count": 3,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T12:00:33Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "snippet_completion_rate_by_run": {
+            "run-001": 1.0,
+            "run-003": 1.0,
+            "run-005": 1.0
+          },
+          "snippet_completion_rate_avg": 1.0,
+          "snippet_missing_keys_by_run": {
+            "run-001": [],
+            "run-003": [],
+            "run-005": []
+          },
+          "client_shell_impact_drift": false
+        },
+        "thresholds_summary": {
+          "pass_count": 3,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T12:40:59Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "snippet_completion_rate_by_run": {
+            "run-001": 1.0,
+            "run-003": 1.0,
+            "run-005": 1.0
+          },
+          "snippet_completion_rate_avg": 1.0,
+          "snippet_missing_keys_by_run": {
+            "run-001": [],
+            "run-003": [],
+            "run-005": []
+          },
+          "client_shell_impact_drift": false
+        },
+        "thresholds_summary": {
+          "pass_count": 3,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      }
+    ],
+    "delta_vs_prev": {
+      "snippet_completion_rate_avg": 0.0,
+      "sanitization_violation_count": 0.0
+    },
+    "regression_flags": []
+  }
+}

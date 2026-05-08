@@ -3,13 +3,13 @@
 **Trigger**: user message starts with **`SYNC:`**. Optional token on the same line:
 
 - **`scope=full`** (default) — run all tiers **T0–T6** below.
-- **`scope=pipelines`** — **T0**, **T1** only (router, harness-map, AGENTS, README, HOW-TO, qa-artifacts tables).
+- **`scope=pipelines`** — **T0**, **T1** only (router, harness-map, AGENTS, README, **`HOW-TO.md`**, qa-artifacts tables).
 - **`scope=prompts`** — **T2** only ([`.cursor/prompts/`](../prompts/)).
 - **`scope=templates`** — **T3** only ([`epics/templates/`](../../epics/templates/), [`epics/README.md`](../../epics/README.md)).
 - **`scope=tools`** — **T4** only: [`automation/tools/`](../../automation/tools/), [`automation/docs/`](../../automation/docs/), harness **T2** hints if MCP/tunnel docs change.
-- **`scope=mcp`** — **T4** **MCP sub-tier only** (postgres-ctqa snippet + global vs project `.cursor/mcp.json` story across HOW-TO / AGENTS / README / tunnel README).
+- **`scope=mcp`** — **T4** **MCP sub-tier only** (postgres-ctqa snippet + global vs project `.cursor/mcp.json` story across **`automation/tools/tunnel/README.md`** / AGENTS / README).
 
-**Scope**: Reconcile **harness pointers** after adding or changing a pipeline, template, tool, test surface, **MCP documentation** (e.g. postgres-ctqa snippet in HOW-TO), or **rule** file. Complements **`PUBLIC-SCRUB:`** ([`public-scrub.md`](public-scrub.md)) which runs only on **`release`**. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
+**Scope**: Reconcile **harness pointers** after adding or changing a pipeline, template, tool, test surface, **MCP documentation** (e.g. postgres-ctqa snippet in **`automation/tools/tunnel/README.md`**), or **rule** file. Complements **`PUBLIC-SCRUB:`** ([`public-scrub.md`](public-scrub.md)) which runs only on **`release`**. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
 **Hard invariant**: Run **`SYNC:`** only on **`develop`** or **`main`**. If the current branch is **`release`**, **stop** — use **`PUBLIC-SCRUB:`** there; do not use **`SYNC:`** as a release workflow.
 
@@ -34,7 +34,7 @@
 
 When you **add** a new file under `.cursor/pipelines/*.md`, **update this table** in the same change set, then apply **T0–T1** for all rows.
 
-| Pipeline id | Trigger | Playbook | `harness-map` T1 package `id` | Temp / ephemeral | Must appear in: router, map, AGENTS, README, HOW-TO (bullets + keywords), qa-artifacts |
+| Pipeline id | Trigger | Playbook | `harness-map` T1 package `id` | Temp / ephemeral | Must appear in: router, map, AGENTS, README, **`HOW-TO.md`** at repo root (**process guide** + **Keywords**/triggers table), qa-artifacts |
 |-------------|---------|----------|-------------------------------|------------------|----------------------------------------------------------------------------------------|
 | `epic-prep` | **`EPIC-PREP:`** | [`epic-prep.md`](epic-prep.md) | `epic_ref` | `epics/<KEY>/temp/` | Yes |
 | `coverage` | **`COVERAGE:`** | [`coverage.md`](coverage.md) | `coverage_pipeline` | `epics/<KEY>/temp/` | Yes |
@@ -44,7 +44,7 @@ When you **add** a new file under `.cursor/pipelines/*.md`, **update this table*
 | `public-scrub` | **`PUBLIC-SCRUB:`** | [`public-scrub.md`](public-scrub.md) | `public_scrub_pipeline` | `automation/temp/public-scrub/`; commits **only** on **`release`** | Yes (human docs describe **`release`** constraint) |
 | `sync` | **`SYNC:`** | [`sync.md`](sync.md) (this file) | `sync_pipeline` | `automation/temp/sync/` | Yes |
 
-**Exemptions**: None today. If a playbook is internal-only later, document **`harness-map` exemption** in this table and skip AGENTS/README/HOW-TO rows only with rationale.
+**Exemptions**: None today. If a playbook is internal-only later, document **`harness-map` exemption** in this table and skip AGENTS/README/**`HOW-TO.md`** rows only with rationale.
 
 ---
 
@@ -67,7 +67,7 @@ Align:
 
 - [`AGENTS.md`](../../AGENTS.md) — **Pipelines** table (all triggers + paths + branch notes for **`PUBLIC-SCRUB:`** / **`SYNC:`**).
 - [`README.md`](../../README.md) — **Pipelines (chat triggers)** table.
-- [`.cursor/HOW-TO.md`](../HOW-TO.md) — **Pipelines** bullets + **Keywords → pipelines** list.
+- **[`HOW-TO.md`](../../HOW-TO.md)** at repo root — **process overview** (**Stats**, **Pipelines**, **Benchmark**) + **how to run** triggers / **`/crtqa-*`** commands (no playbook file paths inside workflow prose).
 - [`.cursor/rules/qa-artifacts.mdc`](../rules/qa-artifacts.mdc) — durable artifact bullets for epic pipelines, **`PUBLIC-SCRUB:`**, **`SYNC:`**.
 
 ---
@@ -106,9 +106,9 @@ Align:
 
 **Scope**: `full`, `tools`, `mcp`
 
-1. There is **no** committed **`.cursor/mcp/`** folder; do **not** reintroduce template JSON files there. The **`postgres-ctqa`** copy-paste snippet lives in [`.cursor/HOW-TO.md`](../HOW-TO.md) (*MCP — PostgreSQL*).
-2. [**`AGENTS.md`**](../../AGENTS.md), [**`README.md`**](../../README.md), [`.cursor/HOW-TO.md`](../HOW-TO.md), and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) must stay aligned: engineers add MCP either to **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) **or** to **gitignored** project [`.cursor/mcp.json`](../../.cursor/mcp.json) — Cursor merges both; avoid duplicate **`postgres-ctqa`** definitions.
-3. If MCP or tunnel **behavior** changes, update [`docs/harness-map.json`](../../docs/harness-map.json) **T2** / relevant **`mcp_hint`** and [`.cursor/HOW-TO.md`](../HOW-TO.md).
+1. There is **no** committed **`.cursor/mcp/`** folder; do **not** reintroduce template JSON files there. The **`postgres-ctqa`** copy-paste snippet lives in [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*).
+2. [**`AGENTS.md`**](../../AGENTS.md), [**`README.md`**](../../README.md), [**`HOW-TO.md`**](../../HOW-TO.md), and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) must stay aligned: engineers add MCP either to **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) **or** to **gitignored** project [`.cursor/mcp.json`](../../.cursor/mcp.json) — Cursor merges both; avoid duplicate **`postgres-ctqa`** definitions.
+3. If MCP or tunnel **behavior** changes, update [`docs/harness-map.json`](../../docs/harness-map.json) **T2** / relevant **`mcp_hint`** and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md).
 
 ---
 
@@ -117,7 +117,7 @@ Align:
 **Scope**: `full` only (not `tools` / `mcp` / `pipelines` alone — run **`scope=full`** or add explicit passes)
 
 1. Enumerate **`.cursor/rules/*.mdc`**.
-2. Align with [**`AGENTS.md`**](../../AGENTS.md) *Rules in this repo* list and [`.cursor/HOW-TO.md`](../HOW-TO.md) **`.cursor/rules/`** bullets when a new rule file is added or renamed.
+2. Align with [**`AGENTS.md`**](../../AGENTS.md) *Rules in this repo* list when a new rule file is added or renamed. Root **[`HOW-TO.md`](../../HOW-TO.md)** intentionally omits the rules inventory (non-technical entry point).
 
 ---
 
@@ -135,15 +135,15 @@ Align:
 
 After edits:
 
-1. Each **trigger** in the [registry](#normative-pipeline-registry-v1) appears in **`pipeline-router.mdc`** and in **HOW-TO** **Keywords → pipelines** (except if a future exemption is documented).
+1. Each **trigger** in the [registry](#normative-pipeline-registry-v1) appears in **`pipeline-router.mdc`** and in root **[`HOW-TO.md`](../../HOW-TO.md)** **how to run** table (except if a future exemption is documented).
 2. **`docs/harness-map.json`** parses as JSON; no duplicate **`id`** values inside **`match_any_package`**.
-3. [`.cursor/HOW-TO.md`](../HOW-TO.md) (*MCP — PostgreSQL*) still contains the **`postgres-ctqa`** JSON snippet; AGENTS, README, and tunnel README still point to HOW-TO (no resurrected **`.cursor/mcp/*.json`** templates).
+3. [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) still contains the **`postgres-ctqa`** JSON snippet; AGENTS and README still point there (no resurrected **`.cursor/mcp/*.json`** templates).
 
 ---
 
 ## V2 — Second pass
 
-1. Re-read **AGENTS**, **README**, **HOW-TO** pipeline sections against the registry table row-by-row.
+1. Re-read **AGENTS**, **README**, root **`HOW-TO.md`** pipeline/trigger sections against the registry table row-by-row.
 2. Record a short **`validation_log`** in the session summary (chat or **`qa-handoff.md`**): V1 checks done, V2 spot-check OK.
 
 ---
@@ -154,14 +154,14 @@ After edits:
 |---|--------|-------------|-----------|
 | 0 | Preflight | all | On **`develop`** or **`main`**; not using **`SYNC:`** on **`release`** |
 | 1 | T0 | full, pipelines | Router + harness-map + hard rules aligned |
-| 2 | T1 | full, pipelines | AGENTS, README, HOW-TO, qa-artifacts aligned |
+| 2 | T1 | full, pipelines | AGENTS, README, **`HOW-TO.md`**, qa-artifacts aligned |
 | 3 | T2 | full, prompts | Prompts list triggers / links |
 | 4 | T3 | full, templates | Templates + epics README aligned |
 | 5 | T4a | full, tools | Tool docs + AGENTS/README |
-| 6 | T4b | full, tools, mcp | HOW-TO postgres snippet + global vs project `mcp.json` story + harness-map T2 if needed |
-| 7 | T5 | full only | Rules inventory vs AGENTS / HOW-TO |
+| 6 | T4b | full, tools, mcp | Tunnel README postgres snippet + global vs project `mcp.json` story + harness-map T2 if needed |
+| 7 | T5 | full only | Rules inventory vs AGENTS |
 | 8 | T6 | full only | harness-maintenance + orphan `rg` clean |
-| 9 | V1 | all applicable | Trigger + JSON + HOW-TO postgres snippet / MCP doc pointers pass |
+| 9 | V1 | all applicable | Trigger + JSON + tunnel README postgres snippet / MCP doc pointers pass |
 | 10 | V2 | all applicable | Second pass + log |
 | 11 | Cleanup | all | **`automation/temp/sync/`** deleted |
 

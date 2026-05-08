@@ -57,4 +57,4 @@ Playbook: [`.cursor/pipelines/test-exec.md`](../.cursor/pipelines/test-exec.md).
 These chat triggers are defined in [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc); they reconcile or export the **repository** rather than a single `epics/<KEY>/` tree.
 
 - **`PUBLIC-SCRUB:`** — sanitize for public export; run only on branch **`release`** — [`.cursor/pipelines/public-scrub.md`](../.cursor/pipelines/public-scrub.md).
-- **`SYNC:`** — keep router, harness-map, AGENTS, README, HOW-TO, and related pointers aligned; run only on **`develop`** or **`main`** — [`.cursor/pipelines/sync.md`](../.cursor/pipelines/sync.md).
+- **`SYNC:`** — keep router, harness-map, AGENTS, README, root **HOW-TO.md**, and related pointers aligned; run only on **`develop`** or **`main`** — [`.cursor/pipelines/sync.md`](../.cursor/pipelines/sync.md).

@@ -8,23 +8,28 @@
 | **`skip_postgres=yes`** | Do not use **postgres-ctqa** MCP or DB assertions. | `no` — attempt DB when bundle needs it and MCP is available. |
 | **`include_blocked=yes`** | Allow materialization for bundles with `automation.feasibility == blocked` or exec-detected block. | `no` — **skip** those bundles (status `blocked` / `skipped_feasibility`). |
 | **`max_bundles=N`** | Process at most **N** bundles in this run (order: `test_bundles[]` array order). | No cap. |
+| **`benchmark_suite=`** / **`benchmark_attempt=`** | Optional; shadow **`{EpicDir}`** ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)) — match prior **`TEST-PREP`** tokens for this attempt. | — |
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
+## Epic workspace (`{EpicDir}`)
+
+Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
+
 **Nature**: **Optional** and **non-gating**. It depends on a reachable app URL, **user-mcp-playwright**, and optionally **postgres-ctqa** (SSH tunnel + global MCP). It does **not** replace human regression execution or `TEST-PREP` drafts. Failures here do not invalidate `-tests.json` / `-tests.md`.
 
-**Prerequisite**: `epics/<KEY>/<KEY>-tests.json` **must** exist (from [`TEST-PREP:`](test-prep.md)). If missing: **stop** and instruct `TEST-PREP: <KEY>` first.
+**Prerequisite**: `{EpicDir}<KEY>-tests.json` **must** exist (from [`TEST-PREP:`](test-prep.md)). If missing: **stop** and instruct `TEST-PREP: <KEY>` first (with matching benchmark tokens when in benchmark mode).
 
-**Inputs**: `epics/<KEY>/<KEY>-tests.json` (schema_version ≥ 1; **`automation`** hints from schema_version **2** when present). Optionally load `epics/<KEY>/<KEY>-coverage.json` for extra context — do not fabricate checks.
+**Inputs**: `{EpicDir}<KEY>-tests.json` (schema_version ≥ 1; **`automation`** hints from schema_version **2** when present). Optionally load `{EpicDir}<KEY>-coverage.json` for extra context — do not fabricate checks.
 
 **Outputs**:
 
-- `epics/<KEY>/tests/` — Playwright spec files, one per successfully materialized bundle, named **`{bundle_id}.spec.ts`** (e.g. `tb-001.spec.ts`). **No secrets** in files; use environment variables or documented placeholders only.
-- `epics/<KEY>/<KEY>-test-exec.json` — manifest per [epics/templates/test-exec-ref.json](../../epics/templates/test-exec-ref.json).
+- `{EpicDir}tests/` — Playwright spec files, one per successfully materialized bundle, named **`{bundle_id}.spec.ts`** (e.g. `tb-001.spec.ts`). **No secrets** in files; use environment variables or documented placeholders only.
+- `{EpicDir}<KEY>-test-exec.json` — manifest per [epics/templates/test-exec-ref.json](../../epics/templates/test-exec-ref.json).
 
 **Explicitly out of scope**: **dxCore console**, **SSH** to hosts, **webbroker-only** environment setup, or any verification path not expressible as **Playwright (UI)** + **readonly Postgres MCP** (`postgres-ctqa`). Do not invent operational commands.
 
-**Ephemeral**: `epics/<KEY>/temp/` — use only for `test-exec-*` scratch (draft spec fragments, heal diffs, transcript notes). **Must be deleted** before the run is considered complete (success or abort after temp was created). Durable files must **not** contain the substring `/temp/`.
+**Ephemeral**: `{EpicDir}temp/` — use only for `test-exec-*` scratch (draft spec fragments, heal diffs, transcript notes). **Must be deleted** before the run is considered complete (success or abort after temp was created). Durable files must **not** contain the substring `/temp/`.
 
 ---
 
@@ -81,7 +86,7 @@
 
 **Subprocess → orchestrator — output**:
 
-- Preferred: write **`epics/<KEY>/temp/test-exec-spec-<bundle_id>.json`** with `{ "bundle_id", "status", "spec_ts_content" | null, "blocked_reason", "notes"[] }` for orchestrator to merge into `epics/<KEY>/tests/<bundle_id>.spec.ts` and **`bundles[]`**.
+- Preferred: write **`{EpicDir}temp/test-exec-spec-<bundle_id>.json`** with `{ "bundle_id", "status", "spec_ts_content" | null, "blocked_reason", "notes"[] }` for orchestrator to merge into `{EpicDir}tests/<bundle_id>.spec.ts` and **`bundles[]`**.
 - Alternative: return the same object in the Task transcript if parsing is reliable.
 
 **Caps**: Subprocess **MUST NOT** fetch unrelated Jira issues solely to invent steps; operational text must come from the **draft** or tool-backed sources already in `-tests.json`.
@@ -90,11 +95,11 @@
 
 ## Folder lifecycle
 
-1. Ensure `epics/<KEY>/` exists.
-2. Create **`epics/<KEY>/temp/`** when writing any `test-exec-*` scratch.
-3. Create **`epics/<KEY>/tests/`** when emitting first spec (if absent).
-4. Merge durable content into **`epics/<KEY>/<KEY>-test-exec.json`** and spec files under **`tests/`**.
-5. **Delete** `epics/<KEY>/temp/` recursively before finishing.
+1. Ensure `{EpicDir}` exists.
+2. Create **`{EpicDir}temp/`** when writing any `test-exec-*` scratch.
+3. Create **`{EpicDir}tests/`** when emitting first spec (if absent).
+4. Merge durable content into **`{EpicDir}<KEY>-test-exec.json`** and spec files under **`tests/`**.
+5. **Delete** `{EpicDir}temp/` recursively before finishing.
 6. **Self-check**: `-test-exec.json` and **`tests/*.spec.ts`** must **not** contain `/temp/`.
 
 ---
@@ -130,19 +135,19 @@
 ### 5. Per-bundle subprocess (materialize + optional heal)
 
 - For each selected bundle, invoke **one subprocess** per [Subprocess prompt contract](#subprocess-prompt-contract-normative).
-- Orchestrator merges spec into `epics/<KEY>/tests/<bundle_id>.spec.ts` when `spec_ts_content` is non-null.
+- Orchestrator merges spec into `{EpicDir}tests/<bundle_id>.spec.ts` when `spec_ts_content` is non-null.
 - Update **`bundles[]`**: `status`, `heal_attempts`, `oracle_change_recorded`, `last_run_at`, `notes`.
 - On **`failed_ambiguous`**: do not retry indefinitely; **continue** to next bundle.
 - Append `validation_log`: step `5-<bundle_id>` per bundle.
 
 ### 6. Emit manifest
 
-- Write **`epics/<KEY>/<KEY>-test-exec.json`** from [epics/templates/test-exec-ref.json](../../epics/templates/test-exec-ref.json).
+- Write **`{EpicDir}<KEY>-test-exec.json`** from [epics/templates/test-exec-ref.json](../../epics/templates/test-exec-ref.json).
 - Set `run_completed_at` (ISO-8601).
 
 ### 7. Cleanup
 
-- **Delete** `epics/<KEY>/temp/`.
+- **Delete** `{EpicDir}temp/`.
 - Append `validation_log`: step `7` (complete).
 
 ---
@@ -162,5 +167,5 @@
 - Input template: [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json)
 - Manifest template: [epics/templates/test-exec-ref.json](../../epics/templates/test-exec-ref.json)
 - Test drafting: [`test-prep.md`](test-prep.md)
-- Human how-to (tunnel, Postgres MCP): [`.cursor/HOW-TO.md`](../HOW-TO.md)
+- Human how-to (tunnel, Postgres MCP): [`automation/tools/tunnel/README.md`](../../automation/tools/tunnel/README.md)
 - Router: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc)

@@ -1,0 +1,54 @@
+{
+  "epic_key": "CRTQA-10183",
+  "pipeline": "both",
+  "scope_statement": "Manual test: FX Spot rounding ladders — average price at 7dp (half-up cases + repeating decimals); Open PL and Realized PL in USD with floor to 2dp; maps to CRT-1740/DXINV-192 (avg), CRT-1743/DXINV-181 (open), CRT-1738/DXINV-326 (realized).",
+  "required_requirement_keys_in_snippets": [],
+  "required_smart_checklist_substrings": [
+    "CRT-1740",
+    "CRT-1743",
+    "CRT-1738",
+    "DXINV-192",
+    "DXINV-181",
+    "DXINV-326",
+    "Average Price",
+    "Realized PL",
+    "Open PL",
+    "floor",
+    "7 dp",
+    "EURUSD.spot"
+  ],
+  "structured_assertions": {
+    "sanitization": {
+      "enabled": true,
+      "forbidden_regex": [
+        "(?i)\\b(api[_-]?key|token|secret|password)\\s*[:=]\\s*\\S+",
+        "(?i)\\bbearer\\s+[a-z0-9._-]{8,}"
+      ],
+      "forbidden_substrings": [
+        "jira.in.devexperts.com",
+        "confluence.in.devexperts.com",
+        "stash.in.devexperts.com",
+        "devexperts.slack.com"
+      ],
+      "allowed_exceptions": ["none_found"],
+      "scan_targets": ["client_shell_impact", "checklist_markdown"]
+    },
+    "thresholds": {
+      "prep": {
+        "min_snippet_completion_rate": 0.85,
+        "max_missing_snippet_keys": 2,
+        "require_client_shell_impact_stable": false
+      },
+      "coverage": {
+        "min_core_bullet_jaccard_avg": 0.85,
+        "max_matrix_role_flip_count": 2,
+        "min_primary_focus_verbatim_pass_rate": 0.8,
+        "max_diagnostic_bullets_per_run": 3
+      }
+    },
+    "coverage": {
+      "min_core_bullet_count": 6,
+      "primary_focus_verbatim_required": false
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "run_key": "<RUN_KEY>",
+  "suite_id": "<SUITE_ID>",
+  "suite_run_dir": ".cursor/benchmark/runs/<SUITE_ID>",
+  "crossref_dir": ".cursor/benchmark/runs/<SUITE_ID>/_aggregate/crossref",
+  "change_requests": [
+    {
+      "id": "CR-<SUITE_ID>-001",
+      "target_files": [
+        ".cursor/pipelines/coverage.md"
+      ],
+      "trigger": {
+        "metrics_relative_path": ".cursor/benchmark/runs/<SUITE_ID>/_aggregate/crossref/<KEY>-coverage-metrics.json",
+        "summary": "thresholds.summary.status == fail OR specific KPI name + actual",
+        "gold_file": ".cursor/benchmark/data/<KEY>-gold.json"
+      },
+      "hypothesis": "One sentence: which playbook gap explains the miss.",
+      "proposed_edit": [
+        "Under section «…», add/adjust: …",
+        "Clarify MCP fallback when …"
+      ],
+      "generalization": {
+        "survives_different_epic_keys": true,
+        "multi_epic_note": "Pattern seen on ≥2 keys or deferred to epic follow-ups."
+      },
+      "verify": [
+        "python automation/tools/benchmark_aggregate.py --suite-dir .cursor/benchmark/runs/<SUITE_ID>"
+      ]
+    }
+  ]
+}

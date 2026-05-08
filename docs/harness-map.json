@@ -279,7 +279,7 @@
             "epics/templates/tests-ref.json",
             "epics/templates/test-exec-ref.json",
             "epics/README.md",
-            ".cursor/HOW-TO.md",
+            "automation/tools/tunnel/README.md",
             ".cursor/pipelines/test-prep.md"
           ],
           "mcp_hint": "Optional; requires -tests.json from TEST-PREP. user-mcp-playwright + optional postgres-ctqa (tunnel up). One subprocess per bundle for spec materialization; epics/<KEY>/tests/*.spec.ts + -test-exec.json; temp/test-exec-* then delete epics/<KEY>/temp/. No console/SSH/webbroker-only setup—blocked bundles unless include_blocked=yes."
@@ -327,9 +327,9 @@
             ".cursor/rules/pipeline-router.mdc",
             "AGENTS.md",
             "README.md",
-            ".cursor/HOW-TO.md"
+            "HOW-TO.md"
           ],
-          "mcp_hint": "No Atlassian MCP. develop/main only—not release. scope=pipelines|prompts|templates|tools|mcp|full. Tiers T0-T6: router + harness-map + AGENTS + README + HOW-TO + qa-artifacts + prompts + epics templates + automation/tools + MCP (postgres-ctqa) doc parity in HOW-TO/AGENTS/README/tunnel README + rules inventory + harness-maintenance rg. V1: HOW-TO still contains postgres-ctqa JSON snippet; no committed .cursor/mcp/ folder. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
+          "mcp_hint": "No Atlassian MCP. develop/main only—not release. scope=pipelines|prompts|templates|tools|mcp|full. Tiers T0-T6: router + harness-map + AGENTS + README + HOW-TO.md + qa-artifacts + prompts + epics templates + automation/tools + MCP (postgres-ctqa) doc parity in automation/tools/tunnel/README.md + AGENTS + README + rules inventory + harness-maintenance rg. V1: tunnel README still contains postgres-ctqa JSON snippet; no committed .cursor/mcp/ folder. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
         }
       ]
     },
@@ -337,7 +337,7 @@
       "id": "T2",
       "name": "external_truth",
       "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when .cursor/mcp.json or global ~/.cursor/mcp.json includes postgres-ctqa and tunnel is up; optional user-mcp-playwright for TEST-EXEC UI steps",
-      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration or TEST-EXEC DB checks, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and Cursor MCP (gitignored .cursor/mcp.json or global)—see .cursor/HOW-TO.md (MCP — PostgreSQL), automation/tools/tunnel/README.md.",
+      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL exploration or TEST-EXEC DB checks, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and Cursor MCP (gitignored .cursor/mcp.json or global)—see automation/tools/tunnel/README.md (MCP — PostgreSQL).",
       "mcp_scope": "Scope Atlassian searches using docs/project.json, docs/qa-project.json, and docs/corner-platform-map.json mcp_scope_recap (CT, XT, QAPORTAL subtree rooted at 497097273)."
     }
   ],

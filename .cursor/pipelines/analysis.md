@@ -3,19 +3,24 @@
 **Trigger**: user message starts with `ANALYSE:` and includes a Jira **Epic key** (e.g. `ANALYSE: CRT-639`). Optional tokens on the same line:
 
 - **`include_closed=`** — when set to `yes` / `true` / `1`, allow **recent closed** issues (e.g. resolved within 90 days) to be appended as **`>`** detail lines in coverage when `in_scope_relevant` and they serve as a **regression anchor**. **Default**: **OPEN issues only** for coverage mutation.
+- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — optional shadow `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)); must match prior **EPIC-PREP**/**COVERAGE** tokens for this attempt.
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
+## Epic workspace (`{EpicDir}`)
+
+Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md) (`benchmark_suite=` + `benchmark_attempt=` vs production `epics/<KEY>/`).
+
 **Outputs**:
 
-- `epics/<KEY>/<KEY>-analysis.json` — structured artifact (from [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json)).
-- `epics/<KEY>/<KEY>-analysis.md` — human-readable summary (four sections; simple markdown).
+- `{EpicDir}<KEY>-analysis.json` — structured artifact (from [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json)).
+- `{EpicDir}<KEY>-analysis.md` — human-readable summary (four sections; simple markdown).
 
 **Side effects (when `-coverage.json` is loaded and reconciliation applies)**:
 
-- May **append** `checks[].detail_lines` in `epics/<KEY>/<KEY>-coverage.json` and sync **`>`** lines in `epics/<KEY>/<KEY>-coverage.md` per [Coverage mutation](#coverage-mutation-normative). Does **not** remove or rewrite existing scenario **`-`** lines.
+- May **append** `checks[].detail_lines` in `{EpicDir}<KEY>-coverage.json` and sync **`>`** lines in `{EpicDir}<KEY>-coverage.md` per [Coverage mutation](#coverage-mutation-normative). Does **not** remove or rewrite existing scenario **`-`** lines.
 
-**Ephemeral**: `epics/<KEY>/temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain the substring `/temp/`.
+**Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain the substring `/temp/`.
 
 ---
 
@@ -23,7 +28,7 @@
 
 - **user-mcp-atlassian**: `jira_get_issue`, `jira_search` — read each tool’s schema before calls.
 - **Context anchors**: [`docs/project.json`](../../docs/project.json), [`docs/qa-project.json`](../../docs/qa-project.json), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) — Jira projects and dashboards per **`jira_index`** / **`jira_dashboards`** in the platform map (and `qa-project.json` pointer); use for JQL scoping, not invented ticket text.
-- **Optional repo inputs** (grounding): `epics/<KEY>/<KEY>-ref.json`, `epics/<KEY>/<KEY>-coverage.json`. **If paths exist on disk**, load them without asking the user. If **missing**, append **`validation_log`**, **prompt once** to run `EPIC-PREP:` / `COVERAGE:` or provide files, and **stop** unless the user explicitly agrees to **Jira-only** degraded analysis (then set `coverage_loaded` / `ref_loaded` false and skip phases 7–8).
+- **Optional repo inputs** (grounding): `{EpicDir}<KEY>-ref.json`, `{EpicDir}<KEY>-coverage.json`. **If paths exist on disk**, load them without asking the user. If **missing**, append **`validation_log`**, **prompt once** to run `EPIC-PREP:` / `COVERAGE:` or provide files, and **stop** unless the user explicitly agrees to **Jira-only** degraded analysis (then set `coverage_loaded` / `ref_loaded` false and skip phases 7–8).
 
 **Format norms for appended coverage lines**: [`.cursor/pipelines/coverage.md`](coverage.md) — **`>`** = details under a scenario; do not break Smart Checklist structure.
 
@@ -31,12 +36,12 @@
 
 ## Folder lifecycle
 
-1. Ensure `epics/<KEY>/` exists.
-2. Create `epics/<KEY>/temp/` only if raw Jira exports are saved (optional).
+1. Ensure `{EpicDir}` exists.
+2. Create `{EpicDir}temp/` only if raw Jira exports are saved (optional).
 3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `jira-search-*.json` scratch. **No cookies or tokens** in committed files.
-4. Merge durable facts into `epics/<KEY>/<KEY>-analysis.json` and write `epics/<KEY>/<KEY>-analysis.md`.
-5. If coverage mutation runs: update `epics/<KEY>/<KEY>-coverage.json` and `epics/<KEY>/<KEY>-coverage.md` in place.
-6. **Delete** `epics/<KEY>/temp/` recursively before finishing.
+4. Merge durable facts into `{EpicDir}<KEY>-analysis.json` and write `{EpicDir}<KEY>-analysis.md`.
+5. If coverage mutation runs: update `{EpicDir}<KEY>-coverage.json` and `{EpicDir}<KEY>-coverage.md` in place.
+6. **Delete** `{EpicDir}temp/` recursively before finishing.
 7. **Self-check**: `<KEY>-analysis.json`, `<KEY>-analysis.md`, and (if touched) `<KEY>-coverage.json` / `.md` must **not** contain `/temp/`.
 
 ---
@@ -47,8 +52,8 @@
 
 - Parse `<KEY>` and optional **`include_closed=`** from the user message.
 - Set `epic_key`, `sources.ref_path`, `sources.coverage_path`.
-- Attempt to read `epics/<KEY>/<KEY>-ref.json` → set `sources.ref_loaded` true/false; `sources.epic_ref_loaded_at` or merge into `validation_log` if missing.
-- Attempt to read `epics/<KEY>/<KEY>-coverage.json` → set `sources.coverage_loaded` true/false.
+- Attempt to read `{EpicDir}<KEY>-ref.json` → set `sources.ref_loaded` true/false; `sources.epic_ref_loaded_at` or merge into `validation_log` if missing.
+- Attempt to read `{EpicDir}<KEY>-coverage.json` → set `sources.coverage_loaded` true/false.
 - If both JSON inputs missing: prompt user; stop or degraded mode per [Preconditions](#preconditions).
 - Append `validation_log`: step `1`.
 
@@ -128,7 +133,7 @@ Do **not** fabricate evidence strings; pointers only (field paths, keys).
 
 ### 9. Emit analysis markdown
 
-Write **`epics/<KEY>/<KEY>-analysis.md`** with **exactly four top-level sections** (use `##` headings):
+Write **`{EpicDir}<KEY>-analysis.md`** with **exactly four top-level sections** (use `##` headings):
 
 1. **Summary** — `summary.text` only (no tables).
 2. **Gaps** — bullets from `gaps[]` (optional prefix `` `gap-00N` ``).
@@ -140,9 +145,9 @@ Write **`epics/<KEY>/<KEY>-analysis.md`** with **exactly four top-level sections
 
 Optional: minimal HTML `<span style="color:...">` for severity **only** if the team’s viewer supports it; **default** to semantic text tags above.
 
-Write **`epics/<KEY>/<KEY>-analysis.json`** (validate JSON).
+Write **`{EpicDir}<KEY>-analysis.json`** (validate JSON).
 
-**Delete** `epics/<KEY>/temp/`.
+**Delete** `{EpicDir}temp/`.
 
 ---
 

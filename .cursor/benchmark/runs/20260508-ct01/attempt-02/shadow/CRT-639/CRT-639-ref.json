@@ -1,0 +1,225 @@
+{
+  "schema_version": 3,
+  "epic": {
+    "key": "CRT-639",
+    "url": "https://jira.in.devexperts.com/browse/CRT-639",
+    "summary": "Cash Settlement based on Average Price",
+    "status": "Pending Fix",
+    "labels": ["ct_ph5"],
+    "issue_type": "Epic"
+  },
+  "business_context": "Change P/L calculation for FX Spot instruments from FIFO to weighted average price; configuration distinguishes instrument types calculated by FIFO vs WeightedAvg; average fill price, Open P/L, % P/L Gross, and weighted-average realization logic are specified in linked Corner requirements.",
+  "synthesis": {
+    "problem_gist": "Corner must switch FX Spot cash-settlement style P/L handling from FIFO to average-price methodology keyed off instrument/accounting configuration (FIFO vs WeightedAvg), impacting average fill, open P/L, % P/L gross, and weighted-average ladders for realization.",
+    "problem_gist_source": "from_jira_field",
+    "impact_areas": [
+      {"text": "Instrument-level accounting rule (FIFO vs WeightedAvg) and associated configuration", "source": "from_jira_field"},
+      {"text": "Position metric math: average position fill price, open P/L, % P/L gross, realized vs cash settlement ladders", "source": "from_jira_field"},
+      {"text": "FX Spot (non-equity cash flow) portfolios relying on weighted-average opening-leg logic", "source": "inferred_from_jira"}
+    ],
+    "keywords": [
+      {"text": "FX Spot", "source": "inferred_from_jira"},
+      {"text": "FIFO", "source": "from_jira_field"},
+      {"text": "WeightedAvg", "source": "inferred_from_jira"},
+      {"text": "weighted average price", "source": "from_jira_field"},
+      {"text": "cash settlement", "source": "inferred_from_jira"},
+      {"text": "open P/L", "source": "from_jira_field"},
+      {"text": "average fill price", "source": "from_jira_field"},
+      {"text": "% P/L Gross", "source": "from_jira_field"},
+      {"text": "Realized P/L", "source": "from_jira_field"},
+      {"text": "opening trades", "source": "inferred_from_jira"}
+    ]
+  },
+  "client_shell_impact": {
+    "corner_trader": {
+      "status": "affected",
+      "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+      "evidence": "none_found"
+    },
+    "adaptive": {
+      "status": "affected",
+      "note": "Default both clients per qa-project.json unless Jira excludes Adaptive; confirm at test time.",
+      "evidence": "none_found"
+    },
+    "source": "qa_default_both"
+  },
+  "design": {
+    "figma": [],
+    "other_design": [],
+    "notes": "no_figma_urls_in_jira_description",
+    "ui_artifacts_in_jira": "none"
+  },
+  "requirements": [
+    {
+      "key": "CRT-1741",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1741",
+      "anchor": "req-CRT-1741",
+      "page_id": "345721535",
+      "snippet_text": "FIFO: STOCKS, ETF, OPTION, CFD, CFD_STOCKS, CFD_FOREX, FUTURE Weighted Average: FOREX (FX_SPOT subtype) If not configured, FIFO method is used by default. We assume that configuration is not going to be changed for already existing instrument types: such test scenarios can be skipped.",
+      "extract_mode": "after_th_td",
+      "jira_context": "Epic CRT-639 description bullets link this requirement for distinguishing FIFO vs average-price instrument types.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null
+    },
+    {
+      "key": "CRT-1740",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1740",
+      "anchor": "req-CRT-1740",
+      "page_id": "345703196",
+      "snippet_text": "According to the configuration : For FIFO-calculated instruments: weighted average by trades contributing to the currently open net position by FIFO (see ) For WeightedAvg-calculated instruments: weighted average by all opening trades since last crossing 0 (see )",
+      "extract_mode": "inline_td",
+      "jira_context": "Epic CRT-639 description links this requirement for average position fill price behavior.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null
+    },
+    {
+      "key": "CRT-1743",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1743",
+      "anchor": "req-CRT-1743",
+      "page_id": "345703196",
+      "snippet_text": "According to the configuration : For FIFO-calculated instruments : (position_qty * mark price - open cost) * multiplier , For WeightedAvg-calculated instruments: position_qty * (mark price - average fill price) * multiplier , where: mark price is according to open cost is a sum of costs of all opening trades that remain open by FIFO, signed average price is according to",
+      "extract_mode": "inline_td",
+      "jira_context": "Epic CRT-639 description links this requirement for open P/L calculation.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null
+    },
+    {
+      "key": "CRT-1742",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1742",
+      "anchor": "req-CRT-1742",
+      "page_id": "345703196",
+      "snippet_text": "According to the configuration : For FIFO-calculated instruments : (Open PL / ABS(SUM (open cost * multiplier))) * 100 For WeightedAvg-calculated instruments: (Open PL / ABS( SUM (average price x qty * multiplier))) * 100 where: open cost is a sum of costs of all opening trades that remain open by FIFO, signed average price is according to Open PL is according to , signed Should be rounded to the closest value with 2 decimals.",
+      "extract_mode": "inline_td",
+      "jira_context": "Epic CRT-639 description links this requirement for % P/L Gross formulas.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null
+    },
+    {
+      "key": "CRT-1738",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1738",
+      "anchor": "req-CRT-1738",
+      "page_id": "345703196",
+      "snippet_text": "Average Price, Open PL and Realized PL during cash settlement (for non-equity cash flow) are calculated by weighted average for the instrument types configured accordingly in . The Weighted Average algorithm assumes that PL for each closing trade for the whole history of a position should be calculated based on average position price and not the opening price of the matched opening trades. Only opening trades contributes to position average price. See rounding rules: for average price calculation - according to ; for realized PL - according to ; for open PL - according to . Example the following position history from the moment the position was flat (zero size): 1) BUY +10 @ 99.00 => position: long 10 2) BUY +10 @ 98.00 => position: long 20 3a) SELL -20 @ 99.50 => position: 0 3b) SELL -10 @ 99.50 => position: short 10 4) SELL -10 @ 98.50 => position: short 20 5a) BUY +10 @ 97.25 => position: short 10 5b) BUY +15 @ 98 => position: long 5 6) BUY +10 @ 99.50 => position: long 15 Ask = 99 Bid = 97 Average price and PL calculations for each point: Trade sequence Trade side Trade size Trade price Position net size Position average price Realized PL Effect",
+      "extract_mode": "inline_td",
+      "jira_context": "Epic CRT-639 description links this ladder requirement for weighted-average realized/open/average-price behavior.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null
+    }
+  ],
+  "traversal": {
+    "nested_refs": [],
+    "cross_epic": [],
+    "xt_refs": [
+      {
+        "page_id": "402589545",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=402589545",
+        "title": "DXtrade XT Home",
+        "why_relevant": "Upstream XT program entry tying Corner metrics and shared platform documentation for position/P&L semantics.",
+        "source_query_or_link": "docs/project.json upstream fork page_id",
+        "status": "keep"
+      },
+      {
+        "page_id": "497111535",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=497111535",
+        "title": "2.5. Positions",
+        "why_relevant": "Defines client-facing Positions widget fields including Avg Fill Price language tied to UX verification.",
+        "source_query_or_link": "XT search: weighted average position FIFO FX",
+        "status": "keep"
+      },
+      {
+        "page_id": "505943399",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505943399",
+        "title": "[In Review] Positions",
+        "why_relevant": "Open P/L metric discussion and FIFO linkage for interpreting platform defaults vs CRT-639 WeightedAvg change.",
+        "source_query_or_link": "XT search: weighted average position FIFO FX",
+        "status": "keep"
+      },
+      {
+        "page_id": "518021342",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=518021342",
+        "title": "Proprietary Trading: Metrics Description",
+        "why_relevant": "Open P/L and related account metric definitions complementary to CTR requirement formulas.",
+        "source_query_or_link": "XT search: Open PL position metrics",
+        "status": "keep"
+      },
+      {
+        "page_id": "474712291",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=474712291",
+        "title": "Combined Future/Equity Accounts",
+        "why_relevant": "Articulates Open P/L for non-equity cash flow positions, aligning with CRT-639 cash-settlement scope.",
+        "source_query_or_link": "XT search: Open PL position metrics",
+        "status": "keep"
+      },
+      {
+        "page_id": "543364528",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=543364528",
+        "title": "XT Escaped Defects Analysis 2026",
+        "why_relevant": "Escaped-defect QA notes referencing Average Fill Price metric coverage parity across surfaces.",
+        "source_query_or_link": "XT search: weighted average position FIFO FX",
+        "status": "keep"
+      },
+      {
+        "page_id": "411382115",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=411382115",
+        "title": "DX_Notification_API_Spec_2023_6.html",
+        "why_relevant": "Structured API TOC includes position and position-metrics types used by integration tests for metric parity hints.",
+        "source_query_or_link": "XT search: weighted average position FIFO FX",
+        "status": "keep"
+      }
+    ]
+  },
+  "implementation": {
+    "hits": [
+      {
+        "id": "prep-impl-001",
+        "search_query": "(browse_fallback root)",
+        "path": "",
+        "fragment": "",
+        "note": "listing shows dxcore, webbroker, xt packaging folders for BRO/xt monorepo where UX (webbroker) and core calculators likely split",
+        "source_phase": "epic_prep"
+      },
+      {
+        "id": "prep-impl-002",
+        "search_query": "(browse_fallback dxcore)",
+        "path": "dxcore/calculators",
+        "fragment": "",
+        "note": "dxcore/calculators directory present as likely locus for valuation and P/L computation modules feeding FIFO vs WeightedAvg changes",
+        "source_phase": "epic_prep"
+      }
+    ],
+    "skipped_reason": null
+  },
+  "validation_log": [
+    {
+      "step": "jira",
+      "at": "2026-05-08T12:30:00Z",
+      "action": "Fetched CRT-639 via MCP; harvested jira_linked_keys CRT-1741, CRT-1740, CRT-1743, CRT-1742, CRT-1738 from Epic description Requirement Yogi URLs."
+    },
+    {
+      "step": "3b_snippet_retry",
+      "at": "2026-05-08T12:31:00Z",
+      "action": "Not required: first-pass MCP storage export + yogi_snippet.py --storage-file produced non-empty snippets for every jira_linked_keys row."
+    },
+    {
+      "step": "3.4",
+      "at": "2026-05-08T12:32:00Z",
+      "action": "Synthesis audited against raw Jira issue fields and Epic description only; stripped dependence on unpublished XT-7911 discussion from deterministic prep fields."
+    },
+    {
+      "step": "5b_bitbucket_prep",
+      "at": "2026-05-08T12:33:00Z",
+      "action": "bitbucket_search_code(BRO/xt, two queries) HTTP 404 (/rest/api/1.0/search); search_404_used_browse_fallback with two bitbucket_browse_directory calls (root, dxcore) yielding prep-impl-001/002 directory evidence."
+    },
+    {
+      "step": "3.6_xt_refs",
+      "at": "2026-05-08T12:34:00Z",
+      "action": "Seven xt_refs retained (XT home, Positions UX pages, proprietary metrics glossary, combined accounts Open PL note, escaped-defect QA list, Notification API TOC); pruned attachment PDFs/DOCX and customer-note pages with weak CTR traceability."
+    }
+  ],
+  "sources": {
+    "jira_fetched_at": "2026-05-08T12:30:00Z",
+    "confluence_method": "mcp",
+    "bitbucket_repo": "BRO/xt",
+    "bitbucket_searched_at": "2026-05-08T12:33:00Z"
+  }
+}

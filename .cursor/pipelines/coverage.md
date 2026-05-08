@@ -4,17 +4,22 @@
 
 - **`repo=…`** — Bitbucket default for this run: Cloud `workspace/slug` or Stash `PROJECT_KEY/repo_slug` (e.g. `COVERAGE: CRT-593 repo=BRO/xt`; Adaptive-focused runs may use `repo=CAN/corner`).
 - **`focus=...`** — free-text **verification focus override** when Jira is ambiguous or to stress a subset (e.g. `COVERAGE: CRT-639 focus=FX_SPOT_WeightedAvg_metrics`). Sets `epic_verification_focus.source` to `user_trigger_focus` and merges into `epic_verification_focus.statement` (see phase 3a). If `focus=` **conflicts** with Jira summary/description, record in `validation_log` and `anti_pattern_findings` rather than silently overriding Jira.
+- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — optional; together select **benchmark shadow** `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)). Must match the same tokens used for prior **`EPIC-PREP:`** for this attempt.
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
-**Prerequisite**: `epics/<KEY>/<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first. Do not fabricate requirement snippets.
+## Epic workspace (`{EpicDir}`)
+
+Resolve **`{EpicDir}`** from the trigger line using the same rules as [`epic-prep.md`](epic-prep.md) (**`benchmark_suite=`** + **`benchmark_attempt=`** vs production `epics/<KEY>/`). Contract: [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
+
+**Prerequisite**: `{EpicDir}<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first (with matching benchmark tokens if in benchmark mode). Do not fabricate requirement snippets.
 
 **Outputs**:
 
-- `epics/<KEY>/<KEY>-coverage.json` — structured artifact (from [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json)).
-- `epics/<KEY>/<KEY>-coverage.md` — Jira Smart Checklist paste (`smart_checklist_markdown` body + optional header).
+- `{EpicDir}<KEY>-coverage.json` — structured artifact (from [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json)).
+- `{EpicDir}<KEY>-coverage.md` — Jira Smart Checklist paste (`smart_checklist_markdown` body + optional header).
 
-**Ephemeral**: `epics/<KEY>/temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain the substring `/temp/`.
+**Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain **`/temp/`** or **`temp/`** as a path segment in any persisted string.
 
 ---
 
@@ -27,7 +32,7 @@
 
 **Context anchors**: [`docs/project.json`](../../docs/project.json) (CT **342168339**, XT **402589545**), [`docs/qa-project.json`](../../docs/qa-project.json) (QAPORTAL Corner **497097273** subtree; **Corner Trader + Adaptive** client shells per `product_outline`), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) (environment hosts, Jira index, Stash defaults).
 
-**Epic ref**: Read **`client_shell_impact`** from `epics/<KEY>/<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note.
+**Epic ref**: Read **`client_shell_impact`** from `{EpicDir}<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note.
 
 **Format norms**: [Smart Checklist markdown](#smart-checklist-markdown-normative) (this file).
 
@@ -62,12 +67,16 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 ## Folder lifecycle
 
-1. Ensure `epics/<KEY>/` exists.
-2. Create `epics/<KEY>/temp/` if raw exports are needed.
+1. Ensure `{EpicDir}` exists.
+2. Create `{EpicDir}temp/` if raw exports are needed.
 3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `yogi-*.json`, `bitbucket-*.json`, scratch. **No cookies or tokens** in committed files.
-4. Merge durable facts into `epics/<KEY>/<KEY>-coverage.json` and write `epics/<KEY>/<KEY>-coverage.md`.
-5. **Delete** `epics/<KEY>/temp/` recursively before finishing.
-6. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain `/temp/`.
+4. Merge durable facts into `{EpicDir}<KEY>-coverage.json` and write `{EpicDir}<KEY>-coverage.md`.
+5. **Delete** `{EpicDir}temp/` recursively before finishing.
+6. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain **`/temp/`** or **`temp/`** path segments (same bar as [`test-prep.md`](test-prep.md) durable JSON hygiene).
+
+### Fresh-session / benchmark stability
+
+Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** overlap of **core** checklist lines and on **matrix** consistency (`coverage_matrix[].id`, **`verification_role`**). Prefer **deterministic structure** and **stable requirement-facing wording** copied from Jira or **`requirements[].snippet_text`** where it applies — avoid paraphrasing the same scenario with different surface text when the epic’s evidence already supplies phrasing. Thresholds in epic-local benchmark **gold** JSON (e.g. [`../benchmark/data/CRT-639-gold.json`](../benchmark/data/CRT-639-gold.json)) should be tightened only after the same rules reproduce on **≥2** epic keys.
 
 ---
 
@@ -75,7 +84,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 ### 1. Load epic ref + Jira refresh
 
-- Read `epics/<KEY>/<KEY>-ref.json` (template source for `requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
+- Read `{EpicDir}<KEY>-ref.json` (template source for `requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
 - MCP `jira_get_issue` for `<KEY>`; optional save raw JSON to `temp/jira-epic.json`.
 - **`sources.bitbucket_repo`** (resolve in order; **`repo=`** on the trigger **wins** and **short-circuits** the rest for **this run only**):
   1. **`repo=`** on the **COVERAGE** trigger when present.
@@ -119,6 +128,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
   1. Clearly in Jira / **`epic_verification_focus`** scope → **`primary`** or **`supporting`**.
   2. Linked requirement text is **explicitly not epic-owned** → **`out_of_epic`** **and** the rationale must also appear under **`explicitly_out_of_scope`** (phase 11) — not a stray matrix row alone.
   3. **Ambiguous** → default **`out_of_epic`** + rationale (phase 11) rather than **`supporting`** to reduce `verification_role` flips between runs.
+- **Stable classification**: Re-assigning the **same** capability (`capability` + keyed evidence) between **`primary`** / **`supporting`** / **`out_of_epic`** across reruns **without** new Jira/snippet/BB evidence is an **anti-pattern**. Prefer one decision per evidence snapshot; if interpretation must change, append **`validation_log`** step `4` with **why** (do not silently flip roles).
 - **`verification_role` rules**:
   - **`primary`** — must drive **top-level `-`** checks (or a structured `!` with reason if blocked).
   - **`supporting`** — formula/variant belongs under **`>`** on a primary check, or in **at most one** optional `### Contrast / regression (non-epic path)` subsection with **minimal** `-` lines **only** if Jira/AC explicitly requires non-regression on other branches/types.
@@ -170,6 +180,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 - Use `>` for: grep examples, Figma/Slack links, formula expansion, parameter variants, **Bitbucket paths / fragments** from **`implementation_hits`** (including **`source_phase: epic_prep`**) when they ground the check (not separate top-level checks when same outcome family).
 - **`!`** only as structured ambiguity: `! reason: <short machine-readable explanation>` — **no** casual TBD on executable scenario lines. Unexecutable unknowns go to `checks[].ambiguity` or a dedicated “Blocked / needs BA” subsection.
 - **Optional / conditional scenarios** (retest lines, roadmap or platform disclaimers, “nice-to-have” checks): either **include in every run** with evidence or a structured **`! reason:`**, **or** **omit** and record the omission in **`explicitly_out_of_scope`** and/or `coverage_matrix[].notes_from_epic` — **no silent** inclusion in one run only.
+- **Requirement terminology**: When Jira or **`requirements[].snippet_text`** uses specific setup or domain terms the epic **depends on** (e.g. **account group**, two-group preconditions), include **≥1** evidence-backed **`-`** line (or scoped **`>`** detail under the dominant primary check) that **preserves that vocabulary** — do **not** invent synonyms for concepts the source text already names.
 
 **`metrics_calculation` / `mixed` (metrics-heavy)**
 
@@ -193,7 +204,7 @@ Add explicit `-` checks **only when supported by evidence** — Jira epic text, 
 Candidate dimensions (each requires the evidence gate above):
 
 - Trading vs **non-trading hours** (only if epic/snippets/BB imply session or mark-path changes).
-- **Two accounts, two groups**, different quotes — only if Jira/snippets describe multi-account/group behavior for this change; else **`! reason: epic silent on multi-account`** or omit.
+- **Two accounts, two groups**, different quotes — only if Jira/snippets describe multi-account/group behavior for this change; else **`! reason: epic silent on multi-account`** or omit. When the epic **does** describe that behavior, prefer the **same multi-account / account-group phrasing** as in Jira/snippets on the dimension line (aids traceability and substring-style benchmark gates without adding scope).
 - **Position crosses zero** / partial-close stress — if **not** already placed under the parent metric **`##`** in phase 8, add here **only** when cross-cutting; prefer parent-section placement for metric-definitional rules.
 - **FX conversion** — instrument vs account vs portfolio currency when multi-currency applies and epic implies.
 - **Order mark vs position mark**; **pre-trade validation** vs **open position** metrics separately when epic implies.
@@ -204,6 +215,7 @@ Candidate dimensions (each requires the evidence gate above):
 ### 11. Scope prune
 
 - Fill `explicitly_out_of_scope[]` with `{ item, rationale }`.
+- **Canonical out-of-scope wording for gates**: Where team **gold** or downstream checks expect a **literal** marker in consolidated scope prose (e.g. the phrase **`out of epic`** in an **`item`** or **`rationale`**), use that **exact** wording **at least once** in the consolidated **`explicitly_out_of_scope`** text for the relevant theme — avoid **only** synonymous phrasing so substring gates and humans stay aligned. (Still obey [Out-of-epic fork prose](#smart-checklist-markdown-normative) in the checklist body.)
 - **If/then requirement branches not named in `epic_verification_focus`**: add at least one **`explicitly_out_of_scope`** entry listing those branches (e.g. “FIFO path for non-target instrument types — out of epic scope per Jira”), **unless** every such branch is already captured as **`out_of_epic`** matrix rows with the same rationale consolidated in one bullet.
 - **Optional / conditional checklist items** (phase 9): if not emitted as **`-`** lines, capture here **why** they are out of scope or deferred so reruns do not drift.
 - Minimal cross-cutting checks only with one-line justification (shared component touched).
@@ -232,10 +244,10 @@ Candidate dimensions (each requires the evidence gate above):
 
 ### 14. Emit
 
-- Set `smart_checklist_markdown` to the full checklist string. **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase).
-- Write `epics/<KEY>/<KEY>-coverage.md` (optional top lines: checklist title, XRay folder hint — functional only).
-- Write `epics/<KEY>/<KEY>-coverage.json` (validate JSON).
-- **Delete** `epics/<KEY>/temp/`.
+- Set `smart_checklist_markdown` to the full checklist string. **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase); **`coverage_matrix[].id`** ordering matches phase **4** deterministic scheme; every **`out_of_epic`** matrix row has a matching **`explicitly_out_of_scope`** rationale (or consolidated single bullet per theme); no unjustified **`verification_role`** drift versus logged evidence.
+- Write `{EpicDir}<KEY>-coverage.md` (optional top lines: checklist title, XRay folder hint — functional only).
+- Write `{EpicDir}<KEY>-coverage.json` (validate JSON).
+- **Delete** `{EpicDir}temp/`.
 
 ---
 
@@ -251,6 +263,7 @@ Candidate dimensions (each requires the evidence gate above):
 - **LLM “validation”** — Grounding audit lists evidence; it does not replace human review for high-risk metrics.
 - **Matrix `id` drift** — Use phase **4** deterministic ordering; avoid ad-hoc suffix rows that change between runs without a logged split.
 - **Focus line paraphrase** — Phase **8** / **14** require verbatim **`epic_verification_focus.statement`** in the first substantive **`##`** block.
+- **Benchmark gold vs playbook** — If coverage benchmark checks fail on **substring** or **verbatim** metrics, reconcile **this playbook** with the epic’s **gold** JSON (or relax **gold** after repro on multiple keys); see [Fresh-session / benchmark stability](#fresh-session--benchmark-stability).
 
 ---
 

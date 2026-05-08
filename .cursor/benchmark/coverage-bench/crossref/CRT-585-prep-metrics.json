@@ -1,0 +1,226 @@
+{
+  "runs": [
+    "run-001",
+    "run-003",
+    "run-005"
+  ],
+  "per_run": {
+    "run-001": {
+      "requirement_keys": [
+        "CRT-101",
+        "CRT-1473",
+        "CRT-1474",
+        "CRT-1480",
+        "CRT-1481",
+        "CRT-1522",
+        "CRT-1524",
+        "CRT-1526",
+        "CRT-1527",
+        "CRT-1528",
+        "CRT-1529",
+        "CRT-1530",
+        "CRT-1531",
+        "CRT-1533",
+        "CRT-1534",
+        "CRT-1598",
+        "CRT-1731",
+        "CRT-1732",
+        "CRT-1733",
+        "CRT-1734"
+      ],
+      "snippet_sha256": {
+        "CRT-1733": "72a961f2f9735e69f2179a0c3bcc1a8d9dc254737dd8b4a3c4893f415692087a",
+        "CRT-1473": "4317a96362adaa253d9ab1ad698fae6c134e26a0baf9cdfe41cd3c563cad6584",
+        "CRT-1598": "8ede0dd98c626540061b1c3196c01aaeb4f0ab0d2766c1871bf8212c230c2b73",
+        "CRT-1524": null,
+        "CRT-1474": "865841eee69171016b3ccc3229f37d4328ee4deb6849bade28744cd27fe2e3ec",
+        "CRT-1731": "6e242f994d3367f540ca1e2d47e1ced0a9d9c655dd78e52717d49c9f7061713c",
+        "CRT-1734": null,
+        "CRT-101": null,
+        "CRT-1480": "f2ac7a4c4625e90954c5c21f188bc574aa70009721f2df88b3d26a6f1bb2fda6",
+        "CRT-1481": null,
+        "CRT-1522": null,
+        "CRT-1527": "01c761e465836a750b3203c9f0eaf20e83d208afacd4c66e8b77299654e559a9",
+        "CRT-1529": "3258b89d1b9eef9ff229e03374b8c79b3c59ef7c5b9dd9da27e7450952f217ff",
+        "CRT-1528": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1530": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1526": "52ece5587c4ad3696bc7fbc76063fe37bab10530b49c8b997631dc4fb29d1117",
+        "CRT-1531": null,
+        "CRT-1533": null,
+        "CRT-1534": "9bb9f3d45894797ea8a94bb83ffacf25e286aa2391f360b59f7e3fc5047ba047",
+        "CRT-1732": null
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Epic text targets WebBroker selectors, instrument admin, IPF fields, console configuration, and EOD/reporting jobs for FX_SPOT.",
+          "evidence": "Jira description: WebBroker commissions/risk selectors; rename in WB; IPF and console configuration bullets."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Epic validation comment lists CAN-12469 (Adaptive order entry with FX_spot) among blockers.",
+          "evidence": "Jira comment 2026-03-12 (amukanova): CAN-12469 CT Adaptive Order Entry - Not possible to issue order with FX_spot"
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-003": {
+      "requirement_keys": [
+        "CRT-101",
+        "CRT-1473",
+        "CRT-1474",
+        "CRT-1480",
+        "CRT-1481",
+        "CRT-1522",
+        "CRT-1524",
+        "CRT-1526",
+        "CRT-1527",
+        "CRT-1528",
+        "CRT-1529",
+        "CRT-1530",
+        "CRT-1531",
+        "CRT-1533",
+        "CRT-1534",
+        "CRT-1598",
+        "CRT-1731",
+        "CRT-1732",
+        "CRT-1733",
+        "CRT-1734"
+      ],
+      "snippet_sha256": {
+        "CRT-1733": "72a961f2f9735e69f2179a0c3bcc1a8d9dc254737dd8b4a3c4893f415692087a",
+        "CRT-1473": "4317a96362adaa253d9ab1ad698fae6c134e26a0baf9cdfe41cd3c563cad6584",
+        "CRT-1598": "8ede0dd98c626540061b1c3196c01aaeb4f0ab0d2766c1871bf8212c230c2b73",
+        "CRT-1524": null,
+        "CRT-1474": "865841eee69171016b3ccc3229f37d4328ee4deb6849bade28744cd27fe2e3ec",
+        "CRT-1731": "6e242f994d3367f540ca1e2d47e1ced0a9d9c655dd78e52717d49c9f7061713c",
+        "CRT-1734": null,
+        "CRT-101": null,
+        "CRT-1480": "f2ac7a4c4625e90954c5c21f188bc574aa70009721f2df88b3d26a6f1bb2fda6",
+        "CRT-1481": null,
+        "CRT-1522": null,
+        "CRT-1527": "01c761e465836a750b3203c9f0eaf20e83d208afacd4c66e8b77299654e559a9",
+        "CRT-1529": "3258b89d1b9eef9ff229e03374b8c79b3c59ef7c5b9dd9da27e7450952f217ff",
+        "CRT-1528": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1530": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1526": "52ece5587c4ad3696bc7fbc76063fe37bab10530b49c8b997631dc4fb29d1117",
+        "CRT-1531": null,
+        "CRT-1533": null,
+        "CRT-1534": "9bb9f3d45894797ea8a94bb83ffacf25e286aa2391f360b59f7e3fc5047ba047",
+        "CRT-1732": null
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Epic text targets WebBroker selectors, instrument admin, IPF fields, console configuration, and EOD/reporting jobs for FX_SPOT.",
+          "evidence": "Jira description: WebBroker commissions/risk selectors; rename in WB; IPF and console configuration bullets."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Epic validation comment lists CAN-12469 (Adaptive order entry with FX_spot) among blockers.",
+          "evidence": "Jira comment 2026-03-12 (amukanova): CAN-12469 CT Adaptive Order Entry - Not possible to issue order with FX_spot"
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-005": {
+      "requirement_keys": [
+        "CRT-101",
+        "CRT-1473",
+        "CRT-1474",
+        "CRT-1480",
+        "CRT-1481",
+        "CRT-1522",
+        "CRT-1524",
+        "CRT-1526",
+        "CRT-1527",
+        "CRT-1528",
+        "CRT-1529",
+        "CRT-1530",
+        "CRT-1531",
+        "CRT-1533",
+        "CRT-1534",
+        "CRT-1598",
+        "CRT-1731",
+        "CRT-1732",
+        "CRT-1733",
+        "CRT-1734"
+      ],
+      "snippet_sha256": {
+        "CRT-1733": "72a961f2f9735e69f2179a0c3bcc1a8d9dc254737dd8b4a3c4893f415692087a",
+        "CRT-1473": "4317a96362adaa253d9ab1ad698fae6c134e26a0baf9cdfe41cd3c563cad6584",
+        "CRT-1598": "8ede0dd98c626540061b1c3196c01aaeb4f0ab0d2766c1871bf8212c230c2b73",
+        "CRT-1524": null,
+        "CRT-1474": "865841eee69171016b3ccc3229f37d4328ee4deb6849bade28744cd27fe2e3ec",
+        "CRT-1731": "6e242f994d3367f540ca1e2d47e1ced0a9d9c655dd78e52717d49c9f7061713c",
+        "CRT-1734": null,
+        "CRT-101": null,
+        "CRT-1480": "f2ac7a4c4625e90954c5c21f188bc574aa70009721f2df88b3d26a6f1bb2fda6",
+        "CRT-1481": null,
+        "CRT-1522": null,
+        "CRT-1527": "01c761e465836a750b3203c9f0eaf20e83d208afacd4c66e8b77299654e559a9",
+        "CRT-1529": "3258b89d1b9eef9ff229e03374b8c79b3c59ef7c5b9dd9da27e7450952f217ff",
+        "CRT-1528": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1530": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+        "CRT-1526": "52ece5587c4ad3696bc7fbc76063fe37bab10530b49c8b997631dc4fb29d1117",
+        "CRT-1531": null,
+        "CRT-1533": null,
+        "CRT-1534": "9bb9f3d45894797ea8a94bb83ffacf25e286aa2391f360b59f7e3fc5047ba047",
+        "CRT-1732": null
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Epic text targets WebBroker selectors, instrument admin, IPF fields, console configuration, and EOD/reporting jobs for FX_SPOT.",
+          "evidence": "Jira description: WebBroker commissions/risk selectors; rename in WB; IPF and console configuration bullets."
+        },
+        "adaptive": {
+          "status": "affected",
+          "note": "Epic validation comment lists CAN-12469 (Adaptive order entry with FX_spot) among blockers.",
+          "evidence": "Jira comment 2026-03-12 (amukanova): CAN-12469 CT Adaptive Order Entry - Not possible to issue order with FX_spot"
+        },
+        "source": "jira_field"
+      }
+    }
+  },
+  "key_intersection_all_runs": [
+    "CRT-101",
+    "CRT-1473",
+    "CRT-1474",
+    "CRT-1480",
+    "CRT-1481",
+    "CRT-1522",
+    "CRT-1524",
+    "CRT-1526",
+    "CRT-1527",
+    "CRT-1528",
+    "CRT-1529",
+    "CRT-1530",
+    "CRT-1531",
+    "CRT-1533",
+    "CRT-1534",
+    "CRT-1598",
+    "CRT-1731",
+    "CRT-1732",
+    "CRT-1733",
+    "CRT-1734"
+  ],
+  "snippet_hash_stable_across_all_runs": {
+    "CRT-1473": "4317a96362adaa253d9ab1ad698fae6c134e26a0baf9cdfe41cd3c563cad6584",
+    "CRT-1474": "865841eee69171016b3ccc3229f37d4328ee4deb6849bade28744cd27fe2e3ec",
+    "CRT-1480": "f2ac7a4c4625e90954c5c21f188bc574aa70009721f2df88b3d26a6f1bb2fda6",
+    "CRT-1526": "52ece5587c4ad3696bc7fbc76063fe37bab10530b49c8b997631dc4fb29d1117",
+    "CRT-1527": "01c761e465836a750b3203c9f0eaf20e83d208afacd4c66e8b77299654e559a9",
+    "CRT-1528": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+    "CRT-1529": "3258b89d1b9eef9ff229e03374b8c79b3c59ef7c5b9dd9da27e7450952f217ff",
+    "CRT-1530": "09a55b8ebd4322fac7ee3cd486b3285bad0186505ce1d5a743a48cc10981ba23",
+    "CRT-1534": "9bb9f3d45894797ea8a94bb83ffacf25e286aa2391f360b59f7e3fc5047ba047",
+    "CRT-1598": "8ede0dd98c626540061b1c3196c01aaeb4f0ab0d2766c1871bf8212c230c2b73",
+    "CRT-1731": "6e242f994d3367f540ca1e2d47e1ced0a9d9c655dd78e52717d49c9f7061713c",
+    "CRT-1733": "72a961f2f9735e69f2179a0c3bcc1a8d9dc254737dd8b4a3c4893f415692087a"
+  },
+  "unstable_keys": [],
+  "client_shell_impact_drift": false,
+  "epic_key": "CRT-585",
+  "suite_id": "20260413-qa9f"
+}

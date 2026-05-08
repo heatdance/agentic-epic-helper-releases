@@ -2,14 +2,16 @@
 
 For QA engineers using the same stack (Cursor, MCP, CTQA DB over SSH). **PuTTY** is the default SSH client on Windows because OpenSSH on some PCs hits TLS/MAC issues against the same host where PuTTY works.
 
+**Org-wide MCP and tokens** (separate from this database): [AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor) on QAPORTAL.
+
 ## Prerequisites
 
 | Item | Notes |
-|------|--------|
+|------|------|
 | Python | 3.10+ on PATH |
 | PuTTY | `plink.exe` (default install: `C:\Program Files\PuTTY\`) |
-| Node.js | For Cursor MCP `npx` (postgres-ctqa) |
-| Cursor | **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [.cursor/HOW-TO.md](../../.cursor/HOW-TO.md) (*MCP — PostgreSQL*) |
+| Node.js | For Cursor MCP `npx` (**`postgres-ctqa`**) |
+| Cursor | **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — use **§ MCP — PostgreSQL (Cursor)** below |
 
 Optional for `--probe-only`:
 
@@ -30,7 +32,9 @@ python automation/tools/tunnel/ctqa_pg.py YOUR_AD_USER@ctqa.prosp.devexperts.com
 - Enter your **AD password** when prompted; press **Enter** if the server prints “Press Return to begin session”.
 - **Leave this terminal open** while you work.
 
-## DB probe + MCP (Tab 2)
+`-n` / `--dry-run` prints the exact command without connecting.
+
+## DB probe (Tab 2)
 
 After the tunnel is listening:
 
@@ -55,15 +59,57 @@ Custom read-only check:
 python automation/tools/tunnel/ctqa_pg.py --probe-only --probe-sql "SELECT COUNT(*) FROM ctqa_core.orders"
 ```
 
-## MCP (Cursor)
+## MCP — PostgreSQL (Cursor)
 
-Your **Cursor MCP** config for `postgres-ctqa` (see **[.cursor/HOW-TO.md](../../.cursor/HOW-TO.md)** — *MCP — PostgreSQL*), whether in **`.cursor/mcp.json`** or **global** `mcp.json`, should use **`127.0.0.1:15432`** and **`sslmode=disable`** on the URL (traffic is already inside SSH; avoids Node `self-signed certificate` errors). Reload MCP after editing.
+Configure **`postgres-ctqa`** in **Cursor’s global** and/or **project** MCP file so the repo stays free of DB credentials.
+
+**Where to edit**
+
+| OS | Global `mcp.json` |
+|----|-------------------|
+| Windows | `%USERPROFILE%\.cursor\mcp.json` |
+| macOS / Linux | `~/.cursor/mcp.json` |
+
+Project **`.cursor/mcp.json`** is **gitignored** and is optional. Cursor **merges** global and project; do **not** define the same server twice with conflicting URLs.
+
+**Terminal checklist (order matters)**
+
+1. Start the **SSH tunnel** (§ One-liner tunnel) and leave that window open.
+2. Optionally run **§ DB probe** to confirm connectivity (`CTQA_PG_PASSWORD`, then `--probe-only`).
+3. Merge the **`postgres-ctqa`** server from the snippet below into **`mcpServers`** in global and/or gitignored `.cursor/mcp.json`.
+4. **SSL:** use **`sslmode=disable`** on **`127.0.0.1`** through SSH (traffic is encrypted inside the tunnel; avoids Node/pg self-signed certificate errors with MCP). Do **not** disable SSL for untunneled internet database connections.
+5. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**). Check **MCP Logs** if the server fails to start (`npx` must be on PATH for the Cursor process, same as Playwright MCP).
+
+**Snippet (placeholders)**
+
+Uses [`@sarmadparvez/postgresql-mcp`](https://www.npmjs.com/package/@sarmadparvez/postgresql-mcp). Append **`?mode=readonly`** so write-oriented tools stay disabled at the MCP layer; still prefer a database role limited to **`SELECT`**.
+
+Replace **`USER`**, **`PASSWORD`** (URL-encode special characters), and **`15432`** if your local forward differs:
+
+```json
+{
+  "mcpServers": {
+    "postgres-ctqa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sarmadparvez/postgresql-mcp",
+        "postgresql://USER:PASSWORD@127.0.0.1:15432/ctqa?sslmode=disable&mode=readonly"
+      ]
+    }
+  }
+}
+```
+
+There is **no** committed **`.cursor/mcp/`** template folder—keep the copy-paste block here authoritative.
+
+Your URL must match the tunnel: **`127.0.0.1`** and **`sslmode=disable`** as shown.
 
 ## Zipping this workspace for other QA projects
 
 1. Zip the repo (or your standard QA harness subtree).
 2. Each engineer installs **Python**, **Node**, **PuTTY**, **Cursor**.
-3. Add **`postgres-ctqa`** using the JSON snippet in **[`.cursor/HOW-TO.md`](../../.cursor/HOW-TO.md)** (*MCP — PostgreSQL*) to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); set the Postgres user/password in the URI and omit secrets from shared zips.
+3. Add **`postgres-ctqa`** using **§ MCP — PostgreSQL** above to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`).
 4. Document **Tab 1** = tunnel, **Tab 2** = probe / Cursor with MCP.
 5. Do **not** commit real passwords; use env vars for probes and local-only MCP edits.
 

@@ -1,0 +1,551 @@
+{
+  "schema_version": 4,
+  "runs": [
+    "run-002",
+    "run-004",
+    "run-006"
+  ],
+  "per_run": {
+    "run-002": {
+      "bullet_count": 14,
+      "core_bullet_count": 14,
+      "diagnostic_bullet_count": 0,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        }
+      ],
+      "primary_focus_verbatim_pass": true
+    },
+    "run-004": {
+      "bullet_count": 14,
+      "core_bullet_count": 14,
+      "diagnostic_bullet_count": 0,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        }
+      ],
+      "primary_focus_verbatim_pass": true
+    },
+    "run-006": {
+      "bullet_count": 14,
+      "core_bullet_count": 14,
+      "diagnostic_bullet_count": 0,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "out_of_epic"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        }
+      ],
+      "primary_focus_verbatim_pass": true
+    }
+  },
+  "pairwise_jaccard": {
+    "run-002": {
+      "run-004": 1.0,
+      "run-006": 1.0
+    },
+    "run-004": {
+      "run-006": 1.0
+    },
+    "run-006": {}
+  },
+  "core_pairwise_jaccard": {
+    "run-002": {
+      "run-004": 1.0,
+      "run-006": 1.0
+    },
+    "run-004": {
+      "run-006": 1.0
+    },
+    "run-006": {}
+  },
+  "bullet_frequency": {
+    "[crt-1760] for a configured forex fx_spot symbol, placing any supported client order type that should use et shows the order routed to the et fix session (not a legacy domestic venue) — observable via execution destination / route diagnostics or approved gateway capture.": 3,
+    "[crt-1759] outbound newordersingle / newordermultileg / cancel messages populate fix tags per crt-1759 table (partyids, account, symbol/securitytype, ordtype variants, memo composition, market-only leg tags) matching a golden capture for a reference account group.": 3,
+    "this epic primarily verifies a new fix-router path for forex fx_spot with et trader: et general fix spec (crt-1756), et-prepared fix message examples for dx (crt-1757), additional fields sent to et and saved on fill (crt-1765), key outbound fix tags per table (crt-1759), saved et execution tags including transaction id et_reference_id (crt-1877, crt-1881), and routing of all forex fx_spot orders to et (crt-1760).": 3,
+    "[crt-1877] [crt-1881] on fill, dxcore execution stores et transaction id mapped to et_reference_id (tag 37 semantics per crt-1881) and related additional fields per crt-1877 table — values match inbound executionreport and downstream reporting expectations.": 3,
+    "[crt-1760] dxtrade5: user can place a routed fx_spot market/limit path that hits et per configuration; order state and errors surface consistently with backend.": 3,
+    "[crt-1760] adaptive: if fx_spot order entry is in scope for the bank build, et-routed orders show consistent states vs web stack — ! reason: adaptive_surface_scope_bank_config": 3,
+    "[crt-1756] for fx spot trading, dx sends newordermultileg (35=ab) for market orders and newordersingle (35=d) for limit/stop; cancels use f/g as specified; et responds with executionreport (35=8) for fills/rejects.": 3,
+    "[crt-1760] webbroker: same et-routed fx_spot scenario as dxtrade5 baseline — order lifecycle and rejection reasons align (no silent divergence).": 3,
+    "partial-fill handling on et integration: requirement text states partial fills are not expected and must not be implemented/tested for this et path.": 3,
+    "dxfeed pricing subscription mechanics as standalone epic: snippet notes pricing done on dxfeed side; coverage here assumes feeds as prerequisite, not re-validating full dxfeed et subscription matrix unless explicitly in crt-617 scope.": 3,
+    "[crt-1756] fixt.1.1 session establishes with required defaultapplverid and successful logon, then proxy user be (35=be) succeeds per et connection table — session stable for subsequent trade messages.": 3,
+    "[crt-1765] market fx_spot order to et carries tolerance, current price for selected quantity, quoteid, and settldate via the new new order extension — fields visible in outbound capture and persisted on accepted orders per model.": 3,
+    "[crt-1756] support can collect fix line logs for et session (sender/target/compids per published test tables) and correlate with dxcore order keys for incidents.": 3,
+    "fx forward-only fix scenarios in crt-1757 catalog: epic jira centers fx_spot with et; forward flows are adjacent in linked doc, not named as primary epic verification.": 3
+  },
+  "core_bullet_frequency": {
+    "[crt-1760] for a configured forex fx_spot symbol, placing any supported client order type that should use et shows the order routed to the et fix session (not a legacy domestic venue) — observable via execution destination / route diagnostics or approved gateway capture.": 3,
+    "[crt-1759] outbound newordersingle / newordermultileg / cancel messages populate fix tags per crt-1759 table (partyids, account, symbol/securitytype, ordtype variants, memo composition, market-only leg tags) matching a golden capture for a reference account group.": 3,
+    "this epic primarily verifies a new fix-router path for forex fx_spot with et trader: et general fix spec (crt-1756), et-prepared fix message examples for dx (crt-1757), additional fields sent to et and saved on fill (crt-1765), key outbound fix tags per table (crt-1759), saved et execution tags including transaction id et_reference_id (crt-1877, crt-1881), and routing of all forex fx_spot orders to et (crt-1760).": 3,
+    "[crt-1877] [crt-1881] on fill, dxcore execution stores et transaction id mapped to et_reference_id (tag 37 semantics per crt-1881) and related additional fields per crt-1877 table — values match inbound executionreport and downstream reporting expectations.": 3,
+    "[crt-1760] dxtrade5: user can place a routed fx_spot market/limit path that hits et per configuration; order state and errors surface consistently with backend.": 3,
+    "[crt-1760] adaptive: if fx_spot order entry is in scope for the bank build, et-routed orders show consistent states vs web stack — ! reason: adaptive_surface_scope_bank_config": 3,
+    "[crt-1756] for fx spot trading, dx sends newordermultileg (35=ab) for market orders and newordersingle (35=d) for limit/stop; cancels use f/g as specified; et responds with executionreport (35=8) for fills/rejects.": 3,
+    "[crt-1760] webbroker: same et-routed fx_spot scenario as dxtrade5 baseline — order lifecycle and rejection reasons align (no silent divergence).": 3,
+    "partial-fill handling on et integration: requirement text states partial fills are not expected and must not be implemented/tested for this et path.": 3,
+    "dxfeed pricing subscription mechanics as standalone epic: snippet notes pricing done on dxfeed side; coverage here assumes feeds as prerequisite, not re-validating full dxfeed et subscription matrix unless explicitly in crt-617 scope.": 3,
+    "[crt-1756] fixt.1.1 session establishes with required defaultapplverid and successful logon, then proxy user be (35=be) succeeds per et connection table — session stable for subsequent trade messages.": 3,
+    "[crt-1765] market fx_spot order to et carries tolerance, current price for selected quantity, quoteid, and settldate via the new new order extension — fields visible in outbound capture and persisted on accepted orders per model.": 3,
+    "[crt-1756] support can collect fix line logs for et session (sender/target/compids per published test tables) and correlate with dxcore order keys for incidents.": 3,
+    "fx forward-only fix scenarios in crt-1757 catalog: epic jira centers fx_spot with et; forward flows are adjacent in linked doc, not named as primary epic verification.": 3
+  },
+  "diagnostic_bullet_frequency": {},
+  "strong_bullets_all_runs": [
+    "[crt-1756] fixt.1.1 session establishes with required defaultapplverid and successful logon, then proxy user be (35=be) succeeds per et connection table — session stable for subsequent trade messages.",
+    "[crt-1756] for fx spot trading, dx sends newordermultileg (35=ab) for market orders and newordersingle (35=d) for limit/stop; cancels use f/g as specified; et responds with executionreport (35=8) for fills/rejects.",
+    "[crt-1756] support can collect fix line logs for et session (sender/target/compids per published test tables) and correlate with dxcore order keys for incidents.",
+    "[crt-1759] outbound newordersingle / newordermultileg / cancel messages populate fix tags per crt-1759 table (partyids, account, symbol/securitytype, ordtype variants, memo composition, market-only leg tags) matching a golden capture for a reference account group.",
+    "[crt-1760] adaptive: if fx_spot order entry is in scope for the bank build, et-routed orders show consistent states vs web stack — ! reason: adaptive_surface_scope_bank_config",
+    "[crt-1760] dxtrade5: user can place a routed fx_spot market/limit path that hits et per configuration; order state and errors surface consistently with backend.",
+    "[crt-1760] for a configured forex fx_spot symbol, placing any supported client order type that should use et shows the order routed to the et fix session (not a legacy domestic venue) — observable via execution destination / route diagnostics or approved gateway capture.",
+    "[crt-1760] webbroker: same et-routed fx_spot scenario as dxtrade5 baseline — order lifecycle and rejection reasons align (no silent divergence).",
+    "[crt-1765] market fx_spot order to et carries tolerance, current price for selected quantity, quoteid, and settldate via the new new order extension — fields visible in outbound capture and persisted on accepted orders per model.",
+    "[crt-1877] [crt-1881] on fill, dxcore execution stores et transaction id mapped to et_reference_id (tag 37 semantics per crt-1881) and related additional fields per crt-1877 table — values match inbound executionreport and downstream reporting expectations.",
+    "dxfeed pricing subscription mechanics as standalone epic: snippet notes pricing done on dxfeed side; coverage here assumes feeds as prerequisite, not re-validating full dxfeed et subscription matrix unless explicitly in crt-617 scope.",
+    "fx forward-only fix scenarios in crt-1757 catalog: epic jira centers fx_spot with et; forward flows are adjacent in linked doc, not named as primary epic verification.",
+    "partial-fill handling on et integration: requirement text states partial fills are not expected and must not be implemented/tested for this et path.",
+    "this epic primarily verifies a new fix-router path for forex fx_spot with et trader: et general fix spec (crt-1756), et-prepared fix message examples for dx (crt-1757), additional fields sent to et and saved on fill (crt-1765), key outbound fix tags per table (crt-1759), saved et execution tags including transaction id et_reference_id (crt-1877, crt-1881), and routing of all forex fx_spot orders to et (crt-1760)."
+  ],
+  "weak_bullets": [],
+  "core_strong_bullets_all_runs": [
+    "[crt-1756] fixt.1.1 session establishes with required defaultapplverid and successful logon, then proxy user be (35=be) succeeds per et connection table — session stable for subsequent trade messages.",
+    "[crt-1756] for fx spot trading, dx sends newordermultileg (35=ab) for market orders and newordersingle (35=d) for limit/stop; cancels use f/g as specified; et responds with executionreport (35=8) for fills/rejects.",
+    "[crt-1756] support can collect fix line logs for et session (sender/target/compids per published test tables) and correlate with dxcore order keys for incidents.",
+    "[crt-1759] outbound newordersingle / newordermultileg / cancel messages populate fix tags per crt-1759 table (partyids, account, symbol/securitytype, ordtype variants, memo composition, market-only leg tags) matching a golden capture for a reference account group.",
+    "[crt-1760] adaptive: if fx_spot order entry is in scope for the bank build, et-routed orders show consistent states vs web stack — ! reason: adaptive_surface_scope_bank_config",
+    "[crt-1760] dxtrade5: user can place a routed fx_spot market/limit path that hits et per configuration; order state and errors surface consistently with backend.",
+    "[crt-1760] for a configured forex fx_spot symbol, placing any supported client order type that should use et shows the order routed to the et fix session (not a legacy domestic venue) — observable via execution destination / route diagnostics or approved gateway capture.",
+    "[crt-1760] webbroker: same et-routed fx_spot scenario as dxtrade5 baseline — order lifecycle and rejection reasons align (no silent divergence).",
+    "[crt-1765] market fx_spot order to et carries tolerance, current price for selected quantity, quoteid, and settldate via the new new order extension — fields visible in outbound capture and persisted on accepted orders per model.",
+    "[crt-1877] [crt-1881] on fill, dxcore execution stores et transaction id mapped to et_reference_id (tag 37 semantics per crt-1881) and related additional fields per crt-1877 table — values match inbound executionreport and downstream reporting expectations.",
+    "dxfeed pricing subscription mechanics as standalone epic: snippet notes pricing done on dxfeed side; coverage here assumes feeds as prerequisite, not re-validating full dxfeed et subscription matrix unless explicitly in crt-617 scope.",
+    "fx forward-only fix scenarios in crt-1757 catalog: epic jira centers fx_spot with et; forward flows are adjacent in linked doc, not named as primary epic verification.",
+    "partial-fill handling on et integration: requirement text states partial fills are not expected and must not be implemented/tested for this et path.",
+    "this epic primarily verifies a new fix-router path for forex fx_spot with et trader: et general fix spec (crt-1756), et-prepared fix message examples for dx (crt-1757), additional fields sent to et and saved on fill (crt-1765), key outbound fix tags per table (crt-1759), saved et execution tags including transaction id et_reference_id (crt-1877, crt-1881), and routing of all forex fx_spot orders to et (crt-1760)."
+  ],
+  "core_weak_bullets": [],
+  "matrix_intersection": [
+    [
+      "m-001",
+      "primary"
+    ],
+    [
+      "m-002",
+      "primary"
+    ],
+    [
+      "m-003",
+      "out_of_epic"
+    ],
+    [
+      "m-004",
+      "primary"
+    ],
+    [
+      "m-005",
+      "primary"
+    ],
+    [
+      "m-006",
+      "primary"
+    ]
+  ],
+  "kpis": {
+    "core_bullet_jaccard_avg": 1.0,
+    "diagnostic_bullet_count_by_run": {
+      "run-002": 0,
+      "run-004": 0,
+      "run-006": 0
+    },
+    "matrix_role_flip_count": 0,
+    "primary_focus_verbatim_pass_rate": 1.0
+  },
+  "epic_key": "CRT-617",
+  "suite_id": "20260415-qa4e",
+  "gold_checks": {
+    "gold_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/coverage-bench/data/CRT-617-gold.json",
+    "applied": true,
+    "pipeline": "both",
+    "legacy_checks": {
+      "required_smart_checklist_substrings": {
+        "configured_substrings": [
+          "et-fix-router",
+          "NewOrderMultileg",
+          "NewOrderSingle",
+          "Market Orders",
+          "Limit Orders",
+          "Stop Orders",
+          "Common FIX Validation",
+          "ExecutionReport",
+          "WebBroker",
+          "FIXT.1.1"
+        ],
+        "pass": false,
+        "failures": [
+          {
+            "run": "run-002",
+            "missing_substrings": [
+              "et-fix-router",
+              "Limit Orders",
+              "Stop Orders",
+              "Common FIX Validation"
+            ]
+          },
+          {
+            "run": "run-004",
+            "missing_substrings": [
+              "et-fix-router",
+              "Limit Orders",
+              "Stop Orders",
+              "Common FIX Validation"
+            ]
+          },
+          {
+            "run": "run-006",
+            "missing_substrings": [
+              "et-fix-router",
+              "Limit Orders",
+              "Stop Orders",
+              "Common FIX Validation"
+            ]
+          }
+        ]
+      },
+      "forbidden_checklist_regex": {
+        "configured_patterns": [],
+        "pass": true,
+        "failures": []
+      }
+    },
+    "structured_checks": {
+      "required_matrix_roles": {
+        "configured": [
+          {
+            "id": "m-003",
+            "verification_role": "out_of_epic"
+          }
+        ],
+        "pass": true,
+        "failures": []
+      },
+      "min_core_bullet_count": {
+        "threshold": 10,
+        "pass": true,
+        "failures": []
+      },
+      "required_out_of_scope_substrings": {
+        "configured_substrings": [
+          "FX Forward-only FIX scenarios"
+        ],
+        "pass": true,
+        "failures": []
+      },
+      "primary_focus_verbatim_required": {
+        "required": true,
+        "pass": true,
+        "failures": []
+      }
+    }
+  },
+  "thresholds": {
+    "evaluated": true,
+    "checks": [
+      {
+        "name": "min_core_bullet_jaccard_avg",
+        "actual": 1.0,
+        "expected": {
+          "op": ">=",
+          "value": 0.95
+        },
+        "pass": true
+      },
+      {
+        "name": "max_matrix_role_flip_count",
+        "actual": 0,
+        "expected": {
+          "op": "<=",
+          "value": 0
+        },
+        "pass": true
+      },
+      {
+        "name": "min_primary_focus_verbatim_pass_rate",
+        "actual": 1.0,
+        "expected": {
+          "op": ">=",
+          "value": 1.0
+        },
+        "pass": true
+      },
+      {
+        "name": "max_diagnostic_bullets_per_run",
+        "actual": 0,
+        "expected": {
+          "op": "<=",
+          "value": 1
+        },
+        "pass": true,
+        "details": {
+          "by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          }
+        }
+      }
+    ],
+    "summary": {
+      "pass_count": 4,
+      "fail_count": 0,
+      "status": "pass"
+    }
+  },
+  "sanitization": {
+    "evaluated": true,
+    "policy": {
+      "enabled": true,
+      "forbidden_regex": [
+        "(?i)\\b(api[_-]?key|token|secret|password)\\s*[:=]\\s*\\S+",
+        "(?i)\\bbearer\\s+[a-z0-9._-]{8,}"
+      ],
+      "forbidden_substrings": [
+        "jira.in.devexperts.com",
+        "confluence.in.devexperts.com",
+        "stash.in.devexperts.com",
+        "devexperts.slack.com"
+      ],
+      "allowed_exceptions": [
+        "none_found"
+      ],
+      "scan_targets": [
+        "client_shell_impact",
+        "checklist_markdown"
+      ]
+    },
+    "checks": [
+      {
+        "name": "forbidden_regex",
+        "configured_count": 2,
+        "violation_count": 0,
+        "pass": true
+      },
+      {
+        "name": "forbidden_substrings",
+        "configured_count": 4,
+        "violation_count": 0,
+        "pass": true
+      }
+    ],
+    "violations": [],
+    "summary": {
+      "pass_count": 2,
+      "fail_count": 0,
+      "status": "pass",
+      "violation_count": 0
+    }
+  },
+  "trend": {
+    "status": "ok",
+    "history_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/coverage-bench/history/CRT-617-coverage-history.jsonl",
+    "latest_n": [
+      {
+        "at_utc": "2026-05-07T09:09:34Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "core_bullet_jaccard_avg": 1.0,
+          "diagnostic_bullet_count_by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          },
+          "matrix_role_flip_count": 0,
+          "primary_focus_verbatim_pass_rate": 1.0
+        },
+        "thresholds_summary": {
+          "pass_count": 4,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": null
+      },
+      {
+        "at_utc": "2026-05-07T09:21:07Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "core_bullet_jaccard_avg": 1.0,
+          "diagnostic_bullet_count_by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          },
+          "matrix_role_flip_count": 0,
+          "primary_focus_verbatim_pass_rate": 1.0
+        },
+        "thresholds_summary": {
+          "pass_count": 4,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T09:22:03Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "core_bullet_jaccard_avg": 1.0,
+          "diagnostic_bullet_count_by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          },
+          "matrix_role_flip_count": 0,
+          "primary_focus_verbatim_pass_rate": 1.0
+        },
+        "thresholds_summary": {
+          "pass_count": 4,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T12:00:33Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "core_bullet_jaccard_avg": 1.0,
+          "diagnostic_bullet_count_by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          },
+          "matrix_role_flip_count": 0,
+          "primary_focus_verbatim_pass_rate": 1.0
+        },
+        "thresholds_summary": {
+          "pass_count": 4,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-07T12:41:00Z",
+        "suite_id": "20260415-qa4e",
+        "runs_count": 3,
+        "kpis": {
+          "core_bullet_jaccard_avg": 1.0,
+          "diagnostic_bullet_count_by_run": {
+            "run-002": 0,
+            "run-004": 0,
+            "run-006": 0
+          },
+          "matrix_role_flip_count": 0,
+          "primary_focus_verbatim_pass_rate": 1.0
+        },
+        "thresholds_summary": {
+          "pass_count": 4,
+          "fail_count": 0,
+          "status": "pass"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      }
+    ],
+    "delta_vs_prev": {
+      "core_bullet_jaccard_avg": 0.0,
+      "matrix_role_flip_count": 0.0,
+      "primary_focus_verbatim_pass_rate": 0.0,
+      "sanitization_violation_count": 0.0
+    },
+    "regression_flags": []
+  }
+}

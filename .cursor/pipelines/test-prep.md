@@ -3,27 +3,37 @@
 **Trigger**: user message starts with `TEST-PREP:` and includes a Jira **Epic key** (e.g. `TEST-PREP: CRT-639`). Optional tokens on the same line:
 
 - **`map_only=yes`** / `true` / `1` — emit **mapping** (`test_bundles[]` with `proposed_title`, `covers_check_ids`, `covers_sections`) and **Jira search audit** only; **omit** full `draft.preconditions` / `actions` / `results` / `peculiarities` prose (use empty arrays or single placeholder line per array documenting map-only). Use for fast traceability review before full authoring.
+- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — optional shadow `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)); must match prior **`EPIC-PREP`**/**`COVERAGE:`** tokens for this attempt.
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
-**Prerequisite**: `epics/<KEY>/<KEY>-coverage.json` **must** exist (from [`COVERAGE:`](coverage.md)). If missing: **stop** and instruct the user to run `COVERAGE: <KEY>` first. Do not fabricate checklist checks.
+## Epic workspace (`{EpicDir}`)
+
+Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
+
+**Prerequisite**: `{EpicDir}<KEY>-coverage.json` **must** exist (from [`COVERAGE:`](coverage.md)). If missing: **stop** and instruct the user to run `COVERAGE: <KEY>` first (with matching benchmark tokens when in benchmark mode). Do not fabricate checklist checks.
 
 **Outputs**:
 
-- `epics/<KEY>/<KEY>-tests.json` — structured artifact (from [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json)).
-- `epics/<KEY>/<KEY>-tests.md` — human-readable mapping table + draft test bodies for review / Jira paste.
+- `{EpicDir}<KEY>-tests.json` — structured artifact (from [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json)).
+- `{EpicDir}<KEY>-tests.md` — human-readable mapping table + draft test bodies for review / Jira paste.
 
-**Authoring model**: Full **`draft`** prose (when not `map_only`) is produced **one bundle per subprocess** (phase **8b**), not in a single one-shot generation — see [Orchestration](#orchestration-no-one-shot-drafts).
+**Authoring model**: Full **`draft`** prose (when not `map_only`) is produced **one bundle per subprocess** (phase **8b**), then consolidated through phase **8c** before emit — not in a single one-shot generation — see [Orchestration](#orchestration-no-one-shot-drafts).
 
 **Explicitly out of scope (v1)**: Playwright MCP, QA database access, SSH / dxCore console execution. Operational examples (SQL, console commands, sample outputs) **must not** be invented; use **`[TBD]`** or **`[REQUIRES: <source>]`** unless text is **copied** from a **fetched** Jira issue field or an attached runbook excerpt the user provided in-chat (then cite source).
 
 **Downstream (optional)**: [`TEST-EXEC:`](test-exec.md) may materialize Playwright specs from this artifact when the environment allows. **`test_bundles[].automation`** (schema_version **2**) lets you flag **`feasibility: blocked`** when a bundle **requires** console-only, webbroker-only, or otherwise non-UI/non-readonly-DB setup—**TEST-EXEC** skips those by default. **`TEST-PREP`** may leave **`feasibility: unknown`**; it still **must not** run Playwright or DB verification here.
 
-**Ephemeral**: `epics/<KEY>/temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain the substring `/temp/`.
+**Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort). Durable outputs must **not** reference `temp/` as a path segment (same hygiene as [`coverage.md`](coverage.md): no `/temp/` in committed strings).
 
 ---
 
 ## Normative rules (MUST / MUST NOT)
+
+### Durable JSON path hygiene
+
+- **MUST NOT** persist the substring **`/temp/`** or a **`temp/`** path segment in **any** string field of **`{EpicDir}<KEY>-tests.json`** (including merged **`draft`** arrays, **`authoring_notes`**, provenance, or copy-pasted paths from subprocesses). Ephemeral draft files under `{EpicDir}temp/` are orchestrator-only; they **must not** appear as **paths** in durable JSON.
+- **MUST** run phase **8c** (below) after all **8b** merges and **before** writing **`-tests.json`** to disk when full drafts were produced.
 
 ### Mental model and taxonomy
 
@@ -71,7 +81,8 @@
 - **MUST NOT** generate **full** `draft.preconditions` / `actions` / `results` / `peculiarities` for **more than one** `bundle_id` in a **single** model completion / turn when `sources.map_only` is **false**. Treat **batching all bundle drafts** in one shot as a **pipeline violation** (same severity as inventing Jira text).
 - **MUST** complete **phase 8a** (bundle **shells** only: ids, titles, `covers_check_ids`, `covers_sections`, `related_existing_tests`; `draft` empty or single-line placeholders) **before** starting **phase 8b** subprocesses.
 - **MUST** run **phase 8b** as **N sequential subprocesses** (N = number of bundles), **one bundle per subprocess**. Recommended: Cursor **Task** tool with `subagent_type: generalPurpose` (or any equivalent **isolated** agent run). Each subprocess **only** authors **that** bundle’s `draft`.
-- **When `map_only` is true**: **skip** phase **8b** entirely; shells may carry map-only placeholder `draft` lines only.
+- **MUST** run **phase 8c** immediately after the **phase 8b** loop completes when `sources.map_only` is **false**, even when **N = 0** bundles (cheap no-op scrub) — see [Durable JSON path hygiene](#durable-json-path-hygiene).
+- **When `map_only` is true**: **skip** phase **8b** and **8c** entirely; shells may carry map-only placeholder `draft` lines only.
 
 ---
 
@@ -93,7 +104,9 @@
   `{ "bundle_id": "<same as input>", "draft": { "preconditions": [], "actions": [], "results": [], "peculiarities": [] }, "authoring_notes": [] }`  
   `authoring_notes` optional (e.g. why a line is `[TBD]`).
 
-**Preferred persistence (robust merge)**: Subprocess writes **`epics/<KEY>/temp/test-prep-draft-<bundle_id>.json`** with the object above (sanitize `bundle_id` for the filename, e.g. replace unsafe chars). Orchestrator **reads** each file after the subprocess returns, **merges** `draft` into the matching `test_bundles[]` entry, sets **`authoring.subprocess_completed`** and **`authoring.completed_at`** (ISO-8601), leaves **`authoring.temp_draft_file`** **null** in **durable** `-tests.json` (never persist `/temp/` paths in committed output).
+**Preferred persistence (robust merge)**: Subprocess writes **`{EpicDir}temp/test-prep-draft-<bundle_id>.json`** with the object above (sanitize `bundle_id` for the filename, e.g. replace unsafe chars). Orchestrator **reads** each file after the subprocess returns, **merges** `draft` into the matching `test_bundles[]` entry, sets **`authoring.subprocess_completed`** and **`authoring.completed_at`** (ISO-8601), leaves **`authoring.temp_draft_file`** **null** in **durable** `-tests.json` (never persist `/temp/` paths in committed output).
+
+**MUST NOT** (subprocess output): Include filesystem paths containing **`temp/`** or **`/temp/`** (e.g. `.../temp/test-prep-draft-tb-001.json`, absolute `{EpicDir}` traces) in **any** JSON field (`draft` lines, `authoring_notes`). Reference bundles by **`bundle_id`** only in prose.
 
 **Alternative**: Subprocess returns the JSON object only in the Task transcript — acceptable if the orchestrator **parses** it reliably; **prefer temp files** when unsure.
 
@@ -113,19 +126,19 @@
 ## Preconditions
 
 - **user-mcp-atlassian**: Jira tools — schema before calls.
-- **Inputs**: **`epics/<KEY>/<KEY>-coverage.json`** (required), **`epics/<KEY>/<KEY>-coverage.md`** (recommended for headings), **`epics/<KEY>/<KEY>-analysis.json`** (optional), **`epics/<KEY>/<KEY>-ref.json`** (optional — `client_shell_impact`, `synthesis`).
+- **Inputs**: **`{EpicDir}<KEY>-coverage.json`** (required), **`{EpicDir}<KEY>-coverage.md`** (recommended for headings), **`{EpicDir}<KEY>-analysis.json`** (optional), **`{EpicDir}<KEY>-ref.json`** (optional — `client_shell_impact`, `synthesis`).
 - **Context**: [`docs/qa-project.json`](../../docs/qa-project.json) for Jira project lists (CRTQA, CRT, CRTBL, SUPXT, CAN, etc.).
 
 ---
 
 ## Folder lifecycle
 
-1. Ensure `epics/<KEY>/` exists.
-2. Create `epics/<KEY>/temp/` when saving raw Jira exports **or** per-bundle draft fragments.
+1. Ensure `{EpicDir}` exists.
+2. Create `{EpicDir}temp/` when saving raw Jira exports **or** per-bundle draft fragments.
 3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `jira-test-search-*.json`, **`test-prep-draft-<bundle_id>.json`** (phase 8b). **No cookies or tokens** in committed files.
-4. Merge durable facts into `epics/<KEY>/<KEY>-tests.json` and write `epics/<KEY>/<KEY>-tests.md`.
-5. **Delete** `epics/<KEY>/temp/` recursively before finishing.
-6. **Self-check**: `<KEY>-tests.json` and `.md` must **not** contain `/temp/`.
+4. Merge durable facts into `{EpicDir}<KEY>-tests.json` and write `{EpicDir}<KEY>-tests.md` (after phase **8c** scrub when applicable).
+5. **Delete** `{EpicDir}temp/` recursively before finishing.
+6. **Self-check**: `<KEY>-tests.json` and `.md` must **not** contain `/temp/` or **`temp/`** path segments in any string (see [Durable JSON path hygiene](#durable-json-path-hygiene)).
 
 ---
 
@@ -138,15 +151,15 @@
 
 ### 2. Load coverage (required)
 
-- Read `epics/<KEY>/<KEY>-coverage.json`. If missing: **stop**; log and instruct `COVERAGE: <KEY>`.
+- Read `{EpicDir}<KEY>-coverage.json`. If missing: **stop**; log and instruct `COVERAGE: <KEY>`.
 - Set `sources.coverage_loaded: true`, timestamp if useful.
-- Read `epics/<KEY>/<KEY>-coverage.md` when present for section headings.
+- Read `{EpicDir}<KEY>-coverage.md` when present for section headings.
 - Append `validation_log`: step `2`.
 
 ### 3. Load optional inputs
 
-- Read `epics/<KEY>/<KEY>-analysis.json` → `sources.analysis_loaded`.
-- Read `epics/<KEY>/<KEY>-ref.json` → `sources.ref_loaded`.
+- Read `{EpicDir}<KEY>-analysis.json` → `sources.analysis_loaded`.
+- Read `{EpicDir}<KEY>-ref.json` → `sources.ref_loaded`.
 - Append `validation_log`: step `3`.
 
 ### 4. Refresh Epic (Jira)
@@ -186,8 +199,8 @@
 
 - Cluster **`checks[]`** (minus exclusions) using [Bundling](#bundling-normative) rules.
 - Assign **`bundle_id`** (`tb-001`…), **`proposed_title`**, **`covers_check_ids`**, **`covers_sections`**, **`related_existing_tests`** (keys from phase 7 that overlap thematically — **do not** imply steps were reused unless fetched).
-- Initialize **`authoring`**: `subprocess: true`, `subprocess_completed: false`, `completed_at: null`, `temp_draft_file: null` (see template). If **`map_only`**: set **`authoring.subprocess: false`**, keep **`subprocess_completed: false`**; **skip phase 8b**.
-- If **`map_only`**: set `draft` arrays to minimal placeholders documenting map-only only; **skip phase 8b**.
+- Initialize **`authoring`**: `subprocess: true`, `subprocess_completed: false`, `completed_at: null`, `temp_draft_file: null` (see template). If **`map_only`**: set **`authoring.subprocess: false`**, keep **`subprocess_completed: false`**; **skip phase 8b** and **8c**.
+- If **`map_only`**: set `draft` arrays to minimal placeholders documenting map-only only; **skip phase 8b** and **8c**.
 - If **not** `map_only`: set **`draft`** to **empty arrays** `[]` **or** a **single** placeholder string per array (e.g. `"1. [PENDING subprocess tb-001]"`) — **do not** write full Preconditions/Actions/Results/Peculiarities prose in this phase.
 - Append `validation_log`: step `8a`.
 
@@ -200,6 +213,12 @@
   4. Set **`authoring.subprocess_completed: true`**, **`authoring.completed_at`** (ISO-8601). **Do not** write **`temp_draft_file`** paths into durable JSON.
   5. Append `validation_log`: e.g. step `8b-tb-001` … or one entry per bundle with `action: merged draft for tb-00N`.
 - **MUST NOT** substitute 8b by generating all drafts in the orchestrator in one completion — see [Orchestration](#orchestration-no-one-shot-drafts).
+
+### 8c. Durable path scrub (skip only if `map_only`)
+
+- After **all** **8b** merges, **scan** the in-memory **`test_bundles`** (every string in **`draft`** and any other **`test_bundles[]`** fields you populate) plus top-level prose fields due for **`-tests.json`** for **`/temp/`** or path-like **`temp/`** segments (or run the equivalent check on the serialized JSON **before** `write`).
+- **If matched**: **rewrite** paths to neutral references — e.g. drop the directory prefix, cite **`bundle_id`**, or replace with **`[ephemeral draft merged]`** — so the **saved** file contains **no** `temp/` path fragments. **Do not** ship subprocess echo of scratch file locations.
+- Append `validation_log`: step `8c`, including whether scrubbing changed any fields.
 
 ### 9. Reverse validation
 
@@ -215,7 +234,8 @@
 
 ### 11. Emit markdown
 
-- Write **`epics/<KEY>/<KEY>-tests.md`**:
+- **Pre-write**: Confirm phase **8c** completed (or was N/A) and the assembled **`-tests.json`** payload still passes [Durable JSON path hygiene](#durable-json-path-hygiene).
+- Write **`{EpicDir}<KEY>-tests.md`**:
   - **Epic** line and optional focus from coverage.
   - **Mapping table**: `bundle_id` | `proposed_title` | `covers_check_ids` (comma-separated) | `covers_sections` (short).
   - **Existing tests considered** (bullets: key — summary — reuse note).
@@ -223,13 +243,13 @@
   - **Reverse validation** summary: gaps (must be empty or listed), red flags, notes.
   - **Excluded checks** summary when non-empty.
 
-- Write **`epics/<KEY>/<KEY>-tests.json`** from template, all sections filled.
+- Write **`{EpicDir}<KEY>-tests.json`** from template, all sections filled.
 
 - Append `validation_log`: step `11`.
 
 ### 12. Cleanup
 
-- **Delete** `epics/<KEY>/temp/`.
+- **Delete** `{EpicDir}temp/`.
 - Append `validation_log`: step `12` (complete).
 
 ---
@@ -242,6 +262,7 @@
 - **Ignoring `!` ambiguity** — Default skip + `excluded_checks_with_reason`.
 - **Traceability holes** — `coverage_gaps` must be reconciled or waived in writing.
 - **Temp leakage** — Mandatory delete + substring self-check; never persist `/temp/` paths in `-tests.json`.
+- **Subprocess path echo** — Merged **8b** `draft` text can reintroduce `temp/` fragments; phase **8c** + step **11** pre-write check are **mandatory** before saving **`-tests.json`**.
 
 ---
 

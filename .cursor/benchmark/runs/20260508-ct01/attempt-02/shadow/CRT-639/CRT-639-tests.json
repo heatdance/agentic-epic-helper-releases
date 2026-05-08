@@ -1,0 +1,373 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "taxonomy_note": "Bundles operationalize CRT-639-coverage Smart Checklist; CRTQA issues cite fetched Jira Test bodies for dxCore/UI patterns.",
+  "sources": {
+    "jira_fetched_at": "2026-05-08T13:40:13Z",
+    "ref_path": ".cursor/benchmark/runs/20260508-ct01/attempt-02/shadow/CRT-639/CRT-639-ref.json",
+    "ref_loaded": true,
+    "coverage_path": ".cursor/benchmark/runs/20260508-ct01/attempt-02/shadow/CRT-639/CRT-639-coverage.json",
+    "coverage_loaded": true,
+    "coverage_md_path": ".cursor/benchmark/runs/20260508-ct01/attempt-02/shadow/CRT-639/CRT-639-coverage.md",
+    "analysis_path": ".cursor/benchmark/runs/20260508-ct01/attempt-02/shadow/CRT-639/CRT-639-analysis.json",
+    "analysis_loaded": false,
+    "map_only": false,
+    "note": "Benchmark shadow attempt-02; phase 8b completed via three Task subprocesses (one bundle each)."
+  },
+  "jira_test_search": {
+    "at": "2026-05-08T13:40:13Z",
+    "queries": [
+      {
+        "jql": "project = CRTQA AND text ~ \"CRT-639\"",
+        "purpose": "epic_key_text",
+        "result_count": 6
+      },
+      {
+        "jql": "project = CRTQA AND (text ~ \"WeightedAvg\" OR text ~ \"average price\") AND text ~ \"FX\"",
+        "purpose": "summary_keyword",
+        "result_count": 25
+      }
+    ]
+  },
+  "existing_tests_considered": [
+    {
+      "key": "CRTQA-10177",
+      "summary": "FX Spot - Calculate Average Price and Realized PL for the full ladder",
+      "status": "Open",
+      "issuetype": "Test",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10177",
+      "steps_provenance": "fetched_from_issue",
+      "fields_used": [
+        "description"
+      ],
+      "reuse_recommendation": "adapt_steps",
+      "note": "dxCore console ladder + position_metrics_from_publisher patterns reused in tb-001."
+    },
+    {
+      "key": "CRTQA-10183",
+      "summary": "FX Spot - Verify rounding for Average Price and Realized PL",
+      "status": "Open",
+      "issuetype": "Test",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10183",
+      "steps_provenance": "fetched_from_issue",
+      "fields_used": [
+        "description"
+      ],
+      "reuse_recommendation": "reference_only",
+      "note": "Optional deep rounding matrix; cite peculiarities when exercised."
+    },
+    {
+      "key": "CRTQA-10184",
+      "summary": "FX Spot - Changing account group doesn't affect existing positions' Average Price",
+      "status": "Open",
+      "issuetype": "Test",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10184",
+      "steps_provenance": "fetched_from_issue",
+      "fields_used": [
+        "description"
+      ],
+      "reuse_recommendation": "adapt_steps",
+      "note": "Maps checklist chk-003; embedded in tb-001 actions."
+    },
+    {
+      "key": "CRTQA-10152",
+      "summary": "FX_SPOT - Check Open PL metric",
+      "status": "Open",
+      "issuetype": "Test",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10152",
+      "steps_provenance": "fetched_from_issue",
+      "fields_used": [
+        "description"
+      ],
+      "reuse_recommendation": "adapt_steps",
+      "note": "dxTrade5 / Adaptive / console parity foundation for tb-002."
+    },
+    {
+      "key": "CRTQA-10176",
+      "summary": "CRT-639: Account & System Configuration",
+      "status": "Open",
+      "issuetype": "Pre-Condition",
+      "url": "https://jira.in.devexperts.com/browse/CRTQA-10176",
+      "steps_provenance": "not_fetched",
+      "fields_used": [],
+      "reuse_recommendation": "none",
+      "note": "Referenced as precondition in CRTQA-10177/10183/10184; fetch before execution."
+    }
+  ],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-008",
+      "reason": "ambiguity_flag",
+      "evidence": "coverage.checks[chk-008].scenario_line Smart Checklist \"! reason:\" deferral for rounding-rule keys / XT-7911; default skip per test-prep.md."
+    }
+  ],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "FX Spot WeightedAvg — configuration, ladders, Open P/L, % P/L gross, realized (dxCore-backed)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-001",
+        "chk-002",
+        "chk-003",
+        "chk-004",
+        "chk-005",
+        "chk-006",
+        "chk-007",
+        "chk-009"
+      ],
+      "covers_sections": [
+        "## Primary focus",
+        "## Prerequisites — configuration & truth source",
+        "## [CRT-1740] Average position fill price — WeightedAvg path",
+        "## [CRT-1743] Open P/L — WeightedAvg path",
+        "## [CRT-1742] % P/L Gross — WeightedAvg path",
+        "## [CRT-1738] Cash settlement ladder — realized P/L & opening-trade-only averages",
+        "## Dimensions — position crosses zero / partial closures"
+      ],
+      "related_existing_tests": [
+        "CRTQA-10176",
+        "CRTQA-10177",
+        "CRTQA-10183",
+        "CRTQA-10184"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-08T13:40:13Z",
+        "temp_draft_file": null
+      },
+      "draft": {
+        "preconditions": [
+          "1. CRTQA-10176 (Account & System Configuration) satisfied for the target environment, or an approved equivalent lab profile [TBD] (see Peculiarities 1–2).",
+          "2. dxCore console reachable; only command families illustrated in CRTQA-10177 / CRTQA-10183 / CRTQA-10184 may be reused (no ad-hoc invented console verbs).",
+          "3. Functional data associates FOREX FX_SPOT with WeightedAvg and leaves listed non-target types on FIFO defaults per CRT-1741; account/group mapping evidence [TBD] (chk-002)."
+        ],
+        "actions": [
+          "1. Confirm FX_SPOT → WeightedAvg binding and capture the effective account/instrument group mapping (chk-002).",
+          "2. Exercise the CRT-1740 micro-ladder (flat → layered buys/sells including zeroing) using CRTQA-10177 console patterns (buy / execution trade / show position_metrics_from_publisher) — prices/qty may mirror coverage checklist or CRTQA-10177 samples (chk-004, chk-009).",
+          "3. Extend the session through the fuller CRT-1738-style ladder with partial closes and Sell-first variant where required; assert Realized PL progression matches the issue’s worked math only where numerics are supplied in Jira (chk-007; supplement with [REQUIRES: BA numeric oracle] while XT-7911 open).",
+          "4. Recompute Open P/L per CRT-1743 from recorded mark vs weighted-average fill; compare publisher/console outputs (chk-005).",
+          "5. Validate % P/L Gross per CRT-1742 (two-decimal presentation) against the same staged position (chk-006).",
+          "6. Execute the CRTQA-10184 account-group transfer steps verbatim, then re-read position metrics to ensure prior Weighted Average for the open history is unchanged (chk-003)."
+        ],
+        "results": [
+          "1. Configuration evidence shows FX_SPOT on WeightedAvg with FIFO defaults elsewhere (chk-002 / CRT-1741).",
+          "2. Weighted-average fill updates follow opening-trade-only contribution rules through the micro-ladder (chk-004 / CRT-1740).",
+          "3. Extended ladder + partial-close legs keep Realized PL consistent with CRT-1738 narratives captured in CRTQA-10177 (chk-007, chk-009).",
+          "4. Open P/L matches CRT-1743 arithmetic for the truth-source mark used in the session (chk-005).",
+          "5. % P/L Gross matches CRT-1742 formula and rounds to two decimals (chk-006).",
+          "6. Account group change per CRTQA-10184 does not restate historical averages for already-open FX_SPOT exposure (chk-003).",
+          "7. Primary focus statement (chk-001) is satisfied by the end-to-end WA behavior demonstrated above — cross-check wording against CRT-639-coverage Primary focus block."
+        ],
+        "peculiarities": [
+          "1. CRTQA-10177 — copy buy/execution/show position_metrics_from_publisher patterns from the Jira Test description; do not invent alternate console syntax.",
+          "2. CRTQA-10183 — reference explicit rounding ladders there when validating sub-cent behavior; skip rows not in scope for this bundle unless BA expands the session.",
+          "3. CRTQA-10184 — follow the group-add/remove narrative there for chk-003; instrument group names (OPPORTUNITY vs ENERGY etc.) remain as published in that issue.",
+          "4. CRT-639 Jira comments note dependency on XT-7911 for locking some CRT-1738 numeric ladders — document tolerances with BA when exact cents are still pending."
+        ]
+      },
+      "automation": {
+        "feasibility": "blocked",
+        "blocked_reason": "requires_console",
+        "notes": "CRTQA-10177 patterns require dxCore console; TEST-EXEC skips unless substitute approved."
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "Cross-surface parity — dxTrade5, WebBroker, Adaptive (FX_SPOT WeightedAvg metrics)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-010",
+        "chk-011",
+        "chk-012"
+      ],
+      "covers_sections": [
+        "## Cross-surface parity — dxTrade5, WebBroker, Adaptive"
+      ],
+      "related_existing_tests": [
+        "CRTQA-10152"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-08T13:40:13Z",
+        "temp_draft_file": null
+      },
+      "draft": {
+        "preconditions": [
+          "1. Same FX_SPOT WeightedAvg-capable account/instrument state as bundle tb-001 truth source, or a fresh ladder session whose API/export snapshot is agreed as reference [TBD].",
+          "2. dxTrade5 session for [TBD operator account] (chk-010).",
+          "3. CRTQA-10152 preconditions (dxTrade5 login, ssh, dx run console, use <AccountPortfolio:AccountCode>) satisfied verbatim where that issue prescribes them — no extra ssh commands (chk-010, chk-011, chk-012).",
+          "4. Adaptive and WebBroker credentials or deep links per environment playbook [TBD] (chk-011, chk-012)."
+        ],
+        "actions": [
+          "1. Replicate CRTQA-10152 setup: open FX_SPOT exposure, compute Open P/L via position_qty × (mark − average fill) × multiplier using values from the issue, compare dxTrade5 Positions widget vs Adaptive vs console output (chk-010, chk-012).",
+          "2. Repeat the comparison after instrument/account grouping switch exactly as CRTQA-10152 instructs; capture any drift (chk-010, chk-012).",
+          "3. Validate average fill, % P/L gross, and realized / cash-equivalent columns on dxTrade5 vs the same reference snapshot when those fields are visible; mark ! reason if a column is absent (chk-010).",
+          "4. Navigate WebBroker positions UI (impl-003 BRO/xt wiring) and compare the same metrics; use ! reason when a column cannot be located (chk-011).",
+          "5. Confirm Adaptive shows the same metrics or document structured ! reasons per missing column (chk-012)."
+        ],
+        "results": [
+          "1. dxTrade5 values match the referenced formula / snapshot within agreed tolerance (chk-010).",
+          "2. Post-switch values remain explainable per CRTQA-10152 expectations (chk-010, chk-012).",
+          "3. WebBroker parity recorded or gaps flagged with ! (chk-011).",
+          "4. Adaptive parity recorded or gaps flagged with ! (chk-012)."
+        ],
+        "peculiarities": [
+          "1. CRTQA-10152 operational text is authoritative for ssh / dx run console / grouping switch — transcribe from Jira, not from memory.",
+          "2. Use [TBD] for account/portfolio codes, instruments, and rounding policy where the issue leaves them open.",
+          "3. impl-003 is a code-layout hint only — actual WebBroker navigation paths require the environment playbook."
+        ]
+      },
+      "automation": {
+        "feasibility": "unknown",
+        "blocked_reason": null,
+        "notes": "Mixture of UI parity and CRTQA-10152 ssh/console prerequisites."
+      }
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "FIFO sanity smoke — non-FX_SPOT instruments (regression guard)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-013"
+      ],
+      "covers_sections": [
+        "### Contrast / regression (non-epic path — minimal)"
+      ],
+      "related_existing_tests": [],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-08T13:40:13Z",
+        "temp_draft_file": null
+      },
+      "draft": {
+        "preconditions": [
+          "1. Availability of at least one non-FX_SPOT instrument class still on FIFO configuration (e.g., CFD_FOREX or STOCK) per CRT-1741 matrix — exact symbol [REQUIRES: environment playbook].",
+          "2. Trader credentials with rights to place canned orders for that instrument [TBD]."
+        ],
+        "actions": [
+          "1. Open a minimal position on the FIFO-configured instrument using UI flows from the environment playbook (no invented console steps) (chk-013).",
+          "2. Perform a short open → reduce/close sequence that would surface FIFO consumption if exposed in UI diagnostics; if UI lacks explicit FIFO cues, capture position metrics only and mark [REQUIRES: diagnostics path] (chk-013).",
+          "3. Repeat a single comparable action on FX_SPOT WeightedAvg instrument in the same session only to ensure no cross-instrument error — keep scope smoke-level (chk-013)."
+        ],
+        "results": [
+          "1. FIFO-configured instrument completes the smoke path without errors attributable to CRT-639 regressions (chk-013).",
+          "2. Documented evidence notes any UI limitations for observing FIFO ordering explicitly (chk-013)."
+        ],
+        "peculiarities": [
+          "1. This bundle intentionally avoids the exhaustive FIFO matrix called out as out-of-epic in coverage; expand only when BA directs."
+        ]
+      },
+      "automation": {
+        "feasibility": "unknown",
+        "blocked_reason": null,
+        "notes": "UI smoke unless playbook adds FIFO diagnostics."
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [],
+    "orphan_bundles": [],
+    "notes": [
+      "Excluded chk-008 tracked in excluded_checks_with_reason.",
+      "Primary checks mapped once; chk-013 (supporting) mapped to tb-003."
+    ]
+  },
+  "draft_red_flags": [
+    {
+      "code": "invented_operational_detail_risk",
+      "detail": "tb-003 uses [TBD]/[REQUIRES] placeholders until playbook supplies navigation.",
+      "check_ids": [],
+      "bundle_ids": [
+        "tb-003"
+      ]
+    }
+  ],
+  "anti_pattern_findings": [
+    {
+      "pattern": "one_shot_all_bundle_drafts_avoided",
+      "bundle_id": null,
+      "fix_hint": "Draft prose authored via three isolated Task subprocesses (tb-001..003) plus orchestrator normalization."
+    }
+  ],
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "TEST-PREP CRT-639 benchmark shadow attempt-02 EpicDir resolved."
+    },
+    {
+      "step": "2",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "CRT-639-coverage.json/md loaded."
+    },
+    {
+      "step": "3",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "CRT-639-ref.json loaded optional context."
+    },
+    {
+      "step": "4",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "jira_get_issue CRT-639 refresh."
+    },
+    {
+      "step": "5",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "chk-008 excluded Smart Checklist ! deferral; no include_ambiguous override."
+    },
+    {
+      "step": "6",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Jira search queries CRTQA CRT-639 text + FX/WeightedAvg keywords."
+    },
+    {
+      "step": "7",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Fetched CRTQA-10177,10183,10184,10152; CRTQA-10176 not fetched."
+    },
+    {
+      "step": "8a",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Bundle shells tb-001..tb-003 with traceability clusters."
+    },
+    {
+      "step": "8b-tb-001",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Task subprocess + merge normalized draft tb-001."
+    },
+    {
+      "step": "8b-tb-002",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Task subprocess + merge normalized draft tb-002."
+    },
+    {
+      "step": "8b-tb-003",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Task subprocess + merge normalized draft tb-003."
+    },
+    {
+      "step": "9",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "reverse_validation: coverage_gaps empty."
+    },
+    {
+      "step": "10",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "anti_pattern scan logged."
+    },
+    {
+      "step": "11",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "Emit tests.json + tests.md."
+    },
+    {
+      "step": "12",
+      "at": "2026-05-08T13:40:13Z",
+      "action": "No EpicDir temp/ artifacts retained."
+    }
+  ]
+}

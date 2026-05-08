@@ -1,0 +1,4 @@
+# Keep only .gitkeep tracked; use this folder for local benchmark scratch.
+*
+!.gitignore
+!.gitkeep

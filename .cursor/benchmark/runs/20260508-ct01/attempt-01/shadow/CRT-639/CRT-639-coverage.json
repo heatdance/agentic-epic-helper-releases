@@ -1,0 +1,336 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-639",
+  "epic_ref_path": ".cursor/benchmark/runs/20260508-ct01/attempt-01/shadow/CRT-639/CRT-639-ref.json",
+  "sources": {
+    "jira_fetched_at": "2026-05-08T14:30:00.000Z",
+    "epic_ref_loaded_at": "2026-05-08T14:30:00.000Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "bitbucket_repo from epic-ref sources.bitbucket_repo (no repo= override on trigger)."
+  },
+  "archetype": "metrics_calculation",
+  "epic_verification_focus": {
+    "statement": "This epic primarily verifies P/L and position metrics for FX Spot instruments when calculation uses weighted-average methodology instead of FIFO: functional configuration by instrument type (CRT-1741), average fill price (CRT-1740), open P/L (CRT-1743), % P/L Gross (CRT-1742), and the weighted-average cash-settlement ladder for average price, open PL, and realized PL (CRT-1738).",
+    "source": "jira_description",
+    "keywords": [
+      "FX Spot",
+      "FX_SPOT",
+      "FOREX",
+      "weighted average",
+      "FIFO",
+      "open PL",
+      "% PL Gross",
+      "realized PL",
+      "cash settlement"
+    ]
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Average fill price — WeightedAvg configuration path",
+      "semantic_variants": [
+        "weighted average by opening trades since last net-size crossed zero"
+      ],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5", "webbroker", "adaptive", "api"],
+      "requirement_keys": ["CRT-1740"],
+      "notes_from_epic": "Jira: average position fill price per configuration; FX Spot migration from FIFO."
+    },
+    {
+      "id": "m-002",
+      "capability": "Cash settlement — weighted-average PL ladder (non-equity cash flow)",
+      "semantic_variants": ["average price", "open PL", "realized PL", "position history steps"],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5", "webbroker", "adaptive", "api"],
+      "requirement_keys": ["CRT-1738"],
+      "notes_from_epic": "Epic bullet: weighted average for avg fill, open PL, realized PL during cash settlement."
+    },
+    {
+      "id": "m-003",
+      "capability": "FIFO and non-FX-Spot requirement branches (linked spec breadth)",
+      "semantic_variants": ["FIFO formulas for other instrument classes", "default FIFO when unconfigured"],
+      "verification_role": "out_of_epic",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5", "webbroker", "adaptive", "api"],
+      "requirement_keys": ["CRT-1740", "CRT-1741", "CRT-1742", "CRT-1743"],
+      "notes_from_epic": "Yogi text covers FIFO vs WeightedAvg matrix; Jira narrative narrows epic to FX Spot P/L change — full non-FX matrix is not primary."
+    },
+    {
+      "id": "m-004",
+      "capability": "Instrument type methodology — FIFO vs WeightedAvg (associated data)",
+      "semantic_variants": ["FOREX FX_SPOT subtype → Weighted Average"],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": ["console", "api"],
+      "requirement_keys": ["CRT-1741"],
+      "notes_from_epic": "CRT-1741: STOCKS/… FIFO vs FOREX Weighted Average; epic changes FX Spot treatment."
+    },
+    {
+      "id": "m-005",
+      "capability": "Open PL — WeightedAvg formula path",
+      "semantic_variants": ["mark vs average fill", "multiplier"],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5", "webbroker", "adaptive", "api"],
+      "requirement_keys": ["CRT-1743"],
+      "notes_from_epic": "WeightedAvg branch: position_qty * (mark - average fill) * multiplier per snippet."
+    },
+    {
+      "id": "m-006",
+      "capability": "Percent PL Gross — WeightedAvg formula path",
+      "semantic_variants": ["2 decimal rounding"],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5", "webbroker", "adaptive", "api"],
+      "requirement_keys": ["CRT-1742"],
+      "notes_from_epic": "WeightedAvg denominator uses average price × qty × multiplier sum per snippet."
+    }
+  ],
+  "xt_confluence_hits": [
+    {
+      "page_id": "402589545",
+      "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=402589545",
+      "title": "DXtrade XT Home",
+      "why_relevant": "Upstream program entry; cross-links to account/position metric documentation used with CT requirements.",
+      "summary": "XT space anchor from docs/project.json; not a formula source for CRT-639 but frames shared platform lineage."
+    },
+    {
+      "page_id": "505943399",
+      "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=505943399",
+      "title": "[In Review] Positions",
+      "why_relevant": "Defines avg fill price at position level — vocabulary alignment for UI/API checks.",
+      "summary": "Positions glossary: quantity, avg fill price as average price at which orders filled."
+    },
+    {
+      "page_id": "480847055",
+      "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=480847055",
+      "title": "Transaction Upload User Manual",
+      "why_relevant": "Worked examples of average fill / average price semantics for positions in XT docs.",
+      "summary": "Business cases reference resulting average fill price after transaction upload scenarios."
+    },
+    {
+      "page_id": "518009763",
+      "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=518009763",
+      "title": "Risk Settings and Groups admin guide 2026.2",
+      "why_relevant": "Illustrates Day PL constructs at account level adjacent to metric exposure questions in Jira comments.",
+      "summary": "Worked numeric examples for Day PL / loss thresholds — secondary context for reporting checks only."
+    }
+  ],
+  "implementation_hits": [
+    {
+      "id": "impl-001",
+      "search_query": "bitbucket_search_code BRO/xt average fill price FIFO FX_SPOT",
+      "path": "BRO/xt",
+      "fragment": "Repo root lists dxcore/, webbroker/ — P/L and position metrics span core calculators and web UI.",
+      "note": "Epic-prep import; monorepo layout for COVERAGE.",
+      "source_phase": "epic_prep"
+    },
+    {
+      "id": "impl-002",
+      "search_query": "browse_fallback after HTTP 404 on /rest/api/1.0/search",
+      "path": "BRO/xt/dxcore/calculators",
+      "fragment": "Submodules: calculators-api, position-metrics, pom.xml",
+      "note": "Epic-prep import; calculators hub for position math.",
+      "source_phase": "epic_prep"
+    },
+    {
+      "id": "impl-003",
+      "search_query": "browse_fallback dxcore/calculators/position-metrics",
+      "path": "BRO/xt/dxcore/calculators/position-metrics",
+      "fragment": "position-metrics-api, position-metrics-calculators, position-metrics-dxcore-impl, position-metrics-tests",
+      "note": "Epic-prep import; primary code locality for avg-price and PL calculators.",
+      "source_phase": "epic_prep"
+    }
+  ],
+  "nested_requirement_refs": [],
+  "checks": [
+    {
+      "id": "chk-001",
+      "section": "## Primary focus",
+      "subsection": null,
+      "scenario_line": "- This epic primarily verifies P/L and position metrics for FX Spot instruments when calculation uses weighted-average methodology instead of FIFO: functional configuration by instrument type (CRT-1741), average fill price (CRT-1740), open P/L (CRT-1743), % P/L Gross (CRT-1742), and the weighted-average cash-settlement ladder for average price, open PL, and realized PL (CRT-1738).",
+      "detail_lines": [],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": null,
+      "requirement_keys": ["CRT-1741", "CRT-1740", "CRT-1743", "CRT-1742", "CRT-1738"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-002",
+      "section": "## Prerequisites and configuration",
+      "subsection": null,
+      "scenario_line": "- [CRT-1741] For tests targeting FX Spot (FOREX / FX_SPOT subtype), associated data / functional configuration places the instrument under the Weighted Average branch per CRT-1741; when unset, FIFO default applies and WeightedAvg-specific expectations do not apply.",
+      "detail_lines": [
+        "> CRT-1741 snippet: FIFO default instrument types vs Weighted Average for FOREX (FX_SPOT); “already existing instrument types” unchanged-configuration scenarios may be skipped per requirement text."
+      ],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present",
+      "requirement_keys": ["CRT-1741"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-003",
+      "section": "## Average fill price — WeightedAvg (position)",
+      "subsection": null,
+      "scenario_line": "- [CRT-1740] With FX Spot on WeightedAvg, build an executable ladder (concrete BUY/SELL quantities and prices including partial closes and at least one net-size cross through zero); observed average fill / average position price matches weighted average by all opening trades since the last time net size crossed zero, not FIFO lot ordering.",
+      "detail_lines": [
+        "> Ground implementation: `impl-003` path `BRO/xt/dxcore/calculators/position-metrics`."
+      ],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present",
+      "requirement_keys": ["CRT-1740"],
+      "implementation_hit_ids": ["impl-003"]
+    },
+    {
+      "id": "chk-004",
+      "section": "## Open PL — WeightedAvg (position)",
+      "subsection": null,
+      "scenario_line": "- [CRT-1743] For FX Spot under WeightedAvg, open PL matches `position_qty * (mark_price - average_fill_price) * multiplier` using the same mark and average fill definitions as the configuration branch (WeightedAvg snippet path).",
+      "detail_lines": [
+        "> Do not assume UI column labels say “mark”; identify the platform truth source for mark and average fill (API/feed) from environment docs."
+      ],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present",
+      "requirement_keys": ["CRT-1743"],
+      "implementation_hit_ids": ["impl-003"]
+    },
+    {
+      "id": "chk-005",
+      "section": "## Percent PL Gross — WeightedAvg (position)",
+      "subsection": null,
+      "scenario_line": "- [CRT-1742] For FX Spot under WeightedAvg, % PL Gross matches `(Open PL / ABS(SUM(average price × qty × multiplier))) * 100` and rounds to two decimals per snippet.",
+      "detail_lines": [
+        "> Use the same executed trade ladder and open PL inputs as the [CRT-1740]/[CRT-1743] checks so % PL Gross is computed on a consistent snapshot."
+      ],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present",
+      "requirement_keys": ["CRT-1742"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-006",
+      "section": "## Cash settlement ladder — CRT-1738",
+      "subsection": null,
+      "scenario_line": "- [CRT-1738] For non-equity cash settlement on instrument types configured for weighted average, replay the requirement’s multi-step trade sequence from flat through long/short transitions; after each step, position average price and realized PL follow “closing P/L from average position price vs matched opens; only opening trades contribute to average price.”",
+      "detail_lines": [
+        "> Rounding references in snippet point to other requirement keys not inlined in epic-ref — resolve nested keys or coordinate with XT-7911 before locking gold numbers (Jira comment)."
+      ],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present",
+      "requirement_keys": ["CRT-1738"],
+      "implementation_hit_ids": ["impl-003"]
+    },
+    {
+      "id": "chk-007",
+      "section": "## Cross-surface consistency — WebBroker and dxTrade5",
+      "subsection": null,
+      "scenario_line": "- [CRT-1743] WebBroker: for a snapshot account/position under FX Spot WeightedAvg config, displayed open PL (where exposed) matches the backend/API value used as truth source for the formula check.",
+      "detail_lines": [],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": null,
+      "requirement_keys": ["CRT-1743"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-008",
+      "section": "## Cross-surface consistency — WebBroker and dxTrade5",
+      "subsection": null,
+      "scenario_line": "- [CRT-1743] dxTrade5 (desktop/web stack): same open PL as WebBroker for the same controlled snapshot when the metric is shown for FX Spot.",
+      "detail_lines": [],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": null,
+      "requirement_keys": ["CRT-1743"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-009",
+      "section": "## Cross-surface consistency — Adaptive",
+      "subsection": null,
+      "scenario_line": "- [CRT-1743] Adaptive: where FX Spot open PL or average fill is surfaced for the account, values match WebBroker/dxTrade5 for the same snapshot; if the metric is absent on Adaptive for FX Spot, record `! reason: metric not exposed on this surface` with product evidence rather than inferring pass.",
+      "detail_lines": [],
+      "ambiguity": null,
+      "verification_role": "primary",
+      "calculation_contract": null,
+      "requirement_keys": ["CRT-1743"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-010",
+      "section": "## Dependencies and ambiguity",
+      "subsection": null,
+      "scenario_line": "- ! reason: Jira comments reference XT-7911 and locking expected numeric outputs for the CRT-1738 ladder — treat definitive golden-vector sign-off as blocked until that dependency is cleared.",
+      "detail_lines": [],
+      "ambiguity": { "flag": "!", "reason": "XT-7911 / CRT-1738 numeric baseline" },
+      "verification_role": "primary",
+      "calculation_contract": "deferred_ambiguous",
+      "requirement_keys": ["CRT-1738"],
+      "implementation_hit_ids": []
+    },
+    {
+      "id": "chk-011",
+      "section": "## Dependencies and ambiguity",
+      "subsection": null,
+      "scenario_line": "- ! reason: Jira asks which affected metrics appear in UI — enumerate observables per surface with BA/dev confirmation where labels differ from spec terms.",
+      "detail_lines": [],
+      "ambiguity": { "flag": "!", "reason": "UI exposure matrix not in epic body" },
+      "verification_role": "supporting",
+      "calculation_contract": "deferred_ambiguous",
+      "requirement_keys": ["CRT-639"],
+      "implementation_hit_ids": []
+    }
+  ],
+  "explicitly_out_of_scope": [
+    {
+      "item": "Primary test matrix for FIFO path on STOCKS, ETF, OPTION, CFD, etc., and full symmetric FIFO vs WeightedAvg scenarios for all instrument types from CRT-1741…CRT-1743 snippets",
+      "rationale": "Epic Jira narrative targets FX Spot migration from FIFO to average price; broad FIFO regression for every non-FX class is not the primary verification thread unless BA adds explicit non-regression AC."
+    },
+    {
+      "item": "Detailed multi-account / two-group quote-switch scenarios",
+      "rationale": "Epic and snippets do not describe multi-account group behavior for this change; add only if scope expands."
+    }
+  ],
+  "grounding_audit": {
+    "by_check_id": [
+      { "check_id": "chk-001", "evidence_keys": ["CRT-1741", "CRT-1740", "CRT-1743", "CRT-1742", "CRT-1738"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-002", "evidence_keys": ["CRT-1741"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-003", "evidence_keys": ["CRT-1740"], "evidence_impl_ids": ["impl-003"], "status": "grounded" },
+      { "check_id": "chk-004", "evidence_keys": ["CRT-1743"], "evidence_impl_ids": ["impl-003"], "status": "grounded" },
+      { "check_id": "chk-005", "evidence_keys": ["CRT-1742"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-006", "evidence_keys": ["CRT-1738"], "evidence_impl_ids": ["impl-003"], "status": "grounded" },
+      { "check_id": "chk-007", "evidence_keys": ["CRT-1743"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-008", "evidence_keys": ["CRT-1743"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-009", "evidence_keys": ["CRT-1743"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-010", "evidence_keys": ["CRT-1738"], "evidence_impl_ids": [], "status": "grounded" },
+      { "check_id": "chk-011", "evidence_keys": [], "evidence_impl_ids": [], "status": "ungrounded" }
+    ],
+    "ungrounded_check_ids": ["chk-011"]
+  },
+  "anti_pattern_findings": [],
+  "validation_log": [
+    { "step": "1", "at": "2026-05-08T14:30:00.000Z", "action": "Loaded CRT-639-ref.json from benchmark shadow; MCP jira_get_issue CRT-639; bitbucket_repo resolved from epic_ref (source: epic_ref)." },
+    { "step": "2", "at": "2026-05-08T14:30:05.000Z", "action": "Hygiene: five /requirements/CT/ links in description — URL path keys match visible CRT-* in links; no label/path mismatch." },
+    { "step": "3", "at": "2026-05-08T14:30:05.000Z", "action": "Archetype metrics_calculation — formulas, config, P/L metrics dominate; no Figma." },
+    { "step": "3a", "at": "2026-05-08T14:30:05.000Z", "action": "epic_verification_focus from Jira description (FX Spot FIFO→avg price); no focus= on trigger." },
+    { "step": "4", "at": "2026-05-08T14:30:05.000Z", "action": "coverage_matrix six rows; deterministic ids m-001…m-006; m-003 out_of_epic for broad FIFO branches." },
+    { "step": "5", "at": "2026-05-08T14:30:05.000Z", "action": "Snippet enrichment skipped — epic-ref requirements[] all snippet_status ok; nested Yogi 'according to' keys not extracted as separate refs (empty nested_requirement_refs)." },
+    { "step": "6", "at": "2026-05-08T14:30:10.000Z", "action": "XT narrow search (FX_SPOT weighted average position PL); four xt_confluence_hits (pages + XT home); summaries only." },
+    { "step": "7", "at": "2026-05-08T14:30:15.000Z", "action": "Merged three epic_prep implementation.hits as impl-001…003 (sorted by path). bitbucket_search_code(WeightedAvg position metric) HTTP 404 — no new coverage rows; prep hits retained." },
+    { "step": "8", "at": "2026-05-08T14:30:15.000Z", "action": "smart_checklist sections: Primary focus (verbatim statement) → prerequisites → metric groups → cross-surface → dependencies." },
+    { "step": "9", "at": "2026-05-08T14:30:15.000Z", "action": "Draft checks: primary-first; Adaptive line present; structured ! for XT-7911 and UI exposure gap." },
+    { "step": "10", "at": "2026-05-08T14:30:15.000Z", "action": "Dimensions: position-level and cash-settlement ladder covered where snippets imply; no extra trading-hours/multi-account lines (no evidence)." },
+    { "step": "11", "at": "2026-05-08T14:30:15.000Z", "action": "explicitly_out_of_scope: broad FIFO matrix and multi-account scenarios deferred." },
+    { "step": "12", "at": "2026-05-08T14:30:15.000Z", "action": "grounding_audit: chk-011 ungrounded (Jira comment on UI exposure — no requirement key); others grounded." },
+    { "step": "13", "at": "2026-05-08T14:30:15.000Z", "action": "Anti-pattern scan: none — chk-005 tied to shared ladder in detail_lines; no dual_branch_symmetry (no peer FIFO ## section)." }
+  ],
+  "smart_checklist_markdown": "# CRT-639 — Cash Settlement based on Average Price\n\n## Primary focus\n\n- This epic primarily verifies P/L and position metrics for FX Spot instruments when calculation uses weighted-average methodology instead of FIFO: functional configuration by instrument type (CRT-1741), average fill price (CRT-1740), open P/L (CRT-1743), % P/L Gross (CRT-1742), and the weighted-average cash-settlement ladder for average price, open PL, and realized PL (CRT-1738).\n\n## Prerequisites and configuration\n\n- [CRT-1741] For tests targeting FX Spot (FOREX / FX_SPOT subtype), associated data / functional configuration places the instrument under the Weighted Average branch per CRT-1741; when unset, FIFO default applies and WeightedAvg-specific expectations do not apply.\n> CRT-1741 snippet: FIFO default instrument types vs Weighted Average for FOREX (FX_SPOT); “already existing instrument types” unchanged-configuration scenarios may be skipped per requirement text.\n\n## Average fill price — WeightedAvg (position)\n\n- [CRT-1740] With FX Spot on WeightedAvg, build an executable ladder (concrete BUY/SELL quantities and prices including partial closes and at least one net-size cross through zero); observed average fill / average position price matches weighted average by all opening trades since the last time net size crossed zero, not FIFO lot ordering.\n> Ground implementation: `BRO/xt/dxcore/calculators/position-metrics` (`impl-003`).\n\n## Open PL — WeightedAvg (position)\n\n- [CRT-1743] For FX Spot under WeightedAvg, open PL matches `position_qty * (mark_price - average_fill_price) * multiplier` using the same mark and average fill definitions as the configuration branch (WeightedAvg snippet path).\n> Do not assume UI column labels say “mark”; identify the platform truth source for mark and average fill (API/feed) from environment docs.\n\n## Percent PL Gross — WeightedAvg (position)\n\n- [CRT-1742] For FX Spot under WeightedAvg, % PL Gross matches `(Open PL / ABS(SUM(average price × qty × multiplier))) * 100` and rounds to two decimals per snippet.\n> Use the same executed trade ladder and open PL inputs as the [CRT-1740]/[CRT-1743] checks so % PL Gross is computed on a consistent snapshot.\n\n## Cash settlement ladder — CRT-1738\n\n- [CRT-1738] For non-equity cash settlement on instrument types configured for weighted average, replay the requirement’s multi-step trade sequence from flat through long/short transitions; after each step, position average price and realized PL follow “closing P/L from average position price vs matched opens; only opening trades contribute to average price.”\n> Rounding references in snippet point to other requirement keys not inlined in epic-ref — resolve nested keys or coordinate with XT-7911 before locking gold numbers (Jira comment).\n\n## Cross-surface consistency — WebBroker and dxTrade5\n\n- [CRT-1743] WebBroker: for a snapshot account/position under FX Spot WeightedAvg config, displayed open PL (where exposed) matches the backend/API value used as truth source for the formula check.\n- [CRT-1743] dxTrade5 (desktop/web stack): same open PL as WebBroker for the same controlled snapshot when the metric is shown for FX Spot.\n\n## Cross-surface consistency — Adaptive\n\n- [CRT-1743] Adaptive: where FX Spot open PL or average fill is surfaced for the account, values match WebBroker/dxTrade5 for the same snapshot; if the metric is absent on Adaptive for FX Spot, record `! reason: metric not exposed on this surface` with product evidence rather than inferring pass.\n\n## Dependencies and ambiguity\n\n- ! reason: Jira comments reference XT-7911 and locking expected numeric outputs for the CRT-1738 ladder — treat definitive golden-vector sign-off as blocked until that dependency is cleared.\n- ! reason: Jira asks which affected metrics appear in UI — enumerate observables per surface with BA/dev confirmation where labels differ from spec terms.\n"
+}

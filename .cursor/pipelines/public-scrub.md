@@ -125,7 +125,7 @@ Preserve structure and templates that are product-agnostic:
 
 | Path / topic | Action |
 |--------------|--------|
-| MCP Postgres / DB in workflows | Replace Corner-only **server id** and **database name** in **committed** examples with **placeholders**. Add or keep a **tool-agnostic** note: SSH tunnel → local port → **readonly** DB role; **MCP** is one integration option; credentials only in user/global config — see internal [`.cursor/HOW-TO.md`](../../.cursor/HOW-TO.md) pattern generalized in public README scrub. |
+| MCP Postgres / DB in workflows | Replace Corner-only **server id** and **database name** in **committed** examples with **placeholders**. Add or keep a **tool-agnostic** note: SSH tunnel → local port → **readonly** DB role; **MCP** is one integration option; credentials only in user/global config — see internal [`automation/tools/tunnel/README.md`](../../automation/tools/tunnel/README.md) pattern generalized in public README scrub. |
 | [`automation/tools/remote-cli/secrets.properties`](../../automation/tools/remote-cli/secrets.properties) | **Remove** from export if present; keep only [`secrets.properties.example`](../../automation/tools/remote-cli/secrets.properties.example) (or equivalent). |
 | [`docs/project.json`](../../docs/project.json), [`docs/qa-project.json`](../../docs/qa-project.json) | **Transform** to placeholders: generic Confluence/Jira **shape** without real space IDs, page IDs, or internal hostnames — or replace with `*.example` + minimal stub JSON. |
 | Bitbucket / internal remotes in docs | Strip or anonymize; document “set your `default_repo` here” in prose. |
@@ -143,7 +143,7 @@ Apply **delete** or **rewrite** per team policy. Minimal default manifest (exten
 | `epics/<REAL_EPIC_KEY>/` (e.g. `CRT-*`, org-specific keys) | **Delete** directories for real epics; keep [`epics/README.md`](../../epics/README.md) + [`epics/templates/`](../../epics/templates/) only unless templates contain secrets. |
 | `qa-handoff.md` | **Delete** or replace with neutral `qa-handoff.example.md` (no session history, no internal ticket lists). |
 | Internal URLs | Remove `https://jira...internal...`, internal Confluence hosts, etc. |
-| Benchmark / digest scratch under [`.cursor/benchmark/`](../../.cursor/benchmark/) if they contain real keys | **Delete** or strip to synthetic examples only. |
+| Benchmark outputs under [`.cursor/benchmark/`](../../.cursor/benchmark/) — **`coverage-bench/temp/`**, **`test-bench/temp/`**, legacy **`coverage-bench/runs/`**, **`crossref/`** / **`history/`**, hub **`runs/<suite_id>/attempt-*/`**, **`runs/<suite_id>/_aggregate/`**, **`benchmark/history/`**, **`run-results/<run-key>/`** (finalize narratives + **`pipeline-delta-queue.json`**; subtree **gitignored** except template **`README`**) | **Delete** or strip if they embed real ticket keys/secrets. Hub suite root **`runs/<suite_id>/`** prompts + **`_manifest.json`** *may* be committed—scrub if inappropriate for **`release`**. Do **not** expect **`report.md`** under the suite folder; it lives under **`run-results/`**. **Tracked harness** (root **`HOW-TO.md`**, **`pipeline/`**, **`scripts/`**, **`templates/`**, **`data/README.md`**) stays unless contaminated. |
 | `.cursor/prompts/` or rules mentioning internal-only scopes | Trim or generalize text while keeping harness behavior describable. |
 
 **Self-check**: `rg` for known internal domains and project keys returns **no** matches in tracked files (see [V1](#v1-verification)).

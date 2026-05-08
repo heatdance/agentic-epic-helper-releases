@@ -1,12 +1,22 @@
 # Pipeline: epic-prep
 
-**Trigger**: user message starts with `EPIC-PREP:` and includes a Jira **Epic key** (e.g. `EPIC-PREP: CRT-1234`). Optional token on the same line:
+**Trigger**: user message starts with `EPIC-PREP:` and includes a Jira **Epic key** (e.g. `EPIC-PREP: CRT-1234`). Optional tokens on the same line:
 
+- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — together enable **benchmark shadow** `{EpicDir}` ([workspace](#epic-workspace-epicdir); [docs/benchmark-contract.md](../../docs/benchmark-contract.md)).
 - **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`** (see also [docs/corner-platform-map.json](../../docs/corner-platform-map.json) **`code_streams`** for `BRO/xt` vs `CAN/corner` vs packaging repos).
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
-**Output**: `epics/<KEY>/<KEY>-ref.json` (copy from [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)). **Ephemeral**: `epics/<KEY>/temp/` — **must be deleted** before the run is considered complete (success or abort).
+## Epic workspace (`{EpicDir}`)
+
+Before any filesystem work, parse `<KEY>` and optional **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** from the **same user message line** as **`EPIC-PREP:`**.
+
+- **Benchmark mode**: **both** tokens present → **`{EpicDir}`** = `{repo_root}/.cursor/benchmark/runs/<suite_id>/attempt-<nn>/shadow/<KEY>/` where **`nn`** is `benchmark_attempt` zero-padded to **two** digits. Do **not** write QA artifacts under `epics/<KEY>/` for this run.
+- **Production** (default): omit either token → **`{EpicDir}`** = `{repo_root}/epics/<KEY>/`.
+
+Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Contract: [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
+
+**Output**: `{EpicDir}<KEY>-ref.json` (copy from [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)). **Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort).
 
 ---
 
@@ -23,11 +33,11 @@
 
 ## Folder lifecycle
 
-1. Ensure `epics/<KEY>/` exists.
-2. Create `epics/<KEY>/temp/`.
+1. Ensure `{EpicDir}` exists.
+2. Create `{EpicDir}temp/`.
 3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
-4. Work: merge durable facts into `epics/<KEY>/<KEY>-ref.json`.
-5. **Exit**: delete `epics/<KEY>/temp/` recursively (`Remove-Item -Recurse` on Windows, `rm -rf` on Unix).
+4. Work: merge durable facts into `{EpicDir}<KEY>-ref.json`.
+5. **Exit**: delete `{EpicDir}temp/` recursively (`Remove-Item -Recurse` on Windows, `rm -rf` on Unix).
 6. **Self-check**: `<KEY>-ref.json` must **not** contain the substring `/temp/` (no stale paths).
 
 **Abort / failure**: If `temp/` was created, still delete it unless legal retention requires otherwise (none expected here).
@@ -39,8 +49,8 @@
 ### 1. Jira — fetch Epic
 
 - MCP fetch the issue by key; save raw JSON to `temp/jira-issue.json` (optional but recommended for audit).
-- If **`epics/<KEY>/<KEY>-ref.json` already exists**, read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
-- Copy template → `epics/<KEY>/<KEY>-ref.json`.
+- If **`{EpicDir}<KEY>-ref.json` already exists**, read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
+- Copy template → `{EpicDir}<KEY>-ref.json`.
 - Fill `epic` (`key`, `url`, `summary`, `status`, `labels`, `issue_type`) and `sources.jira_fetched_at` (ISO-8601).
 - Parse optional **`repo=`** from the user message (same token shape as [`coverage.md`](coverage.md)). **Repo resolution** for `sources.bitbucket_repo` (first match wins): trigger **`repo=`** → **prior** ref’s `sources.bitbucket_repo` (from the pre-overwrite read above) → [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** if non-null. If still unresolved, leave null for step **5b** (optional search skipped).
 
@@ -128,7 +138,7 @@
 - Set `sources.confluence_method` (`snippet` / `mcp` / `mixed`) as appropriate.
 - Ensure **`sources.bitbucket_repo`** reflects the resolved workspace/slug (step **1** / **5b**) for downstream **COVERAGE** when the user omits `repo=` on the coverage trigger.
 - Validate JSON.
-- **Delete** `epics/<KEY>/temp/`.
+- **Delete** `{EpicDir}temp/`.
 - Confirm `<KEY>-ref.json` contains no `/temp/` substring.
 
 ---

@@ -1,0 +1,102 @@
+{
+  "runs": [
+    "run-001",
+    "run-002",
+    "run-003",
+    "run-004",
+    "run-005",
+    "run-006"
+  ],
+  "per_run": {
+    "run-001": {
+      "requirement_keys": [
+        "CRT-1744",
+        "CRT-1745"
+      ],
+      "snippet_sha256": {
+        "CRT-1744": "2081ad86da4b797234f7084ca879ebc11f109313418b3315f9c6c6029f0a6a82",
+        "CRT-1745": "55c7d924cba288d0b85cf0359dc422bac7c91004f09c8ba934afe9c7d43397df"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Epic targets widgets with search and column filters on dxTrade5/WebTrader; Jira links CornerBank WebTrader Dark Figma.",
+          "evidence": "Jira acceptance criteria and Requirements bullets; Design: Figma CornerBank WebTrader Dark."
+        },
+        "adaptive": {
+          "status": "not_applicable",
+          "note": "Epic explicitly excludes Adaptive; scope pointed to CRT-632 for Adaptive.",
+          "evidence": "Jira description: 'Adaptive: not a part of this epic, see CRT-632'"
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-002": {
+      "error": "not a prep phase record"
+    },
+    "run-003": {
+      "requirement_keys": [
+        "CRT-1744",
+        "CRT-1745"
+      ],
+      "snippet_sha256": {
+        "CRT-1744": "2081ad86da4b797234f7084ca879ebc11f109313418b3315f9c6c6029f0a6a82",
+        "CRT-1745": "55c7d924cba288d0b85cf0359dc422bac7c91004f09c8ba934afe9c7d43397df"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "Epic is Corner Trader web stack: instrument search tabs and filters; Figma CornerBank WebTrader Dark linked.",
+          "evidence": "Jira AC and Design link; Requirements CRT-1744/1745."
+        },
+        "adaptive": {
+          "status": "not_applicable",
+          "note": "Explicitly out of scope; Adaptive covered under CRT-632.",
+          "evidence": "Jira: Adaptive: not a part of this epic, see CRT-632"
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-004": {
+      "error": "not a prep phase record"
+    },
+    "run-005": {
+      "requirement_keys": [
+        "CRT-1744",
+        "CRT-1745"
+      ],
+      "snippet_sha256": {
+        "CRT-1744": "2081ad86da4b797234f7084ca879ebc11f109313418b3315f9c6c6029f0a6a82",
+        "CRT-1745": "55c7d924cba288d0b85cf0359dc422bac7c91004f09c8ba934afe9c7d43397df"
+      },
+      "client_shell_impact": {
+        "corner_trader": {
+          "status": "affected",
+          "note": "dxTrade5 + WebBroker surfaces with instrument search and filters; Figma CornerBank WebTrader Dark referenced in Jira.",
+          "evidence": "Jira AC; Design Figma link; Requirements 1–2."
+        },
+        "adaptive": {
+          "status": "not_applicable",
+          "note": "Out of epic; follow CRT-632 for Adaptive.",
+          "evidence": "Jira description: Adaptive: not a part of this epic, see CRT-632"
+        },
+        "source": "jira_field"
+      }
+    },
+    "run-006": {
+      "error": "not a prep phase record"
+    }
+  },
+  "key_intersection_all_runs": [
+    "CRT-1744",
+    "CRT-1745"
+  ],
+  "snippet_hash_stable_across_all_runs": {
+    "CRT-1744": "2081ad86da4b797234f7084ca879ebc11f109313418b3315f9c6c6029f0a6a82",
+    "CRT-1745": "55c7d924cba288d0b85cf0359dc422bac7c91004f09c8ba934afe9c7d43397df"
+  },
+  "unstable_keys": [],
+  "client_shell_impact_drift": true,
+  "epic_key": "CRT-638",
+  "suite_id": "20260413-qa9f"
+}

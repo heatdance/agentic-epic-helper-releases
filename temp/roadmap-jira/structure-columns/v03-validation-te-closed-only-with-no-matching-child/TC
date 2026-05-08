@@ -1,0 +1,38 @@
+IF this.issuetype != "Epic" : "" ELSE:
+
+IF this.labels.CONTAINS("qa-no-task") OR stories.FILTER(MATCH($.issuetype, "Test Execution") AND MATCH($.summary, "*Epic Testing*")).SIZE() > 0: "Skipped" ELSE:
+
+with tctasks = stories
+               .FILTER(
+                 (MATCH($.issuetype, "QA Task") AND MATCH($.customfield_20572, "Test cases development")) OR
+                 (MATCH($.issuetype, "Test Execution") AND MATCH($.summary, "*Test Case Development*"))
+               )
+               .FILTER($.status != "Aborted"):
+
+IF tctasks.SIZE() > 1: 
+  CONCAT("(!) ",tctasks.SIZE())
+
+ELSE: IF tctasks.SIZE() = 1:
+  with tctask = tctasks.MAP($.key):
+  CONCAT("[", tctasks.status, "|", tctask, "]")
+
+ELSE: IF stories.FILTER(MATCH($.issuetype, "Test Execution") AND $.status = "Closed" AND (MATCH($.summary, "*Epic Validation*") OR MATCH($.summary, "*Epic Testing*"))).SIZE() > 0: "Skipped" ELSE:
+
+  with icon = 
+    IF (this.status = "NEW" or this.status = "REQUIREMENTS REVIEW" ): "" ELSE:
+    IF (DEFINED(this.customfield_61071)): this.customfield_61071 ELSE:
+    IF (this.status = "Validation" or this.status = "Closed" or this.status = "Pending Resolution"): "(flag)"
+    ELSE "(flagoff)":
+
+  with safe_summary = REPLACE(REPLACE(URL_DECODE(this.summary), "[", "\["), "]", "\]"):
+  with description = CONCAT("Create+test+cases+for+", this.key, ".%0A%0AFocus+on+the+approach+described+%5Bhere%7Chttps%3A//confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097317/Test%2BRepository%5D%3A%0A%0A*+Create+relevant+folders+if+necessary+in+the+%5Brepository%7Chttps%3A//jira.in.devexperts.com/secure/XrayTestRepositoryAction%21default.jspa%3FentityKey%3DCRTQA%26path%3D%255Craven_all_tests%5D%3A+Corner+or+Adaptive%0A%0A*+In+%22Full+Regression%22+subfolder+create+Unit-level+tests+%28testing+individual+pieces+of+logic%29%0A%0A*+In+%22E2E%22+subfolder+create+System-level+tests+%28testing+use+case+scenarios%29%0A%0AAs+a+result+of+this+task+you+should+have+*at+least*+one+E2E+test.+Unit+tests+usually+require+at+least+several+test+cases."):
+
+with static_args = "pid=31060&issuetype=10902&assignee=ct-qa&priority=4&components=42593&components=42588&customfield_11250=16":
+with epic_args = CONCAT(
+  "&summary=", "<PROJECT>[Test+Case+Development]+", this.key, ":+", safe_summary,
+  "&customfield_15471=", this.key,
+  "&customfield_18082=26700",
+  "&reporter=", ME(),
+  "&description=", description
+):
+CONCAT(icon, "[+", "|", "https://jira.in.devexperts.com/secure/CreateIssueDetails!init.jspa?", static_args, epic_args, "]")

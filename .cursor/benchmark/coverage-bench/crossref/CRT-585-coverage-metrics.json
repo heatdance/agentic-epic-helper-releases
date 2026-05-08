@@ -1,0 +1,380 @@
+{
+  "runs": [
+    "run-002",
+    "run-004",
+    "run-006"
+  ],
+  "per_run": {
+    "run-002": {
+      "bullet_count": 34,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-014",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-015",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-016",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    },
+    "run-004": {
+      "bullet_count": 35,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-014",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-015",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-016",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-017",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    },
+    "run-006": {
+      "bullet_count": 35,
+      "matrix_rows": [
+        {
+          "id": "m-001",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-002",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-003",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-004",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-005",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-006b",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-007",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-008",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-009",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-010",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-011",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-012",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-013",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-014",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-015",
+          "verification_role": "primary"
+        },
+        {
+          "id": "m-016",
+          "verification_role": "supporting"
+        },
+        {
+          "id": "m-017",
+          "verification_role": "out_of_epic"
+        }
+      ]
+    }
+  },
+  "pairwise_jaccard": {
+    "run-002": {
+      "run-004": 0.9714,
+      "run-006": 0.9714
+    },
+    "run-004": {
+      "run-006": 0.9444
+    },
+    "run-006": {}
+  },
+  "bullet_frequency": {
+    "[crt-585] webbroker — **order book**: **instrument type** column shows **forex** for fx_spot symbols; **instrument type** filter includes **forex**; **symbol** filter finds fx_spot symbols.": 3,
+    "[crt-1731] ipf — **epic** on fx_spot sourced from **ig-related cfd_forex** mapping (margin rates path tied to epic field).": 3,
+    "[crt-1529] console — **instrument tree (m_tree)** shows **forex** with **fx_spot** subtype where applicable.": 3,
+    "**upstream xt** generic “conversion-rate forex only” demos — background contrast only; not corner fx_spot deliverable proof.": 3,
+    "[crt-1598] ipf — **opol** populated with **`et`** for fx_spot rows where the requirement applies.": 3,
+    "[crt-1481] trading hours — **fx_spot** trading hours configurable and visible where platform exposes forex hours.": 3,
+    "[crt-1522] margin — **margin rates from ig** files respected for fx_spot, **matched by epic** mapping.": 3,
+    "[crt-1527] console — **fx_spot** appears in **supported instruments** / allowed-type configuration for accounts as requirement describes.": 3,
+    "[crt-1733] webbroker — **crud + export** flows for a representative **fx_spot** symbol (create, edit, copy uniqueness, close, export csv field set) match ipf-backed attributes.": 3,
+    "[crt-585] adaptive — **order entry** can submit and manage orders for **fx_spot** instruments on the adaptive trading path (epic validation lists **can-12469** as blocker until fixed).": 3,
+    "[crt-1733] ipf — forex instruments used as fx spot carry **corner_subtype `fx_spot`**; conversion-rate forex rows keep **empty** `corner_subtype` per requirement table.": 3,
+    "[crt-585] webbroker — **position book**: same **instrument type** / **forex** filter expectations; **symbol** filter for fx_spot does not loop or hang.": 3,
+    "[crt-1734] ipf — **subtype / instrument type** logic for forex vs fx_spot matches confluence **crt-1734** (instrument type definition).": 3,
+    "[crt-585] webbroker — **backup prices**: can select **fx_spot** symbol, change bp, add new bp row.": 3,
+    "[crt-1733] webbroker — **cornertrader subtype** column: **fx_spot** for spot instruments; **empty** for conversion-rate forex instruments.": 3,
+    "[crt-585] webbroker — **commissions**: **forex** instrument type visible in commission plan configuration; plans can target **forex** / fx_spot-eligible instruments per admin ux.": 3,
+    "[crt-1524] ipf — **rollover_cut_off** present/configurable for fx_spot on ipf storage.": 3,
+    "[crt-1474] ipf — **oco min amplitude** field available for fx_spot and **not cleared** on ipf update (decimal display behaviour per snippet).": 3,
+    "[crt-1480] static list — **fx_spot** instruments created from uploaded static list; **lot size, quantity increment, multiplier** copied from the **relevant cfd forex dma** pair as epic states.": 3,
+    "[crt-585] webbroker — **financing/swaps**: financing configuration does **not** apply incorrectly to **fx_spot** positions (epic description intent).": 3,
+    "[crt-1473] ipf — **forex** type exposes extended fields for fx_spot where required: **trading hours**, **cfd tiered margin rates**, **disable automatic margin rates update**, **exposure limit**, **epic** (as listed in epic bullets).": 3,
+    "[crt-1528] console — **cash flow mapping** includes **forex (fx_spot subtype)** path per configuration table.": 3,
+    "**routing-related** configuration rows called out as excluded in epic (“all except routing related”) — do not expand checklist into full routing matrix unless a linked defect explicitly requires it.": 3,
+    "[crt-1733] webbroker — **instrument type list** shows **forex** with updated labelling (**forex (fx spot)**) instead of legacy conversion-rates naming where epic applies.": 3,
+    "[crt-101] instrument universe / ipf sync — **forex instruments are not mutated** by ipf synchronization when fx_spot static list jobs run (no unintended updates to non-target forex rows).": 3,
+    "[crt-1533] webbroker — **fx_spot disabled by default** on existing client accounts; can be **enabled** where product allows instrument on account.": 3,
+    "[crt-1732] jobs — **cfd parameters check** job **includes fx_spot** instruments in its parameter scan scope; **job log messages** mention fx_spot outcomes when instruments are present.": 3,
+    "[crt-1526] console — **short sell allowed instruments** can include **forex (fx_spot subtype)** where product allows.": 3,
+    "[crt-1534] eod — **eod instruments fx_spot** report: file naming pattern **`yyyy.mm.dd_hh.mm.ss_fx_spot.csv`** (timezone per project); each run produces new file; fields include **`instrument_type`** etc. per requirement snippet.": 3,
+    "[crt-585] webbroker — **account transactions / positions / orders / trades / trading journal**: filters allow **forex** type and/or **fx_spot** symbol as described (symbol vs type filters per surface).": 3,
+    "[crt-1473] webbroker — **risk settings**: **exposure limit** can be set for fx_spot where forex tiered margin / exposure fields apply (align with ipf).": 3,
+    "[crt-1530] console — **liquidation / leveraged instrument types** configuration includes **forex (fx_spot subtype)** row.": 3,
+    "[crt-585] webbroker — **watchlist / chart**: can add **fx_spot** instrument; chart receives data for that symbol.": 3,
+    "[crt-1531] console — **oco min amplitude** can be configured per type including fx_spot row in `oco_min_amplitude_percent_per_type` (or equivalent).": 3,
+    "**xt roadmap breakdown** (`402589824`) — epic-ref **flagged** as weak tie; do not treat checklist-level proof of fx_spot behaviour.": 1,
+    "**xt brokerage requirements sync** (`402589756`) — epic-ref **flagged** weak / historical; do not treat as acceptance evidence for ig margin or fx_spot (corner yogi + jira win).": 1
+  },
+  "strong_bullets_all_runs": [
+    "**routing-related** configuration rows called out as excluded in epic (“all except routing related”) — do not expand checklist into full routing matrix unless a linked defect explicitly requires it.",
+    "**upstream xt** generic “conversion-rate forex only” demos — background contrast only; not corner fx_spot deliverable proof.",
+    "[crt-101] instrument universe / ipf sync — **forex instruments are not mutated** by ipf synchronization when fx_spot static list jobs run (no unintended updates to non-target forex rows).",
+    "[crt-1473] ipf — **forex** type exposes extended fields for fx_spot where required: **trading hours**, **cfd tiered margin rates**, **disable automatic margin rates update**, **exposure limit**, **epic** (as listed in epic bullets).",
+    "[crt-1473] webbroker — **risk settings**: **exposure limit** can be set for fx_spot where forex tiered margin / exposure fields apply (align with ipf).",
+    "[crt-1474] ipf — **oco min amplitude** field available for fx_spot and **not cleared** on ipf update (decimal display behaviour per snippet).",
+    "[crt-1480] static list — **fx_spot** instruments created from uploaded static list; **lot size, quantity increment, multiplier** copied from the **relevant cfd forex dma** pair as epic states.",
+    "[crt-1481] trading hours — **fx_spot** trading hours configurable and visible where platform exposes forex hours.",
+    "[crt-1522] margin — **margin rates from ig** files respected for fx_spot, **matched by epic** mapping.",
+    "[crt-1524] ipf — **rollover_cut_off** present/configurable for fx_spot on ipf storage.",
+    "[crt-1526] console — **short sell allowed instruments** can include **forex (fx_spot subtype)** where product allows.",
+    "[crt-1527] console — **fx_spot** appears in **supported instruments** / allowed-type configuration for accounts as requirement describes.",
+    "[crt-1528] console — **cash flow mapping** includes **forex (fx_spot subtype)** path per configuration table.",
+    "[crt-1529] console — **instrument tree (m_tree)** shows **forex** with **fx_spot** subtype where applicable.",
+    "[crt-1530] console — **liquidation / leveraged instrument types** configuration includes **forex (fx_spot subtype)** row.",
+    "[crt-1531] console — **oco min amplitude** can be configured per type including fx_spot row in `oco_min_amplitude_percent_per_type` (or equivalent).",
+    "[crt-1533] webbroker — **fx_spot disabled by default** on existing client accounts; can be **enabled** where product allows instrument on account.",
+    "[crt-1534] eod — **eod instruments fx_spot** report: file naming pattern **`yyyy.mm.dd_hh.mm.ss_fx_spot.csv`** (timezone per project); each run produces new file; fields include **`instrument_type`** etc. per requirement snippet.",
+    "[crt-1598] ipf — **opol** populated with **`et`** for fx_spot rows where the requirement applies.",
+    "[crt-1731] ipf — **epic** on fx_spot sourced from **ig-related cfd_forex** mapping (margin rates path tied to epic field).",
+    "[crt-1732] jobs — **cfd parameters check** job **includes fx_spot** instruments in its parameter scan scope; **job log messages** mention fx_spot outcomes when instruments are present.",
+    "[crt-1733] ipf — forex instruments used as fx spot carry **corner_subtype `fx_spot`**; conversion-rate forex rows keep **empty** `corner_subtype` per requirement table.",
+    "[crt-1733] webbroker — **cornertrader subtype** column: **fx_spot** for spot instruments; **empty** for conversion-rate forex instruments.",
+    "[crt-1733] webbroker — **crud + export** flows for a representative **fx_spot** symbol (create, edit, copy uniqueness, close, export csv field set) match ipf-backed attributes.",
+    "[crt-1733] webbroker — **instrument type list** shows **forex** with updated labelling (**forex (fx spot)**) instead of legacy conversion-rates naming where epic applies.",
+    "[crt-1734] ipf — **subtype / instrument type** logic for forex vs fx_spot matches confluence **crt-1734** (instrument type definition).",
+    "[crt-585] adaptive — **order entry** can submit and manage orders for **fx_spot** instruments on the adaptive trading path (epic validation lists **can-12469** as blocker until fixed).",
+    "[crt-585] webbroker — **account transactions / positions / orders / trades / trading journal**: filters allow **forex** type and/or **fx_spot** symbol as described (symbol vs type filters per surface).",
+    "[crt-585] webbroker — **backup prices**: can select **fx_spot** symbol, change bp, add new bp row.",
+    "[crt-585] webbroker — **commissions**: **forex** instrument type visible in commission plan configuration; plans can target **forex** / fx_spot-eligible instruments per admin ux.",
+    "[crt-585] webbroker — **financing/swaps**: financing configuration does **not** apply incorrectly to **fx_spot** positions (epic description intent).",
+    "[crt-585] webbroker — **order book**: **instrument type** column shows **forex** for fx_spot symbols; **instrument type** filter includes **forex**; **symbol** filter finds fx_spot symbols.",
+    "[crt-585] webbroker — **position book**: same **instrument type** / **forex** filter expectations; **symbol** filter for fx_spot does not loop or hang.",
+    "[crt-585] webbroker — **watchlist / chart**: can add **fx_spot** instrument; chart receives data for that symbol."
+  ],
+  "weak_bullets": [
+    "**xt brokerage requirements sync** (`402589756`) — epic-ref **flagged** weak / historical; do not treat as acceptance evidence for ig margin or fx_spot (corner yogi + jira win).",
+    "**xt roadmap breakdown** (`402589824`) — epic-ref **flagged** as weak tie; do not treat checklist-level proof of fx_spot behaviour."
+  ],
+  "matrix_intersection": [
+    [
+      "m-001",
+      "primary"
+    ],
+    [
+      "m-002",
+      "primary"
+    ],
+    [
+      "m-003",
+      "primary"
+    ],
+    [
+      "m-004",
+      "primary"
+    ],
+    [
+      "m-005",
+      "primary"
+    ],
+    [
+      "m-006",
+      "primary"
+    ],
+    [
+      "m-007",
+      "primary"
+    ],
+    [
+      "m-008",
+      "primary"
+    ],
+    [
+      "m-009",
+      "primary"
+    ],
+    [
+      "m-010",
+      "primary"
+    ],
+    [
+      "m-011",
+      "primary"
+    ],
+    [
+      "m-012",
+      "primary"
+    ],
+    [
+      "m-013",
+      "primary"
+    ],
+    [
+      "m-014",
+      "primary"
+    ],
+    [
+      "m-015",
+      "primary"
+    ]
+  ],
+  "epic_key": "CRT-585",
+  "suite_id": "20260413-qa9f"
+}

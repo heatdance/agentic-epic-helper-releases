@@ -1,0 +1,73 @@
+{
+  "epic_key": "CRT-639",
+  "pipeline": "both",
+  "scope_statement": "Gold oracle for CRT-639 (WeightedAvg cash settlement for FX Spot): configuration FIFO vs WeightedAvg, ladder behavior for average fill and realized P/L from opening legs only, position-history crossing zero, open P/L and % P/L gross formulas, rounding expectations, cross-surface parity (Corner dxTrade5/WebBroker/Adaptive), and account-group change must not rewrite existing averages.",
+  "required_requirement_keys_in_snippets": [
+    "CRT-1741",
+    "CRT-1740",
+    "CRT-1738",
+    "CRT-1743",
+    "CRT-1742"
+  ],
+  "forbidden_checklist_regex": ["(?i)^## .*FIFO\\s*$"],
+  "required_smart_checklist_substrings": [
+    "WeightedAvg",
+    "FX_SPOT",
+    "FIFO",
+    "opening",
+    "average fill",
+    "Realized",
+    "Open P/L",
+    "% P/L",
+    "dxTrade5",
+    "WebBroker",
+    "Adaptive",
+    "account group"
+  ],
+  "structured_assertions": {
+    "sanitization": {
+      "enabled": true,
+      "forbidden_regex": [
+        "(?i)\\b(api[_-]?key|token|secret|password)\\s*[:=]\\s*\\S+",
+        "(?i)\\bbearer\\s+[a-z0-9._-]{8,}"
+      ],
+      "forbidden_substrings": [
+        "jira.in.devexperts.com",
+        "confluence.in.devexperts.com",
+        "stash.in.devexperts.com",
+        "devexperts.slack.com"
+      ],
+      "allowed_exceptions": ["none_found"],
+      "scan_targets": ["client_shell_impact", "checklist_markdown"]
+    },
+    "thresholds": {
+      "prep": {
+        "min_snippet_completion_rate": 1.0,
+        "max_missing_snippet_keys": 0,
+        "require_client_shell_impact_stable": true
+      },
+      "coverage": {
+        "min_core_bullet_jaccard_avg": 0.9,
+        "max_matrix_role_flip_count": 1,
+        "min_primary_focus_verbatim_pass_rate": 0.85,
+        "max_diagnostic_bullets_per_run": 2
+      }
+    },
+    "prep": {
+      "required_snippet_keys": [
+        "CRT-1741",
+        "CRT-1740",
+        "CRT-1738",
+        "CRT-1743",
+        "CRT-1742"
+      ],
+      "min_snippet_completion_rate": 1.0,
+      "client_shell_source_in": ["jira_field", "qa_default_both"]
+    },
+    "coverage": {
+      "min_core_bullet_count": 8,
+      "required_out_of_scope_substrings": ["out of epic"],
+      "primary_focus_verbatim_required": false
+    }
+  }
+}

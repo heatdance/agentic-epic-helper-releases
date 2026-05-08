@@ -1,0 +1,158 @@
+# CRT-639 — Regression test drafts (TEST-PREP)
+
+**Shadow:** `.cursor/benchmark/runs/20260508-ct01/attempt-01/shadow/CRT-639/`
+
+## Bundle mapping
+
+| bundle_id | proposed_title | covers_check_ids |
+|-----------|----------------|------------------|
+| tb-001 | CRT-639 — FX Spot config + weighted-average fill ladder | chk-001, chk-002, chk-003 |
+| tb-002 | CRT-639 — Open PL and % PL Gross (WeightedAvg) | chk-004, chk-005 |
+| tb-003 | CRT-639 — CRT-1738 cash settlement weighted-average ladder | chk-006 |
+| tb-004 | CRT-639 — WebBroker vs dxTrade5 open PL consistency | chk-007, chk-008 |
+| tb-005 | CRT-639 — Adaptive cross-check (FX Spot metrics) | chk-009 |
+
+## Existing Jira considered
+
+- **CRTQA-10134** — reference_only
+- **CRTQA-10132** — reference_only
+
+## Excluded checklist checks
+
+- **chk-010:** ambiguity_flag
+- **chk-011:** ambiguity_flag
+
+---
+
+## tb-001: CRT-639 — FX Spot config + weighted-average fill ladder
+
+### Preconditions
+1. Primary focus (meta scope): session exercises P/L and position metrics for FX Spot under weighted-average vs FIFO, aligned with CRT-1741, CRT-1740, CRT-1743, CRT-1742, CRT-1738.
+2. Environment: QA login and build where CRT-639 FX Spot behavior is available; instrument/account identifiers [TBD] or [REQUIRES: test data sheet].
+3. Observable position metrics (qty, direction, avg fill) via UI or approved read-only diagnostics [REQUIRES: runbook].
+4. chk-002 [CRT-1741]: FOREX/FX_SPOT configured for WeightedAvg per associated data; know how to confirm vs FIFO [REQUIRES: CRT-1741 configuration reference].
+5. FIFO default when WeightedAvg unset — contrast path [REQUIRES: policy doc]; full FIFO matrix not primary for this epic.
+
+### Actions
+1. Session setup (chk-002): open client with prepared FX Spot symbol [TBD]; confirm firm and account [TBD].
+2. Verify WeightedAvg configuration (chk-002): navigate to configuration for FX Spot; confirm WeightedAvg branch consistent with associated data [REQUIRES: CRT-1741]; capture evidence per team norm.
+3. Initialize ladder (chk-003): place and fill opening BUY Q1>0 at P1 [TBD]; record fill from blotter [REQUIRES: capture method].
+4. Second leg: additional BUY Q2 at P2; record net long and displayed average fill.
+5. Partial SELLs (remain long): reduce without flipping sign; record net qty and avg fill after material fills.
+6. Approach zero: SELL until flat from long side; note avg fill and qty before flattening fill.
+7. Net crosses zero (chk-003): execute fills so net crosses through zero; record crossing fill and post-trade sign/size.
+8. Re-open after cross: new BUY/SELL cycle [TBD]; record average fill for new cycle.
+9. Consolidate ordered log: each fill, running net qty, platform average fill through zero cross [REQUIRES: spreadsheet optional].
+
+### Results
+1. chk-002: evidence shows FX Spot on WeightedAvg per CRT-1741 or defect logged.
+2. After two BUYs: net and average fill consistent with weighted opens since flat [REQUIRES: calculator] — not invented sample output.
+3. Partial SELLs while long: avg fill matches WeightedAvg rules since last zero cross.
+4. After zero/sign cross: new cycle average from opens after cross; prior cycle does not pollute new basis.
+5. Traceability: steps map to chk-001 scope, chk-002 config, chk-003 ladder.
+
+### Peculiarities
+1. Implementation anchor: BRO/xt `dxcore/calculators/position-metrics` — validate via UI/blotter/exports; no invented dxCore commands.
+2. Formula aid: weighted average by opens since last flat; at zero cross, next cycle starts fresh — detail [REQUIRES: CRT-1740].
+3. If avg fill wrong, re-check config (chk-002) and instrument/account mix [TBD].
+
+## tb-002: CRT-639 — Open PL and % PL Gross (WeightedAvg)
+
+### Preconditions
+1. tb-001 completed: open FX Spot position under WeightedAvg on target account; same context as Peculiarities 1.
+2. Access UI/export for position P/L for that account [REQUIRES: runbook paths].
+3. Entitlements to read Open P/L and % PL Gross [TBD] or [REQUIRES: access matrix].
+
+### Actions
+1. Same session as tb-001: navigate to same account and FX Spot position.
+2. Open position detail: qty, average fill, multiplier if shown, mark source [REQUIRES: product doc for labels].
+3. chk-004: capture displayed Open P/L [CRT-1743]; screenshot or export with timestamp — Peculiarities 2, 4.
+4. chk-005: on same line/snapshot, read % PL Gross [CRT-1742]; confirm two decimals displayed.
+5. Optional reconciliation using visible inputs only; if inputs incomplete, stop at UI/export — [REQUIRES: calculator].
+
+### Results
+1. chk-004: Open P/L documented; ties to position_qty×(mark−avg_fill)×multiplier with mark sourcing per Peculiarities 4.
+2. chk-005: % PL Gross from same snapshot; formula per CRT-1742; rounding two decimals.
+3. Evidence pairs chk-004 and chk-005 unambiguously (one capture or linked exports).
+
+### Peculiarities
+1. Same account/instrument snapshot as tb-001; no extra trades unless plan says.
+2. chk-004/chk-005 same detail line and timed snapshot.
+3. Open PL formula [CRT-1743] — inputs from authorized UI/export only.
+4. Mark truth source [REQUIRES: feed/mark rule]; if missing, [TBD] numeric sign-off.
+5. % PL Gross denominator per CRT-1742 — scope matches position line.
+6. Proposed title: CRT-639 — Open PL and % PL Gross (WeightedAvg).
+
+## tb-003: CRT-639 — CRT-1738 cash settlement weighted-average ladder
+
+### Preconditions
+1. chk-006 [CRT-1738] non-equity cash settlement; Yogi CRT-1738 available for ladder definitions.
+2. Instrument on WeightedAvg cash-settlement path [REQUIRES: CRT-1741 / environment SoT].
+3. Account/instrument session [TBD]; start flat.
+
+### Actions
+1. Flat→long: BUY +[TBD] @[TBD] (shape per CRT-1738 example e.g. +10@99 — use lab qty/price).
+2. Add exposure: second BUY +[TBD] @[TBD]; confirm long.
+3. SELL ladder: partial closes, through flat, into short per CRT-1738 choreography — record side after each step.
+4. At each checkpoint: capture average fill (opening trades only) and realized P/L; gold numbers [REQUIRES: XT-7911 / nested rounding reqs].
+
+### Results
+1. Average price updates per opening-trade rules; closings follow CRT-1738.
+2. Realized P/L per step; numeric acceptance [REQUIRES: XT-7911 / rounding].
+3. Path flat→long→…→short matches CRT-1738 sequence shape.
+4. Evidence via [REQUIRES: approved verification path] — no fabricated commands.
+
+### Peculiarities
+1. Gold vectors [REQUIRES: XT-7911 / nested rounding].
+2. CRT-1738 supplies sequence shape; lab qty/prices [TBD] until locked.
+3. Cross-surface parity not in tb-003 unless added to charter.
+
+## tb-004: CRT-639 — WebBroker vs dxTrade5 open PL consistency
+
+### Preconditions
+1. QA environment where WebBroker, dxTrade5, and readonly API base (e.g. dxSCA Swagger) are reachable for same deployment [REQUIRES: corner-platform-map or runbook].
+2. Same user session; account with open FX Spot position under CRT-639 WeightedAvg scope; no reconfiguration mid-compare unless separate run.
+3. [REQUIRES: runbook] One snapshot discipline across surfaces (time window or explicit snapshot id).
+
+### Actions
+1. chk-007: Using readonly path documented for env (e.g. Swagger from approved QA appendix), retrieve backend open P/L for target position at snapshot; record field names from spec — no invented SQL/CLI.
+2. WebBroker: read displayed Open P/L same account/instrument; no trades during compare.
+3. dxTrade5: read Open P/L same snapshot as steps 1–2.
+4. Compare WebBroker vs API (chk-007); dxTrade5 vs WebBroker (chk-008); tolerance only from requirement or approved note.
+
+### Results
+1. chk-007: WebBroker Open P/L matches readonly API at snapshot within rounding contract.
+2. chk-008: dxTrade5 matches WebBroker same snapshot.
+3. On mismatch: capture surfaces, numbers, environment id; defect — no undocumented SQL fix.
+
+### Peculiarities
+1. Single comparison pass; if mark moves, restart aligned snapshot.
+2. chk-007 = UI vs API; chk-008 = dxTrade5 vs WebBroker.
+3. Readonly HTTP/Swagger only for backend truth per [REQUIRES: spec].
+
+## tb-005: CRT-639 — Adaptive cross-check (FX Spot metrics)
+
+### Preconditions
+1. Adaptive mobile/client shell; manual observation only (no Playwright in TEST-PREP v1).
+2. Same account and FX Spot position as WebBroker/dxTrade5 compare window.
+3. Note per-surface labels for Open P/L and average fill.
+
+### Actions
+1. Adaptive: open position view; record Open P/L and average fill or closest equivalents and labels.
+2. Same snapshot window: WebBroker and dxTrade5 same account/instrument row.
+3. If metric absent on a shell: structured N/A with evidence (screenshot ref or message) — no guessed numbers.
+4. Compare per metric where shown on two+ surfaces; rounding per product rules.
+
+### Results
+1. Where Adaptive and both references show a metric: values agree within rounding OR documented exception.
+2. Missing metric: structured N/A with evidence; pass requires match or explicit N/A per chk-009.
+3. If no shell exposes either metric: document coverage gap for follow-up.
+
+### Peculiarities
+1. chk-009: parity Adaptive vs WebBroker/dxTrade5; manual only.
+2. Freeze account state between reads where possible.
+3. Compare formatted display; note decimal rules [REQUIRES: product].
+
+## Reverse validation
+
+coverage_gaps: **none** (chk-001..chk-009 covered).

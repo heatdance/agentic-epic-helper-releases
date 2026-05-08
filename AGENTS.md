@@ -58,8 +58,9 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
-| Humans: Cursor + MCP + tunnel how-to | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) |
-| CTQA Postgres MCP | [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
+| Custom commands (**`/crtqa-stats`**, **`/crtqa-benchmark`**) | [.cursor/commands/](.cursor/commands/) — TCD stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md); benchmark hub [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md) (**questionnaire**, **`CONTROL_HUB.md`**, **`DONE_HANDOFF_PROMPT.md`**, **`FINALIZE_PROMPT.md`** → narratives under **`.cursor/benchmark/run-results/<run-key>/`**) + [benchmark_verify.py](automation/tools/benchmark_verify.py) / [benchmark_aggregate.py](automation/tools/benchmark_aggregate.py); [stats/crtqa-stats/](stats/crtqa-stats/) |
+| Humans: Cursor + main processes | [HOW-TO.md](HOW-TO.md) |
+| CTQA Postgres MCP | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
 
 ## Context escalation
 
@@ -86,8 +87,8 @@ When tasks include **Figma file/frame/layer** URLs, use the **workspace-configur
 
 ### PostgreSQL / CTQA (optional)
 
-1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[.cursor/HOW-TO.md](.cursor/HOW-TO.md)** and **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
-2. **Cursor `mcp.json`** — add **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) per the snippet in [.cursor/HOW-TO.md](.cursor/HOW-TO.md). Cursor merges project and global; do not define the same server twice with conflicting URLs. Uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`**; use **`sslmode=disable`** on `127.0.0.1` through SSH.
+1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
+2. **Cursor `mcp.json`** — add **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) per the snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md). Cursor merges project and global; do not define the same server twice with conflicting URLs. Uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`**; use **`sslmode=disable`** on `127.0.0.1` through SSH.
 3. **Do not** commit real passwords; credentials live only in ignored `.cursor/mcp.json` and/or global MCP.
 
 When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**. Optional pipeline **`TEST-EXEC:`** may use the same server for **readonly** SQL checks when bundles require DB verification.

@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-639",
+  "role": "jira_test_issue_snapshot",
+  "source": "jira_get_issue",
+  "fetched_at": "2026-05-07T12:00:00Z",
+  "steps_provenance": "fetched_from_issue",
+  "reuse_recommendation": "reference_only",
+  "issue": {
+    "id": "1945435",
+    "key": "CRTQA-10182",
+    "self": "https://jira.in.devexperts.com/rest/api/2/issue/1945435",
+    "summary": "FX Spot - Calculate Open PL & % PL Gross for the full ladder",
+    "description": "**Preconditions**:\r\n1. CRTQA-10176;\r\n2. CRTQA-10177;\r\n2. dxCore console is up and running;\r\n3. Account able to trade FX Spot is `used` (see Peculiarities 1).\r\n\r\n**Actions**:\r\n1. Using dxCore console output from `show position_metrics_from_publisher`, recalculate Open PL:\r\n```\n\r\nposition_qty x (mark price - average fill price) x multiplier\r\n\n```\r\nwhere:\r\n- mark price is published bid for long or ask for short in CRTQA-10176;\r\n- multiplier is:\r\n```\n\r\nantonfx> grep multiplier:  show instrument EURUSD.spot\r\n\r\nfor:\r\n- Short position with positive PL\r\n- Short position with negative PL\r\n- Short position with 0 PL\r\n- Buy position with negative PL\r\n- Buy position with positive PL\r\n- Buy position with 0 PL\r\n\r\n2. Using dxCore console output from {{grep plGross show portfolio_metrics}}, recalculate % PL Gross:\r\n\n```\r\nOpen PL / ABS(average price x qty x multiplier) x 100\r\n```\n\r\nwhere\r\n- result is rounded mathematically to 2 digit precision, e.g. -3.448275% ~ -3.45%\r\n\r\n*Results*:\r\n1. Open PL metric is calculated correctly for the FX Spot trading ladder.\r\n2. % PL Gross is recalculated correctly from Open PL with 2 digit precision.\r\n\r\n*Peculiarities*:\r\n1. E.g., in dxCore console:\r\n\n```\r\n> use 11004\r\nantonfx>\r\n{code}",
+    "status": {
+      "name": "Open",
+      "category": "To Do",
+      "color": "default"
+    },
+    "issue_type": {
+      "name": "Test"
+    },
+    "priority": {
+      "name": "Normal"
+    },
+    "assignee": {
+      "display_name": "Corner Trader QA",
+      "name": "ct-qa",
+      "key": "JIRAUSER50232"
+    },
+    "reporter": {
+      "display_name": "Anton Rodzevich",
+      "name": "arodzevich",
+      "key": "arodzevich"
+    },
+    "created": "2026-04-20T15:10:00.829+0000",
+    "updated": "2026-04-20T15:10:54.864+0000",
+    "labels": []
+  }
+}

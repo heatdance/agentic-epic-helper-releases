@@ -14,8 +14,12 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 
 | Who | First reads |
 |-----|-------------|
-| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (Cursor: pipelines, MCP, CTQA Postgres tunnel) |
+| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, benchmark; CTQA Postgres: [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)) |
 | **AI agents** | [AGENTS.md](AGENTS.md) (map + MCP policy), [docs/harness-map.json](docs/harness-map.json) (keyword → which files to open; tiers T0–T2) |
+
+## Satellite / planned
+
+- [corner-map/README.md](corner-map/README.md) — seed spec for a future **Phase 5 change-map** repo (workflow, diagrams in [corner-map/docs/architecture.md](corner-map/docs/architecture.md)); intended to move to its own workspace.
 
 ## Product and QA context (JSON)
 
@@ -36,11 +40,15 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
 | `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
 | `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
-| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in HOW-TO), AGENTS, README, HOW-TO, qa-artifacts (not for **`release`**) |
+| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)), AGENTS, README, [HOW-TO.md](HOW-TO.md), qa-artifacts (not for **`release`**) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 **Public export**: Manifest field reference for automation — [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on internal branches; live `docs/public-export-manifest.json` exists only on **`release`** after a scrub run).
+
+## Stats (CRTQA TCD)
+
+- [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`**: TCD rollups (Epic Link + Test Lead), default **delta** reruns, human **agent-assist** labels, **Time saving** / category strata in `latest.md`.
 
 ## Epics and templates
 
@@ -58,7 +66,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 - Rules: [.cursor/rules/](.cursor/rules/).
 - Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for ad-hoc ticket/incident Q&A).
-- Optional **postgres-ctqa** MCP: add to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [.cursor/HOW-TO.md](.cursor/HOW-TO.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
+- Optional **postgres-ctqa** MCP: add to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
 
 ## Reference docs
 

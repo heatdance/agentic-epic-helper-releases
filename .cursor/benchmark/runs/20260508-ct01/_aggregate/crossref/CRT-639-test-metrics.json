@@ -1,0 +1,259 @@
+{
+  "schema_version": 4,
+  "runs": [
+    "attempt-01__shadow-test",
+    "attempt-02__shadow-test",
+    "attempt-03__shadow-test"
+  ],
+  "per_run": {
+    "attempt-01__shadow-test": {
+      "bundle_count": 5,
+      "subprocess_bundle_count": 5,
+      "subprocess_completed_count": 5,
+      "subprocess_completed_rate": 1.0,
+      "sources_map_only": false,
+      "sources_coverage_loaded": true,
+      "temp_path_fragment_in_json": true,
+      "tests_md_present": true,
+      "tests_md_path": "C:/Media/Work/cursor.corner/.cursor/benchmark/runs/20260508-ct01/attempt-01/shadow/CRT-639/CRT-639-tests.md"
+    },
+    "attempt-02__shadow-test": {
+      "bundle_count": 3,
+      "subprocess_bundle_count": 3,
+      "subprocess_completed_count": 3,
+      "subprocess_completed_rate": 1.0,
+      "sources_map_only": false,
+      "sources_coverage_loaded": true,
+      "temp_path_fragment_in_json": false,
+      "tests_md_present": true,
+      "tests_md_path": "C:/Media/Work/cursor.corner/.cursor/benchmark/runs/20260508-ct01/attempt-02/shadow/CRT-639/CRT-639-tests.md"
+    },
+    "attempt-03__shadow-test": {
+      "bundle_count": 3,
+      "subprocess_bundle_count": 3,
+      "subprocess_completed_count": 3,
+      "subprocess_completed_rate": 1.0,
+      "sources_map_only": false,
+      "sources_coverage_loaded": true,
+      "temp_path_fragment_in_json": false,
+      "tests_md_present": true,
+      "tests_md_path": "C:/Media/Work/cursor.corner/.cursor/benchmark/runs/20260508-ct01/attempt-03/shadow/CRT-639/CRT-639-tests.md"
+    }
+  },
+  "kpis": {
+    "test_bundle_count_by_run": {
+      "attempt-01__shadow-test": 5,
+      "attempt-02__shadow-test": 3,
+      "attempt-03__shadow-test": 3
+    },
+    "subprocess_completed_rate_by_run": {
+      "attempt-01__shadow-test": 1.0,
+      "attempt-02__shadow-test": 1.0,
+      "attempt-03__shadow-test": 1.0
+    },
+    "subprocess_completed_rate_avg": 1.0,
+    "temp_path_fragment_violation_run_count": 1,
+    "tests_md_missing_run_count": 0
+  },
+  "epic_key": "CRT-639",
+  "suite_id": "20260508-ct01",
+  "discovery": "hub_suite_run_dir",
+  "discovery_source": "hub_shadow_fallback",
+  "suite_run_dir": "C:/Media/Work/cursor.corner/.cursor/benchmark/runs/20260508-ct01",
+  "gold_checks": {
+    "gold_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/data/CRT-639-gold.json",
+    "applied": false,
+    "reason": "pipeline_not_applicable",
+    "pipeline": "both"
+  },
+  "thresholds": {
+    "evaluated": false,
+    "reason": "not_configured",
+    "checks": [],
+    "summary": {
+      "pass_count": 0,
+      "fail_count": 0,
+      "status": "not_configured"
+    }
+  },
+  "sanitization": {
+    "evaluated": true,
+    "policy": {
+      "enabled": true,
+      "forbidden_regex": [
+        "(?i)\\b(api[_-]?key|token|secret|password)\\s*[:=]\\s*\\S+",
+        "(?i)\\bbearer\\s+[a-z0-9._-]{8,}"
+      ],
+      "forbidden_substrings": [
+        "jira.in.devexperts.com",
+        "confluence.in.devexperts.com",
+        "stash.in.devexperts.com",
+        "devexperts.slack.com"
+      ],
+      "allowed_exceptions": [
+        "none_found"
+      ],
+      "scan_targets": [
+        "client_shell_impact",
+        "checklist_markdown"
+      ]
+    },
+    "checks": [
+      {
+        "name": "forbidden_regex",
+        "configured_count": 2,
+        "violation_count": 0,
+        "pass": true
+      },
+      {
+        "name": "forbidden_substrings",
+        "configured_count": 4,
+        "violation_count": 0,
+        "pass": true
+      }
+    ],
+    "violations": [],
+    "summary": {
+      "pass_count": 2,
+      "fail_count": 0,
+      "status": "pass",
+      "violation_count": 0
+    }
+  },
+  "trend": {
+    "status": "ok",
+    "history_file": "C:/Media/Work/cursor.corner/.cursor/benchmark/history/CRT-639-test-history.jsonl",
+    "latest_n": [
+      {
+        "at_utc": "2026-05-08T13:16:04Z",
+        "suite_id": "20260201-cvct",
+        "runs_count": 3,
+        "kpis": {
+          "test_bundle_count_by_run": {
+            "attempt-01__shadow-test": 5,
+            "attempt-02__shadow-test": 3,
+            "attempt-03__shadow-test": 2
+          },
+          "subprocess_completed_rate_by_run": {
+            "attempt-01__shadow-test": 1.0,
+            "attempt-02__shadow-test": 1.0,
+            "attempt-03__shadow-test": 1.0
+          },
+          "subprocess_completed_rate_avg": 1.0,
+          "temp_path_fragment_violation_run_count": 0,
+          "tests_md_missing_run_count": 0
+        },
+        "thresholds_summary": {
+          "pass_count": 0,
+          "fail_count": 0,
+          "status": "not_configured"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-08T13:17:04Z",
+        "suite_id": "20260201-cvct",
+        "runs_count": 3,
+        "kpis": {
+          "test_bundle_count_by_run": {
+            "attempt-01__shadow-test": 5,
+            "attempt-02__shadow-test": 3,
+            "attempt-03__shadow-test": 2
+          },
+          "subprocess_completed_rate_by_run": {
+            "attempt-01__shadow-test": 1.0,
+            "attempt-02__shadow-test": 1.0,
+            "attempt-03__shadow-test": 1.0
+          },
+          "subprocess_completed_rate_avg": 1.0,
+          "temp_path_fragment_violation_run_count": 0,
+          "tests_md_missing_run_count": 0
+        },
+        "thresholds_summary": {
+          "pass_count": 0,
+          "fail_count": 0,
+          "status": "not_configured"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-08T13:17:05Z",
+        "suite_id": "20260201-cvct",
+        "runs_count": 3,
+        "kpis": {
+          "test_bundle_count_by_run": {
+            "attempt-01__shadow-test": 5,
+            "attempt-02__shadow-test": 3,
+            "attempt-03__shadow-test": 2
+          },
+          "subprocess_completed_rate_by_run": {
+            "attempt-01__shadow-test": 1.0,
+            "attempt-02__shadow-test": 1.0,
+            "attempt-03__shadow-test": 1.0
+          },
+          "subprocess_completed_rate_avg": 1.0,
+          "temp_path_fragment_violation_run_count": 0,
+          "tests_md_missing_run_count": 0
+        },
+        "thresholds_summary": {
+          "pass_count": 0,
+          "fail_count": 0,
+          "status": "not_configured"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      },
+      {
+        "at_utc": "2026-05-08T14:50:20Z",
+        "suite_id": "20260508-ct01",
+        "runs_count": 3,
+        "kpis": {
+          "test_bundle_count_by_run": {
+            "attempt-01__shadow-test": 5,
+            "attempt-02__shadow-test": 3,
+            "attempt-03__shadow-test": 3
+          },
+          "subprocess_completed_rate_by_run": {
+            "attempt-01__shadow-test": 1.0,
+            "attempt-02__shadow-test": 1.0,
+            "attempt-03__shadow-test": 1.0
+          },
+          "subprocess_completed_rate_avg": 1.0,
+          "temp_path_fragment_violation_run_count": 1,
+          "tests_md_missing_run_count": 0
+        },
+        "thresholds_summary": {
+          "pass_count": 0,
+          "fail_count": 0,
+          "status": "not_configured"
+        },
+        "sanitization_summary": {
+          "pass_count": 2,
+          "fail_count": 0,
+          "status": "pass",
+          "violation_count": 0
+        }
+      }
+    ],
+    "delta_vs_prev": {
+      "subprocess_completed_rate_avg": 0.0,
+      "temp_path_fragment_violation_run_count": 1.0,
+      "sanitization_violation_count": 0.0
+    },
+    "regression_flags": []
+  }
+}

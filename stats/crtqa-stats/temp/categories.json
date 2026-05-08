@@ -1,0 +1,82 @@
+[
+  {
+    "id": "xt_platform_baseline",
+    "name": "XT Platform Baseline",
+    "description": "Work inherited from DXtrade XT platform behavior that Corner depends on."
+  },
+  {
+    "id": "corner_product_delta",
+    "name": "Corner Product Delta",
+    "description": "Corner-specific behavior layered on top of the XT baseline."
+  },
+  {
+    "id": "integration_connectivity",
+    "name": "Integration and Connectivity",
+    "description": "Dependencies on external systems and transport layers."
+  },
+  {
+    "id": "surface_dxtrade5",
+    "name": "Surface: dxTrade5",
+    "description": "Work focused on dxTrade5 client behavior."
+  },
+  {
+    "id": "surface_webbroker",
+    "name": "Surface: WebBroker",
+    "description": "Work focused on WebBroker-specific behavior."
+  },
+  {
+    "id": "surface_adaptive",
+    "name": "Surface: Adaptive",
+    "description": "Work focused on Adaptive/mobile shell behavior."
+  },
+  {
+    "id": "functional_order_entry",
+    "name": "Functional: Order Entry",
+    "description": "Order entry flows and input validation behavior."
+  },
+  {
+    "id": "functional_order_processing",
+    "name": "Functional: Order Processing",
+    "description": "Order lifecycle handling after submission."
+  },
+  {
+    "id": "functional_positions",
+    "name": "Functional: Positions",
+    "description": "Position calculation and position-related flows."
+  },
+  {
+    "id": "functional_order_book",
+    "name": "Functional: Order Book",
+    "description": "Order book views, actions, filters, and related coverage."
+  },
+  {
+    "id": "functional_market_data_fx",
+    "name": "Functional: Market Data and FX",
+    "description": "Market data, instrument behavior, and FX spot scenarios."
+  },
+  {
+    "id": "functional_settlement_metrics",
+    "name": "Functional: Settlement and Metrics",
+    "description": "Cash settlement and calculation-heavy metrics behavior."
+  },
+  {
+    "id": "qa_requirements_analysis",
+    "name": "QA Lane: Requirements Analysis",
+    "description": "Requirements analysis work that defines coverage scope."
+  },
+  {
+    "id": "qa_test_case_development",
+    "name": "QA Lane: Test Case Development",
+    "description": "Coverage drafting and TCD work before execution."
+  },
+  {
+    "id": "qa_epic_validation",
+    "name": "QA Lane: Epic Validation",
+    "description": "Validation-stage execution and closure checks."
+  },
+  {
+    "id": "qa_e2e_automation",
+    "name": "QA Lane: E2E Automation",
+    "description": "E2E implementation and stabilization work."
+  }
+]
