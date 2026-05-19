@@ -93,7 +93,9 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         "export_version": export_version,
         "last_source_branch": source_branch,
         "last_source_sha": source_sha,
-        "last_run_utc": __import__("datetime").datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "last_run_utc": __import__("datetime")
+        .datetime.now(__import__("datetime").timezone.utc)
+        .strftime("%Y-%m-%dT%H:%M:%SZ"),
         "validation_log": "clean_apply_public + clean_verify public",
         "notes": "Guide-only export per docs/clean-public-style.md",
     }
@@ -116,6 +118,11 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         "docs/dxcore-console-harness.json",
         "docs/dxtrade5-harness",
         "docs/webbroker-harness",
+        ".cursor/calibrate",
+        ".cursor/commands",
+        ".cursor/prompts",
+        "automation",
+        "stats",
     ):
         p = root / heavy
         if p.is_dir():
@@ -139,21 +146,35 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         "4. Do not expect runnable automation from this repository alone.\n",
         encoding="utf-8",
     )
+    (root / "epics/README.md").write_text(
+        "# Epics layout (guide)\n\n"
+        "Use `epics/templates/` for JSON schemas. "
+        "Create `epics/<YOUR-KEY>/` locally with artefacts from pipeline readmes.\n",
+        encoding="utf-8",
+    )
     (root / "AGENTS.md").write_text(
         "# AGENTS.md (public guide)\n\n"
         "Short map for coding agents. Open `docs/harness-map.json` for keyword routing. "
         "Full playbooks are intentionally omitted; use `*-readme.md` files instead.\n",
         encoding="utf-8",
     )
-    for org in (
-        "docs/project.json",
-        "docs/qa-project.json",
-        "docs/corner-platform-map.json",
-    ):
-        p = root / org
-        if p.is_file():
-            p.unlink()
+    docs_keep = {
+        "clean-public-style.md",
+        "public-export-manifest.json",
+        "public-export-manifest.example.json",
+    }
+    docs_dir = root / "docs"
+    if docs_dir.is_dir():
+        for p in list(docs_dir.rglob("*")):
+            if p.is_file() and p.name not in docs_keep:
+                p.unlink(missing_ok=True)
+        for p in sorted(docs_dir.rglob("*"), key=lambda x: len(x.parts), reverse=True):
+            if p.is_dir() and not any(p.iterdir()):
+                p.rmdir()
 
+    rules_dir = root / ".cursor/rules"
+    if rules_dir.is_dir():
+        shutil.rmtree(rules_dir, ignore_errors=True)
     router = root / ".cursor/rules/pipeline-router.mdc"
     router.parent.mkdir(parents=True, exist_ok=True)
     router.write_text(

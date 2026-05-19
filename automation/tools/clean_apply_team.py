@@ -46,6 +46,27 @@ def apply(root: Path) -> None:
     clean_md = root / ".cursor/pipelines/clean.md"
     if clean_md.is_file():
         clean_md.unlink()
+    router = root / ".cursor/rules/pipeline-router.mdc"
+    if router.is_file():
+        text = router.read_text(encoding="utf-8")
+        lines = [
+            ln
+            for ln in text.splitlines()
+            if "CLEAN:" not in ln and "clean.md" not in ln and "clean_pipeline" not in ln
+        ]
+        # Remove hard rule about CLEAN only on personal
+        filtered = []
+        skip = False
+        for ln in lines:
+            if ln.strip().startswith("5. **`CLEAN:`**"):
+                skip = True
+                continue
+            if skip and ln.strip().startswith("6."):
+                skip = False
+            if skip:
+                continue
+            filtered.append(ln)
+        router.write_text("\n".join(filtered) + "\n", encoding="utf-8")
     for t in team.get("transform_paths", []):
         src = root / t["path"]
         dst = root / t["target"]

@@ -301,26 +301,34 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
     return _ok("team")
 
 
+def _allowed_blocklist_path(rel: str, allow_globs: list[str]) -> bool:
+    if "epics/templates" in rel:
+        return True
+    for g in allow_globs:
+        if fnmatch(rel, g) or fnmatch(Path(rel).name, g):
+            return True
+    return False
+
+
 def _rg_blocklist(root: Path, contract: dict[str, Any]) -> int:
     block = contract.get("blocklist", {})
-    patterns = block.get("rg_patterns", [])
+    patterns = [re.compile(p, re.I) for p in block.get("rg_patterns", [])]
     allow = block.get("rg_allow_globs", [])
-    glob_args: list[str] = []
-    for g in allow:
-        glob_args.extend(["--glob", f"!{g}"])
+    compiled = patterns
 
-    skip_dirs = {".git", "epics/templates"}
-    for pattern in patterns:
-        cmd = ["rg", "-n", pattern, str(root), *glob_args]
-        r = subprocess.run(cmd, capture_output=True, text=True, check=False)
-        if r.returncode == 0 and r.stdout.strip():
-            for line in r.stdout.strip().splitlines():
-                path_part = line.split(":", 1)[0] if ":" in line else line
-                if any(s in path_part.replace("\\", "/") for s in skip_dirs):
-                    continue
-                if path_part.endswith(".example.json"):
-                    continue
-                return _fail(f"blocklist hit {pattern!r}: {line}")
+    for rel in _git_tracked_files(root):
+        if _allowed_blocklist_path(rel, allow):
+            continue
+        path = root / rel
+        if not path.is_file():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        for rx in compiled:
+            if rx.search(text):
+                return _fail(f"blocklist hit {rx.pattern!r} in {rel}")
     return 0
 
 
