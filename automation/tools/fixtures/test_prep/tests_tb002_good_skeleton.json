@@ -1,0 +1,37 @@
+{
+  "schema_version": 4,
+  "epic_key": "FIXTURE",
+  "sources": {
+    "draft_profile": "crtqa_outline",
+    "generation_mode": true
+  },
+  "jira_test_search": {
+    "skipped": true
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-002",
+      "covers_check_ids": ["chk-005", "chk-006"],
+      "draft": {
+        "preconditions": ["See -precon.md cluster pc-001."],
+        "actions": [
+          "c01 — use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "c02 — use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; partial close sell <qty> at <price>; show position_metrics_from_publisher",
+          "c03 — repeat ladder through zero cross twice; show position_metrics_from_publisher after each leg",
+          "c04 — close against average position price; show position_metrics_from_publisher; verify realized P/L [oracle:TBD]",
+          "c05 — opening-side adds only affect average; show position_metrics_from_publisher [oracle:TBD]"
+        ],
+        "results": [
+          "Average resets per CRT-1740 after zero cross. [CRT-1740]",
+          "Partial close uses opening-side average only. [CRT-1740]",
+          "Multiple zero crossings reset opening window. [CRT-1740]",
+          "Realized P/L from average not FIFO opening match. [CRT-1740]",
+          "Opening trades only contribute to average. [CRT-1738]"
+        ],
+        "peculiarities": ["Literary templates only; no live execution during PREP."]
+      }
+    }
+  ]
+}

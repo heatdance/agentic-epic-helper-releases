@@ -54,7 +54,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, benchmarks
 
 **Undecided expected values:** Use **`[TBD]`** (or playbook equivalents) where output is not yet decided.
 
-**Checklist IDs vs quality:** `reverse_validation.coverage_gaps` can be empty while **topic-level** E2E quality is still wrong—**chk** completeness is necessary, not sufficient (future metrics may tighten this).
+**Checklist IDs vs quality:** `reverse_validation.coverage_gaps` can be empty while **topic-level** E2E quality is still wrong—**chk** completeness is necessary, not sufficient. **TEST-PREP v3.1** adds mechanical gates (`test_prep_verify.py`: one Action/Result per `case_outline` row for ladder/rounding bundles, duplicate-action detection, excluded primary ↔ `coverage_gaps[]`, plan class lint)—still not sufficient for human-test gold quality.
 
 **Obligations handoff (EPIC-PREP → COVERAGE):** **EPIC-PREP** emits **`obligations_proposed[]`** (ref schema v4) from per-requirement subprocesses — invariants, ladders, rounding, etc. **COVERAGE** must **row-complete** every **`primary_candidate`** in **`obligations_coverage`** (coverage schema v2) as a **primary** check, keyed deferral, or **`excluded_checks_with_reason`** — not blanket Dimensions `!` lines. Verifiers: [`epic_prep_verify.py`](../automation/tools/epic_prep_verify.py), [`coverage_verify.py`](../automation/tools/coverage_verify.py). **Production** pipelines **must not** ingest CRTQA tests or bench JSON except in **benchmark** mode (both tokens on the trigger).
 

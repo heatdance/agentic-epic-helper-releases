@@ -12,106 +12,111 @@ This workspace uses **Cursor** with Jira and Confluence so people and agents can
 
 ---
 
-## 1. Stats (CRTQA Test Case Development time)
+## 1. Stats (CRTQA Test Case Development time) — v4
 
-**Purpose:** Measure **% time saved** on done **Test Case Development** work (CRTQA tasks under CRT epics where you are test lead) when using the **agentic epic helper** (this workspace), against a **manual baseline corpus** from earlier non-AI work. The report is descriptive only—**association, not causation**.
+**Purpose:** Measure time saved on done **Test Case Development** (CRTQA TCD under CRT epics where you are test lead) when using the **agentic epic helper**, vs a **manual corpus** and vs **draft estimates**. Draft hours come from Jira **`customfield_11250`**; **Devex SP** = draft ÷ 8. **Association, not causation.**
+
+**Which mode**
+
+| Mode | When |
+|------|------|
+| `initial_assessment` | First baseline: all done TCD tasks for your epics |
+| `incremental_update` | Routine: only **new** done tasks since last run (report still refreshes if there are none) |
+| `full_refresh` | Re-pull Jira for the **same** included keys (redo assessment, fix draft/logged fields, or after v4 upgrade) — epic roles unchanged unless you re-attest |
 
 **Workflow (conceptual)**
 
-1. **First run (`initial_assessment`)** — Pull all done TCD tasks; confirm the key list; for **each epic**, say whether it was **already AI-assisted** (yes → **comparison**, not corpus; no → **corpus** baseline). Classify tasks (FE / BE / API / … and story-point size). Build medians and `latest.md`.
-2. **Later runs (`incremental_update`)** — Add newly done tasks; confirm each as AI-assisted (default yes). Compare new hours to corpus medians.
-3. **Reading results** — **% saved** appears only where the corpus has **≥ 4** tasks in that category (or category×size cell). Sparse categories show “benchmark pending” for that row only; other categories still report normally.
+1. Confirm **included CRTQA keys**; per epic on first run: **already AI-assisted?** (yes → **comparison**, no → **corpus**).
+2. Ingest **draft** (`customfield_11250`) and **logged** (`timetracking.time_spent`). Do **not** use `timetracking.original_estimate` for draft or size.
+3. Agent (or you) runs rollup: `python automation/tools/crtqa_stats_rollup.py --append-longitudinal`.
+
+**Reading [`stats/crtqa-stats/latest.md`](stats/crtqa-stats/latest.md)**
+
+1. Header — **`report_profile`** (`task_detail` \| `directional` \| `benchmark`) and what the run can claim.
+2. **Task-level** table — draft vs logged, **vs draft** hours, **attribution** (`estimate_only` vs corpus-backed).
+3. Charts — draft vs logged (always when draft exists); corpus benchmark chart when n≥4 manual tasks in a category.
+4. Benchmark tables — **% saved vs corpus** only when corpus **≥ 4** in that category×size; otherwise “benchmark pending” for that row only.
 
 **How to run it**
 
-- Run **`/crtqa-stats`** with **`mode=initial_assessment|incremental_update|full_refresh`** and **`jira_user=<your Jira user>`** (for example `mode=initial_assessment jira_user=arodzevich`).
-- Answer **confirmations** (included keys) and **epic attestation** (already AI-assisted?) on the first run; on incremental, confirm **new keys** and AI use per task.
-- After the agent writes state, rollup runs: `python automation/tools/crtqa_stats_rollup.py --append-longitudinal` → updates [`stats/crtqa-stats/latest.md`](stats/crtqa-stats/latest.md).
+```
+/crtqa-stats mode=initial_assessment jira_user=<you>
+/crtqa-stats mode=incremental_update jira_user=<you>
+/crtqa-stats mode=full_refresh jira_user=<you>
+```
 
-**Docs:** [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) · [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md)
+Playbook: [`.cursor/commands/crtqa-stats.md`](.cursor/commands/crtqa-stats.md). Rollup details: [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md). Operator summary: [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md).
+
+**Git:** `latest.md` is committed; `stats/crtqa-stats/state/` and `raw/` are local (gitignored).
 
 ---
 
 ## 2. Pipelines (QA work per Epic)
 
-**Purpose:** Turn an Epic into a **chain of structured artifacts** agents (and you) can reuse: a grounded map of requirements and context, an end-to-end checklist of what must be verified, optional gap analysis, discovery and precondition maps, drafted regression tests linked to that checklist, and optionally **Close** (documentation integrity + archive). **No** live app, MCP, or Playwright is required for Close. **Public scrub** and **harness sync** are separate tracks for **publishing** and for **keeping docs and triggers aligned**—not for day-to-day Epic QA.
+**Purpose:** Build a reusable artifact chain per Epic—requirements map, verification checklist, optional gap analysis, discovery/precondition maps, draft regression tests, optional **Close** (integrity + archive). Close does not run the app or Playwright.
 
-**Workflow (conceptual, in order)**
+**Typical order**
 
-1. **Prep** — Gather Jira/Confluence (and optional code pointers) into a single structured **epic map** the next steps can trust.
-2. **Coverage** — Draft a **scenario-style checklist** that covers the feature end to end, aligned to that map.
-3. **Analysis** (optional) — Coverage-grounded **gap audit**; optional **`known_issues=yes`** to reconcile Jira and append **`>`** lines on coverage.
-4. **Test Discovery** — After coverage, map obligations and environment needs into **`-discover.json`** (see [checklist](#discovery-precondition--prep-checklist) below). Phase 0 must pass before the file is written.
-5. **Test Precondition** (optional) — Author environment setup and **`test_skeleton[]`** into **`-precon.json`** + **`-precon.md`** for Test Prep; same operator prep as Test Discovery.
-6. **Test Prep** — Turn checklist items into **executable-outline** draft test cases (default **`crtqa_outline`**; optional **`draft_profile=teaching`**); uses the same [Discovery / Precondition / Prep checklist](#discovery-precondition--prep-checklist) when UI exploration is required.
-7. **Close** (optional) — Backward integrity ladder on JSON artefacts, optional mechanical fixes, regenerate four human **`.md`** files, then archive all JSON under **`epics/<KEY>/context/`**.
+| Step | Trigger | Main output |
+|------|---------|-------------|
+| 1 | `EPIC-PREP:` | `epics/<KEY>/<KEY>-ref.json` |
+| 2 | `COVERAGE:` | `-coverage.json` / `-coverage.md` |
+| 3 | `ANALYSE:` (optional) | `-analysis.json` / `-analysis.md` |
+| 4 | `TEST-DISCOVER:` | `-discover.json` |
+| 5 | `TEST-PRECON:` (optional) | `-precon.json` / `-precon.md` |
+| 6 | `TEST-PREP:` | `-tests.json` / `-tests.md` |
+| 7 | `CLOSE:` (optional) | JSON → `context/`; four `.md` at epic root |
 
-**Parallel tracks**
+Run **one Epic per chat**. Paste the trigger and key on the first line, for example: `COVERAGE: CRT-639`.
 
-- **Public scrub** — Prepare a **sanitized** copy of the tree for **public** export; use only on the **`release`** branch as defined in team practice.
-- **Harness sync** — Reconcile triggers, maps, and entry-point docs after harness changes; use only on **`develop`** or **`main`**, not on **`release`**.
+### Trigger reference
 
-**How to run pipelines**
+| Trigger | Needs (under `epics/<KEY>/`) | Optional on same line |
+|---------|------------------------------|----------------------|
+| `EPIC-PREP:` *KEY* | — | `repo=`, `focus=` |
+| `COVERAGE:` *KEY* | `-ref.json` | `repo=`, `focus=` |
+| `ANALYSE:` *KEY* | `-coverage.json` | `known_issues=yes`, `resolve=no`, `include_closed=yes` |
+| `TEST-DISCOVER:` *KEY* | `-ref.json`, `-coverage.json` | FE creds (below), `proceed`, `fe_exploration_waived=yes`, `crtqa_index=yes`, `discover_override=yes` |
+| `TEST-PRECON:` *KEY* | `-coverage.json` | Same FE tokens; SHOULD `-discover.json`, `-ref.json` |
+| `TEST-PREP:` *KEY* | `-coverage.json` (obligations_coverage) | Same FE tokens; SHOULD `-precon.json`; `map_only=yes`, `draft_profile=teaching` |
+| `CLOSE:` *KEY* | `-ref`, `-coverage`, `-discover`, `-precon`, `-tests` at epic root | `heal=no` (default: apply fixes) |
+| `CLEAN:` | — | `scope=full` (default) \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** |
 
-Open a Cursor chat scoped to this repo and send **one Epic per message** unless you intentionally widen scope. Use these **exact line prefixes** plus the Epic key (for example `CRT-1234`):
+Playbooks: [.cursor/pipelines/](.cursor/pipelines/). Layout: [epics/README.md](epics/README.md). For benchmark shadow runs, add `benchmark_suite=` and `benchmark_attempt=` on the same line (see [§3](#3-benchmark-repeatability-and-variance)).
 
-| Action | What to type |
-|--------|----------------|
-| Prep | **`EPIC-PREP:`** *Epic key* — optional **`repo=`** / **`focus=`**; emits **obligations** (ref v4) |
-| Coverage | **`COVERAGE:`** *Epic key* — requires **`-ref.json`**; optional **`repo=`** / **`focus=`**; **obligations_coverage** (v2) |
-| Analysis | **`ANALYSE:`** *Epic key* — requires **`-coverage.json`**; optional **`known_issues=yes`** (default off), **`resolve=no`**, **`include_closed=yes`** (with known_issues) |
-| Test Discovery | **`TEST-DISCOVER:`** *Epic key* |
-| Test Precondition | **`TEST-PRECON:`** *Epic key* |
-| Test Prep | **`TEST-PREP:`** *Epic key* |
-| Close epic | **`CLOSE:`** *Epic key* — optional **`heal=no`** (default: apply mechanical fixes); requires full artifact set at epic root |
-| Public scrub | **`PUBLIC-SCRUB:`** — optional **`version=`**, **`source=`** — **only on `release`** |
-| Harness sync | **`SYNC:`** — optional **`scope=`** — **only on `develop` or `main`** |
+**Publish track:** **`CLEAN:`** aligns harness pointers, pushes **`personal`**, updates [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team` branch via PR after bootstrap), and publishes **`public-M.N`** to [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases). Not for day-to-day Epic QA.
 
-Optional tokens on the **same line** as the trigger (see [checklist](#discovery-precondition--prep-checklist)): **`repo=`**, **`focus=`**, **`map_only=yes`**, **`discover_override=yes`**, **`crtqa_index=yes`** (Test Discovery), **`skip_cold_gate=yes`** (Test Precondition), **`benchmark_suite=`** / **`benchmark_attempt=`** (benchmark runs).
+### Operator prep (Discovery, Precondition, Prep)
 
-### Discovery, Precondition & Prep checklist
+Do **once per session**, then run `TEST-DISCOVER:` → `TEST-PRECON:` → `TEST-PREP:` in separate chats (recommended order).
 
-One Epic per chat. Run **environment** steps once per session, then run Test Discovery, Test Precondition, and/or Test Prep in **separate** chats (recommended order: Discovery → Precondition → Prep).
+1. **Postgres tunnel** (leave open):  
+   `python automation/tools/tunnel/ctqa_pg.py YOUR_AD_USER@ctqa.prosp.devexperts.com`  
+   Reload **postgres-ctqa** MCP — [tunnel README](automation/tools/tunnel/README.md).
+2. **Console:** `/crtqa-console start` (SSH password in dialog, ~30s).
+3. **Check:** `/crtqa-env` — fix any FAIL before pipelines.
+4. **Chrome:** enable **chrome-devtools** MCP when dxTrade5 or WebBroker is in scope ([fe-ui-probe-contract](docs/fe-ui-probe-contract.json)). Configured ≠ logged in.
 
-**Environment (steps 1–3)**
+**FE credentials** — append to the trigger line when UI is in scope (never commit secrets to the repo):
 
-1. **Postgres tunnel** — leave open: `python automation/tools/tunnel/ctqa_pg.py YOUR_AD_USER@ctqa.prosp.devexperts.com` ([tunnel README](automation/tools/tunnel/README.md)). Reload **`postgres-ctqa`** MCP in Cursor.
-2. **Console** — **`/crtqa-console start`** (SSH password in the desktop dialog, ~30s).
-3. **Environment check** — **`/crtqa-env`** — fix any FAIL before running the pipelines below.
+| Token | Meaning |
+|-------|---------|
+| `dxtrade5_creds=<user>/<password>` | CTQA retail |
+| `webbroker_creds=<user>/<password>` | CTQA dealer |
+| `fe_exploration_waived=yes` | After Phase 0b stop + your ack — shell-only UI |
+| `proceed` | After Phase 0 infra stop — re-run Phase 0, then continue |
 
-**Chrome (step 4)** — enable **`chrome-devtools`** MCP when the epic needs dxTrade5 or WebBroker. Configured ≠ logged in ([fe-ui-probe-contract](docs/fe-ui-probe-contract.json)).
+Example: `TEST-DISCOVER: CRT-639 dxtrade5_creds=USER/PASS webbroker_creds=USER/PASS` — reuse the same suffix for `TEST-PRECON:` and `TEST-PREP:`.
 
-**FE credentials (steps 5–6)** — same tokens on the trigger line for **Test Discovery**, **Test Precondition**, and **Test Prep** when UI is in scope:
+**Adaptive** has no cred token (CTQA shared principal) — [corner-platform-map](docs/corner-platform-map.json).
 
-| Token | Use |
-|-------|-----|
-| `dxtrade5_creds=<user>/<password>` | CTQA retail login |
-| `webbroker_creds=<user>/<password>` | CTQA dealer login |
-| `fe_exploration_waived=yes` | After Phase **0b** stop + ack — UI depth capped at login shell only |
-| `proceed` | After Phase **0** tunnel/console stop — re-run Phase **0**, then continue |
+**Exploration depth:** Phase 0c is login smoke only; Precondition drills setup; Prep opens verification grids before drafting ([exploration-depth-ladder](docs/exploration-depth-ladder.json)).
 
-**Adaptive** has no cred token (CTQA shared principal on `/adaptive/`) — see [corner-platform-map](docs/corner-platform-map.json) `adaptive_login_policy`.
+**If Phase 0 stops:** add cred tokens or `fe_exploration_waived=yes`; for tunnel/console failures, fix infra and resend with `proceed`.
 
-Example (replace user/password; **never** commit or paste into repo files):
+### After Close
 
-`TEST-DISCOVER: CRT-639 dxtrade5_creds=YOUR_USER/YOUR_PASSWORD webbroker_creds=YOUR_USER/YOUR_PASSWORD`
-
-Use the same cred suffix for **`TEST-PRECON:`** and **`TEST-PREP:`**.
-
-**Triggers (step 7)** — one line per chat:
-
-| Pipeline | Line prefix | Prerequisites |
-|----------|-------------|---------------|
-| Test Discovery | **`TEST-DISCOVER:`** *Epic key* | `-ref.json`, `-coverage.json` |
-| Test Precondition | **`TEST-PRECON:`** *Epic key* | `-coverage.json`; SHOULD `-discover.json`, `-ref.json` |
-| Test Prep | **`TEST-PREP:`** *Epic key* (`shape_ref=benchmark` only with benchmark tokens) | `-coverage.json` with **obligations_coverage**; SHOULD `-precon.json` |
-| Close epic | **`CLOSE:`** *Epic key* (optional **`heal=no`**) | `-ref.json`, `-coverage.json`, `-discover.json`, `-precon.json`, `-tests.json` at epic root |
-
-**Exploration depth** ([exploration-depth-ladder](docs/exploration-depth-ladder.json)): login smoke is not enough. Test Precondition drills setup UI/forms; Test Prep opens verification grids (**8a¾**) before drafting tests. Allow longer runs when creds are supplied.
-
-**If Phase 0 stops** — missing creds: re-send the trigger with cred tokens or **`fe_exploration_waived=yes`**; tunnel/console: fix infra, then same pipeline with **`proceed`** (repeat cred tokens if UI still applies).
-
-**Closed epics (`CLOSE:` completed)** — After **`CLOSE:`**, JSON artefacts live under **`epics/<KEY>/context/`**; only four human files remain at **`epics/<KEY>/`**: **`-coverage.md`**, **`-analysis.md`**, **`-tests.md`**, **`-precon.md`**. Rerunning **`EPIC-PREP:`**, **`COVERAGE:`**, or other upstream pipelines on a closed epic **will fail or write to wrong paths** unless you move JSON back to the epic root (or use a fresh folder). **`CLOSE:`** is the terminal archive step for that epic folder.
+When `CLOSE:` has run, JSON lives under `epics/<KEY>/context/`. Only these stay at epic root: `-coverage.md`, `-analysis.md`, `-tests.md`, `-precon.md`. Do not rerun upstream pipelines unless you restore JSON to the epic root first.
 
 ---
 
@@ -123,6 +128,7 @@ Use the same cred suffix for **`TEST-PRECON:`** and **`TEST-PREP:`**.
 
 **How to run it**
 
-- In the coordinating chat, run **`/crtqa-benchmark`** and follow the prompts.
-- For each row the hub gives you, open a **new** chat, paste the **single line** it provides (it will include the usual **`EPIC-PREP:`**, **`COVERAGE:`**, **`ANALYSE:`**, **`TEST-DISCOVER:`**, **`TEST-PRECON:`**, **`TEST-PREP:`**, or **`CLOSE:`** trigger plus **`benchmark_suite=`** and **`benchmark_attempt=`** when applicable).
+- In the coordinating chat, run `**/crtqa-benchmark`** and follow the prompts.
+- For each row the hub gives you, open a **new** chat, paste the **single line** it provides (it will include the usual `**EPIC-PREP:`**, `**COVERAGE:**`, `**ANALYSE:**`, `**TEST-DISCOVER:**`, `**TEST-PRECON:**`, `**TEST-PREP:**`, or `**CLOSE:**` trigger plus `**benchmark_suite=**` and `**benchmark_attempt=**` when applicable).
 - Finish with the hub’s **finalize** instructions so results are **checked and compared** across attempts.
+

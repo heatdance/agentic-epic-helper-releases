@@ -21,7 +21,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | **dxTrade5 web UI** agent map (concept → IA → locations; T1 **`dxtrade5_harness`**) | [docs/dxtrade5-harness/](docs/dxtrade5-harness/) — [README](docs/dxtrade5-harness/README.md), [dxtrade5-harness.json](docs/dxtrade5-harness/dxtrade5-harness.json), [concept-map.json](docs/dxtrade5-harness/concept-map.json) |
 | **WebBroker dealer web UI** agent map (concept → IA → locations; T1 **`webbroker_harness`**) | [docs/webbroker-harness/](docs/webbroker-harness/) — [README](docs/webbroker-harness/README.md), [webbroker-harness.json](docs/webbroker-harness/webbroker-harness.json), [concept-map.json](docs/webbroker-harness/concept-map.json) |
 | **Harness doctrine** (generation vs benchmark, coverage vs E2E, reference ownership) | [docs/harness-principles.md](docs/harness-principles.md) |
-| Public export manifest (example; live file on `release` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
+| Public export manifest (example; live file on `public-*` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
 ### Deliverables and references
 
@@ -36,7 +36,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` v4 obligations; `epic_prep_verify.py`; optional `repo=` / `focus=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` v2 `obligations_coverage`; `coverage_verify.py`; optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:` v2; `analysis_verify.py`; optional `known_issues=yes` / `resolve=no`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:` optional benchmark tokens / `crtqa_index=yes`; CRTQA index off in generation by default; optional inline FE cred hints—**not** in durable JSON), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:` v5; Phase 2b `case_outline`; Phase 4R/4D/4C), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` v3 executable outline default; `shape_ref=benchmark` **benchmark-only**; 8b per check; 8c merge; [test_prep_verify.py](automation/tools/test_prep_verify.py) `plan`/`explore`/`draft`/`merge`/`tests`; [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json)), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:` optional `heal=no`; archive to `context/`; [close_verify.py](automation/tools/close_verify.py)), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `prompts` / `templates` / `tools` / `mcp` — **develop** / **`main`** only; not for **`release`**) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:`), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:`), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:`), [`clean.md`](.cursor/pipelines/clean.md) (`CLEAN:` — **`personal` only**; align + publish team/public; [clean_verify.py](automation/tools/clean_verify.py)) |
 
 ### Epics
 
@@ -60,6 +60,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | CTQA **`dx run console`** (SSH/plink) · slash **`/crtqa-console`** (`start` \| `status` \| `probe` \| `stop`) | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) · `Start-` / `Get-CrtqaConsoleStatus` / `Invoke -Probe` / `Stop-`; interactive: `Enter-CrtqaConsole.ps1` |
 | **jq** JSON projection (system PATH; agent inspect) | [automation/docs/jq.md](automation/docs/jq.md) · `winget install --id jqlang.jq -e` (Windows); rule [`.cursor/rules/jq-json.mdc`](.cursor/rules/jq-json.mdc) |
 | Agent scratch / temp | [automation/temp/](automation/temp/) |
+| **CRTQA TCD stats (v4)** | [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) · `/crtqa-stats` [crtqa-stats.md](.cursor/commands/crtqa-stats.md) · rollup [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py) · [crtqa-stats.md (tool)](automation/docs/crtqa-stats.md) — corpus vs comparison; draft `customfield_11250`; `latest.md` + gitignored `state/` |
 
 ### Cursor
 
@@ -67,13 +68,14 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
-| Custom commands (**`/crtqa-env`**, **`/crtqa-console`**, **`/crtqa-stats`**, **`/crtqa-benchmark`**) | [.cursor/commands/](.cursor/commands/) — env [crtqa-env.md](.cursor/commands/crtqa-env.md); console [crtqa-console.md](.cursor/commands/crtqa-console.md); TCD stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md) (corpus vs comparison, [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py)); benchmark hub [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md) (**questionnaire**, **`CONTROL_HUB.md`**, **`DONE_HANDOFF_PROMPT.md`**, **`FINALIZE_PROMPT.md`** → narratives under **`.cursor/benchmark/run-results/<run-key>/`**) + [benchmark_verify.py](automation/tools/benchmark_verify.py) / [benchmark_aggregate.py](automation/tools/benchmark_aggregate.py); [stats/crtqa-stats/](stats/crtqa-stats/) |
+| Custom commands (**`/crtqa-env`**, **`/crtqa-console`**, **`/crtqa-stats`**, **`/crtqa-benchmark`**, **`/clean`**) | [.cursor/commands/](.cursor/commands/) — env [crtqa-env.md](.cursor/commands/crtqa-env.md); console [crtqa-console.md](.cursor/commands/crtqa-console.md); stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md); benchmark [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md); publish [clean.md](.cursor/commands/clean.md) |
 | EPIC-PREP verifier | [epic_prep_verify.py](automation/tools/epic_prep_verify.py) · [automation/docs/epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
 | COVERAGE verifier | [coverage_verify.py](automation/tools/coverage_verify.py) · [automation/docs/coverage-verify.md](automation/docs/coverage-verify.md) |
 | ANALYSE verifier | [analysis_verify.py](automation/tools/analysis_verify.py) · [automation/docs/analysis-verify.md](automation/docs/analysis-verify.md) |
 | TEST-DISCOVER verifier | [discover_verify.py](automation/tools/discover_verify.py) · [automation/docs/discover-verify.md](automation/docs/discover-verify.md) |
 | TEST-PREP verifier | [test_prep_verify.py](automation/tools/test_prep_verify.py) · [automation/docs/test-prep-verify.md](automation/docs/test-prep-verify.md) |
 | CLOSE verifier | [close_verify.py](automation/tools/close_verify.py) · [automation/docs/close-verify.md](automation/docs/close-verify.md) · [close_archive.py](automation/tools/close_archive.py) |
+| CLEAN verifier | [clean_verify.py](automation/tools/clean_verify.py) · [clean-verify.md](automation/docs/clean-verify.md) · helpers `clean_file_map.py`, `clean_apply_team.py`, `clean_apply_public.py` |
 | Humans: Cursor + main processes | [HOW-TO.md](HOW-TO.md) |
 | CTQA Postgres MCP | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
 | Chrome DevTools MCP (**`chrome-devtools`**, ad-hoc UI) | [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md); merge into `.cursor/mcp.json` — see [`.cursor/mcp.json.example`](.cursor/mcp.json.example) |

@@ -16,8 +16,8 @@
 6. Phase **8a½**: plan + **`case_outline[]`** per bundle → `--mode plan` (max 3).
 7. Phase **8a¾**: verification exploration per bundle → `--mode explore` (max 2 per bundle).
 8. Phase **8b**: draft per bundle **or** per **`check_id`** (split rule); **no** parent-chat one-shot.
-9. Phase **8c**: merge per-check drafts → `--mode merge`.
-10. **8b-verify** per bundle; emit → `--mode tests` → delete `temp/`.
+9. Phase **8c**: merge per-check drafts → `--mode merge` (**`--plan` required**).
+10. **8b-verify** per bundle (`--mode draft` + **`--plan`**); emit → `--mode tests` + **`--plan`** → delete `temp/`.
 
 ## Subprocess 8a½ (plan)
 
@@ -29,7 +29,7 @@
 
 **Input:** `case_outline[]` slice, `session_placeholders`, `command_patterns`, 8a¾ labels, `results_only_context`.
 
-**crtqa_outline:** expand every case; ladder templates with `<placeholders>`; forbidden whole-scenario TBD.
+**crtqa_outline:** one numbered Action/Result **per `case_outline` row**; `command_patterns.ladder_step` lines are **sub-bullets inside** that action (not separate numbered pairs). See **`expansion_policy`** in TBD contract. Ladder templates use `<placeholders>`; forbidden whole-scenario TBD.
 
 **teaching:** legacy illustration_budget cap.
 

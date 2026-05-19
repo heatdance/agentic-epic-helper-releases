@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "sources": {
+    "jira_fetched_at": "2026-05-19T12:33:19Z",
+    "ref_path": "epics/CRT-639/CRT-639-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-639/CRT-639-coverage.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "note": "known_issues=no; resolve attempted for nested rounding (not found in CT search pass)"
+  },
+  "summary": {
+    "text": "Verify weighted-average cash settlement P/L for FOREX FX_SPOT when Functional Configuration selects WeightedAvg (CRT-1741): CRT-1740 average fill with zero-crossing reset, CRT-1738 realized versus open interplay, CRT-1743 mark-minus-average open P/L, and CRT-1742 gross percent denominators—observed on dxTrade5, WebBroker, and Adaptive.",
+    "derived_from": [
+      "coverage.epic_verification_focus"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "kind": "deferred_check",
+      "confidence": "high",
+      "summary": "CRT-1738 ladder check defers cent-level numeric oracle until XT-7911 (calculation_contract deferred_ambiguous).",
+      "pointers": {
+        "check_id": "chk-004",
+        "requirement_key": "CRT-1738"
+      },
+      "evidence": "checks[chk-004].calculation_contract=deferred_ambiguous; checks[chk-004].ambiguity.reason",
+      "recommended_action": "ignore_for_discover",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-002",
+      "kind": "deferred_check",
+      "confidence": "high",
+      "summary": "Ambiguity section reiterates XT-7911 block on locking CRT-1738 worked-table numerics.",
+      "pointers": {
+        "check_id": "chk-016",
+        "requirement_key": "CRT-1738"
+      },
+      "evidence": "checks[chk-016].ambiguity.reason; traversal.cross_epic XT-7911 in ref",
+      "recommended_action": "ignore_for_discover",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-003",
+      "kind": "human_ba",
+      "confidence": "high",
+      "summary": "CRT-1738 Yogi snippet cites rounding rules for average price, realized PL, and open PL but nested requirement keys are not resolved in coverage nested_requirement_refs.",
+      "pointers": {
+        "check_id": "chk-012",
+        "requirement_key": "CRT-1738",
+        "obligation_id": "obl-010"
+      },
+      "evidence": "ref.requirements[CRT-1738].snippet_text rounding placeholders; checks[chk-012].ambiguity",
+      "recommended_action": "human_ba",
+      "status": "open"
+    },
+    {
+      "id": "gap-004",
+      "kind": "human_ba",
+      "confidence": "medium",
+      "summary": "Open P/L check requires documenting mark price source (mid/bid/ask/last) but environment-specific mark path is not specified in coverage or Jira.",
+      "pointers": {
+        "check_id": "chk-008",
+        "requirement_key": "CRT-1743"
+      },
+      "evidence": "checks[chk-008].scenario_line mark feed wording",
+      "recommended_action": "human_ba",
+      "status": "open"
+    },
+    {
+      "id": "gap-005",
+      "kind": "human_ba",
+      "confidence": "medium",
+      "summary": "Functional Configuration procedure to assign WeightedAvg for FX_SPOT is not spelled as executable console/UI steps in coverage (TBD mapping).",
+      "pointers": {
+        "check_id": "chk-002",
+        "requirement_key": "CRT-1741",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "checks[chk-002].scenario_line; no implementation_hits for functional config UI",
+      "recommended_action": "human_ba",
+      "status": "open"
+    }
+  ],
+  "resolved_gaps": [],
+  "exploration_suppressed": [
+    {
+      "check_id": "chk-004",
+      "reason": "deferred_in_check",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-012",
+      "reason": "keyed deferral per obligations_coverage / nested rounding unresolved",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-016",
+      "reason": "deferred_in_check",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    }
+  ],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": "Structural CRT-1738 ladder + WeightedAvg FX_SPOT metrics; defer locked numerics until XT-7911; resolve rounding nested Yogi keys before hard rounding pass/fail.",
+    "human_notes": []
+  },
+  "questions": [],
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "Loaded coverage v2 + ref v4; known_issues=no resolve=yes."
+    },
+    {
+      "step": "2",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "Work queue: 3 deferred/ambiguity checks, 0 ungrounded, 0 nested_req_unresolved rows, 0 anti_patterns."
+    },
+    {
+      "step": "3",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "5 mechanical/derived gaps (2 confirmed deferred, 3 human_ba open)."
+    },
+    {
+      "step": "4b",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "Confluence search for CRT-1738 nested rounding keys: no resolvable Yogi keys found; gap-003 remains open."
+    },
+    {
+      "step": "5",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "exploration_suppressed for chk-004, chk-012, chk-016."
+    },
+    {
+      "step": "10",
+      "at": "2026-05-19T12:33:19Z",
+      "action": "Emit analysis json/md."
+    }
+  ]
+}

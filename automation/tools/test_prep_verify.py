@@ -47,6 +47,9 @@ POSITION_METRICS_RE = re.compile(r"show\s+position_metrics_from_publisher", re.I
 PLACEHOLDER_RE = re.compile(r"<[a-z_]+>", re.I)
 ORACLE_TBD_RE = re.compile(r"\[oracle:TBD\]", re.I)
 
+SINGLE_PAIR_CLASSES = frozenset({"stateful_ladder", "rounding_matrix"})
+SINGLE_PAIR_PATTERN_REFS = frozenset({"ladder_step"})
+
 
 def _load_json(path: Path) -> dict[str, Any] | None:
     try:
@@ -115,6 +118,138 @@ def _case_outline_for_check(plan_row: dict[str, Any]) -> list[dict[str, Any]]:
         if isinstance(item, dict):
             out.append(item)
     return out
+
+
+def _normalize_action_line(line: str) -> str:
+    return re.sub(r"\s+", " ", str(line).strip()).lower()
+
+
+def _bundle_plan_rows(plan: dict[str, Any], bundle_id: str) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    for pb in plan.get("bundles") or []:
+        if not isinstance(pb, dict) or str(pb.get("bundle_id")) != bundle_id:
+            continue
+        for row in pb.get("verification_plan") or []:
+            if isinstance(row, dict):
+                rows.append(row)
+    return rows
+
+
+def _bundle_case_outline_count(plan: dict[str, Any], bundle_id: str) -> int:
+    total = 0
+    for row in _bundle_plan_rows(plan, bundle_id):
+        total += len(_case_outline_for_check(row))
+    return total
+
+
+def _bundle_requires_single_pair(plan: dict[str, Any], bundle_id: str) -> bool:
+    for row in _bundle_plan_rows(plan, bundle_id):
+        if str(row.get("verification_class") or "") in SINGLE_PAIR_CLASSES:
+            return True
+        for item in _case_outline_for_check(row):
+            if str(item.get("pattern_ref") or "") in SINGLE_PAIR_PATTERN_REFS:
+                return True
+    return False
+
+
+def _verify_outline_cardinality(
+    act: list[str],
+    res: list[str],
+    plan: dict[str, Any],
+    bundle_id: str,
+) -> list[str]:
+    errors: list[str] = []
+    if not _bundle_requires_single_pair(plan, bundle_id):
+        return errors
+    expected = _bundle_case_outline_count(plan, bundle_id)
+    if expected <= 0:
+        return errors
+    if len(act) != expected:
+        errors.append(
+            f"bundle {bundle_id}: actions count {len(act)} != case_outline rows {expected} "
+            "(single_pair_per_case_outline_row; ladder_step lines are sub-bullets, not separate pairs)"
+        )
+    if len(res) != expected:
+        errors.append(
+            f"bundle {bundle_id}: results count {len(res)} != case_outline rows {expected}"
+        )
+    return errors
+
+
+def _verify_no_duplicate_actions(actions: list[str], bundle_id: str) -> list[str]:
+    errors: list[str] = []
+    if len(actions) < 2:
+        return errors
+    normalized = [_normalize_action_line(a) for a in actions]
+    unique = set(normalized)
+    if len(unique) < len(actions):
+        errors.append(
+            f"bundle {bundle_id}: duplicate action lines detected "
+            f"({len(actions)} actions, {len(unique)} unique); expand one pair per case_outline row"
+        )
+    return errors
+
+
+def _rule_matches(
+    chk: dict[str, Any],
+    rule: dict[str, Any],
+    plan_row: dict[str, Any] | None = None,
+) -> bool:
+    match = rule.get("match") or {}
+    if match.get("fallback"):
+        return True
+
+    scenario = str(chk.get("scenario_line") or "")
+    section = str(chk.get("section") or "")
+    cc = str(chk.get("calculation_contract") or "")
+
+    cc_rule = match.get("calculation_contract")
+    if cc_rule is not None and cc == str(cc_rule):
+        return True
+
+    scenario_pats = list(match.get("scenario_regex_any") or [])
+    section_pats = list(match.get("section_regex_any") or [])
+    surfaces_req = list(match.get("surfaces_any") or [])
+
+    scenario_hit = bool(scenario_pats) and any(
+        re.search(p, scenario, re.I) for p in scenario_pats
+    )
+    section_hit = bool(section_pats) and any(re.search(p, section, re.I) for p in section_pats)
+
+    if scenario_pats and section_pats:
+        matched = scenario_hit or section_hit
+    elif scenario_pats:
+        matched = scenario_hit
+    elif section_pats:
+        matched = section_hit
+    else:
+        matched = False
+
+    if not matched:
+        return False
+
+    if surfaces_req:
+        obs: list[str] = []
+        if plan_row:
+            obs.extend(str(s).lower() for s in (plan_row.get("observation_surfaces") or []))
+        combined = f"{scenario} {section}".lower()
+        return any(s.lower() in obs or s.lower() in combined for s in surfaces_req)
+
+    return True
+
+
+def _expected_verification_class(
+    chk: dict[str, Any],
+    reg: dict[str, Any],
+    plan_row: dict[str, Any] | None = None,
+) -> tuple[str, int]:
+    machine = reg.get("selection_rules_machine") or []
+    rules = [r for r in machine if isinstance(r, dict)]
+    rules.sort(key=lambda r: int(r.get("priority") or 999))
+    for rule in rules:
+        if _rule_matches(chk, rule, plan_row):
+            return str(rule.get("class") or "journey_smoke"), int(rule.get("priority") or 99)
+    return "journey_smoke", 99
 
 
 def _forbidden_tbd_errors(text: str, prefix: str) -> list[str]:
@@ -291,6 +426,31 @@ def verify_plan(
                             errors.append(
                                 f"plan {bid} chk {cid}: case_outline[{i}] missing {field}"
                             )
+
+                chk = checks_map.get(cid) or {}
+                expected_class, expected_priority = _expected_verification_class(
+                    chk, reg, row
+                )
+                override = str(row.get("selection_override_reason") or "").strip()
+                actual_class = str(row.get("verification_class") or "")
+                if not override and actual_class != expected_class:
+                    errors.append(
+                        f"plan {bid} chk {cid}: verification_class {actual_class!r} "
+                        f"!= expected {expected_class!r} (priority {expected_priority}); "
+                        "set selection_override_reason to document override"
+                    )
+                doc_priority = row.get("selection_rule_priority")
+                if not override and doc_priority is not None:
+                    try:
+                        if int(doc_priority) != expected_priority:
+                            errors.append(
+                                f"plan {bid} chk {cid}: selection_rule_priority {doc_priority} "
+                                f"!= expected {expected_priority} for {expected_class}"
+                            )
+                    except (TypeError, ValueError):
+                        errors.append(
+                            f"plan {bid} chk {cid}: selection_rule_priority must be integer"
+                        )
 
     for cid, bids in planned_checks.items():
         if len(bids) > 1:
@@ -569,6 +729,11 @@ def verify_draft_bundle(
                 f"bundle {bundle_id}: actions count {len(act)} < plan min_case_count sum {total_min}"
             )
 
+        if plan:
+            errors.extend(_verify_outline_cardinality(act, res, plan, bundle_id))
+            if _bundle_requires_single_pair(plan, bundle_id):
+                errors.extend(_verify_no_duplicate_actions(act, bundle_id))
+
     if "doc_or_pr_only" in vclasses:
         body = "\n".join(act)
         if EXECUTION_TRADE_RE.search(body):
@@ -652,17 +817,19 @@ def verify_merge(
             continue
         bid = str(b.get("bundle_id") or "")
         act = _draft_section(b, "actions")
+        res = _draft_section(b, "results")
         rows = plan_by_bundle.get(bid) or []
         total_min = 0
         for row in rows:
-            cid = str(row.get("check_id") or "")
-            chk = {}  # coverage optional at merge
             vclass = str(row.get("verification_class") or "")
             total_min += int(
                 row.get("min_case_count")
                 or _min_case_count(vclass, None, reg, profiles)
             )
-        if total_min and len(act) < total_min:
+        if _bundle_requires_single_pair(plan or {}, bid):
+            errors.extend(_verify_outline_cardinality(act, res, plan or {}, bid))
+            errors.extend(_verify_no_duplicate_actions(act, bid))
+        elif total_min and len(act) < total_min:
             errors.append(
                 f"merge {bid}: actions {len(act)} < expected min {total_min} after 8c"
             )
@@ -690,11 +857,26 @@ def verify_tests_emit(
             covered.add(str(cid))
 
     gaps = tests.get("reverse_validation") or {}
-    gap_ids = {
-        str(g["check_id"])
-        for g in (gaps.get("coverage_gaps") or [])
-        if isinstance(g, dict) and g.get("check_id")
-    }
+    gap_rows = [
+        g for g in (gaps.get("coverage_gaps") or []) if isinstance(g, dict) and g.get("check_id")
+    ]
+    gap_ids = {str(g["check_id"]) for g in gap_rows}
+    gap_by_id = {str(g["check_id"]): g for g in gap_rows}
+
+    for row in tests.get("excluded_checks_with_reason") or []:
+        if not isinstance(row, dict):
+            continue
+        cid = str(row.get("check_id") or "")
+        if not cid or cid not in primary:
+            continue
+        if cid not in gap_by_id:
+            errors.append(
+                f"emit: excluded primary {cid} must have reverse_validation.coverage_gaps[] row"
+            )
+        elif not str(gap_by_id[cid].get("reason") or "").strip():
+            errors.append(
+                f"emit: coverage_gaps[{cid}] missing reason (mirror excluded_checks_with_reason)"
+            )
 
     for cid in in_scope:
         if cid not in covered and cid not in gap_ids:
@@ -720,6 +902,12 @@ def verify_tests_emit(
             errors.extend(_forbidden_tbd_errors(body, f"emit {bid}"))
             if CRTQA_KEY_RE.search(body):
                 errors.append(f"emit {bid}: CRTQA keys in draft")
+            if plan:
+                act = _draft_section(b, "actions")
+                res = _draft_section(b, "results")
+                errors.extend(_verify_outline_cardinality(act, res, plan, bid))
+                if _bundle_requires_single_pair(plan, bid):
+                    errors.extend(_verify_no_duplicate_actions(act, bid))
 
     for w in warnings:
         print(f"warning: {w}", file=sys.stderr)
@@ -784,16 +972,22 @@ def main() -> int:
             print(f"cannot read tests: {args.tests}", file=sys.stderr)
             return 2
         plan = _load_json(args.plan.resolve()) if args.plan else None
+        if _plan_profile(plan or {}, tests) == "crtqa_outline" and plan is None:
+            print("--plan required for mode draft when draft_profile=crtqa_outline", file=sys.stderr)
+            return 2
         errors = verify_draft_bundle(coverage, tests, args.bundle_id, plan)
     elif args.mode == "merge":
-        if not args.tests:
-            print("--tests required for mode merge", file=sys.stderr)
+        if not args.tests or not args.plan:
+            print("--tests and --plan required for mode merge", file=sys.stderr)
             return 2
         tests = _load_json(args.tests.resolve())
         if tests is None:
             print(f"cannot read tests: {args.tests}", file=sys.stderr)
             return 2
-        plan = _load_json(args.plan.resolve()) if args.plan else None
+        plan = _load_json(args.plan.resolve())
+        if plan is None:
+            print(f"cannot read plan: {args.plan}", file=sys.stderr)
+            return 2
         errors = verify_merge(tests, plan)
     else:
         if not args.tests:
@@ -804,6 +998,10 @@ def main() -> int:
             print(f"cannot read tests: {args.tests}", file=sys.stderr)
             return 2
         plan = _load_json(args.plan.resolve()) if args.plan else None
+        profile = _plan_profile(plan or {}, tests)
+        if profile == "crtqa_outline" and plan is None:
+            print("--plan required for mode tests when draft_profile=crtqa_outline", file=sys.stderr)
+            return 2
         errors = verify_tests_emit(coverage, tests, plan)
 
     if errors:

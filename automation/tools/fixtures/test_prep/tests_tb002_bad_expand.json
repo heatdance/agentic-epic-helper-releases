@@ -1,0 +1,80 @@
+{
+  "schema_version": 4,
+  "epic_key": "FIXTURE",
+  "sources": {
+    "draft_profile": "crtqa_outline",
+    "generation_mode": true
+  },
+  "jira_test_search": {
+    "skipped": true
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-002",
+      "covers_check_ids": ["chk-005", "chk-006"],
+      "draft": {
+        "preconditions": ["See -precon.md cluster pc-001."],
+        "actions": [
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc",
+          "show order last",
+          "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "show position_metrics_from_publisher",
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc",
+          "show order last",
+          "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "show position_metrics_from_publisher",
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc",
+          "show order last",
+          "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "show position_metrics_from_publisher",
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc",
+          "show order last",
+          "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "show position_metrics_from_publisher",
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc",
+          "show order last",
+          "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "show position_metrics_from_publisher",
+          "use <account_code>",
+          "buy <qty> <instrument_symbol> at <price> gtc"
+        ],
+        "results": [
+          "Account selected.",
+          "Order placed.",
+          "Order visible.",
+          "Trade completed template.",
+          "Metrics shown [oracle:TBD].",
+          "Account selected.",
+          "Order placed.",
+          "Order visible.",
+          "Trade completed template.",
+          "Metrics shown [oracle:TBD].",
+          "Account selected.",
+          "Order placed.",
+          "Order visible.",
+          "Trade completed template.",
+          "Metrics shown [oracle:TBD].",
+          "Account selected.",
+          "Order placed.",
+          "Order visible.",
+          "Trade completed template.",
+          "Metrics shown [oracle:TBD].",
+          "Account selected.",
+          "Order placed.",
+          "Order visible.",
+          "Trade completed template.",
+          "Metrics shown [oracle:TBD].",
+          "Extra padding action."
+        ],
+        "peculiarities": []
+      }
+    }
+  ]
+}

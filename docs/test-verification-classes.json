@@ -145,5 +145,99 @@
       "when": "default fallback for primary chk"
     }
   ],
-  "_selection_note": "Agent applies rules in priority order using coverage check row + optional discover obligation row; document choice in verification_plan[].selection_rule_priority."
+  "_selection_note": "Agent applies rules in priority order using coverage check row + optional discover obligation row; document choice in verification_plan[].selection_rule_priority.",
+  "selection_rules_machine": [
+    {
+      "priority": 15,
+      "class": "rounding_matrix",
+      "match": {
+        "scenario_regex_any": [
+          "rounding",
+          "decimal places",
+          "7 dp",
+          "floor rule"
+        ]
+      }
+    },
+    {
+      "priority": 20,
+      "class": "settlement_stress",
+      "match": {
+        "scenario_regex_any": ["settlement"],
+        "section_regex_any": ["Cash settlement"]
+      }
+    },
+    {
+      "priority": 30,
+      "class": "invariant_under_change",
+      "match": {
+        "scenario_regex_any": [
+          "group change",
+          "does not affect existing",
+          "\\binvariant\\b"
+        ]
+      }
+    },
+    {
+      "priority": 40,
+      "class": "stateful_ladder",
+      "match": {
+        "calculation_contract": "ladder_present",
+        "scenario_regex_any": [
+          "ladder",
+          "weighted-average ladder",
+          "weighted average ladder"
+        ]
+      }
+    },
+    {
+      "priority": 50,
+      "class": "derived_metric",
+      "match": {
+        "scenario_regex_any": [
+          "Open P/L",
+          "% P/L",
+          "% PL",
+          "recalculate",
+          "formula"
+        ]
+      }
+    },
+    {
+      "priority": 60,
+      "class": "cross_surface_parity",
+      "match": {
+        "scenario_regex_any": [
+          "parity",
+          "matching",
+          "same three metrics"
+        ],
+        "surfaces_any": ["dxtrade5", "webbroker", "adaptive"]
+      }
+    },
+    {
+      "priority": 70,
+      "class": "config_posture",
+      "match": {
+        "scenario_regex_any": [
+          "configuration",
+          "instrument posture",
+          "WeightedAvg configuration"
+        ],
+        "section_regex_any": [
+          "configuration",
+          "instrument posture",
+          "Functional configuration"
+        ]
+      }
+    },
+    {
+      "priority": 99,
+      "class": "journey_smoke",
+      "match": {
+        "fallback": true
+      }
+    }
+  ],
+  "_selection_rules_machine_note": "test_prep_verify.py --mode plan recomputes class from coverage row; mismatch errors unless verification_plan[].selection_override_reason is set. doc_or_pr_only omitted (needs discover)."
 }

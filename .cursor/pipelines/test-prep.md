@@ -74,9 +74,10 @@ Before loading **`-coverage.json`** (required), **`-precon.json`**, **`-discover
 
 ### CRTQA outline (default `draft_profile=crtqa_outline`)
 
-- **Actions / Results**: numbered **1:1** pairs — expand **every** **`case_outline[]`** row from plan (merged from PRECON + 8a½).
+- **Actions / Results**: numbered **1:1** pairs — **one** top-level pair per **`case_outline[]`** row from plan (merged from PRECON + 8a½). **Anti-pattern (v3.1):** do **not** emit one numbered pair per line of **`command_patterns.ladder_step`** — those lines are **sub-bullets inside** the single action for that row ([`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json) **`expansion_policy.single_pair_per_case_outline_row`**; applies to **`stateful_ladder`**, **`rounding_matrix`**, **`pattern_ref: ladder_step`**).
 - **`[TBD]`**: only session literals (`<account_code>`, …) and tagged gaps (`[oracle:TBD]`, `[attach:TBD]`) per [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json). **Forbidden:** whole-scenario deferrals (`[TBD: ladder]`, bare `[TBD]`).
-- **`stateful_ladder`**: use **`command_patterns.ladder_step`** from **`-precon.json`** with placeholders; include **`execution trade`** template lines (not executed by agent).
+- **`stateful_ladder`**: use **`command_patterns.ladder_step`** from **`-precon.json`** with placeholders inside each row’s action; include **`execution trade`** template lines (not executed by agent).
+- **Plan class:** `verification_plan[].verification_class` must match machine rules in [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) **`selection_rules_machine`** unless **`selection_override_reason`** is set; document **`selection_rule_priority`**.
 - **Yogi / requirement tags** — **only** in **`draft.results[]`**; orchestrator passes **`results_only_context`** to subprocess.
 - **Peculiarities**: formulas; FE labels from **8a¾** `metric_columns` / `widgets_seen`; no Yogi tags.
 
@@ -289,6 +290,8 @@ Same as v2 path scrub on durable-bound staging; append **`validation_log`**: **`
 
 ### 8b-verify. Draft verifier (per bundle, max 2 retries)
 
+**Requires `--plan`** (v3.1: outline cardinality + duplicate-action gates for ladder/rounding bundles).
+
 ```powershell
 python automation/tools/test_prep_verify.py --mode draft `
   --coverage {EpicDir}<KEY>-coverage.json `
@@ -297,7 +300,7 @@ python automation/tools/test_prep_verify.py --mode draft `
   --plan {EpicDir}temp/test-prep-plan.json
 ```
 
-On fail: re-run **8b** for that bundle only.
+On fail: re-run **8b** for that bundle only (fix expansion: one pair per **`case_outline`** row, not per **`ladder_step`** line).
 
 ### 9–10. Reverse validation and anti-patterns
 
@@ -310,8 +313,11 @@ Same as v1; add anti-pattern **`crtqa_structural_dependency_in_generation`**, **
 ```powershell
 python automation/tools/test_prep_verify.py --mode tests `
   --coverage {EpicDir}<KEY>-coverage.json `
-  --tests {EpicDir}<KEY>-tests.json
+  --tests {EpicDir}<KEY>-tests.json `
+  --plan {EpicDir}temp/test-prep-plan.json
 ```
+
+(Use the same **`test-prep-plan.json`** used for **8a½**–**8c**; **required** for **`crtqa_outline`** emit — exclusion ↔ **`coverage_gaps[]`**, outline cardinality.)
 
 Write **`-tests.md`** and **`-tests.json`**. When **`map_only`**: include verification plan summary table from temp plan; note map-only.
 

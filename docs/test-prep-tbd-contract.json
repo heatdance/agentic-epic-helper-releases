@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "_comment": "TBD allowlist/forbidden patterns for TEST-PREP crtqa_outline profile. Agent executes templates only—no live execution trade during PREP.",
+  "schema_version": 2,
+  "_comment": "TBD allowlist/forbidden patterns for TEST-PREP crtqa_outline profile. Agent executes templates only—no live execution trade during PREP. v3.1: expansion_policy.",
   "profile": "crtqa_outline",
   "tbd_allowlist": {
     "session_literals": [
@@ -53,6 +53,20 @@
       "message": "Use case_outline + <fixture_window> placeholder instead."
     }
   ],
+  "expansion_policy": {
+    "single_pair_per_case_outline_row": {
+      "applies_when": {
+        "pattern_ref_any": ["ladder_step"],
+        "verification_class_any": ["stateful_ladder", "rounding_matrix"]
+      },
+      "rules": [
+        "One top-level numbered Action and one numbered Result per case_outline[] row.",
+        "command_patterns.ladder_step lines are sub-steps inside that Action (bullets or indented lines), not separate numbered pairs.",
+        "Results summarize observable metrics for the row; use [oracle:TBD] for deferred numerics."
+      ],
+      "anti_pattern": "Do not emit N numbered Action/Result pairs for N lines in command_patterns.ladder_step."
+    }
+  },
   "command_patterns": {
     "ladder_step": [
       "use <account_code>",

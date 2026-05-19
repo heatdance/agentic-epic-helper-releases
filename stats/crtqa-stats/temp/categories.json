@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "categories": [
     {
       "id": "fe",
@@ -54,29 +54,36 @@
     {
       "id": "sp_lt_1",
       "label": "< 1 SP",
-      "sp_min": null,
-      "sp_max": 0.99
+      "draft_hours_min": null,
+      "draft_hours_max": 7.99,
+      "devex_sp_max": 0.99
     },
     {
       "id": "sp_1_2",
       "label": "1–2 SP",
-      "sp_min": 1,
-      "sp_max": 2
+      "draft_hours_min": 8,
+      "draft_hours_max": 16,
+      "devex_sp_min": 1,
+      "devex_sp_max": 2
     },
     {
       "id": "sp_3_plus",
       "label": "3+ SP",
-      "sp_min": 3,
-      "sp_max": null
+      "draft_hours_min": 16.01,
+      "draft_hours_max": null,
+      "devex_sp_min": 3,
+      "devex_sp_max": null
     },
     {
       "id": "sp_unknown",
       "label": "SP unknown",
-      "sp_min": null,
-      "sp_max": null
+      "draft_hours_min": null,
+      "draft_hours_max": null
     }
   ],
-  "jira_story_points": {
-    "field_note": "Agent MUST resolve via jira_get_issue on one CRTQA TCD sample; store resolved id in state.jira_field_map.story_points — do not invent."
-  }
+  "jira_draft_estimate": {
+    "field_id": "customfield_11250",
+    "field_note": "Draft estimate in working hours on CRTQA TCD issues. Do not use timetracking.original_estimate."
+  },
+  "devex_sp_hours_per_point": 8
 }

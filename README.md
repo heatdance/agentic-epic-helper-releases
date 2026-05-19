@@ -9,12 +9,10 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 | Branch | Remote | Role |
 |--------|--------|------|
 | **`personal`** | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (`origin`) | **Personal production** — day-to-day work: epics, stats, benchmark runs, temp, and harness changes. Commit and push here first. |
-| **`team`** | same private repo (`origin`) | **Team private share** — same pipelines and harness shape as `personal`, intended **without** personal epics, CRTQA stats corpus, or scratch paths (promotion workflow TBD). Not updated on every personal push. |
-| **`public-1.1`** (etc.) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public export** — sanitized tree for knowledge sharing (incomplete / non-operational artifacts, corporate data removed). Semver branch per export (e.g. `public-1.1`). Updated only via [`PUBLIC-SCRUB:`](.cursor/pipelines/public-scrub.md) while checked out on the target **`public-*`** branch — never commit scrub results on `personal` or `team`. |
+| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness without personal epics, stats corpus, or scratch. Updated via **`CLEAN:`** (PR to `team` after bootstrap). |
+| **`public-M.N`** (e.g. `public-1.2`) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public guide export** — methodology and template shapes only. Updated only via **`CLEAN:`** from **`personal`**. |
 
-**Checkout (private repo):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
-
-**Legacy:** Remote may still list `develop` / `main` from the old naming; local rename was `develop` → `personal`, `main` → `team`, `release-1.1.0` → `public-1.1`. Harness playbooks may still mention `develop` / `main` / `release` until a doc pass aligns them.
+**Checkout (personal):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
 
 ## Start here
 
@@ -50,16 +48,19 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `TEST-PRECON:` + Epic key | [test-precon.md](.cursor/pipelines/test-precon.md) v5 — [exploration-depth-ladder.json](docs/exploration-depth-ladder.json); Phase 4R/4D/4C; [precon_verify.py](automation/tools/precon_verify.py) `--discover` |
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) — v3 executable outlines (default); `shape_ref=benchmark` benchmark-only; [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json) |
 | `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — optional; documentation integrity ladder + archive to `context/`; **no** MCP |
-| `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=personal` or `source=team` (playbook may still say `develop`/`main`); **checkout target `public-*` on `releases` first**; public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`public-*` only** |
-| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **`personal`** or **`team`** only (playbook may still say `develop`/`main`) — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)), AGENTS, README, [HOW-TO.md](HOW-TO.md), qa-artifacts (not for **`public-*`**) |
+| `CLEAN:` | [clean.md](.cursor/pipelines/clean.md) — optional `scope=full` \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** — align harness, push personal, publish team + public ([clean-verify.md](automation/docs/clean-verify.md)) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
-**Public export**: Manifest field reference for automation — [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on `personal`/`team`; live `docs/public-export-manifest.json` exists only on **`public-*`** after a scrub run).
+**Public export**: [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on `personal`/`team`; live manifest on **`public-*`** after **`CLEAN:`**).
 
 ## Stats (CRTQA TCD)
 
-- [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`**: manual **corpus** baseline vs **AI-assisted comparison**, category + SP strata, **% saved** when corpus n≥4; [`crtqa_stats_rollup.py`](automation/tools/crtqa_stats_rollup.py).
+Measure ROI of the agentic epic helper on done **Test Case Development** work: **manual corpus** vs **AI-assisted comparison**, sized by **draft estimate hours** (not Jira Story Points).
+
+- Operator steps: [HOW-TO.md §1](HOW-TO.md) (modes, read order for `latest.md`).
+- Summary: [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`** playbook [crtqa-stats.md](.cursor/commands/crtqa-stats.md); rollup [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py) + [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md).
+- Output: committed [`stats/crtqa-stats/latest.md`](stats/crtqa-stats/latest.md); state under `stats/crtqa-stats/state/` (gitignored).
 
 ## Epics and templates
 

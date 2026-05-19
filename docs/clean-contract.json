@@ -1,0 +1,247 @@
+{
+  "_comment": "Normative contract for CLEAN: pipeline. Referenced by .cursor/pipelines/clean.md and automation/tools/clean_verify.py.",
+  "schema_version": 1,
+  "trigger": "CLEAN:",
+  "required_branch": "personal",
+  "ephemeral_dir": "automation/temp/clean/",
+  "retry_escalate_after": 10,
+  "remotes": {
+    "personal": {
+      "remote": "origin",
+      "url": "https://github.com/heatdance/agentic-epic-helper.git",
+      "branch": "personal"
+    },
+    "team": {
+      "remote": "team",
+      "url": "https://github.com/heatdance/agentic-epic-helper-team.git",
+      "branch": "team"
+    },
+    "public": {
+      "remote": "releases",
+      "url": "https://github.com/heatdance/agentic-epic-helper-releases.git",
+      "branch_pattern": "public-{major}.{minor}"
+    }
+  },
+  "semver": {
+    "branch_pattern": "public-{major}.{minor}",
+    "default_when_no_public_branch": "public-1.2",
+    "export_version_from_branch": "{major}.{minor}.0",
+    "auto_increment_minor": true,
+    "minor_max_before_gate": 9,
+    "legacy_branches_delete": ["release-1.0.0", "release-1.1.0"],
+    "trigger_tokens": {
+      "version": "version=M.N forces branch public-M.N",
+      "confirm_major": "confirm_major=yes required to create public-{major+1}.0 after public-M.9"
+    }
+  },
+  "phases": {
+    "S1": "file-map inventory",
+    "S2": "align harness pointers (former SYNC T0-T6)",
+    "P": "commit and push personal",
+    "T": "strip team tree and push or open PR",
+    "U": "sterilize public branch and push releases"
+  },
+  "team": {
+    "bootstrap": {
+      "allow_direct_push_when_remote_empty": true
+    },
+    "pr": {
+      "branch_prefix": "clean/",
+      "target_branch": "team",
+      "agent_must_not_merge": true
+    },
+    "delete_globs": [
+      "qa-handoff.md",
+      "epics/CRT-*",
+      "epics/CRT-*/*",
+      "temp/**",
+      "automation/temp/**",
+      ".cursor/benchmark/runs/**",
+      ".cursor/pipelines/clean.md",
+      "temp/crtqa-console/**",
+      "stats/crtqa-stats/latest.md",
+      "stats/crtqa-stats/raw/**",
+      "stats/crtqa-stats/state/**"
+    ],
+    "delete_paths": [
+      ".cursor/pipelines/test-exec.md"
+    ],
+    "keep_globs": [
+      ".cursor/pipelines/*.md",
+      ".cursor/prompts/**",
+      ".cursor/commands/**",
+      ".cursor/rules/**",
+      "epics/templates/**",
+      "epics/README.md",
+      "automation/tools/**",
+      "automation/docs/**",
+      "docs/**",
+      "stats/crtqa-stats/README.md",
+      "stats/crtqa-stats/temp/categories.json",
+      "AGENTS.md",
+      "README.md",
+      "HOW-TO.md",
+      ".gitignore",
+      ".cursor/mcp.json.example"
+    ],
+    "keep_exclude": [
+      ".cursor/pipelines/clean.md"
+    ],
+    "transform_paths": [
+      {
+        "path": "docs/project.json",
+        "action": "copy_to_example",
+        "target": "docs/project.example.json"
+      },
+      {
+        "path": "docs/qa-project.json",
+        "action": "copy_to_example",
+        "target": "docs/qa-project.example.json"
+      },
+      {
+        "path": "docs/corner-platform-map.json",
+        "action": "copy_to_example",
+        "target": "docs/corner-platform-map.example.json"
+      }
+    ],
+    "required_after_strip": [
+      "epics/templates/epic-ref.json",
+      "docs/harness-map.json",
+      "docs/harness-principles.md",
+      "HOW-TO.md",
+      ".cursor/rules/pipeline-router.mdc"
+    ],
+    "router": {
+      "exclude_triggers": ["CLEAN:"]
+    }
+  },
+  "public": {
+    "source_branch": "team",
+    "delete_globs": [
+      "qa-handoff.md",
+      "epics/CRT-*",
+      "epics/CRT-*/*",
+      ".cursor/pipelines/clean.md",
+      ".cursor/pipelines/*.md",
+      "automation/tools/*_verify.py",
+      "automation/tools/benchmark_verify.py",
+      "automation/tools/benchmark_aggregate.py",
+      "automation/tools/close_archive.py",
+      ".cursor/benchmark/**",
+      "stats/crtqa-stats/latest.md",
+      "temp/**",
+      "automation/temp/**"
+    ],
+    "keep_globs": [
+      ".cursor/pipelines/*-readme.md",
+      "epics/templates/**",
+      "epics/README.md",
+      "docs/**",
+      "automation/docs/**",
+      "AGENTS.md",
+      "README.md",
+      "HOW-TO.md",
+      ".cursor/rules/**",
+      ".cursor/prompts/**",
+      ".agents/**"
+    ],
+    "archetypes": [
+      {
+        "id": "pipeline_playbook",
+        "match": ".cursor/pipelines/*.md",
+        "exclude": ["clean.md", "*-readme.md"],
+        "action": "replace_with_readme",
+        "readme_suffix": "-readme.md"
+      },
+      {
+        "id": "verifier_scripts",
+        "match": "automation/tools/*_verify.py",
+        "action": "delete"
+      },
+      {
+        "id": "org_json",
+        "match": "docs/project.json",
+        "action": "stub_example_only",
+        "example": "docs/project.example.json"
+      },
+      {
+        "id": "org_json_qa",
+        "match": "docs/qa-project.json",
+        "action": "stub_example_only",
+        "example": "docs/qa-project.example.json"
+      },
+      {
+        "id": "org_json_platform",
+        "match": "docs/corner-platform-map.json",
+        "action": "stub_example_only",
+        "example": "docs/corner-platform-map.example.json"
+      }
+    ],
+    "required_readmes": [
+      "epic-prep",
+      "coverage",
+      "analysis",
+      "test-discover",
+      "test-precon",
+      "test-prep",
+      "close"
+    ],
+    "router": {
+      "exclude_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"],
+      "mode": "guide_only"
+    },
+    "manifest_path": "docs/public-export-manifest.json"
+  },
+  "blocklist": {
+    "path_patterns": ["secrets.properties", "**/crtqa-console.local.json", ".cursor/mcp.json", ".env"],
+    "rg_patterns": [
+      "jira\\.in\\.devexperts",
+      "confluence\\.in\\.devexperts",
+      "stash\\.in\\.devexperts",
+      "display-dev\\.dxfeed",
+      "devexperts",
+      "Corner Trader",
+      "corner trader",
+      "DXtrade",
+      "dxtrade",
+      "WebBroker",
+      "CRT-\\d+",
+      "CRTQA-\\d+",
+      "QAPORTAL",
+      "heatdance/agentic-epic-helper(?!-releases)"
+    ],
+    "rg_allow_globs": ["*.example", "*.example.json", "*-readme.md", "clean-contract.json", "clean-public-style.md", "clean-verify.md", "clean.md", "clean_verify.py"]
+  },
+  "align": {
+    "registry_pipeline_ids": [
+      "epic-prep",
+      "coverage",
+      "analysis",
+      "test-discover",
+      "test-precon",
+      "test-prep",
+      "close",
+      "clean"
+    ],
+    "stale_triggers_forbidden": ["PUBLIC-SCRUB:", "SYNC:", "PUBLIC-SCRUB", "SYNC"],
+    "stale_branch_names_forbidden_in_t1": ["develop", "main", "release"],
+    "t1_files": ["AGENTS.md", "README.md", "HOW-TO.md", ".cursor/rules/qa-artifacts.mdc"]
+  },
+  "benchmark": {
+    "_comment": "Paths may change when benchmark rework lands; update globs then.",
+    "team_keep_globs": [".cursor/benchmark/README.md", ".cursor/commands/crtqa-benchmark.md", "docs/benchmark-contract.md"],
+    "team_delete_globs": [".cursor/benchmark/runs/**", ".cursor/benchmark/run-results/**"]
+  },
+  "router_tiers": {
+    "personal": {
+      "include_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"]
+    },
+    "team": {
+      "exclude_triggers": ["CLEAN:"]
+    },
+    "public": {
+      "exclude_triggers": ["CLEAN:"],
+      "guide_only": true
+    }
+  }
+}

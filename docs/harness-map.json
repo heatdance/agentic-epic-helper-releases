@@ -574,52 +574,31 @@
           "mcp_hint": "Hub under .cursor/benchmark/runs/<suite_id>/; operator-driven suite. Finalize report under .cursor/benchmark/run-results/; report-only gate per harness-principles."
         },
         {
-          "id": "public_scrub_pipeline",
+          "id": "clean_pipeline",
           "keywords": [
-            "PUBLIC-SCRUB",
-            "PUBLIC-SCRUB:",
+            "CLEAN",
+            "CLEAN:",
+            "clean pipeline",
+            "publish harness",
+            "personal team public",
+            "agentic-epic-helper-team",
+            "agentic-epic-helper-releases",
+            "public-export",
+            "harness align",
+            "harness sync",
             "public scrub",
-            "public export",
-            "sanitize repo",
-            "release branch",
-            "public-export-manifest",
-            ".agents",
-            "dotagents",
-            "vendor neutral agent config"
+            "scope=align",
+            "clean_verify"
           ],
           "read": [
-            ".cursor/pipelines/public-scrub.md",
+            ".cursor/pipelines/clean.md",
+            "docs/clean-contract.json",
+            "docs/clean-public-style.md",
+            "automation/docs/clean-verify.md",
             "docs/public-export-manifest.example.json",
             "README.md"
           ],
-          "mcp_hint": "No MCP. Git only: checkout release, merge origin/develop or origin/main (source=), tiers A-D scrub, write docs/public-export-manifest.json on release only, .agents/ per dotagentsprotocol.com, V1 rg blocklist then V2 worktree re-run. version= sets semver; else patch bump from manifest. Never commit scrub on main/develop. Ephemeral automation/temp/public-scrub/ then delete."
-        },
-        {
-          "id": "sync_pipeline",
-          "keywords": [
-            "SYNC",
-            "SYNC:",
-            "harness sync",
-            "harness drift",
-            "drift",
-            "harness-registry",
-            "harness maintenance",
-            "keep AGENTS README in sync",
-            "pipeline router sync",
-            "scope=mcp",
-            "mcp.json",
-            "postgres-ctqa"
-          ],
-          "read": [
-            ".cursor/pipelines/sync.md",
-            ".cursor/rules/harness-maintenance.mdc",
-            ".cursor/rules/pipeline-router.mdc",
-            "AGENTS.md",
-            "README.md",
-            "HOW-TO.md",
-            "docs/harness-principles.md"
-          ],
-          "mcp_hint": "No Atlassian MCP. develop/main only—not release. scope=pipelines|prompts|templates|tools|mcp|full. Tiers T0-T6: router + harness-map + AGENTS + README + HOW-TO.md + qa-artifacts + prompts + epics templates + automation/tools + MCP (postgres-ctqa) doc parity in automation/tools/tunnel/README.md + AGENTS + README + rules inventory + harness-maintenance rg. V1: tunnel README still contains postgres-ctqa JSON snippet; no committed .cursor/mcp/ folder. Ephemeral automation/temp/sync/ then delete. Complements PUBLIC-SCRUB (release only)."
+          "mcp_hint": "No MCP. personal branch only. Phase S align (T0-T6), push origin/personal, team strip to team remote (bootstrap push once else gh PR, no merge), public-M.N on releases (semver_next, delete legacy release-*). clean_verify.py modes; automation/temp/clean/ ephemeral. Style: docs/clean-public-style.md; playbook readmes on public."
         }
       ]
     },

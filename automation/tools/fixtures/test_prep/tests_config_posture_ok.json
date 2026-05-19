@@ -1,0 +1,33 @@
+{
+  "schema_version": 4,
+  "epic_key": "FIXTURE",
+  "sources": {
+    "draft_profile": "crtqa_outline",
+    "generation_mode": true
+  },
+  "jira_test_search": {
+    "skipped": true
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "covers_check_ids": ["chk-001"],
+      "draft": {
+        "preconditions": ["See -precon.md."],
+        "actions": [
+          "Confirm FX_SPOT instrument mapped to WeightedAvg via Functional Configuration.",
+          "Record configuration row for reproducibility across surfaces.",
+          "Verify non-target families remain on FIFO defaults."
+        ],
+        "results": [
+          "WeightedAvg mapping confirmed. [CRT-1741]",
+          "Configuration row captured. [CRT-1741]",
+          "FIFO default unchanged on out-of-scope families. [CRT-1741]"
+        ],
+        "peculiarities": []
+      }
+    }
+  ]
+}
