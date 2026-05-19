@@ -2,13 +2,19 @@
 
 Devexperts QA working area for **Corner Trader**: templates, automation docs, and a Cursor harness for agent-assisted work (this repo is not necessarily the application source tree).
 
-## Branches (GitHub: [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper))
+## Branches
 
-| Branch | Role |
-|--------|------|
-| **`main`** | **Default** on GitHub — **stable** snapshots. Merge from `develop` (e.g. via PR) when a harness change set is ready to publish. |
-| **`develop`** | Integration branch for **new work**; commit and push here first, then promote to `main` when stable. |
-| **`release`** | **Public export** line: sanitized tree + semver manifest ([`docs/public-export-manifest.json`](docs/public-export-manifest.json), not on `main`/`develop`). Updated only via agent playbook [`PUBLIC-SCRUB:`](.cursor/pipelines/public-scrub.md) while checked out on **`release`** — do not commit scrub results on `main` or `develop`. First-time: `git fetch origin && git checkout -b release origin/develop` (see playbook). |
+Three tiers: **personal** (full workspace), **team** (shareable private harness without personal data), **public-*** (scrubbed knowledge export).
+
+| Branch | Remote | Role |
+|--------|--------|------|
+| **`personal`** | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (`origin`) | **Personal production** — day-to-day work: epics, stats, benchmark runs, temp, and harness changes. Commit and push here first. |
+| **`team`** | same private repo (`origin`) | **Team private share** — same pipelines and harness shape as `personal`, intended **without** personal epics, CRTQA stats corpus, or scratch paths (promotion workflow TBD). Not updated on every personal push. |
+| **`public-1.1`** (etc.) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public export** — sanitized tree for knowledge sharing (incomplete / non-operational artifacts, corporate data removed). Semver branch per export (e.g. `public-1.1`). Updated only via [`PUBLIC-SCRUB:`](.cursor/pipelines/public-scrub.md) while checked out on the target **`public-*`** branch — never commit scrub results on `personal` or `team`. |
+
+**Checkout (private repo):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
+
+**Legacy:** Remote may still list `develop` / `main` from the old naming; local rename was `develop` → `personal`, `main` → `team`, `release-1.1.0` → `public-1.1`. Harness playbooks may still mention `develop` / `main` / `release` until a doc pass aligns them.
 
 ## Start here
 
@@ -44,12 +50,12 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `TEST-PRECON:` + Epic key | [test-precon.md](.cursor/pipelines/test-precon.md) v5 — [exploration-depth-ladder.json](docs/exploration-depth-ladder.json); Phase 4R/4D/4C; [precon_verify.py](automation/tools/precon_verify.py) `--discover` |
 | `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) — v3 executable outlines (default); `shape_ref=benchmark` benchmark-only; [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json) |
 | `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — optional; documentation integrity ladder + archive to `context/`; **no** MCP |
-| `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
-| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)), AGENTS, README, [HOW-TO.md](HOW-TO.md), qa-artifacts (not for **`release`**) |
+| `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=personal` or `source=team` (playbook may still say `develop`/`main`); **checkout target `public-*` on `releases` first**; public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`public-*` only** |
+| `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **`personal`** or **`team`** only (playbook may still say `develop`/`main`) — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)), AGENTS, README, [HOW-TO.md](HOW-TO.md), qa-artifacts (not for **`public-*`**) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
-**Public export**: Manifest field reference for automation — [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on internal branches; live `docs/public-export-manifest.json` exists only on **`release`** after a scrub run).
+**Public export**: Manifest field reference for automation — [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) (example on `personal`/`team`; live `docs/public-export-manifest.json` exists only on **`public-*`** after a scrub run).
 
 ## Stats (CRTQA TCD)
 
