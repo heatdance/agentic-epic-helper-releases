@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply public-tier mechanical transforms (readmes, deletes) per clean-contract."""
+"""Apply public-tier mechanical transforms (readmes, deletes, template overlays) per clean-contract."""
 
 from __future__ import annotations
 
@@ -10,40 +10,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTRACT = REPO_ROOT / "docs/clean-contract.json"
-STYLE = REPO_ROOT / "docs/clean-public-style.md"
-
-README_TEMPLATE = """# {title} (guide)
-
-## Purpose
-{purpose}
-
-## When to use
-Trigger: `{trigger}` — configure in your own router after adapting this harness.
-
-## Inputs
-Generic artefacts under `epics/<KEY>/` per your template schemas.
-
-## Process steps
-1. Gather authoritative requirements from your issue tracker and wiki.
-2. Run phased agent or human steps aligned to your template JSON schemas.
-3. Verify with scripts you maintain (this export does not ship verifiers).
-
-## Outputs
-Structured JSON and markdown under `epics/<KEY>/` per your templates.
-
-## Build your own
-See `epics/templates/` and [docs/clean-public-style.md](../../docs/clean-public-style.md). Implement your own MCP and environment gates.
-"""
-
-PIPELINE_META = {
-    "epic-prep": ("Epic preparation", "Map requirements into epic ref JSON.", "EPIC-PREP:"),
-    "coverage": ("Coverage", "Draft end-to-end verification checklist.", "COVERAGE:"),
-    "analysis": ("Analysis", "Reconcile known issues with coverage.", "ANALYSE:"),
-    "test-discover": ("Test discovery", "Map obligations to environment needs.", "TEST-DISCOVER:"),
-    "test-precon": ("Test precondition", "Author setup and skeleton tests.", "TEST-PRECON:"),
-    "test-prep": ("Test preparation", "Draft regression test outlines.", "TEST-PREP:"),
-    "close": ("Close", "Documentation integrity and archive.", "CLOSE:"),
-}
+CONTENT_ROOT = REPO_ROOT / "docs/clean-public-content"
 
 
 def _load() -> dict:
@@ -51,43 +18,74 @@ def _load() -> dict:
         return json.load(f)
 
 
+def _copy_seed(root: Path, rel: str) -> None:
+    src = CONTENT_ROOT / rel
+    if not src.is_file():
+        raise FileNotFoundError(f"missing public content seed: {src}")
+    dest = root / rel
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(src, dest)
+
+
+def _apply_template_overlays(root: Path, contract: dict) -> None:
+    overlays = contract.get("public", {}).get("template_overlays", {})
+    for dest_rel, src_rel in overlays.items():
+        src = REPO_ROOT / src_rel
+        dest = root / dest_rel
+        if not src.is_file():
+            raise FileNotFoundError(f"template overlay source missing: {src}")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dest)
+
+
+def _delete_forbidden_paths(root: Path, contract: dict) -> None:
+    for rel in contract.get("public", {}).get("delete_paths", []):
+        p = root / rel
+        if p.is_file():
+            p.unlink()
+        elif p.is_dir():
+            shutil.rmtree(p, ignore_errors=True)
+
+
 def apply(root: Path, export_version: str, source_branch: str, source_sha: str) -> None:
     contract = _load()
     pub = contract["public"]
+
+    _delete_forbidden_paths(root, contract)
+
     for pat in pub.get("delete_globs", []):
         for p in list(root.glob(pat)):
             if p.is_dir():
                 shutil.rmtree(p, ignore_errors=True)
             elif p.is_file() and not str(p).endswith("-readme.md"):
-                if "templates" in p.as_posix():
+                if "templates" in p.as_posix() and "public" in p.as_posix():
                     continue
                 p.unlink(missing_ok=True)
+
     pipelines = root / ".cursor/pipelines"
     for md in list(pipelines.glob("*.md")):
         if md.name.endswith("-readme.md") or md.name == "clean.md":
             continue
         pid = md.stem
-        meta = PIPELINE_META.get(pid)
-        if meta:
-            title, purpose, trigger = meta
-            text = README_TEMPLATE.format(title=title, purpose=purpose, trigger=trigger)
-        else:
-            text = README_TEMPLATE.format(
-                title=pid.replace("-", " ").title(),
-                purpose="See templates and harness doctrine.",
-                trigger=f"{pid.upper()}:",
-            )
+        seed = CONTENT_ROOT / "pipelines" / f"{pid}-readme.md"
         readme = pipelines / f"{pid}-readme.md"
-        readme.write_text(text, encoding="utf-8")
-        md.unlink()
+        if seed.is_file():
+            readme.write_text(seed.read_text(encoding="utf-8"), encoding="utf-8")
+        md.unlink(missing_ok=True)
+
     for pid in pub.get("required_readmes", []):
+        seed = CONTENT_ROOT / "pipelines" / f"{pid}-readme.md"
         readme = pipelines / f"{pid}-readme.md"
-        if not readme.is_file() and pid in PIPELINE_META:
-            title, purpose, trigger = PIPELINE_META[pid]
-            readme.write_text(
-                README_TEMPLATE.format(title=title, purpose=purpose, trigger=trigger),
-                encoding="utf-8",
-            )
+        if seed.is_file():
+            readme.parent.mkdir(parents=True, exist_ok=True)
+            readme.write_text(seed.read_text(encoding="utf-8"), encoding="utf-8")
+
+    _apply_template_overlays(root, contract)
+
+    _copy_seed(root, "README.md")
+    _copy_seed(root, "HOW-TO.md")
+    _copy_seed(root, "AGENTS.md")
+
     manifest = {
         "schema_version": 1,
         "export_version": export_version,
@@ -102,17 +100,18 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
     (root / "docs/public-export-manifest.json").write_text(
         json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
     )
+
     qh = root / "qa-handoff.md"
     if qh.is_file():
         qh.unlink()
     example = root / "qa-handoff.example.md"
     if not example.is_file():
         example.write_text(
-            "# QA handoff (example)\n\nSession focus and next steps — copy to `qa-handoff.md` locally.\n",
+            "# QA handoff (example)\n\n"
+            "Session focus and next steps — copy to `qa-handoff.md` locally.\n",
             encoding="utf-8",
         )
 
-    # Remove org-heavy harness docs; keep generic contracts only
     for heavy in (
         "docs/harness-map.json",
         "docs/dxcore-console-harness.json",
@@ -130,34 +129,13 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         elif p.is_file():
             p.unlink(missing_ok=True)
 
-    # Neutral entry docs (blocklist-safe)
-    (root / "README.md").write_text(
-        "# Agentic QA harness (public guide)\n\n"
-        "Redacted export: pipeline **ideas**, template **shapes**, and workflow **concepts** only. "
-        "Not configured for any employer or product. See `.cursor/pipelines/*-readme.md` and "
-        "`epics/templates/`.\n",
-        encoding="utf-8",
-    )
-    (root / "HOW-TO.md").write_text(
-        "# How to use this export\n\n"
-        "1. Read pipeline guides under `.cursor/pipelines/*-readme.md`.\n"
-        "2. Copy `epics/templates/` and adapt schemas to your issue tracker.\n"
-        "3. Implement your own verifiers and MCP integrations locally.\n"
-        "4. Do not expect runnable automation from this repository alone.\n",
-        encoding="utf-8",
-    )
     (root / "epics/README.md").write_text(
         "# Epics layout (guide)\n\n"
         "Use `epics/templates/` for JSON schemas. "
         "Create `epics/<YOUR-KEY>/` locally with artefacts from pipeline readmes.\n",
         encoding="utf-8",
     )
-    (root / "AGENTS.md").write_text(
-        "# AGENTS.md (public guide)\n\n"
-        "Short map for coding agents. Open `docs/harness-map.json` for keyword routing. "
-        "Full playbooks are intentionally omitted; use `*-readme.md` files instead.\n",
-        encoding="utf-8",
-    )
+
     docs_keep = {
         "clean-public-style.md",
         "public-export-manifest.json",
@@ -184,6 +162,10 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         "Implement triggers in your private harness.\n",
         encoding="utf-8",
     )
+
+    public_overlay_dir = root / "epics/templates/public"
+    if public_overlay_dir.is_dir():
+        shutil.rmtree(public_overlay_dir, ignore_errors=True)
 
 
 def main() -> int:

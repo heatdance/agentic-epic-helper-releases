@@ -4,23 +4,25 @@
 
 | Token | Meaning |
 |-------|---------|
-| **`scope=full`** (default) | Phases **0 → S → P → T → U** |
+| **`scope=full`** (default) | Phases **0 → S → P → T → U → U5** |
 | **`scope=align`** | **S** only |
 | **`scope=personal`** | **S → P** |
 | **`scope=team`** | **T** (after personal is pushed) |
-| **`scope=public`** | **U** only |
+| **`scope=public`** | **U → U5** (requires current `team/team`) |
 | **`version=M.N`** | Force public branch `public-M.N` (e.g. `version=1.2`) |
 | **`confirm_major=yes`** | Required after latest `public-M.9` to create `public-{M+1}.0` |
 | **`skip_personal_push=yes`** | Run align without commit/push (testing) |
 | **`proceed`** | Acknowledge dirty working tree on personal |
 
-**Scope**: One publish run from branch **`personal` only**. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc). **Contract**: [`docs/clean-contract.json`](../../docs/clean-contract.json). **Verifier**: [`automation/tools/clean_verify.py`](../../automation/tools/clean_verify.py). **Style (public)**: [`docs/clean-public-style.md`](../../docs/clean-public-style.md).
+**Scope**: One publish run from branch **`personal` only**. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc). **Contract**: [`docs/clean-contract.json`](../../docs/clean-contract.json). **Verifier**: [`automation/tools/clean_verify.py`](../../automation/tools/clean_verify.py). **Style (public)**: [`docs/clean-public-style.md`](../../docs/clean-public-style.md). **Remediation (one-time)**: [`automation/docs/clean-remediation.md`](../../automation/docs/clean-remediation.md).
 
-**Hard invariant**: Do **not** run **`CLEAN:`** on **`team`** or **`public-*`** branches. Team/public trees are **outputs** of this pipeline.
+**Hard invariant**: Do **not** run **`CLEAN:`** while checked out on **`team`** or **`public-*`**. End every full run on **`personal`** with **no extra worktrees** and **no `clean/*` or `release-*`** on `team` / `releases` remotes.
 
-**Ephemeral**: [`automation/temp/clean/`](../../automation/temp/clean/) only. **Delete recursively** before each tier’s final commit. Durable JSON must **not** reference paths under `automation/temp/clean/`.
+**Branch model (three lines only)**: `origin/personal` → `team/team` → `releases/public-M.N` (single current public line). **Sequential checkout** in this repo — **no** worktrees, **no** `clean/*` PR branches.
 
-**Replaces**: former **`SYNC:`** (align tiers) and **`PUBLIC-SCRUB:`** (public sterilize). Do not invoke those triggers after this playbook ships.
+**Ephemeral**: [`automation/temp/clean/`](../../automation/temp/clean/) only. Delete before team/public commits. Durable JSON must **not** reference paths under `automation/temp/clean/`.
+
+**Replaces**: former **`SYNC:`** and **`PUBLIC-SCRUB:`**. Do not invoke those triggers.
 
 ---
 
@@ -37,188 +39,177 @@
 ## Phase 0 — Preflight (blocking)
 
 1. **`git rev-parse --is-inside-work-tree`**
-2. **`git branch --show-current`** must be **`personal`**. Else **stop**: `git checkout personal`
-3. **`python automation/tools/clean_verify.py --mode preflight`**
-4. If working tree dirty: show **`git status -sb`**; **stop** until operator sends **`proceed`** on the trigger line (or stash unrelated work).
-5. Parse **`scope=`** (default `full`).
+2. **`git branch --show-current`** must be **`personal`**. Else **`git checkout personal`**
+3. **`git fetch origin team releases`**
+4. Remove stale worktrees if present:
+   - `git worktree remove ../cursor-corner-team-build --force` (ignore errors)
+   - `git worktree remove ../cursor-corner-public-build --force` (ignore errors)
+   - `git worktree prune`
+5. **`python automation/tools/clean_verify.py --mode preflight`** (fails if extra worktrees remain)
+6. If working tree dirty: show **`git status -sb`**; **stop** until **`proceed`** on the trigger line
+7. Parse **`scope=`** (default `full`)
 
 ---
 
-## Phase S — Align (replaces SYNC)
+## Phase S — Align
 
 ### S1 — File-map
 
 1. Ensure **`automation/temp/clean/`** exists.
-2. SoT: [`docs/clean-publish-tier-matrix.json`](../../docs/clean-publish-tier-matrix.json) (human index: [clean-publish-tier-matrix.md](../../docs/clean-publish-tier-matrix.md)).
-3. Run **`python automation/tools/clean_file_map.py`** → merges matrix + `git ls-files` → **`automation/temp/clean/file-map.json`** (`audience` / `t1_variant` on T1 paths).
+2. SoT: [`docs/clean-publish-tier-matrix.json`](../../docs/clean-publish-tier-matrix.json).
+3. **`python automation/tools/clean_file_map.py`** → **`automation/temp/clean/file-map.json`**
 4. **`python automation/tools/clean_verify.py --mode file_map`**
-5. **Subagent (optional)**: enrich `role` / `consumers[]` for rows where `action != keep`.
 
 ### S2 — Harness align (T0–T6)
 
-Run **one subprocess per tier**; after each tier, run **`clean_verify.py --mode align`** and retry until pass (escalate to human after **10** failures per [`clean-contract.json`](../../docs/clean-contract.json) `retry_escalate_after`).
+After each tier subprocess: **`clean_verify.py --mode align`** (retry until pass; escalate after **10** failures).
 
-**Normative pipeline registry** — when adding `.cursor/pipelines/*.md`, update this table and T0–T1 in the same change:
+| Pipeline id | Trigger | Playbook |
+|-------------|---------|----------|
+| `epic-prep` | **`EPIC-PREP:`** | [epic-prep.md](epic-prep.md) |
+| `coverage` | **`COVERAGE:`** | [coverage.md](coverage.md) |
+| `analysis` | **`ANALYSE:`** | [analysis.md](analysis.md) |
+| `test-discover` | **`TEST-DISCOVER:`** | [test-discover.md](test-discover.md) |
+| `test-precon` | **`TEST-PRECON:`** | [test-precon.md](test-precon.md) |
+| `test-prep` | **`TEST-PREP:`** | [test-prep.md](test-prep.md) |
+| `close` | **`CLOSE:`** | [close.md](close.md) |
+| `clean` | **`CLEAN:`** | [clean.md](clean.md) (this file) |
 
-| Pipeline id | Trigger | Playbook | `harness-map` package | Temp | Router + AGENTS + README + HOW-TO + qa-artifacts |
-|-------------|---------|----------|----------------------|------|--------------------------------------------------|
-| `epic-prep` | **`EPIC-PREP:`** | [epic-prep.md](epic-prep.md) | `epic_ref` | `epics/<KEY>/temp/` | Yes |
-| `coverage` | **`COVERAGE:`** | [coverage.md](coverage.md) | `coverage_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `analysis` | **`ANALYSE:`** | [analysis.md](analysis.md) | `analysis_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `test-discover` | **`TEST-DISCOVER:`** | [test-discover.md](test-discover.md) | `test_discover_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `test-precon` | **`TEST-PRECON:`** | [test-precon.md](test-precon.md) | `test_precon_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `test-prep` | **`TEST-PREP:`** | [test-prep.md](test-prep.md) | `test_prep_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `close` | **`CLOSE:`** | [close.md](close.md) | `close_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `clean` | **`CLEAN:`** | [clean.md](clean.md) (this file) | `clean_pipeline` | `automation/temp/clean/` | Yes — **`personal` only** |
-
-**T0** — List `.cursor/pipelines/*.md`; each epic pipeline + **`clean`** in router; **`clean_pipeline`** in harness-map; **no** `public-scrub.md` / `sync.md`; **no** `PUBLIC-SCRUB` / `SYNC` in router.
-
-**T1 (personal only)** — [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), [HOW-TO.md](../../HOW-TO.md), [qa-artifacts.mdc](../rules/qa-artifacts.mdc): three-repo table + **`CLEAN:`** on **personal** only. **Do not** copy maintainer T1 to team/public — team/public entry docs come from **`clean_apply_t1_docs.py`** / **`clean_apply_public.py`** in phases **T** / **U**.
-
-**T2** — [`.cursor/prompts/`](../prompts/): triggers and links.
-
-**T3** — [`epics/templates/`](../../epics/templates/), [`epics/README.md`](../../epics/README.md).
-
-**T4** — [`automation/tools/`](../../automation/tools/), [`automation/docs/`](../../automation/docs/), tunnel README MCP snippet, [jq.md](../../automation/docs/jq.md).
-
-**T5** — [`.cursor/rules/`](../rules/) inventory vs AGENTS.
-
-**T6** — [harness-maintenance.mdc](../rules/harness-maintenance.mdc); `rg` stale paths.
-
-**S exit**: **`clean_verify.py --mode align`** exit 0.
-
-If **`scope=align`**, delete **`automation/temp/clean/`** only if no later phase in this run; **stop**.
+**S exit**: **`align`** OK. If **`scope=align`**, delete **`automation/temp/clean/`** when done; **stop**.
 
 ---
 
 ## Phase P — Personal commit and push
 
-Skip if **`scope`** is `align` only, or **`skip_personal_push=yes`**.
+Skip if **`scope=align`** or **`skip_personal_push=yes`**.
 
-1. **`python automation/tools/clean_verify.py --mode secret_scan`**
-2. **`git add -A`** (respect `.gitignore`)
-3. Commit: **`clean: align harness before publish`**
+1. Stay on **`personal`**
+2. **`python automation/tools/clean_verify.py --mode secret_scan`**
+3. **`git add -A`** · commit **`clean: align harness before publish`**
 4. **`git push origin personal`**
-5. Delete **`automation/temp/clean/`** before team/public work if regenerating maps.
+5. Delete **`automation/temp/clean/`** before Phase T
 
 If **`scope=personal`**, **stop**.
 
 ---
 
-## Phase T — Team strip and publish
+## Phase T — Team strip and direct push
 
-### T1 — Worktree
-
-Prefer isolated worktree (keeps **`personal`** checkout unchanged):
+**Input**: `origin/personal` tip. **Output**: `team/team` updated in place. **No new branch names.**
 
 ```text
 git fetch origin personal
-git worktree remove ../cursor-corner-team-build 2>nul
-git worktree add -B team ../cursor-corner-team-build origin/personal
+git fetch team team
+git checkout team
 ```
 
-Work root: **`../cursor-corner-team-build`**.
-
-### T2 — Strip
-
-1. **`python automation/tools/clean_apply_team.py --root ../cursor-corner-team-build`** (deletes, router strip, calibrate gold, **`clean_apply_t1_docs --tier team`**, harness-map strip `clean_pipeline`).
-2. **`python automation/tools/clean_verify.py --mode team --root ../cursor-corner-team-build`** — loop until pass (forbidden publish strings per contract `team.forbidden_substrings`).
-3. **Subagent (optional escalation only)** if router or T1 still leak maintainer vocabulary.
-
-### T3 — Commit and push
-
-Inside worktree:
+If local **`team`** is missing: **`git branch -f team team/team`** then **`git checkout team`**.
 
 ```text
+git reset --hard origin/personal
+python automation/tools/clean_apply_team.py --root .
+python automation/tools/clean_verify.py --mode team --root .
 git add -A
 git commit -m "clean: team harness export"
+TEAM_SHA=$(git rev-parse HEAD)
+git push team team
+python automation/tools/clean_verify.py --mode prune_team_remote
+python automation/tools/clean_verify.py --mode team_tip --sha %TEAM_SHA%
+git checkout personal
 ```
 
-**Push policy**:
+- **`prune_team_remote`**: deletes every head on **`team`** remote except **`team`** (removes prior `clean/*` PR branches).
+- Record **`TEAM_SHA`** for Phase U gate.
 
-```text
-git ls-remote --heads team
-```
-
-- **No heads** (bootstrap): **`git push team team:team`** — direct push once per [clean-contract.json](../../docs/clean-contract.json).
-- **Else**: **`git push team HEAD:refs/heads/clean/<YYYYMMDD>-<shortsha>`** then **`gh pr create --repo heatdance/agentic-epic-helper-team --base team --head clean/<...> --title "clean: team harness" --body "CLEAN pipeline; operator must merge."`** — **do not** `gh pr merge`. **Stop** with PR URL.
-
-If **`scope=team`**, remove worktree if desired; **stop**.
+If **`scope=team`**, run **`postflight`** (Phase U5) or at minimum **`git checkout personal`**; **stop**.
 
 ---
 
-## Phase U — Public sterilize
+## Phase U — Public sterilize (from `team/team` only)
 
-### U0 — Branch and legacy delete
-
-1. **`git fetch releases`**
-2. **`python automation/tools/clean_verify.py --mode semver_next --json`** (add **`--version M.N`** or **`--confirm-major yes`** from trigger). Parse **`target_branch`** and **`superseded_branch`** (e.g. `public-1.2` supersedes `public-1.1`). Plain branch name only: omit **`--json`**.
-3. Expect **`public-1.2`** on first run when no `public-*` exists.
-4. Delete legacy branches (ignore errors if missing):
+### U0 — Semver and legacy
 
 ```text
-git push releases --delete release-1.0.0 release-1.1.0
+git fetch releases team
+python automation/tools/clean_verify.py --mode semver_next --json
 ```
 
-### U1 — Public worktree
+Parse **`target_branch`**, **`superseded_branch`**, **`export_version`**.
 
 ```text
-git worktree remove ../cursor-corner-public-build 2>nul
-git worktree add -B public-1.2 ../cursor-corner-public-build team/team
+python automation/tools/clean_public_supersede.py --legacy-only
+python automation/tools/clean_verify.py --mode legacy_remote
 ```
 
-(Use branch name from semver step, e.g. **`public-1.2`**.)
+**Abort** if **`legacy_remote`** fails (any **`release-*`** still on `releases`).
 
-### U2 — Transform
+**Gate**: **`python automation/tools/clean_verify.py --mode team_tip --sha <TEAM_SHA>`** must pass before creating the public branch.
 
-1. Regenerate file-map if needed (S1) against team tip context.
-2. **Mechanical base**: **`python automation/tools/clean_apply_public.py --root ../cursor-corner-public-build --export-version 1.2.0 --source-branch team --source-sha <team-tip-sha>`**
-3. **Subagent (one per playbook id)**: rewrite **`<id>-readme.md`** per [clean-public-style.md](../../docs/clean-public-style.md) (plain English, no org names); load only that readme + style guide.
-4. **Subagent (docs)**: ensure **`docs/project.example.json`** etc.; remove live org JSON.
-5. **`.agents/`** — neutral [dotagentsprotocol.com](https://dotagentsprotocol.com) layer if not present (see former public-scrub tier).
-6. Public **`pipeline-router.mdc`**: guide-only; no executable epic triggers (contract `public.router`).
-7. **`python automation/tools/clean_verify.py --mode public --root ../cursor-corner-public-build`** — loop until pass.
-
-### U3 — V2 worktree verify
+### U1 — Checkout public target from team tip
 
 ```text
-git -C ../cursor-corner-public-build commit -am "public-export: 1.2.0"
-git worktree add ../cursor-corner-public-verify <commit-sha>
-python automation/tools/clean_verify.py --mode public --root ../cursor-corner-public-verify
-git worktree remove ../cursor-corner-public-verify
+git checkout -B <target_branch> team/team
 ```
 
-### U4 — Push
+Example: **`git checkout -B public-1.4 team/team`**.
+
+### U2 — Transform and verify (in place)
+
+Mechanical public transform (no agent improvisation for readmes):
+
+- Seeds from [`docs/clean-public-content/`](../../docs/clean-public-content/) (entry docs + pipeline `*-readme.md`)
+- Template overlays from [`epics/templates/public/`](../../epics/templates/public/) per [`docs/clean-contract.json`](../../docs/clean-contract.json) `public.template_overlays`
+- Deletes `.cursor/mcp.json.example` and other `public.delete_paths`
 
 ```text
-git -C ../cursor-corner-public-build push -u releases public-1.2:public-1.2
+python automation/tools/clean_apply_public.py --root . --export-version <export_version> --source-branch team --source-sha <TEAM_SHA>
+python automation/tools/clean_verify.py --mode public --root .
+git add -A
+git commit -m "public-export: <export_version>"
+python automation/tools/clean_verify.py --mode public --root .
+git push -u releases <target_branch>:<target_branch>
 ```
 
-### U4b — Supersede previous public branch
+### U4b — Supersede
 
-**Only after U4 push succeeds** and **`superseded_branch`** is non-null (from semver JSON).
+Only when **`superseded_branch`** is non-null from semver JSON.
 
-1. **`python automation/tools/clean_public_supersede.py --target public-1.2 --superseded public-1.1`**
-   (use values from semver step). Sets GitHub default to **`target_branch`** when **`gh`** is available, then **`git push releases --delete <superseded>`** and local **`git branch -D`**.
-2. **`python automation/tools/clean_verify.py --mode public_remote --superseded public-1.1`**
-3. Log result in CLEAN summary (deleted / skipped / failed).
+```text
+python automation/tools/clean_public_supersede.py --target <target_branch> --superseded <superseded_branch>
+python automation/tools/clean_verify.py --mode public_remote --superseded <superseded_branch>
+```
 
-**Re-publish same `version=M.N`:** when **`target_branch`** already exists on `releases`, **`superseded_branch`** is **`null`** — skip U4b.
+**Re-publish same `version=M.N`:** **`superseded_branch`** is **`null`** — skip U4b.
 
-Update root [README.md](../../README.md) on **personal** only if public branch naming docs need bump (next session).
+```text
+git checkout personal
+git branch -D <superseded_branch>
+```
 
-### U5 — Cleanup
+Also delete stale local names if present: **`release-1.1.0`**, **`public-1.1`** (legacy tracking branches).
 
-Delete **`automation/temp/clean/`**. Remove team/public worktrees when operator confirms.
+---
+
+## Phase U5 — Postflight (mandatory)
+
+```text
+git checkout personal
+Remove-Item -Recurse -Force automation/temp/clean -ErrorAction SilentlyContinue
+python automation/tools/clean_verify.py --mode postflight
+```
+
+**Done when**: on **`personal`**; **`postflight`** OK; remotes match [branch_policy](../../docs/clean-contract.json).
 
 ---
 
 ## Abort criteria
 
-- Branch ≠ **`personal`** at start.
-- **`secret_scan`** or **`align`** fails after retry budget.
-- **`gh`** unavailable when team remote already has branches (PR required).
-- **`public`** blocklist fails after retries.
+- Branch ≠ **`personal`** at start (or not returned to **`personal`** at end).
+- Extra worktrees after Phase 0 cleanup.
+- **`secret_scan`** / **`align`** fails after retry budget.
+- Phase U without passing **`team_tip`** for recorded **`TEAM_SHA`**.
+- **`legacy_remote`** fails after U0.
+- **`postflight`** fails (`clean/*`, `release-*`, or multiple `public-*` on remotes).
 - Operator declines dirty-tree **`proceed`**.
 
 ---
@@ -227,18 +218,17 @@ Delete **`automation/temp/clean/`**. Remove team/public worktrees when operator 
 
 | # | Phase | Done when |
 |---|--------|-----------|
-| 0 | Preflight | On `personal`; preflight OK |
-| S1 | File-map | `file-map.json` + verify |
-| S2 | Align | `align` verify OK |
+| 0 | Preflight | On `personal`; no worktrees; preflight OK |
+| S | Align | `align` OK |
 | P | Personal | Pushed `origin/personal` |
-| T | Team | `team` verify OK; pushed or PR opened |
-| U0–U4 | Public | `public-*` verify OK; pushed `releases` |
-| 5 | Cleanup | `automation/temp/clean/` deleted |
+| T | Team | `team` verify OK; `team/team` pushed; `prune_team_remote` OK |
+| U | Public | From `team/team`; pushed `releases/<target>`; supersede + `legacy_remote` OK |
+| U5 | Postflight | On `personal`; `postflight` OK |
 
 ---
 
 ## Downstream
 
-- **Contributors** clone **team** repo; merge PRs — no direct push to **`team`** (repo branch protection recommended).
-- **Public** consumers clone [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) branch **`public-M.N`** — guide-only.
-- **You** keep working on **`personal`**; re-run **`CLEAN:`** after harness or epic changes worth publishing.
+- **Contributors** clone [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) branch **`team`** — no `clean/*` flow.
+- **Public** consumers clone [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) branch **`public-M.N`** (single current line) — guide-only.
+- **Maintainers** work on **`personal`**; re-run **`CLEAN:`** after harness changes worth publishing.

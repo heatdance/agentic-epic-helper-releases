@@ -589,11 +589,13 @@
             ".cursor/pipelines/clean.md",
             "docs/clean-contract.json",
             "docs/clean-public-style.md",
+            "docs/clean-public-content/README.md",
             "automation/docs/clean-verify.md",
+            "automation/docs/clean-remediation.md",
             "docs/public-export-manifest.example.json",
             "README.md"
           ],
-          "mcp_hint": "No MCP. personal branch only. Phase S align (T0-T6), push origin/personal, team strip to team remote (bootstrap push once else gh PR, no merge), public-M.N on releases (semver_next, delete legacy release-*). clean_verify.py modes; automation/temp/clean/ ephemeral. Style: docs/clean-public-style.md; playbook readmes on public."
+          "mcp_hint": "No MCP. personal only; sequential checkout. Phase U: clean_apply_public seeds docs/clean-public-content/, template overlays epics/templates/public/, verify public (stack scrub, readme depth, no mcp.json.example). postflight, team_tip, prune_team_remote."
         }
       ]
     },

@@ -7,7 +7,7 @@ Normative path → tier actions for **`CLEAN:`**. Machine-readable source: [clea
 | Variant | Branch / remote | Entry docs |
 |---------|-----------------|------------|
 | **maintainer** | `personal` / `origin` | Live [README.md](../README.md), [HOW-TO.md](../HOW-TO.md), [AGENTS.md](../AGENTS.md) — includes three-repo table and `CLEAN:` |
-| **contributor** | `team` / `team` | Generated from [clean-entry-templates/](clean-entry-templates/) — single repo, PR workflow, no publish vocabulary |
+| **contributor** | `team` / `team` | Generated from [clean-entry-templates/](clean-entry-templates/) — clone `team` branch; no `CLEAN:` / publish vocabulary |
 | **visitor** | `public-M.N` / `releases` | Guide-only; [clean_apply_public.py](../automation/tools/clean_apply_public.py) |
 
 ## Mind map (high level)

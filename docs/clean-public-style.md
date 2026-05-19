@@ -22,12 +22,22 @@ Use placeholders: `YOUR-EPIC-KEY`, `your-org.confluence.example`, `PROJECT_KEY/r
 
 Each file replaces a full playbook under `.cursor/pipelines/`.
 
-1. **Purpose** — one short paragraph.
+1. **Purpose** — at least one substantive paragraph (see `public.readme_min_words` in contract).
 2. **When to use** — trigger name only (e.g. `EPIC-PREP:`), no copy-paste blocks.
 3. **Inputs** — generic artifacts (e.g. “epic ref JSON at `epics/<KEY>/<KEY>-ref.json`”).
-4. **Process steps** — numbered phases as **methodology** (discovery, verification, merge), not agent subprocess instructions.
+4. **Process steps** — numbered **methodology** (discovery, verification, merge), not agent subprocess instructions; minimum depth enforced by `clean_verify.py` `public` mode.
 5. **Outputs** — file names and schema role, not full JSON samples with real keys.
 6. **Build your own** — suggest verifier script, templates folder, and human review; do not ship working automation.
+
+## MCP and stack names (public)
+
+- Do **not** ship `.cursor/mcp.json.example` or `.cursor/mcp.json` on the public tree.
+- Do **not** use employer-specific MCP server ids (e.g. `postgres-ctqa`) or database names in public files.
+- Neutral template overlays live under `epics/templates/public/` on **personal** only; Phase U copies them onto the public branch then removes the `public/` subdirectory from the export.
+
+## Mechanical seeds
+
+Phase U reads prose from [`docs/clean-public-content/`](../docs/clean-public-content/) via [`clean_apply_public.py`](../automation/tools/clean_apply_public.py). Update seeds when guide depth or neutral templates change.
 
 ## Golden stub — `epic-prep-readme.md`
 

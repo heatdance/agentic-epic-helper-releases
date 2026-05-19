@@ -84,7 +84,7 @@ Run **one Epic per chat**. Paste the trigger and key on the first line, for exam
 
 Playbooks: [.cursor/pipelines/](.cursor/pipelines/). Layout: [epics/README.md](epics/README.md). Post-hoc harness calibration: [§3](#3-calibrate-prod-vs-operator-gold).
 
-**Publish track:** **`CLEAN:`** aligns harness pointers, pushes **`personal`**, updates [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team` branch via PR after bootstrap), and publishes **`public-M.N`** to [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases). Not for day-to-day Epic QA.
+**Publish track:** **`CLEAN:`** ( **`personal` branch only** ) aligns harness, pushes **`origin/personal`**, checks out **`team`** and pushes **`team/team`** directly (no `clean/*` branches), then builds **`public-M.N+1`** from **`team/team`** on [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) and deletes the previous **`public-*`** line. Sequential checkout in one repo — no worktrees. One-time fix for a bad publish: [automation/docs/clean-remediation.md](automation/docs/clean-remediation.md). Not for day-to-day Epic QA.
 
 ### Operator prep (Discovery, Precondition, Prep)
 

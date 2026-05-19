@@ -38,7 +38,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:`), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:`), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:`), [`clean.md`](.cursor/pipelines/clean.md) (`CLEAN:` — **`personal` only**; align + publish team/public; [clean_verify.py](automation/tools/clean_verify.py)) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:`), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:`), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:`), [`clean.md`](.cursor/pipelines/clean.md) (`CLEAN:` — **`personal` only**; sequential checkout; direct `team/team` + `public-M.N`; [clean_verify.py](automation/tools/clean_verify.py)) |
 
 ### Epics
 
@@ -78,7 +78,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | TEST-DISCOVER verifier | [discover_verify.py](automation/tools/discover_verify.py) · [automation/docs/discover-verify.md](automation/docs/discover-verify.md) |
 | TEST-PREP verifier | [test_prep_verify.py](automation/tools/test_prep_verify.py) · [automation/docs/test-prep-verify.md](automation/docs/test-prep-verify.md) |
 | CLOSE verifier | [close_verify.py](automation/tools/close_verify.py) · [automation/docs/close-verify.md](automation/docs/close-verify.md) · [close_archive.py](automation/tools/close_archive.py) |
-| CLEAN verifier | [clean_verify.py](automation/tools/clean_verify.py) · [clean-verify.md](automation/docs/clean-verify.md) · `clean_file_map.py`, `clean_apply_team.py`, `clean_apply_t1_docs.py`, `clean_apply_public.py`, `clean_public_supersede.py` |
+| CLEAN verifier | [clean_verify.py](automation/tools/clean_verify.py) · [clean-verify.md](automation/docs/clean-verify.md) · [clean-remediation.md](automation/docs/clean-remediation.md) · `clean_file_map.py`, `clean_apply_team.py`, `clean_apply_t1_docs.py`, `clean_apply_public.py`, `clean_public_supersede.py` |
 | Humans: Cursor + main processes | [HOW-TO.md](HOW-TO.md) |
 | CTQA Postgres MCP | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
 | Chrome DevTools MCP (**`chrome-devtools`**, ad-hoc UI) | [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md); merge into `.cursor/mcp.json` — see [`.cursor/mcp.json.example`](.cursor/mcp.json.example) |

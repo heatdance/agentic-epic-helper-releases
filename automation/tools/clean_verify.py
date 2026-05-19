@@ -32,6 +32,8 @@ HIGH_RISK_SECRET_RE = re.compile(
     r"(Bearer\s+[A-Za-z0-9._-]{12,}|password\s*=\s*['\"][^'\"\\s]{8,}['\"])", re.I
 )
 PUBLIC_BRANCH_RE = re.compile(r"^public-(\d+)\.(\d+)$")
+RELEASE_BRANCH_RE = re.compile(r"^release-")
+FORBIDDEN_CLEAN_BRANCH_RE = re.compile(r"^clean/")
 EPIC_KEY_RE = re.compile(r"^(CRT|CRTQA|CRTBL)-\d+$", re.I)
 
 
@@ -90,6 +92,75 @@ def _path_matches_glob(rel: str, pattern: str) -> bool:
     return fnmatch(rel.replace("\\", "/"), pattern)
 
 
+def _worktree_paths(root: Path) -> list[str]:
+    code, out = _git("worktree", "list", "--porcelain", cwd=root)
+    if code != 0:
+        return []
+    paths: list[str] = []
+    for line in out.splitlines():
+        if line.startswith("worktree "):
+            paths.append(line.split(" ", 1)[1].strip())
+    return paths
+
+
+def _has_extra_worktrees(root: Path) -> bool:
+    paths = _worktree_paths(root)
+    root_resolved = root.resolve()
+    return len(paths) > 1 or any(
+        Path(p).resolve() != root_resolved for p in paths
+    )
+
+
+def _branches_matching_remote(
+    remote: str, patterns: list[str], cwd: Path | None = None
+) -> list[str]:
+    branches = _remote_branches(remote, cwd)
+    matched: list[str] = []
+    for name in branches:
+        for pat in patterns:
+            if fnmatch(name, pat):
+                matched.append(name)
+                break
+    return matched
+
+
+def _public_branches_on_releases(contract: dict[str, Any], cwd: Path | None = None) -> list[str]:
+    remote = contract["remotes"]["public"]["remote"]
+    return [b for b in _remote_branches(remote, cwd) if _public_branch_tuple(b)]
+
+
+def _check_branch_policy_remotes(contract: dict[str, Any], cwd: Path) -> int | None:
+    policy = contract.get("branch_policy", {})
+    forbidden = policy.get("forbidden_remote_patterns", ["clean/*", "release-*"])
+
+    team_remote = contract["remotes"]["team"]["remote"]
+    allowed_team = {contract["remotes"]["team"]["branch"]}
+    team_heads = _remote_branches(team_remote, cwd)
+    extra_team = [b for b in team_heads if b not in allowed_team]
+    if extra_team:
+        return _fail(f"extra branches on {team_remote} (allowed {allowed_team}): {extra_team}")
+
+    releases_remote = contract["remotes"]["public"]["remote"]
+    for name in _branches_matching_remote(releases_remote, forbidden, cwd):
+        return _fail(f"forbidden branch on {releases_remote}: {name}")
+
+    public_heads = _public_branches_on_releases(contract, cwd)
+    max_count = policy.get("max_public_branches_on_releases", 1)
+    if len(public_heads) > max_count:
+        return _fail(
+            f"releases has {len(public_heads)} public-* branches, max {max_count}: {public_heads}"
+        )
+
+    origin_remote = contract["remotes"]["personal"]["remote"]
+    origin_heads = _remote_branches(origin_remote, cwd)
+    personal_branch = contract["remotes"]["personal"]["branch"]
+    extra_origin = [b for b in origin_heads if b != personal_branch]
+    if extra_origin and policy.get("warn_extra_origin_branches", False):
+        print(f"WARN: extra branches on {origin_remote}: {extra_origin}", file=sys.stderr)
+
+    return None
+
+
 def mode_preflight(root: Path, contract: dict[str, Any]) -> int:
     required = contract.get("required_branch", "personal")
     branch = _current_branch(root)
@@ -102,7 +173,87 @@ def mode_preflight(root: Path, contract: dict[str, Any]) -> int:
         if code != 0:
             return _fail(f"git remote {remote!r} not configured")
 
+    if _has_extra_worktrees(root):
+        return _fail(
+            "extra git worktrees present; remove cursor-corner-*-build dirs and run git worktree prune"
+        )
+
+    for rel in contract.get("branch_policy", {}).get(
+        "known_worktree_paths_forbidden", []
+    ):
+        if (root.parent / Path(rel).name).exists() and rel.startswith("../"):
+            candidate = (root / rel).resolve()
+            if candidate.exists():
+                return _fail(f"forbidden worktree path exists: {rel}")
+
     return _ok("preflight")
+
+
+def mode_team_tip(root: Path, contract: dict[str, Any], expected_sha: str | None) -> int:
+    if not expected_sha:
+        return _fail("team_tip mode requires --sha")
+    expected = expected_sha.strip().lower()
+    code, out = _git("rev-parse", contract.get("public", {}).get("source_ref", "team/team"), cwd=root)
+    if code != 0:
+        return _fail(f"cannot resolve team tip: {out.strip()}")
+    actual = out.strip().lower()
+    if actual != expected and not (
+        len(expected) >= 7 and actual.startswith(expected[:7])
+    ):
+        return _fail(f"team/team is {actual[:12]}, expected {expected[:12]}")
+    return _ok(f"team_tip ({actual[:12]})")
+
+
+def mode_legacy_remote(contract: dict[str, Any], cwd: Path) -> int:
+    sem = contract.get("semver", {})
+    if not sem.get("legacy_branches_delete_required", True):
+        return _ok("legacy_remote (not required)")
+    remote = contract["remotes"]["public"]["remote"]
+    legacy = sem.get("legacy_branches_delete", [])
+    remaining = [b for b in _remote_branches(remote, cwd) if b in legacy or RELEASE_BRANCH_RE.match(b)]
+    if remaining:
+        return _fail(f"legacy release-* branches still on {remote}: {remaining}")
+    return _ok("legacy_remote")
+
+
+def mode_prune_team_remote(contract: dict[str, Any], cwd: Path) -> int:
+    """Delete all team-remote heads except the canonical team branch."""
+    team_remote = contract["remotes"]["team"]["remote"]
+    allowed = contract["remotes"]["team"]["branch"]
+    deleted: list[str] = []
+    for name in _remote_branches(team_remote, cwd):
+        if name == allowed:
+            continue
+        code, err = _git("push", team_remote, "--delete", name, cwd=cwd)
+        if code != 0:
+            print(f"WARN: could not delete {team_remote}/{name}: {err.strip()}", file=sys.stderr)
+        else:
+            deleted.append(name)
+    if deleted:
+        print(f"pruned team remote branches: {deleted}")
+    return _ok("prune_team_remote")
+
+
+def mode_postflight(root: Path, contract: dict[str, Any]) -> int:
+    post = contract.get("postflight", {})
+    required = post.get("required_branch", contract.get("required_branch", "personal"))
+    branch = _current_branch(root)
+    if branch != required:
+        return _fail(f"postflight: branch must be {required!r}, got {branch!r}")
+
+    if post.get("require_empty_worktrees", True) and _has_extra_worktrees(root):
+        return _fail("postflight: extra git worktrees still present")
+
+    if post.get("enforce_branch_policy_on_remotes", True):
+        err = _check_branch_policy_remotes(contract, root)
+        if err is not None:
+            return err
+
+    err = mode_legacy_remote(contract, root)
+    if err != 0:
+        return err
+
+    return _ok("postflight")
 
 
 def _git_tracked_files(root: Path) -> list[str]:
@@ -472,6 +623,91 @@ def _rg_blocklist(root: Path, contract: dict[str, Any]) -> int:
     return 0
 
 
+def _stack_allow_path(rel: str, allow_globs: list[str]) -> bool:
+    norm = rel.replace("\\", "/")
+    for g in allow_globs:
+        if fnmatch(norm, g) or fnmatch(Path(norm).name, g):
+            return True
+    return False
+
+
+def _section_word_count(text: str, heading: str) -> int:
+    marker = f"## {heading}"
+    if marker not in text:
+        return 0
+    start = text.index(marker) + len(marker)
+    rest = text[start:].lstrip("\n")
+    nxt = rest.find("\n## ")
+    body = rest[:nxt] if nxt >= 0 else rest
+    return len(body.split())
+
+
+def _public_readme_depth(root: Path, contract: dict[str, Any]) -> int | None:
+    pub = contract.get("public", {})
+    mins = pub.get("readme_min_words", {})
+    required_sections = [
+        ("Purpose", mins.get("section_purpose", 25)),
+        ("Process steps", mins.get("section_process_steps", 40)),
+        ("Outputs", mins.get("section_outputs", 10)),
+        ("Build your own", mins.get("section_build_your_own", 15)),
+    ]
+    pipelines = root / ".cursor/pipelines"
+    for pid in pub.get("required_readmes", []):
+        readme = pipelines / f"{pid}-readme.md"
+        if not readme.is_file():
+            return _fail(f"missing readme for depth check: {pid}")
+        text = _read_text(readme)
+        for heading, min_w in required_sections:
+            wc = _section_word_count(text, heading)
+            if wc < min_w:
+                return _fail(
+                    f"{readme.name} section {heading!r} has {wc} words, min {min_w}"
+                )
+    for rel, min_total in (
+        ("README.md", mins.get("entry_readme", 80)),
+        ("HOW-TO.md", mins.get("entry_howto", 60)),
+        ("AGENTS.md", mins.get("entry_agents", 40)),
+    ):
+        p = root / rel
+        if not p.is_file():
+            return _fail(f"missing entry doc: {rel}")
+        wc = len(_read_text(p).split())
+        if wc < min_total:
+            return _fail(f"{rel} has {wc} words, min {min_total}")
+    return None
+
+
+def _public_forbidden_stack(root: Path, contract: dict[str, Any]) -> int | None:
+    pub = contract.get("public", {})
+    patterns = [re.compile(p, re.I) for p in pub.get("forbidden_stack_patterns", [])]
+    allow = pub.get("forbidden_stack_allow_path_globs", [])
+    if not patterns:
+        return None
+    for rel in _git_tracked_files(root):
+        if _stack_allow_path(rel, allow):
+            continue
+        path = root / rel
+        if not path.is_file():
+            continue
+        try:
+            text = path.read_text(encoding="utf-8", errors="ignore")
+        except OSError:
+            continue
+        for rx in patterns:
+            if rx.search(text):
+                return _fail(f"forbidden stack pattern {rx.pattern!r} in {rel}")
+    return None
+
+
+def _public_mcp_files_absent(root: Path, contract: dict[str, Any]) -> int | None:
+    for rel in contract.get("public", {}).get(
+        "delete_paths", [".cursor/mcp.json.example", ".cursor/mcp.json"]
+    ):
+        if (root / rel).is_file():
+            return _fail(f"MCP config must not exist on public tree: {rel}")
+    return None
+
+
 def mode_public(root: Path, contract: dict[str, Any]) -> int:
     pub = contract.get("public", {})
     for pat in pub.get("delete_globs", []):
@@ -505,6 +741,20 @@ def mode_public(root: Path, contract: dict[str, Any]) -> int:
     if not manifest.is_file():
         return _fail("missing docs/public-export-manifest.json on public tree")
 
+    err = _public_mcp_files_absent(root, contract)
+    if err is not None:
+        return err
+    err = _public_forbidden_stack(root, contract)
+    if err is not None:
+        return err
+    err = _public_readme_depth(root, contract)
+    if err is not None:
+        return err
+
+    overlay_dir = root / "epics/templates/public"
+    if overlay_dir.exists():
+        return _fail("epics/templates/public must not ship on public tree")
+
     return _ok("public")
 
 
@@ -520,8 +770,12 @@ def main() -> int:
             "file_map",
             "align",
             "team",
+            "team_tip",
             "public",
             "public_remote",
+            "legacy_remote",
+            "prune_team_remote",
+            "postflight",
         ],
     )
     parser.add_argument(
@@ -542,6 +796,12 @@ def main() -> int:
         "--confirm-major",
         choices=["yes", "no"],
         default="no",
+    )
+    parser.add_argument(
+        "--sha",
+        type=str,
+        default=None,
+        help="expected team/team SHA for team_tip mode",
     )
     args = parser.parse_args()
     contract = _load_contract()
@@ -565,6 +825,14 @@ def main() -> int:
         return mode_team(root, contract)
     if args.mode == "public":
         return mode_public(root, contract)
+    if args.mode == "team_tip":
+        return mode_team_tip(root, contract, args.sha)
+    if args.mode == "legacy_remote":
+        return mode_legacy_remote(contract, root)
+    if args.mode == "prune_team_remote":
+        return mode_prune_team_remote(contract, root)
+    if args.mode == "postflight":
+        return mode_postflight(root, contract)
     return _fail(f"unknown mode {args.mode}")
 
 

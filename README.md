@@ -9,7 +9,7 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 | Branch | Remote | Role |
 |--------|--------|------|
 | **`personal`** | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (`origin`) | **Personal production** — day-to-day work: epics, stats, calibrate gold, temp, and harness changes. Commit and push here first. |
-| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness without personal epics, stats corpus, or scratch. Updated via **`CLEAN:`** (PR to `team` after bootstrap). |
+| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness without personal epics, stats corpus, or scratch. Updated via **`CLEAN:`** (direct push to `team/team` from `personal`). |
 | **`public-M.N`** (e.g. `public-1.2`) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public guide export** — methodology and template shapes only. Updated only via **`CLEAN:`** from **`personal`**. |
 
 **Checkout (personal):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
