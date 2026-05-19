@@ -12,7 +12,8 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 - **Date**: 2026-05-19 — **`ANALYSE: CRT-639`** (production): `CRT-639-analysis.json` v2 + gaps-first `.md` — **5** gaps, **3** `exploration_suppressed`; `analysis_verify.py` gaps/downstream/emit **OK**; `known_issues=no`.
 - **Date**: 2026-05-19 — **`COVERAGE: CRT-639`** (production): `CRT-639-coverage.json` v2 + `CRT-639-coverage.md` — **16** checks, **8** matrix rows, **14** `obligations_coverage`; `coverage_verify.py` obligations+emit **OK**.
 - **Date**: 2026-05-19 — **`EPIC-PREP: CRT-639`** (production): recreated `epics/CRT-639/CRT-639-ref.json` schema v4 — **15** `obligations_proposed[]`, **5** Yogi requirements (snippets ok via MCP), `client_shell_impact` qa_default_both, `BRO/xt` browse hits, **5** `xt_refs`; `epic_prep_verify.py` ref+reconcile **OK**; `temp/` deleted.
-- **Date**: 2026-05-19 — **`/crtqa-stats`** `initial_assessment` for `arodzevich`: cohort **2** TCD tasks (CRTQA-10034 corpus, CRTQA-10132 comparison); state `stats/crtqa-stats/state/last-sync.json` v3; report `stats/crtqa-stats/latest.md` (benchmark pending — corpus n under 4).
+- **Date**: 2026-05-19 — **Benchmark retired → `/crtqa-calibrate`**: removed `.cursor/benchmark/`, `docs/benchmark-contract.md`, benchmark Python tools; added `.cursor/calibrate/`, `docs/calibrate-contract.json`, `calibrate_verify.py`, playbooks/commands/docs; HOW-TO §3 rewritten.
+- **Date**: 2026-05-19 — **`/crtqa-stats`** `initial_assessment` for `arodzevich`: cohort **2** TCD tasks (CRTQA-10034 corpus, CRTQA-10132 comparison); state `stats/crtqa-stats/state/last-sync.json` v3; report `stats/crtqa-stats/latest.md` (corpus benchmark pending — n under 4 per category).
 - **Date**: 2026-05-19 — **Harness doc reconciliation** complete: [HOW-TO.md](HOW-TO.md), [epics/README.md](epics/README.md), [README.md](README.md), [sync.md](.cursor/pipelines/sync.md) registry, scratch WS-A/WS-C/session notes; templates post-`context/` notes; **TEST-EXEC** refs removed from durable docs (intentional “replaces TEST-EXEC” in this file only).
 - **Date**: 2026-05-19 — **`CLOSE:`** pipeline implemented: [`docs/close-contract.json`](docs/close-contract.json), [`.cursor/pipelines/close.md`](.cursor/pipelines/close.md), verifiers [`close_verify.py`](automation/tools/close_verify.py) / [`close_archive.py`](automation/tools/close_archive.py).
 - **Date**: 2026-05-19 — **ANALYSE v2** + **EPIC-PREP/COVERAGE obligation patch** (see prior entries).
@@ -36,5 +37,6 @@ Doctrine: **[docs/harness-principles.md](docs/harness-principles.md)** (CLOSE ar
 
 ## Notes
 
-- **Deferred (next pass):** mandatory-chain doc wording (optional → required for discover/precon); benchmark CLOSE KPIs; automated un-archive.
+- **Deferred (next pass):** mandatory-chain doc wording (optional → required for discover/precon); automated un-archive.
+- **Calibrate v1.1:** `calibrate_verify.py` adds `gold_distinct`, `compare`, `NO_ACTIONABLE_DELTA`; CRT-639 seed gold still **prod-identical** → `/crtqa-calibrate` stops at `GOLD_NOT_DISTINCT` until real oracle JSON.
 - **Retired:** **TEST-EXEC** / Playwright chain step — use **`CLOSE:`** for integrity + archive; chrome-devtools remains for discover/precon/prep ad-hoc only.

@@ -6,7 +6,7 @@ COVERAGE: <!-- EPIC-KEY e.g. CRT-639 -->
 
 **Agent**: [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md) end-to-end. **Requires** `{EpicDir}<KEY>-ref.json` (**schema v4**, `obligations_proposed[]`).
 
-Optional: **`repo=`**, **`focus=`**, **`benchmark_suite=`** + **`benchmark_attempt=`**.
+Optional: **`repo=`**, **`focus=`**
 
 ## Subprocess checklist
 

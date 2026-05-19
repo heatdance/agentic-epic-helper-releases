@@ -85,4 +85,4 @@ See [automation/tools/fixtures/test_prep/README.md](../tools/fixtures/test_prep/
 
 ## Generation (greenfield)
 
-No live CRTQA Jira fetch — [docs/harness-principles.md](../../docs/harness-principles.md) §3. Optional **`shape_ref=benchmark`** is shape-only (playbook); verifier still forbids CRTQA keys in durable output.
+No live CRTQA Jira fetch — [docs/harness-principles.md](../../docs/harness-principles.md) §3. Verifier forbids CRTQA keys in durable output.

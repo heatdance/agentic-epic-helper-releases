@@ -6,7 +6,7 @@ Copy into chat when running **`TEST-DISCOVER: <KEY>`**. Doctrine: [docs/harness-
 
 - [ ] **Generation** (default): **`sources.crtqa_index_enabled: false`** — **skip Step C-index**
 - [ ] **`crtqa_index=yes`** on trigger — run C-index in generation
-- [ ] **Benchmark** (`benchmark_suite=` + `benchmark_attempt=`): **`crtqa_index_enabled: true`**
+- [ ] **Benchmark** (`+ `**`crtqa_index_enabled: true`**
 
 ## Preconditions
 

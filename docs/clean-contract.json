@@ -1,8 +1,10 @@
 {
   "_comment": "Normative contract for CLEAN: pipeline. Referenced by .cursor/pipelines/clean.md and automation/tools/clean_verify.py.",
-  "schema_version": 1,
+  "schema_version": 2,
   "trigger": "CLEAN:",
   "required_branch": "personal",
+  "tier_matrix": "docs/clean-publish-tier-matrix.json",
+  "entry_templates_dir": "docs/clean-entry-templates",
   "ephemeral_dir": "automation/temp/clean/",
   "retry_escalate_after": 10,
   "remotes": {
@@ -56,7 +58,7 @@
       "epics/CRT-*/*",
       "temp/**",
       "automation/temp/**",
-      ".cursor/benchmark/runs/**",
+      ".cursor/calibrate/reports/**",
       ".cursor/pipelines/clean.md",
       "temp/crtqa-console/**",
       "stats/crtqa-stats/latest.md",
@@ -113,10 +115,33 @@
     ],
     "router": {
       "exclude_triggers": ["CLEAN:"]
+    },
+    "harness_map_strip_package_ids": ["clean_pipeline"],
+    "entry_templates": {
+      "README.md": "README.team.md",
+      "HOW-TO.md": "HOW-TO.team.md",
+      "AGENTS.md": "AGENTS.team.md"
+    },
+    "forbidden_substrings": [
+      "CLEAN:",
+      "clean_pipeline",
+      "agentic-epic-helper.git",
+      "agentic-epic-helper-releases",
+      "origin/personal",
+      "checkout personal",
+      "PUBLIC-SCRUB:",
+      "SYNC:",
+      "benchmark_suite",
+      ".cursor/benchmark/"
+    ],
+    "forbidden_substrings_allow_if": {
+      "heatdance/agentic-epic-helper": ["heatdance/agentic-epic-helper-team"]
     }
   },
   "public": {
     "source_branch": "team",
+    "supersede_previous_branch": true,
+    "supersede_after_push_only": true,
     "delete_globs": [
       "qa-handoff.md",
       "epics/CRT-*",
@@ -124,10 +149,8 @@
       ".cursor/pipelines/clean.md",
       ".cursor/pipelines/*.md",
       "automation/tools/*_verify.py",
-      "automation/tools/benchmark_verify.py",
-      "automation/tools/benchmark_aggregate.py",
+      "automation/tools/calibrate_verify.py",
       "automation/tools/close_archive.py",
-      ".cursor/benchmark/**",
       "stats/crtqa-stats/latest.md",
       "temp/**",
       "automation/temp/**"
@@ -227,10 +250,10 @@
     "stale_branch_names_forbidden_in_t1": ["develop", "main", "release"],
     "t1_files": ["AGENTS.md", "README.md", "HOW-TO.md", ".cursor/rules/qa-artifacts.mdc"]
   },
-  "benchmark": {
-    "_comment": "Paths may change when benchmark rework lands; update globs then.",
-    "team_keep_globs": [".cursor/benchmark/README.md", ".cursor/commands/crtqa-benchmark.md", "docs/benchmark-contract.md"],
-    "team_delete_globs": [".cursor/benchmark/runs/**", ".cursor/benchmark/run-results/**"]
+  "calibrate": {
+    "_comment": "Operator gold folders may stay on personal; scrub secrets in reports.",
+    "team_keep_globs": [".cursor/calibrate/README.md", ".cursor/commands/crtqa-calibrate.md", "docs/calibrate-contract.json"],
+    "team_delete_globs": [".cursor/calibrate/reports/**", ".cursor/calibrate/*-gold/**"]
   },
   "router_tiers": {
     "personal": {

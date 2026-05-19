@@ -1,6 +1,6 @@
 # CLOSE prompt scaffold
 
-**Trigger line:** `CLOSE: <EPIC-KEY>` (optional `benchmark_suite=` / `benchmark_attempt=`; optional `heal=no`).
+**Trigger line:** `CLOSE: <EPIC-KEY>` (optional `/ `optional `heal=no`).
 
 **Playbook (follow exactly):** [`.cursor/pipelines/close.md`](../pipelines/close.md)
 

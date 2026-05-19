@@ -17,13 +17,13 @@
     "cold_gate_resolved_at": null,
     "discover_schema_version": 3,
     "discover_run_started_at": null,
-    "discovery_mode": "generation | benchmark",
+    "discovery_mode": "generation",
     "crtqa_index_enabled": false,
     "fe_exploration_waived": false,
     "_fe_exploration_waived": "true when fe_exploration_waived=yes on trigger after Phase 0b stop; caps dxtrade5/webbroker Chrome at shell_only.",
     "_discover_run_started_at": "ISO-8601 set once when Step A starts after Phase 0 pass; all validation_log.at must be >= this.",
     "_cold_gate_resolved_at": "Optional ISO-8601 when operator re-ran after TEST-DISCOVER … proceed and Phase 0 passed.",
-    "_crtqa_index_enabled": "true when crtqa_index=yes on trigger OR discovery_mode is benchmark (both benchmark_suite and benchmark_attempt on line)."
+    "_crtqa_index_enabled": "true when crtqa_index=yes on trigger."
   },
   "obligation_closure": {
     "primary_count": null,

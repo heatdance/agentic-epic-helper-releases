@@ -2,7 +2,6 @@
 
 **Trigger**: user message starts with **`TEST-PRECON:`** and includes a Jira **Epic key** (e.g. `TEST-PRECON: CRT-639`). Optional tokens on the **same line**:
 
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — shadow **`{EpicDir}`** per [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
 - **`proceed`** — after a **Phase 0 hard stop** only. Re-run Phase **0** from scratch; on pass, start a **fresh** run (new **`sources.precon_run_started_at`**, new **`temp/precon-ledger.json`**). **MUST NOT** merge into a prior failed attempt.
 - **`skip_cold_gate=yes`** — waive Phase **0** machine gates. **`sources.cold_gate_skip_token_used: true`**; **`validation_log`** **MUST** record **`cold_gate_skipped`**.
 - **`dxtrade5_creds=<user>/<password>`** and **`webbroker_creds=<user>/<password>`** — transient only (**MUST NOT** enter durable JSON).
@@ -133,7 +132,7 @@ Optional scratch: **`{EpicDir}temp/precon-cold-gate.json`** (probe JSON) — **d
 
 ### Phase 1 — Load inputs
 
-1. Set **`{EpicDir}`**, **`epic_key`**, benchmark tokens.
+1. Set **`{EpicDir}`** = `epics/<KEY>/`, **`epic_key`**.
 2. **MUST** project each present artifact with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading full files into context:
    - **`-coverage.json`**: e.g. `jq '.checks[] | {id, summary, verification_role}'`, `jq '.surfaces'`
    - **`-discover.json`** (when present): e.g. `jq '{discovery_status, test_prep_gates}'`, `jq '.fixture_needs[]'`
@@ -164,7 +163,7 @@ Apply bundling from [test-prep.md § Bundling](test-prep.md#bundling-normative):
 
 **After Phase 2**, before Phase 3. Feeds **TEST-PREP v3** [`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json).
 
-**Input per subprocess:** coverage slice for **`covers_check_ids`**, skeleton row, optional **`-discover.json`** obligation hints, optional **`shape_ref=benchmark`** on trigger **only with both** **`benchmark_suite=`** + **`benchmark_attempt=`** (read local bench data for **case titles only** — **no** CRTQA keys in output). **Phase 2b** **`case_outline[]`**: seed steps from **coverage `checks[]`** + matching **ref `obligations_proposed[]`** (`obligation_ids` / check text).
+**Input per subprocess:** coverage slice for **`covers_check_ids`**, skeleton row, optional **`-discover.json`** obligation hints. **Phase 2b** **`case_outline[]`**: seed steps from **coverage `checks[]`** + matching **ref `obligations_proposed[]`** (`obligation_ids` / check text).
 
 **Output:** merge into skeleton row **`case_outline[]`**:
 

@@ -20,7 +20,7 @@ python automation/tools/discover_verify.py `
   --discover epics/CRT-639/CRT-639-discover.json
 ```
 
-Optional **`--mode generation|benchmark`** overrides **`sources.crtqa_index_enabled`** inference.
+Optional **`--mode generation`** (legacy **`benchmark`** accepted for old artefacts) overrides **`sources.crtqa_index_enabled`** inference.
 
 Optional **`--ref epics/<KEY>/<KEY>-ref.json`** when **`environment.client_shell_impact`** is missing on the ledger/discover (Adaptive complete bar).
 

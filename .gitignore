@@ -14,3 +14,6 @@ __pycache__/
 # CRTQA stats — local state and run audit (see stats/crtqa-stats/README.md)
 stats/crtqa-stats/state/
 stats/crtqa-stats/raw/
+
+# Calibrate — optional local history (see docs/calibrate-contract.json)
+.cursor/calibrate/history.jsonl

@@ -88,7 +88,6 @@
   },
   "shape_ref_hygiene": {
     "forbid_crtqa_keys_in_durable": true,
-    "forbid_crtqa_requires": true,
-    "allowed_from_benchmark": ["case titles", "subsection structure", "scenario headings"]
+    "forbid_crtqa_requires": true
   }
 }

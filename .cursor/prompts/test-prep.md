@@ -9,7 +9,7 @@
 ## Orchestrator checklist
 
 1. **MUST** `jq` project **`-coverage.json`** (required), **`-precon.json`** (SHOULD — `case_outline`, `session_placeholders`, `command_patterns`), optional **`-discover.json`**, **`-ref.json`** per [automation/docs/jq.md](../../automation/docs/jq.md) before Read; summarize stdout, then load only slices needed for edit/emit.
-2. Parse **`draft_profile`** (default `crtqa_outline` = executable outline), optional **`shape_ref=benchmark`** (**only** if both **`benchmark_suite=`** + **`benchmark_attempt=`** on trigger), **`draft_split=`**.
+2. Parse **`draft_profile`** (default `crtqa_outline` = executable outline), **`draft_split=`**.
 3. Phase **6**: CRTQA Jira search skip.
 4. Phase **8a** shells from **`test_skeleton[]`**.
 5. **Phase 0** (after 8a): machine + FE creds + **0c smoke only**.
@@ -22,7 +22,6 @@
 ## Subprocess 8a½ (plan)
 
 - Merge PRECON **`case_outline[]`**; add rows until **`min_case_count`**.
-- **`shape_ref=benchmark`**: benchmark mode only — case titles only — **no CRTQA keys** in plan JSON.
 - If **`obligations_coverage`** has uncovered **`primary_candidate`**: **`map_only=yes`** or STOP.
 
 ## Subprocess 8b (draft)
@@ -39,4 +38,4 @@ Merge `test-prep-draft-<bundle>-<chk>.json` → bundle `draft` ordered by `case_
 
 ## Trigger tokens
 
-`draft_profile=teaching`, `shape_ref=benchmark`, `draft_split=per_check|per_bundle`, `dxtrade5_creds=`, `webbroker_creds=`, `fe_exploration_waived=yes`, `proceed`, `skip_cold_gate=yes`, `map_only=yes`, `discover_override=yes`, `benchmark_suite=`, `benchmark_attempt=`
+`draft_profile=teaching`, `draft_split=per_check|per_bundle`, `dxtrade5_creds=`, `webbroker_creds=`, `fe_exploration_waived=yes`, `proceed`, `skip_cold_gate=yes`, `map_only=yes`, `discover_override=yes`

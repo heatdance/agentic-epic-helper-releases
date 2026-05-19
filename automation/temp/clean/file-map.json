@@ -1,0 +1,3136 @@
+{
+  "schema_version": 2,
+  "repo_root": "C:\\Media\\Work\\cursor.corner",
+  "tier_matrix": "docs/clean-publish-tier-matrix.json",
+  "entry_count": 193,
+  "entries": [
+    {
+      "path": ".cursor/calibrate/CRT-639-gold/CRT-639-coverage.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": ".cursor/calibrate/CRT-639-gold/CRT-639-gold-meta.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": ".cursor/calibrate/CRT-639-gold/CRT-639-tests.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": ".cursor/calibrate/CRT-639-gold/README.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": ".cursor/commands/clean.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/commands/crtqa-console.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/commands/crtqa-env.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/commands/crtqa-stats.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/mcp.json.example",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/analysis.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/clean.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/close.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/coverage.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/epic-prep.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/test-discover.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/test-precon.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/pipelines/test-prep.md",
+      "tier": "all",
+      "action": "public_readme_replace",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "public_readme_replace"
+      }
+    },
+    {
+      "path": ".cursor/prompts/analysis.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/close.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/codebase-context.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/combined-qa-task.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/confluence-spec-work.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/corner-adhoc-qa.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/coverage.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/epic-prep.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/jira-ticket-work.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/test-discover.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/test-precon.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/prompts/test-prep.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/dxcore-console-harness.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/dxtrade5-harness.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/harness-context.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/harness-maintenance.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/jq-json.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/mcp-atlassian-search.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/pipeline-router.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".cursor/rules/qa-artifacts.mdc",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": ".gitignore",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "AGENTS.md",
+      "tier": "all",
+      "action": "team_rewrite",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep",
+        "t1_variant": "maintainer"
+      },
+      "team": {
+        "action": "rewrite",
+        "t1_variant": "contributor",
+        "template": "AGENTS.team.md"
+      },
+      "public": {
+        "action": "rewrite",
+        "t1_variant": "visitor"
+      },
+      "t1_variant": "maintainer",
+      "audience": "maintainer"
+    },
+    {
+      "path": "HOW-TO.md",
+      "tier": "all",
+      "action": "team_rewrite",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep",
+        "t1_variant": "maintainer"
+      },
+      "team": {
+        "action": "rewrite",
+        "t1_variant": "contributor",
+        "template": "HOW-TO.team.md"
+      },
+      "public": {
+        "action": "rewrite",
+        "t1_variant": "visitor"
+      },
+      "t1_variant": "maintainer",
+      "audience": "maintainer"
+    },
+    {
+      "path": "README.md",
+      "tier": "all",
+      "action": "team_rewrite",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep",
+        "t1_variant": "maintainer"
+      },
+      "team": {
+        "action": "rewrite",
+        "t1_variant": "contributor",
+        "template": "README.team.md"
+      },
+      "public": {
+        "action": "rewrite",
+        "t1_variant": "visitor"
+      },
+      "t1_variant": "maintainer",
+      "audience": "maintainer"
+    },
+    {
+      "path": "automation/docs/analysis-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/chrome-devtools-mcp.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/clean-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/close-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/coverage-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/crtqa-env.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/crtqa-stats.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/discover-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/epic-prep-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/figma-mcp.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/jq.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/precon-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/test-prep-verify.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/docs/yogi-url-resolve.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/temp/README.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/af-effect-plan-delivery.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/README.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-A-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-B-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-C-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-D-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-E-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/benchmark-rework-analysis/WS-F-findings.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/temp/confluence-portfolio-metrics-345703196.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/analysis_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/clean_apply_public.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/clean_apply_team.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/clean_file_map.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/clean_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/close_archive.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/close_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/coverage_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/CrtqaConsole.Common.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/Enter-CrtqaConsole.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/Get-CrtqaConsoleStatus.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/Start-CrtqaConsoleSession.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps1",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/crtqa-console.config.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/crtqa-console.local.json.example",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa-console/crtqa-invoke-remote.bash.template",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa_env_common.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa_env_probe.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/crtqa_stats_rollup.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/discover_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/dxtrade5-harness/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/dxtrade5-harness/bootstrap_ctqa_locations.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/dxtrade5-harness/check_locations_parity.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/epic_prep_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/coverage_snippet.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/plan_config_posture.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/plan_tb002_minimal.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/tests_config_posture_ok.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/tests_tb002_bad_expand.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/fixtures/test_prep/tests_tb002_good_skeleton.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/precon_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/test_prep_verify.py",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "automation/tools/tunnel/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/tunnel/ctqa_pg.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/tunnel/host_pg.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/tunnel/requirements.txt",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/tunnel/ssh_pg_tunnel.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/webbroker-harness/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/webbroker-harness/bootstrap_ctqa_locations.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/webbroker-harness/check_locations_parity.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/fixtures/sample_adjacent_req.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/fixtures/sample_duplicate_key_req.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/fixtures/sample_inline_req.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/test_yogi_extract.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/yogi_confluence.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/yogi_extract.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/yogi_resolve.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "automation/tools/yogi-tool/yogi_snippet.py",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/analysis-gap-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/clean-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/clean-public-style.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/close-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/corner-platform-map.json",
+      "tier": "team",
+      "action": "transform_example",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "example_only",
+        "target": "docs/corner-platform-map.example.json"
+      },
+      "public": {
+        "action": "example_only"
+      }
+    },
+    {
+      "path": "docs/coverage-obligation-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/discover-fixture-probes.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxcore-console-harness.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/concept-map.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/dxtrade5-harness.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/ia-map-stage2.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/ia-map.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/locations/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/dxtrade5-harness/locations/ctqa.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/epic-obligation-kinds.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/exploration-depth-ladder.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/fe-ui-probe-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/harness-map.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "transform",
+        "strip_package_ids": [
+          "clean_pipeline"
+        ]
+      },
+      "public": {
+        "action": "transform",
+        "strip_package_ids": [
+          "clean_pipeline",
+          "calibrate_pipeline"
+        ]
+      }
+    },
+    {
+      "path": "docs/harness-principles.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/mcp-atlassian-tools.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/precon-step-archetypes.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/project.json",
+      "tier": "team",
+      "action": "transform_example",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "example_only",
+        "target": "docs/project.example.json"
+      },
+      "public": {
+        "action": "example_only"
+      }
+    },
+    {
+      "path": "docs/public-export-manifest.example.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/qa-project.json",
+      "tier": "team",
+      "action": "transform_example",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "example_only",
+        "target": "docs/qa-project.example.json"
+      },
+      "public": {
+        "action": "example_only"
+      }
+    },
+    {
+      "path": "docs/test-prep-draft-profiles.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/test-prep-tbd-contract.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/test-verification-classes.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/concept-map.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/ia-map-stage2.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/ia-map.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/locations/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/locations/ctqa.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "docs/webbroker-harness/webbroker-harness.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/CRT-639/CRT-639-analysis.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/CRT-639-coverage.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/CRT-639-precon.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/CRT-639-tests.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-analysis.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-close.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-coverage.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-discover.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-precon.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-ref.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/CRT-639/context/CRT-639-tests.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "epics/README.md",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/analysis-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/close-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/coverage-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/discover-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/epic-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/precon-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "epics/templates/tests-ref.json",
+      "tier": "all",
+      "action": "keep",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "keep"
+      },
+      "public": {
+        "action": "keep"
+      }
+    },
+    {
+      "path": "qa-handoff.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "stats/crtqa-stats/README.md",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "partial",
+        "keep": [
+          "stats/crtqa-stats/README.md",
+          "stats/crtqa-stats/temp/categories.json"
+        ]
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "stats/crtqa-stats/latest.md",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "partial",
+        "keep": [
+          "stats/crtqa-stats/README.md",
+          "stats/crtqa-stats/temp/categories.json"
+        ]
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "stats/crtqa-stats/temp/categories.json",
+      "tier": "public",
+      "action": "delete_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "partial",
+        "keep": [
+          "stats/crtqa-stats/README.md",
+          "stats/crtqa-stats/temp/categories.json"
+        ]
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/README.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/dependencies.json",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v01-baseline-before-validation-te-rule/CR",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v01-baseline-before-validation-te-rule/RA",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v01-baseline-before-validation-te-rule/TC",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v01-baseline-before-validation-te-rule/Validation",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v02-validation-te-closed-always-skips-three-columns/CR",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v02-validation-te-closed-always-skips-three-columns/RA",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v02-validation-te-closed-always-skips-three-columns/TC",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v02-validation-te-closed-always-skips-three-columns/Validation",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v03-validation-te-closed-only-with-no-matching-child/CR",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v03-validation-te-closed-only-with-no-matching-child/RA",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v03-validation-te-closed-only-with-no-matching-child/TC",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v03-validation-te-closed-only-with-no-matching-child/Validation",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v04-epic-aborted-skip-with-jql-counter/CR",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v04-epic-aborted-skip-with-jql-counter/RA",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/roadmap-jira/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    },
+    {
+      "path": "temp/session-2026-05-15-harness-benchmark-context.md",
+      "tier": "personal",
+      "action": "delete_team_public",
+      "role": "tracked",
+      "consumers": [],
+      "personal": {
+        "action": "keep"
+      },
+      "team": {
+        "action": "delete"
+      },
+      "public": {
+        "action": "delete"
+      }
+    }
+  ]
+}

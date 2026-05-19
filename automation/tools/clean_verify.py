@@ -136,47 +136,111 @@ def mode_secret_scan(root: Path) -> int:
     return _ok("secret_scan")
 
 
-def mode_semver_next(
+def _public_branch_tuple(name: str) -> tuple[int, int] | None:
+    m = PUBLIC_BRANCH_RE.match(name)
+    if m:
+        return int(m.group(1)), int(m.group(2))
+    return None
+
+
+def _branch_from_tuple(major: int, minor: int) -> str:
+    return f"public-{major}.{minor}"
+
+
+def _superseded_branch(
+    target: tuple[int, int],
+    public_versions: list[tuple[int, int]],
+    republish_same: bool,
+) -> str | None:
+    if republish_same:
+        return None
+    older = [v for v in public_versions if v < target]
+    if not older:
+        return None
+    m, n = max(older)
+    return _branch_from_tuple(m, n)
+
+
+def compute_semver_next(
     contract: dict[str, Any],
     version_override: str | None,
     confirm_major: bool,
-) -> int:
+) -> tuple[str | None, str | None, str | None]:
+    """Returns (target_branch, superseded_branch, error_message)."""
     sem = contract["semver"]
     remote = contract["remotes"]["public"]["remote"]
     branches = _remote_branches(remote)
     public_versions: list[tuple[int, int]] = []
+    branch_names: dict[tuple[int, int], str] = {}
     for b in branches:
-        m = PUBLIC_BRANCH_RE.match(b)
-        if m:
-            public_versions.append((int(m.group(1)), int(m.group(2))))
+        t = _public_branch_tuple(b)
+        if t:
+            public_versions.append(t)
+            branch_names[t] = b
 
     if version_override:
         parts = version_override.split(".")
         if len(parts) != 2 or not all(p.isdigit() for p in parts):
-            return _fail(f"invalid version override: {version_override!r}")
+            return None, None, f"invalid version override: {version_override!r}"
         major, minor = int(parts[0]), int(parts[1])
-        name = f"public-{major}.{minor}"
-        print(name)
-        return 0
+        target_t = (major, minor)
+        name = _branch_from_tuple(major, minor)
+        republish = target_t in public_versions
+        superseded = _superseded_branch(target_t, public_versions, republish)
+        return name, superseded, None
 
     if not public_versions:
         default = sem.get("default_when_no_public_branch", "public-1.2")
-        print(default)
-        return 0
+        return default, None, None
 
     major, minor = max(public_versions)
     minor_max = sem.get("minor_max_before_gate", 9)
     if minor >= minor_max:
         if not confirm_major:
-            return _fail(
-                f"latest public-{major}.{minor}; need confirm_major=yes for public-{major + 1}.0"
+            return (
+                None,
+                None,
+                f"latest public-{major}.{minor}; need confirm_major=yes for public-{major + 1}.0",
             )
         major += 1
         minor = 0
     else:
         minor += 1
-    name = f"public-{major}.{minor}"
-    print(name)
+    target_t = (major, minor)
+    name = _branch_from_tuple(major, minor)
+    superseded = _superseded_branch(target_t, public_versions, False)
+    return name, superseded, None
+
+
+def mode_semver_next(
+    contract: dict[str, Any],
+    version_override: str | None,
+    confirm_major: bool,
+    json_output: bool,
+) -> int:
+    target, superseded, err = compute_semver_next(
+        contract, version_override, confirm_major
+    )
+    if err:
+        return _fail(err)
+    if json_output:
+        export_version = None
+        if target:
+            m = PUBLIC_BRANCH_RE.match(target)
+            if m:
+                export_version = f"{m.group(1)}.{m.group(2)}.0"
+        print(
+            json.dumps(
+                {
+                    "target_branch": target,
+                    "superseded_branch": superseded,
+                    "export_version": export_version,
+                },
+                indent=2,
+            )
+        )
+        return 0
+    print(target)
     return 0
 
 
@@ -200,7 +264,7 @@ def mode_file_map(map_path: Path) -> int:
             if key not in row:
                 return _fail(f"entry {i} missing {key}")
         if row["tier"] not in ("personal", "team", "public", "all"):
-            return _fail(f"entry {i} bad tier: {row['tier']}")
+            return _fail(f"entry {i} bad tier: {row['tier']!r}")
 
     return _ok(f"file_map ({len(entries)} entries)")
 
@@ -298,7 +362,83 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
     if "CLEAN:" in router:
         return _fail("team router must not include CLEAN:")
 
+    agents = _read_text(root / "AGENTS.md")
+    if "clean.md" in agents and "pipelines/clean" in agents:
+        return _fail("AGENTS.md must not reference clean.md")
+
+    howto = _read_text(root / "HOW-TO.md")
+    if "CLEAN:" in howto:
+        return _fail("HOW-TO.md must not contain CLEAN:")
+
+    readme = _read_text(root / "README.md")
+    if "agentic-epic-helper-releases" in readme:
+        return _fail("README.md must not reference releases repo")
+    if re.search(r"heatdance/agentic-epic-helper(?!-team)", readme):
+        return _fail("README.md must not reference personal repo URL")
+
+    if (root / "qa-handoff.md").is_file():
+        return _fail("qa-handoff.md must not exist on team tree")
+
+    cal = root / ".cursor/calibrate"
+    if cal.is_dir():
+        for gold in cal.glob("*-gold"):
+            if gold.is_dir():
+                return _fail(f"calibrate gold present: {gold.relative_to(root)}")
+        for rep in (cal / "reports").glob("*") if (cal / "reports").is_dir() else []:
+            if rep.is_file():
+                return _fail(f"calibrate report present: {rep.relative_to(root)}")
+
+    cmd = root / ".cursor/commands/crtqa-calibrate.md"
+    if not cmd.is_file():
+        return _fail("team tree missing .cursor/commands/crtqa-calibrate.md")
+
+    try:
+        with (root / "docs/harness-map.json").open(encoding="utf-8") as f:
+            hmap = json.load(f)
+        packages = hmap.get("tiers", [{}])[1].get("match_any_package", []) if hmap.get("tiers") else []
+        ids = [p.get("id") for p in packages if isinstance(p, dict)]
+        if "clean_pipeline" in ids:
+            return _fail("harness-map must not include clean_pipeline on team tree")
+    except (OSError, json.JSONDecodeError) as e:
+        return _fail(f"harness-map.json: {e}")
+
+    forbidden = team.get("forbidden_substrings", [])
+    allow_map = team.get("forbidden_substrings_allow_if", {})
+    scan_files = ["README.md", "HOW-TO.md", "AGENTS.md", ".cursor/rules/pipeline-router.mdc"]
+    for rel in scan_files:
+        text = _read_text(root / rel)
+        lower = text.lower()
+        for sub in forbidden:
+            sub_l = sub.lower()
+            if sub_l not in lower:
+                continue
+            allowed = False
+            for key, replacements in allow_map.items():
+                if sub_l in key.lower():
+                    for rep in replacements:
+                        if rep.lower() in lower:
+                            allowed = True
+                            break
+            if not allowed:
+                return _fail(f"forbidden substring {sub!r} in {rel}")
+
+    if ".cursor/benchmark" in readme or ".cursor/benchmark" in howto:
+        return _fail("team docs must not reference .cursor/benchmark/")
+
     return _ok("team")
+
+
+def mode_public_remote(
+    contract: dict[str, Any],
+    superseded_branch: str | None,
+) -> int:
+    if not superseded_branch:
+        return _ok("public_remote (no supersede expected)")
+    remote = contract["remotes"]["public"]["remote"]
+    branches = _remote_branches(remote)
+    if superseded_branch in branches:
+        return _fail(f"superseded branch still on remote: {superseded_branch}")
+    return _ok("public_remote")
 
 
 def _allowed_blocklist_path(rel: str, allow_globs: list[str]) -> bool:
@@ -381,7 +521,19 @@ def main() -> int:
             "align",
             "team",
             "public",
+            "public_remote",
         ],
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="JSON output for semver_next",
+    )
+    parser.add_argument(
+        "--superseded",
+        type=str,
+        default=None,
+        help="superseded branch name for public_remote mode",
     )
     parser.add_argument("--root", type=Path, default=REPO_ROOT)
     parser.add_argument("--map", type=Path, default=REPO_ROOT / "automation/temp/clean/file-map.json")
@@ -401,8 +553,10 @@ def main() -> int:
         return mode_secret_scan(root)
     if args.mode == "semver_next":
         return mode_semver_next(
-            contract, args.version, args.confirm_major == "yes"
+            contract, args.version, args.confirm_major == "yes", args.json
         )
+    if args.mode == "public_remote":
+        return mode_public_remote(contract, args.superseded)
     if args.mode == "file_map":
         return mode_file_map(args.map.resolve())
     if args.mode == "align":

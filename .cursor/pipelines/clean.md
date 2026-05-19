@@ -49,9 +49,10 @@
 ### S1 — File-map
 
 1. Ensure **`automation/temp/clean/`** exists.
-2. Run **`python automation/tools/clean_file_map.py`** → writes **`automation/temp/clean/file-map.json`**.
-3. **`python automation/tools/clean_verify.py --mode file_map`**
-4. **Subagent (optional)**: enrich `role` / `consumers[]` for rows where `action != keep` (one cluster per top-level directory; load only those rows + contract).
+2. SoT: [`docs/clean-publish-tier-matrix.json`](../../docs/clean-publish-tier-matrix.json) (human index: [clean-publish-tier-matrix.md](../../docs/clean-publish-tier-matrix.md)).
+3. Run **`python automation/tools/clean_file_map.py`** → merges matrix + `git ls-files` → **`automation/temp/clean/file-map.json`** (`audience` / `t1_variant` on T1 paths).
+4. **`python automation/tools/clean_verify.py --mode file_map`**
+5. **Subagent (optional)**: enrich `role` / `consumers[]` for rows where `action != keep`.
 
 ### S2 — Harness align (T0–T6)
 
@@ -72,7 +73,7 @@ Run **one subprocess per tier**; after each tier, run **`clean_verify.py --mode 
 
 **T0** — List `.cursor/pipelines/*.md`; each epic pipeline + **`clean`** in router; **`clean_pipeline`** in harness-map; **no** `public-scrub.md` / `sync.md`; **no** `PUBLIC-SCRUB` / `SYNC` in router.
 
-**T1** — [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), [HOW-TO.md](../../HOW-TO.md), [qa-artifacts.mdc](../rules/qa-artifacts.mdc): branch table (team → `team` remote); **`CLEAN:`** only (no scrub/sync).
+**T1 (personal only)** — [AGENTS.md](../../AGENTS.md), [README.md](../../README.md), [HOW-TO.md](../../HOW-TO.md), [qa-artifacts.mdc](../rules/qa-artifacts.mdc): three-repo table + **`CLEAN:`** on **personal** only. **Do not** copy maintainer T1 to team/public — team/public entry docs come from **`clean_apply_t1_docs.py`** / **`clean_apply_public.py`** in phases **T** / **U**.
 
 **T2** — [`.cursor/prompts/`](../prompts/): triggers and links.
 
@@ -120,9 +121,9 @@ Work root: **`../cursor-corner-team-build`**.
 
 ### T2 — Strip
 
-1. **`python automation/tools/clean_apply_team.py --root ../cursor-corner-team-build`**
-2. **Subagent**: refine team **`pipeline-router.mdc`** — remove **`CLEAN:`** row and hard rules for CLEAN (see contract `team.router`).
-3. **`python automation/tools/clean_verify.py --mode team --root ../cursor-corner-team-build`** — loop until pass.
+1. **`python automation/tools/clean_apply_team.py --root ../cursor-corner-team-build`** (deletes, router strip, calibrate gold, **`clean_apply_t1_docs --tier team`**, harness-map strip `clean_pipeline`).
+2. **`python automation/tools/clean_verify.py --mode team --root ../cursor-corner-team-build`** — loop until pass (forbidden publish strings per contract `team.forbidden_substrings`).
+3. **Subagent (optional escalation only)** if router or T1 still leak maintainer vocabulary.
 
 ### T3 — Commit and push
 
@@ -150,9 +151,10 @@ If **`scope=team`**, remove worktree if desired; **stop**.
 
 ### U0 — Branch and legacy delete
 
-1. **`python automation/tools/clean_verify.py --mode semver_next`** (add **`--version M.N`** or **`--confirm-major yes`** from trigger). Expect **`public-1.2`** on first run when no `public-*` exists.
-2. **`git fetch releases`**
-3. Delete legacy branches (ignore errors if missing):
+1. **`git fetch releases`**
+2. **`python automation/tools/clean_verify.py --mode semver_next --json`** (add **`--version M.N`** or **`--confirm-major yes`** from trigger). Parse **`target_branch`** and **`superseded_branch`** (e.g. `public-1.2` supersedes `public-1.1`). Plain branch name only: omit **`--json`**.
+3. Expect **`public-1.2`** on first run when no `public-*` exists.
+4. Delete legacy branches (ignore errors if missing):
 
 ```text
 git push releases --delete release-1.0.0 release-1.1.0
@@ -191,6 +193,17 @@ git worktree remove ../cursor-corner-public-verify
 ```text
 git -C ../cursor-corner-public-build push -u releases public-1.2:public-1.2
 ```
+
+### U4b — Supersede previous public branch
+
+**Only after U4 push succeeds** and **`superseded_branch`** is non-null (from semver JSON).
+
+1. **`python automation/tools/clean_public_supersede.py --target public-1.2 --superseded public-1.1`**
+   (use values from semver step). Sets GitHub default to **`target_branch`** when **`gh`** is available, then **`git push releases --delete <superseded>`** and local **`git branch -D`**.
+2. **`python automation/tools/clean_verify.py --mode public_remote --superseded public-1.1`**
+3. Log result in CLEAN summary (deleted / skipped / failed).
+
+**Re-publish same `version=M.N`:** when **`target_branch`** already exists on `releases`, **`superseded_branch`** is **`null`** — skip U4b.
 
 Update root [README.md](../../README.md) on **personal** only if public branch naming docs need bump (next session).
 

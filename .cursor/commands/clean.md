@@ -35,8 +35,15 @@ Partial runs (operator request):
 | Team PR | Merge PR on team repo — agent **must not** `gh pr merge` |
 | Public `public-1.9` → `public-2.0` | Add **`confirm_major=yes`** |
 
+## Tier docs and supersede
+
+- Publish matrix: [docs/clean-publish-tier-matrix.md](../../docs/clean-publish-tier-matrix.md)
+- Team/public **README / HOW-TO / AGENTS** are generated (not copied from personal).
+- After each new **`public-M.N`** push, phase **U4b** deletes the previous **`public-*`** branch on `releases` when `superseded_branch` is set (`semver_next --json`).
+
 ## Related
 
 - [docs/clean-contract.json](../../docs/clean-contract.json)
+- [automation/docs/clean-verify.md](../../automation/docs/clean-verify.md)
 - [automation/docs/clean-verify.md](../../automation/docs/clean-verify.md)
 - [docs/clean-public-style.md](../../docs/clean-public-style.md)

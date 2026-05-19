@@ -21,7 +21,7 @@
 
 Required per row: `case_id`, `check_id`, `title`, `intent`; optional `pattern_ref` (e.g. `ladder_step`).
 
-Optional **`shape_ref=benchmark`** on trigger **only with both benchmark tokens**: titles from bench JSON only. **Phase 2b**: seed **`case_outline[]`** from coverage **`checks[]`** + ref **`obligations_proposed[]`**.
+**Phase 2b**: seed **`case_outline[]`** from coverage **`checks[]`** + ref **`obligations_proposed[]`**.
 
 ## Subprocess 4R (replay discover fixture)
 

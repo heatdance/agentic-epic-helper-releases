@@ -2,24 +2,22 @@
 
 **Trigger**: user message starts with `EPIC-PREP:` and includes a Jira **Epic key** (e.g. `EPIC-PREP: CRT-1234`). Optional tokens on the same line:
 
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — together enable **benchmark shadow** `{EpicDir}` ([workspace](#epic-workspace-epicdir); [docs/benchmark-contract.md](../../docs/benchmark-contract.md)).
 - **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`** (see also [docs/corner-platform-map.json](../../docs/corner-platform-map.json) **`code_streams`** for `BRO/xt` vs `CAN/corner` vs packaging repos).
 - **`focus=...`** — free-text merge into synthesis and **obligations reconcile** (step **6b**), same spirit as COVERAGE `focus=` (e.g. `focus=FX_SPOT_WeightedAvg_metrics`).
 
 **Version note (obligation subprocesses)**: schema **`schema_version: 4`** with **`obligations_proposed[]`**; finalize gate **`epic_prep_verify.py`**. Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md).
 
-**Forbidden inputs (production)**: Do **not** read or copy from sibling **`-coverage.json`**, **`-discover.json`**, **`-precon.json`**, **`-tests.json`**, CRTQA Jira issues, or benchmark bench JSON unless **both** `benchmark_suite=` and `benchmark_attempt=` are set (shadow tree only).
+**Forbidden inputs (production)**: Do **not** read or copy from sibling **`-coverage.json`**, **`-discover.json`**, **`-precon.json`**, **`-tests.json`**, CRTQA Jira issues, or operator gold under **`.cursor/calibrate/`** (calibrate is post-hoc only).
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
 ## Epic workspace (`{EpicDir}`)
 
-Before any filesystem work, parse `<KEY>` and optional **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** from the **same user message line** as **`EPIC-PREP:`**.
+Before any filesystem work, parse `<KEY>` from the **same user message line** as **`EPIC-PREP:`**.
 
-- **Benchmark mode**: **both** tokens present → **`{EpicDir}`** = `{repo_root}/.cursor/benchmark/runs/<suite_id>/attempt-<nn>/shadow/<KEY>/` where **`nn`** is `benchmark_attempt` zero-padded to **two** digits. Do **not** write QA artifacts under `epics/<KEY>/` for this run.
-- **Production** (default): omit either token → **`{EpicDir}`** = `{repo_root}/epics/<KEY>/`.
+- **`{EpicDir}`** = `{repo_root}/epics/<KEY>/`
 
-Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Contract: [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
+Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 
 **Output**: `{EpicDir}<KEY>-ref.json` (copy from [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)). **Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort).
 

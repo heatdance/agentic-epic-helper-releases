@@ -4,9 +4,7 @@
 
 - **`map_only=yes`** / `true` / `1` — emit **shells** (phase **8a**) + **verification plan** (phase **8a½**) + plan verify only; **omit** full `draft` prose (placeholder arrays OK). **Skips** phase **8b**, **8b-verify**, **8c**, and **8c-verify**.
 - **`draft_profile=teaching`** — legacy v2 teaching drafts (`illustration_budget` cap). **Default:** **`crtqa_outline`** (no token required).
-- **`shape_ref=benchmark`** — **only when both** **`benchmark_suite=`** and **`benchmark_attempt=`** are on the **same line** as **`TEST-PREP:`**; read local [`.cursor/benchmark/test-bench/data/<KEY>/`](../../.cursor/benchmark/test-bench/data/) for **case titles/structure only**; **MUST NOT** copy CRTQA keys into durable output; set **`sources.shape_ref: benchmark`** on emit. **Forbidden** in production generation triggers.
 - **`draft_split=per_check`** / **`per_bundle`** — override auto 8b split rule ([profiles](docs/test-prep-draft-profiles.json)).
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — shadow **`{EpicDir}`** ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)).
 - **`discover_override=yes`** — when **`test_prep_gates.blocked: true`** on **`-discover.json`**; set **`sources.discover_blocked_acknowledged: true`**.
 - **`dxtrade5_creds=<user>/<password>`** / **`webbroker_creds=<user>/<password>`** — transient only (**MUST NOT** enter durable JSON).
 - **`fe_exploration_waived=yes`** — only after Phase **0b** FE stop + operator ack (caps FE at **`shell_only`**).
@@ -70,7 +68,7 @@ Before loading **`-coverage.json`** (required), **`-precon.json`**, **`-discover
 
 - **MUST NOT** use **existing CRTQA Test** issues for bundle design, preconditions chains, or Actions/Results prose.
 - **MUST NOT** run Jira test search/fetch in generation (phase **6** logs skip); **`existing_tests_considered: []`**, **`jira_test_search.skipped: true`**.
-- **MUST NOT** emit **`[REQUIRES: CRTQA-*]`** unless benchmark mode explicitly enables CRTQA index (out of scope for default cold run).
+- **MUST NOT** emit **`[REQUIRES: CRTQA-*]`** in generation (use **`crtqa_index=yes`** on **TEST-DISCOVER** only when operator opts in).
 
 ### CRTQA outline (default `draft_profile=crtqa_outline`)
 
@@ -183,7 +181,7 @@ Complete **0a**–**0c** above. Append **`validation_log`**: **`phase0`**, **`ph
 
 ### 8a½. Verification plan (one subprocess per bundle)
 
-**Input to subprocess**: coverage slice, discover slice (if loaded), registry path, bundle shell, **`-precon.json`** **`case_outline[]`** + **`session_placeholders`** / **`command_patterns`**, optional **`shape_ref=benchmark`** (titles only), **`fe_ui_sessions`**, ref **`client_shell_impact`**, **`draft_profile`**.
+**Input to subprocess**: coverage slice, discover slice (if loaded), registry path, bundle shell, **`-precon.json`** **`case_outline[]`** + **`session_placeholders`** / **`command_patterns`**, **`fe_ui_sessions`**, ref **`client_shell_impact`**, **`draft_profile`**.
 
 **Output**: **`{EpicDir}temp/test-prep-plan-<bundle_id>.json`** with **`verification_plan[]`** (each row includes **`case_outline[]`**, **`min_case_count`**, **`draft_profile`**), **`plan_status`**, **`fe_probe_surfaces`**, **`ladder_dependency_declared`** when class is **`stateful_ladder`**.
 
@@ -267,8 +265,7 @@ Append **`validation_log`**: **`8a-three-quarter-verify-<bundle_id>`**.
 3. **`-precon.json`**: **`session_placeholders`**, **`command_patterns`**, thin precon cite text.
 4. **`verification_exploration[]`** / **`metric_columns`** from plan (**8a¾**).
 5. **`results_only_context`** (Yogi — **Results only**).
-6. **`shape_ref=benchmark`**: stripped case headings only — **no CRTQA keys** in output.
-7. [test-verification-classes.json](../../docs/test-verification-classes.json), [test-prep-tbd-contract.json](../../docs/test-prep-tbd-contract.json).
+6. [test-verification-classes.json](../../docs/test-verification-classes.json), [test-prep-tbd-contract.json](../../docs/test-prep-tbd-contract.json).
 
 **Output**:
 
@@ -415,7 +412,7 @@ Unchanged from v1: merge by shared surface/session/preconditions; split on reset
 | Draft profiles | [`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json) |
 | TBD contract | [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json) |
 | Verifier | [`automation/tools/test_prep_verify.py`](../../automation/tools/test_prep_verify.py) · [doc](../../automation/docs/test-prep-verify.md) (`plan`, `explore`, `draft`, `merge`, `tests`) |
-| Benchmark shape (optional) | [`.cursor/benchmark/test-bench/data/`](../../.cursor/benchmark/test-bench/data/) |
+| Calibrate (post-hoc) | [`.cursor/pipelines/calibrate.md`](calibrate.md) |
 | Exploration depth | [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json) |
 | FE contract | [`docs/fe-ui-probe-contract.json`](../../docs/fe-ui-probe-contract.json) |
 | Precon | [`test-precon.md`](test-precon.md) |

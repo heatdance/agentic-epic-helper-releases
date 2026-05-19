@@ -13,7 +13,6 @@ Optional on the **same line**:
 - **`known_issues=yes`** — Jira search + optional coverage `>` Known issue lines (default **off**)
 - **`include_closed=yes`** — with known_issues only
 - **`resolve=no`** — audit-only (skip Confluence resolve subprocesses; default **on**)
-- **`benchmark_suite=`** + **`benchmark_attempt=`** — shadow tree
 
 ## Checklist
 

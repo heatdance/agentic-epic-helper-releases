@@ -2,14 +2,13 @@
 
 **Trigger**: user message starts with **`TEST-DISCOVER:`** and includes a Jira **Epic key** (e.g. `TEST-DISCOVER: CRT-639`). Optional tokens on the **same line**:
 
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — shadow **`{EpicDir}`** per [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md); sets **`sources.discovery_mode: benchmark`** and **`sources.crtqa_index_enabled: true`** (CRTQA Jira index allowed).
-- **`crtqa_index=yes`** — force CRTQA Jira index (Step **C-index**) in **generation** mode without benchmark tokens.
+- **`crtqa_index=yes`** — enable CRTQA Jira index (Step **C-index**); default is **off** in generation.
 - **`proceed`** — after a **Phase 0 hard stop** only. Re-run **Phase 0** from scratch; on pass, start a **fresh** run (new **`sources.discover_run_started_at`**, new **`validation_log`** chain, new **`temp/discover-ledger.json`**). **MUST NOT** append to a prior failed attempt or merge an existing **`-discover.json`** `validation_log`.
 - **`skip_cold_gate=yes`** — explicit opt-out from Phase **0** probes. **`validation_log`** **MUST** record **`cold_gate_skipped`**; **`sources.cold_gate_skip_token_used: true`** in **`-discover.json`**.
 - **`dxtrade5_creds=<user>/<password>`** and **`webbroker_creds=<user>/<password>`** — transient FE helpers only (**MUST NOT** enter durable JSON). **`supplied`** ≠ authenticated Chrome session.
 - **`fe_exploration_waived=yes`** — only after Phase **0b** hard stop + operator ack. Caps dxTrade5/WebBroker Chrome at **`shell_only`**; sets **`sources.fe_exploration_waived: true`** and **`fe_credentials.*: waived`** for waived surfaces.
 
-**CRTQA index default:** **`sources.crtqa_index_enabled: false`** unless **`crtqa_index=yes`** **or** both benchmark tokens are present. When false, **MUST NOT** run Step **C-index**; **`reference_index`**, **`precondition_signals`**, **`prerequisite_edges`** **MUST** be **`[]`** at emit.
+**CRTQA index default:** **`sources.crtqa_index_enabled: false`** unless **`crtqa_index=yes`** on the trigger. When false, **MUST NOT** run Step **C-index**; **`reference_index`**, **`precondition_signals`**, **`prerequisite_edges`** **MUST** be **`[]`** at emit.
 
 **Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
@@ -105,7 +104,7 @@ After Step **A** (ledger materialized):
 
 ### Step 0 — Cold-session gates (blocking, hard stop)
 
-Run after **`-ref.json`** and **`-coverage.json`** load. **MUST** project coverage/ref (and later **`temp/discover-ledger.json`**) with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading full files into context for the closure loop. Set **`sources.discovery_mode`** (`generation` \| `benchmark`) and **`sources.crtqa_index_enabled`** per trigger tokens.
+Run after **`-ref.json`** and **`-coverage.json`** load. **MUST** project coverage/ref (and later **`temp/discover-ledger.json`**) with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading full files into context for the closure loop. Set **`sources.discovery_mode: generation`** and **`sources.crtqa_index_enabled`** per **`crtqa_index=yes`** on the trigger.
 
 1. **`skip_cold_gate=yes`**: skip probes; log **`cold_gate_skipped`**; set tooling/session_gates per [contract](#tooling-and-session_gates-contract); continue to Step **A**.
 2. Else apply **[Tooling intent rubric](#tooling-intent-rubric-universal)** → **`tooling.*.intent`** (same labels as [`crtqa_env_common.py`](../../automation/tools/crtqa_env_common.py) **`tooling_intent_from_coverage`**).

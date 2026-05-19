@@ -1,0 +1,126 @@
+{
+  "_comment": "SoT for CLEAN publish tiers. Referenced by docs/clean-contract.json tier_matrix. Generated file-map merges these rules with git ls-files.",
+  "schema_version": 1,
+  "rules": [
+    {
+      "match": "README.md",
+      "personal": { "action": "keep", "t1_variant": "maintainer" },
+      "team": { "action": "rewrite", "t1_variant": "contributor", "template": "README.team.md" },
+      "public": { "action": "rewrite", "t1_variant": "visitor" }
+    },
+    {
+      "match": "HOW-TO.md",
+      "personal": { "action": "keep", "t1_variant": "maintainer" },
+      "team": { "action": "rewrite", "t1_variant": "contributor", "template": "HOW-TO.team.md" },
+      "public": { "action": "rewrite", "t1_variant": "visitor" }
+    },
+    {
+      "match": "AGENTS.md",
+      "personal": { "action": "keep", "t1_variant": "maintainer" },
+      "team": { "action": "rewrite", "t1_variant": "contributor", "template": "AGENTS.team.md" },
+      "public": { "action": "rewrite", "t1_variant": "visitor" }
+    },
+    {
+      "match": "qa-handoff.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/pipelines/clean.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/calibrate/**/*-gold/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/calibrate/reports/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/calibrate/README.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/crtqa-calibrate.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/calibrate-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/calibrate_verify.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/harness-map.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "transform", "strip_package_ids": ["clean_pipeline"] },
+      "public": { "action": "transform", "strip_package_ids": ["clean_pipeline", "calibrate_pipeline"] }
+    },
+    {
+      "match": "stats/crtqa-stats/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "partial", "keep": ["stats/crtqa-stats/README.md", "stats/crtqa-stats/temp/categories.json"] },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/project.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "example_only", "target": "docs/project.example.json" },
+      "public": { "action": "example_only" }
+    },
+    {
+      "match": "docs/qa-project.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "example_only", "target": "docs/qa-project.example.json" },
+      "public": { "action": "example_only" }
+    },
+    {
+      "match": "docs/corner-platform-map.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "example_only", "target": "docs/corner-platform-map.example.json" },
+      "public": { "action": "example_only" }
+    },
+    {
+      "match": "epics/CRT-*",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/pipelines/*.md",
+      "exclude": ["*-readme.md", "clean.md"],
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "public_readme_replace" }
+    },
+    {
+      "match": "automation/tools/*_verify.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    }
+  ],
+  "default": {
+    "personal": { "action": "keep" },
+    "team": { "action": "keep" },
+    "public": { "action": "keep" }
+  }
+}

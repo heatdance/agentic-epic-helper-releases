@@ -1,0 +1,109 @@
+{
+  "schema_version": 2,
+  "_comment": "Operator calibration: prod epics/<KEY>/ vs .cursor/calibrate/<KEY>-gold/. Playbook: .cursor/pipelines/calibrate.md. Command: /crtqa-calibrate.",
+  "gold_root": ".cursor/calibrate",
+  "gold_dir_pattern": "{gold_root}/{epic_key}-gold",
+  "prod_root_pattern": "epics/{epic_key}",
+  "prod_context_pattern": "epics/{epic_key}/context",
+  "required_gold_files": [
+    "{epic_key}-coverage.json",
+    "{epic_key}-tests.json"
+  ],
+  "optional_gold_files": [
+    "{epic_key}-precon.json",
+    "{epic_key}-analysis.json",
+    "{epic_key}-gold-meta.json"
+  ],
+  "prod_human_md": [
+    "{epic_key}-coverage.md",
+    "{epic_key}-analysis.md",
+    "{epic_key}-tests.md",
+    "{epic_key}-precon.md"
+  ],
+  "outcomes": [
+    "GOLD_INVALID",
+    "GOLD_NOT_DISTINCT",
+    "PROD_BROKEN",
+    "NO_ACTIONABLE_DELTA",
+    "DELTA_REVIEW"
+  ],
+  "gold_integrity": {
+    "require_readme": true,
+    "readme_filename": "README.md",
+    "gold_as_of_pattern": "gold_as_of:\\s*\\d{4}-\\d{2}-\\d{2}"
+  },
+  "compare": {
+    "prod_artifact_resolution": "context_first",
+    "_prod_artifact_resolution": "Use epics/<KEY>/context/<KEY>-{suffix}.json when present; else epics/<KEY>/<KEY>-{suffix}.json",
+    "signals": [
+      {
+        "id": "check_ids",
+        "source": "coverage",
+        "extract": "checks[].id"
+      },
+      {
+        "id": "bundle_covers",
+        "source": "tests",
+        "extract": "test_bundles[].{bundle_id,covers_check_ids}"
+      },
+      {
+        "id": "excluded_checks",
+        "source": "tests",
+        "extract": "excluded_checks_with_reason[]"
+      },
+      {
+        "id": "obligations_coverage",
+        "source": "coverage",
+        "extract": "obligations_coverage"
+      },
+      {
+        "id": "checklist_hash",
+        "source": "coverage",
+        "extract": "smart_checklist_markdown",
+        "optional": true
+      }
+    ]
+  },
+  "lesson_policy": {
+    "max_prioritized_lessons": 3,
+    "require_diff_evidence": true,
+    "forbid_lessons_when_outcome": ["NO_ACTIONABLE_DELTA", "GOLD_NOT_DISTINCT", "GOLD_INVALID"]
+  },
+  "epic_debt_examples": [
+    "epics/<KEY>/temp/ not deleted",
+    "CLOSE info orphan supporting checks not bundled",
+    "analysis gaps without gold/prod diff"
+  ],
+  "decision_map_dimensions": [
+    "traceability",
+    "deferrals_and_coverage_gaps",
+    "expansion_and_cardinality",
+    "verification_class",
+    "topic_coverage",
+    "verifier_failures",
+    "human_oracle_gaps"
+  ],
+  "lesson_record": {
+    "fields": [
+      "id",
+      "applies_to",
+      "proposed_target",
+      "epic_evidence",
+      "generalized_rule",
+      "confidence",
+      "self_doubt",
+      "diff_evidence"
+    ],
+    "proposed_target_enum": ["verifier", "contract", "playbook", "coverage_norm"],
+    "diff_evidence_fields": ["signal_id", "path", "check_id", "bundle_id"]
+  },
+  "command_scope": {
+    "ends_after_step": "6.6",
+    "must_not_auto_edit_playbooks": true,
+    "must_not_rerun_production_pipelines": true
+  },
+  "reports_dir": ".cursor/calibrate/reports",
+  "report_filename_pattern": "{epic_key}-latest.md",
+  "compare_report_filename_pattern": "{epic_key}-compare.json",
+  "history_file": ".cursor/calibrate/history.jsonl"
+}

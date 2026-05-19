@@ -21,9 +21,9 @@ The interface shapes reasoning. Treat the context window as finite working memor
 
 ## Harness doctrine (MUST when relevant)
 
-If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:`, …), **benchmark** (`benchmark_suite` / `benchmark_attempt`, `/crtqa-benchmark`, shadow runs), **epic deliverables** under `epics/<KEY>/`, or **coverage vs test-draft** behaviour:
+If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:`, …), **calibrate** (`/crtqa-calibrate`, operator gold under `.cursor/calibrate/`), **epic deliverables** under `epics/<KEY>/`, or **coverage vs test-draft** behaviour:
 
-- **Read [docs/harness-principles.md](docs/harness-principles.md)** before proposing norms (after `qa-handoff.md` / **AGENTS.md** as needed). It defines generation vs benchmark, CRTQA non-reliance in generation, coverage vs E2E shape, cold-benchmark `epics/` policy, reference ownership, and **TEST-DISCOVER obligation closure** (§8).
+- **Read [docs/harness-principles.md](docs/harness-principles.md)** before proposing norms (after `qa-handoff.md` / **AGENTS.md** as needed). It defines production generation vs operator calibrate, CRTQA non-reliance in generation, coverage vs E2E shape, reference ownership, and **TEST-DISCOVER obligation closure** (§8).
 
 ## Output norms (short)
 

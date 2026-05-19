@@ -10,7 +10,6 @@ EPIC-PREP: <!-- EPIC-KEY e.g. CRT-1234 -->
 
 Optional on the **same line**:
 
-- **`benchmark_suite=<id>`** + **`benchmark_attempt=<n>`** → **`{EpicDir}`** under **`.cursor/benchmark/runs/.../shadow/<KEY>/`** ([docs/benchmark-contract.md](../../docs/benchmark-contract.md))
 - **`repo=WORKSPACE/SLUG`** — Bitbucket prep search
 - **`focus=...`** — merge into synthesis / obligations reconcile
 

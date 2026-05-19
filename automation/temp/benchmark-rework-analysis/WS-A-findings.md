@@ -1,5 +1,7 @@
 # WS-A — Artifact and path coupling audit
 
+> **Retired (2026-05-19):** Benchmark harness removed; use **`/crtqa-calibrate`** and `.cursor/calibrate/<KEY>-gold/`.
+
 > **Historical context (superseded for git / grep expectations):** As of benchmark harness finishing work (2026), **`.cursor/benchmark/`** harness sources are **tracked** in the repo except machine paths listed in **`.gitignore`** (see **`.cursor/benchmark/README.md`** § Git hygiene). Findings below about “may be gitignored” / “not fully greppable” applied to the **earlier** state when the tree was wholly ignored — keep the coupling table as design rationale.
 
 **Date:** 2026-05-08  

@@ -1,5 +1,7 @@
 # WS-C — Control hub specification (vendor-neutral core)
 
+> **Retired (2026-05-19):** Replaced by **`/crtqa-calibrate`** — [docs/calibrate-contract.json](../../../docs/calibrate-contract.json).
+
 **Date:** 2026-05-08
 
 ## Design principle

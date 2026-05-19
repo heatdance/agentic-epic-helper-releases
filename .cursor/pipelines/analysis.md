@@ -5,7 +5,6 @@
 - **`known_issues=yes`** — run phases **6–8** (Jira search + optional coverage `>` mutation). **Default: off** (empty `known_issues[]`, no coverage mutation).
 - **`include_closed=yes`** — only when **`known_issues=yes`**; allow recent **closed** issues for `>` regression anchors (≤ 90 days when `updated` available).
 - **`resolve=no`** — audit-only: skip phase **4b** Confluence resolve subprocesses. **Default: resolve on** (omit token or `resolve=yes`).
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — shadow `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)).
 
 **Version note (v2):** Coverage-grounded **gap auditor** + bounded Confluence resolve + **`exploration_suppressed[]`** for downstream. Contract: [`docs/analysis-gap-contract.json`](../../docs/analysis-gap-contract.json). Verifier: [`automation/docs/analysis-verify.md`](../../automation/docs/analysis-verify.md). Template: [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json) **schema v2**.
 
@@ -59,7 +58,7 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 ### 1. Resolve inputs
 
-- Parse `<KEY>`, **`known_issues=yes`**, **`include_closed=yes`**, **`resolve=no`**, benchmark tokens.
+- Parse `<KEY>`, **`known_issues=yes`**, **`include_closed=yes`**, **`resolve=no`**.
 - Set `sources.known_issues_enabled`, `sources.resolve_enabled` on the analysis artifact.
 - **MUST** `jq` project `-coverage.json` and `-ref.json` before full load.
 - Set `sources.coverage_loaded`, `sources.ref_loaded`, paths, `epic_key`.

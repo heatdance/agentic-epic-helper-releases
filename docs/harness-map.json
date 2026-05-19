@@ -500,7 +500,7 @@
             ".cursor/pipelines/test-precon.md",
             "docs/qa-project.json"
           ],
-          "mcp_hint": "v3 crtqa_outline default; shape_ref=benchmark only with both benchmark tokens; obligation_coverage gate map_only or STOP. 8a -> 0c -> 8a-half -> 8b -> 8c. Modes plan/explore/draft/merge/tests. delete EpicDir temp/."
+          "mcp_hint": "v3 crtqa_outline default; obligation_coverage gate map_only or STOP. 8a -> 0c -> 8a-half -> 8b -> 8c. Modes plan/explore/draft/merge/tests. delete EpicDir temp/."
         },
         {
           "id": "close_pipeline",
@@ -530,48 +530,43 @@
           "keywords": [
             "harness principles",
             "generation mode",
-            "benchmark mode",
-            "shadow run",
-            "benchmark_suite",
-            "benchmark_attempt",
             "EpicDir",
-            "two worlds",
             "CRTQA tests",
             "coverage vs E2E",
             "test draft shape",
             "human reference",
             "oracle",
-            "cold benchmark",
+            "calibrate",
+            "operator gold",
             "harness doctrine"
           ],
           "read": [
             "docs/harness-principles.md",
-            "docs/benchmark-contract.md"
+            "docs/calibrate-contract.json"
           ],
-          "mcp_hint": "Read docs/harness-principles.md for generation vs benchmark, CRTQA non-reliance in generation, coverage vs E2E, cold benchmark (no epics/ read-write). benchmark-contract resolves EpicDir."
+          "mcp_hint": "Read docs/harness-principles.md for production-only generation, CRTQA non-reliance, coverage vs E2E, operator gold under .cursor/calibrate/."
         },
         {
-          "id": "benchmark_operator",
+          "id": "calibrate_operator",
           "keywords": [
-            "crtqa-benchmark",
-            "/crtqa-benchmark",
-            "CONTROL_HUB",
-            "DONE_HANDOFF",
-            "FINALIZE_PROMPT",
-            "compare_runs",
-            "suite_id",
-            "benchmark verify",
-            "benchmark aggregate",
-            "run-results",
-            "crossref"
+            "crtqa-calibrate",
+            "/crtqa-calibrate",
+            "calibrate",
+            "operator gold",
+            "gold gate",
+            "prod vs gold",
+            "calibrate_verify",
+            "lesson_record"
           ],
           "read": [
-            "docs/benchmark-contract.md",
-            ".cursor/benchmark/README.md",
-            ".cursor/commands/crtqa-benchmark.md",
+            "docs/calibrate-contract.json",
+            ".cursor/calibrate/README.md",
+            ".cursor/commands/crtqa-calibrate.md",
+            ".cursor/pipelines/calibrate.md",
+            "automation/docs/calibrate.md",
             "docs/harness-principles.md"
           ],
-          "mcp_hint": "Hub under .cursor/benchmark/runs/<suite_id>/; operator-driven suite. Finalize report under .cursor/benchmark/run-results/; report-only gate per harness-principles."
+          "mcp_hint": "gold_gate + gold_distinct (hard stop if gold copies prod) + compare. NO_ACTIONABLE_DELTA = success, no harness suggestions. DELTA_REVIEW only then playbook 6.6 (max 3 lessons, diff_evidence required). calibrate_verify.py --self-test."
         },
         {
           "id": "clean_pipeline",
@@ -620,6 +615,6 @@
     "For **dealer WebBroker** (`/webbroker/` app path) **screen maps**, **Order Book**, and **embedded dxTrade-class widgets**, prefer T1 package **webbroker_harness** (`docs/webbroker-harness/`) over **dxtrade5_harness** when the task is explicitly WebBroker/dealer shell—not retail Cornèrtrader root.",
     "Never copy passwords or secrets from Confluence into repo files.",
     "When adding new durable docs or paths, update AGENTS.md, README.md, and this map per harness-maintenance rule.",
-    "When both benchmark_suite= and benchmark_attempt= appear on the same line as a pipeline trigger, EpicDir is the shadow tree under .cursor/benchmark/runs/…/—do not read or write epics/<KEY>/ for that run (see docs/benchmark-contract.md and docs/harness-principles.md)."
+    "EpicDir for pipeline triggers is always epics/<KEY>/ (production). Post-hoc prod vs gold: /crtqa-calibrate and docs/calibrate-contract.json — do not mix gold into generation runs."
   ]
 }

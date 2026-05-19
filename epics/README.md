@@ -32,7 +32,7 @@ Playbook: [`.cursor/pipelines/analysis.md`](../.cursor/pipelines/analysis.md).
 
 **Optional** after **`epics/<KEY>/<KEY>-ref.json`** and **`epics/<KEY>/<KEY>-coverage.json`** exist (and ideally **`-analysis.json`** from `ANALYSE:`). Pipeline **`TEST-DISCOVER:`** + key produces:
 
-- **`epics/<KEY>/<KEY>-discover.json`** only — schema [templates/discover-ref.json](templates/discover-ref.json) **v3**: **obligation closure** (**`obligation_ledger`**, **`fixture_needs`**, setup depth), delivery/PR, tooling, **`verification_affordances`**, **`test_prep_gates`**. Optional **`reference_index`** when **`crtqa_index=yes`** or benchmark tokens on **`TEST-DISCOVER:`**. **No** `-discover.md` in v1.
+- **`epics/<KEY>/<KEY>-discover.json`** only — schema [templates/discover-ref.json](templates/discover-ref.json) **v3**: **obligation closure** (**`obligation_ledger`**, **`fixture_needs`**, setup depth), delivery/PR, tooling, **`verification_affordances`**, **`test_prep_gates`**. Optional **`reference_index`** when **`crtqa_index=yes`** on **`TEST-DISCOVER:`**. **No** `-discover.md` in v1.
 
 Playbook: [`.cursor/pipelines/test-discover.md`](../.cursor/pipelines/test-discover.md) — Steps **0** → **G**, self-heal closure loop, **`discover_verify.py`** before emit; **`epics/<KEY>/temp/`** then **delete**; no secrets or **`/temp/`** in durable JSON.
 
@@ -60,7 +60,7 @@ Playbook: [`.cursor/pipelines/test-prep.md`](../.cursor/pipelines/test-prep.md).
 
 # Per-epic close (`<EPIC-KEY>-close.json`, `context/`)
 
-After **`epics/<KEY>/<KEY>-tests.json`** exists (from **`TEST-PREP:`**), and **`-ref.json`**, **`-coverage.json`**, **`-discover.json`**, **`-precon.json`** are present, pipeline **`CLOSE:`** + key (optional **`heal=no`**, optional benchmark tokens) produces:
+After **`epics/<KEY>/<KEY>-tests.json`** exists (from **`TEST-PREP:`**), and **`-ref.json`**, **`-coverage.json`**, **`-discover.json`**, **`-precon.json`** are present, pipeline **`CLOSE:`** + key (optional **`heal=no`**) produces:
 
 - **`epics/<KEY>/context/<KEY>-close.json`** — integrity manifest per [templates/close-ref.json](templates/close-ref.json) (ladder findings, corrections, `epic_verdict`, archive metadata). **No** `-close.md`.
 - **Post-close layout:** four human **`.md`** at **`epics/<KEY>/`** root only: **`-coverage.md`**, **`-analysis.md`**, **`-tests.md`**, **`-precon.md`** (regenerated from JSON before archive). All **`*.json`** (including **`-close.json`**) under **`epics/<KEY>/context/`**. Legacy **`tests/*.spec.ts`** move to **`context/tests/`** if present.
@@ -74,3 +74,7 @@ Playbook: [`.cursor/pipelines/close.md`](../.cursor/pipelines/close.md). Verifie
 These chat triggers are defined in [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc); they reconcile or export the **repository** rather than a single `epics/<KEY>/` tree.
 
 - **`CLEAN:`** — align harness and publish **`personal`** → team repo → **`public-M.N`** releases; **`personal` branch only** — [`.cursor/pipelines/clean.md`](../.cursor/pipelines/clean.md).
+
+# Calibrate (post-hoc, no Epic trigger)
+
+After Close (or when production artefacts are stable), curate operator **gold** under **`.cursor/calibrate/<KEY>-gold/`** (required **`-coverage.json`** + **`-tests.json`**) and run **`/crtqa-calibrate`** — [automation/docs/calibrate.md](../automation/docs/calibrate.md), [HOW-TO.md §3](../HOW-TO.md#3-calibrate-prod-vs-operator-gold).

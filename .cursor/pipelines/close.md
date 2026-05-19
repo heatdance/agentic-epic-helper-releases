@@ -4,7 +4,6 @@
 
 | Token | Meaning | Default |
 |--------|---------|---------|
-| **`benchmark_suite=`** / **`benchmark_attempt=`** | Shadow **`{EpicDir}`** ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)) | production `epics/<KEY>/` |
 | **`heal=no`** | Skip mechanical corrections in finalize | **heal on** (apply whitelist fixes) |
 
 **Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
@@ -79,7 +78,7 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 ### 0. Preflight
 
-- Parse `<KEY>`, benchmark tokens, `heal=no`.
+- Parse `<KEY>`, `heal=no`.
 - Run `python automation/tools/close_verify.py --mode preflight --epic-dir {EpicDir}`.
 - If epic already has `context/<KEY>-ref.json` → **STOP** (closed epic; see [HOW-TO.md](../../HOW-TO.md)).
 - Initialize `{EpicDir}temp/` and in-progress `{EpicDir}<KEY>-close.json` from template.

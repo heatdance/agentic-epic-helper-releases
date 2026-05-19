@@ -4,19 +4,17 @@
 
 - **`repo=…`** — Bitbucket default for this run: Cloud `workspace/slug` or Stash `PROJECT_KEY/repo_slug` (e.g. `COVERAGE: CRT-593 repo=BRO/xt`; Adaptive-focused runs may use `repo=CAN/corner`).
 - **`focus=...`** — free-text **verification focus override** when Jira is ambiguous or to stress a subset (e.g. `COVERAGE: CRT-639 focus=FX_SPOT_WeightedAvg_metrics`). Sets `epic_verification_focus.source` to `user_trigger_focus` and merges into `epic_verification_focus.statement` (see phase 3a). If `focus=` **conflicts** with Jira summary/description, record in `validation_log` and `anti_pattern_findings` rather than silently overriding Jira.
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — optional; together select **benchmark shadow** `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)). Must match the same tokens used for prior **`EPIC-PREP:`** for this attempt.
-
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
 **Version note (obligation subprocesses)**: schema **`schema_version: 2`** with **`obligations_coverage`** and per-check **`obligation_ids[]`**. Contract: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json). Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md). Epic obligations: ref **`obligations_proposed[]`** (schema v4).
 
-**Forbidden inputs (production)**: CRTQA Jira issues, bench JSON, **`-tests.json`**, **`-discover.json`**, **`-precon.json`** — coverage reads **`-ref.json`** + Jira/tools only (benchmark shadow may compare CRTQA externally per [benchmark contract](../../docs/benchmark-contract.md)).
+**Forbidden inputs (production)**: CRTQA Jira issues, operator gold under **`.cursor/calibrate/`**, **`-tests.json`**, **`-discover.json`**, **`-precon.json`** — coverage reads **`-ref.json`** + Jira/tools only.
 
 ## Epic workspace (`{EpicDir}`)
 
-Resolve **`{EpicDir}`** from the trigger line using the same rules as [`epic-prep.md`](epic-prep.md) (**`benchmark_suite=`** + **`benchmark_attempt=`** vs production `epics/<KEY>/`). Contract: [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
+Resolve **`{EpicDir}`** = `epics/<KEY>/` per [`epic-prep.md`](epic-prep.md).
 
-**Prerequisite**: `{EpicDir}<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first (with matching benchmark tokens if in benchmark mode). Do not fabricate requirement snippets.
+**Prerequisite**: `{EpicDir}<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first. Do not fabricate requirement snippets.
 
 **Outputs**:
 
@@ -79,9 +77,9 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 6. **Delete** `{EpicDir}temp/` recursively before finishing.
 7. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain **`/temp/`** or **`temp/`** path segments (same bar as [`test-prep.md`](test-prep.md) durable JSON hygiene).
 
-### Fresh-session / benchmark stability
+### Fresh-session stability
 
-Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** overlap of **core** checklist lines and on **matrix** consistency (`coverage_matrix[].id`, **`verification_role`**). Prefer **deterministic structure** and **stable requirement-facing wording** copied from Jira or **`requirements[].snippet_text`** where it applies — avoid paraphrasing the same scenario with different surface text when the epic’s evidence already supplies phrasing. Thresholds in epic-local benchmark **gold** JSON (e.g. [`../benchmark/data/CRT-639-gold.json`](../benchmark/data/CRT-639-gold.json)) should be tightened only after the same rules reproduce on **≥2** epic keys.
+Prefer **deterministic structure** and **stable requirement-facing wording** copied from Jira or **`requirements[].snippet_text`** where it applies — avoid paraphrasing the same scenario with different surface text when the epic’s evidence already supplies phrasing. Post-hoc scoring vs operator gold: [`.cursor/pipelines/calibrate.md`](calibrate.md).
 
 ---
 
@@ -308,7 +306,7 @@ Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant s
 - **LLM “validation”** — Grounding audit lists evidence; it does not replace human review for high-risk metrics.
 - **Matrix `id` drift** — Use phase **4** deterministic ordering; avoid ad-hoc suffix rows that change between runs without a logged split.
 - **Focus line paraphrase** — Phase **8** / **14** require verbatim **`epic_verification_focus.statement`** in the first substantive **`##`** block.
-- **Benchmark gold vs playbook** — If coverage benchmark checks fail on **substring** or **verbatim** metrics, reconcile **this playbook** with the epic’s **gold** JSON (or relax **gold** after repro on multiple keys); see [Fresh-session / benchmark stability](#fresh-session--benchmark-stability).
+- **Calibrate gold vs playbook** — Post-hoc prod vs operator gold: [`.cursor/pipelines/calibrate.md`](calibrate.md); see [Fresh-session stability](#fresh-session-stability).
 
 ---
 

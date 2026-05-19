@@ -1,0 +1,6 @@
+{
+  "test_bundles": [
+    {"bundle_id": "tb-001", "covers_check_ids": ["chk-001", "chk-002"], "proposed_title": "Gold bundle differs"}
+  ],
+  "excluded_checks_with_reason": []
+}

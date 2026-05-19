@@ -20,7 +20,9 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | **dxCore console** agent map (truth tiers + forks + Confluence trust; T1 **`dxcore_console`**) | [docs/dxcore-console-harness.json](docs/dxcore-console-harness.json) |
 | **dxTrade5 web UI** agent map (concept → IA → locations; T1 **`dxtrade5_harness`**) | [docs/dxtrade5-harness/](docs/dxtrade5-harness/) — [README](docs/dxtrade5-harness/README.md), [dxtrade5-harness.json](docs/dxtrade5-harness/dxtrade5-harness.json), [concept-map.json](docs/dxtrade5-harness/concept-map.json) |
 | **WebBroker dealer web UI** agent map (concept → IA → locations; T1 **`webbroker_harness`**) | [docs/webbroker-harness/](docs/webbroker-harness/) — [README](docs/webbroker-harness/README.md), [webbroker-harness.json](docs/webbroker-harness/webbroker-harness.json), [concept-map.json](docs/webbroker-harness/concept-map.json) |
-| **Harness doctrine** (generation vs benchmark, coverage vs E2E, reference ownership) | [docs/harness-principles.md](docs/harness-principles.md) |
+| **Harness doctrine** (generation vs calibrate, coverage vs E2E, reference ownership) | [docs/harness-principles.md](docs/harness-principles.md) |
+| **CLEAN publish tier matrix** (personal / team / public path actions) | [docs/clean-publish-tier-matrix.md](docs/clean-publish-tier-matrix.md) |
+| **Calibrate contract** (operator gold vs prod) | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
 | Public export manifest (example; live file on `public-*` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
 ### Deliverables and references
@@ -68,14 +70,15 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
-| Custom commands (**`/crtqa-env`**, **`/crtqa-console`**, **`/crtqa-stats`**, **`/crtqa-benchmark`**, **`/clean`**) | [.cursor/commands/](.cursor/commands/) — env [crtqa-env.md](.cursor/commands/crtqa-env.md); console [crtqa-console.md](.cursor/commands/crtqa-console.md); stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md); benchmark [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md); publish [clean.md](.cursor/commands/clean.md) |
+| Custom commands (**`/crtqa-env`**, **`/crtqa-console`**, **`/crtqa-stats`**, **`/crtqa-calibrate`**, **`/clean`**) | [.cursor/commands/](.cursor/commands/) — env [crtqa-env.md](.cursor/commands/crtqa-env.md); console [crtqa-console.md](.cursor/commands/crtqa-console.md); stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md); calibrate [crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md); publish [clean.md](.cursor/commands/clean.md) |
+| Calibrate verifier | [calibrate_verify.py](automation/tools/calibrate_verify.py) · [automation/docs/calibrate.md](automation/docs/calibrate.md) |
 | EPIC-PREP verifier | [epic_prep_verify.py](automation/tools/epic_prep_verify.py) · [automation/docs/epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
 | COVERAGE verifier | [coverage_verify.py](automation/tools/coverage_verify.py) · [automation/docs/coverage-verify.md](automation/docs/coverage-verify.md) |
 | ANALYSE verifier | [analysis_verify.py](automation/tools/analysis_verify.py) · [automation/docs/analysis-verify.md](automation/docs/analysis-verify.md) |
 | TEST-DISCOVER verifier | [discover_verify.py](automation/tools/discover_verify.py) · [automation/docs/discover-verify.md](automation/docs/discover-verify.md) |
 | TEST-PREP verifier | [test_prep_verify.py](automation/tools/test_prep_verify.py) · [automation/docs/test-prep-verify.md](automation/docs/test-prep-verify.md) |
 | CLOSE verifier | [close_verify.py](automation/tools/close_verify.py) · [automation/docs/close-verify.md](automation/docs/close-verify.md) · [close_archive.py](automation/tools/close_archive.py) |
-| CLEAN verifier | [clean_verify.py](automation/tools/clean_verify.py) · [clean-verify.md](automation/docs/clean-verify.md) · helpers `clean_file_map.py`, `clean_apply_team.py`, `clean_apply_public.py` |
+| CLEAN verifier | [clean_verify.py](automation/tools/clean_verify.py) · [clean-verify.md](automation/docs/clean-verify.md) · `clean_file_map.py`, `clean_apply_team.py`, `clean_apply_t1_docs.py`, `clean_apply_public.py`, `clean_public_supersede.py` |
 | Humans: Cursor + main processes | [HOW-TO.md](HOW-TO.md) |
 | CTQA Postgres MCP | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
 | Chrome DevTools MCP (**`chrome-devtools`**, ad-hoc UI) | [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md); merge into `.cursor/mcp.json` — see [`.cursor/mcp.json.example`](.cursor/mcp.json.example) |
@@ -90,7 +93,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 ## How to start a session
 
 1. Read **[qa-handoff.md](qa-handoff.md)** for current focus, blockers, and next steps.
-2. For any substantive **pipeline**, **benchmark**, or **epic deliverable** work, read **[docs/harness-principles.md](docs/harness-principles.md)** once per session (or follow the matching **`harness-map.json`** package that includes it)—**stable doctrine**, not duplicated in `qa-handoff.md`.
+2. For any substantive **pipeline**, **calibrate**, or **epic deliverable** work, read **[docs/harness-principles.md](docs/harness-principles.md)** once per session (or follow the matching **`harness-map.json`** package that includes it)—**stable doctrine**, not duplicated in `qa-handoff.md`.
 3. Open only the **task-specific** docs or code paths you need—avoid loading the whole tree into context.
 4. For substantive work, **update `qa-handoff.md`** before closing the session.
 

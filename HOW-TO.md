@@ -82,7 +82,7 @@ Run **one Epic per chat**. Paste the trigger and key on the first line, for exam
 | `CLOSE:` *KEY* | `-ref`, `-coverage`, `-discover`, `-precon`, `-tests` at epic root | `heal=no` (default: apply fixes) |
 | `CLEAN:` | — | `scope=full` (default) \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** |
 
-Playbooks: [.cursor/pipelines/](.cursor/pipelines/). Layout: [epics/README.md](epics/README.md). For benchmark shadow runs, add `benchmark_suite=` and `benchmark_attempt=` on the same line (see [§3](#3-benchmark-repeatability-and-variance)).
+Playbooks: [.cursor/pipelines/](.cursor/pipelines/). Layout: [epics/README.md](epics/README.md). Post-hoc harness calibration: [§3](#3-calibrate-prod-vs-operator-gold).
 
 **Publish track:** **`CLEAN:`** aligns harness pointers, pushes **`personal`**, updates [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team` branch via PR after bootstrap), and publishes **`public-M.N`** to [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases). Not for day-to-day Epic QA.
 
@@ -120,15 +120,21 @@ When `CLOSE:` has run, JSON lives under `epics/<KEY>/context/`. Only these stay 
 
 ---
 
-## 3. Benchmark (repeatability and variance)
+## 3. Calibrate (prod vs operator gold)
 
-**Purpose:** Run the same **prep / coverage / (optional) analyse / discover / precon / Test Prep / (optional) Close** steps more than once under controlled conditions to see how much outputs **vary** (for example across sessions or attempts), without mixing that noise into normal epic folders.
+**When:** After the full epic workflow (pipelines through **`CLOSE:`** when you close) and after you curate **gold** under **`.cursor/calibrate/<KEY>-gold/`** (required: **`<KEY>-coverage.json`** and **`<KEY>-tests.json`**).
 
-**Workflow (conceptual):** Answer a short **questionnaire** so the run is defined (profile, number of attempts, epics, methodology). A **control hub** chat creates the suite layout and ordered **lines to paste** into **fresh** chats. Each pasted line runs the same pipeline triggers as production, usually with **benchmark suite** tokens on the line. When attempts finish, you **verify** completion markers and run **finalize / compare** steps from the hub instructions to produce a consolidated view.
+**How:**
 
-**How to run it**
+1. Run **`/crtqa-calibrate`** in Cursor (no CLI args on the slash command).
+2. Answer the **questionnaire** (epic key).
+3. Mechanical gates: gold must include **`gold_as_of:`** in README; **`gold_distinct`** rejects gold that merely copies `context/`; **`compare`** emits `NO_ACTIONABLE_DELTA` or `DELTA_REVIEW`.
+4. **`NO_ACTIONABLE_DELTA`** — **success**: no harness suggestions; you are done until gold or prod changes.
+5. **`DELTA_REVIEW`** only — agent may propose up to **3** harness changes, each tied to a compare signal; discuss in a **separate** chat to apply — calibrate does **not** auto-merge playbook patches.
 
-- In the coordinating chat, run `**/crtqa-benchmark`** and follow the prompts.
-- For each row the hub gives you, open a **new** chat, paste the **single line** it provides (it will include the usual `**EPIC-PREP:`**, `**COVERAGE:**`, `**ANALYSE:**`, `**TEST-DISCOVER:**`, `**TEST-PRECON:**`, `**TEST-PREP:**`, or `**CLOSE:**` trigger plus `**benchmark_suite=**` and `**benchmark_attempt=**` when applicable).
-- Finish with the hub’s **finalize** instructions so results are **checked and compared** across attempts.
+**Where gold lives:** [`.cursor/calibrate/<KEY>-gold/`](.cursor/calibrate/README.md)
+
+**What you get:** A suggestion list and optional report under **`.cursor/calibrate/reports/<KEY>-latest.md`** — not automatic harness commits.
+
+**Docs:** [automation/docs/calibrate.md](automation/docs/calibrate.md) · [epics/README.md](epics/README.md) (calibrate bullet)
 
