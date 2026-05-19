@@ -1,0 +1,15 @@
+---
+description: dxTrade5 web UI — concept/IA/location harness; browser truth over wiki for layout
+alwaysApply: false
+agent_requestable: true
+---
+
+# dxTrade5 UI harness
+
+When work involves **dxTrade5** (or Corner **web trading terminal**) **screen maps**, **widget discoverability**, **theme/settings location**, or **Chrome DevTools** UI exploration (discover/precon/prep):
+
+1. **Read first:** [docs/dxtrade5-harness/README.md](../../docs/dxtrade5-harness/README.md) and T1 package **dxtrade5_harness** in [docs/harness-map.json](../../docs/harness-map.json); load [docs/dxtrade5-harness/dxtrade5-harness.json](../../docs/dxtrade5-harness/dxtrade5-harness.json) for tier order.
+2. **Truth order:** **Live UI** on the target deployment for *where* controls sit → **locations/*.json** when present → **ia-map.json** paths → **concept-map.json** capabilities → Confluence/Figma for vocabulary only—see JSON **`meta.truth_hierarchy`**.
+3. **Stage discipline:** `concept-map.json` has **no selectors**; put navigation strings in **ia-map.json** (Stage 2) and dated steps in **locations/** (Stage 3).
+4. **Figma MCP:** [.cursor/rules/harness-context.mdc](harness-context.mdc) / [automation/docs/figma-mcp.md](../../automation/docs/figma-mcp.md)—**get_figma_data** needs a **fileKey**; team project URLs must be opened in Figma and narrowed to a file/frame link first.
+5. **Atlassian MCP:** [.cursor/rules/mcp-atlassian-search.mdc](mcp-atlassian-search.mdc)—hubs CT **342171997**, DR **254224494**; narrow `confluence_search` by ancestor or terms; **`confluence_get_page`** by id.

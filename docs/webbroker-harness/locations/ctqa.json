@@ -1,0 +1,573 @@
+{
+  "schema_version": 1,
+  "env": "ctqa",
+  "base_url": "https://ctqa.prosp.devexperts.com/webbroker/",
+  "verified_at": "2026-05-15",
+  "session_note": "2026-05-15: W1–W4 verified on dealer /webbroker/ via Chrome DevTools MCP. Credentials only in locations/WAVES.md.",
+  "phase0": {
+    "chrome_devtools_mcp": "navigate_page, fill, click, take_snapshot, wait_for used against base_url.",
+    "account_class_intended": "dealer_webbroker",
+    "auth_handoff": "See locations/PHASE0.md and locations/WAVES.md Wave 1.",
+    "exploration_note": "W1 (2026-05-15): Post-login dealer shell on /webbroker/ verified (Chrome DevTools MCP): header desk menus (Trading, User and Risk Management, System Management, Client Area), FIX status strip, workspace tabs (Sessions, Workspace 1/6/7/8, Instruments 5, Account Groups), Position Book widget, Order Entry dock (Show Order Entry, Analyze, Chart, order grid columns, Confirm and Send), assertive status region. Account control: Account wat1, CHF. W2 (2026-05-15): Order Entry ticket verified on dock; Chart/Analyze mode on OE with Show settings; Instruments workspace tab opens Instruments widget embedding dxMC Admin Console instruments search (Type/Text/Symbol/Show Instruments); Trading flyout lists Account List, Order Book, Position Book, Transactions (no Watchlist label); no Market Depth / DOM widget found in this pass (Order Book shows Bid/Ask columns). W3 (2026-05-15): Workspace 1 shows **Orders** widget (Account context, Time Range Today, Order History pane, sort/filter column headers) plus **Order Book** and **Position Book** tiles; Trading menu exposes **Transactions** as draggable widget; header **Account wat1, CHF** opens modal with portfolio account search copy. W4 (2026-05-15): **Order Defaults** modal from Order Entry **Show settings** (asset-class tabs, Order Type in OE, Quantity, Save/Cancel). **System Management** flyout lists Instruments, Job Monitor, Backup Prices, Financing/Swaps. **User and Risk Management** flyout lists Notifications, Risk Settings, FX Settings, etc. **Client Area** flyout lists **Messages**. Header icon next to Account opens **System Actions** (Change Password, Log Out, build). **Flatten all** not surfaced in static chrome; **Risk Settings** widget is the likely next hop (not opened — destructive). No transient toast sampled; aria-live assertive status regions present. Requirements hubs: external-only drift.",
+    "wave1_executed": "2026-05-15",
+    "wave2_executed": "2026-05-15",
+    "wave3_executed": "2026-05-15",
+    "wave4_executed": "2026-05-15",
+    "stage3_locations_waves_complete": "2026-05-15",
+    "stage3_locations_waves_note": "W1–W4 refreshed 2026-05-15 (MCP dealer session). Compass parity satisfied (primary_path_ok or drift_notes)."
+  },
+  "locations": {
+    "webbroker.session.authentication": {
+      "feature_id": "webbroker.session.authentication",
+      "wave": "W1",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Navigate to https://ctqa.prosp.devexperts.com/webbroker/",
+        "Pre-auth: Username, Password, Show password, Log In (accessibility snapshot)",
+        "Submit credentials per locations/WAVES.md Wave 1 (CTQA automation pattern — not stored in this JSON)",
+        "Post-auth: wait until dealer shell visible (desk menus, workspace tabs, Order Entry / widgets)"
+      ],
+      "verify": {
+        "page_title": "Cornèrtrader - your online trading platform.",
+        "pre_auth_labels": [
+          "Username",
+          "Password",
+          "Show password",
+          "Log In"
+        ],
+        "post_auth_labels": [
+          "Trading",
+          "User and Risk Management",
+          "System Management",
+          "Client Area",
+          "FIX 6/9 Connected",
+          "Sessions",
+          "Workspace 1",
+          "Position Book",
+          "Show Order Entry",
+          "Analyze",
+          "Chart",
+          "Spread",
+          "Account",
+          "Symbol",
+          "Side",
+          "Quantity",
+          "Order Type",
+          "Limit Price",
+          "Stop Price",
+          "Duration",
+          "Clear data",
+          "Confirm and Send"
+        ],
+        "regions": [
+          "main",
+          "header desk strip",
+          "workspace tab list",
+          "embedded widget chrome"
+        ]
+      },
+      "drift_notes": [
+        "Pre-auth and post-auth labels from Chrome DevTools MCP accessibility tree on /webbroker/.",
+        "Some trading regions use iframe hosts (about:blank in tree); core controls still surfaced in main a11y snapshot."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.session.account_portfolio_selector": {
+      "feature_id": "webbroker.session.account_portfolio_selector",
+      "wave": "W1",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "After Wave 1 login on /webbroker/, observe header region for account context control",
+        "Control labeled Account with expandable button showing account id and portfolio currency"
+      ],
+      "verify": {
+        "labels": [
+          "Account",
+          "Account wat1, CHF"
+        ],
+        "regions": [
+          "header adjacent to desk menu strip"
+        ]
+      },
+      "drift_notes": [
+        "Snapshot shows button Account wat1, CHF (expandable, haspopup dialog) — aligns with IA dealer header account selection."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.workspace.watchlist": {
+      "feature_id": "webbroker.workspace.watchlist",
+      "wave": "W2",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": false,
+      "steps": [
+        "Authenticated /webbroker/ → header **Trading** → review flyout palette for Watchlist",
+        "Also attempted workspace **icon-** flyout and **User and Risk Management** palette"
+      ],
+      "verify": {
+        "trading_flyout_widgets_observed": [
+          "Account List",
+          "Order Book",
+          "Position Book",
+          "Transactions"
+        ],
+        "palette_instruction": "Click on or Drag an item and Drop it to a place into the layout"
+      },
+      "drift_notes": [
+        "On CTQA dealer layout 2026-05-15, Trading and User/Risk Management flyouts did not expose a control labeled Watchlist in the accessibility tree; widget may require another gallery path or entitlement.",
+        "IA primary_path (narrow after Watchlist surfaces): WebBroker main workspace → Watchlist widget or panel (list/grid view)."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.chart.tradingview_advanced": {
+      "feature_id": "webbroker.chart.tradingview_advanced",
+      "wave": "W2",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → Order Entry dock → use **Analyze** / **Chart** radio group on the ticket header",
+        "Optional: **Show settings** on chart region (per snapshot)"
+      ],
+      "verify": {
+        "order_entry_chart_chrome": [
+          "Analyze",
+          "Chart",
+          "Analyze switcher description",
+          "Show settings",
+          "PLANNED"
+        ],
+        "note": "Advanced chart canvas is typically iframe/canvas-heavy; snapshot confirms mode chrome, not TradingView trademark text."
+      },
+      "drift_notes": [
+        "TradingView / Advanced Charts branding not present as literal StaticText in this accessibility snapshot; treat as chart surface behind OE Analyze·Chart switcher until visual/iframe inspection in a later pass."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.market_depth": {
+      "feature_id": "webbroker.market_depth",
+      "wave": "W2",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": false,
+      "steps": [
+        "Authenticated /webbroker/ → **Trading** flyout — no Market Depth / Level 2 entry in observed palette",
+        "Searched accessibility tree for Market Depth / DOM labels in this session — not found"
+      ],
+      "verify": {
+        "order_book_has_bid_ask_columns": true,
+        "context": "Workspace 6 showed Order Book grid with Bid and Ask column headers (working orders), not a standalone DOM widget"
+      },
+      "drift_notes": [
+        "Market Depth (L2 DOM) widget not discovered on dealer CTQA layout in this pass; Order Book grid exposes Bid/Ask headers as related but distinct surface.",
+        "IA primary_path: Dealer workspace → Market Depth (Level 2) widget → active symbol tied to desk selection or watchlist."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.orders.order_entry": {
+      "feature_id": "webbroker.orders.order_entry",
+      "wave": "W2",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → bottom Order Entry dock (**Show Order Entry** / Expand)",
+        "Confirm **Account** column shows selected desk portfolio (e.g. wat1, CHF) aligned with header **Account wat1, CHF**",
+        "Review ticket columns: Spread, Account, Symbol, Side, Quantity, Order Type, Limit Price, Stop Price, Duration",
+        "Use **Clear data** / **Confirm and Send** (Send disabled until valid ticket — not exercised)"
+      ],
+      "verify": {
+        "labels": [
+          "Show Order Entry",
+          "Pin panel",
+          "Expand",
+          "Spread",
+          "Account",
+          "Symbol",
+          "Side",
+          "Quantity",
+          "Order Type",
+          "Limit Price",
+          "Stop Price",
+          "Duration",
+          "Clear data",
+          "Confirm and Send"
+        ],
+        "account_field_sample": "wat1, CHF"
+      },
+      "drift_notes": [
+        "OEC chrome matches IA dealer dock; chart/analyze radios share the same header region as chart feature entry."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.orders.orders_widget": {
+      "feature_id": "webbroker.orders.orders_widget",
+      "wave": "W3",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → workspace tab **Workspace 1** (layout name deployment-specific)",
+        "Locate **Orders** widget title row with Account context and **Time Range: Today**",
+        "Use **Order History** region and column sort/filter controls (Instrument, Symbol, Status, Time, Order ID, …)"
+      ],
+      "verify": {
+        "widget_title": "Orders",
+        "chrome_labels": [
+          "Account",
+          "Time Range:",
+          "Today",
+          "Expand all orders",
+          "Collapse all orders",
+          "Autoresize",
+          "Order History",
+          "Expand",
+          "Select an Order to View Its History",
+          "Widget menu",
+          "Close widget"
+        ],
+        "sort_filter_sample": [
+          "Sort by Time",
+          "Filter by Status",
+          "Sort by Order ID"
+        ]
+      },
+      "drift_notes": [
+        "Full order row values omitted from JSON (PII/entitlement); structure verified via accessibility tree labels only."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.orders.order_book": {
+      "feature_id": "webbroker.orders.order_book",
+      "wave": "W3",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → **Workspace 1** shows **Order Book** widget next to Orders (same desk layout)",
+        "**Trading** menu also lists **Order Book** as a draggable palette entry",
+        "Alternate layout: dedicated workspace tab (e.g. Workspace 6) can host a full internal-book grid with Bid/Ask style columns — tab names are deployment-specific"
+      ],
+      "verify": {
+        "widget_title": "Order Book",
+        "palette_includes_order_book": true,
+        "grid_column_headers_sample": [
+          "Login",
+          "Sub-account",
+          "Instrument",
+          "Status",
+          "Side",
+          "Limit",
+          "Bid",
+          "Ask",
+          "Quantity",
+          "Last Update",
+          "Mode"
+        ]
+      },
+      "drift_notes": [
+        "Internal working-order rows and symbols are visible in the live grid but not duplicated here; confirm entitlements on target desk."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.positions.position_book": {
+      "feature_id": "webbroker.positions.position_book",
+      "wave": "W3",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → **Workspace 1** → **Position Book** widget tile (alongside Orders and Order Book on this CTQA layout)",
+        "**Trading** flyout also lists **Position Book** for layout drops"
+      ],
+      "verify": {
+        "widget_title": "Position Book",
+        "chrome_labels": [
+          "Widget menu",
+          "Close widget",
+          "icon-"
+        ]
+      },
+      "drift_notes": [
+        "Position grid body may be iframe-heavy; tile chrome and title verified in MCP snapshot. Populate row-level verify on a future pass if needed."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.account.portfolio_metrics": {
+      "feature_id": "webbroker.account.portfolio_metrics",
+      "wave": "W3",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → header **Account** control (e.g. Account wat1, CHF) → open dialog",
+        "Read guidance copy for portfolio-wide account list and search"
+      ],
+      "verify": {
+        "dialog_title_sample": "wat1, CHF",
+        "labels": [
+          "Account",
+          "Deselect Account"
+        ],
+        "assistive_copy": [
+          "All accounts of current user's portfolio are shown.",
+          "Use search to find other accounts."
+        ]
+      },
+      "drift_notes": [
+        "Retail-style strip of Balance / Portfolio Value metrics is not in this accessibility snapshot; dealer desk may rely on header selector + separate Account List widget from Trading palette — add metrics-specific verify if a Portfolio Overview tile is dropped on layout."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.settings.order_defaults": {
+      "feature_id": "webbroker.settings.order_defaults",
+      "wave": "W4",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → bottom Order Entry strip → **Show settings** (next to Analyze/Chart)",
+        "Modal **Order Defaults** opens"
+      ],
+      "verify": {
+        "dialog_heading": "Order Defaults",
+        "asset_class_tabs": [
+          "Equities",
+          "Options",
+          "Futures",
+          "CFD",
+          "Forex"
+        ],
+        "fields_sample": [
+          "Order Type in OE",
+          "Quantity"
+        ],
+        "actions": [
+          "Cancel",
+          "Save",
+          "Close"
+        ],
+        "quantity_controls": [
+          "Decrease",
+          "Increase"
+        ]
+      },
+      "drift_notes": [
+        "Default order type shown as Limit with numeric quantity steppers in this session; values are session-specific — omit from fixtures."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.market_data.subscriptions": {
+      "feature_id": "webbroker.market_data.subscriptions",
+      "wave": "W4",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → header **System Management** → read widget palette (draggable items)"
+      ],
+      "verify": {
+        "desk_menu": "System Management",
+        "palette_entries": [
+          "Instruments",
+          "Job Monitor",
+          "Backup Prices",
+          "Financing/Swaps"
+        ],
+        "palette_instruction": "Click on or Drag an item and Drop it to a place into the layout"
+      },
+      "drift_notes": [
+        "Retail-style label **Market Data Subscriptions** / package picker was not present in this dealer accessibility tree; pricing and reference-data ops surface as **Backup Prices** and **Financing/Swaps** admin widgets plus **Instruments**. Subscription semantics may live inside embedded Admin Console after drop — extend verify after placing a widget."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.notifications.platform_toasts": {
+      "feature_id": "webbroker.notifications.platform_toasts",
+      "wave": "W4",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → observe document for aria-live / status regions suitable for transient platform messages"
+      ],
+      "verify": {
+        "live_regions": [
+          "status atomic live=\"assertive\" relevant=\"additions text\" (multiple)"
+        ],
+        "persistent_status_article_sample": "FIX 6/9 Connected"
+      },
+      "drift_notes": [
+        "No fire-and-dismiss toast captured in this idle session (passive as expected between events per WAVES.md). Assertive live regions are the hook for future event-driven copy."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.notifications.messages_feed": {
+      "feature_id": "webbroker.notifications.messages_feed",
+      "wave": "W4",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → header **Client Area** → confirm **Messages** in draggable widget list",
+        "Optional: header **User and Risk Management** also lists **Notifications** as a separate admin widget"
+      ],
+      "verify": {
+        "client_area_palette_entries_sample": [
+          "Account",
+          "Account Transactions",
+          "Positions",
+          "Orders",
+          "Trades",
+          "Trading Journal",
+          "Watchlist",
+          "Derivatives",
+          "Chart",
+          "Portfolio Overview",
+          "Risk Profile",
+          "Messages"
+        ],
+        "related_user_risk_palette": [
+          "Notifications"
+        ],
+        "palette_instruction": "Click on or Drag an item and Drop it to a place into the layout"
+      },
+      "drift_notes": [
+        "Feed body / bell chrome not verified after placing **Messages** widget (same limitation as other palette-only confirms)."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.instrument.instrument_page": {
+      "feature_id": "webbroker.instrument.instrument_page",
+      "wave": "W2",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → workspace tab **Instruments 5** (name deployment-specific)",
+        "Instruments widget title **Instruments** with Close widget control",
+        "Embedded **Admin Console** frame opens instruments route with search fields and actions"
+      ],
+      "verify": {
+        "widget_title": "Instruments",
+        "admin_console_labels": [
+          "Type:",
+          "Text:",
+          "Symbol:",
+          "Underlying:",
+          "Show Instruments",
+          "New Instrument",
+          "Import from CSV",
+          "Import from IPF",
+          "Export CFD parameters"
+        ],
+        "embedded_app_role_name": "Admin Console"
+      },
+      "drift_notes": [
+        "Dealer CTQA exposes back-office **Admin Console** instrument catalog embedded under WebBroker tab; retail client **Instrument** symbol-detail page (tabs Portfolio/Stats) may differ — compare with IA alt_paths when validating client skin."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.risk.flatten_all": {
+      "feature_id": "webbroker.risk.flatten_all",
+      "wave": "W4",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": false,
+      "steps": [
+        "Post-login /webbroker/ → header **User and Risk Management** → note **Risk Settings** and related palette items",
+        "Per playbook: do **not** confirm destructive flatten — do not open confirmation dialogs in harness pass"
+      ],
+      "verify": {
+        "user_risk_palette_entries_sample": [
+          "Account Groups",
+          "Risk Settings",
+          "Commission Plans",
+          "Sessions",
+          "User Management",
+          "Soft Check Alerts Log",
+          "Notifications",
+          "Options Risk Monitor",
+          "FX Settings"
+        ]
+      },
+      "drift_notes": [
+        "String **Flatten** / **flatten all** not present in visible page text while flyouts closed or open in this pass; control likely inside **Risk Settings** (or similar) widget after placement. Destructive confirmation intentionally not exercised."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.transactions.account_transactions": {
+      "feature_id": "webbroker.transactions.account_transactions",
+      "wave": "W3",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/ → header **Trading** → widget palette",
+        "Confirm **Transactions** appears alongside Account List, Order Book, Position Book",
+        "Drag/drop per on-screen instruction to place widget if not already on a workspace tab"
+      ],
+      "verify": {
+        "palette_entries": [
+          "Account List",
+          "Order Book",
+          "Position Book",
+          "Transactions"
+        ],
+        "palette_instruction": "Click on or Drag an item and Drop it to a place into the layout"
+      },
+      "drift_notes": [
+        "This pass verified palette discoverability only; transactions table body not captured after drop. Re-run after placing widget to record column headers."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.embedded.dxtrade_widgets_context": {
+      "feature_id": "webbroker.embedded.dxtrade_widgets_context",
+      "wave": "W1",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": true,
+      "steps": [
+        "Post-login /webbroker/: confirm desk workspace tabs and dxTrade-class widget chrome visible",
+        "Observe Position Book tile title with widget menu / close controls; Order Entry dock with Analyze vs Chart toggle and order ticket grid"
+      ],
+      "verify": {
+        "widget_titles": [
+          "Position Book"
+        ],
+        "order_entry_labels": [
+          "Show Order Entry",
+          "Analyze",
+          "Chart",
+          "Spread",
+          "Confirm and Send",
+          "Clear data",
+          "Widget menu",
+          "Close widget"
+        ],
+        "workspace_tabs_sample": [
+          "Sessions",
+          "Workspace 1",
+          "Workspace 6",
+          "Instruments 5",
+          "Account Groups 2",
+          "Account Groups 3",
+          "icon-"
+        ]
+      },
+      "drift_notes": [
+        "Dealer template on CTQA shows multi-tab workspace and OE/Position Book consistent with embedded dxTrade5-class composition; full widget list is deployment-specific."
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.requirements.hub_cornertrader": {
+      "feature_id": "webbroker.requirements.hub_cornertrader",
+      "wave": "W1",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": false,
+      "steps": [],
+      "verify": {},
+      "drift_notes": [
+        "External Confluence hub only — no CTQA UI verification. IA primary_path: External: Confluence CT → Cornertrader Requirements (page 342171997) → child specification pages (including WebBroker widgets)"
+      ],
+      "selectors_may_change": {}
+    },
+    "webbroker.requirements.hub_dxbro": {
+      "feature_id": "webbroker.requirements.hub_dxbro",
+      "wave": "W1",
+      "verified_at": "2026-05-15",
+      "primary_path_ok": false,
+      "steps": [],
+      "verify": {},
+      "drift_notes": [
+        "External Confluence hub only — no CTQA UI verification. IA primary_path: External: Confluence DR → dxBro Requirements (page 254224494) → descendant WEB/mobile specs relevant to WebBroker"
+      ],
+      "selectors_may_change": {}
+    }
+  }
+}

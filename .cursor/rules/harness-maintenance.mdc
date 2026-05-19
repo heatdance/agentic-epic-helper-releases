@@ -10,8 +10,9 @@ alwaysApply: true
 Whenever you **add or materially change** durable documentation under:
 
 - `docs/` (except transient scratch),
+- **[docs/harness-principles.md](docs/harness-principles.md)** — first-class: when **behaviour** of pipelines, router, benchmark contract, `/crtqa-benchmark` **meaning**, or **JSON inspection (jq)** norms change, update **harness-principles** (and [automation/docs/jq.md](automation/docs/jq.md) / [jq-json.mdc](.cursor/rules/jq-json.mdc) when filters or agent rules change) in the **same change** (or immediate follow-up) so global doctrine stays true.
 - `automation/docs/`,
-- or cross-references / new paths under `.cursor/` (including `.cursor/pipelines/`, **`.cursor/commands/`**, and **MCP** guidance in **`automation/tools/tunnel/README.md`** when postgres-ctqa or `mcp.json` layout changes),
+- or cross-references / new paths under `.cursor/` (including **`.cursor/pipelines/`**, **`.cursor/rules/pipeline-router.mdc`**, **`docs/benchmark-contract.md`**, **`.cursor/commands/crtqa-benchmark.md`**, and **MCP** guidance in **`automation/tools/tunnel/README.md`**, **`automation/docs/chrome-devtools-mcp.md`**, or **[`.cursor/mcp.json.example`](../mcp.json.example)** when postgres-ctqa, **chrome-devtools**, or `mcp.json` layout changes),
 
 you must **in the same change** (or an immediate follow-up) update:
 

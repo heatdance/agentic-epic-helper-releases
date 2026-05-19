@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "_comment": "CLOSE pipeline normative contract. Playbook: .cursor/pipelines/close.md. Template: epics/templates/close-ref.json. Verifier: automation/tools/close_verify.py.",
+  "ladder_levels": ["L0", "L1", "L2", "L3", "L4"],
+  "ladder_sources": {
+    "L0": "tests.json",
+    "L1": "precon.json",
+    "L2": "discover.json",
+    "L3": "coverage.json",
+    "L4": "ref.json"
+  },
+  "finding_kinds": [
+    "broken_cross_ref",
+    "orphan_check_id",
+    "orphan_bundle",
+    "draft_shape",
+    "precon_mismatch",
+    "discover_gate",
+    "obligation_gap",
+    "snippet_status",
+    "id_typo",
+    "path_string",
+    "md_drift",
+    "forbidden_edit_attempt",
+    "other"
+  ],
+  "finding_severities": ["error", "warning", "info"],
+  "max_findings_emit": 200,
+  "max_bundles_per_run": 50,
+  "preflight": {
+    "required_artifacts": [
+      "{epic_key}-ref.json",
+      "{epic_key}-coverage.json",
+      "{epic_key}-discover.json",
+      "{epic_key}-precon.json",
+      "{epic_key}-tests.json"
+    ],
+    "optional_artifacts": ["{epic_key}-analysis.json"],
+    "forbid_temp_dir": true,
+    "artifact_location": "epic_dir_root"
+  },
+  "correction_whitelist": {
+    "allowed_kinds": [
+      "fix_check_id_typo",
+      "fix_bundle_id_typo",
+      "fix_covers_check_ids",
+      "fix_json_path_string",
+      "fix_cross_ref_path",
+      "fix_md_table_header"
+    ],
+    "forbidden": [
+      "add_test_bundle",
+      "remove_test_bundle",
+      "rewrite_oracle_text",
+      "rewrite_test_steps",
+      "remove_coverage_check",
+      "add_coverage_check",
+      "weaken_expected_result"
+    ]
+  },
+  "verdict_rules": {
+    "pass": "no findings with severity error",
+    "pass_with_warnings": "no error-severity findings; one or more warning-severity findings",
+    "fail": "one or more error-severity findings remain after finalize (or preflight/archive failed)"
+  },
+  "archive_manifest": {
+    "archive_layout_version": 1,
+    "context_subdir": "context",
+    "root_human_md": [
+      "{epic_key}-coverage.md",
+      "{epic_key}-analysis.md",
+      "{epic_key}-tests.md",
+      "{epic_key}-precon.md"
+    ],
+    "move_to_context_globs": [
+      "{epic_key}-*.json",
+      "tests"
+    ],
+    "close_json_name": "{epic_key}-close.json",
+    "close_json_location_after_archive": "context",
+    "archive_always": true,
+    "note": "After CLOSE, all JSON including -close.json live under context/. Four md remain at EpicDir root. Legacy tests/*.spec.ts move to context/tests/."
+  },
+  "md_regen_sources": {
+    "{epic_key}-coverage.md": {
+      "json": "{epic_key}-coverage.json",
+      "playbook": ".cursor/pipelines/coverage.md",
+      "emit_section": "Smart Checklist paste body"
+    },
+    "{epic_key}-analysis.md": {
+      "json": "{epic_key}-analysis.json",
+      "playbook": ".cursor/pipelines/analysis.md",
+      "emit_section": "gaps-first md; stub when analysis json absent",
+      "stub_heading": "## Gaps",
+      "stub_body": "_ANALYSE not run for this epic._"
+    },
+    "{epic_key}-tests.md": {
+      "json": "{epic_key}-tests.json",
+      "playbook": ".cursor/pipelines/test-prep.md",
+      "template": "epics/templates/tests-ref.json format_norms"
+    },
+    "{epic_key}-precon.md": {
+      "json": "{epic_key}-precon.json",
+      "playbook": ".cursor/pipelines/test-precon.md",
+      "emit_section": "Jira Pre-Condition paste body only"
+    }
+  },
+  "ladder_checks": {
+    "L0": [
+      "bundle_id unique",
+      "covers_check_ids exist in coverage.checks",
+      "draft actions/results 1:1 when draft present",
+      "no CRTQA keys in generation_mode bundles",
+      "precon cite resolvable in precon.json"
+    ],
+    "L1": [
+      "test_skeleton case_outline aligns with bundle covers_check_ids",
+      "session_placeholders not literal secrets",
+      "command_patterns referenced by bundle"
+    ],
+    "L2": [
+      "obligation_ledger vs bundle checks",
+      "fixture_needs vs bundle surfaces",
+      "test_prep_gates.blocked acknowledged in tests sources when blocking"
+    ],
+    "L3": [
+      "each covers_check_id exists in checks",
+      "obligations_coverage row-complete for bundle checks when schema_version >= 2",
+      "verification_role primary/supporting consistent"
+    ],
+    "L4": [
+      "obligations_proposed primary_candidate covered or gap finding",
+      "snippet_status failures surfaced as warning",
+      "implementation hits not contradicted by bundle text"
+    ]
+  },
+  "epic_wide_checks": [
+    "orphan coverage checks not in any bundle",
+    "orphan bundles with empty covers_check_ids",
+    "cross-file check_id namespace consistent"
+  ],
+  "trigger_options": {
+    "heal_default": true,
+    "heal_no_token": "heal=no"
+  }
+}

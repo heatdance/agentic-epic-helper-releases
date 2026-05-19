@@ -1,0 +1,12 @@
+---
+description: Use jq to project JSON before loading large repo artifacts into agent context
+alwaysApply: true
+---
+
+# JSON inspection (jq)
+
+- **MUST** use shell **`jq`** to **inspect** in-repo JSON before pasting large blobs into chat or doing multi-field reasoning on nested structures.
+- **Threshold:** default **~60 lines** or whenever you need a **subset** of keys/arrays (epic `*-ref.json`, `*-coverage.json`, `*-discover.json`, `*-tests.json`, `docs/*.json`, harness maps, benchmark shadow paths under `.cursor/benchmark/`).
+- **MUST NOT** use **`grep`** / **`Select-String`** as the primary way to query **structured** JSON (grep remains OK for repo-wide **file** discovery).
+- **Exceptions:** writing/editing durable JSON; files under ~60 lines; invalid JSON (fix or Python); **normative** validation (`discover_verify.py`, `benchmark_verify.py`, `crtqa_env_probe.py`); MCP-returned JSON (jq optional).
+- **Canonical filters:** [automation/docs/jq.md](../../automation/docs/jq.md). **Install:** system PATH (`winget install --id jqlang.jq -e` on Windows) — not a Cursor plugin.

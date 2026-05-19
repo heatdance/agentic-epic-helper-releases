@@ -1,0 +1,52 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "sources": {
+    "jira_fetched_at": "2026-05-19T12:00:00Z",
+    "ref_path": "epics/CRT-639/CRT-639-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-639/CRT-639-coverage.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "note": "Post-obligation coverage validation sample"
+  },
+  "summary": {
+    "text": null,
+    "derived_from": [
+      "coverage.epic_verification_focus"
+    ]
+  },
+  "gaps": [],
+  "resolved_gaps": [],
+  "exploration_suppressed": [
+    {
+      "check_id": "chk-009",
+      "reason": "supporting parity deferral; invariant on chk-013",
+      "blocks_fixture_probe": false,
+      "until_action": "rerun_coverage"
+    }
+  ],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": []
+  },
+  "questions": [],
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "validate_v2",
+      "at": "2026-05-19T12:00:00Z",
+      "action": "green coverage sample"
+    }
+  ]
+}

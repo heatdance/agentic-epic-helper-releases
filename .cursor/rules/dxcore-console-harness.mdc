@@ -1,0 +1,15 @@
+---
+description: dxCore console — tiered doctrine; load harness JSON before relying on Confluence for executable syntax
+alwaysApply: false
+agent_requestable: true
+---
+
+# dxCore console harness
+
+When work involves **`dx run console`**, multiplex **`plink -share`**, crtqa-console scripts, **`console_guide`**, or scripted discovery on **deployed** JVMs:
+
+1. **Read first:** [docs/dxcore-console-harness.json](../../docs/dxcore-console-harness.json) (T1 package **`dxcore_console`** in [docs/harness-map.json](../../docs/harness-map.json)) and [automation/tools/crtqa-console/README.md](../../automation/tools/crtqa-console/README.md).
+2. **Agent verification (no password dialog):** **`Get-CrtqaConsoleStatus.ps1`** (Phase 0 / **`/crtqa-console status`**) and **`Invoke-CrtqaDxConsole.ps1 -Probe`** (Step E / **`/crtqa-console probe`**). Operator **`/crtqa-console start`** only for the desktop SSH handshake.
+3. **Truth order:** **Live console on the target build** (`show console_guide`, narrow `grep` / `dump_to`) for *what exists* on that version → repo multiplex tooling → **Confluence / Jira only for orientation** (may be stale or generic)—see JSON **`meta.truth_hierarchy`** / **`tier_sequence`**.
+4. **No one-shot:** Do not paste wiki walls into plans as if they were the command catalogue for a specific host; encode steps as tiered scans and **hypothesis_confirmation** with small repro commands + transcripts (`docs/dxcore-console-harness.json`).
+5. **Atlassian MCP:** [.cursor/rules/mcp-atlassian-search.mdc](mcp-atlassian-search.mdc)—narrow search, **`confluence_get_page`** by known id where listed in the harness JSON **`confluence_catalog`**; never invent console syntax.

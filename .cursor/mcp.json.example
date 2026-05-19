@@ -1,0 +1,17 @@
+{
+  "_comment": "Copy snippets into gitignored .cursor/mcp.json and/or global ~/.cursor/mcp.json (Windows: %USERPROFILE%\\.cursor\\mcp.json). Cursor merges global + project. Replace postgres USER/PASSWORD and local port if needed. See automation/tools/tunnel/README.md (PostgreSQL) and automation/docs/chrome-devtools-mcp.md (Chrome).",
+  "mcpServers": {
+    "postgres-ctqa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sarmadparvez/postgresql-mcp",
+        "postgresql://USER:PASSWORD@127.0.0.1:15432/ctqa?mode=readonly&sslmode=disable"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    }
+  }
+}

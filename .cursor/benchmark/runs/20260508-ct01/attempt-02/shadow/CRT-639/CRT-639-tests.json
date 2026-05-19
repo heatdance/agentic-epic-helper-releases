@@ -170,7 +170,7 @@
       "automation": {
         "feasibility": "blocked",
         "blocked_reason": "requires_console",
-        "notes": "CRTQA-10177 patterns require dxCore console; TEST-EXEC skips unless substitute approved."
+        "notes": "CRTQA-10177 patterns require dxCore console; human execution / CLOSE documents blocked feasibility."
       }
     },
     {

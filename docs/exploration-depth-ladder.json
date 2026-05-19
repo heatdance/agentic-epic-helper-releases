@@ -1,0 +1,174 @@
+{
+  "schema_version": 1,
+  "_comment": "Shared exploration depth ladder: DISCOVER → PRECON → PREP. Phase 0c = smoke only (L0). Real navigation in PRECON Phase 4 and PREP Phase 8a-three-quarter. Verifiers: precon_verify.py, test_prep_verify.py --mode explore. Playbooks: test-precon.md, test-prep.md.",
+  "depth_levels": {
+    "smoke": {
+      "level": 0,
+      "description": "Login / shell visible only. Produced in Phase 0c post_login_smoke.",
+      "producers": ["TEST-DISCOVER Phase 0c", "TEST-PRECON Phase 0c", "TEST-PREP Phase 0c"]
+    },
+    "discover_probe": {
+      "level": 1,
+      "description": "Discover fixture probe recipe completed (setup_depth probe_executed).",
+      "producers": ["TEST-DISCOVER Step E"]
+    },
+    "precon_drill": {
+      "level": 2,
+      "description": "Replay L1 + open setup-relevant views/forms (read-only). PRECON Phase 4R/4D/4C.",
+      "producers": ["TEST-PRECON Phase 4"]
+    },
+    "prep_verify_view": {
+      "level": 3,
+      "description": "Verification-target grids/metrics for plan class (read-only Chrome/console).",
+      "producers": ["TEST-PREP Phase 8a-three-quarter"]
+    }
+  },
+  "depth_order": ["smoke", "discover_probe", "precon_drill", "prep_verify_view"],
+  "precon_requires": {
+    "by_fixture_kind": {
+      "console_ladder_session": {
+        "min_depth": "precon_drill",
+        "required_views": [
+          {
+            "surface": "console",
+            "view_id": "console_guide_family",
+            "actions": ["show console_guide", "help position_metrics or ladder-related commands"]
+          }
+        ]
+      },
+      "weighted_avg_fx_spot_account": {
+        "min_depth": "precon_drill",
+        "required_views": [
+          {
+            "surface": "console",
+            "view_id": "account_instrument_show",
+            "actions": ["show on linked account/instrument/group when discover notes contain sanitized ids", "show account_group_hierarchy", "show profiles domains=ExternalExecution"]
+          },
+          {
+            "surface": "dxtrade5",
+            "view_id": "positions_widget_open",
+            "actions": ["open Positions widget", "capture metric column headers"]
+          },
+          {
+            "surface": "webbroker",
+            "view_id": "position_book_drilled",
+            "actions": ["navigate to Position Book or client metrics for parity context"]
+          }
+        ],
+        "console_readonly_extended": true
+      },
+      "webbroker_dealer_client_metrics": {
+        "min_depth": "precon_drill",
+        "required_views": [
+          {
+            "surface": "webbroker",
+            "view_id": "position_book_drilled",
+            "actions": ["navigate past dealer landing", "open Position Book or client portfolio grid"]
+          },
+          {
+            "surface": "webbroker",
+            "view_id": "user_management_create_form",
+            "actions": ["open User Management", "snapshot create-user form field labels", "snapshot assign-account flow labels"]
+          }
+        ]
+      },
+      "dxtrade5_retail_positions": {
+        "min_depth": "precon_drill",
+        "required_views": [
+          {
+            "surface": "dxtrade5",
+            "view_id": "positions_widget_open",
+            "actions": ["open Positions", "confirm Avg Fill / Open P/L / % PL Gross column headers or structured absence"]
+          }
+        ]
+      }
+    },
+    "replay_discover_when": "discover fixture_needs[].setup_depth is probe_executed",
+    "exploration_log_fields": {
+      "depth_level": "smoke | discover_probe | precon_drill",
+      "discover_fixture_id": "fix-NNN",
+      "replay_of": "discover_probe | precon_deepen",
+      "view_id": "registry view_id string",
+      "url_path": "sanitized path only",
+      "evidence": ["widget_label_list", "metric_columns", "commands_seen"],
+      "progress_note": "optional"
+    },
+    "shallow_nav_denylist": [
+      "Login",
+      "FIX Connected",
+      "Sub-account"
+    ],
+    "shallow_nav_requires_drill": [
+      "User Management",
+      "Position Book",
+      "Positions"
+    ]
+  },
+  "prep_requires": {
+    "by_verification_class": {
+      "config_posture": {
+        "min_depth": "prep_verify_view",
+        "surfaces_from_plan": true,
+        "required_evidence": ["widget_label_list"]
+      },
+      "stateful_ladder": {
+        "min_depth": "prep_verify_view",
+        "required_views": [
+          {
+            "surface": "console",
+            "view_id": "position_metrics_family",
+            "actions": ["show help or guide for position_metrics_from_publisher; literary only in draft"]
+          }
+        ]
+      },
+      "derived_metric": {
+        "min_depth": "prep_verify_view",
+        "required_evidence": ["metric_columns"],
+        "surfaces_from_plan": true
+      },
+      "cross_surface_parity": {
+        "min_depth": "prep_verify_view",
+        "required_evidence": ["metric_columns"],
+        "all_observation_surfaces": true,
+        "label_parity": "prep metric_columns must be superset of precon widgets_seen per surface when same surface"
+      },
+      "invariant_under_change": {
+        "min_depth": "precon_drill",
+        "note": "May rely on precon console depth if no extra FE in plan"
+      },
+      "settlement_stress": {
+        "min_depth": "precon_drill",
+        "console_view_id": "console_guide_family"
+      },
+      "journey_smoke": {
+        "min_depth": "prep_verify_view",
+        "surfaces_from_plan": true
+      },
+      "doc_or_pr_only": {
+        "min_depth": "smoke",
+        "fe_exploration_optional": true
+      }
+    },
+    "verification_exploration_fields": {
+      "bundle_id": "tb-NNN",
+      "surface": "dxtrade5 | webbroker | adaptive | console",
+      "depth_level": "prep_verify_view",
+      "view_id": "string",
+      "metric_columns": [],
+      "widgets_seen": [],
+      "precon_depth_ok": true
+    }
+  },
+  "default_budgets": {
+    "precon": {
+      "max_cluster_iterations": 3,
+      "max_fe_nav_cycles_per_surface": 6,
+      "max_console_commands": 12
+    },
+    "prep": {
+      "max_explore_iterations_per_bundle": 2,
+      "max_bundle_explore_failures_before_stop": 5
+    }
+  },
+  "authenticated_not_explored": "fe_ui_sessions.authenticated alone does not satisfy precon_drill or prep_verify_view. Verifiers enforce view_id and depth_level on exploration_log / verification_exploration."
+}

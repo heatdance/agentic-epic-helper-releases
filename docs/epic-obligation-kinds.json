@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "_comment": "Obligation kinds for EPIC-PREP obligations_proposed[] and COVERAGE mapping. Playbook: .cursor/pipelines/epic-prep.md. Coverage contract: docs/coverage-obligation-contract.json.",
+  "kinds": [
+    "invariant",
+    "ladder",
+    "formula",
+    "config_posture",
+    "settlement",
+    "rounding",
+    "parity",
+    "explicit_deferral"
+  ],
+  "config_vs_position_values": [
+    "instrument_type_config",
+    "account_group_assignment",
+    "position_state",
+    "routing_or_markup",
+    "not_applicable"
+  ],
+  "disambiguation_notes": {
+    "instrument_type_config": "CRT-1741-style FIFO vs WeightedAvg mapping for instrument families; 'skip config-change scenarios' applies here, not to open-position metrics.",
+    "account_group_assignment": "Moving account between instrument groups (e.g. OPPORTUNITY vs ENERGY); distinct from instrument-type remap.",
+    "position_state": "Metrics on an open position (avg price, open P/L) must not change when only group/markup context changes.",
+    "routing_or_markup": "Quote/routing/markup path changes without position metric rewrite."
+  },
+  "disposition_values": ["primary_candidate", "deferral_candidate"],
+  "coverage_mapping_hint": {
+    "invariant": {
+      "section": "## Invariants under configuration change",
+      "verification_class": "invariant_under_change"
+    },
+    "ladder": {
+      "section": "## Average fill price & weighted-average ladder",
+      "verification_class": "stateful_ladder"
+    },
+    "formula": {
+      "section": "## Open PL, % PL gross, parity",
+      "verification_class": "derived_metric"
+    },
+    "config_posture": {
+      "section": "## Functional configuration & instrument posture",
+      "verification_class": "config_posture"
+    },
+    "settlement": {
+      "section": "## Cash settlement stresses",
+      "verification_class": "settlement_stress"
+    },
+    "rounding": {
+      "section": "## Rounding and display policy",
+      "verification_class": "rounding_matrix"
+    },
+    "parity": {
+      "section": "## Open PL, % PL gross, parity",
+      "verification_class": "cross_surface_parity"
+    },
+    "explicit_deferral": {
+      "section": null,
+      "verification_class": null
+    }
+  },
+  "subprocess_id_pattern": "obl-{nnn}"
+}

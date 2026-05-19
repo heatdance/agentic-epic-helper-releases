@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "harness_id": "dxtrade5_ui",
+  "description": "Agent-facing tiered workflow for dxTrade5 web UI: concept → IA → live locations. Browser truth beats wiki/design for layout.",
+  "content_policy": "Functional/process only. No credentials or secrets in JSON. Do not paste full Confluence HTML or large Figma exports into the repo.",
+  "meta": {
+    "staleness_doctrine": [
+      "Confluence pages under Cornertrader Requirements (CT) and dxBro Requirements (DR) explain intent and acceptance-style behaviour—they may not match every QA build.",
+      "Figma frames describe target UX; deployed spacing, labels, and feature flags can differ.",
+      "For *where* a control is on screen, prefer Stage 3 locations + live snapshots (Chrome DevTools MCP) on the target host."
+    ],
+    "truth_hierarchy": [
+      "1_live_ui: Snapshot / exploration on target deployment (e.g. ctqa)",
+      "2_locations_json: docs/dxtrade5-harness/locations/<env>.json when present and recently verified",
+      "3_ia_map: docs/dxtrade5-harness/ia-map.json primary_path strings",
+      "4_concept_map: docs/dxtrade5-harness/concept-map.json capabilities and deps",
+      "5_confluence_figma: Orientation and vocabulary only"
+    ],
+    "harness_map_package": "dxtrade5_harness",
+    "related_reads": [
+      "docs/dxtrade5-harness/README.md",
+      "docs/dxtrade5-harness/concept-map.json",
+      "docs/dxtrade5-harness/ia-map.json",
+      "docs/harness-map.json",
+      "docs/corner-platform-map.json",
+      "automation/docs/chrome-devtools-mcp.md",
+      "automation/docs/figma-mcp.md"
+    ]
+  },
+  "tier_sequence": [
+    {
+      "id": "tier_concept",
+      "label": "Stage 1 — concept-map.json",
+      "goal": "Resolve feature IDs, dependencies, and synonyms before searching the DOM."
+    },
+    {
+      "id": "tier_ia",
+      "label": "Stage 2 — ia-map.json",
+      "goal": "Narrow navigation using primary_path / areas (no selectors)."
+    },
+    {
+      "id": "tier_locations",
+      "label": "Stage 3 — locations/<env>.json + browser",
+      "goal": "Verify or record concrete steps and labels on the target host; cite verified_at."
+    }
+  ],
+  "confluence_anchors": {
+    "cornertrader_requirements_hub_ct": "342171997",
+    "dxbro_requirements_hub_dr": "254224494"
+  },
+  "design_anchors": {
+    "figma_team_project_url": "https://www.figma.com/files/812379849205775254/project/335034859?fuid=909086425388392671",
+    "mcp_note": "Figma get_figma_data requires fileKey from a file or design URL; attach node-id when sharing a frame link."
+  }
+}

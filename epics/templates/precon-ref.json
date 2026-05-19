@@ -1,0 +1,112 @@
+{
+  "_comment": "TEST-PRECON pipeline output schema v5. Adds session_placeholders, command_patterns, test_skeleton[].case_outline[] for TEST-PREP v3. Exploration depth: docs/exploration-depth-ladder.json. Pair with <KEY>-precon.md.",
+  "format_norms": {
+    "jira_wiki": "# Pre-Condition Jira wiki format (Corner QA)\n\nSame as v3; exploration depth is agent-only in exploration_log (depth_level, view_id). Phase 4 must produce precon_drill rows before steps claim exploration provenance."
+  },
+  "schema_version": 5,
+  "epic_key": null,
+  "precon_status": "complete",
+  "exploration_budgets": {
+    "max_cluster_iterations": 3,
+    "max_fe_nav_cycles_per_surface": 6,
+    "max_console_commands": 12
+  },
+  "exploration_gaps": [],
+  "_exploration_gaps_item": {
+    "cluster_id": "pc-001",
+    "fixture_id": "fix-003",
+    "surface": "webbroker",
+    "view_id": "user_management_create_form",
+    "reason": "tooling_blocked | chrome_unavailable | waived",
+    "note": "human-readable"
+  },
+  "sources": {
+    "coverage_path": null,
+    "coverage_loaded": false,
+    "discover_path": null,
+    "discover_loaded": false,
+    "ref_path": null,
+    "ref_loaded": false,
+    "analysis_path": null,
+    "analysis_loaded": false,
+    "precon_run_started_at": null,
+    "cold_gate_skip_token_used": false,
+    "cold_gate_resolved_at": null,
+    "fe_exploration_waived": false,
+    "optional_jira_audit": {
+      "performed": false,
+      "steps_provenance": "not_used_for_authoring",
+      "note": "Greenfield: existing CRTQA Pre-Conditions are not structural input."
+    }
+  },
+  "fe_credentials": {
+    "dxtrade5": "missing | supplied | waived",
+    "webbroker": "missing | supplied | waived",
+    "adaptive": "not_required"
+  },
+  "fe_ui_sessions": {
+    "dxtrade5": "not_required",
+    "webbroker": "not_required",
+    "adaptive": "not_required"
+  },
+  "environment": {
+    "tier": "ct_qa",
+    "client_shell_impact": {
+      "corner_trader": { "status": null, "note": null },
+      "adaptive": { "status": null, "note": null }
+    }
+  },
+  "session_placeholders": {
+    "console_principal": "<username>",
+    "account_code": "<account_code>",
+    "instrument_example": "<instrument_symbol>"
+  },
+  "command_patterns": {
+    "ladder_step": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> at <price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+      "show position_metrics_from_publisher"
+    ]
+  },
+  "test_skeleton": [],
+  "_test_skeleton_item": {
+    "bundle_id": "tb-001",
+    "proposed_title": null,
+    "covers_check_ids": [],
+    "covers_sections": [],
+    "precon_cluster_id": "pc-001",
+    "surfaces": [],
+    "ladder_in_test": false,
+    "case_outline": [
+      {
+        "case_id": "c01",
+        "check_id": "chk-001",
+        "title": "Short scenario title",
+        "intent": "What this case proves",
+        "pattern_ref": "ladder_step"
+      }
+    ]
+  },
+  "precon_clusters": [],
+  "_exploration_log_item": {
+    "at": "ISO-8601",
+    "surface": "console | webbroker | dxtrade5 | adaptive | postgres",
+    "action": "what was attempted (read-only)",
+    "outcome": "pass | partial | fail",
+    "login_state": "shell_only | authenticated",
+    "depth_level": "smoke | discover_probe | precon_drill",
+    "discover_fixture_id": "fix-NNN",
+    "replay_of": "discover_probe | precon_deepen",
+    "view_id": "position_book_drilled | positions_widget_open | user_management_create_form | ...",
+    "url_path": "sanitized path",
+    "widgets_seen": [],
+    "commands_seen": [],
+    "evidence": [],
+    "progress_note": null
+  },
+  "precon_verify_passed": false,
+  "validation_log": [],
+  "anti_pattern_findings": []
+}

@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "_comment": "ANALYSE v2 gap taxonomy and work-queue rules. Playbook: .cursor/pipelines/analysis.md. Template: epics/templates/analysis-ref.json schema v2.",
+  "gap_kinds": [
+    "obligation_uncovered",
+    "snippet_missing",
+    "nested_req_unresolved",
+    "deferred_check",
+    "ungrounded_check",
+    "grounding_weak",
+    "tooling_blocked",
+    "env_blocked",
+    "anti_pattern",
+    "human_ba"
+  ],
+  "confidence_levels": ["high", "medium", "low"],
+  "emit_forbidden_confidence": ["low"],
+  "recommended_actions": [
+    "rerun_coverage",
+    "rerun_epic_prep",
+    "confluence_resolve",
+    "human_ba",
+    "ignore_for_discover",
+    "ignore_for_prep"
+  ],
+  "gap_status": ["open", "resolved", "confirmed_gap"],
+  "resolution_types": [
+    "confluence_snippet",
+    "coverage_updated",
+    "false_positive"
+  ],
+  "max_open_gaps_emit": 15,
+  "max_resolve_attempts_per_run": 8,
+  "work_queue_sources": [
+    {
+      "id": "deferred_check",
+      "scan": "coverage.checks[] where calculation_contract is deferred_ambiguous or ambiguity is set"
+    },
+    {
+      "id": "ungrounded_check",
+      "scan": "coverage.grounding_audit.ungrounded_check_ids"
+    },
+    {
+      "id": "nested_req_unresolved",
+      "scan": "coverage.nested_requirement_refs[] where page_id or short_url is null"
+    },
+    {
+      "id": "obligation_uncovered",
+      "scan": "ref.obligations_proposed primary_candidate not covered in obligations_coverage; skip when coverage.schema_version >= 2 and obligations_coverage row-complete"
+    },
+    {
+      "id": "snippet_missing",
+      "scan": "ref.requirements[] where snippet_status is missing or failed"
+    },
+    {
+      "id": "anti_pattern",
+      "scan": "coverage.anti_pattern_findings[]"
+    }
+  ],
+  "exploration_suppression_kinds": [
+    "deferred_check",
+    "human_ba"
+  ],
+  "recommended_action_by_kind": {
+    "obligation_uncovered": "rerun_coverage",
+    "snippet_missing": "rerun_epic_prep",
+    "nested_req_unresolved": "confluence_resolve",
+    "deferred_check": "ignore_for_discover",
+    "ungrounded_check": "rerun_coverage",
+    "grounding_weak": "rerun_coverage",
+    "tooling_blocked": "human_ba",
+    "env_blocked": "human_ba",
+    "anti_pattern": "rerun_coverage",
+    "human_ba": "human_ba"
+  },
+  "_operator_notes": "Reserved for operator gap taxonomy pointers; playbook references this section when populated."
+}

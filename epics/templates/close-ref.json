@@ -1,0 +1,62 @@
+{
+  "_comment": "CLOSE: epic integrity ladder + archive manifest. Final pre-archive write at {EpicDir}<KEY>-close.json root; after archive: {EpicDir}context/<KEY>-close.json only. No -close.md. Contract: docs/close-contract.json. Playbook: .cursor/pipelines/close.md.",
+  "schema_version": 1,
+  "epic_key": null,
+  "sources": {
+    "ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
+    "coverage_path": "epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json",
+    "discover_path": "epics/<EPIC-KEY>/<EPIC-KEY>-discover.json",
+    "precon_path": "epics/<EPIC-KEY>/<EPIC-KEY>-precon.json",
+    "tests_path": "epics/<EPIC-KEY>/<EPIC-KEY>-tests.json",
+    "analysis_path": "epics/<EPIC-KEY>/<EPIC-KEY>-analysis.json",
+    "analysis_loaded": false,
+    "heal_enabled": true,
+    "note": "Paths are pre-archive locations. After archive, JSON lives under context/; four human md remain at EpicDir root."
+  },
+  "ladder_summary": [],
+  "_ladder_summary_item": {
+    "level": "L0 | L1 | L2 | L3 | L4",
+    "bundles_processed": 0,
+    "finding_count": 0,
+    "error_count": 0,
+    "warning_count": 0,
+    "completed_at": "ISO-8601"
+  },
+  "findings": [],
+  "_findings_item": {
+    "id": "find-001",
+    "level": "L0",
+    "bundle_id": "tb-001",
+    "kind": "broken_cross_ref",
+    "severity": "error | warning | info",
+    "summary": "Short description",
+    "evidence": "jq path or field pointer only",
+    "check_ids": ["chk-001"],
+    "auto_fixable": false
+  },
+  "corrections": [],
+  "_corrections_item": {
+    "id": "corr-001",
+    "kind": "fix_check_id_typo",
+    "target_file": "CRT-639-coverage.json",
+    "field_path": "checks[0].id",
+    "before": "chk-00l",
+    "after": "chk-001",
+    "applied": true,
+    "at": "ISO-8601"
+  },
+  "epic_verdict": "pass | pass_with_warnings | fail",
+  "archive": {
+    "layout_version": 1,
+    "archived_at": null,
+    "manifest_applied": false,
+    "root_md": [],
+    "context_json": []
+  },
+  "validation_log": [],
+  "_validation_log_item": {
+    "step": "preflight | ladder_l0 | finalize | md_regen | archive | emit",
+    "action": "pass | fail | warn",
+    "detail": "short machine-readable note"
+  }
+}

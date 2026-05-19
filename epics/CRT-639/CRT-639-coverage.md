@@ -1,47 +1,53 @@
-# CRT-639 — Coverage checklist (Smart Checklist paste)
+# CRT-639 — Weighted-average FX Spot cash settlement coverage
 
 ## Primary focus
 
-- This epic verifies that FX Spot P/L shifts from FIFO to average-price calculators: CRT-1741 maps instrument families to FIFO vs WeightedAvg; CRT-1740 Average Fill Price, CRT-1743 Open P/L, and CRT-1742 % PL Gross follow that mapping on positions; CRT-1738 binds the weighted-average ladder for Average Price, Open PL, and Realized PL during cash settlement, with parity on dxTrade5, Web Broker, and Adaptive.
+- Corners verifies weighted-average cash settlement P/L mapping for FOREX FX_SPOT instruments when Functional Configuration selects WeightedAvg (CRT-1741), spanning CRT-1740 average fill ladders that reset net size at zero, CRT-1738 realized versus open interplay, CRT-1743 mark-minus-average open P/L, and CRT-1742 gross percent denominators—all observed consistently on dxTrade5, WebBroker, and Adaptive shells.
 
-## Functional configuration & instrument posture
 
-- [CRT-1741] Build or reuse FX_SPOT **WeightedAvg** test instruments tied to CRT-1741 mapping; validate associated data places **FOREX (FX_SPOT subtype)** on the weighted-average lane instead of stale FIFO defaults before trading.
-> Yogi CRT-1741: FIFO STOCKS/ETF/OPTION/CFD/… vs **Weighted Average: FOREX (FX_SPOT subtype)**.
-> Record instrument id, **account group** id, and config screen evidence for rerun stability.
+## Invariants under configuration change
 
-## Average fill price & weighted-average ladder
+- [CRT-1740] With an open WeightedAvg FX_SPOT position and recorded average fill price, move the account between CornerTraderFxConfiguration groups (e.g. OPPORTUNITY to ENERGY) without closing the position; average fill price and open P/L inputs for the open lots remain unchanged.
+  > Preconditions: open position built per weighted-average ladder; group keys from account_group_hierarchy.
 
-### CRT-1738 ladder
+## Functional configuration and prerequisites
 
-- [CRT-1738][CRT-1740] Execute a CRT-1738-aligned trade ladder on FX_SPOT WeightedAvg after last zero-cross: opening trades establishing average fill, partial closes altering realized P/L, and post-close average price — snapshot engine truth (position qty, avg price, realized, open exposure) **before** UI assertions.
-> CRT-639 comment: waits for XT-7911 before locking immutable golden numeric table — cite interim tolerances.
-> Map each ladder row to CRT-1738 illustrative BUY/SELL sequence inside the requirement snippet.
+- [CRT-1741] Using Functional Configuration Live Platform documentation, arrange a FOREX `FX_SPOT` test instrument—or equivalent controlled mapping—assigned to WeightedAvg (not FIFO) for valuation; confirm STOCKS/CFD paths remain FIFO unless explicitly migrating them (explicitly outside this epic’s primary focus).
+  > Yogi CRT-1741: Weighted Average bucket covers FOREX (FX_SPOT subtype); default when unset is FIFO.
+- [CRT-1741] Record the configuration row and associated data used on the test account so COVERAGE can reproduce the same instrument classification across dxTrade5, WebBroker, and Adaptive sessions.
+  > impl-001 / impl-002: BRO/xt monorepo (`dxcore/`, `webbroker/`) is the default implementation surface for metric plumbing.
 
-- [CRT-1740] For WeightedAvg instruments, weighted average fills come from opening trades since last net-size zero cross — verify observed average fill differs from FIFO-only netting when historic mixed-opening lots remain open.
+## Weighted-average ladder — average fill, realized P/L, crossing zero (CRT-1738 & CRT-1740)
 
-## Open PL, % PL gross, parity
+- [CRT-1738] Drive the published ladder pattern from Yogi (flat → layered buys → sells through zero → short rebuild) on the configured WeightedAvg FX_SPOT instrument; after each trade, compare position net size, average price, and realized P/L effect against the authoritative ladder output once XT-7911 supplies final numerics.
+  > Jira comment (2026-05-07): epic “Waits for XT-7911” before locking expected outputs for the CRT-1738 ladder.
+  > ! reason: absolute numeric expectations still pending upstream XT-7911 alignment per Jira; execute structural ladder and document observed engine values for later diff.
+- [CRT-1740] After re-crossing net zero, confirm the next opening leg restarts the WeightedAvg opening-trade window (only opening trades contribute; WeightedAvg path uses all opening trades since last crossing 0 per snippet).
+- [CRT-1738] Verify partial closes that do not flip net sign update average price per WeightedAvg opening-trade rules (no silent regression to FIFO opening-match prices for closing events).
 
-- [CRT-1743][CRT-1738][CRT-1742][CRT-1740][CRT-1741] With grounded mark feed, WeightedAvg **Open P/L** equals `position_qty × (mark − average_fill_price) × multiplier`; **% PL gross** denominator uses summed `average_price × qty × multiplier` weights (two-decimal rounding) — diff ≤ agreed tolerance versus risk engine/export.
-> CRT-639 comment thread asks which metrics appear per UI — annotate `! reason` when metric absent on a shell.
 
-### dxTrade5
+## Rounding and display policy
 
-- [CRT-1743][CRT-1742][CRT-1738][CRT-1741] **dxTrade5** exposes Average Fill Price, Open P/L, % PL gross for FX_SPOT WeightedAvg instrument matching ladder numbers within tolerance — structured `!` if column absent.
+- [CRT-1742] For a WeightedAvg FX_SPOT position, verify % P/L gross rounds to two decimals per requirement denominator rules after a controlled mark move.
+  > Use executable ladder from CRT-1742 snippet; compare UI/API to expected rounded value.
 
-### Web Broker
+## Open P/L and % P/L gross (WeightedAvg path)
 
-- [CRT-1743][CRT-1742][CRT-1738][CRT-1741] **Web Broker** shows the same three metrics given identical quotes/session as the dxTrade5 capture for this ladder — attach screenshot + timestamp.
+- [CRT-1743] On an open WeightedAvg FX_SPOT position, assert Open P/L equals `position_qty * (mark_price - average_fill_price) * multiplier` using the same mark feed as production configuration; document which mark source (mid, bid, ask, last) the environment applies.
+- [CRT-1742] Assert % P/L gross follows `(Open PL / ABS(SUM(average_price * qty * multiplier))) * 100` for the WeightedAvg branch and rounds to two decimals per Yogi CRT-1742.
+  > Contrast regression for FIFO denominators is explicitly out of epic scope unless QA policy demands a single smoke (see `explicitly_out_of_scope` in coverage JSON).
 
-### Adaptive
+## Cross-surface parity (Corner Trader)
 
-- [CRT-1743][CRT-1742][CRT-1738][CRT-1741] **Adaptive** shows the surfaced subset per `qa_default_both`; if Adaptive omits metric, structured `! reason: Adaptive UI omits <metric>` with tracking key.
+- [CRT-1738] dxTrade5 — For the same account/instrument snapshot, capture Average Price, Open P/L, % P/L gross, and Realized P/L columns from the primary positions view and compare to the dxCore/API truth used in prior sections.
+- [CRT-1743] WebBroker — Repeat the same snapshot read (positions / client area widgets that expose the metrics) and assert numerics match dxTrade5 within rounding tolerance.
+- [CRT-1742] Adaptive — Repeat for every metric column exposed on mobile position details; if a column is absent, log `! reason: metric not exposed on Adaptive surface` instead of bundling with web results.
+  > Anti-pattern guard: do not assume UI labels say “mark” vs “mid”; bind checks to column semantics confirmed with PM/BA.
 
-## Cash settlement stresses
+## Dimensions and edge cases (evidence-gated)
 
-- [CRT-1738] During **cash settlement** events for FX_SPOT weighted instruments, reconcile Average Fill, Open PL, Realized PL against CRT-1738 weighted-average wording (non-equity cash flow excerpt) plus rounding macros once keys are retrieved.
-> Tie evidence to known cash-settlement window or BA-provided fixture once available.
+- [CRT-1738] Stress position history that crosses zero multiple times in one session to ensure average reset windows match Yogi expectations.
 
-## Dimensions
+## Ambiguity / blocked
 
-! reason: CRT-639 Jira text is silent on multi-account/multi-group quote permutations beyond configuration — skip extra dimension bullets unless BA extends scope.
+- [CRT-1738] ! reason: nested rounding requirement keys referenced inside CRT-1738 storage export are not yet resolved to explicit CRT keys in this workspace—open separate Yogi fetch before hard-pass/fail on rounding tolerances.

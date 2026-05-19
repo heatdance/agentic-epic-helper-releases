@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "_comment": "Epic-agnostic bounded probes for TEST-DISCOVER Step E setup_depth. Playbook: .cursor/pipelines/test-discover.md. No secrets; sanitized ids only in discover artefacts.",
+  "kinds": {
+    "console_ladder_session": {
+      "surfaces": ["console"],
+      "complete_requires": "probe_executed",
+      "probes": [
+        {
+          "surface": "console",
+          "tool": "Invoke-CrtqaDxConsole.ps1 -Probe",
+          "steps": [
+            "show console_guide",
+            "exit"
+          ],
+          "depth_when": "probe_executed",
+          "artifacts": ["console_guide_transcript_ok"]
+        }
+      ]
+    },
+    "weighted_avg_fx_spot_account": {
+      "surfaces": ["console", "dxtrade5", "webbroker"],
+      "complete_requires": "probe_executed",
+      "link_parity_account": true,
+      "probes": [
+        {
+          "surface": "console",
+          "tool": "Invoke-CrtqaDxConsole.ps1",
+          "steps": [
+            "show console_guide",
+            "grep or narrow guide for account_group, instrument, corner_subtype, PL settings (dxcore-console-harness corner_ct_xt_examples)",
+            "run read-only show commands from live guide only (no create/set/delete)",
+            "capture sanitized instrument_id, account_group_id, FX_SPOT WeightedAvg lane evidence"
+          ],
+          "depth_when": "probe_executed",
+          "artifacts": ["instrument_id", "account_group_id", "weighted_avg_lane_evidence"]
+        },
+        {
+          "surface": "postgres",
+          "tool": "postgres-ctqa MCP query",
+          "optional": true,
+          "note": "When linked chk has sql in evidence_need; use readonly allowlist only when documented in automation/tools/tunnel/README.md discover subsection. Console path still required for probe_executed."
+        }
+      ]
+    },
+    "webbroker_dealer_client_metrics": {
+      "surfaces": ["webbroker"],
+      "complete_requires": "probe_executed",
+      "probes": [
+        {
+          "surface": "webbroker",
+          "tool": "chrome-devtools",
+          "steps": [
+            "dealer login (webbroker_creds on trigger if needed)",
+            "navigate to client/portfolio metrics or Position Book for parity account"
+          ],
+          "depth_when": "probe_executed",
+          "artifacts": ["widget_label_list"]
+        }
+      ]
+    },
+    "dxtrade5_retail_positions": {
+      "surfaces": ["dxtrade5"],
+      "complete_requires": "probe_executed",
+      "probes": [
+        {
+          "surface": "dxtrade5",
+          "tool": "chrome-devtools",
+          "steps": [
+            "login (dxtrade5_creds on trigger if needed)",
+            "open Positions; confirm target metric columns or structured absence"
+          ],
+          "depth_when": "probe_executed",
+          "artifacts": ["widget_label_list"]
+        }
+      ]
+    }
+  }
+}

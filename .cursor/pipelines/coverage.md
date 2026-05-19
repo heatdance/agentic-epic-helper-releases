@@ -8,6 +8,10 @@
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
+**Version note (obligation subprocesses)**: schema **`schema_version: 2`** with **`obligations_coverage`** and per-check **`obligation_ids[]`**. Contract: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json). Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md). Epic obligations: ref **`obligations_proposed[]`** (schema v4).
+
+**Forbidden inputs (production)**: CRTQA Jira issues, bench JSON, **`-tests.json`**, **`-discover.json`**, **`-precon.json`** — coverage reads **`-ref.json`** + Jira/tools only (benchmark shadow may compare CRTQA externally per [benchmark contract](../../docs/benchmark-contract.md)).
+
 ## Epic workspace (`{EpicDir}`)
 
 Resolve **`{EpicDir}`** from the trigger line using the same rules as [`epic-prep.md`](epic-prep.md) (**`benchmark_suite=`** + **`benchmark_attempt=`** vs production `epics/<KEY>/`). Contract: [`docs/benchmark-contract.md`](../../docs/benchmark-contract.md).
@@ -69,10 +73,11 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 1. Ensure `{EpicDir}` exists.
 2. Create `{EpicDir}temp/` if raw exports are needed.
-3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `yogi-*.json`, `bitbucket-*.json`, scratch. **No cookies or tokens** in committed files.
-4. Merge durable facts into `{EpicDir}<KEY>-coverage.json` and write `{EpicDir}<KEY>-coverage.md`.
-5. **Delete** `{EpicDir}temp/` recursively before finishing.
-6. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain **`/temp/`** or **`temp/`** path segments (same bar as [`test-prep.md`](test-prep.md) durable JSON hygiene).
+3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `yogi-*.json`, `bitbucket-*.json`, **`coverage-section-<slug>.json`** (per-section subprocess drafts), scratch. **No cookies or tokens** in committed files.
+4. **Section subprocess fan-out (phase 9)**: orchestrator merges `temp/coverage-section-*.json` into durable **`checks[]`** — parent **MUST NOT** one-shot all sections in one chat turn.
+5. Merge durable facts into `{EpicDir}<KEY>-coverage.json` and write `{EpicDir}<KEY>-coverage.md`.
+6. **Delete** `{EpicDir}temp/` recursively before finishing.
+7. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain **`/temp/`** or **`temp/`** path segments (same bar as [`test-prep.md`](test-prep.md) durable JSON hygiene).
 
 ### Fresh-session / benchmark stability
 
@@ -84,7 +89,7 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 
 ### 1. Load epic ref + Jira refresh
 
-- Read `{EpicDir}<KEY>-ref.json` (template source for `requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
+- **MUST** project `{EpicDir}<KEY>-ref.json` with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file into context; then read fields needed for coverage (`requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
 - MCP `jira_get_issue` for `<KEY>`; optional save raw JSON to `temp/jira-epic.json`.
 - **`sources.bitbucket_repo`** (resolve in order; **`repo=`** on the trigger **wins** and **short-circuits** the rest for **this run only**):
   1. **`repo=`** on the **COVERAGE** trigger when present.
@@ -95,6 +100,13 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 - Set `sources.jira_fetched_at`, `sources.epic_ref_loaded_at` (ISO-8601), `epic_key`, `epic_ref_path`, and the resolved `sources.bitbucket_repo` above. Set optional `sources.note` if repo came from ref vs map vs project default (audit only).
 - Parse optional **`focus=`** from the user message (free text after `focus=` until next space-delimited token or end of line). Preserve Jira **summary**, **description**, and `synthesis.problem_gist` (if present) as inputs for phase **3a**.
 - Append `validation_log`: step `1`, action summary (include Bitbucket repo **source**: `trigger` | `epic_ref` | `adaptive_map` | `project_default` | `none`).
+
+### 1½. Load epic obligations (required)
+
+- From epic-ref **`obligations_proposed[]`**, initialize **`obligations_coverage`** map: for each row with **`disposition: primary_candidate`**, draft `status` `covered` | `deferred_in_check` | `excluded_with_reason` (finalized in phases **4b**, **9**, **11**).
+- **`deferral_candidate`** obligations may map to structured **`!`** checks only with **`obligation_ids[]`** on the check — not silent Dimensions deferral.
+- If ref **`schema_version` < 4** or obligations missing: **STOP** — instruct **EPIC-PREP** re-run with obligation subprocesses.
+- Append `validation_log`: step `1.5`, count primary vs deferral obligations.
 
 ### 2. Jira link–key hygiene
 
@@ -117,12 +129,14 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 - Populate **`epic_verification_focus`** in the coverage artifact (`statement`, `source`, optional `keywords[]`). **`statement`**: 1–3 sentences describing what this epic **primarily** verifies.
 - **`source`**: `jira_summary` | `jira_description` | `epic_ref_synthesis` | `user_trigger_focus`. If the user passed **`focus=`**, set `source` to `user_trigger_focus` and merge that text into `statement` (or append with clear delimiter). If `focus=` **contradicts** Jira summary/description, log in `validation_log` and add `anti_pattern_findings` with `fix_hint`; do not hide the conflict.
 - If requirement text is **broader** than Jira (e.g. full FIFO vs WeightedAvg matrix while Jira only names FX Spot migration), **Jira wins** for primary scope unless `focus=` overrides.
+- **Obligation gate**: Do **not** drop **`primary_candidate`** obligations from scope without logging **`validation_log`** conflict (e.g. `focus=` vs invariant obligation) and updating **`obligations_coverage`** to `excluded_with_reason` with rationale.
 - **`epic_verification_focus` must be set before building `coverage_matrix[]`** so each row can be tagged with `verification_role`.
 - Append `validation_log`: step `3a`, action summary.
 
 ### 4. Coverage matrix
 
-- Build `coverage_matrix[]`: rows with `id`, `capability`, `semantic_variants[]`, **`verification_role`** (`primary` | `supporting` | `out_of_epic`), `aggregation_level` (position/account/portfolio where relevant), `surfaces[]`, `requirement_keys[]`, `notes_from_epic`.
+- Build `coverage_matrix[]`: rows with `id`, `capability`, `semantic_variants[]`, **`verification_role`** (`primary` | `supporting` | `out_of_epic`), `aggregation_level` (position/account/portfolio where relevant), `surfaces[]`, `requirement_keys[]`, optional **`obligation_ids[]`**, `notes_from_epic`.
+- Optional **matrix subprocess** per major section slug when matrix is large — output `temp/coverage-matrix-<slug>.json` merged by orchestrator.
 - **Stable matrix `id` (normative)**: `id` must identify the **same semantic row** across reruns. **Assign ids after deterministic ordering**: sort rows by `capability` (string), then `aggregation_level`, then joined sorted `requirement_keys` (e.g. `KEY1|KEY2`), then label **`m-001`**, **`m-002`**, … in order. Do **not** add ad-hoc suffixes such as **`m-006b`** for the same conceptual capability across runs; if you **split** one row into two, note the retired id in `notes_from_epic` and log the change in `validation_log` (step `4`).
 - **`supporting` vs `out_of_epic` decision ladder**:
   1. Clearly in Jira / **`epic_verification_focus`** scope → **`primary`** or **`supporting`**.
@@ -137,6 +151,15 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 - **Single-class / narrow epic**: When **`epic_verification_focus`** names **one instrument class** or one-way migration, **do not** add a **second top-level `-`** whose only purpose is enumerating a **full configuration type matrix** from a linked requirement (e.g. entire FIFO vs WA instrument-type table); fold into **one** primary config check or a single **`>`** under it, with **`supporting`** / **`out_of_epic`** matrix rows as needed.
 - **Surfaces**: Seed `surfaces[]` from **`client_shell_impact`** (dxTrade5, WebBroker, **Adaptive**, console/API as applicable) plus epic text; include **Adaptive** when status is **`affected`** or **`qa_default_both`** — do not omit unless **`not_applicable`** with Jira evidence.
 - Append `validation_log`: step `4`.
+
+### 4b. Invariants section subprocess (when ref has `kind: invariant`)
+
+- **Dedicated subprocess** (do not fold into generic Dimensions): for each **`primary_candidate`** **`invariant`** obligation, draft **primary** `checks[]` under section **`## Invariants under configuration change`** ([`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)).
+- Set matrix row(s) with **`verification_class`** hint `invariant_under_change` per [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json).
+- Example pattern: account **group** change must **not** alter existing position **average price** / open P/L inputs — executable ladder or keyed deferral with **`obligation_ids[]`**, **not** `! epic silent on multi-group`.
+- Write `temp/coverage-section-invariants.json`; merge in phase **9**.
+- Update **`obligations_coverage`** for each invariant `obl-###`.
+- Append `validation_log`: step `4b`.
 
 ### 5. Snippet enrichment
 
@@ -168,10 +191,15 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 - Derive **section structure** for `smart_checklist_markdown`: one **##** section per E2E thread (CRTQA-10034 style): prerequisites / data setup → capability group → variants (groups, quotes, hours).
 - **Primary focus block (required, verbatim)**: The **first substantive `##`** after any title/header must satisfy [Smart Checklist markdown — Epic verification focus](#smart-checklist-markdown-normative) (verbatim **`epic_verification_focus.statement`**), and must anchor the **primary thread** (data/instrument/config under test → metrics or UI outcomes). Place additional narrative **after** that block or under following **`##`** sections — do not paraphrase the focus line. Avoid symmetric **FIFO section / WeightedAvg section** (or equivalent forks) **unless** both forks are **`verification_role: primary`** in the matrix.
 - **Algorithm stressors** that **define** a metric (e.g. **position crosses zero**, **partial close without changing weighted average**, **opening-trade-only contribution**) belong in the **same `##` section** as the parent capability (e.g. average fill / open P/L tied to CRT-1740 / CRT-1738), not isolated under a generic **Dimensions** section unless they are **genuinely cross-cutting** with phase-10 evidence.
+- **Section requirements**: When ref has **`primary_candidate`** **`invariant`** → include **`## Invariants under configuration change`**. When ref has **`rounding`** → include **`## Rounding and display policy`** (headings per coverage-obligation-contract).
 - Subsections **`###`** for logical UI groupings (filters, widgets) when archetype is `widget_ui`.
 - Append `validation_log`: step `8`.
 
-### 9. Draft checks (archetype branches)
+### 9. Draft checks (archetype branches) — per-section subprocesses
+
+**Orchestrator**: one subprocess per major **`##`** section (+ **invariants** / **rounding** passes from **4b**). Input: section slug, matrix rows, obligations slice, snippets. Output: `temp/coverage-section-<slug>.json` with `checks[]` fragment. Merge into artifact; set **`obligation_ids[]`** / **`obligation_kinds[]`** on each check.
+
+**Forbidden**: moving **`invariant`** obligations to generic **Dimensions** `!` deferrals ([`dimension_deferral_without_obligation_review`](../../docs/coverage-obligation-contract.json)).
 
 **All archetypes**
 
@@ -199,12 +227,14 @@ Cold **COVERAGE** runs (e.g. benchmark hub rows) may be scored on **verbatim** o
 
 ### 10. Dimensions pass
 
-Add explicit `-` checks **only when supported by evidence** — Jira epic text, **`requirements[].snippet_text`**, or **`implementation_hits`** — that this epic **changes** or **must validate** that dimension. **Do not** add generic dimension lines “for coverage” without that signal (record **`anti_pattern_findings`** `dimension_without_evidence` if the model would otherwise pad).
+Add explicit `-` checks **only when supported by evidence** — Jira epic text, **`requirements[].snippet_text`**, **`implementation_hits`**, or matching **`obligations_proposed[]`** row — that this epic **changes** or **must validate** that dimension. **Do not** add generic dimension lines “for coverage” without that signal (record **`anti_pattern_findings`** `dimension_without_evidence` if the model would otherwise pad).
+
+**Contract** ([`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)): **Forbid** blanket lines such as **`! reason: epic silent on multi-account`** / **multi-group quote permutations** when ref contains **`primary_candidate`** **`invariant`** with **`config_vs_position`** `position_state` or `account_group_assignment` — those belong under **Invariants** (phase **4b**), not Dimensions.
 
 Candidate dimensions (each requires the evidence gate above):
 
 - Trading vs **non-trading hours** (only if epic/snippets/BB imply session or mark-path changes).
-- **Two accounts, two groups**, different quotes — only if Jira/snippets describe multi-account/group behavior for this change; else **`! reason: epic silent on multi-account`** or omit. When the epic **does** describe that behavior, prefer the **same multi-account / account-group phrasing** as in Jira/snippets on the dimension line (aids traceability and substring-style benchmark gates without adding scope).
+- **Two accounts, two groups**, different quotes — only if Jira/snippets **or obligation** describe multi-account/group behavior **and** not already covered as an **invariant** check; else omit or keyed deferral with **`obligation_id`**.
 - **Position crosses zero** / partial-close stress — if **not** already placed under the parent metric **`##`** in phase 8, add here **only** when cross-cutting; prefer parent-section placement for metric-definitional rules.
 - **FX conversion** — instrument vs account vs portfolio currency when multi-currency applies and epic implies.
 - **Order mark vs position mark**; **pre-trade validation** vs **open position** metrics separately when epic implies.
@@ -236,17 +266,32 @@ Candidate dimensions (each requires the evidence gate above):
 - Populate `anti_pattern_findings[]` for: UI-only rows without calculation path (metrics epic); assumed visible “midpoint” label; generic group-switch line without metric-specific meaning; bundled unrelated observables on one line; duplicate `>` blobs (dedupe with section-level note once).
 - **`dual_branch_symmetry_without_epic_warrant`**: symmetric top-level `-` coverage for **both** sides of a config fork (e.g. FIFO and WeightedAvg peer sections) when Jira describes a **single instrument class**, **one-way migration**, or **one-sided AC**. **`fix_hint`**: tighten `epic_verification_focus`, demote rows to `supporting`/`out_of_epic`, move non-target branch to `explicitly_out_of_scope`.
 - **`fork_formula_in_body_for_out_of_epic`**: non-target branch formulas in **`-` or `>`** when `verification_role: out_of_epic` — move to **`explicitly_out_of_scope`** only.
-- **`dimension_without_evidence`**: trading hours, multi-account, or similar dimension lines with **no** Jira/snippet/BB support for **this** epic.
+- **`dimension_without_evidence`**: trading hours, multi-account, or similar dimension lines with **no** Jira/snippet/BB/obligation support for **this** epic.
+- **`dimension_deferral_without_obligation_review`**: generic `!` under Dimensions for invariant/group-change work.
+- **`obligation_without_check_or_exclusion`**: `primary_candidate` in ref not in **`obligations_coverage`** as covered or excluded.
+- **`invariant_obligation_in_dimensions_only`**: invariant obligation only deferred under Dimensions.
 - **`missing_calculation_ladder`**: primary metric row without **ladder `!` pair** per calculation scenario contract.
 - **`adaptive_missing_when_in_scope`**: **`client_shell_impact.adaptive`** is **`affected`** or **`qa_default_both`** but no Adaptive-targeted **`-`** in cross-surface section (unless every metric has `!` N/A on Adaptive).
 
 - Append `validation_log`: step `13`.
 
+### 13b. Obligations verifier (required before emit)
+
+```text
+python automation/tools/coverage_verify.py --mode obligations \
+  --coverage {EpicDir}<KEY>-coverage.json \
+  --ref {EpicDir}<KEY>-ref.json
+```
+
+Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant section, or **`excluded_checks_with_reason`** on failure.
+
 ### 14. Emit
 
+- Set **`schema_version`: 2** on coverage JSON.
 - Set `smart_checklist_markdown` to the full checklist string. **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase); **`coverage_matrix[].id`** ordering matches phase **4** deterministic scheme; every **`out_of_epic`** matrix row has a matching **`explicitly_out_of_scope`** rationale (or consolidated single bullet per theme); no unjustified **`verification_role`** drift versus logged evidence.
 - Write `{EpicDir}<KEY>-coverage.md` (optional top lines: checklist title, XRay folder hint — functional only).
 - Write `{EpicDir}<KEY>-coverage.json` (validate JSON).
+- Run **`python automation/tools/coverage_verify.py --mode emit --coverage {EpicDir}<KEY>-coverage.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
 - **Delete** `{EpicDir}temp/`.
 
 ---
@@ -269,7 +314,9 @@ Candidate dimensions (each requires the evidence gate above):
 
 ## Related
 
-- Template: [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json)
+- Template: [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json) (**schema v2**)
+- Obligation contract: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)
+- Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md)
 - Smart Checklist norms: [above](#smart-checklist-markdown-normative)
 - Epic handoff: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json), [`epics/README.md`](../../epics/README.md)
 - Epic pipeline: [`epic-prep.md`](epic-prep.md)

@@ -15,7 +15,7 @@ Place at suite root next to orchestration state, e.g. `.cursor/benchmark/runs/<s
 | `schema_version` | Evolve compatibility |
 | `suite_id` / `suite_label` | Human + machine id |
 | `epics[]` | Jira keys |
-| `modes` | Ordered stack: e.g. `["epic_prep","coverage"]` or add `analysis`, `test_prep`, `test_exec` |
+| `modes` | Ordered stack: e.g. `["epic_prep","coverage"]` or add `analysis`, `test_discover`, `test_precon`, `test_prep`, `close` |
 | `attempts` | Integer N — **must match** required cold sessions for cross-run variance |
 | `gold` | Map: `prep`, `coverage`, `tests` → paths under [`.cursor/benchmark/data/`](../../../.cursor/benchmark/data) (see WS-F) |
 | `tokens` | Optional `repo`, `focus`, `map_only`, etc. |

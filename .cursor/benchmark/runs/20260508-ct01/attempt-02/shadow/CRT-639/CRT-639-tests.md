@@ -26,7 +26,7 @@
 
 ## Bundle tb-001 — FX Spot WeightedAvg — configuration, ladders, Open P/L, % P/L gross, realized (dxCore-backed)
 
-**Automation:** feasibility=`blocked` blocked_reason=requires_console notes=CRTQA-10177 patterns require dxCore console; TEST-EXEC skips unless substitute approved.
+**Automation:** feasibility=`blocked` blocked_reason=requires_console notes=CRTQA-10177 patterns require dxCore console; human execution / CLOSE documents blocked feasibility.
 
 ### Preconditions
 1. CRTQA-10176 (Account & System Configuration) satisfied for the target environment, or an approved equivalent lab profile [TBD] (see Peculiarities 1–2).

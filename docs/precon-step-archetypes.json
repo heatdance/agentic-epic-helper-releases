@@ -1,0 +1,71 @@
+{
+  "schema_version": 2,
+  "_comment": "Authoring intents for TEST-PRECON. Map discover fixture_needs[].kind via fixture_kind_map. Phase 4: read-only exploration then author Jira-clean body from body_template + exploration_hints. Playbook: .cursor/pipelines/test-precon.md.",
+  "fixture_kind_map": {
+    "weighted_avg_fx_spot_account": [
+      "open_console_session",
+      "create_or_select_account",
+      "fx_spot_subtype_allowed",
+      "account_group_membership",
+      "execution_routing",
+      "publish_quote",
+      "webbroker_account_setup"
+    ],
+    "console_ladder_session": [],
+    "webbroker_dealer_client_metrics": ["webbroker_account_setup"],
+    "dxtrade5_retail_positions": []
+  },
+  "exploration_hints": {
+    "open_console_session": ["dx run console on CTQA", "help"],
+    "create_or_select_account": ["help create", "show console_guide", "broker_client patterns"],
+    "fx_spot_subtype_allowed": ["help corner_subtype", "show console_guide corner_subtype"],
+    "account_group_membership": ["show account_group_hierarchy", "help update account_group_members", "grep CAG in hierarchy output"],
+    "execution_routing": ["show profiles domains=ExternalExecution", "help show profiles"],
+    "publish_quote": ["help pub_to_realtime", "show console_guide publish"],
+    "webbroker_account_setup": ["Chrome: dealer login URL from corner-platform-map", "snapshot user/account create forms", "docs/webbroker-harness read-only"]
+  },
+  "intents": {
+    "open_console_session": {
+      "typical_order": 10,
+      "surface": "console",
+      "body_template": "Connect to dxCore console on CTQA (e.g. dx run console as ctqa operator).",
+      "generalization": "full"
+    },
+    "create_or_select_account": {
+      "typical_order": 20,
+      "surface": "console",
+      "body_template": "Create a user with account: use create broker_client (broker CH or BS for .com test platforms), domain default, currency USD. Example placeholders: name=<username>, password=<password>. Create new credentials for the test run; do not reuse the operator login account.",
+      "generalization": "partial"
+    },
+    "fx_spot_subtype_allowed": {
+      "typical_order": 30,
+      "surface": "console",
+      "body_template": "Allow FX_SPOT instruments for the account: corner_subtype set_allowed account=<clearing_code>:<account_code> allowedsubtypes=FX_SPOT. Run help corner_subtype on CTQA to confirm syntax.",
+      "generalization": "partial"
+    },
+    "account_group_membership": {
+      "typical_order": 40,
+      "surface": "console",
+      "body_template": "Add the account to the broker CAG group and a CornerTraderFxConfiguration group (e.g. OPPORTUNITY): use show account_group_hierarchy, locate CAG for broker CH/BS, then update account_group_members key=<group_key> add_accounts=<account_id>.",
+      "generalization": "partial"
+    },
+    "execution_routing": {
+      "typical_order": 50,
+      "surface": "console",
+      "body_template": "Configure ExternalExecution routing for FX_SPOT at account level. Use show profiles domains=ExternalExecution to inspect FIX_AUTO vs ET routing. If ET executor is active for FX_SPOT, unassign FIX_AUTO profile and assign ET per environment policy (FIX_AUTO takes precedence when both apply).",
+      "generalization": "full"
+    },
+    "publish_quote": {
+      "typical_order": 60,
+      "surface": "console",
+      "body_template": "Publish a realtime quote for the instrument planned for tests (e.g. pub_to_realtime on FX spot suffix for your configuration group). Run help pub_to_realtime on CTQA for the exact instrument string.",
+      "generalization": "partial"
+    },
+    "webbroker_account_setup": {
+      "typical_order": 70,
+      "surface": "webbroker",
+      "body_template": "WebBroker on CTQA: (1) Dealer login at the CTQA WebBroker URL. (2) Create user — Broker code CH or BS, Client Type POA, add to CPG for the broker. (3) Create account — Allowed Instruments FX_SPOT, initial balance, CornerTraderFxConfiguration group (e.g. OPPORTUNITY) aligned with console routing.",
+      "generalization": "full"
+    }
+  }
+}

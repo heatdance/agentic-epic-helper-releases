@@ -4,30 +4,29 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 
 ## Last updated
 
-- **Date**: 2026-05-08 — **CRT-639 hub benchmark** (multiple cold sessions, `benchmark_suite` + `benchmark_attempt`) produced shadow artifacts under **`.cursor/benchmark/runs/<suite_id>/attempt-<nn>/shadow/CRT-639/`** (`-ref.json`, `-coverage.json`/`.md`, `-tests.json`/`.md`) per **`docs/benchmark-contract.md`**. That example suite folder was removed locally; re-run **`/crtqa-benchmark`** / **`FINALIZE_PROMPT.md`** for a new **`suite_id`** and store the narrative under **`.cursor/benchmark/run-results/<run-key>/report.md`** (see **`.cursor/benchmark/run-results/README.md`**).
-- **Date**: 2026-04-28 — Confluence/Yogi trace for **Est. AF Effect** / **CRT-030**, **CRT-707**, **CRT-1730** (FX_SPOT reference price) and BE parity checklist: [automation/temp/af-effect-plan-delivery.md](automation/temp/af-effect-plan-delivery.md) (+ storage export `automation/temp/confluence-portfolio-metrics-345703196.json`).
-- **Date**: 2026-04-17 — Added [corner-map/](corner-map/) seed (Phase 5 change-map plan + [corner-map/docs/architecture.md](corner-map/docs/architecture.md)); [README.md](README.md) Satellite link. Prior: 2026-04-16 trimmed handoff noise.
+- **Date**: 2026-05-19 — **Harness doc reconciliation** complete: [HOW-TO.md](HOW-TO.md), [epics/README.md](epics/README.md), [README.md](README.md), [sync.md](.cursor/pipelines/sync.md) registry, scratch WS-A/WS-C/session notes; templates post-`context/` notes; **TEST-EXEC** refs removed from durable docs (intentional “replaces TEST-EXEC” in this file only).
+- **Date**: 2026-05-19 — **`CLOSE:`** pipeline implemented: [`docs/close-contract.json`](docs/close-contract.json), [`.cursor/pipelines/close.md`](.cursor/pipelines/close.md), verifiers [`close_verify.py`](automation/tools/close_verify.py) / [`close_archive.py`](automation/tools/close_archive.py).
+- **Date**: 2026-05-19 — **ANALYSE v2** + **EPIC-PREP/COVERAGE obligation patch** (see prior entries).
 
 ## Current focus
 
-- **CRT-642** (*Non-trading hours*): [CRT-642-ref.json](epics/CRT-642/CRT-642-ref.json), [CRT-642-coverage.md](epics/CRT-642/CRT-642-coverage.md), [CRT-642-analysis.md](epics/CRT-642/CRT-642-analysis.md). **Next**: `TEST-PREP: CRT-642` (optional `TEST-EXEC:` when env is ready). Open gaps called out in analysis: CRT-1481 pointer; chk-015 DxFeed deferral; Stash `bitbucket_search_code` **404** (use browse fallback per playbooks).
-- **CRT-639** (cash settlement / weighted average): production **`epics/CRT-639/`** files are **not** present in-repo (cleared during benchmark housekeeping, or authored only under **benchmark shadow**: **`.cursor/benchmark/runs/<suite>/attempt-*/shadow/CRT-639/`** — see **`docs/benchmark-contract.md`**). Restore production tree via **`EPIC-PREP:`** → **`COVERAGE:`** → optional **`TEST-PREP:`** / **`TEST-EXEC:`** when that epic is active again (see **[HOW-TO.md](HOW-TO.md)** triggers). **Benchmark-mode** pipelines must pass **`benchmark_suite=`** / **`benchmark_attempt=`** consistently if using shadow **`{EpicDir}`**.
+- **CRT-639:** Run **`TEST-PRECON:`** / **`TEST-PREP:`** (production) to restore **`-discover.json`**, **`-precon.json`**, **`-tests.json`** at epic root, then optional **`CLOSE: CRT-639`**.
+- **Harness:** Mandatory-chain doc reconciliation (discover always required in all playbooks) — **deferred** separate pass.
 
-Tiered context and MCP scope: **[AGENTS.md](AGENTS.md)** → **[docs/harness-map.json](docs/harness-map.json)**. Hosts and dashboards (no secrets in git): **[docs/corner-platform-map.json](docs/corner-platform-map.json)**.
+Doctrine: **[docs/harness-principles.md](docs/harness-principles.md)** (CLOSE archive note in §9).
 
 ## Blockers
 
-- **user-mcp-atlassian** must be healthy for live Jira/Confluence; retry or check MCP in Cursor settings.
-- **Figma MCP**: re-auth OAuth if design tools fail.
+- **`CLOSE: CRT-639`** — preflight **fails** today: missing **`-discover.json`**, **`-precon.json`**, **`-tests.json`** under `epics/CRT-639/` (only ref/coverage/analysis present).
+- **user-mcp-atlassian** for live pipeline re-runs.
 
 ## Next steps
 
-1. **`TEST-PREP: CRT-642`** when regression drafts are the priority.
-2. Before **`PUBLIC-SCRUB:`**: ensure branch **`release`** exists from **`main`** per [README.md](README.md) (operator workflow if `release` was removed).
-3. If Corner env URLs or Jira links change materially on Confluence, bump **`last_reviewed`** in [docs/corner-platform-map.json](docs/corner-platform-map.json).
+1. **`TEST-PRECON: CRT-639`** → **`TEST-PREP: CRT-639`**.
+2. **`CLOSE: CRT-639`** (optional `heal=no` to audit-only).
+3. Do **not** rerun upstream pipelines on a **closed** epic without moving JSON out of `context/` — [HOW-TO.md](HOW-TO.md).
 
 ## Notes
 
-- **AF / FX_SPOT pricing:** CRT-1730 still has “link TBD”; align with **CRT-1910** (market FX Spot extra params) and cash-settlement / average-price elaboration on [FX Rolling Spot Estimations](https://confluence.in.devexperts.com/pages/viewpage.action?pageId=490569747) when filing defects vs spec.
-- Ordered workflow scaffold: [.cursor/prompts/combined-qa-task.md](.cursor/prompts/combined-qa-task.md). Credentials stay on Confluence, not in repo files.
-- **corner-map** (planned): portable spec under [corner-map/README.md](corner-map/README.md); next owner step is extract to dedicated repo and add validator / runner harness (see README checklist).
+- **Deferred (next pass):** mandatory-chain doc wording (optional → required for discover/precon); benchmark CLOSE KPIs; automated un-archive.
+- **Retired:** **TEST-EXEC** / Playwright chain step — use **`CLOSE:`** for integrity + archive; chrome-devtools remains for discover/precon/prep ad-hoc only.

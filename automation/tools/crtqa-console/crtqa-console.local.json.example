@@ -1,0 +1,8 @@
+{
+  "plinkPath": "C:\\Program Files\\PuTTY\\plink.exe",
+  "sshHost": "ctqa.prosp.devexperts.com",
+  "sshUser": "your-linux-login",
+  "sudoUnixUser": "ctqa",
+  "remoteDxCommand": "dx run console",
+  "termForRemote": "xterm"
+}

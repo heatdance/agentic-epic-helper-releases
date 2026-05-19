@@ -1,0 +1,79 @@
+{
+  "schema_version": 2,
+  "_comment": "Shared FE UI probe contract for TEST-DISCOVER / TEST-PRECON / TEST-PREP Phase 0b/0c (smoke only). Deeper exploration: docs/exploration-depth-ladder.json (PRECON Phase 4, PREP Phase 8a-three-quarter). URLs: docs/corner-platform-map.json application_urls (ct_qa). Creds on trigger line only—never in durable JSON.",
+  "exploration_depth_ladder": "docs/exploration-depth-ladder.json",
+  "trigger_tokens": {
+    "dxtrade5_creds": "dxtrade5_creds=<user>/<password> on same line as TEST-DISCOVER: or TEST-PRECON:",
+    "webbroker_creds": "webbroker_creds=<user>/<password> on same line",
+    "fe_exploration_waived": "fe_exploration_waived=yes — only after Phase 0b hard stop + operator ack; caps UI depth at shell_only"
+  },
+  "semantics": {
+    "fe_credentials_supplied": "Token present on trigger line only—not proof Chrome MCP logged in.",
+    "fe_ui_sessions_authenticated": "Post-login smoke passed in Phase 0c only (depth_level smoke). Does NOT imply precon_drill or prep_verify_view.",
+    "fe_ui_sessions_waived": "Operator re-ran with fe_exploration_waived=yes; max setup_depth shell_only for dxtrade5/webbroker fixture kinds."
+  },
+  "required_fe_surfaces_rubric": {
+    "dxtrade5": "tooling_intent.chrome_devtools required AND (primary check or matrix lists dxtrade5 surface)",
+    "webbroker": "tooling_intent.chrome_devtools required AND (primary check or matrix lists webbroker surface)",
+    "adaptive": "ref client_shell_impact.adaptive is affected or likely_affected; no cred token (adaptive_login_policy ctqa_shared_principal)"
+  },
+  "post_login_smoke": {
+    "dxtrade5": {
+      "url_key": "dxtrade5",
+      "pass_signals": [
+        "URL path not login-only",
+        "Retail shell or workspace visible after credential submit",
+        "Positions widget or column headers for metrics (Avg Fill, Open P/L, % PL Gross) optional at smoke time"
+      ],
+      "fail_signals": ["Login form still visible", "Auth error banner only"],
+      "login_state_if_pass": "authenticated",
+      "login_state_if_fail": "shell_only"
+    },
+    "webbroker": {
+      "url_key": "webbroker",
+      "pass_signals": [
+        "Past dealer login page",
+        "Dealer navigation or Position Book / client area visible"
+      ],
+      "fail_signals": ["Dealer login Username/Password form only"],
+      "login_state_if_pass": "authenticated",
+      "login_state_if_fail": "shell_only"
+    },
+    "adaptive": {
+      "url_key": "adaptive",
+      "pass_signals": [
+        "Adaptive shell loads",
+        "Portfolio/position metric labels or structured absence documented"
+      ],
+      "fail_signals": ["Unreachable shell"],
+      "login_state_if_pass": "authenticated",
+      "login_state_if_fail": "shell_only"
+    }
+  },
+  "fe_ui_sessions_values": [
+    "not_required",
+    "waived",
+    "shell_only",
+    "authenticated"
+  ],
+  "depth_caps_when_waived": {
+    "fixture_kinds_max": {
+      "dxtrade5_retail_positions": "shell_only",
+      "webbroker_dealer_client_metrics": "shell_only"
+    },
+    "discover_complete_forbidden": "probe_executed on dxtrade5/webbroker fixture kinds without fe_ui_sessions authenticated unless chk scope_gap",
+    "precon_authoring": "Post-login UI field names in body require [TBD] unless login_state authenticated for that surface"
+  },
+  "phase_0c_scope": "Login gate only (depth_level smoke). MUST NOT count as PRECON Phase 4 or PREP verification exploration complete.",
+  "exploration_log_fields": {
+    "login_state": "shell_only | authenticated",
+    "widgets_seen": "Sanitized label strings only; no account names from probe sessions",
+    "depth_level": "smoke | discover_probe | precon_drill | prep_verify_view — see exploration-depth-ladder.json",
+    "view_id": "Required for precon_drill and prep_verify_view rows"
+  },
+  "operator_recovery_gate_ids": [
+    "fe_dxtrade5_creds_missing",
+    "fe_webbroker_creds_missing",
+    "fe_ui_authentication_failed"
+  ]
+}

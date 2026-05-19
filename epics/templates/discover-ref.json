@@ -1,0 +1,219 @@
+{
+  "_comment": "TEST-DISCOVER pipeline output schema v3. Final instance: epics/<KEY>/<KEY>-discover.json (or shadow EpicDir). Single durable JSON only—no paired .md in v1. Do not persist secrets; do not store /temp/ path segments or raw credentials. discovery_status: complete requires obligation_closure.verifier_passed when emitting complete. v1/v2 instances remain readable; re-run TEST-DISCOVER to upgrade.",
+  "schema_version": 3,
+  "epic_key": null,
+  "discovery_status": null,
+  "_discovery_status": "complete | incomplete | aborted — complete only when obligation_closure.verifier_passed is true; generation complete also requires setup depth rules (see test-discover.md)",
+  "sources": {
+    "jira_fetched_at": null,
+    "ref_path": null,
+    "ref_loaded": null,
+    "coverage_path": null,
+    "coverage_loaded": null,
+    "analysis_path": null,
+    "analysis_loaded": null,
+    "analysis_fallback_logged": false,
+    "cold_gate_skip_token_used": false,
+    "cold_gate_resolved_at": null,
+    "discover_schema_version": 3,
+    "discover_run_started_at": null,
+    "discovery_mode": "generation | benchmark",
+    "crtqa_index_enabled": false,
+    "fe_exploration_waived": false,
+    "_fe_exploration_waived": "true when fe_exploration_waived=yes on trigger after Phase 0b stop; caps dxtrade5/webbroker Chrome at shell_only.",
+    "_discover_run_started_at": "ISO-8601 set once when Step A starts after Phase 0 pass; all validation_log.at must be >= this.",
+    "_cold_gate_resolved_at": "Optional ISO-8601 when operator re-ran after TEST-DISCOVER … proceed and Phase 0 passed.",
+    "_crtqa_index_enabled": "true when crtqa_index=yes on trigger OR discovery_mode is benchmark (both benchmark_suite and benchmark_attempt on line)."
+  },
+  "obligation_closure": {
+    "primary_count": null,
+    "dispositioned_count": null,
+    "closure_gaps": [],
+    "setup_depth_gaps": [],
+    "reference_cap_hit": false,
+    "iterations_used": null,
+    "verifier_passed": false,
+    "no_progress_stop": false
+  },
+  "obligation_ledger": [],
+  "_obligation_ledger_item": {
+    "check_id": "chk-001 from coverage checks[].id",
+    "matrix_ids": [],
+    "surfaces": [],
+    "requirement_keys": [],
+    "calculation_contract": null,
+    "evidence_need": [],
+    "_evidence_need_values": "ui | console | sql | api | pr | doc_only",
+    "disposition": "pending | affordance_mapped | fixture_need_mapped | prerequisite_mapped | tooling_blocked | scope_gap",
+    "disposition_note": null,
+    "affordance_ids": [],
+    "fixture_need_ids": [],
+    "prerequisite_keys": []
+  },
+  "fixture_needs": [],
+  "_fixture_needs_item": {
+    "id": "fix-001",
+    "kind": "weighted_avg_fx_spot_account | console_ladder_session | webbroker_dealer_metrics | unknown",
+    "surfaces": [],
+    "linked_check_ids": [],
+    "derivation": "coverage_matrix_m004 | check_surfaces | ref_client_shell",
+    "setup_depth": "classified_only | shell_only | command_family | probe_executed",
+    "affordance_ids": [],
+    "notes": "No Jira key; operator-facing gap text only"
+  },
+  "prerequisite_edges": [],
+  "_prerequisite_edges_item": {
+    "from_check_id": null,
+    "requires_keys": [],
+    "necessity": "fixture | ladder | parity | settlement | instrument | unknown"
+  },
+  "unresolved_precondition_refs": [],
+  "reference_index": [],
+  "_reference_index_item": {
+    "key": "CRTQA-xxxx or other linked QA/Test issue key",
+    "issuetype_name": null,
+    "summary": null,
+    "role": "fixture | ladder | instrument | unknown",
+    "depends_on_keys": [],
+    "sanitized_command_hints": [],
+    "_sanitized_command_hints_note": "Use [\"UNKNOWN\"] when body yields no safe command tokens; never invent operational text.",
+    "evidence_grade": "fetched_from_issue | jira_partial | unknown",
+    "linked_check_ids": []
+  },
+  "precondition_signals": [],
+  "_precondition_signals_note": "Deprecated alias: when crtqa_index_enabled, copy reference_index[] here at emit for backward compatibility; MUST be [] in generation without crtqa_index.",
+  "environment": {
+    "tier": "ct_qa",
+    "corner_platform_map_note": "Resolve application_urls from docs/corner-platform-map.json (dxtrade retail root vs webbroker dealer path)—do not persist secrets.",
+    "harness_roots_readonly": ["docs/dxtrade5-harness", "docs/webbroker-harness"],
+    "client_shell_impact": {
+      "corner_trader": { "status": null, "note": null },
+      "adaptive": { "status": null, "note": null }
+    },
+    "_client_shell_impact_note": "Snapshot from -ref.json client_shell_impact at Step A (status + note per shell only). Verifier uses adaptive.status for complete bar."
+  },
+  "scope_audit": {
+    "coverage_matrix_ids_touched": [],
+    "checks_ids_summary_note": null,
+    "explicitly_out_of_scope_respected_note": null,
+    "derived_from_artefacts_only": true
+  },
+  "delivery_issues_by_competency": [],
+  "_delivery_issues_by_competency_item": {
+    "competency": "backend | frontend | contracts | infra | ops | unknown",
+    "issues": [
+      {
+        "key": "CRT-xxxx or CRTQA-xxxx",
+        "issuetype_name": "Change Request | Defect Report | Improvement",
+        "status": null,
+        "summary": null,
+        "pr_urls": [],
+        "steps_provenance": "fetched_from_issue | not_fetched"
+      }
+    ]
+  },
+  "issuetype_calibration": {
+    "note": "Record exact issuetype filters used after validating against one jira_search sample for the project.",
+    "change_request_exact": null,
+    "defect_report_exact": null,
+    "improvement_exact": null,
+    "reference_index_note": "Calibrate Test, Pre-Condition, QA Task, Test Execution only when crtqa_index_enabled (Step C-index).",
+    "test_issue_type_exact": null,
+    "pre_condition_exact": null,
+    "qa_task_issue_type_exact": null,
+    "test_execution_issue_type_exact": null
+  },
+  "pr_code_map": [],
+  "_pr_code_map_item": {
+    "pr_url": null,
+    "from_issue_keys": [],
+    "competency": "backend | frontend | contracts | infra | ops | unknown",
+    "evidence_grade": "observed_browse | jira_pr_only | unknown",
+    "files_touched_hints": [],
+    "bitbucket_notes": null
+  },
+  "_tooling_intent_levels": "required | recommended | optional | skipped — Phase 0 cold probes for postgres_ctqa / crtqa_dx_console when required. When intent required and probe OK: postgres available + probe_pass; crtqa available + session_started true + handshake success. Forbidden: crtqa available + session_started false. Phase 0 fail: stop, no -discover.json. test_prep_gates.blocked per test-discover.md.",
+  "tooling": {
+    "postgres_ctqa": { "intent": null, "availability": "available | unavailable | skipped", "note": null },
+    "chrome_devtools": { "intent": null, "availability": "available | unavailable | skipped", "note": null },
+    "crtqa_dx_console": {
+      "intent": null,
+      "availability": "available | unavailable | skipped",
+      "session_started": false,
+      "note": null
+    },
+    "figma": { "intent": null, "availability": "available | unavailable | skipped", "note": null }
+  },
+  "session_gates": {
+    "crtqa_console_handshake": "not_attempted | success | skipped | failed | pending_operator_session",
+    "fe_login_human_gate": "not_required | authenticated | shell_only_waived | skipped_missing_creds | not_required_adaptive_hardcoded",
+    "postgres_ctqa_tunnel": "not_required | probe_pass | probe_required_operator | skipped",
+    "note": "No passwords stored here. pending_operator_session: crtqa_dx_console intent required but multiplex session state file absent at Phase 0 probe time—see playbook (path checked at runtime only; never stringify gitignored session paths in JSON). probe_required_operator: postgres intent required but MCP probe failed in Phase 0."
+  },
+  "operator_recovery": [],
+  "_operator_recovery_item": {
+    "gate_id": "postgres_ctqa_tunnel | crtqa_dx_console_session | fe_dxtrade5_creds_missing | fe_webbroker_creds_missing | fe_ui_authentication_failed",
+    "blocks_test_prep": true,
+    "symptom": "Short machine-readable probe outcome (no stack traces with secrets).",
+    "required_when_note": "Why this gate applied (ties to tooling.intent required).",
+    "actions": ["Numbered operator steps; no secrets; no temp/ path segments in any string."],
+    "documentation_refs": [
+      "automation/tools/tunnel/README.md",
+      "automation/tools/crtqa-console/README.md",
+      ".cursor/commands/crtqa-console.md"
+    ]
+  },
+  "fe_credentials": {
+    "dxtrade5": "missing | supplied | waived",
+    "webbroker": "missing | supplied | waived",
+    "adaptive": "not_required"
+  },
+  "fe_ui_sessions": {
+    "dxtrade5": "not_required",
+    "webbroker": "not_required",
+    "adaptive": "not_required"
+  },
+  "_fe_ui_sessions_note": "Set in Phase 0c from Chrome post-login smoke—not from cred tokens alone. Values: not_required | waived | shell_only | authenticated. See docs/fe-ui-probe-contract.json.",
+  "verification_affordances": [],
+  "_verification_affordances_item": {
+    "id": "aff-001",
+    "competency": "backend | frontend | contracts | infra | ops | unknown",
+    "summary": null,
+    "linked_check_ids": [],
+    "evidence_grade": "observed_runtime | observed_tool_transcript | fetched_from_issue | jira_pr_only | doc_only | unknown",
+    "setup_role": "none | fixture | observation",
+    "setup_depth": "classified_only | shell_only | command_family | probe_executed",
+    "artifacts": [],
+    "_artifacts_example": [{ "kind": "widget_label_list | sql_shape | dxcore_command_family", "sanitized_detail": null }],
+    "status": "satisfied | partial | blocked | skipped",
+    "blocked_reason": null
+  },
+  "exploration_budgets": {
+    "max_cycles_frontend": null,
+    "max_cycles_backend": null,
+    "max_closure_iterations": 5,
+    "max_jira_fetches_per_run": 25,
+    "max_reference_depth": 2,
+    "note": "Normative caps set by playbook execution."
+  },
+  "test_prep_gates": {
+    "blocked": false,
+    "reasons": [],
+    "_reasons_examples": [
+      "missing_pr_for_required_delivery",
+      "tool_unavailable_fe",
+      "console_session_failed",
+      "operator_postgres_tunnel_down",
+      "operator_crtqa_console_session_missing",
+      "obligation_closure_incomplete",
+      "setup_depth_insufficient"
+    ],
+    "override_token_doc": "TEST-PREP trigger line token discover_override=yes when operator accepts proceeding despite test_prep_gates.blocked (see test-prep.md)."
+  },
+  "validation_log": [],
+  "anti_pattern_findings": [],
+  "_anti_pattern_example": {
+    "pattern": "one_shot_all_phases | invented_pr_url | undisclosed_cred_in_json | emit_complete_without_verifier | crtqa_index_without_token_in_generation",
+    "evidence": null
+  }
+}

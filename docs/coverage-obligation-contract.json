@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "_comment": "COVERAGE obligation closure vs epic-ref obligations_proposed[]. Playbook: .cursor/pipelines/coverage.md. Kinds: docs/epic-obligation-kinds.json.",
+  "row_complete_rule": "Every obligations_proposed[] row with disposition primary_candidate must appear in obligations_coverage with status covered or excluded_with_reason (with obligation_id on exclusion).",
+  "obligations_coverage_status": [
+    "covered",
+    "deferred_in_check",
+    "excluded_with_reason"
+  ],
+  "forbidden_scenario_patterns": [
+    {
+      "id": "blanket_multi_group_silent",
+      "regex": "epic silent on multi-account|multi-group quote permutations",
+      "message": "Use dedicated invariant check or keyed deferral tied to obligation_id; do not blanket-defer group/invariant work under Dimensions."
+    },
+    {
+      "id": "bare_tbd_executable",
+      "regex": "^\\s*-\\s*!\\s+reason:.*silent on",
+      "when": "ref_has_primary_candidate_invariant",
+      "message": "When ref proposes invariant obligations, emit executable primary check under ## Invariants under configuration change."
+    }
+  ],
+  "section_requirements": {
+    "invariants_section_heading": "## Invariants under configuration change",
+    "rounding_section_heading": "## Rounding and display policy",
+    "require_invariants_section_when": "ref.obligations_proposed has any kind invariant with disposition primary_candidate",
+    "require_rounding_section_when": "ref.obligations_proposed has any kind rounding with disposition primary_candidate"
+  },
+  "dimensions_phase_rules": {
+    "allow_dimension_line_only_when": [
+      "jira_epic_text_mentions_dimension",
+      "matching_obligation_id_in_ref",
+      "snippet_text_mentions_dimension"
+    ],
+    "forbid_generic_deferral_when": "ref contains primary_candidate invariant with config_vs_position position_state or account_group_assignment"
+  },
+  "anti_pattern_ids": [
+    "dimension_deferral_without_obligation_review",
+    "obligation_without_check_or_exclusion",
+    "invariant_obligation_in_dimensions_only"
+  ],
+  "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"]
+}

@@ -1,6 +1,6 @@
 # Benchmark workspace contract
 
-Normative companion to [`.cursor/benchmark/README.md`](../.cursor/benchmark/README.md). Epic pipelines (`EPIC-PREP`, `COVERAGE`, `ANALYSE`, `TEST-PREP`, `TEST-EXEC`) resolve **all durable artifacts and temp** relative to **EpicDir** (below), not exclusively `epics/<KEY>/`, when benchmark tokens are present.
+Normative companion to [`.cursor/benchmark/README.md`](../.cursor/benchmark/README.md). Epic pipelines (`EPIC-PREP`, `COVERAGE`, `ANALYSE`, `TEST-DISCOVER`, `TEST-PRECON`, `TEST-PREP`, `CLOSE`) resolve **all durable artifacts and temp** relative to **EpicDir** (below), not exclusively `epics/<KEY>/`, when benchmark tokens are present.
 
 ## EpicDir resolution
 
@@ -17,7 +17,7 @@ Then:
 EpicDir = <repo>/.cursor/benchmark/runs/<suite_id>/attempt-<nn>/shadow/<KEY>/
 ```
 
-`<nn>` is `benchmark_attempt` zero-padded to **two** digits (e.g. `1` → `01`). The `shadow/` tree must mirror production layout: `{EpicDir}<KEY>-ref.json`, `{EpicDir}<KEY>-coverage.json`, `{EpicDir}temp/`, `{EpicDir}tests/`, etc.
+`<nn>` is `benchmark_attempt` zero-padded to **two** digits (e.g. `1` → `01`). The `shadow/` tree must mirror production layout: `{EpicDir}<KEY>-ref.json`, `{EpicDir}<KEY>-coverage.json`, `{EpicDir}temp/`, etc. After **`CLOSE:`**, same archive as production: four human `.md` at `{EpicDir}` root; JSON under `{EpicDir}context/` (including `-close.json`).
 
 **Same run index, multiple chats:** You may execute **prep**, **coverage**, and **test-prep** in **separate** cold Cursor sessions **as long as each trigger line repeats the identical** `benchmark_suite` **and** `benchmark_attempt`. All phases for run index `r` write under the same **`attempt-<nn>/shadow/<KEY>/`** (`<nn>` zero-padded from `r`).
 

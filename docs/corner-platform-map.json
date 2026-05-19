@@ -73,6 +73,8 @@
       "ssh_host": "ctqa.prosp.devexperts.com",
       "postgres_db_name": "ctqa",
       "credentials_ref": "Authenticated Confluence: QAPORTAL Corner (497097273) — CT QA credentials and DB parameters. Do not copy into the repository.",
+      "adaptive_login_policy": "ctqa_shared_principal",
+      "adaptive_login_note": "TEST-DISCOVER uses Chrome MCP on application_urls.adaptive with the CTQA standard Adaptive test principal from Confluence (same credentials_ref subtree). No adaptive_creds= trigger token; do not persist usernames or passwords in repo artefacts.",
       "typical_jira_projects": ["CRTQA", "CRT", "XT", "SUPXT", "CAN"],
       "client_shells": ["corner_trader", "adaptive"]
     },

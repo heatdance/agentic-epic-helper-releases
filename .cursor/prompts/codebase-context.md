@@ -13,9 +13,10 @@ Copy or adapt this into chat. **Discovery in code**: use targeted search and sma
 1. Follow [docs/harness-map.json](../../docs/harness-map.json): **T0** always; add **T1** `docs/project.json` if the task touches product, fork, XT, or platform context.
 2. Read [qa-handoff.md](../../qa-handoff.md) if this session continues prior QA work.
 3. Use **semantic or narrow text search** to locate entry points; if results are huge, **narrow the query** before reading more.
-4. Open only **relevant** files; use **line-bounded** reads for large files.
-5. Reply with a **compact summary table**: `file` → `role / finding` (no mega-pastes).
-6. List **open questions** and suggested **next files** to read—do not exhaust the context window in one step.
+4. For in-repo **`*.json`** inspection (~60+ lines or subset need): **MUST** run **`jq`** per [automation/docs/jq.md](../../automation/docs/jq.md) before bounded Read; summarize stdout in chat.
+5. Open only **relevant** files; use **line-bounded** reads for large files.
+6. Reply with a **compact summary table**: `file` → `role / finding` (no mega-pastes).
+7. List **open questions** and suggested **next files** to read—do not exhaust the context window in one step.
 
 ## Out of scope
 

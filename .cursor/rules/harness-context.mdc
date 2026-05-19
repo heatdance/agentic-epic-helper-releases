@@ -10,7 +10,8 @@ The interface shapes reasoning. Treat the context window as finite working memor
 ## Search and reads
 
 - Prefer **narrow, specific** queries over broad grep that returns huge result sets. If results are large, **refine the query** before pulling more.
-- Read source in **slices** (offsets/limits) when files are long. Do not paste entire large files or thousands of lines into chat.
+- For **structured JSON** in the repo (~**60+ lines** or any subset query), **MUST** **`jq`** project first per [automation/docs/jq.md](../../automation/docs/jq.md) and [jq-json.mdc](jq-json.mdc); do not load full epic/harness JSON into chat for inspection.
+- Read source in **slices** (offsets/limits) when files are long and jq is not enough (e.g. editing). Do not paste entire large files or thousands of lines into chat.
 - **Summarize** findings (tables, bullet lists) instead of dumping raw blobs. Quote only the minimum lines needed for decisions.
 
 ## Continuity
@@ -18,12 +19,23 @@ The interface shapes reasoning. Treat the context window as finite working memor
 - For substantive QA work, **read [qa-handoff.md](qa-handoff.md)** at the start of a session and **update it** before ending with what changed, current focus, and next steps.
 - Treat **[AGENTS.md](AGENTS.md)** as the short map; follow pointers to deeper docs rather than loading everything at once (**progressive disclosure**).
 
+## Harness doctrine (MUST when relevant)
+
+If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:`, …), **benchmark** (`benchmark_suite` / `benchmark_attempt`, `/crtqa-benchmark`, shadow runs), **epic deliverables** under `epics/<KEY>/`, or **coverage vs test-draft** behaviour:
+
+- **Read [docs/harness-principles.md](docs/harness-principles.md)** before proposing norms (after `qa-handoff.md` / **AGENTS.md** as needed). It defines generation vs benchmark, CRTQA non-reliance in generation, coverage vs E2E shape, cold-benchmark `epics/` policy, reference ownership, and **TEST-DISCOVER obligation closure** (§8).
+
+## Output norms (short)
+
+- **BLUF** first; cap **~3** repo path references in a typical answer unless the user asked for a full inventory. **Two layers:** default reply is complete but scannable; deeper dumps **below** or on request. Full norms: **harness-principles § Agent output contract**.
+
 ## Tiered context ([docs/harness-map.json](docs/harness-map.json))
 
 - After T0 (`qa-handoff.md`, `AGENTS.md`), match the user’s task language to T1 `match_any_package` entries in [docs/harness-map.json](docs/harness-map.json). Prefer the **clearest single** package when one fits; if several fit or repro/env/repo questions appear, follow the **`rules`** in that file (Jira-key fetch, optional extra read of [docs/corner-platform-map.json](docs/corner-platform-map.json)). Do not load every doc under `docs/` by default.
 - For **environment hostnames**, **which Stash repo**, **Jira project choice**, or **prep vs prod code line** questions, open [docs/corner-platform-map.json](docs/corner-platform-map.json) (T1 `corner_platform_map`) **before** guessing; then use MCP to fill gaps.
 - Use **T2** (`user-mcp-atlassian`) for live Jira/Confluence once you know which space/subtree applies (`project.json` vs `qa-project.json` vs `corner-platform-map.json` `mcp_scope_recap`).
 - For **Figma** URLs, use the workspace **Figma MCP** when the task needs design context and the server is enabled—see [automation/docs/figma-mcp.md](automation/docs/figma-mcp.md) and the `figma_design` T1 package in [docs/harness-map.json](docs/harness-map.json).
+- For **dxTrade5** / web trading **UI maps**, **screen discoverability**, or **Chrome DevTools** navigation aids, use T1 **`dxtrade5_harness`** ([docs/dxtrade5-harness/](docs/dxtrade5-harness/)) and optional [.cursor/rules/dxtrade5-harness.mdc](.cursor/rules/dxtrade5-harness.mdc).
 - For **Yogi** requirement links (`/requirements/{space}/{KEY}`, `#req-…`), use [yogi-tool/yogi_resolve.py](automation/tools/yogi-tool/yogi_resolve.py) + [yogi-tool/yogi_snippet.py](automation/tools/yogi-tool/yogi_snippet.py) for **small** `snippet_text`; see [automation/docs/yogi-url-resolve.md](automation/docs/yogi-url-resolve.md) (`yogi_requirement` T1). Avoid loading full Confluence page bodies into the model for every tag.
 
 ## Multi-turn (clarifications)

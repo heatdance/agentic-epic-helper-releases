@@ -1,0 +1,149 @@
+{
+  "schema_version": 2,
+  "_comment": "Verification class registry for TEST-PREP phase 8a-half (v3). Selection rule-ordered; first match wins. Playbook: .cursor/pipelines/test-prep.md. Profiles: docs/test-prep-draft-profiles.json.",
+  "default_min_case_count": 2,
+  "default_illustration_budget": 2,
+  "_legacy_note": "default_illustration_budget retained for draft_profile=teaching only.",
+  "verification_classes": {
+    "config_posture": {
+      "description": "Instrument/account/group/routing posture before or without trade ladders.",
+      "default_min_case_count": 2,
+      "fe_probe_surfaces": ["dxtrade5", "webbroker"],
+      "draft_shape": {
+        "actions": "Expand every case_outline row: confirm configuration from precon; help/show or posture checks with session placeholders.",
+        "results": "Posture matches coverage scenario_line and requirement intent.",
+        "peculiarities": "Group names from exploration; instrument ids as placeholders."
+      }
+    },
+    "stateful_ladder": {
+      "description": "Multi-step trade ladder; engine truth via console metrics (literary execution templates in prep).",
+      "default_min_case_count": 6,
+      "fe_probe_surfaces": [],
+      "requires_ladder_dependency": true,
+      "draft_shape": {
+        "actions": "Expand every case_outline row using command_patterns.ladder_step with session placeholders; no whole-scenario [TBD].",
+        "results": "Weighted-average opening-side rules, zero-cross, flat, partial close per requirement keys.",
+        "peculiarities": "show position_metrics_from_publisher family; multiplier; account placeholders."
+      }
+    },
+    "derived_metric": {
+      "description": "Recalculate Open P/L, % PL gross, or similar from observed fields.",
+      "default_min_case_count": 3,
+      "fe_probe_surfaces": [],
+      "draft_shape": {
+        "actions": "Expand case_outline: read metrics from console/UI; compare to formula in Peculiarities.",
+        "results": "Metric matches formula within [tolerance:TBD] or [oracle:TBD] when blocked.",
+        "peculiarities": "Full formulas; mark price rules; rounding policy; labels from 8a¾ metric_columns."
+      }
+    },
+    "cross_surface_parity": {
+      "description": "Same metrics or labels across dxTrade5, WebBroker, Adaptive shells.",
+      "default_min_case_count": 3,
+      "fe_probe_surfaces": ["dxtrade5", "webbroker", "adaptive"],
+      "draft_shape": {
+        "actions": "Expand case_outline: capture metric labels per surface (8a¾); compare values within tolerance.",
+        "results": "Parity or structured absence with ! reason when shell omits metric.",
+        "peculiarities": "Column/header names from 8a¾; session notes."
+      }
+    },
+    "invariant_under_change": {
+      "description": "Configuration change must not rewrite existing position state (e.g. avg price).",
+      "default_min_case_count": 2,
+      "fe_probe_surfaces": [],
+      "draft_shape": {
+        "actions": "Expand case_outline: establish position; change group/config; re-read metric with placeholders.",
+        "results": "Invariant holds per coverage.",
+        "peculiarities": "Before/after commands with <group_key> placeholders."
+      }
+    },
+    "rounding_matrix": {
+      "description": "Rounding policy matrix for average price and P/L display (CRTQA-10183-style).",
+      "default_min_case_count": 7,
+      "fe_probe_surfaces": [],
+      "draft_shape": {
+        "actions": "Expand case_outline: micro-ladders per rounding case; state expected rounded values as [oracle:TBD] when needed.",
+        "results": "Rounded average and P/L match policy per case row.",
+        "peculiarities": "dp rules, floor rules, currency context."
+      }
+    },
+    "settlement_stress": {
+      "description": "Cash settlement or event-window reconciliation.",
+      "default_min_case_count": 2,
+      "fe_probe_surfaces": [],
+      "draft_shape": {
+        "actions": "Expand case_outline: <fixture_window> then reconcile metrics.",
+        "results": "Weighted-average behavior per requirement wording.",
+        "peculiarities": "Pointers to coverage detail_lines and discover gaps."
+      }
+    },
+    "journey_smoke": {
+      "description": "End-user journey or UI flow without calculation contract.",
+      "default_min_case_count": 1,
+      "fe_probe_surfaces": ["dxtrade5", "webbroker", "adaptive"],
+      "draft_shape": {
+        "actions": "Expand case_outline: linear navigation steps.",
+        "results": "Observable outcome per scenario_line.",
+        "peculiarities": "URLs from platform map."
+      }
+    },
+    "doc_or_pr_only": {
+      "description": "Proof via PR, doc, or analysis only—no runtime ladder in prep.",
+      "default_min_case_count": 1,
+      "fe_probe_surfaces": [],
+      "forbids_console_execution_verbs": true,
+      "draft_shape": {
+        "actions": "[REQUIRES: source] or review checklist pointer only.",
+        "results": "Doc/PR acceptance criteria.",
+        "peculiarities": "Links to requirement keys in results only."
+      }
+    }
+  },
+  "selection_rules": [
+    {
+      "priority": 10,
+      "class": "doc_or_pr_only",
+      "when": "discover evidence_need includes pr only and no ui console sql on primary chk"
+    },
+    {
+      "priority": 15,
+      "class": "rounding_matrix",
+      "when": "scenario_line mentions rounding or decimal places or 7 dp or floor rule for P/L"
+    },
+    {
+      "priority": 20,
+      "class": "settlement_stress",
+      "when": "coverage section contains Cash settlement or scenario_line mentions settlement"
+    },
+    {
+      "priority": 30,
+      "class": "invariant_under_change",
+      "when": "scenario_line mentions group change or does not affect existing or invariant"
+    },
+    {
+      "priority": 40,
+      "class": "stateful_ladder",
+      "when": "calculation_contract is ladder_present or scenario_line mentions ladder or weighted-average ladder"
+    },
+    {
+      "priority": 50,
+      "class": "derived_metric",
+      "when": "scenario_line mentions Open P/L or % PL or recalculate or formula"
+    },
+    {
+      "priority": 60,
+      "class": "cross_surface_parity",
+      "when": "surfaces includes dxtrade5 or webbroker or adaptive and scenario_line mentions parity or matching or same three metrics"
+    },
+    {
+      "priority": 70,
+      "class": "config_posture",
+      "when": "section contains configuration or instrument posture or WeightedAvg configuration"
+    },
+    {
+      "priority": 99,
+      "class": "journey_smoke",
+      "when": "default fallback for primary chk"
+    }
+  ],
+  "_selection_note": "Agent applies rules in priority order using coverage check row + optional discover obligation row; document choice in verification_plan[].selection_rule_priority."
+}

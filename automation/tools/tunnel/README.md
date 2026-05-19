@@ -11,7 +11,7 @@ For QA engineers using the same stack (Cursor, MCP, CTQA DB over SSH). **PuTTY**
 | Python | 3.10+ on PATH |
 | PuTTY | `plink.exe` (default install: `C:\Program Files\PuTTY\`) |
 | Node.js | For Cursor MCP `npx` (**`postgres-ctqa`**) |
-| Cursor | **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — use **§ MCP — PostgreSQL (Cursor)** below |
+| Cursor | **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — use **§ MCP — PostgreSQL (Cursor)** below; **`chrome-devtools`** for optional discover/precon/prep UI — [automation/docs/chrome-devtools-mcp.md](../../docs/chrome-devtools-mcp.md) |
 
 Optional for `--probe-only`:
 
@@ -78,7 +78,7 @@ Project **`.cursor/mcp.json`** is **gitignored** and is optional. Cursor **merge
 2. Optionally run **§ DB probe** to confirm connectivity (`CTQA_PG_PASSWORD`, then `--probe-only`).
 3. Merge the **`postgres-ctqa`** server from the snippet below into **`mcpServers`** in global and/or gitignored `.cursor/mcp.json`.
 4. **SSL:** use **`sslmode=disable`** on **`127.0.0.1`** through SSH (traffic is encrypted inside the tunnel; avoids Node/pg self-signed certificate errors with MCP). Do **not** disable SSL for untunneled internet database connections.
-5. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**). Check **MCP Logs** if the server fails to start (`npx` must be on PATH for the Cursor process, same as Playwright MCP).
+5. **Reload MCP** — Restart Cursor or refresh MCP servers (**Cursor Settings → MCP**). Check **MCP Logs** if the server fails to start (`npx` must be on PATH for package-based MCP servers started by Cursor).
 
 **Snippet (placeholders)**
 
@@ -104,6 +104,10 @@ Replace **`USER`**, **`PASSWORD`** (URL-encode special characters), and **`15432
 There is **no** committed **`.cursor/mcp/`** template folder—keep the copy-paste block here authoritative.
 
 Your URL must match the tunnel: **`127.0.0.1`** and **`sslmode=disable`** as shown.
+
+## TEST-DISCOVER — optional readonly SQL
+
+When **`TEST-DISCOVER:`** links a **`weighted_avg_fx_spot_account`** fixture and the chk has **`sql`** in **`evidence_need`**, agents may run **one** allowlisted readonly query via **`postgres-ctqa`** after tunnel + MCP are up. Normative probe steps: [`docs/discover-fixture-probes.json`](../../../docs/discover-fixture-probes.json). **Console read-only shows remain required** for **`probe_executed`** on config kinds—SQL does not replace them. Add concrete table/column allowlists here when validated on CTQA; until then, prefer console-only depth.
 
 ## Zipping this workspace for other QA projects
 

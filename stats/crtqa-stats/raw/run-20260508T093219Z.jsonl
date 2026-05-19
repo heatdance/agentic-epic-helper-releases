@@ -1,8 +1,0 @@
-{"record":"run_start","mode":"initial_assessment","jira_user":"arodzevich"}
-{"record":"epic_fetch","count":6,"keys":["CRT-602","CRT-632","CRT-634","CRT-635","CRT-639","CRT-663"]}
-{"record":"candidate_tasks","count":2,"keys":["CRTQA-10034","CRTQA-10132"]}
-{"record":"attestation","epic":"CRT-632","assisted":false}
-{"record":"attestation","epic":"CRT-639","assisted":true}
-{"record":"classification","issue":"CRTQA-10034","category_id":"functional_market_data_fx","confidence":"high"}
-{"record":"classification","issue":"CRTQA-10132","category_id":"functional_settlement_metrics","confidence":"high"}
-{"record":"run_end","snapshot_run_id":"run-20260508T093219Z","generated_at":"2026-05-08T09:32:19Z"}

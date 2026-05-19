@@ -1,6 +1,6 @@
 {
-  "_comment": "Coverage handoff for COVERAGE: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json. Copy this template; do not reference epics/<KEY>/temp/ in durable JSON. Pair with <KEY>-coverage.md (Jira Smart Checklist paste). Markdown norms: .cursor/pipelines/coverage.md. Optional trigger: focus=. Matrix: verification_role. Metrics: optional checks.calculation_contract (ladder_present | deferred_ambiguous). Seed surfaces from epic-ref client_shell_impact (Corner + Adaptive).",
-  "schema_version": 1,
+  "_comment": "Coverage handoff for COVERAGE: pipeline schema v2. obligations_coverage maps epic-ref obligations_proposed[]. checks[].obligation_ids[]. Contract: docs/coverage-obligation-contract.json.",
+  "schema_version": 2,
   "epic_key": null,
   "epic_ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
   "sources": {
@@ -53,6 +53,14 @@
     "short_url": null,
     "source": "yogi_snippet | epic_ref | jira_description"
   },
+  "obligations_coverage": [],
+  "_obligations_coverage_item": {
+    "obligation_id": "obl-001",
+    "status": "covered | deferred_in_check | excluded_with_reason",
+    "check_id": "chk-010",
+    "excluded_reason": null,
+    "note": "audit trail"
+  },
   "checks": [],
   "_checks_item": {
     "id": "chk-001",
@@ -67,7 +75,16 @@
     "calculation_contract": "ladder_present | deferred_ambiguous | null",
     "_calculation_contract": "metrics_calculation: ladder_present = executable preconditions + expected relation on primary metric; deferred_ambiguous = ! reason instead",
     "requirement_keys": [],
+    "obligation_ids": [],
+    "obligation_kinds": [],
     "implementation_hit_ids": []
+  },
+  "excluded_checks_with_reason": [],
+  "_excluded_checks_with_reason_item": {
+    "check_id": "chk-optional",
+    "obligation_id": "obl-optional",
+    "reason": "explicitly_out_of_scope | ambiguity_flag | analysis_gap | user_map_only | obligation_deferred | other",
+    "evidence": "pointer to explicitly_out_of_scope or obligations_coverage"
   },
   "explicitly_out_of_scope": [],
   "_explicitly_out_of_scope_item": {

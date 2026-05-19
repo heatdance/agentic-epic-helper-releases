@@ -1,6 +1,6 @@
 {
-  "_comment": "Requirement analysis handoff for ANALYSE: pipeline. Final instance: epics/<EPIC-KEY>/<EPIC-KEY>-analysis.json. Pair with <KEY>-analysis.md. Do not reference epics/<KEY>/temp/ in durable JSON. May append Known issue > lines to sibling -coverage.json/-coverage.md when coverage loaded and reconciliation verdict is in_scope_relevant.",
-  "schema_version": 1,
+  "_comment": "ANALYSE v2 handoff. Pre-CLOSE: epics/<KEY>/<KEY>-analysis.json + .md at epic root; after CLOSE: JSON under context/. Gaps-first .md. No /temp/ in durable JSON. Known issues + coverage mutation only when trigger known_issues=yes. Contract: docs/analysis-gap-contract.json.",
+  "schema_version": 2,
   "epic_key": null,
   "sources": {
     "jira_fetched_at": null,
@@ -8,66 +8,66 @@
     "ref_loaded": false,
     "coverage_path": "epics/<EPIC-KEY>/<EPIC-KEY>-coverage.json",
     "coverage_loaded": false,
-    "note": "ref_loaded/coverage_loaded: true only when file was read successfully for this run."
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "note": "known_issues_enabled / resolve_enabled mirror trigger tokens for audit."
   },
   "summary": null,
   "_summary": {
-    "text": "1–4 sentences: what we test and why (practical).",
-    "derived_from": ["jira_summary", "jira_description", "ref.synthesis", "ref.business_context"]
+    "text": "Optional one line max; copy epic_verification_focus only — no new prose.",
+    "derived_from": ["coverage.epic_verification_focus"]
   },
   "gaps": [],
   "_gaps_item": {
     "id": "gap-001",
+    "kind": "deferred_check | nested_req_unresolved | obligation_uncovered | snippet_missing | ungrounded_check | grounding_weak | tooling_blocked | env_blocked | anti_pattern | human_ba",
+    "confidence": "high | medium",
     "summary": "Short gap description",
-    "source": "ref | coverage | jira | inferred",
-    "type": "unverifiable | snippet_missing | ambiguity | client_shell_unknown | grounding | other",
-    "evidence": "Optional pointer, e.g. requirements[].key CRT-123 snippet_status=missing, or checks[].id chk-002"
+    "pointers": {
+      "check_id": "chk-optional",
+      "obligation_id": "obl-optional",
+      "requirement_key": "CRT-optional"
+    },
+    "evidence": "Artifact path or field pointer only",
+    "recommended_action": "rerun_coverage | rerun_epic_prep | confluence_resolve | human_ba | ignore_for_discover | ignore_for_prep",
+    "status": "open | resolved | confirmed_gap"
   },
+  "resolved_gaps": [],
+  "_resolved_gaps_item": {
+    "gap_id": "gap-001",
+    "resolution": "confluence_snippet | coverage_updated | false_positive",
+    "evidence": "pointer to snippet or writeback",
+    "at": "ISO-8601"
+  },
+  "exploration_suppressed": [],
+  "_exploration_suppressed_item": {
+    "check_id": "chk-001",
+    "reason": "deferred_in_check | human_ba | analysis_gap",
+    "blocks_fixture_probe": true,
+    "until_action": "rerun_coverage | human_ba"
+  },
+  "coverage_writebacks": [],
+  "_coverage_writebacks_item": {
+    "kind": "nested_requirement_refs | detail_lines_known_issue",
+    "target": "chk-001 or nested key CRT-1481",
+    "evidence": "tool-backed pointer"
+  },
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": []
+  },
+  "_actions": "Compact routing summary for operator and downstream.",
   "questions": [],
-  "_questions_item": {
-    "id": "q-001",
-    "text": "Review question",
-    "kind": "grounded | hypothesis",
-    "dimension": "testability | completeness | consistency | cross_surface | operational | other",
-    "evidence": "Quote or artifact path when kind=grounded; null when hypothesis"
-  },
+  "_questions_v1_deprecated": "v2 emit: questions[] must be empty in generation mode.",
   "known_issues_search": {
     "at": null,
     "queries": []
   },
-  "_known_issues_search_query": {
-    "jql": "JQL string",
-    "purpose": "epic_link | epic_text | keyword_semantic",
-    "result_count": 0
-  },
   "known_issues": [],
-  "_known_issues_item": {
-    "key": "CRTQA-1234",
-    "summary": null,
-    "status": null,
-    "issuetype": null,
-    "resolution": null,
-    "url": null,
-    "relevance": "epic_mention | keyword | linked | jql_hit",
-    "status_category": "open | closed | aborted_other",
-    "coverage_reconciliation": null,
-    "_coverage_reconciliation": {
-      "verdict": "in_scope_relevant | out_of_epic | questionable | skipped_no_coverage",
-      "rationale": "one line"
-    }
-  },
   "unmapped_known_issues": [],
-  "_unmapped_known_issues_item": {
-    "issue_key": "CRTQA-1234",
-    "suggested_check_ids": ["chk-001", "chk-002"],
-    "reason": "ambiguous_mapping | no_check_overlap"
-  },
   "coverage_mutations": [],
-  "_coverage_mutations_item": {
-    "check_id": "chk-001",
-    "appended_lines": ["> Known issue: CRTQA-123 — summary (status: Open)"],
-    "skipped_duplicates": ["CRTQA-123"]
-  },
   "validation_log": [],
   "_validation_log_item": {
     "step": "phase id or name",

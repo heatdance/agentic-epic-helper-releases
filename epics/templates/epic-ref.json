@@ -1,6 +1,6 @@
 {
-  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/<KEY>-ref.json. EPIC-PREP uses epics/<KEY>/temp/ then deletes it. schema_version 3: adds sources.bitbucket_repo, sources.bitbucket_searched_at, implementation (prep Bitbucket hits for COVERAGE merge). Prior: schema_version 2 — synthesis, validation_log, xt_refs, client_shell_impact; requirements[] snippet_status + snippet_failure_reason; EPIC-PREP 3b + step 8 finalize gate; deferral_accepted. requirements[] items: key, short_url, anchor, page_id, snippet_text, extract_mode (inline_td | after_th_td), optional jira_context, optional snippet_status (ok|missing|failed), optional snippet_failure_reason.",
-  "schema_version": 3,
+  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/<KEY>-ref.json. EPIC-PREP v4: obligations_proposed[], obligations_reconcile. COVERAGE consumes obligations. schema_version 4. Prior v3: bitbucket hits. requirements[] + snippet_status. See docs/epic-obligation-kinds.json.",
+  "schema_version": 4,
   "epic": {
     "key": null,
     "url": null,
@@ -52,6 +52,27 @@
     "nested_refs": [],
     "cross_epic": [],
     "xt_refs": []
+  },
+  "obligations_proposed": [],
+  "_obligations_proposed_item": {
+    "id": "obl-001",
+    "kind": "invariant | ladder | formula | config_posture | settlement | rounding | parity | explicit_deferral",
+    "statement": "Human-readable obligation (what must be verified)",
+    "requirement_keys": ["CRT-1234"],
+    "evidence_anchor": "snippet excerpt or jira field reference",
+    "config_vs_position": "instrument_type_config | account_group_assignment | position_state | routing_or_markup | not_applicable",
+    "disposition": "primary_candidate | deferral_candidate",
+    "deferral_reason": null,
+    "implementation_hit_ids": []
+  },
+  "obligations_reconcile": {
+    "epic_summary_aligned": true,
+    "conflicts": [],
+    "focus_merge_note": null
+  },
+  "_obligations_reconcile_conflict_item": {
+    "obligation_id": "obl-001",
+    "reason": "Epic summary silent but snippet requires primary check"
   },
   "implementation": {
     "hits": [],

@@ -14,11 +14,12 @@ Production pipelines hard-code **`epics/<KEY>/`** for durable outputs, **`epics/
 | Artifact | Production path | Intended benchmark shadow (from roadmap) | Primary consumers |
 |----------|-----------------|------------------------------------------|-------------------|
 | Epic ref | `epics/<KEY>/<KEY>-ref.json` | e.g. `.cursor/benchmark/runs/<run>/<attempt>/shadow/<KEY>/<KEY>-ref.json` | `coverage.md` (read), `test-prep.md` (optional read), `analysis.md` (optional read), templates `epic_ref_path` in `coverage-ref.json` |
-| Coverage JSON/MD | `epics/<KEY>/<KEY>-coverage.{json,md}` | same under shadow attempt root | `test-prep.md` (required), `analysis.md`, `test-exec.md` (optional), templates `sources.coverage_path` in `tests-ref.json` |
-| Analysis JSON/MD | `epics/<KEY>/<KEY>-analysis.{json,md}` | shadow (if ANALYSE in stack) | `test-prep.md` (optional read); may mutate coverage in production |
-| Tests JSON/MD | `epics/<KEY>/<KEY>-tests.{json,md}` | shadow | Human Jira paste; future test-bench validators |
-| TEST-EXEC manifest + specs | `epics/<KEY>/<KEY>-test-exec.json`, `epics/<KEY>/tests/*.spec.ts` | shadow (only if EXEC in benchmark scope) | Playwright MCP; scrub rules |
-| Temp | `epics/<KEY>/temp/` (+ test-prep draft files, test-exec scratch) | benchmark-scoped temp only (never `epics/`) | Pipeline self-check: no `/temp/` in durable JSON |
+| Coverage JSON/MD | `epics/<KEY>/<KEY>-coverage.{json,md}` | same under shadow attempt root | `test-prep.md` (required), `analysis.md`, `close.md` (optional), templates `sources.coverage_path` in `tests-ref.json` |
+| Analysis JSON/MD | `epics/<KEY>/<KEY>-analysis.{json,md}` | shadow (if ANALYSE in stack) | `test-prep.md` (optional read); may mutate coverage when `known_issues=yes` |
+| Discover / Precon | `epics/<KEY>/<KEY>-discover.json`, `-precon.{json,md}` | shadow | `test-precon.md`, `test-prep.md`, `close.md` (preflight) |
+| Tests JSON/MD | `epics/<KEY>/<KEY>-tests.{json,md}` | shadow | Human Jira paste; `close.md` L0 |
+| CLOSE manifest | `epics/<KEY>/context/<KEY>-close.json` after archive | shadow `context/` same layout | `close_verify.py`; documentation-only |
+| Temp | `epics/<KEY>/temp/` (+ test-prep / close scratch) | benchmark-scoped temp only (never `epics/`) | Pipeline self-check: no `/temp/` in durable JSON |
 
 ## Files with strong `epics/<KEY>/` coupling (grep-backed)
 
@@ -30,7 +31,9 @@ Production pipelines hard-code **`epics/<KEY>/`** for durable outputs, **`epics/
 | [`.cursor/pipelines/coverage.md`](../../../.cursor/pipelines/coverage.md) | Prerequisite `-ref.json`; writes `-coverage.*`; reads ref |
 | [`.cursor/pipelines/analysis.md`](../../../.cursor/pipelines/analysis.md) | Reads ref/coverage; writes `-analysis.*`; may edit `-coverage.*` |
 | [`.cursor/pipelines/test-prep.md`](../../../.cursor/pipelines/test-prep.md) | Reads coverage (+ optional analysis/ref); temp draft merge; writes `-tests.*` |
-| [`.cursor/pipelines/test-exec.md`](../../../.cursor/pipelines/test-exec.md) | Reads `-tests.json`; writes specs + `-test-exec.json` |
+| [`.cursor/pipelines/close.md`](../../../.cursor/pipelines/close.md) | Integrity ladder; archive to `context/` |
+| [`.cursor/pipelines/test-discover.md`](../../../.cursor/pipelines/test-discover.md) | `-discover.json` |
+| [`.cursor/pipelines/test-precon.md`](../../../.cursor/pipelines/test-precon.md) | `-precon.*` |
 | [`.cursor/pipelines/sync.md`](../../../.cursor/pipelines/sync.md) | Harness table referencing temp under `epics/<KEY>/temp/` |
 | [`.cursor/pipelines/public-scrub.md`](../../../.cursor/pipelines/public-scrub.md) | Deletes real `epics/<REAL_EPIC_KEY>/`; mentions `.cursor/benchmark/` scratch |
 
@@ -44,7 +47,7 @@ Production pipelines hard-code **`epics/<KEY>/`** for durable outputs, **`epics/
 
 ### `epics/templates/`
 
-Embedded path strings in JSON `_comment` and `*_path` fields: [`epic-ref.json`](../../../epics/templates/epic-ref.json), [`coverage-ref.json`](../../../epics/templates/coverage-ref.json), [`analysis-ref.json`](../../../epics/templates/analysis-ref.json), [`tests-ref.json`](../../../epics/templates/tests-ref.json), [`test-exec-ref.json`](../../../epics/templates/test-exec-ref.json). Template literals may remain as documentation if runtime paths are injected by mode.
+Embedded path strings in JSON `_comment` and `*_path` fields: [`epic-ref.json`](../../../epics/templates/epic-ref.json), [`coverage-ref.json`](../../../epics/templates/coverage-ref.json), [`analysis-ref.json`](../../../epics/templates/analysis-ref.json), [`tests-ref.json`](../../../epics/templates/tests-ref.json), [`close-ref.json`](../../../epics/templates/close-ref.json), [`discover-ref.json`](../../../epics/templates/discover-ref.json), [`precon-ref.json`](../../../epics/templates/precon-ref.json). Pre-**CLOSE** paths use `epics/<KEY>/`; post-close JSON under `epics/<KEY>/context/` (see [close-contract.json](../../../docs/close-contract.json)). Runtime paths use `{EpicDir}` when benchmark tokens are set.
 
 ### `automation`
 

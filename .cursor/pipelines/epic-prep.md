@@ -4,6 +4,11 @@
 
 - **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — together enable **benchmark shadow** `{EpicDir}` ([workspace](#epic-workspace-epicdir); [docs/benchmark-contract.md](../../docs/benchmark-contract.md)).
 - **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`** (see also [docs/corner-platform-map.json](../../docs/corner-platform-map.json) **`code_streams`** for `BRO/xt` vs `CAN/corner` vs packaging repos).
+- **`focus=...`** — free-text merge into synthesis and **obligations reconcile** (step **6b**), same spirit as COVERAGE `focus=` (e.g. `focus=FX_SPOT_WeightedAvg_metrics`).
+
+**Version note (obligation subprocesses)**: schema **`schema_version: 4`** with **`obligations_proposed[]`**; finalize gate **`epic_prep_verify.py`**. Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md).
+
+**Forbidden inputs (production)**: Do **not** read or copy from sibling **`-coverage.json`**, **`-discover.json`**, **`-precon.json`**, **`-tests.json`**, CRTQA Jira issues, or benchmark bench JSON unless **both** `benchmark_suite=` and `benchmark_attempt=` are set (shadow tree only).
 
 **Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
@@ -35,7 +40,7 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 
 1. Ensure `{EpicDir}` exists.
 2. Create `{EpicDir}temp/`.
-3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
+3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), **`epic-obligation-<REQKEY>.json`** (per-requirement obligation slices), **`epic-obligation-reconcile.json`** (merge scratch), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
 4. Work: merge durable facts into `{EpicDir}<KEY>-ref.json`.
 5. **Exit**: delete `{EpicDir}temp/` recursively (`Remove-Item -Recurse` on Windows, `rm -rf` on Unix).
 6. **Self-check**: `<KEY>-ref.json` must **not** contain the substring `/temp/` (no stale paths).
@@ -49,19 +54,14 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 ### 1. Jira — fetch Epic
 
 - MCP fetch the issue by key; save raw JSON to `temp/jira-issue.json` (optional but recommended for audit).
-- If **`{EpicDir}<KEY>-ref.json` already exists**, read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
+- If **`{EpicDir}<KEY>-ref.json` already exists**, **MUST** project with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file — then read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
 - Copy template → `{EpicDir}<KEY>-ref.json`.
 - Fill `epic` (`key`, `url`, `summary`, `status`, `labels`, `issue_type`) and `sources.jira_fetched_at` (ISO-8601).
 - Parse optional **`repo=`** from the user message (same token shape as [`coverage.md`](coverage.md)). **Repo resolution** for `sources.bitbucket_repo` (first match wins): trigger **`repo=`** → **prior** ref’s `sources.bitbucket_repo` (from the pre-overwrite read above) → [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** if non-null. If still unresolved, leave null for step **5b** (optional search skipped).
 
-### 2. Synthesis (3.1) — from Jira text only
-
-- Populate `synthesis` in the ref:
-  - `problem_gist` + `problem_gist_source` (`from_jira_field` | `inferred_from_jira`).
-  - `impact_areas[]`, `keywords[]` — prefer objects `{ "text": "...", "source": "from_jira_field" | "inferred_from_jira" }` for non-obvious rows; plain strings only when verbatim from Jira.
-- Do not invent platform facts not present in Jira or later tool outputs.
-
 ### 2b. Client shell impact (mandatory) — Corner Trader vs Adaptive
+
+**Runs after step 3e (synthesis)** — see below.
 
 - Populate **`client_shell_impact`** in the ref (see template `_client_shell_impact` shape).
 - **Stable phrasing (reduces rerun variance)**:
@@ -96,6 +96,30 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 - Append **`validation_log`**: `{ "step": "3b_snippet_retry", "at": "<ISO8601>", "action": "<keys retried and outcome summary>" }`.
 - Rows with **`macro_shape_unsupported`**, **`page_id_unresolved`**, or persistent **`other`** after retry need explicit handling: either document **`deferral_accepted`** in `validation_log` (step 8) or keep `failed` and **block finalize** per step 8.
 
+### 3c. Obligation extraction — per-requirement subprocess (mandatory)
+
+**Parent orchestrator MUST NOT** one-shot all requirements in a single chat turn. For **each** `requirements[]` row with usable `snippet_text` (or Epic description excerpt naming that key):
+
+1. **Input pack** (subprocess only): that row + Epic summary/description sentences mentioning **`key`** only.
+2. **Output**: write `temp/epic-obligation-<REQKEY>.json` with shape `{ "requirement_key": "<KEY>", "obligations_proposed": [ … ] }`.
+3. Each obligation: `id` (`obl-###` unique epic-wide), `kind` from [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json), `statement`, `requirement_keys[]`, `evidence_anchor`, optional `config_vs_position`, `disposition` (`primary_candidate` | `deferral_candidate`), `deferral_reason` when deferral.
+4. Use **disambiguation_notes** — e.g. instrument-type config change ≠ account group assignment ≠ position-state invariant.
+5. **0 obligations** is valid when snippet is purely procedural with no testable obligation; log in subprocess output `notes`.
+
+Merge slices into ref **`obligations_proposed[]`** (dedupe by statement similarity; keep distinct kinds separate).
+
+### 3d. Nested-link obligation subprocess (optional)
+
+When `snippet_text` cites nested `/requirements/` URLs or sibling keys **not** in `jira_linked_keys`, run a **second** subprocess per nested key (same contract as **3c**); append to `temp/epic-obligation-<NESTEDKEY>.json` and merge. Cap **5** nested keys unless user widens scope.
+
+### 3e. Synthesis (3.1) — after obligations
+
+- Populate `synthesis` informed by **`obligations_proposed[]`** (problem framing must not contradict primary invariants):
+  - `problem_gist` + `problem_gist_source` (`from_jira_field` | `inferred_from_jira`).
+  - `impact_areas[]`, `keywords[]` — prefer objects `{ "text": "...", "source": "from_jira_field" | "inferred_from_jira" }`.
+- Merge optional trigger **`focus=`** into keywords / problem_gist with `validation_log` note when it narrows scope.
+- Do not invent platform facts not present in Jira, snippets, or obligation evidence.
+
 ### 4. Design (3.3)
 
 - Parse Jira text for `figma.com` links → `design.figma[]` (`url`, optional `note`).
@@ -115,7 +139,7 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 - **MCP parameters (before any Bitbucket call)**: Map `sources.bitbucket_repo` to tool arguments. **Stash / Server** token **`PROJECT_KEY/repo_slug`** (e.g. `BRO/xt`): set **`project_key`** to the segment before the first `/` and **`repo_slug`** to the segment after (trim both). **Do not** pass the combined `BRO/xt` string as **`repo_slug`** alone — MCP requires **`project_key`** for Server/DC and will reject the call. **Bitbucket Cloud** token **`workspace/repository`**: use **`workspace`** + **`repo_slug`** per the tool schema (no `project_key`).
 - **Execution — code search**: Run `bitbucket_search_code` once per capped query with the mapped parameters.
 - **Execution — when code search is unavailable**: If the MCP reports **project key is required**, fix **`project_key`** / **`repo_slug`** mapping and retry **`bitbucket_search_code`** once per query. If, with correct parameters, calls fail with **HTTP 404** or a URL containing **`/rest/api/1.0/search`** (common on internal Stash when the code-search REST route is absent while browse APIs work): run a **browse fallback** — at most **3** `bitbucket_browse_directory` calls using the same `project_key` / `repo_slug` (e.g. `path` `""` for repo root, then up to two plausible top-level dirs inferred from Epic wording such as `dxcore`, `webbroker`, `common`). Optionally **one** `bitbucket_get_file_content` only if a listing yields an obvious single candidate path; keep stored **`fragment`** short — **no** full files in durable JSON. Add `implementation.hits[]` rows for meaningful listing or file evidence with **`note`** explaining browse-path relevance. Optionally save raw MCP JSON under `temp/bitbucket-*.json` until merged, then delete with `temp/`.
-- **Hits**: Append to `implementation.hits[]` with `id` (`prep-impl-001`, …), `search_query`, `path`, `fragment`, `note` (one-line **why_relevant**, mirror XT `why_relevant` discipline), **`source_phase`**: `epic_prep`.
+- **Hits**: Append to `implementation.hits[]` with `id` (`prep-impl-001`, …), `search_query`, `path`, `fragment`, `note` (one-line **why_relevant**), optional **`related_obligation_ids[]`** when hit supports an obligation, **`source_phase`**: `epic_prep`.
 - **Timestamps**: Set `sources.bitbucket_searched_at` (ISO-8601) when at least one **successful** `bitbucket_search_code` **or** browse fallback call completes; if skipped entirely, leave null.
 - Append **one** `validation_log` entry `{ "step": "5b_bitbucket_prep", "at": "<ISO8601>", "action": "<summary>" }` where **`action`** states query count, search hit count, `search_404_used_browse_fallback` when applicable, or skip reason (e.g. `no_bitbucket_repo`).
 
@@ -132,11 +156,22 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 - For each `xt_refs[]` row: **keep**, **remove**, or **flag** with `status` + `reason` per template.
 - Prefer **removal** over weak ties. Append `validation_log` entries for bulk actions.
 
+### 6b. Obligations reconcile (mandatory)
+
+- Merge all `temp/epic-obligation-*.json` slices; assign stable **`obl-###`** ids if subprocesses used local placeholders.
+- Set **`obligations_reconcile`**: `{ "epic_summary_aligned": true|false, "conflicts": [ { "obligation_id", "summary", "resolution" } ] }`.
+- Resolve **config_vs_position** conflicts using [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json) **disambiguation_notes** (e.g. do not classify group-change avg-price invariant as “skip config scenarios”).
+- Every **`primary_candidate`** must be cited in reconcile narrative or listed in **`conflicts`** with resolution.
+- Optional **`focus=`** from trigger merges here; log in `validation_log`.
+- Run **`python automation/tools/epic_prep_verify.py --mode reconcile --ref {EpicDir}<KEY>-ref.json`**. On failure: fix and retry (**max 2** iterations); then proceed to finalize.
+
 ### 8. Finalize
 
 - **Snippet finalize gate**: Do **not** delete `temp/` or treat the run as complete while any `requirements[]` row whose **`key`** is in **`jira_linked_keys`** (step 3) has **`snippet_status`** `missing` or `failed`, **unless** `validation_log` contains an explicit **`deferral_accepted`** entry for this epic (short reason, e.g. macro unsupported, page unresolved, or human-approved skip). Keys never collected into `requirements[]` are out of scope for this gate.
 - Set `sources.confluence_method` (`snippet` / `mcp` / `mixed`) as appropriate.
 - Ensure **`sources.bitbucket_repo`** reflects the resolved workspace/slug (step **1** / **5b**) for downstream **COVERAGE** when the user omits `repo=` on the coverage trigger.
+- Set **`schema_version`: 4** on the ref.
+- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}<KEY>-ref.json`** — **block** delete of `temp/` and run completion until exit **0**.
 - Validate JSON.
 - **Delete** `{EpicDir}temp/`.
 - Confirm `<KEY>-ref.json` contains no `/temp/` substring.
@@ -149,6 +184,8 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 - **Bitbucket Server search 404 / MCP shape** — Always split `PROJECT_KEY/repo_slug` into **`project_key`** + **`repo_slug`** for Stash. If `bitbucket_search_code` still returns **404** on `/rest/api/1.0/search`, use step **5b** browse fallback (capped); do not treat browse-only grounding as “Bitbucket offline.”
 - **XT noise** — Small caps, keyword-seeded search, per-page `why_relevant`, pass 3.6 pruning.
 - **LLM “validation”** — Steps 3.4 / 3.6 are structured audits (delete uncited / weak links), not proof of truth.
+- **Obligation one-shot** — Skipping **3c** per-requirement subprocesses collapses invariants into COVERAGE `!` rows; parent must fan out.
+- **Downstream leakage** — Never read **`-coverage`** / CRTQA during EPIC-PREP.
 - **Yogi auth** — Skip live snippet or use MCP + `--storage-file` into `temp/` then merge; always set **`snippet_status`** / **`snippet_failure_reason`** when `snippet_text` is absent — do not leave unexplained nulls. Use step **3b** + finalize gate (step **8**) so first-pass flakiness does not ship silent gaps.
 - **Adaptive omission** — Do not default to dxTrade5-only; use **`client_shell_impact`** and **`qa_default_both`** when appropriate.
 - **Temp leakage** — Mandatory delete + grep self-check.
@@ -157,7 +194,9 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`. Con
 
 ## Related
 
-- Template: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)
+- Template: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json) (**schema v4**, `obligations_proposed[]`)
+- Obligation kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json)
+- Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md)
 - Layout: [`epics/README.md`](../../epics/README.md)
 - QA scope (Corner + Adaptive): [`docs/qa-project.json`](../../docs/qa-project.json)
 - Yogi: [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md)

@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "_comment": "TBD allowlist/forbidden patterns for TEST-PREP crtqa_outline profile. Agent executes templates only—no live execution trade during PREP.",
+  "profile": "crtqa_outline",
+  "tbd_allowlist": {
+    "session_literals": [
+      "<username>",
+      "<account_code>",
+      "<account_id>",
+      "<instrument_symbol>",
+      "<instrument>",
+      "<cag_group_key>",
+      "<group_key>",
+      "<orderkey>",
+      "<quote_bid>",
+      "<quote_ask>",
+      "<price>",
+      "<qty>",
+      "<portfolio_code>",
+      "<broker_client_name>"
+    ],
+    "tagged_gaps": [
+      "[oracle:TBD]",
+      "[attach:TBD]",
+      "[tolerance:TBD]"
+    ],
+    "pattern_note": "Angle-bracket placeholders and tagged gaps are human-fill; agent must not invent real session ids."
+  },
+  "tbd_forbidden_patterns": [
+    {
+      "id": "bare_tbd",
+      "regex": "(?<!:)\\[TBD\\](?!:)",
+      "message": "Bare [TBD] forbidden; use <placeholder> or [oracle:TBD] etc."
+    },
+    {
+      "id": "defer_ladder",
+      "regex": "\\[TBD[^\\]]*ladder",
+      "message": "Whole-scenario ladder deferral forbidden in crtqa_outline."
+    },
+    {
+      "id": "defer_additional_sequences",
+      "regex": "\\[TBD[^\\]]*additional sequences",
+      "message": "Use case_outline rows instead of deferring sequences."
+    },
+    {
+      "id": "defer_see_coverage",
+      "regex": "\\[TBD[^\\]]*see coverage",
+      "message": "Expand case_outline; do not defer to coverage subsection only."
+    },
+    {
+      "id": "defer_settlement_fixture",
+      "regex": "\\[TBD[^\\]]*settlement window",
+      "message": "Use case_outline + <fixture_window> placeholder instead."
+    }
+  ],
+  "command_patterns": {
+    "ladder_step": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> at <price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+      "show position_metrics_from_publisher"
+    ],
+    "ladder_step_note": "Literary template in Actions only; agent must not execute during PREP."
+  },
+  "stateful_ladder_requirements": {
+    "min_template_markers_per_case": 2,
+    "template_markers_any": [
+      "execution trade",
+      "show position_metrics_from_publisher",
+      "buy ",
+      "sell "
+    ]
+  },
+  "shape_ref_hygiene": {
+    "forbid_crtqa_keys_in_durable": true,
+    "forbid_crtqa_requires": true,
+    "allowed_from_benchmark": ["case titles", "subsection structure", "scenario headings"]
+  }
+}

@@ -1,275 +1,417 @@
-# Pipeline: test-prep (regression test drafting)
+# Pipeline: test-prep (regression test drafting) v3
 
-**Trigger**: user message starts with `TEST-PREP:` and includes a Jira **Epic key** (e.g. `TEST-PREP: CRT-639`). Optional tokens on the same line:
+**Trigger**: user message starts with **`TEST-PREP:`** and includes a Jira **Epic key** (e.g. `TEST-PREP: CRT-639`). Optional tokens on the **same line**:
 
-- **`map_only=yes`** / `true` / `1` — emit **mapping** (`test_bundles[]` with `proposed_title`, `covers_check_ids`, `covers_sections`) and **Jira search audit** only; **omit** full `draft.preconditions` / `actions` / `results` / `peculiarities` prose (use empty arrays or single placeholder line per array documenting map-only). Use for fast traceability review before full authoring.
-- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — optional shadow `{EpicDir}` ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)); must match prior **`EPIC-PREP`**/**`COVERAGE:`** tokens for this attempt.
+- **`map_only=yes`** / `true` / `1` — emit **shells** (phase **8a**) + **verification plan** (phase **8a½**) + plan verify only; **omit** full `draft` prose (placeholder arrays OK). **Skips** phase **8b**, **8b-verify**, **8c**, and **8c-verify**.
+- **`draft_profile=teaching`** — legacy v2 teaching drafts (`illustration_budget` cap). **Default:** **`crtqa_outline`** (no token required).
+- **`shape_ref=benchmark`** — **only when both** **`benchmark_suite=`** and **`benchmark_attempt=`** are on the **same line** as **`TEST-PREP:`**; read local [`.cursor/benchmark/test-bench/data/<KEY>/`](../../.cursor/benchmark/test-bench/data/) for **case titles/structure only**; **MUST NOT** copy CRTQA keys into durable output; set **`sources.shape_ref: benchmark`** on emit. **Forbidden** in production generation triggers.
+- **`draft_split=per_check`** / **`per_bundle`** — override auto 8b split rule ([profiles](docs/test-prep-draft-profiles.json)).
+- **`benchmark_suite=<suite_id>`** / **`benchmark_attempt=<n>`** — shadow **`{EpicDir}`** ([`docs/benchmark-contract.md`](../../docs/benchmark-contract.md)).
+- **`discover_override=yes`** — when **`test_prep_gates.blocked: true`** on **`-discover.json`**; set **`sources.discover_blocked_acknowledged: true`**.
+- **`dxtrade5_creds=<user>/<password>`** / **`webbroker_creds=<user>/<password>`** — transient only (**MUST NOT** enter durable JSON).
+- **`fe_exploration_waived=yes`** — only after Phase **0b** FE stop + operator ack (caps FE at **`shell_only`**).
+- **`proceed`** — after Phase **0** hard stop; re-run Phase **0** then continue fresh.
+- **`skip_cold_gate=yes`** — waive machine gates; log waiver in **`validation_log`**.
 
-**Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
+**Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
+
+**Doctrine**: [docs/harness-principles.md](../../docs/harness-principles.md) §3–§10 — **generation (greenfield)** assumes **no live CRTQA Jira fetch**; humans create Jira tests **after** drafts. **Default output:** **CRTQA-shaped executable outlines** ([`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json) **`crtqa_outline`**) — full **case_outline** expansion with human-fill session placeholders only ([`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json)).
+
+**Exploration depth (DISCOVER → PRECON → PREP):**
+
+| Pipeline | Dive | Role |
+|----------|------|------|
+| **TEST-DISCOVER** | 1 — surface | Obligations, affordances, fixture depth |
+| **TEST-PRECON** | 2 — abstraction | Environment setup + **`test_skeleton[]`** + **`case_outline[]`** |
+| **TEST-PREP** | 3 — verification outlines | Expand outlines into Actions/Results (`-tests.json`/`.md`) |
+
+---
 
 ## Epic workspace (`{EpicDir}`)
 
 Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
-**Prerequisite**: `{EpicDir}<KEY>-coverage.json` **must** exist (from [`COVERAGE:`](coverage.md)). If missing: **stop** and instruct the user to run `COVERAGE: <KEY>` first (with matching benchmark tokens when in benchmark mode). Do not fabricate checklist checks.
+**Prerequisite**: **`{EpicDir}<KEY>-coverage.json`** (from **`COVERAGE:`**, **schema v2** with **`obligations_coverage`**). If missing: **stop** → instruct **`COVERAGE: <KEY>`**.
+
+**Obligation gate**: If **`-ref.json`** **`obligations_proposed[]`** has **`primary_candidate`** rows not **`covered`** or **`excluded_with_reason`** in **`obligations_coverage`**, **STOP** (or use **`map_only=yes`** with operator ack) — do not invent checks to fill coverage gaps ([`docs/harness-principles.md`](../../docs/harness-principles.md)).
+
+### JSON inspection (inspect only)
+
+Before loading **`-coverage.json`** (required), **`-precon.json`**, **`-discover.json`**, **`-ref.json`**, or **`-analysis.json`** for **inspection**: **MUST** project with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md); do not load full epic JSON into context for multi-field reasoning. **Read** only slices needed for **edit/emit**. For **`{EpicDir}temp/test-prep-plan.json`** and per-bundle plan drafts during merge: **SHOULD** `jq` key slices (`bundles`, `verification_plan`) before full Read when files grow large.
+
+### Optional discovery (`{EpicDir}<KEY>-discover.json`)
+
+- **SHOULD** load before bundle planning (after **`jq`** projection per [JSON inspection](#json-inspection-inspect-only)); honour **`test_prep_gates.blocked`** unless **`discover_override=yes`** (same as v1).
+- **MUST NOT** emit **`[REQUIRES: CRTQA-*]`** from discover when **`crtqa_index_enabled`** is false.
+- Use **`fixture_needs`**, **`obligation_ledger`**, **`verification_affordances`** for modality hints only—not step text.
+
+### Optional precondition (`{EpicDir}<KEY>-precon.json`)
+
+- **SHOULD** load before phase **8a** (after **`jq`** projection per [JSON inspection](#json-inspection-inspect-only)).
+- **Phase 8a**: adopt **`test_skeleton[]`** into **`test_bundles[]`** shells when present.
+- **Phase 8b preconditions**: **thin** — cite **`-precon.md`** cluster; **must not** paste full console/WebBroker blocks per bundle.
 
 **Outputs**:
 
-- `{EpicDir}<KEY>-tests.json` — structured artifact (from [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json)).
-- `{EpicDir}<KEY>-tests.md` — human-readable mapping table + draft test bodies for review / Jira paste.
+- **`{EpicDir}<KEY>-tests.json`** — [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **schema_version 4**.
+- **`{EpicDir}<KEY>-tests.md`** — mapping + draft bodies for human / Jira paste.
 
-**Authoring model**: Full **`draft`** prose (when not `map_only`) is produced **one bundle per subprocess** (phase **8b**), then consolidated through phase **8c** before emit — not in a single one-shot generation — see [Orchestration](#orchestration-no-one-shot-drafts).
+**Ephemeral**: **`{EpicDir}temp/`** only — **`test-prep-plan.json`**, **`test-prep-plan-<bundle_id>.json`**, **`test-prep-draft-<bundle_id>.json`**, **`test-prep-draft-<bundle_id>-<check_id>.json`**, optional **`test-prep-fe-probe.json`**. **Delete** before run complete. **Never** persist **`/temp/`** in durable JSON.
 
-**Explicitly out of scope (v1)**: Playwright MCP, QA database access, SSH / dxCore console execution. Operational examples (SQL, console commands, sample outputs) **must not** be invented; use **`[TBD]`** or **`[REQUIRES: <source>]`** unless text is **copied** from a **fetched** Jira issue field or an attached runbook excerpt the user provided in-chat (then cite source).
+**Exploration depth:** Phase **0c** = **`smoke` only** ([`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json)). Phase **8a¾** = **`prep_verify_view`**. **Out of scope**: mutating console/DB, Playwright, **live** **`execution trade`** execution during PREP — **literary templates** with placeholders **are required** for **`stateful_ladder`** in **`crtqa_outline`**.
 
-**Downstream (optional)**: [`TEST-EXEC:`](test-exec.md) may materialize Playwright specs from this artifact when the environment allows. **`test_bundles[].automation`** (schema_version **2**) lets you flag **`feasibility: blocked`** when a bundle **requires** console-only, webbroker-only, or otherwise non-UI/non-readonly-DB setup—**TEST-EXEC** skips those by default. **`TEST-PREP`** may leave **`feasibility: unknown`**; it still **must not** run Playwright or DB verification here.
-
-**Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort). Durable outputs must **not** reference `temp/` as a path segment (same hygiene as [`coverage.md`](coverage.md): no `/temp/` in committed strings).
+**Downstream**: [`CLOSE:`](close.md) optional (documentation integrity + archive).
 
 ---
 
 ## Normative rules (MUST / MUST NOT)
 
-### Durable JSON path hygiene
+### Greenfield (generation)
 
-- **MUST NOT** persist the substring **`/temp/`** or a **`temp/`** path segment in **any** string field of **`{EpicDir}<KEY>-tests.json`** (including merged **`draft`** arrays, **`authoring_notes`**, provenance, or copy-pasted paths from subprocesses). Ephemeral draft files under `{EpicDir}temp/` are orchestrator-only; they **must not** appear as **paths** in durable JSON.
-- **MUST** run phase **8c** (below) after all **8b** merges and **before** writing **`-tests.json`** to disk when full drafts were produced.
+- **MUST NOT** use **existing CRTQA Test** issues for bundle design, preconditions chains, or Actions/Results prose.
+- **MUST NOT** run Jira test search/fetch in generation (phase **6** logs skip); **`existing_tests_considered: []`**, **`jira_test_search.skipped: true`**.
+- **MUST NOT** emit **`[REQUIRES: CRTQA-*]`** unless benchmark mode explicitly enables CRTQA index (out of scope for default cold run).
 
-### Mental model and taxonomy
+### CRTQA outline (default `draft_profile=crtqa_outline`)
 
-- **MUST** treat **compliance / coverage** (`-coverage.json` / Smart Checklist) as the **matrix** to satisfy. **Regression** test cases in Jira are **client-facing taxonomy**; internally they are **E2E combinatoric bundles** that let a human execute the checklist efficiently.
-- **MUST** minimize the **number** of test cases without dropping **effectiveness**: group many checklist lines into **one bundle** when they share **surface**, **user journey**, and **preconditions** (see [Bundling](#bundling-normative)).
-- **MUST NOT** default to **one Jira test per checklist bullet** when bullets share the same session (see worked pattern: [`docs/temp/coverage-to-tests.txt`](../../docs/temp/coverage-to-tests.txt) — CRT-632 style).
-- **Policy anchor** (human): [QAPORTAL — Test Repository](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497097317/Test+Repository) — cite for taxonomy; do not duplicate full Confluence body in-repo.
+- **Actions / Results**: numbered **1:1** pairs — expand **every** **`case_outline[]`** row from plan (merged from PRECON + 8a½).
+- **`[TBD]`**: only session literals (`<account_code>`, …) and tagged gaps (`[oracle:TBD]`, `[attach:TBD]`) per [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json). **Forbidden:** whole-scenario deferrals (`[TBD: ladder]`, bare `[TBD]`).
+- **`stateful_ladder`**: use **`command_patterns.ladder_step`** from **`-precon.json`** with placeholders; include **`execution trade`** template lines (not executed by agent).
+- **Yogi / requirement tags** — **only** in **`draft.results[]`**; orchestrator passes **`results_only_context`** to subprocess.
+- **Peculiarities**: formulas; FE labels from **8a¾** `metric_columns` / `widgets_seen`; no Yogi tags.
+
+### Teaching (legacy `draft_profile=teaching`)
+
+- **Actions**: ≤ **`illustration_budget`** (default **2**); remainder **`[TBD: …]`** per coverage.
+- Same Yogi / path / orchestration rules as v2.
+
+### Path hygiene, traceability, orchestration
+
+- No **`/temp/`** in durable JSON; **8a½** one subprocess per bundle; **8b** one subprocess per bundle **or** per **`check_id`** when [split rule](docs/test-prep-draft-profiles.json) fires (unless **`draft_split=`** override); **8c** orchestrator merge; **no one-shot** all-bundle drafts.
 
 ### Step format
 
-- **MUST** structure each bundle’s executable text as **Preconditions → Actions → Results → Peculiarities**, per [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **format_norms.markdown** and the inline example [`docs/temp/tc-template.txt`](../../docs/temp/tc-template.txt): cross-reference Preconditions/Actions to Peculiarities (`see Peculiarities N`).
-- **MUST** put formulas, Figma/Slack links, scope caveats, setup detail, and copy-paste **evidence** in **Peculiarities**, not in the main **Actions** list when that keeps Actions linear.
-
-### Jira reuse (anti-hallucination)
-
-- **MUST** use **user-mcp-atlassian** (`jira_search`, `jira_get_issue`) for **discovery and retrieval** — read tool schemas before calls; follow [`.cursor/rules/mcp-atlassian-search.mdc`](../rules/mcp-atlassian-search.mdc).
-- **MUST NOT** invent test steps, expected results, SQL, or console commands **from issue titles or from memory**. If `jira_get_issue` was **not** run for an issue, **do not** claim its steps — set `steps_provenance: not_fetched` and use **`[GAP: pull steps from CRTQA-xxxx or author manually]`** in the draft where reuse was intended.
-- **MUST** record JQL and `result_count` per query in `jira_test_search.queries[]`.
-- **MUST** set `existing_tests_considered[].reuse_recommendation` only when **`steps_provenance == fetched_from_issue`**; otherwise `none` or omit recommendation with note.
-
-### Unknowns and operational detail
-
-- **MUST** use **`[TBD]`** or **`[REQUIRES: <specific source>]`** when the agent lacks **tool-backed** or **user-supplied** text for a label, command, query, or expected output.
-- **MUST** treat **hesitation** as **unknown** — same as missing data.
-- **MUST NOT** output **plausible** dxCore commands, SQL, or example outputs without a **fetched** or **user-pasted** source.
-
-### Exclusions
-
-- **MUST NOT** author bundles whose sole purpose is to cover checks that are **excluded** per coverage **`explicitly_out_of_scope`**, unless the user explicitly overrides in the trigger (default: no override).
-- **MUST** skip checks with **`checks[].ambiguity`** set (Smart Checklist **`!`**) **unless** the user adds an explicit waiver in the trigger line (e.g. `include_ambiguous=yes`) — default **skip** and list under **`excluded_checks_with_reason`**.
-- **SHOULD** use **`-analysis.json`** when present: skip or flag checks tied to **`gaps[]`** with `type: unverifiable` (or similar) the same way — record in **`excluded_checks_with_reason`** with `reason: analysis_gap` and evidence pointer.
-
-### Traceability and reverse validation
-
-- **MUST** assign every **included** primary-relevant check (see below) to **exactly one** `test_bundles[].covers_check_ids` entry, **or** document waiver in **`excluded_checks_with_reason`**.
-- **MUST** populate **`reverse_validation.coverage_gaps[]`** for every **`checks[].id`** that is **`verification_role: primary`** or **`null`** (treat null as in-scope for traceability when not excluded) and **not** covered by any bundle **and** not excluded — **coverage_gaps must be empty** when healthy, or each gap explained.
-- **MUST** populate **`draft_red_flags[]`** when: a bundle has **empty** `covers_check_ids`; the same `check_id` appears in **multiple** bundles without explicit rationale in `reverse_validation.notes`; or self-review detects **ungrounded operational detail** risk.
-- **SHOULD** list **`reverse_validation.orphan_bundles[]`** for bundles with zero `covers_check_ids` after phase 8a.
-
-**Primary-relevant checks**: Prefer `checks[].verification_role == primary` or matrix-aligned primary rows; for **`supporting`** / **`out_of_epic`**, bundle **with** their primary scenario in the same test session when they are **`detail_lines`**-only for the same user journey; otherwise exclude per coverage norms or list under exclusions with rationale.
-
-### Orchestration (no one-shot drafts)
-
-- **MUST** use a **single user trigger** `TEST-PREP:` — the human does **not** re-prompt per test. The **orchestrator** (the agent handling the trigger) runs planning **once**, then runs **one subprocess per bundle** for full draft prose.
-- **MUST NOT** generate **full** `draft.preconditions` / `actions` / `results` / `peculiarities` for **more than one** `bundle_id` in a **single** model completion / turn when `sources.map_only` is **false**. Treat **batching all bundle drafts** in one shot as a **pipeline violation** (same severity as inventing Jira text).
-- **MUST** complete **phase 8a** (bundle **shells** only: ids, titles, `covers_check_ids`, `covers_sections`, `related_existing_tests`; `draft` empty or single-line placeholders) **before** starting **phase 8b** subprocesses.
-- **MUST** run **phase 8b** as **N sequential subprocesses** (N = number of bundles), **one bundle per subprocess**. Recommended: Cursor **Task** tool with `subagent_type: generalPurpose` (or any equivalent **isolated** agent run). Each subprocess **only** authors **that** bundle’s `draft`.
-- **MUST** run **phase 8c** immediately after the **phase 8b** loop completes when `sources.map_only` is **false**, even when **N = 0** bundles (cheap no-op scrub) — see [Durable JSON path hygiene](#durable-json-path-hygiene).
-- **When `map_only` is true**: **skip** phase **8b** and **8c** entirely; shells may carry map-only placeholder `draft` lines only.
+- **Preconditions → Actions → Results → Peculiarities** per [`tests-ref.json`](../../epics/templates/tests-ref.json) **format_norms** and [`docs/temp/tc-template.txt`](../../docs/temp/tc-template.txt).
 
 ---
 
-## Subprocess prompt contract (normative)
+## Verification ladder (phase 8a½)
 
-**Mechanism**: One **dedicated subprocess** per `test_bundles[].bundle_id`. **Do not** pass the entire epic coverage JSON if avoidable — pass a **minimal slice**.
+**Registry**: [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json).
 
-**Orchestrator → subprocess — include explicitly**:
+**Temp plan only**: **`{EpicDir}temp/test-prep-plan.json`** — **never** full **`verification_plan[]`** rows in committed **`-tests.json`** (optional **`verification_classes_summary[]`** on bundles for humans).
 
-1. `epic_key`, `bundle_id`, `proposed_title`.
-2. **Coverage slice**: for each id in `covers_check_ids`, the full matching **`checks[]`** object from `-coverage.json` (`id`, `section`, `subsection`, `scenario_line`, `detail_lines`, `verification_role`, `ambiguity`, `requirement_keys`).
-3. **`existing_tests_considered[]`** rows whose `key` appears in `related_existing_tests` — include **verbatim** fetched step/description fields when `steps_provenance == fetched_from_issue`; otherwise one line per key: not fetched, do not invent.
-4. Pointers: [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) (**format_norms**), [docs/temp/tc-template.txt](../../docs/temp/tc-template.txt), and this playbook’s **Jira reuse**, **Unknowns**, **Exclusions** bullets (or a one-line “obey test-prep.md MUST NOT invent”).
-5. Output schema (subprocess must return or write — see below).
+**Per bundle `verification_plan[]` row** (agent merges from subprocess):
 
-**Subprocess → orchestrator — output**:
+| Field | Source |
+|-------|--------|
+| **`check_id`** | `covers_check_ids` |
+| **`verification_class`** | Rule-ordered selection from registry |
+| **`observation_surfaces`** | coverage + discover modality |
+| **`min_case_count`** | from registry + [`test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json) matrix |
+| **`case_outline[]`** | merge PRECON skeleton outlines; add rows until **`min_case_count`** met |
+| **`draft_profile`** | `crtqa_outline` (default) or `teaching` |
+| **`coverage_anchor`** | short excerpt from `scenario_line` |
+| **`discover_modality`** | disposition / affordance note when discover loaded |
+| **`selection_rule_priority`** | which registry rule matched |
 
-- A JSON object:  
-  `{ "bundle_id": "<same as input>", "draft": { "preconditions": [], "actions": [], "results": [], "peculiarities": [] }, "authoring_notes": [] }`  
-  `authoring_notes` optional (e.g. why a line is `[TBD]`).
+**Self-heal — plan loop** (max **3** epic iterations):
 
-**Preferred persistence (robust merge)**: Subprocess writes **`{EpicDir}temp/test-prep-draft-<bundle_id>.json`** with the object above (sanitize `bundle_id` for the filename, e.g. replace unsafe chars). Orchestrator **reads** each file after the subprocess returns, **merges** `draft` into the matching `test_bundles[]` entry, sets **`authoring.subprocess_completed`** and **`authoring.completed_at`** (ISO-8601), leaves **`authoring.temp_draft_file`** **null** in **durable** `-tests.json` (never persist `/temp/` paths in committed output).
+1. Run **8a½** subprocess per bundle → merge **`temp/test-prep-plan-<bundle_id>.json`** into **`test-prep-plan.json`**.
+2. **`python automation/tools/test_prep_verify.py --mode plan --coverage … --plan …`**
+3. On fail: fix plan subprocesses for affected bundles; goto 1.
 
-**MUST NOT** (subprocess output): Include filesystem paths containing **`temp/`** or **`/temp/`** (e.g. `.../temp/test-prep-draft-tb-001.json`, absolute `{EpicDir}` traces) in **any** JSON field (`draft` lines, `authoring_notes`). Reference bundles by **`bundle_id`** only in prose.
+---
 
-**Alternative**: Subprocess returns the JSON object only in the Task transcript — acceptable if the orchestrator **parses** it reliably; **prefer temp files** when unsure.
+## Phase 0 (after shells, before 8a½)
 
-**Caps**: Subprocess **may** call `jira_get_issue` only for keys listed in `related_existing_tests` if orchestrator did not already fetch body text — keep extra fetches **minimal** (orchestrator should prefetch in phase 7).
+Runs **after** phase **8a** so FE surfaces derive from **`test_bundles[]`** + skeleton **`surfaces`**.
+
+Contract: [`docs/fe-ui-probe-contract.json`](../../docs/fe-ui-probe-contract.json).
+
+### 0a — Machine gates
+
+When any bundle needs console/postgres ( **`ladder_in_test`** on skeleton, console in **`covers_check_ids`** surfaces, or discover tooling intent):
+
+- **`crtqa_env_probe.py --coverage`**
+- MCP **`list_tables`** if postgres required
+- **`Get-CrtqaConsoleStatus.ps1`** if console required
+
+### 0b — FE credential gate
+
+**`required_fe_surfaces`**: union of bundle/skeleton **`surfaces`** + registry **`fe_probe_surfaces`** for planned classes + Adaptive when ref **`client_shell_impact.adaptive`** is **`affected`** / **`likely_affected`**.
+
+Missing creds and no **`fe_exploration_waived=yes`** → **STOP** + **`operator_recovery`** (chat only).
+
+### 0c — Post-login smoke (read-only Chrome)
+
+**Depth `smoke` only** — login gate; **does not** satisfy verification exploration.
+
+Record **`fe_ui_sessions`** in **`temp/test-prep-plan.json`**; copy to **`sources.fe_ui_sessions`** on emit.
+
+**Hard stop** on auth fail when creds supplied.
+
+---
+
+## Phases (complete unless N/A)
+
+### 1–5. Resolve, load, epic refresh, exclusions
+
+Same as v1 (steps **1**–**5**): load coverage (required), analysis/ref optional — **MUST** `jq` project each present artifact per [JSON inspection](#json-inspection-inspect-only) before loading full files; when **`-analysis.json`** (v2) present, `jq '.exploration_suppressed[]'` — do not re-explore suppressed **`check_id`** rows; **`jira_get_issue`** for **Epic `<KEY>`** only (not CRTQA tests), build **`excluded_checks_with_reason[]`**.
+
+### 6. Generation — skip CRTQA test search
+
+- Set **`jira_test_search.at`** (ISO-8601), **`jira_test_search.skipped: true`**, **`jira_test_search.note`**: `generation_mode_greenfield`.
+- **`jira_test_search.queries: []`**
+- **`existing_tests_considered: []`**
+- **Do not** run **`jira_search`** for CRTQA tests in generation.
+- Append **`validation_log`**: **`6-skip-crtqa-search`**.
+
+### 8a. Bundle shells
+
+- Adopt **`test_skeleton[]`** when **`-precon.json`** loaded; else bundle from [Bundling](#bundling-normative).
+- **`related_existing_tests: []`** always in generation.
+- **`precon_cluster_refs[]`** from skeleton when present.
+- **`draft`**: empty `[]` or single-line pending placeholders unless **`map_only`**.
+- Set **`sources.tests_run_started_at`** (ISO-8601).
+- Append **`validation_log`**: **`8a`**.
+
+### Phase 0 (after 8a)
+
+Complete **0a**–**0c** above. Append **`validation_log`**: **`phase0`**, **`phase0b`**, **`phase0c`** as applicable.
+
+### 8a½. Verification plan (one subprocess per bundle)
+
+**Input to subprocess**: coverage slice, discover slice (if loaded), registry path, bundle shell, **`-precon.json`** **`case_outline[]`** + **`session_placeholders`** / **`command_patterns`**, optional **`shape_ref=benchmark`** (titles only), **`fe_ui_sessions`**, ref **`client_shell_impact`**, **`draft_profile`**.
+
+**Output**: **`{EpicDir}temp/test-prep-plan-<bundle_id>.json`** with **`verification_plan[]`** (each row includes **`case_outline[]`**, **`min_case_count`**, **`draft_profile`**), **`plan_status`**, **`fe_probe_surfaces`**, **`ladder_dependency_declared`** when class is **`stateful_ladder`**.
+
+**Merge:** set epic-level **`draft_profile`** on **`temp/test-prep-plan.json`** (default **`crtqa_outline`**).
+
+Orchestrator merges into **`{EpicDir}temp/test-prep-plan.json`**.
+
+Append **`validation_log`**: **`8a-half-<bundle_id>`**.
+
+### 8a½-verify. Plan verifier gate
+
+```powershell
+python automation/tools/test_prep_verify.py --mode plan `
+  --coverage {EpicDir}<KEY>-coverage.json `
+  --plan {EpicDir}temp/test-prep-plan.json
+```
+
+- Max **3** epic iterations on non-zero exit.
+- On pass: set each bundle **`plan_status: verified`** in temp plan.
+
+Append **`validation_log`**: **`8a-half-verify`**.
+
+### 8a¾. Verification exploration (one subprocess per bundle)
+
+**After plan verify, before 8b.** Contract: [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json) **`prep_requires`**.
+
+**Input:** plan slice, **`-precon.json`** `exploration_log` summary, optional **`-discover.json`**, **`fe_ui_sessions`**, coverage metric keywords.
+
+**Task:** reach **`prep_verify_view`** per **`verification_class`** — open verification-target grids (Position Book, Positions widget, Adaptive portfolio metrics, console metric help family for **`stateful_ladder`**).
+
+**Output:** merge into **`temp/test-prep-plan.json`** per bundle:
+
+```json
+{
+  "bundle_id": "tb-003",
+  "verification_exploration": [
+    {
+      "surface": "dxtrade5",
+      "depth_level": "prep_verify_view",
+      "view_id": "positions_widget_metrics",
+      "metric_columns": ["Open P/L", "% PL Gross"],
+      "widgets_seen": [],
+      "precon_depth_ok": true
+    }
+  ]
+}
+```
+
+**MUST** use Chrome MCP navigation beyond login; **≥1** row per **`observation_surfaces`** on parity classes.
+
+**Optional split:** one subprocess per **surface** when plan lists multiple FE surfaces.
+
+Append **`validation_log`**: **`8a-three-quarter-<bundle_id>`**.
+
+### 8a¾-verify. Exploration verifier (per bundle, max 2 iterations)
+
+```powershell
+python automation/tools/test_prep_verify.py --mode explore `
+  --coverage {EpicDir}<KEY>-coverage.json `
+  --plan {EpicDir}temp/test-prep-plan.json `
+  --precon {EpicDir}<KEY>-precon.json `
+  --bundle-id tb-003
+```
+
+Epic cap: **5** bundle explore failures → set **`test_prep_gates.blocked: true`** on temp plan + **STOP** with operator recovery (chat).
+
+On fail: re-run **8a¾** for that bundle only.
+
+Append **`validation_log`**: **`8a-three-quarter-verify-<bundle_id>`**.
+
+### 8b. Draft (skip if `map_only`)
+
+**Split rule** ([`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json)): **per-check** subprocess when bundle has class in `{stateful_ladder, derived_metric, invariant_under_change, rounding_matrix}` **and** (`len(covers_check_ids) > 1` **or** `min_case_count > 4`). Else **per-bundle**. Override with **`draft_split=`** on trigger.
+
+**MUST NOT** one-shot all bundles or all checks in parent chat.
+
+**Orchestrator → subprocess** (bounded pack):
+
+1. `epic_key`, `bundle_id`, `check_id` (when per-check), `proposed_title`, `draft_profile`.
+2. Coverage slice; **plan slice** including **`case_outline[]`** for target check(s).
+3. **`-precon.json`**: **`session_placeholders`**, **`command_patterns`**, thin precon cite text.
+4. **`verification_exploration[]`** / **`metric_columns`** from plan (**8a¾**).
+5. **`results_only_context`** (Yogi — **Results only**).
+6. **`shape_ref=benchmark`**: stripped case headings only — **no CRTQA keys** in output.
+7. [test-verification-classes.json](../../docs/test-verification-classes.json), [test-prep-tbd-contract.json](../../docs/test-prep-tbd-contract.json).
+
+**Output**:
+
+- Per-bundle: **`temp/test-prep-draft-<bundle_id>.json`**
+- Per-check: **`temp/test-prep-draft-<bundle_id>-<check_id>.json`**
+
+Append **`validation_log`**: **`8b-<bundle_id>`** or **`8b-<bundle_id>-<check_id>`**.
+
+### 8c. Merge drafts (orchestrator; skip if `map_only`)
+
+1. For each bundle: concatenate per-check draft arrays in **`case_id`** order into one **`draft`** on **`test_bundles[]`**.
+2. Set **`authoring.subprocess_completed: true`**, **`verification_classes_summary[]`**.
+3. **`python automation/tools/test_prep_verify.py --mode merge --tests … --plan …`**
+4. Append **`validation_log`**: **`8c`**.
+
+### 8c-verify. Path scrub (skip if `map_only`)
+
+Same as v2 path scrub on durable-bound staging; append **`validation_log`**: **`8c-scrub`**.
+
+### 8b-verify. Draft verifier (per bundle, max 2 retries)
+
+```powershell
+python automation/tools/test_prep_verify.py --mode draft `
+  --coverage {EpicDir}<KEY>-coverage.json `
+  --tests <in-memory or temp staging> `
+  --bundle-id tb-001 `
+  --plan {EpicDir}temp/test-prep-plan.json
+```
+
+On fail: re-run **8b** for that bundle only.
+
+### 9–10. Reverse validation and anti-patterns
+
+Same as v1; add anti-pattern **`crtqa_structural_dependency_in_generation`**, **`verification_plan_missing`**.
+
+### 11. Emit
+
+**Pre-write**:
+
+```powershell
+python automation/tools/test_prep_verify.py --mode tests `
+  --coverage {EpicDir}<KEY>-coverage.json `
+  --tests {EpicDir}<KEY>-tests.json
+```
+
+Write **`-tests.md`** and **`-tests.json`**. When **`map_only`**: include verification plan summary table from temp plan; note map-only.
+
+**`sources.fe_ui_sessions`**, **`sources.fe_exploration_waived`**, **`sources.generation_mode: true`**, **`sources.draft_profile`**, optional **`sources.shape_ref`** on emit.
+
+### 12. Cleanup
+
+**Delete** **`{EpicDir}temp/`** entirely.
+
+---
+
+## Subprocess contracts
+
+### Plan subprocess (`8a½`)
+
+Write **`temp/test-prep-plan-<bundle_id>.json`**:
+
+```json
+{
+  "bundle_id": "tb-002",
+  "draft_profile": "crtqa_outline",
+  "verification_plan": [
+    {
+      "check_id": "chk-002",
+      "verification_class": "stateful_ladder",
+      "min_case_count": 6,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-002",
+          "title": "Multi-buy then sell through zero with remainder",
+          "intent": "opening-side avg; realized on close",
+          "pattern_ref": "ladder_step"
+        }
+      ],
+      "observation_surfaces": ["console"],
+      "coverage_anchor": "…",
+      "selection_rule_priority": 40
+    }
+  ],
+  "plan_status": "pending",
+  "ladder_dependency_declared": true,
+  "fe_probe_surfaces": []
+}
+```
+
+### Draft subprocess (`8b`)
+
+Write **`temp/test-prep-draft-<bundle_id>.json`** or **`temp/test-prep-draft-<bundle_id>-<check_id>.json`**:
+
+```json
+{
+  "bundle_id": "tb-002",
+  "check_id": "chk-002",
+  "draft": { "preconditions": [], "actions": [], "results": [], "peculiarities": [] },
+  "verification_classes_summary": ["stateful_ladder"],
+  "authoring_notes": []
+}
+```
 
 ---
 
 ## Bundling (normative)
 
-1. **Merge** when: same **surface** (e.g. same app / same major screen), continuous **navigation**, shared **preconditions** (same user, account, instrument setup), and executing **Action N** does not invalidate **Result** of prior checks in the bundle.
-2. **Split** when: different **persona** or **account**, **backend reset** required between scenarios, or a **long** unrelated journey (different major `##` section with different setup).
-3. **Allow** one proposed Jira test to span **multiple `###` subsections** when one session validates all (pattern: shared **CRTQA** key across Instrument page subsections in [`docs/temp/coverage-to-tests.txt`](../../docs/temp/coverage-to-tests.txt)).
-4. **Copy** `covers_sections` from **`-coverage.md`** `##` / `###` headings where possible for human orientation.
-
----
-
-## Preconditions
-
-- **user-mcp-atlassian**: Jira tools — schema before calls.
-- **Inputs**: **`{EpicDir}<KEY>-coverage.json`** (required), **`{EpicDir}<KEY>-coverage.md`** (recommended for headings), **`{EpicDir}<KEY>-analysis.json`** (optional), **`{EpicDir}<KEY>-ref.json`** (optional — `client_shell_impact`, `synthesis`).
-- **Context**: [`docs/qa-project.json`](../../docs/qa-project.json) for Jira project lists (CRTQA, CRT, CRTBL, SUPXT, CAN, etc.).
-
----
-
-## Folder lifecycle
-
-1. Ensure `{EpicDir}` exists.
-2. Create `{EpicDir}temp/` when saving raw Jira exports **or** per-bundle draft fragments.
-3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `jira-test-search-*.json`, **`test-prep-draft-<bundle_id>.json`** (phase 8b). **No cookies or tokens** in committed files.
-4. Merge durable facts into `{EpicDir}<KEY>-tests.json` and write `{EpicDir}<KEY>-tests.md` (after phase **8c** scrub when applicable).
-5. **Delete** `{EpicDir}temp/` recursively before finishing.
-6. **Self-check**: `<KEY>-tests.json` and `.md` must **not** contain `/temp/` or **`temp/`** path segments in any string (see [Durable JSON path hygiene](#durable-json-path-hygiene)).
-
----
-
-## Phases (complete all unless N/A — document skip in `validation_log`)
-
-### 1. Resolve trigger and paths
-
-- Parse `<KEY>` and optional **`map_only`** (`yes`/`true`/`1` → `sources.map_only: true`).
-- Set `epic_key`, `sources.*_path`, append `validation_log` step `1`.
-
-### 2. Load coverage (required)
-
-- Read `{EpicDir}<KEY>-coverage.json`. If missing: **stop**; log and instruct `COVERAGE: <KEY>`.
-- Set `sources.coverage_loaded: true`, timestamp if useful.
-- Read `{EpicDir}<KEY>-coverage.md` when present for section headings.
-- Append `validation_log`: step `2`.
-
-### 3. Load optional inputs
-
-- Read `{EpicDir}<KEY>-analysis.json` → `sources.analysis_loaded`.
-- Read `{EpicDir}<KEY>-ref.json` → `sources.ref_loaded`.
-- Append `validation_log`: step `3`.
-
-### 4. Refresh Epic (Jira)
-
-- MCP `jira_get_issue` for `<KEY>`; optional save raw JSON to `temp/jira-epic.json`.
-- Set `sources.jira_fetched_at` (ISO-8601).
-- Append `validation_log`: step `4`.
-
-### 5. Build exclusion set
-
-- From **`-coverage.json`**: all **`explicitly_out_of_scope`** themes; each **`checks[]`** with non-null **`ambiguity`** (unless user `include_ambiguous=yes` in trigger).
-- From **`-analysis.json`** when loaded: map **`gaps[]`** with `type` in `unverifiable`, `snippet_missing` (optional team policy — default exclude or flag per gap evidence).
-- Populate **`excluded_checks_with_reason[]`** with `check_id`, `reason`, `evidence` (field path).
-- Append `validation_log`: step `5`.
-
-### 6. Jira search — existing tests
-
-- Set `jira_test_search.at` (ISO-8601).
-- Run **multiple** `jira_search` calls; record `jql`, `purpose`, `result_count` in `jira_test_search.queries[]`.
-
-**JQL strategy** (adapt to instance; try in order):
-
-1. **Epic linkage** (`epic_link`): e.g. `"Epic Link" = <KEY>` or `parent = <KEY>` or `issue in childIssuesOf("<KEY>")` if supported — scope to **Test** / **CRTQA** issue types **only if** `issuetype` names are confirmed from a sample query; otherwise broader project filter.
-2. **Epic key text** (`epic_key_text`): `text ~ "<KEY>" AND project in (CRTQA, ...)` per qa-project.
-3. **Summary keywords** (`summary_keyword`): 1–2 queries from epic summary tokens + `epic_verification_focus.keywords` when present.
-
-- Cap total issues considered (e.g. **≤ 50** keys) before selective `jira_get_issue`.
-- Append `validation_log`: step `6`.
-
-### 7. Fetch candidate tests
-
-- For the **most relevant** subset of search hits (epic-linked first, then keyword), run **`jira_get_issue`** to retrieve description / test-step fields.
-- Populate **`existing_tests_considered[]`** with `key`, `summary`, `status`, `issuetype`, `url`, `steps_provenance`, `fields_used`, `reuse_recommendation` per template rules.
-- Append `validation_log`: step `7`.
-
-### 8a. Compose test bundle shells (orchestrator only)
-
-- Cluster **`checks[]`** (minus exclusions) using [Bundling](#bundling-normative) rules.
-- Assign **`bundle_id`** (`tb-001`…), **`proposed_title`**, **`covers_check_ids`**, **`covers_sections`**, **`related_existing_tests`** (keys from phase 7 that overlap thematically — **do not** imply steps were reused unless fetched).
-- Initialize **`authoring`**: `subprocess: true`, `subprocess_completed: false`, `completed_at: null`, `temp_draft_file: null` (see template). If **`map_only`**: set **`authoring.subprocess: false`**, keep **`subprocess_completed: false`**; **skip phase 8b** and **8c**.
-- If **`map_only`**: set `draft` arrays to minimal placeholders documenting map-only only; **skip phase 8b** and **8c**.
-- If **not** `map_only`: set **`draft`** to **empty arrays** `[]` **or** a **single** placeholder string per array (e.g. `"1. [PENDING subprocess tb-001]"`) — **do not** write full Preconditions/Actions/Results/Peculiarities prose in this phase.
-- Append `validation_log`: step `8a`.
-
-### 8b. Draft each bundle via subprocess (skip if `map_only`)
-
-- For **each** `test_bundles[]` entry in order:
-  1. Invoke a **dedicated subprocess** per [Subprocess prompt contract](#subprocess-prompt-contract-normative) (e.g. **Task** `generalPurpose`).
-  2. Subprocess produces **`draft`** only for **this** `bundle_id`.
-  3. Merge: read `temp/test-prep-draft-<bundle_id>.json` **or** parse subprocess return → copy `draft` into `test_bundles[]` for matching `bundle_id`.
-  4. Set **`authoring.subprocess_completed: true`**, **`authoring.completed_at`** (ISO-8601). **Do not** write **`temp_draft_file`** paths into durable JSON.
-  5. Append `validation_log`: e.g. step `8b-tb-001` … or one entry per bundle with `action: merged draft for tb-00N`.
-- **MUST NOT** substitute 8b by generating all drafts in the orchestrator in one completion — see [Orchestration](#orchestration-no-one-shot-drafts).
-
-### 8c. Durable path scrub (skip only if `map_only`)
-
-- After **all** **8b** merges, **scan** the in-memory **`test_bundles`** (every string in **`draft`** and any other **`test_bundles[]`** fields you populate) plus top-level prose fields due for **`-tests.json`** for **`/temp/`** or path-like **`temp/`** segments (or run the equivalent check on the serialized JSON **before** `write`).
-- **If matched**: **rewrite** paths to neutral references — e.g. drop the directory prefix, cite **`bundle_id`**, or replace with **`[ephemeral draft merged]`** — so the **saved** file contains **no** `temp/` path fragments. **Do not** ship subprocess echo of scratch file locations.
-- Append `validation_log`: step `8c`, including whether scrubbing changed any fields.
-
-### 9. Reverse validation
-
-- Compute **`reverse_validation.coverage_gaps`** for uncovered primary-relevant checks.
-- Detect **duplicate** `check_id` across bundles → **`draft_red_flags`** + **`reverse_validation.notes`**.
-- Detect bundles with **empty** `covers_check_ids` → **`orphan_bundles`** / **`draft_red_flags`**.
-- Append `validation_log`: step `9`.
-
-### 10. Anti-pattern scan
-
-- Populate **`anti_pattern_findings[]`** for: one-bullet-one-test explosion without justification; missing traceability; suspected invented operational detail (self-check).
-- Append `validation_log`: step `10`.
-
-### 11. Emit markdown
-
-- **Pre-write**: Confirm phase **8c** completed (or was N/A) and the assembled **`-tests.json`** payload still passes [Durable JSON path hygiene](#durable-json-path-hygiene).
-- Write **`{EpicDir}<KEY>-tests.md`**:
-  - **Epic** line and optional focus from coverage.
-  - **Mapping table**: `bundle_id` | `proposed_title` | `covers_check_ids` (comma-separated) | `covers_sections` (short).
-  - **Existing tests considered** (bullets: key — summary — reuse note).
-  - **Per bundle**: full draft text (Preconditions / Actions / Results / Peculiarities) **or** map-only notice.
-  - **Reverse validation** summary: gaps (must be empty or listed), red flags, notes.
-  - **Excluded checks** summary when non-empty.
-
-- Write **`{EpicDir}<KEY>-tests.json`** from template, all sections filled.
-
-- Append `validation_log`: step `11`.
-
-### 12. Cleanup
-
-- **Delete** `{EpicDir}temp/`.
-- Append `validation_log`: step `12` (complete).
+Unchanged from v1: merge by shared surface/session/preconditions; split on reset/persona; copy **`covers_sections`** from **`-coverage.md`**.
 
 ---
 
 ## Pitfalls
 
-- **One-shot all-bundle drafts** — Violates [Orchestration](#orchestration-no-one-shot-drafts); use phase **8b** per bundle.
-- **Inventing Jira steps** — Titles are not evidence; fetch or `[GAP]`.
-- **Inventing SQL/console** — Use `[TBD]` / `[REQUIRES: …]`.
-- **Ignoring `!` ambiguity** — Default skip + `excluded_checks_with_reason`.
-- **Traceability holes** — `coverage_gaps` must be reconciled or waived in writing.
-- **Temp leakage** — Mandatory delete + substring self-check; never persist `/temp/` paths in `-tests.json`.
-- **Subprocess path echo** — Merged **8b** `draft` text can reintroduce `temp/` fragments; phase **8c** + step **11** pre-write check are **mandatory** before saving **`-tests.json`**.
+| Pattern | Severity |
+|---------|----------|
+| One-shot all-bundle drafts | **Violation** |
+| CRTQA search or reuse in generation | **Violation** |
+| Yogi tags outside **Results** | **Violation** |
+| Skip plan verify before **8b** | **Violation** |
+| Full **verification_plan** in durable **`-tests.json`** | **Violation** |
+| Phase **0** after plan without creds when FE required | **Violation** |
+| Skip **8a¾** before **8b** when plan class needs `prep_verify_view` | **Violation** |
+| **8b** Peculiarities labels not from **8a¾** `metric_columns` / `widgets_seen` | **Violation** |
+| Whole-scenario `[TBD]` in **crtqa_outline** | **Violation** |
+| CRTQA keys in durable draft (generation) | **Violation** |
+| **teaching**: invented `execution trade` without vignette/TBD | **Violation** |
+| **crtqa_outline**: `stateful_ladder` without ladder template markers | **Violation** |
+| Skip **8c** merge after per-check **8b** | **Violation** |
 
 ---
 
 ## Related
 
-- Template: [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json)
-- Coverage playbook: [`coverage.md`](coverage.md)
-- Analysis playbook: [`analysis.md`](analysis.md)
-- Epic ref: [`epic-prep.md`](epic-prep.md), [`epics/README.md`](../../epics/README.md)
-- Router: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc)
+| Item | Path |
+|------|------|
+| Template | [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) |
+| Verification classes | [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) |
+| Draft profiles | [`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json) |
+| TBD contract | [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json) |
+| Verifier | [`automation/tools/test_prep_verify.py`](../../automation/tools/test_prep_verify.py) · [doc](../../automation/docs/test-prep-verify.md) (`plan`, `explore`, `draft`, `merge`, `tests`) |
+| Benchmark shape (optional) | [`.cursor/benchmark/test-bench/data/`](../../.cursor/benchmark/test-bench/data/) |
+| Exploration depth | [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json) |
+| FE contract | [`docs/fe-ui-probe-contract.json`](../../docs/fe-ui-probe-contract.json) |
+| Precon | [`test-precon.md`](test-precon.md) |
+| Discover | [`test-discover.md`](test-discover.md) |
+| Coverage | [`coverage.md`](coverage.md) |

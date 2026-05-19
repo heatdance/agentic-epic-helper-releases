@@ -36,11 +36,13 @@ When you **add** a new file under `.cursor/pipelines/*.md`, **update this table*
 
 | Pipeline id | Trigger | Playbook | `harness-map` T1 package `id` | Temp / ephemeral | Must appear in: router, map, AGENTS, README, **`HOW-TO.md`** at repo root (**process guide** + **Keywords**/triggers table), qa-artifacts |
 |-------------|---------|----------|-------------------------------|------------------|----------------------------------------------------------------------------------------|
-| `epic-prep` | **`EPIC-PREP:`** | [`epic-prep.md`](epic-prep.md) | `epic_ref` | `epics/<KEY>/temp/` | Yes |
-| `coverage` | **`COVERAGE:`** | [`coverage.md`](coverage.md) | `coverage_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `analysis` | **`ANALYSE:`** | [`analysis.md`](analysis.md) | `analysis_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `test-prep` | **`TEST-PREP:`** | [`test-prep.md`](test-prep.md) | `test_prep_pipeline` | `epics/<KEY>/temp/` | Yes |
-| `test-exec` | **`TEST-EXEC:`** | [`test-exec.md`](test-exec.md) | `test_exec_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `epic-prep` | **`EPIC-PREP:`** | [`epic-prep.md`](epic-prep.md) — v4 obligations, `epic_prep_verify.py`, `focus=` | `epic_ref` | `epics/<KEY>/temp/` | Yes |
+| `coverage` | **`COVERAGE:`** | [`coverage.md`](coverage.md) — v2 obligations_coverage, section subprocesses, `coverage_verify.py` | `coverage_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `analysis` | **`ANALYSE:`** | [`analysis.md`](analysis.md) v2 gaps + `exploration_suppressed`; `analysis_verify.py`; `known_issues` opt-in | `analysis_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `test-discover` | **`TEST-DISCOVER:`** | [`test-discover.md`](test-discover.md) — schema v3, **0b/0c FE gates**, **`fe-ui-probe-contract.json`**, **`discover_verify.py`** | `test_discover_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `test-precon` | **`TEST-PRECON:`** | [`test-precon.md`](test-precon.md) v4 — **`exploration-depth-ladder.json`**; Phase 4R/4D/4C; **`precon_verify.py --discover`** | `test_precon_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `test-prep` | **`TEST-PREP:`** | [`test-prep.md`](test-prep.md) — v3 **crtqa_outline**; **case_outline**; **8c** merge; profiles + TBD contract; **`shape_ref=benchmark`** | `test_prep_pipeline` | `epics/<KEY>/temp/` | Yes |
+| `close` | **`CLOSE:`** | [`close.md`](close.md) — L0–L4 ladder, `close_verify.py` + `close_archive.py`, [close-contract.json](../../docs/close-contract.json); post-close JSON under `context/` | `close_pipeline` | `epics/<KEY>/temp/` | Yes |
 | `public-scrub` | **`PUBLIC-SCRUB:`** | [`public-scrub.md`](public-scrub.md) | `public_scrub_pipeline` | `automation/temp/public-scrub/`; commits **only** on **`release`** | Yes (human docs describe **`release`** constraint) |
 | `sync` | **`SYNC:`** | [`sync.md`](sync.md) (this file) | `sync_pipeline` | `automation/temp/sync/` | Yes |
 
@@ -65,9 +67,10 @@ When you **add** a new file under `.cursor/pipelines/*.md`, **update this table*
 
 Align:
 
-- [`AGENTS.md`](../../AGENTS.md) — **Pipelines** table (all triggers + paths + branch notes for **`PUBLIC-SCRUB:`** / **`SYNC:`**).
-- [`README.md`](../../README.md) — **Pipelines (chat triggers)** table.
+- [`AGENTS.md`](../../AGENTS.md) — **Pipelines** table (all triggers + paths + branch notes for **`PUBLIC-SCRUB:`** / **`SYNC:`**); **Canonical JSON** / **Harness** row must still point at [`docs/harness-principles.md`](../../docs/harness-principles.md) when present.
+- [`README.md`](../../README.md) — **Pipelines (chat triggers)** table; **Start here** / product bullets mention harness principles if those sections list entry docs.
 - **[`HOW-TO.md`](../../HOW-TO.md)** at repo root — **process overview** (**Stats**, **Pipelines**, **Benchmark**) + **how to run** triggers / **`/crtqa-*`** commands (no playbook file paths inside workflow prose).
+- [`docs/harness-principles.md`](../../docs/harness-principles.md) — still linked from AGENTS/README/harness-map after pipeline edits; if playbook **behaviour** changed, principles should have been updated in the same change per [`.cursor/rules/harness-maintenance.mdc`](../rules/harness-maintenance.mdc).
 - [`.cursor/rules/qa-artifacts.mdc`](../rules/qa-artifacts.mdc) — durable artifact bullets for epic pipelines, **`PUBLIC-SCRUB:`**, **`SYNC:`**.
 
 ---
@@ -101,13 +104,14 @@ Align:
 
 1. New or renamed tools under [`automation/tools/`](../../automation/tools/) have docs under [`automation/docs/`](../../automation/docs/) and/or a **README** in the tool folder.
 2. [`AGENTS.md`](../../AGENTS.md) and [`README.md`](../../README.md) **Automation** sections link discoverable tools when relevant.
+3. **jq:** [`automation/docs/jq.md`](../../automation/docs/jq.md) exists; [HOW-TO.md](../../HOW-TO.md) operator prerequisites and harness-map package **`jq_json`** / [jq-json.mdc](../rules/jq-json.mdc) stay aligned when JSON inspection norms change; epic pipeline playbooks and [`.cursor/prompts/`](../../.cursor/prompts/) orchestrators reference **`jq.md`** for inspect (not full-file Read).
 
 ### T4b — Postgres MCP snippet and `mcp.json` story
 
 **Scope**: `full`, `tools`, `mcp`
 
-1. There is **no** committed **`.cursor/mcp/`** folder; do **not** reintroduce template JSON files there. The **`postgres-ctqa`** copy-paste snippet lives in [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*).
-2. [**`AGENTS.md`**](../../AGENTS.md), [**`README.md`**](../../README.md), [**`HOW-TO.md`**](../../HOW-TO.md), and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) must stay aligned: engineers add MCP either to **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) **or** to **gitignored** project [`.cursor/mcp.json`](../../.cursor/mcp.json) — Cursor merges both; avoid duplicate **`postgres-ctqa`** definitions.
+1. There is **no** committed **`.cursor/mcp/`** folder; do **not** reintroduce template JSON files there. The **`postgres-ctqa`** copy-paste snippet lives in [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*). Committed **[`.cursor/mcp.json.example`](../../.cursor/mcp.json.example)** is an optional **merge template** for **`postgres-ctqa`** + **`chrome-devtools`** (placeholders only); prose for Chrome setup: [`automation/docs/chrome-devtools-mcp.md`](../../automation/docs/chrome-devtools-mcp.md).
+2. [**`AGENTS.md`**](../../AGENTS.md), [**`README.md`**](../../README.md), [**`HOW-TO.md`**](../../HOW-TO.md), and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) must stay aligned: engineers add MCP either to **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) **or** to **gitignored** project [`.cursor/mcp.json`](../../.cursor/mcp.json) — Cursor merges both; avoid duplicate **`postgres-ctqa`** or **`chrome-devtools`** definitions with conflicting args.
 3. If MCP or tunnel **behavior** changes, update [`docs/harness-map.json`](../../docs/harness-map.json) **T2** / relevant **`mcp_hint`** and [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md).
 
 ---
@@ -137,7 +141,7 @@ After edits:
 
 1. Each **trigger** in the [registry](#normative-pipeline-registry-v1) appears in **`pipeline-router.mdc`** and in root **[`HOW-TO.md`](../../HOW-TO.md)** **how to run** table (except if a future exemption is documented).
 2. **`docs/harness-map.json`** parses as JSON; no duplicate **`id`** values inside **`match_any_package`**.
-3. [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) still contains the **`postgres-ctqa`** JSON snippet; AGENTS and README still point there (no resurrected **`.cursor/mcp/*.json`** templates).
+3. [**`automation/tools/tunnel/README.md`**](../../automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) still contains the **`postgres-ctqa`** JSON snippet; AGENTS and README still point there and to **[`automation/docs/chrome-devtools-mcp.md`](../../automation/docs/chrome-devtools-mcp.md)** / **[`.cursor/mcp.json.example`](../../.cursor/mcp.json.example)** (no resurrected **`.cursor/mcp/*.json`** templates).
 
 ---
 

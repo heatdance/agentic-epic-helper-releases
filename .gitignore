@@ -1,8 +1,16 @@
 .cursor/mcp.json
 
+# CRTQA dxCore console launcher — local overlays and ephemeral session metadata
+temp/crtqa-console/
+automation/tools/crtqa-console/crtqa-console.local.json
+
 .env
 
 __pycache__/
 *.pyc
 
 .playwright-mcp/
+
+# CRTQA stats — local state and run audit (see stats/crtqa-stats/README.md)
+stats/crtqa-stats/state/
+stats/crtqa-stats/raw/

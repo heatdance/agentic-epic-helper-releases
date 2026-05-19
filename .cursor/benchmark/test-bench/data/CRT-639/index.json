@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "epic_key": "CRT-639",
-  "purpose": "Jira Test issue snapshots for test-bench / TEST-PREP benchmark inputs (existing_tests_considered).",
+  "purpose": "Human-curated Jira Test issue snapshots for benchmark compare and optional TEST-PREP v3 shape_ref=benchmark (case titles/structure only—not structural input to cold generation; see docs/harness-principles.md).",
   "fetched_at": "2026-05-07T12:00:00Z",
   "issues": [
     {

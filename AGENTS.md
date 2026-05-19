@@ -17,6 +17,10 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 | Environments, code streams (Stash), Jira index, Confluence index (MCP-backed) | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Atlassian MCP — tool list, safety ladder, Stash search vs browse | [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md) |
 | Tiered context escalation (keywords → which files to read) | [docs/harness-map.json](docs/harness-map.json) |
+| **dxCore console** agent map (truth tiers + forks + Confluence trust; T1 **`dxcore_console`**) | [docs/dxcore-console-harness.json](docs/dxcore-console-harness.json) |
+| **dxTrade5 web UI** agent map (concept → IA → locations; T1 **`dxtrade5_harness`**) | [docs/dxtrade5-harness/](docs/dxtrade5-harness/) — [README](docs/dxtrade5-harness/README.md), [dxtrade5-harness.json](docs/dxtrade5-harness/dxtrade5-harness.json), [concept-map.json](docs/dxtrade5-harness/concept-map.json) |
+| **WebBroker dealer web UI** agent map (concept → IA → locations; T1 **`webbroker_harness`**) | [docs/webbroker-harness/](docs/webbroker-harness/) — [README](docs/webbroker-harness/README.md), [webbroker-harness.json](docs/webbroker-harness/webbroker-harness.json), [concept-map.json](docs/webbroker-harness/concept-map.json) |
+| **Harness doctrine** (generation vs benchmark, coverage vs E2E, reference ownership) | [docs/harness-principles.md](docs/harness-principles.md) |
 | Public export manifest (example; live file on `release` only) | [docs/public-export-manifest.example.json](docs/public-export-manifest.example.json) |
 
 ### Deliverables and references
@@ -32,17 +36,19 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` optional `repo=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` optional `map_only=yes`), [`test-exec.md`](.cursor/pipelines/test-exec.md) (`TEST-EXEC:` optional `base_url=` / `skip_postgres` / `include_blocked` / `max_bundles`; optional pipeline), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `prompts` / `templates` / `tools` / `mcp` — **develop** / **`main`** only; not for **`release`**) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:` v4 obligations; `epic_prep_verify.py`; optional `repo=` / `focus=`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:` v2 `obligations_coverage`; `coverage_verify.py`; optional `repo=` / `focus=`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:` v2; `analysis_verify.py`; optional `known_issues=yes` / `resolve=no`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:` optional benchmark tokens / `crtqa_index=yes`; CRTQA index off in generation by default; optional inline FE cred hints—**not** in durable JSON), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:` v5; Phase 2b `case_outline`; Phase 4R/4D/4C), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` v3 executable outline default; `shape_ref=benchmark` **benchmark-only**; 8b per check; 8c merge; [test_prep_verify.py](automation/tools/test_prep_verify.py) `plan`/`explore`/`draft`/`merge`/`tests`; [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json)), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:` optional `heal=no`; archive to `context/`; [close_verify.py](automation/tools/close_verify.py)), [`public-scrub.md`](.cursor/pipelines/public-scrub.md) (`PUBLIC-SCRUB:` optional `version=` / `source=` — **release branch only**; never commit scrub on `main`/`develop`), [`sync.md`](.cursor/pipelines/sync.md) (`SYNC:` optional `scope=` e.g. `full` / `pipelines` / `prompts` / `templates` / `tools` / `mcp` — **develop** / **`main`** only; not for **`release`**) |
 
 ### Epics
 
 | Area | Path |
 |------|------|
-| Epic handoff JSON (one Epic at a time) | [epics/templates/epic-ref.json](epics/templates/epic-ref.json) · `epics/<KEY>/<KEY>-ref.json` · [epics/README.md](epics/README.md); **`client_shell_impact`** (Corner + Adaptive), **`snippet_status`** on requirements, optional **`implementation.hits`** + **`sources.bitbucket_repo`** (EPIC-PREP + Bitbucket MCP: split Stash **`PROJECT_KEY/repo_slug`** for tools; **`bitbucket_search_code`** may 404 — use browse fallback in [epic-prep.md](.cursor/pipelines/epic-prep.md) step **5b**); defaults in [docs/project.json](docs/project.json) `bitbucket` |
-| Epic coverage (Smart Checklist draft + audit JSON) | [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) · `epics/<KEY>/<KEY>-coverage.json` · `epics/<KEY>/<KEY>-coverage.md` · trigger `COVERAGE:` |
-| Epic requirement analysis | [epics/templates/analysis-ref.json](epics/templates/analysis-ref.json) · `epics/<KEY>/<KEY>-analysis.json` · `epics/<KEY>/<KEY>-analysis.md` · trigger `ANALYSE:` |
-| Epic regression test drafts | [epics/templates/tests-ref.json](epics/templates/tests-ref.json) · `epics/<KEY>/<KEY>-tests.json` · `epics/<KEY>/<KEY>-tests.md` · trigger `TEST-PREP:` |
-| Epic optional E2E materialization | [epics/templates/test-exec-ref.json](epics/templates/test-exec-ref.json) · `epics/<KEY>/<KEY>-test-exec.json` · `epics/<KEY>/tests/*.spec.ts` · trigger `TEST-EXEC:` (requires `-tests.json`; environment-dependent) |
+| Epic handoff JSON (schema v4) | [epics/templates/epic-ref.json](epics/templates/epic-ref.json) · **`obligations_proposed[]`** · [docs/epic-obligation-kinds.json](docs/epic-obligation-kinds.json) · [epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
+| Epic coverage (schema v2) | [epics/templates/coverage-ref.json](epics/templates/coverage-ref.json) · **`obligations_coverage`** · [coverage-obligation-contract.json](docs/coverage-obligation-contract.json) · [coverage-verify.md](automation/docs/coverage-verify.md) |
+| Epic requirement analysis (v2) | [analysis-ref.json](epics/templates/analysis-ref.json) · [analysis-gap-contract.json](docs/analysis-gap-contract.json) · [analysis-verify.md](automation/docs/analysis-verify.md) · `exploration_suppressed[]` |
+| Epic optional discovery (obligation closure map) | [epics/templates/discover-ref.json](epics/templates/discover-ref.json) v3 · `epics/<KEY>/<KEY>-discover.json` · `TEST-DISCOVER:` · **`fixture_needs`** (CRTQA index opt-in) · verifier [automation/tools/discover_verify.py](automation/tools/discover_verify.py) |
+| Epic optional precondition authoring (v4) | [precon-ref.json](epics/templates/precon-ref.json) · [exploration-depth-ladder.json](docs/exploration-depth-ladder.json) · [precon_verify.py](automation/tools/precon_verify.py) (`--discover`, `--md`) |
+| Epic regression test drafts (v3) | [epics/templates/tests-ref.json](epics/templates/tests-ref.json) schema v4 · [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json) · [test-prep-tbd-contract.json](docs/test-prep-tbd-contract.json) · `-tests.json` / `-tests.md` · `TEST-PREP:` |
+| Epic close (integrity + archive) | [epics/templates/close-ref.json](epics/templates/close-ref.json) · `epics/<KEY>/context/<KEY>-close.json` · four root `.md` · trigger `CLOSE:` (documentation-only; after full artifact set) |
 
 ### Automation tools
 
@@ -50,6 +56,9 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Yogi URL resolve + lightweight snippets | [automation/docs/yogi-url-resolve.md](automation/docs/yogi-url-resolve.md) · [yogi-tool/](automation/tools/yogi-tool/) (`yogi_resolve.py`, `yogi_snippet.py`, `yogi_extract.py`) |
 | CTQA Postgres SSH tunnel + probe + zip handoff | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) · `python automation/tools/tunnel/ctqa_pg.py USER@host` · `--probe-only` + env `CTQA_PG_PASSWORD` |
+| CTQA environment probe · slash **`/crtqa-env`** | [automation/docs/crtqa-env.md](automation/docs/crtqa-env.md) · `python automation/tools/crtqa_env_probe.py` (optional `--coverage epics/<KEY>/<KEY>-coverage.json`) |
+| CTQA **`dx run console`** (SSH/plink) · slash **`/crtqa-console`** (`start` \| `status` \| `probe` \| `stop`) | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) · `Start-` / `Get-CrtqaConsoleStatus` / `Invoke -Probe` / `Stop-`; interactive: `Enter-CrtqaConsole.ps1` |
+| **jq** JSON projection (system PATH; agent inspect) | [automation/docs/jq.md](automation/docs/jq.md) · `winget install --id jqlang.jq -e` (Windows); rule [`.cursor/rules/jq-json.mdc`](.cursor/rules/jq-json.mdc) |
 | Agent scratch / temp | [automation/temp/](automation/temp/) |
 
 ### Cursor
@@ -58,9 +67,16 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
-| Custom commands (**`/crtqa-stats`**, **`/crtqa-benchmark`**) | [.cursor/commands/](.cursor/commands/) — TCD stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md); benchmark hub [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md) (**questionnaire**, **`CONTROL_HUB.md`**, **`DONE_HANDOFF_PROMPT.md`**, **`FINALIZE_PROMPT.md`** → narratives under **`.cursor/benchmark/run-results/<run-key>/`**) + [benchmark_verify.py](automation/tools/benchmark_verify.py) / [benchmark_aggregate.py](automation/tools/benchmark_aggregate.py); [stats/crtqa-stats/](stats/crtqa-stats/) |
+| Custom commands (**`/crtqa-env`**, **`/crtqa-console`**, **`/crtqa-stats`**, **`/crtqa-benchmark`**) | [.cursor/commands/](.cursor/commands/) — env [crtqa-env.md](.cursor/commands/crtqa-env.md); console [crtqa-console.md](.cursor/commands/crtqa-console.md); TCD stats [crtqa-stats.md](.cursor/commands/crtqa-stats.md) (corpus vs comparison, [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py)); benchmark hub [crtqa-benchmark.md](.cursor/commands/crtqa-benchmark.md) (**questionnaire**, **`CONTROL_HUB.md`**, **`DONE_HANDOFF_PROMPT.md`**, **`FINALIZE_PROMPT.md`** → narratives under **`.cursor/benchmark/run-results/<run-key>/`**) + [benchmark_verify.py](automation/tools/benchmark_verify.py) / [benchmark_aggregate.py](automation/tools/benchmark_aggregate.py); [stats/crtqa-stats/](stats/crtqa-stats/) |
+| EPIC-PREP verifier | [epic_prep_verify.py](automation/tools/epic_prep_verify.py) · [automation/docs/epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
+| COVERAGE verifier | [coverage_verify.py](automation/tools/coverage_verify.py) · [automation/docs/coverage-verify.md](automation/docs/coverage-verify.md) |
+| ANALYSE verifier | [analysis_verify.py](automation/tools/analysis_verify.py) · [automation/docs/analysis-verify.md](automation/docs/analysis-verify.md) |
+| TEST-DISCOVER verifier | [discover_verify.py](automation/tools/discover_verify.py) · [automation/docs/discover-verify.md](automation/docs/discover-verify.md) |
+| TEST-PREP verifier | [test_prep_verify.py](automation/tools/test_prep_verify.py) · [automation/docs/test-prep-verify.md](automation/docs/test-prep-verify.md) |
+| CLOSE verifier | [close_verify.py](automation/tools/close_verify.py) · [automation/docs/close-verify.md](automation/docs/close-verify.md) · [close_archive.py](automation/tools/close_archive.py) |
 | Humans: Cursor + main processes | [HOW-TO.md](HOW-TO.md) |
 | CTQA Postgres MCP | [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*) — add **`postgres-ctqa`** to **gitignored** [`.cursor/mcp.json`](.cursor/mcp.json) and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) using the JSON snippet there |
+| Chrome DevTools MCP (**`chrome-devtools`**, ad-hoc UI) | [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md); merge into `.cursor/mcp.json` — see [`.cursor/mcp.json.example`](.cursor/mcp.json.example) |
 
 ## Context escalation
 
@@ -72,8 +88,9 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 ## How to start a session
 
 1. Read **[qa-handoff.md](qa-handoff.md)** for current focus, blockers, and next steps.
-2. Open only the **task-specific** docs or code paths you need—avoid loading the whole tree into context.
-3. For substantive work, **update `qa-handoff.md`** before closing the session.
+2. For any substantive **pipeline**, **benchmark**, or **epic deliverable** work, read **[docs/harness-principles.md](docs/harness-principles.md)** once per session (or follow the matching **`harness-map.json`** package that includes it)—**stable doctrine**, not duplicated in `qa-handoff.md`.
+3. Open only the **task-specific** docs or code paths you need—avoid loading the whole tree into context.
+4. For substantive work, **update `qa-handoff.md`** before closing the session.
 
 ## MCP
 
@@ -85,13 +102,17 @@ All **discovery and retrieval** for Jira issues and Confluence pages (search, fe
 
 When tasks include **Figma file/frame/layer** URLs, use the **workspace-configured Figma MCP** if it is enabled in Cursor. Workflow: **[automation/docs/figma-mcp.md](automation/docs/figma-mcp.md)**. Do not store OAuth tokens or secrets in the repo.
 
+### Chrome DevTools (optional, ad-hoc)
+
+**Chrome DevTools MCP** (register as **`chrome-devtools`**) supports ad-hoc UI exploration (discover/precon/prep phases, harness maps)—not a **`CLOSE:`** dependency. **Setup:** [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md) and **[`.cursor/mcp.json.example`](.cursor/mcp.json.example)**.
+
 ### PostgreSQL / CTQA (optional)
 
 1. **SSH tunnel** to forward a local port to Postgres (PuTTY `plink` default on Windows): see **[automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)**.
 2. **Cursor `mcp.json`** — add **`postgres-ctqa`** in **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: **`%USERPROFILE%\.cursor\mcp.json`**) per the snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md). Cursor merges project and global; do not define the same server twice with conflicting URLs. Uses `@sarmadparvez/postgresql-mcp` with **`?mode=readonly`**; use **`sslmode=disable`** on `127.0.0.1` through SSH.
 3. **Do not** commit real passwords; credentials live only in ignored `.cursor/mcp.json` and/or global MCP.
 
-When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa**. Optional pipeline **`TEST-EXEC:`** may use the same server for **readonly** SQL checks when bundles require DB verification.
+When the tunnel is up and MCP is enabled, the agent may use **`query`**, **`schema`**, and **`list_tables`** against database **ctqa** for ad-hoc readonly checks during exploration pipelines—not **`CLOSE:`**.
 
 ## Codebase exploration
 
@@ -99,4 +120,4 @@ Prefer **narrow** search and **bounded** file reads; summarize findings instead 
 
 ## Rules in this repo
 
-Persistent agent behavior is under [.cursor/rules/](.cursor/rules/): `harness-context`, `mcp-atlassian-search`, `qa-artifacts`, `harness-maintenance`, `pipeline-router`. Keep **AGENTS.md** short; extend detail in linked JSON and Confluence via MCP.
+Persistent agent behavior is under [.cursor/rules/](.cursor/rules/): `harness-context`, **`jq-json`**, **`pipeline-router`** (trigger → playbook), `mcp-atlassian-search`, **`dxcore-console-harness`** (optional), **`dxtrade5-harness`** (optional), **`webbroker_harness`** (optional), `qa-artifacts`, `harness-maintenance`. **Stable doctrine:** [docs/harness-principles.md](docs/harness-principles.md). Keep **AGENTS.md** short; extend detail in linked JSON and Confluence via MCP.

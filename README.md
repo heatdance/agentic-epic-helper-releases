@@ -14,8 +14,8 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 
 | Who | First reads |
 |-----|-------------|
-| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, benchmark; CTQA Postgres: [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)) |
-| **AI agents** | [AGENTS.md](AGENTS.md) (map + MCP policy), [docs/harness-map.json](docs/harness-map.json) (keyword → which files to open; tiers T0–T2) |
+| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, benchmark; CTQA prep: tunnel [README](automation/tools/tunnel/README.md), **`/crtqa-console`**, **`/crtqa-env`**; **jq** on PATH: [automation/docs/jq.md](automation/docs/jq.md)) |
+| **AI agents** | [AGENTS.md](AGENTS.md) (map + MCP policy), [docs/harness-principles.md](docs/harness-principles.md) (harness doctrine for pipelines & benchmark), [docs/harness-map.json](docs/harness-map.json) (keyword → which files to open; tiers T0–T2) |
 
 ## Satellite / planned
 
@@ -27,6 +27,9 @@ Devexperts QA working area for **Corner Trader**: templates, automation docs, an
 - [docs/qa-project.json](docs/qa-project.json) — Corner QA scope (QAPORTAL Corner subtree), workflow pointers (functional summaries only).
 - [docs/corner-platform-map.json](docs/corner-platform-map.json) — **SoT** for environment hostnames/paths, Jira project/dashboard links, Stash repo ladder, QAPORTAL child index (no secrets in repo).
 - [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md) — **`user-mcp-atlassian`** tool surface (read-only), Stash **browse-first** ladder, where server debugging lives (outside this repo).
+- [docs/harness-principles.md](docs/harness-principles.md) — **Harness doctrine** (generation vs benchmark, coverage vs E2E tests, reference ownership).
+- [docs/dxcore-console-harness.json](docs/dxcore-console-harness.json) — **dxCore console** agent map (tiers, forks, Confluence trust; harness-map package **`dxcore_console`**).
+- [docs/dxtrade5-harness/README.md](docs/dxtrade5-harness/README.md) — **dxTrade5 web UI** three-stage map (concept → IA → locations; harness-map package **`dxtrade5_harness`**). Stage 3 parity: `python automation/tools/dxtrade5-harness/check_locations_parity.py`.
 
 ## Pipelines (chat triggers)
 
@@ -34,11 +37,13 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 
 | Trigger | Playbook |
 |---------|----------|
-| `EPIC-PREP:` + Epic key | [epic-prep.md](.cursor/pipelines/epic-prep.md) |
-| `COVERAGE:` + Epic key | [coverage.md](.cursor/pipelines/coverage.md) |
-| `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) |
-| `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) |
-| `TEST-EXEC:` + Epic key | [test-exec.md](.cursor/pipelines/test-exec.md) — optional; needs app URL / MCP; **non-gating** vs `TEST-PREP` |
+| `EPIC-PREP:` + Epic key | [epic-prep.md](.cursor/pipelines/epic-prep.md) — v4 obligations; [epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
+| `COVERAGE:` + Epic key | [coverage.md](.cursor/pipelines/coverage.md) — v2 obligations_coverage; [coverage-verify.md](automation/docs/coverage-verify.md) |
+| `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) v2 — requires coverage; [analysis-verify.md](automation/docs/analysis-verify.md) |
+| `TEST-DISCOVER:` + Epic key | [test-discover.md](.cursor/pipelines/test-discover.md) — schema v3 **`fixture_needs`**; CRTQA index opt-in (`crtqa_index=yes` or benchmark); [discover_verify.py](automation/tools/discover_verify.py); may end **`incomplete`** when setup depth insufficient |
+| `TEST-PRECON:` + Epic key | [test-precon.md](.cursor/pipelines/test-precon.md) v5 — [exploration-depth-ladder.json](docs/exploration-depth-ladder.json); Phase 4R/4D/4C; [precon_verify.py](automation/tools/precon_verify.py) `--discover` |
+| `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) — v3 executable outlines (default); `shape_ref=benchmark` benchmark-only; [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json) |
+| `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — optional; documentation integrity ladder + archive to `context/`; **no** MCP |
 | `PUBLIC-SCRUB:` | [public-scrub.md](.cursor/pipelines/public-scrub.md) — optional `version=X.Y.Z`, `source=develop` or `source=main`; **checkout `release` first**; produces public-safe tree + manifest + [`.agents/`](https://dotagentsprotocol.com/) on **`release` only** |
 | `SYNC:` | [sync.md](.cursor/pipelines/sync.md) — optional `scope=full` (default) or `pipelines` / `prompts` / `templates` / `tools` / `mcp`; **develop** or **`main`** only — reconciles router, harness-map, rules, prompts, templates, tool docs, postgres-ctqa MCP story (snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md)), AGENTS, README, [HOW-TO.md](HOW-TO.md), qa-artifacts (not for **`release`**) |
 
@@ -48,17 +53,17 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 ## Stats (CRTQA TCD)
 
-- [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`**: TCD rollups (Epic Link + Test Lead), default **delta** reruns, human **agent-assist** labels, **Time saving** / category strata in `latest.md`.
+- [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`**: manual **corpus** baseline vs **AI-assisted comparison**, category + SP strata, **% saved** when corpus n≥4; [`crtqa_stats_rollup.py`](automation/tools/crtqa_stats_rollup.py).
 
 ## Epics and templates
 
 - Layout and workflow: [epics/README.md](epics/README.md).
-- Schemas: [epics/templates/](epics/templates/) (`epic-ref.json`, `coverage-ref.json`, `analysis-ref.json`, `tests-ref.json`, `test-exec-ref.json`).
+- Schemas: [epics/templates/](epics/templates/) (`epic-ref.json`, `coverage-ref.json`, `analysis-ref.json`, `tests-ref.json`, `close-ref.json`).
 - Per-Epic artifacts live under `epics/<KEY>/`.
 
 ## Automation
 
-- Tool docs: [automation/docs/](automation/docs/) (e.g. [yogi-url-resolve.md](automation/docs/yogi-url-resolve.md), [figma-mcp.md](automation/docs/figma-mcp.md)).
+- Tool docs: [automation/docs/](automation/docs/) (e.g. [yogi-url-resolve.md](automation/docs/yogi-url-resolve.md), [jq.md](automation/docs/jq.md), [figma-mcp.md](automation/docs/figma-mcp.md), [chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md)).
 - Runnable tools: [automation/tools/](automation/tools/) — **CTQA Postgres SSH tunnel / probe**: [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (`ctqa_pg.py`, PuTTY plink default on Windows).
 - Scratch: [automation/temp/](automation/temp/) (short-lived; see [automation/temp/README.md](automation/temp/README.md)).
 
@@ -66,7 +71,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 - Rules: [.cursor/rules/](.cursor/rules/).
 - Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for ad-hoc ticket/incident Q&A).
-- Optional **postgres-ctqa** MCP: add to **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`) — JSON snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*); SSH tunnel + local URI; no secrets in git.
+- Optional MCP: **`postgres-ctqa`** — snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*); **`chrome-devtools`** (ad-hoc UI / discover-precon-prep) — [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md). Merge into **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); template **[`.cursor/mcp.json.example`](.cursor/mcp.json.example)**; SSH tunnel + local URI for Postgres; no secrets in git.
 
 ## Reference docs
 
