@@ -133,6 +133,10 @@
       "HOW-TO.md",
       ".cursor/rules/pipeline-router.mdc"
     ],
+    "required_mcp_examples": [
+      ".cursor/mcp.json.example",
+      ".cursor/mcp.json.team.example"
+    ],
     "router": {
       "exclude_triggers": ["CLEAN:"]
     },

@@ -1,5 +1,5 @@
 {
-  "_comment": "Copy snippets into gitignored .cursor/mcp.json and/or global ~/.cursor/mcp.json (Windows: %USERPROFILE%\\.cursor\\mcp.json). Cursor merges global + project. Replace postgres USER/PASSWORD and local port if needed. See automation/tools/tunnel/README.md (PostgreSQL) and automation/docs/chrome-devtools-mcp.md (Chrome).",
+  "_comment": "Personal tree: postgres-ctqa + chrome-devtools (project and/or global mcp.json). Atlassian/Figma: global ~/.cursor/mcp.json — see .cursor/mcp.json.team.example for full scrubbed team template. CLEAN public phase must not delete gitignored .cursor/mcp.json.",
   "mcpServers": {
     "postgres-ctqa": {
       "command": "npx",

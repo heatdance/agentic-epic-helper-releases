@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import json
 import shutil
+import subprocess
 import sys
 from pathlib import Path
 
@@ -38,8 +39,20 @@ def _apply_template_overlays(root: Path, contract: dict) -> None:
         shutil.copy2(src, dest)
 
 
+def _is_gitignored(root: Path, rel: str) -> bool:
+    """True when rel is ignored by git (operator-local paths must survive public strip)."""
+    proc = subprocess.run(
+        ["git", "check-ignore", "-q", rel],
+        cwd=root,
+        capture_output=True,
+    )
+    return proc.returncode == 0
+
+
 def _delete_forbidden_paths(root: Path, contract: dict) -> None:
     for rel in contract.get("public", {}).get("delete_paths", []):
+        if rel == ".cursor/mcp.json" and _is_gitignored(root, rel):
+            continue
         p = root / rel
         if p.is_file():
             p.unlink()

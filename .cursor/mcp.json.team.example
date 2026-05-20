@@ -1,0 +1,45 @@
+{
+  "_comment": "Team-tier MCP template: copy to gitignored .cursor/mcp.json and/or global ~/.cursor/mcp.json. Replace every YOUR_* placeholder; never commit real tokens. Personal-only servers (postgres-ctqa) need org CTQA access.",
+  "mcpServers": {
+    "user-mcp-atlassian": {
+      "command": "uvx",
+      "args": [
+        "--with",
+        "fakeredis<2.35",
+        "mcp-atlassian-with-bitbucket"
+      ],
+      "env": {
+        "CONFLUENCE_URL": "https://YOUR-CONFLUENCE-HOST",
+        "CONFLUENCE_PERSONAL_TOKEN": "YOUR_CONFLUENCE_PAT",
+        "CONFLUENCE_SSL_VERIFY": "false",
+        "JIRA_URL": "https://YOUR-JIRA-HOST",
+        "JIRA_PERSONAL_TOKEN": "YOUR_JIRA_PAT",
+        "JIRA_SSL_VERIFY": "false",
+        "BITBUCKET_URL": "https://YOUR-BITBUCKET-HOST",
+        "BITBUCKET_PERSONAL_TOKEN": "YOUR_BITBUCKET_PAT",
+        "BITBUCKET_SSL_VERIFY": "false",
+        "READ_ONLY_MODE": "true",
+        "ENABLED_TOOLS": "confluence_search,confluence_get_page,jira_search,jira_get_issue,bitbucket_list_repositories,bitbucket_search_code,bitbucket_get_file_content,bitbucket_browse_directory,bitbucket_list_pull_requests,bitbucket_get_pull_request,bitbucket_get_pull_request_diff,bitbucket_list_commits,bitbucket_get_commit"
+      }
+    },
+    "postgres-ctqa": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@sarmadparvez/postgresql-mcp",
+        "postgresql://USER:PASSWORD@127.0.0.1:15432/ctqa?mode=readonly&sslmode=disable"
+      ]
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"]
+    },
+    "user-mcp-figma": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "figma-developer-mcp", "--stdio"],
+      "env": {
+        "FIGMA_API_KEY": "YOUR_FIGMA_API_KEY"
+      }
+    }
+  }
+}

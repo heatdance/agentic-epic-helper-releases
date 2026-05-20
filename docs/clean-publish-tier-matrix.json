@@ -116,6 +116,24 @@
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/mcp.json.example",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/mcp.json.team.example",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/mcp.json",
+      "personal": { "action": "keep", "gitignored": true },
+      "team": { "action": "forbid_tracked" },
+      "public": { "action": "forbid_tracked" }
     }
   ],
   "default": {

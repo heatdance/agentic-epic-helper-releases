@@ -508,6 +508,9 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
     for req in team.get("required_after_strip", []):
         if not (root / req).is_file():
             return _fail(f"team required missing: {req}")
+    for rel in team.get("required_mcp_examples", []):
+        if not (root / rel).is_file():
+            return _fail(f"team MCP example missing: {rel}")
 
     router = _read_text(root / ".cursor/rules/pipeline-router.mdc")
     if "CLEAN:" in router:
@@ -700,9 +703,14 @@ def _public_forbidden_stack(root: Path, contract: dict[str, Any]) -> int | None:
 
 
 def _public_mcp_files_absent(root: Path, contract: dict[str, Any]) -> int | None:
+    tracked = set(_git_tracked_files(root))
     for rel in contract.get("public", {}).get(
         "delete_paths", [".cursor/mcp.json.example", ".cursor/mcp.json"]
     ):
+        if rel in tracked:
+            return _fail(f"MCP config must not be tracked on public tree: {rel}")
+        if rel == ".cursor/mcp.json":
+            continue
         if (root / rel).is_file():
             return _fail(f"MCP config must not exist on public tree: {rel}")
     return None

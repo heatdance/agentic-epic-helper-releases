@@ -159,7 +159,8 @@ Mechanical public transform (no agent improvisation for readmes):
 
 - Seeds from [`docs/clean-public-content/`](../../docs/clean-public-content/) (entry docs + pipeline `*-readme.md`)
 - Template overlays from [`epics/templates/public/`](../../epics/templates/public/) per [`docs/clean-contract.json`](../../docs/clean-contract.json) `public.template_overlays`
-- Deletes `.cursor/mcp.json.example` and other `public.delete_paths`
+- Deletes `.cursor/mcp.json.example` and other `public.delete_paths` (never deletes **gitignored** `.cursor/mcp.json` — operator restores from `.cursor/mcp.json.example` if missing after U5)
+- Team export keeps **`.cursor/mcp.json.example`** + **`.cursor/mcp.json.team.example`** (placeholders only; no PATs)
 
 ```text
 python automation/tools/clean_apply_public.py --root . --export-version <export_version> --source-branch team --source-sha <TEAM_SHA>

@@ -52,8 +52,9 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 
 ## MCP
 
-- **Jira / Confluence / Stash:** `user-mcp-atlassian` — see [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md). No secrets in repo files.
-- **Optional:** postgres-ctqa, chrome-devtools, Figma — see [HOW-TO.md](HOW-TO.md) and tunnel README.
+- **Templates (no secrets):** [`.cursor/mcp.json.example`](../.cursor/mcp.json.example) (postgres + chrome) and [`.cursor/mcp.json.team.example`](../.cursor/mcp.json.team.example) (full stack with `YOUR_*` placeholders).
+- **Jira / Confluence / Stash:** `user-mcp-atlassian` — see [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md). Configure in **gitignored** `.cursor/mcp.json` and/or global `~/.cursor/mcp.json`.
+- **Optional:** postgres-ctqa, chrome-devtools, Figma — see [HOW-TO.md](HOW-TO.md) and [automation/tools/tunnel/README.md](../automation/tools/tunnel/README.md).
 
 ## Rules
 

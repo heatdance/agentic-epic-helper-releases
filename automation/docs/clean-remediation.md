@@ -13,6 +13,7 @@ Normative pipeline: [`.cursor/pipelines/clean.md`](../../.cursor/pipelines/clean
 | `team/team` SHA ≠ latest strip export | PR never merged; public built from worktree commit |
 | `release-1.1.0` on releases | Legacy naming; U0 delete was best-effort only |
 | Local `public-1.1` tracks `release-1.1.0` | Old clone; not removed by supersede of older `public-*` |
+| MCP servers missing after full `CLEAN:` | Phase U **`clean_apply_public`** deleted gitignored **`.cursor/mcp.json`** from the shared worktree (fixed: skip when `git check-ignore`) |
 
 ## Remediation steps (PowerShell)
 
@@ -51,7 +52,18 @@ git checkout personal
 git branch -D team public-1.1 public-1.3 clean-team-test 2>$null
 ```
 
-### 5. Acceptance
+### 5. Restore operator MCP (after public Phase U)
+
+```powershell
+# Project-local (postgres-ctqa, chrome-devtools)
+Copy-Item .cursor\mcp.json.example .cursor\mcp.json -Force
+# Edit .cursor\mcp.json: set postgres USER/PASSWORD; reload Cursor MCP.
+
+# Atlassian / Figma: merge from team template into global mcp.json (placeholders → your PATs)
+# Copy-Item .cursor\mcp.json.team.example $env:USERPROFILE\.cursor\mcp.json -Force  # then edit — do not commit
+```
+
+### 6. Acceptance
 
 ```powershell
 git branch

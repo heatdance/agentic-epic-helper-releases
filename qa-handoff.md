@@ -4,7 +4,9 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 
 ## Last updated
 
-- **Date**: 2026-05-19 — **CLEAN public hardening** on `personal`: `clean_apply_public` seeds from `docs/clean-public-content/`, template overlays `epics/templates/public/`, `public` verify (stack scrub, readme depth, no MCP example). **Ready:** run **`CLEAN: proceed`** from `personal` for full publish (`public-1.4` expected).
+- **Date**: 2026-05-20 — **CLEAN MCP fix:** Phase U no longer deletes gitignored `.cursor/mcp.json`; public verify allows ignored file on disk; team tier adds `.cursor/mcp.json.team.example` (scrubbed stack). Restored local `.cursor/mcp.json` from example — operator must set postgres `USER`/`PASSWORD` and confirm global MCP (Atlassian/Figma) in Cursor Settings.
+- **Date**: 2026-05-19 — **`CLEAN: proceed`** (full publish from `personal`): **S/P** align OK (no personal commit); **T** `team/team` → **`83ccda1`** (`clean: team harness export`; **force-push** required — remote had diverged from `origin/personal`); **U** **`public-1.4`** → **`848ff3b`** on `releases` (`public-export: 1.4.0`); local back on **`personal`** only. **Postflight FAIL:** `releases` still has **`public-1.3`** + **`public-1.4`** — remote delete of `public-1.3` rejected (*current branch* on GitHub). **Operator:** set default branch to **`public-1.4`**, delete **`public-1.3`**, then `clean_verify.py --mode public_remote --superseded public-1.3` + `--mode postflight`.
+- **Date**: 2026-05-19 — **CLEAN public hardening** on `personal`: `clean_apply_public` seeds, template overlays, `public` verify gates.
 - **Date**: 2026-05-19 — **CLEAN v3 (three-branch model):** contract/playbook/verify — sequential checkout, direct `team/team` push, `postflight`/`legacy_remote`/`prune_team_remote`; [clean-remediation.md](automation/docs/clean-remediation.md). Remediation run: worktrees removed, `clean/*` pruned on team, `release-*` gone on releases; local only `personal`. **`team/team` still pre-strip** until next full `CLEAN:` Phase T.
 - **Date**: 2026-05-19 — **TEST-PREP v3.1** (harness): expansion_policy in [`docs/test-prep-tbd-contract.json`](docs/test-prep-tbd-contract.json); `selection_rules_machine` + verifier gates in [`test_prep_verify.py`](automation/tools/test_prep_verify.py) (one pair per `case_outline` row for ladder/rounding; duplicate actions; excluded primary ↔ `coverage_gaps[]`; `--plan` required on draft/merge/tests emit). Fixtures: [`automation/tools/fixtures/test_prep/`](automation/tools/fixtures/test_prep/). **Archived CRT-639** `-tests.json` would fail new emit/cardinality until re-prep or gap backfill — no regen in this change.
 - **Date**: 2026-05-19 — **`CLOSE: CRT-639`** (production): `context/CRT-639-close.json` — **`epic_verdict: pass`**; L0–L4 + epic-wide OK; JSON archived under `context/`; four root `.md` retained; **3** info findings (supporting chk-013–015 unbundled).
@@ -29,13 +31,15 @@ Doctrine: **[docs/harness-principles.md](docs/harness-principles.md)** (CLOSE ar
 
 ## Blockers
 
+- **CLEAN postflight** — `releases` default branch still **`public-1.3`**; cannot delete until default is **`public-1.4`** (see Last updated).
 - **CRT-1738 numeric oracle** — Jira notes dependency on **XT-7911** (`obl-015` deferral in ref); reflected in excluded checks and analysis gaps.
 - **user-mcp-atlassian** for live pipeline re-runs.
 
 ## Next steps
 
-1. Human: create CRTQA test issues from **`CRT-639-tests.md`** (generation mode — no CRTQA keys in repo).
-2. To re-run **EPIC-PREP** / **COVERAGE** / etc. on CRT-639: move JSON from `epics/CRT-639/context/` back to epic root first — [HOW-TO.md](HOW-TO.md).
+1. **CLEAN finish:** GitHub → `agentic-epic-helper-releases` → default branch **`public-1.4`** → delete **`public-1.3`** → verify `public_remote` + `postflight` locally.
+2. Human: create CRTQA test issues from **`CRT-639-tests.md`** (generation mode — no CRTQA keys in repo).
+3. To re-run **EPIC-PREP** / **COVERAGE** / etc. on CRT-639: move JSON from `epics/CRT-639/context/` back to epic root first — [HOW-TO.md](HOW-TO.md).
 
 ## Notes
 
