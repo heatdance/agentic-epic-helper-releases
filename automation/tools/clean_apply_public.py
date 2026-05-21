@@ -68,6 +68,8 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
 
     for pat in pub.get("delete_globs", []):
         for p in list(root.glob(pat)):
+            if p.is_file() and p.name == "clean_verify.py":
+                continue
             if p.is_dir():
                 shutil.rmtree(p, ignore_errors=True)
             elif p.is_file() and not str(p).endswith("-readme.md"):
