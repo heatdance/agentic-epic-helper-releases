@@ -248,6 +248,7 @@
     "manifest_path": "docs/public-export-manifest.json",
     "delete_paths": [
       ".cursor/mcp.json.example",
+      ".cursor/mcp.json.team.example",
       ".cursor/mcp.json",
       ".cursor/commands/release-notes.md",
       "docs/release-notes-contract.json",
