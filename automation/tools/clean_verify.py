@@ -736,9 +736,12 @@ def _public_mcp_files_absent(root: Path, contract: dict[str, Any]) -> int | None
 
 def mode_public(root: Path, contract: dict[str, Any]) -> int:
     pub = contract.get("public", {})
+    verify_self = {"automation/tools/clean_verify.py", "automation/tools/clean_apply_public.py"}
     for pat in pub.get("delete_globs", []):
         for p in _glob_exists(root, pat):
             rel = p.relative_to(root).as_posix()
+            if rel in verify_self:
+                continue
             if rel.endswith("-readme.md"):
                 continue
             if "templates" in rel:

@@ -125,22 +125,41 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
             encoding="utf-8",
         )
 
-    for heavy in (
+    for rel in (
         "docs/harness-map.json",
         "docs/dxcore-console-harness.json",
         "docs/dxtrade5-harness",
         "docs/webbroker-harness",
-        ".cursor/calibrate",
-        ".cursor/commands",
-        ".cursor/prompts",
-        "automation",
-        "stats",
+        "docs/project.json",
+        "docs/qa-project.json",
+        "docs/corner-platform-map.json",
+        "docs/calibrate-contract.json",
+        "docs/clean-contract.json",
+        "docs/clean-publish-tier-matrix.json",
+        "docs/clean-publish-tier-matrix.md",
+        "docs/release-notes-contract.json",
     ):
-        p = root / heavy
+        p = root / rel
+        if p.is_file():
+            p.unlink(missing_ok=True)
+        elif p.is_dir():
+            shutil.rmtree(p, ignore_errors=True)
+    for rel in (".cursor/calibrate", ".cursor/commands", ".cursor/prompts"):
+        p = root / rel
         if p.is_dir():
             shutil.rmtree(p, ignore_errors=True)
-        elif p.is_file():
-            p.unlink(missing_ok=True)
+    tools = root / "automation" / "tools"
+    if tools.is_dir():
+        for py in tools.glob("*.py"):
+            if py.name.endswith("_verify.py") or py.name in (
+                "calibrate_verify.py",
+                "close_archive.py",
+                "release_notes.py",
+                "clean_apply_public.py",
+                "clean_apply_team.py",
+                "clean_file_map.py",
+            ):
+                py.unlink(missing_ok=True)
 
     (root / "epics/README.md").write_text(
         "# Epics layout (guide)\n\n"
