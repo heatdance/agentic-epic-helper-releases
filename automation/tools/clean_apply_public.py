@@ -134,7 +134,6 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         "docs/qa-project.json",
         "docs/corner-platform-map.json",
         "docs/calibrate-contract.json",
-        "docs/clean-contract.json",
         "docs/clean-publish-tier-matrix.json",
         "docs/clean-publish-tier-matrix.md",
         "docs/release-notes-contract.json",
@@ -151,6 +150,8 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
     tools = root / "automation" / "tools"
     if tools.is_dir():
         for py in tools.glob("*.py"):
+            if py.name == "clean_verify.py":
+                continue
             if py.name.endswith("_verify.py") or py.name in (
                 "calibrate_verify.py",
                 "close_archive.py",
