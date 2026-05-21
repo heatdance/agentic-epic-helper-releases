@@ -4,7 +4,7 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 
 ## Project
 
-**Corner Trader QA workspace** (templates, harness, automation). Product context: use **`docs/project.example.json`** locally (Confluence-backed fields are not committed here).
+**Corner Trader QA workspace** (templates, harness, automation). Org context maps are **committed on this branch** — point MCP and pipelines at them after you add credentials.
 
 ## Where things live
 
@@ -12,9 +12,9 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 
 | Area | Path |
 |------|------|
-| Product / fork (example) | [docs/project.example.json](docs/project.example.json) |
-| Corner QA scope (example) | [docs/qa-project.example.json](docs/qa-project.example.json) |
-| Environments / repos (example) | [docs/corner-platform-map.example.json](docs/corner-platform-map.example.json) |
+| Product / fork | [docs/project.json](docs/project.json) |
+| Corner QA scope | [docs/qa-project.json](docs/qa-project.json) |
+| Environments / repos | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Tiered context | [docs/harness-map.json](docs/harness-map.json) |
 | Harness doctrine | [docs/harness-principles.md](docs/harness-principles.md) |
 | Calibrate contract | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
@@ -42,7 +42,10 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 | `/crtqa-env` | [automation/docs/crtqa-env.md](automation/docs/crtqa-env.md) |
 | `/crtqa-console` | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) |
 | `/crtqa-calibrate` | [automation/docs/calibrate.md](automation/docs/calibrate.md) · [calibrate_verify.py](automation/tools/calibrate_verify.py) |
+| `/crtqa-stats` | [crtqa-stats.md](.cursor/commands/crtqa-stats.md) · [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py) · [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md) |
 | jq inspection | [automation/docs/jq.md](automation/docs/jq.md) |
+
+**Not in this repo:** `/release-notes`, `releases/**` (maintainer personal branch only).
 
 ## How to start a session
 

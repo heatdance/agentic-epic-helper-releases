@@ -11,7 +11,12 @@
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"]
+      "args": [
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--auto-connect"
+      ],
+      "_comment_auto_connect": "Uses your logged-in Chrome (enable remote debugging at chrome://inspect/#remote-debugging). Or use --browserUrl http://127.0.0.1:9222"
     }
   }
 }

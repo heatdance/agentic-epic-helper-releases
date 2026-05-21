@@ -75,7 +75,7 @@ def apply_team(root: Path, contract: dict) -> None:
 
 def apply_public_t1(root: Path) -> None:
     """Public T1 is written by clean_apply_public; ensure harness-map strip if file remains."""
-    strip_harness_packages(root, ["clean_pipeline", "calibrate_pipeline"])
+    strip_harness_packages(root, ["clean_pipeline", "calibrate_pipeline", "release_notes"])
 
 
 def apply(root: Path, tier: str) -> None:

@@ -65,7 +65,14 @@
     "require_empty_worktrees": true,
     "enforce_branch_policy_on_remotes": true
   },
+  "tier_goals": {
+    "personal": "Maintainer-only backup on origin/personal: full tree except gitignore; includes epics, qa-handoff, releases/**, /release-notes, calibrate gold, and committed stats/latest.md.",
+    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness on clone after MCP/creds; no maintainer epics, release-notes, publish flow, or personal stats results (latest/raw/state).",
+    "public": "External guide on releases/public-M.N: same file names/structure as teaching stubs; no playbooks, verifiers, org truth, MCP recipes, crtqa-stats, or release-notes."
+  },
   "team": {
+    "audience": "private_squad",
+    "org_maps_policy": "shared_team_truth",
     "publish": {
       "mode": "direct",
       "remote": "team",
@@ -77,6 +84,7 @@
       "qa-handoff.md",
       "epics/CRT-*",
       "epics/CRT-*/*",
+      "releases/**",
       "temp/**",
       "automation/temp/**",
       ".cursor/calibrate/reports/**",
@@ -87,7 +95,10 @@
       "stats/crtqa-stats/state/**"
     ],
     "delete_paths": [
-      ".cursor/pipelines/test-exec.md"
+      ".cursor/pipelines/test-exec.md",
+      ".cursor/commands/release-notes.md",
+      "docs/release-notes-contract.json",
+      "automation/tools/release_notes.py"
     ],
     "keep_globs": [
       ".cursor/pipelines/*.md",
@@ -109,29 +120,20 @@
     "keep_exclude": [
       ".cursor/pipelines/clean.md"
     ],
-    "transform_paths": [
-      {
-        "path": "docs/project.json",
-        "action": "copy_to_example",
-        "target": "docs/project.example.json"
-      },
-      {
-        "path": "docs/qa-project.json",
-        "action": "copy_to_example",
-        "target": "docs/qa-project.example.json"
-      },
-      {
-        "path": "docs/corner-platform-map.json",
-        "action": "copy_to_example",
-        "target": "docs/corner-platform-map.example.json"
-      }
-    ],
+    "transform_paths": [],
     "required_after_strip": [
       "epics/templates/epic-ref.json",
       "docs/harness-map.json",
       "docs/harness-principles.md",
+      "docs/project.json",
+      "docs/qa-project.json",
+      "docs/corner-platform-map.json",
       "HOW-TO.md",
-      ".cursor/rules/pipeline-router.mdc"
+      ".cursor/rules/pipeline-router.mdc",
+      ".cursor/commands/crtqa-stats.md",
+      "automation/tools/crtqa_stats_rollup.py",
+      "stats/crtqa-stats/README.md",
+      "stats/crtqa-stats/temp/categories.json"
     ],
     "required_mcp_examples": [
       ".cursor/mcp.json.example",
@@ -140,7 +142,7 @@
     "router": {
       "exclude_triggers": ["CLEAN:"]
     },
-    "harness_map_strip_package_ids": ["clean_pipeline"],
+    "harness_map_strip_package_ids": ["clean_pipeline", "release_notes"],
     "entry_templates": {
       "README.md": "README.team.md",
       "HOW-TO.md": "HOW-TO.team.md",
@@ -149,6 +151,9 @@
     "forbidden_substrings": [
       "CLEAN:",
       "clean_pipeline",
+      "/release-notes",
+      "release-notes-contract",
+      "release_notes.py",
       "agentic-epic-helper.git",
       "agentic-epic-helper-releases",
       "origin/personal",
@@ -172,12 +177,13 @@
       "qa-handoff.md",
       "epics/CRT-*",
       "epics/CRT-*/*",
+      "releases/**",
       ".cursor/pipelines/clean.md",
       ".cursor/pipelines/*.md",
       "automation/tools/*_verify.py",
       "automation/tools/calibrate_verify.py",
       "automation/tools/close_archive.py",
-      "stats/crtqa-stats/latest.md",
+      "stats/crtqa-stats/**",
       "temp/**",
       "automation/temp/**"
     ],
@@ -240,7 +246,13 @@
       "mode": "guide_only"
     },
     "manifest_path": "docs/public-export-manifest.json",
-    "delete_paths": [".cursor/mcp.json.example", ".cursor/mcp.json"],
+    "delete_paths": [
+      ".cursor/mcp.json.example",
+      ".cursor/mcp.json",
+      ".cursor/commands/release-notes.md",
+      "docs/release-notes-contract.json",
+      "automation/tools/release_notes.py"
+    ],
     "template_overlays": {
       "epics/templates/discover-ref.json": "epics/templates/public/discover-ref.json",
       "epics/templates/tests-ref.json": "epics/templates/public/tests-ref.json",

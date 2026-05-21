@@ -17,3 +17,7 @@ stats/crtqa-stats/raw/
 
 # Calibrate — optional local history (see docs/calibrate-contract.json)
 .cursor/calibrate/history.jsonl
+
+# Release notes — command scratch (see .cursor/commands/release-notes.md)
+automation/temp/release-notes/
+automation/temp/release-map/

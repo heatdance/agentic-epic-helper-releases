@@ -546,6 +546,22 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
     if not cmd.is_file():
         return _fail("team tree missing .cursor/commands/crtqa-calibrate.md")
 
+    stats_cmd = root / ".cursor/commands/crtqa-stats.md"
+    if not stats_cmd.is_file():
+        return _fail("team tree missing .cursor/commands/crtqa-stats.md")
+    if (root / "stats/crtqa-stats/latest.md").is_file():
+        return _fail("team tree must not include stats/crtqa-stats/latest.md")
+
+    for rel in (
+        ".cursor/commands/release-notes.md",
+        "docs/release-notes-contract.json",
+        "automation/tools/release_notes.py",
+    ):
+        if (root / rel).exists():
+            return _fail(f"release-notes artefact present on team tree: {rel}")
+    if (root / "releases").is_dir() and any((root / "releases").iterdir()):
+        return _fail("releases/ must be empty or absent on team tree")
+
     try:
         with (root / "docs/harness-map.json").open(encoding="utf-8") as f:
             hmap = json.load(f)
@@ -553,6 +569,8 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
         ids = [p.get("id") for p in packages if isinstance(p, dict)]
         if "clean_pipeline" in ids:
             return _fail("harness-map must not include clean_pipeline on team tree")
+        if "release_notes" in ids:
+            return _fail("harness-map must not include release_notes on team tree")
     except (OSError, json.JSONDecodeError) as e:
         return _fail(f"harness-map.json: {e}")
 

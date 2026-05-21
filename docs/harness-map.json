@@ -569,6 +569,25 @@
           "mcp_hint": "gold_gate + gold_distinct (hard stop if gold copies prod) + compare. NO_ACTIONABLE_DELTA = success, no harness suggestions. DELTA_REVIEW only then playbook 6.6 (max 3 lessons, diff_evidence required). calibrate_verify.py --self-test."
         },
         {
+          "id": "release_notes",
+          "keywords": [
+            "release notes",
+            "PMOPROC",
+            "dxProject Key",
+            "CRT-650",
+            "corner-adaptive",
+            "rns-fx",
+            "rns.md",
+            "/release-notes"
+          ],
+          "read": [
+            "releases/README.md",
+            "docs/release-notes-contract.json",
+            ".cursor/commands/release-notes.md"
+          ],
+          "mcp_hint": "/release-notes v3: four JQL per fixVersion; FX Epic not CRT-650/644; Master Epic in CRT-650/644; fx base also excludes resolved and won't fix; adaptive queries omit project=."
+        },
+        {
           "id": "clean_pipeline",
           "keywords": [
             "CLEAN",

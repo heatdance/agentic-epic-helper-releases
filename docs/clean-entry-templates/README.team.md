@@ -1,6 +1,6 @@
 # Agentic epic helper — team harness
 
-Runnable **Corner Trader QA** harness for contributors: epic pipelines, verifiers, templates, and optional calibrate — **without** maintainer epics, stats corpus, or publish tooling.
+Runnable **Corner Trader QA** harness for contributors: epic pipelines, verifiers, templates, org maps, `/crtqa-stats`, and optional calibrate — **without** maintainer epics, release-notes tooling, personal stats reports, or publish tooling.
 
 ## Repository
 
@@ -43,7 +43,7 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 ## Context JSON
 
-Use **example** files for org-specific hosts (copy locally): `docs/project.example.json`, `docs/qa-project.example.json`, `docs/corner-platform-map.example.json`.
+Committed org maps (update only if your team agrees): [docs/project.json](docs/project.json), [docs/qa-project.json](docs/qa-project.json), [docs/corner-platform-map.json](docs/corner-platform-map.json). Add **gitignored** `.cursor/mcp.json` from the MCP examples below.
 
 ## Epics and automation
 

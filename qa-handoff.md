@@ -4,6 +4,9 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 
 ## Last updated
 
+- **Date**: 2026-05-20 — **`/release-notes` JQL:** FX Epic **not in** CRT-650, CRT-644 (+ base excludes resolved, won't fix); Master Epic **in** CRT-650, CRT-644; adaptive still `status not in (aborted)`.
+- **Date**: 2026-05-21 — **CLEAN tier alignment** (operator-confirmed): **personal** = full private backup; **team** = private squad + **shared org-map truth** + runnable harness (no release-notes, no maintainer stats `latest.md`); **public** = guide-only (no stats/release-notes). Contract `tier_goals` locked. Re-run **`CLEAN:`** Phase T/U to refresh remotes.
+- **Date**: 2026-05-20 — **`/release-notes` v3:** removed `corner-map.json`, `releases/exploration/`, `release_map_probe.py`; four fixed PMOPROC/Epic JQLs per fixVersion; adaptive without `project=`; contract schema v3; slim `release_notes.py`. Old batch outputs deleted — regenerate with `/release-notes` on `personal`.
 - **Date**: 2026-05-20 — **CLEAN MCP fix:** Phase U no longer deletes gitignored `.cursor/mcp.json`; public verify allows ignored file on disk; team tier adds `.cursor/mcp.json.team.example` (scrubbed stack). Restored local `.cursor/mcp.json` from example — operator must set postgres `USER`/`PASSWORD` and confirm global MCP (Atlassian/Figma) in Cursor Settings.
 - **Date**: 2026-05-19 — **`CLEAN: proceed`** (full publish from `personal`): **S/P** align OK (no personal commit); **T** `team/team` → **`83ccda1`** (`clean: team harness export`; **force-push** required — remote had diverged from `origin/personal`); **U** **`public-1.4`** → **`848ff3b`** on `releases` (`public-export: 1.4.0`); local back on **`personal`** only. **Postflight FAIL:** `releases` still has **`public-1.3`** + **`public-1.4`** — remote delete of `public-1.3` rejected (*current branch* on GitHub). **Operator:** set default branch to **`public-1.4`**, delete **`public-1.3`**, then `clean_verify.py --mode public_remote --superseded public-1.3` + `--mode postflight`.
 - **Date**: 2026-05-19 — **CLEAN public hardening** on `personal`: `clean_apply_public` seeds, template overlays, `public` verify gates.
@@ -25,6 +28,7 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 ## Current focus
 
 - **CRT-639:** **closed** — do not rerun upstream pipelines without restoring JSON from `context/` to epic root.
+- **Release notes:** v3 playbook + contract; run `/release-notes` to populate `releases/<batch>/` (no corner-map).
 - **Harness:** Mandatory-chain doc reconciliation (discover always required in all playbooks) — **deferred** separate pass.
 
 Doctrine: **[docs/harness-principles.md](docs/harness-principles.md)** (CLOSE archive note in §9).

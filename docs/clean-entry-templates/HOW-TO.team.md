@@ -61,6 +61,13 @@ Docs: [automation/docs/calibrate.md](automation/docs/calibrate.md) · [.cursor/c
 
 ---
 
-## 3. Stats (optional, local)
+## 3. Stats (`/crtqa-stats`)
 
-Team repo may include [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) for methodology; **`latest.md` and state are not published here.** Use `/crtqa-stats` only when your maintainer has configured Jira access locally.
+Out of the box on **`team`**: command [crtqa-stats.md](.cursor/commands/crtqa-stats.md), rollup [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py), shared [categories.json](stats/crtqa-stats/temp/categories.json). Each colleague builds **their own** `state/` and `latest.md` locally (gitignored / not on this remote).
+
+```text
+/crtqa-stats mode=initial_assessment jira_user=<you>
+python automation/tools/crtqa_stats_rollup.py --append-longitudinal
+```
+
+Maintainer personal reports are **not** copied here (no committed `stats/crtqa-stats/latest.md`).

@@ -77,25 +77,56 @@
     {
       "match": "stats/crtqa-stats/**",
       "personal": { "action": "keep" },
-      "team": { "action": "partial", "keep": ["stats/crtqa-stats/README.md", "stats/crtqa-stats/temp/categories.json"] },
+      "team": {
+        "action": "keep",
+        "drop_personal_results": [
+          "stats/crtqa-stats/latest.md",
+          "stats/crtqa-stats/raw/**",
+          "stats/crtqa-stats/state/**"
+        ]
+      },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/release-notes.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/release-notes-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/release_notes.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "releases/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
       "match": "docs/project.json",
       "personal": { "action": "keep" },
-      "team": { "action": "example_only", "target": "docs/project.example.json" },
+      "team": { "action": "keep" },
       "public": { "action": "example_only" }
     },
     {
       "match": "docs/qa-project.json",
       "personal": { "action": "keep" },
-      "team": { "action": "example_only", "target": "docs/qa-project.example.json" },
+      "team": { "action": "keep" },
       "public": { "action": "example_only" }
     },
     {
       "match": "docs/corner-platform-map.json",
       "personal": { "action": "keep" },
-      "team": { "action": "example_only", "target": "docs/corner-platform-map.example.json" },
+      "team": { "action": "keep" },
       "public": { "action": "example_only" }
     },
     {
