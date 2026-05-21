@@ -49,6 +49,14 @@ def _is_gitignored(root: Path, rel: str) -> bool:
     return proc.returncode == 0
 
 
+def _git_rm_if_tracked(root: Path, rel: str) -> None:
+    subprocess.run(
+        ["git", "rm", "-f", "--ignore-unmatch", rel],
+        cwd=root,
+        capture_output=True,
+    )
+
+
 def _delete_forbidden_paths(root: Path, contract: dict) -> None:
     for rel in contract.get("public", {}).get("delete_paths", []):
         if rel == ".cursor/mcp.json" and _is_gitignored(root, rel):
@@ -58,6 +66,7 @@ def _delete_forbidden_paths(root: Path, contract: dict) -> None:
             p.unlink()
         elif p.is_dir():
             shutil.rmtree(p, ignore_errors=True)
+        _git_rm_if_tracked(root, rel)
 
 
 def apply(root: Path, export_version: str, source_branch: str, source_sha: str) -> None:
