@@ -149,6 +149,9 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
         p = root / rel
         if p.is_dir():
             shutil.rmtree(p, ignore_errors=True)
+    adocs = root / "automation" / "docs"
+    if adocs.is_dir():
+        shutil.rmtree(adocs, ignore_errors=True)
     tools = root / "automation" / "tools"
     if tools.is_dir():
         for py in tools.glob("*.py"):
