@@ -5,7 +5,8 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 ## Last updated
 
 - **Date**: 2026-05-20 — **`/release-notes` JQL:** FX Epic **not in** CRT-650, CRT-644 (+ base excludes resolved, won't fix); Master Epic **in** CRT-650, CRT-644; adaptive still `status not in (aborted)`.
-- **Date**: 2026-05-21 — **CLEAN tier alignment** (operator-confirmed): **personal** = full private backup; **team** = private squad + **shared org-map truth** + runnable harness (no release-notes, no maintainer stats `latest.md`); **public** = guide-only (no stats/release-notes). Contract `tier_goals` locked. Re-run **`CLEAN:`** Phase T/U to refresh remotes.
+- **Date**: 2026-05-21 — **`CLEAN:` full run:** **P** `origin/personal` → **`e901a47`** (+ harness fixes **`ad034fb`**); **T** `team/team` → **`1c02e27`** (force-push); **U** `releases/public-1.5` → **`c8025f2`** (new branch). Tier rules applied (no release-notes on team; org maps kept on team; stats toolkit on team; public guide-only). **Postflight FAIL:** delete **`public-1.4`** blocked — GitHub default branch still **`public-1.4`**; set default to **`public-1.5`**, then `clean_verify.py --mode public_remote --superseded public-1.4` + `--mode postflight`.
+- **Date**: 2026-05-21 — **CLEAN tier alignment** (operator-confirmed): **personal** = full private backup; **team** = private squad + **shared org-map truth** + runnable harness (no release-notes, no maintainer stats `latest.md`); **public** = guide-only (no stats/release-notes). Contract `tier_goals` locked.
 - **Date**: 2026-05-20 — **`/release-notes` v3:** removed `corner-map.json`, `releases/exploration/`, `release_map_probe.py`; four fixed PMOPROC/Epic JQLs per fixVersion; adaptive without `project=`; contract schema v3; slim `release_notes.py`. Old batch outputs deleted — regenerate with `/release-notes` on `personal`.
 - **Date**: 2026-05-20 — **CLEAN MCP fix:** Phase U no longer deletes gitignored `.cursor/mcp.json`; public verify allows ignored file on disk; team tier adds `.cursor/mcp.json.team.example` (scrubbed stack). Restored local `.cursor/mcp.json` from example — operator must set postgres `USER`/`PASSWORD` and confirm global MCP (Atlassian/Figma) in Cursor Settings.
 - **Date**: 2026-05-19 — **`CLEAN: proceed`** (full publish from `personal`): **S/P** align OK (no personal commit); **T** `team/team` → **`83ccda1`** (`clean: team harness export`; **force-push** required — remote had diverged from `origin/personal`); **U** **`public-1.4`** → **`848ff3b`** on `releases` (`public-export: 1.4.0`); local back on **`personal`** only. **Postflight FAIL:** `releases` still has **`public-1.3`** + **`public-1.4`** — remote delete of `public-1.3` rejected (*current branch* on GitHub). **Operator:** set default branch to **`public-1.4`**, delete **`public-1.3`**, then `clean_verify.py --mode public_remote --superseded public-1.3` + `--mode postflight`.
@@ -35,13 +36,13 @@ Doctrine: **[docs/harness-principles.md](docs/harness-principles.md)** (CLOSE ar
 
 ## Blockers
 
-- **CLEAN postflight** — `releases` default branch still **`public-1.3`**; cannot delete until default is **`public-1.4`** (see Last updated).
+- **CLEAN postflight** — `releases` default branch still **`public-1.4`**; cannot delete until default is **`public-1.5`** (see Last updated).
 - **CRT-1738 numeric oracle** — Jira notes dependency on **XT-7911** (`obl-015` deferral in ref); reflected in excluded checks and analysis gaps.
 - **user-mcp-atlassian** for live pipeline re-runs.
 
 ## Next steps
 
-1. **CLEAN finish:** GitHub → `agentic-epic-helper-releases` → default branch **`public-1.4`** → delete **`public-1.3`** → verify `public_remote` + `postflight` locally.
+1. **CLEAN finish:** GitHub → `agentic-epic-helper-releases` → default branch **`public-1.5`** → delete **`public-1.4`** → `python automation/tools/clean_verify.py --mode public_remote --superseded public-1.4` + `--mode postflight`.
 2. Human: create CRTQA test issues from **`CRT-639-tests.md`** (generation mode — no CRTQA keys in repo).
 3. To re-run **EPIC-PREP** / **COVERAGE** / etc. on CRT-639: move JSON from `epics/CRT-639/context/` back to epic root first — [HOW-TO.md](HOW-TO.md).
 
