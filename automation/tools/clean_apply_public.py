@@ -205,6 +205,10 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
     if public_overlay_dir.is_dir():
         shutil.rmtree(public_overlay_dir, ignore_errors=True)
 
+    automation_dir = root / "automation"
+    if automation_dir.is_dir():
+        shutil.rmtree(automation_dir, ignore_errors=True)
+
 
 def main() -> int:
     import argparse
