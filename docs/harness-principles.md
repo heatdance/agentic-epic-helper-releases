@@ -19,7 +19,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 | Concept | Rule |
 |---------|------|
-| **Triggers** | `EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` — see [pipeline-router](../.cursor/rules/pipeline-router.mdc) |
+| **Triggers** | `EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `COVERAGE-REINFORCE:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` — see [pipeline-router](../.cursor/rules/pipeline-router.mdc) |
 | **`EpicDir`** | Always `epics/<KEY>/` (after **CLOSE:** JSON under `epics/<KEY>/context/`) |
 | **CRTQA Tests** | **Assumed not to exist** yet during **TEST-PREP**; operators create Jira tests **after** drafts |
 
@@ -118,7 +118,9 @@ Three lanes (epic-agnostic; content varies per Epic):
 
 **Exploration map (deepening):** **DISCOVER** (what must be satisfiable) → **PRECON** (how to set up once) → **PREP** (how to verify each bundle). Each layer **must produce strictly deeper evidence** than the previous ([`docs/exploration-depth-ladder.json`](exploration-depth-ladder.json)): `smoke` → `discover_probe` → `precon_drill` → `prep_verify_view`. **Authenticated ≠ explored.**
 
-**Recommended chain:** `EPIC-PREP` → `COVERAGE` → optional `ANALYSE` → optional `TEST-DISCOVER` → optional **`TEST-PRECON`** → `TEST-PREP` → optional **`CLOSE`**.
+**Recommended chain:** `EPIC-PREP` → `COVERAGE` → `ANALYSE` → `TEST-DISCOVER` → **`COVERAGE-REINFORCE`** → **`TEST-PRECON`** → `TEST-PREP` → **`CLOSE`**. Optional stages may be skipped when not using **`/crtqa-helper`**; helper runs the full chain by default.
+
+**`/crtqa-helper`:** one pipeline **per agent turn**; three human gates (env, coverage review, discover creds); scratch `epics/<KEY>/helper/` → `context/helper/` on CLOSE. Contract: [`crtqa-helper-contract.json`](crtqa-helper-contract.json).
 
 **`CLOSE:`** — backward documentation integrity ladder + archive. Post-close: four human `.md` at `{EpicDir}` root; all JSON under `{EpicDir}context/` ([`docs/close-contract.json`](close-contract.json)). **No** MCP. Does not re-run **ANALYSE**. Rerunning upstream pipelines on a closed epic breaks paths unless JSON is moved back from `context/`.
 
@@ -179,9 +181,33 @@ Rule detail: [`.cursor/rules/jq-json.mdc`](../.cursor/rules/jq-json.mdc).
 
 ---
 
-## 14. Session context in Cursor (realistic model)
+## 14. Conversation vs Action (operator discipline)
 
-There is **no separate IDE “cache”** that injects a first-prompt summary on every later turn. The model sees **rules**, **user messages**, **tool results**, and **chat history** (lossy when long).
+Adapted from [grounding-kit](https://github.com/heatdance/grounding-kit); charter: [`docs/grounding-integration.json`](grounding-integration.json).
+
+| Mode | Examples | Agent duty |
+|------|----------|------------|
+| **Conversation** | `/better-prompt`, `/better-skill`, questions, review-only | No epic or harness edits; no `qa-handoff` churn for chat-only turns |
+| **Teach** | `/teach`, `/teach stop` | Teach-first smoke under `auto-tests/`; no complete test unless operator asks; no `epics/` or pipeline emits; session file `auto-tests/.teacher-session.json` |
+| **Action** | `EPIC-PREP:` … `CLOSE:`, harness doc edits, epic artefacts | Playbooks + verifiers; update handoff before session end |
+
+**Pipeline triggers** (`EPIC-PREP:` … `CLOSE:`, `CLEAN:`, slash commands in [`grounding-integration.json`](grounding-integration.json)) are **high confidence for declared scope** — see [`.cursor/rules/intent-corner.mdc`](../.cursor/rules/intent-corner.mdc).
+
+### Action-close (harness or session work)
+
+When an **Action** changes durable harness files or ends a substantive session:
+
+1. Update [`qa-handoff.md`](../qa-handoff.md) — **Resume**, **Next**, **Anchors** (≤15 lines) + dated bullet under Last updated.
+2. If paths/keywords changed → [`docs/harness-map.json`](harness-map.json), [`AGENTS.md`](../AGENTS.md), [`README.md`](../README.md) per [harness-maintenance](../.cursor/rules/harness-maintenance.mdc).
+3. If coach behavior changed → bump versions in [`docs/operator-assist-contract.json`](operator-assist-contract.json) + fixture goldens.
+
+Epic pipeline runs do **not** require a machine `log.research[]` trail.
+
+---
+
+## 15. Session context in Cursor (realistic model)
+
+There is **no separate IDE “cache”** that injects a first-prompt summary on every later turn. The model sees **rules**, **user messages**, **tool results**, and **chat history** (lossy when long). Optional: [`.cursor/docs/inject-corner.json`](../.cursor/docs/inject-corner.json) when hooks are enabled (pass 2).
 
 **Practical approach for this repo:**
 
@@ -193,7 +219,7 @@ There is **no separate IDE “cache”** that injects a first-prompt summary on 
 
 ---
 
-## 14. Related paths (minimal)
+## 16. Related paths (minimal)
 
 | Role | Path |
 |------|------|
@@ -205,6 +231,10 @@ There is **no separate IDE “cache”** that injects a first-prompt summary on 
 | TEST-DISCOVER verifier | [`automation/tools/discover_verify.py`](../automation/tools/discover_verify.py) |
 | TEST-PRECON verifier | [`automation/tools/precon_verify.py`](../automation/tools/precon_verify.py) |
 | jq filters / install | [automation/docs/jq.md](../automation/docs/jq.md) |
+| Grounding charter / coaches | [docs/grounding-integration.json](grounding-integration.json) |
+| Corner harness verify | [automation/docs/corner-harness-verify.md](../automation/docs/corner-harness-verify.md) |
+| Karpathy coding (opt-in) | [docs/karpathy-guidelines-contract.json](karpathy-guidelines-contract.json) · [`.cursor/skills/karpathy-guidelines/SKILL.md`](../.cursor/skills/karpathy-guidelines/SKILL.md) |
+| Teach / smoke automation | [docs/auto-tests-contract.json](auto-tests-contract.json) · [`/teach`](../.cursor/commands/teach.md) · [`auto-tests/`](../auto-tests/) |
 
 ---
 

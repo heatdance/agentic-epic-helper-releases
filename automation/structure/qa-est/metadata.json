@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "bundle_id": "qa_est",
+  "versions_manifest": "automation/structure/qa-est/versions-manifest.json",
+  "recommended_version": "v1",
+  "meta": {
+    "purpose": "Agent map for QA Est Structure formula — draft vs remaining vs original estimate, epic rollup, lane filters, exclusions.",
+    "structure_column": "QA Est",
+    "last_reviewed": "2026-05-27"
+  },
+  "formula_files": {
+    "v1_exclude_cr": "automation/structure/qa-est/versions/v1/formula.expr",
+    "v2_include_cr": "automation/structure/qa-est/versions/v2/formula.expr"
+  },
+  "estimate_precedence": {
+    "when_timespent_gt_0": "remainingEstimate",
+    "else_when_draft_gt_0": "DURATION(CONCAT(TEXT(customfield_11250); \"h\"))",
+    "else": "originalEstimate",
+    "draft_field": "customfield_11250"
+  },
+  "qa_lanes": {
+    "ra": "QA Task + customfield_20572 Requirements analysis",
+    "cr": "QA Task + Test cases review (excluded from v1 rollup only)",
+    "tc": "QA Task Test cases development OR Test Execution *Test Case Development*",
+    "validation": "Test Execution *Epic Validation* OR *Epic Testing*"
+  },
+  "rollup_by_version": {
+    "v1": "in_qa_lane_agg = RA + TC + Validation (no CR hours in SUM#leaves)",
+    "v2": "in_qa_lane_agg = all QA lanes including CR"
+  },
+  "epic_scope_statuses": ["Validation", "Pending Fix", "Under Implementation"],
+  "epic_scope_layers": {
+    "status": ["epic_in_scope", "under_scope_epic PARENT", "scope_epics_in_subtree"],
+    "label": "epic_in_scope branch: qa-no-task → blank; slot/incomplete guards unchanged",
+    "pmoproc": "scope_epics_in_subtree branch for non-scoped Epic rows; show_blank exclusions unchanged"
+  },
+  "layer_rollup_gate": {
+    "description": "Layer aggregation ignores scoped Epics that are not defined or incomplete.",
+    "qualified_epic_conditions": [
+      "scoped status (Validation, Pending Fix, Under Implementation)",
+      "NOT label qa-no-task",
+      "p_any_slot is true",
+      "NOT p_incomplete (slot coverage + duplicate TC + missing estimate checks)"
+    ]
+  },
+  "exclusions": {
+    "leaf": [
+      "label qa-no-task",
+      "SJQL descendant of folder(\"Archive\")",
+      "JQL/SJQL Fixed Cost Corner Trader M&S (PMOPROC)"
+    ],
+    "blank_rows": [
+      "Archive folder descendants",
+      "summary Archive / Active Epics (ph4/ph5) / Active Epics (Other)",
+      "Fixed Cost Corner Trader M&S patterns"
+    ]
+  },
+  "epic_display_literals": {
+    "not_defined": "(?) not defined",
+    "incomplete": "(!) incomplete",
+    "leaf_closed": "done",
+    "leaf_aborted": "none",
+    "leaf_missing_est": "(?)"
+  },
+  "incomplete_triggers": [
+    "NOT (slot_ra AND slot_cr AND slot_tc AND slot_val) in subtree",
+    "duplicate_tc: more than one TC-pattern issue in subtree",
+    "missing_est: open QA-lane leaf without draft or remaining estimate"
+  ],
+  "aggregation": "SUM#leaves#strict on ticket_est for leaves matching counts_in_sum (uses in_qa_lane_agg per version)"
+}

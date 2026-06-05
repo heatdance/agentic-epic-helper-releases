@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "contract_version": 3,
+  "description": "Normative paths and versioning for Jira ALM Works Structure formula bundles (Corner Roadmap QA columns, QA End Date, QA Est). Paste deploy only — live Structure board is source of truth.",
+  "content_policy": "Functional and process context only. No passwords, tokens, or credentials in repo files.",
+  "jira_host": "https://jira.in.devexperts.com",
+  "deployment": {
+    "structure_board_title": "[Enterprise] Corner Roadmap",
+    "structure_id": 603,
+    "structure_url": "https://jira.in.devexperts.com/secure/StructureBoard.jspa?s=603#",
+    "editing_ui": "Structure → open board → column settings → Formula; Saved column: Custom."
+  },
+  "bundles": {
+    "roadmap_qa_columns": {
+      "id": "roadmap_qa_columns",
+      "recommended_version": "v04-epic-aborted-skip-with-jql-counter",
+      "versions_manifest": "automation/structure/roadmap-columns/versions-manifest.json",
+      "metadata": "automation/structure/roadmap-columns/metadata.json",
+      "readme": "automation/structure/roadmap-columns/README.md",
+      "versions_root": "automation/structure/roadmap-columns/versions",
+      "recommended_formula_dir": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter",
+      "column_mapping": [
+        { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/RA", "structure_column": "QA RA" },
+        { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC", "structure_column": "QA TC" },
+        { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/CR", "structure_column": "QA CR" },
+        { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation", "structure_column": "Validation" }
+      ],
+      "snippet_files": ["CR", "RA", "TC", "Validation"]
+    },
+    "qa_end_date": {
+      "id": "qa_end_date",
+      "recommended_version": "v1",
+      "versions_manifest": "automation/structure/qa-end-date/versions-manifest.json",
+      "readme": "automation/structure/qa-end-date/README.md",
+      "recommended_formula_file": "automation/structure/qa-end-date/versions/v1/formula.expr",
+      "structure_column": "QA End Date",
+      "structure_variable": "EndDate",
+      "jira_field": "End Date",
+      "column_format": "General or Text",
+      "sum_over_sub_items": false
+    },
+    "qa_est": {
+      "id": "qa_est",
+      "recommended_version": "v1",
+      "alternate_version": "v2",
+      "versions_manifest": "automation/structure/qa-est/versions-manifest.json",
+      "metadata": "automation/structure/qa-est/metadata.json",
+      "readme": "automation/structure/qa-est/README.md",
+      "recommended_formula_file": "automation/structure/qa-est/versions/v1/formula.expr",
+      "alternate_formula_file": "automation/structure/qa-est/versions/v2/formula.expr",
+      "structure_column": "QA Est",
+      "draft_field": "customfield_11250",
+      "epic_scope_statuses": ["Validation", "Pending Fix", "Under Implementation"],
+      "rollup_lanes_v1": ["RA", "TC", "Validation"],
+      "rollup_lanes_v2": ["RA", "CR", "TC", "Validation"],
+      "estimate_precedence": "timespent>0 → remainingEstimate; else draft hours → DURATION; else originalEstimate"
+    }
+  },
+  "agent_read_order": [
+    "docs/jira-structure-contract.json",
+    "automation/structure/README.md",
+    "automation/docs/jira-structure.md",
+    "automation/structure/roadmap-columns/README.md",
+    "automation/structure/roadmap-columns/metadata.json"
+  ],
+  "human_doc": "automation/docs/jira-structure.md",
+  "root_readme": "automation/structure/README.md"
+}

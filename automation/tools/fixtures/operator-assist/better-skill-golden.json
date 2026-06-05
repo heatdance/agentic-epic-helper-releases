@@ -1,0 +1,10 @@
+{
+  "expectCoachVersion": 1,
+  "cases": [
+    {
+      "id": "missing_verifier",
+      "draft_excerpt": "Emit coverage when ready.",
+      "expect_rubric_gaps": ["validation_done", "verification_schema"]
+    }
+  ]
+}

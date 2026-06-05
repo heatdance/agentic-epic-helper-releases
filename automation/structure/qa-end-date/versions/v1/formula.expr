@@ -1,0 +1,90 @@
+with is_qa =
+  MATCH(issuetype, "QA Task")
+  OR MATCH(issuetype, "Test Execution") :
+
+with epic_qa_count =
+  COUNT#children#truthy {
+    MATCH(issuetype, "QA Task")
+    OR MATCH(issuetype, "Test Execution")
+  } :
+
+with epic_qa_open =
+  COUNT#children#truthy {
+    (
+      MATCH(issuetype, "QA Task")
+      OR MATCH(issuetype, "Test Execution")
+    )
+    AND status != "Closed"
+    AND status != "Aborted"
+  } :
+
+with epic_qa_closed =
+  COUNT#children#truthy {
+    (
+      MATCH(issuetype, "QA Task")
+      OR MATCH(issuetype, "Test Execution")
+    )
+    AND status = "Closed"
+  } :
+
+with epic_qa_aborted =
+  COUNT#children#truthy {
+    (
+      MATCH(issuetype, "QA Task")
+      OR MATCH(issuetype, "Test Execution")
+    )
+    AND status = "Aborted"
+  } :
+
+with epic_latest_open_end =
+  MAX#children {
+    IF (
+      (
+        MATCH(issuetype, "QA Task")
+        OR MATCH(issuetype, "Test Execution")
+      )
+      AND status != "Closed"
+      AND status != "Aborted";
+      EndDate
+    )
+  } :
+
+with epic_qa_end =
+  IF (
+    epic_qa_count = 0;
+    "";
+    IF (
+      epic_qa_open > 0;
+      epic_latest_open_end;
+      IF (
+        epic_qa_aborted = epic_qa_count;
+        "aborted";
+        IF (
+          epic_qa_closed = epic_qa_count;
+          "done";
+          "done"
+        )
+      )
+    )
+  ) :
+
+with qa_row_end =
+  IF (
+    status = "Closed";
+    "done";
+    IF (
+      status = "Aborted";
+      "aborted";
+      EndDate
+    )
+  ) :
+
+IF (
+  MATCH(issuetype, "Epic");
+  epic_qa_end;
+  IF (
+    is_qa;
+    qa_row_end;
+    ""
+  )
+)

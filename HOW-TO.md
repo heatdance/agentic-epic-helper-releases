@@ -1,128 +1,80 @@
 # Corner QA — how to run the main processes
 
-This workspace uses **Cursor** with Jira and Confluence so people and agents can prepare epics, draft coverage and tests, compare effort over time, and occasionally measure how stable those outputs are. **Workspace rules load automatically** in Cursor; you do not need to open them to start a run.
+This workspace is a **Corner Trader QA harness** for humans and AI agents: prepare epics, draft coverage and tests, and archive artefacts under `epics/<KEY>/`. **Workspace rules load automatically** in Cursor.
 
 **Organization-wide Cursor MCP** (tokens, server layout, global settings): [AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor) on QAPORTAL.
 
 ### Operator prerequisites
 
-- **jq** (optional per person, recommended for agent-assisted epic work): install **once on your own PC** so `jq` is on system **PATH** in any terminal — agents use it to slice large JSON instead of loading whole epic files. **Windows:** `winget install --id jqlang.jq -e`. **macOS:** `brew install jq`. **Linux:** your distro package or [jqlang.org/download](https://jqlang.org/download/). Verify with `jq --version`; restart Cursor or open a new terminal if the command is not found. Details and example filters: [automation/docs/jq.md](automation/docs/jq.md).
+- **jq** (recommended for agent-assisted epic work): install on system **PATH**. **Windows:** `winget install --id jqlang.jq -e`. **macOS:** `brew install jq`. Details: [automation/docs/jq.md](automation/docs/jq.md).
+- **MCP:** configure `user-mcp-atlassian` and optional CTQA tools per [AGENTS.md](AGENTS.md).
 
-**Where detail lives (agents and humans):** [AGENTS.md](AGENTS.md) (map) · [epics/README.md](epics/README.md) (per-artifact layout) · [docs/harness-map.json](docs/harness-map.json) (keyword → files) · [docs/harness-principles.md](docs/harness-principles.md) (doctrine) · playbooks under [.cursor/pipelines/](.cursor/pipelines/) (trigger on the line, e.g. `CLOSE: CRT-639`).
+**Where detail lives:** [AGENTS.md](AGENTS.md) · [epics/README.md](epics/README.md) · [docs/harness-map.json](docs/harness-map.json) · [docs/harness-principles.md](docs/harness-principles.md) · playbooks under [.cursor/pipelines/](.cursor/pipelines/)
 
 ---
 
-## 1. Stats (CRTQA Test Case Development time) — v4
-
-**Purpose:** Measure time saved on done **Test Case Development** (CRTQA TCD under CRT epics where you are test lead) when using the **agentic epic helper**, vs a **manual corpus** and vs **draft estimates**. Draft hours come from Jira **`customfield_11250`**; **Devex SP** = draft ÷ 8. **Association, not causation.**
-
-**Which mode**
+## 1. Stats (CRTQA Test Case Development time) — personal only
 
 | Mode | When |
 |------|------|
-| `initial_assessment` | First baseline: all done TCD tasks for your epics |
-| `incremental_update` | Routine: only **new** done tasks since last run (report still refreshes if there are none) |
-| `full_refresh` | Re-pull Jira for the **same** included keys (redo assessment, fix draft/logged fields, or after v4 upgrade) — epic roles unchanged unless you re-attest |
+| `initial_assessment` | First time: build corpus + `state/last-sync-<you>.json` |
+| `incremental_update` | Team workflow: confirm baselines → scoped AI TCD → `latest-team.md` |
+| `full_refresh` | Re-fetch existing keys; roles unchanged unless you re-attest |
 
-**Workflow (conceptual)**
+**How to run**
 
-1. Confirm **included CRTQA keys**; per epic on first run: **already AI-assisted?** (yes → **comparison**, no → **corpus**).
-2. Ingest **draft** (`customfield_11250`) and **logged** (`timetracking.time_spent`). Do **not** use `timetracking.original_estimate` for draft or size.
-3. Agent (or you) runs rollup: `python automation/tools/crtqa_stats_rollup.py --append-longitudinal`.
-
-**Reading [`stats/crtqa-stats/latest.md`](stats/crtqa-stats/latest.md)**
-
-1. Header — **`report_profile`** (`task_detail` \| `directional` \| `benchmark`) and what the run can claim.
-2. **Task-level** table — draft vs logged, **vs draft** hours, **attribution** (`estimate_only` vs corpus-backed).
-3. Charts — draft vs logged (always when draft exists); corpus benchmark chart when n≥4 manual tasks in a category.
-4. Benchmark tables — **% saved vs corpus** only when corpus **≥ 4** in that category×size; otherwise “benchmark pending” for that row only.
-
-**How to run it**
-
-```
+```text
 /crtqa-stats mode=initial_assessment jira_user=<you>
-/crtqa-stats mode=incremental_update jira_user=<you>
+/crtqa-stats mode=incremental_update
+/crtqa-stats mode=incremental_update users=mshpak,amukanova
 /crtqa-stats mode=full_refresh jira_user=<you>
 ```
 
-Playbook: [`.cursor/commands/crtqa-stats.md`](.cursor/commands/crtqa-stats.md). Rollup details: [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md). Operator summary: [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md).
+**Incremental (team):** Phase 1 — `python automation/tools/crtqa_stats/team_readiness.py` (confirm all `latest-*` current). Phase 2 — per user `fetch_incremental.py` → confirm scope → `process_incremental.py` → `crtqa_stats_rollup.py`. Phase 3 — `python automation/tools/crtqa_stats_team_rollup.py` → `stats/crtqa-stats/latest-team.md`.
 
-**Git:** `latest.md` is committed; `stats/crtqa-stats/state/` and `raw/` are local (gitignored).
+Skill: [`.cursor/skills/crtqa-stats/SKILL.md`](.cursor/skills/crtqa-stats/SKILL.md) · Command: [`.cursor/commands/crtqa-stats.md`](.cursor/commands/crtqa-stats.md) · Contract: [docs/crtqa-stats-contract.json](docs/crtqa-stats-contract.json) · Rollup: [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md)
 
 ---
 
 ## 2. Pipelines (QA work per Epic)
 
-**Purpose:** Build a reusable artifact chain per Epic—requirements map, verification checklist, optional gap analysis, discovery/precondition maps, draft regression tests, optional **Close** (integrity + archive). Close does not run the app or Playwright.
+### Epic orchestrator (`/crtqa-helper`)
 
-**Typical order**
+Recommended entry for a full epic chain — **one pipeline stage per agent turn**.
 
-| Step | Trigger | Main output |
-|------|---------|-------------|
-| 1 | `EPIC-PREP:` | `epics/<KEY>/<KEY>-ref.json` |
-| 2 | `COVERAGE:` | `-coverage.json` / `-coverage.md` |
-| 3 | `ANALYSE:` (optional) | `-analysis.json` / `-analysis.md` |
-| 4 | `TEST-DISCOVER:` | `-discover.json` |
-| 5 | `TEST-PRECON:` (optional) | `-precon.json` / `-precon.md` |
-| 6 | `TEST-PREP:` | `-tests.json` / `-tests.md` |
-| 7 | `CLOSE:` (optional) | JSON → `context/`; four `.md` at epic root |
+| Command | When |
+|---------|------|
+| **`/crtqa-helper CRT-1234`** | Bind epic key; run env probe then first stage when env passes |
+| **`/crtqa-helper resume`** | Advance one stage or clear a gate; optional comment → `epics/<KEY>/helper/operator-feedback.md` |
 
-Run **one Epic per chat**. Paste the trigger and key on the first line, for example: `COVERAGE: CRT-639`.
+**Human gates:** env (tunnel/console) · coverage review (edit `-coverage.md` and/or comment on resume) · discover creds (tokens on resume line only — never in session files).
 
-### Trigger reference
+Scratch: `epics/<KEY>/helper/` (gitignored) archives to `context/helper/` on **`CLOSE:`**. Contract: [docs/crtqa-helper-contract.json](docs/crtqa-helper-contract.json).
 
-| Trigger | Needs (under `epics/<KEY>/`) | Optional on same line |
-|---------|------------------------------|----------------------|
-| `EPIC-PREP:` *KEY* | — | `repo=`, `focus=` |
-| `COVERAGE:` *KEY* | `-ref.json` | `repo=`, `focus=` |
-| `ANALYSE:` *KEY* | `-coverage.json` | `known_issues=yes`, `resolve=no`, `include_closed=yes` |
-| `TEST-DISCOVER:` *KEY* | `-ref.json`, `-coverage.json` | FE creds (below), `proceed`, `fe_exploration_waived=yes`, `crtqa_index=yes`, `discover_override=yes` |
-| `TEST-PRECON:` *KEY* | `-coverage.json` | Same FE tokens; SHOULD `-discover.json`, `-ref.json` |
-| `TEST-PREP:` *KEY* | `-coverage.json` (obligations_coverage) | Same FE tokens; SHOULD `-precon.json`; `map_only=yes`, `draft_profile=teaching` |
-| `CLOSE:` *KEY* | `-ref`, `-coverage`, `-discover`, `-precon`, `-tests` at epic root | `heal=no` (default: apply fixes) |
-| `CLEAN:` | — | `scope=full` (default) \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** |
+You can still run individual triggers below without the orchestrator.
 
-Playbooks: [.cursor/pipelines/](.cursor/pipelines/). Layout: [epics/README.md](epics/README.md). Post-hoc harness calibration: [§3](#3-calibrate-prod-vs-operator-gold).
+### Pipeline reference
 
-**Publish track:** **`CLEAN:`** ( **`personal` branch only** ) aligns harness, pushes **`origin/personal`**, checks out **`team`** and pushes **`team/team`** directly (no `clean/*` branches), then builds **`public-M.N+1`** from **`team/team`** on [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) and deletes the previous **`public-*`** line. Sequential checkout in one repo — no worktrees. One-time fix for a bad publish: [automation/docs/clean-remediation.md](automation/docs/clean-remediation.md). Not for day-to-day Epic QA.
+Run **one Epic per chat**. Paste trigger + key on the first line (e.g. `COVERAGE: CRT-639`).
 
-### Operator prep (Discovery, Precondition, Prep)
+| Trigger | Purpose | Prep |
+|---------|---------|------|
+| `EPIC-PREP:` | Requirement map + proposed obligations | Jira/Confluence MCP |
+| `COVERAGE:` | First-pass Smart Checklist | `-ref.json`; harness maps optional |
+| `ANALYSE:` | Coverage-grounded gap audit | `-coverage.json` |
+| `TEST-DISCOVER:` | Obligation closure + verification affordances | Postgres tunnel + `/crtqa-console start` + `/crtqa-env`; chrome-devtools MCP; FE creds on trigger line |
+| `COVERAGE-REINFORCE:` | Deepen checklist from discover + operator feedback | `-discover.json`, `helper/affordances-slice.json`, `operator-feedback.md` |
+| `TEST-PRECON:` | Preconditions + session placeholders | Same env prep as discover |
+| `TEST-PREP:` | Regression test draft bundles | Same env prep; `-coverage.json` obligations |
+| `CLOSE:` | Integrity ladder + archive | Full artefact set at epic root |
 
-Do **once per session**, then run `TEST-DISCOVER:` → `TEST-PRECON:` → `TEST-PREP:` in separate chats (recommended order).
-
-1. **Postgres tunnel** (leave open):  
-   `python automation/tools/tunnel/ctqa_pg.py YOUR_AD_USER@ctqa.prosp.devexperts.com`  
-   Reload **postgres-ctqa** MCP — [tunnel README](automation/tools/tunnel/README.md).
-2. **Console:** `/crtqa-console start` (SSH password in dialog, ~30s).
-3. **Check:** `/crtqa-env` — fix any FAIL before pipelines.
-4. **Chrome:** enable **chrome-devtools** MCP when dxTrade5 or WebBroker is in scope ([fe-ui-probe-contract](docs/fe-ui-probe-contract.json)). Configured ≠ logged in.
-
-**FE credentials** — append to the trigger line when UI is in scope (never commit secrets to the repo):
-
-| Token | Meaning |
-|-------|---------|
-| `dxtrade5_creds=<user>/<password>` | CTQA retail |
-| `webbroker_creds=<user>/<password>` | CTQA dealer |
-| `fe_exploration_waived=yes` | After Phase 0b stop + your ack — shell-only UI |
-| `proceed` | After Phase 0 infra stop — re-run Phase 0, then continue |
-
-Example: `TEST-DISCOVER: CRT-639 dxtrade5_creds=USER/PASS webbroker_creds=USER/PASS` — reuse the same suffix for `TEST-PRECON:` and `TEST-PREP:`.
-
-**Adaptive** has no cred token (CTQA shared principal) — [corner-platform-map](docs/corner-platform-map.json).
-
-**Exploration depth:** Phase 0c is login smoke only; Precondition drills setup; Prep opens verification grids before drafting ([exploration-depth-ladder](docs/exploration-depth-ladder.json)).
-
-**If Phase 0 stops:** add cred tokens or `fe_exploration_waived=yes`; for tunnel/console failures, fix infra and resend with `proceed`.
-
-### After Close
-
-When `CLOSE:` has run, JSON lives under `epics/<KEY>/context/`. Only these stay at epic root: `-coverage.md`, `-analysis.md`, `-tests.md`, `-precon.md`. Do not rerun upstream pipelines unless you restore JSON to the epic root first.
+Playbooks: [.cursor/pipelines/](.cursor/pipelines/) · Layout: [epics/README.md](epics/README.md)
 
 ---
 
 ## 3. Calibrate (prod vs operator gold)
 
-**When:** After the full epic workflow (pipelines through **`CLOSE:`** when you close) and after you curate **gold** under **`.cursor/calibrate/<KEY>-gold/`** (required: **`<KEY>-coverage.json`** and **`<KEY>-tests.json`**).
+**When:** After the full epic workflow (through **`CLOSE:`** when you close) and after you curate **gold** under **`.cursor/calibrate/<KEY>-gold/`** (required: **`<KEY>-coverage.json`** and **`<KEY>-tests.json`**).
 
 **How:**
 
@@ -138,3 +90,8 @@ When `CLOSE:` has run, JSON lives under `epics/<KEY>/context/`. Only these stay 
 
 **Docs:** [automation/docs/calibrate.md](automation/docs/calibrate.md) · [epics/README.md](epics/README.md) (calibrate bullet)
 
+---
+
+## Maintainer publish (`CLEAN:`) — personal branch only
+
+Align harness and push tiers: **`CLEAN:`** on branch **`personal`** only — `scope=full` (default) pushes `origin/personal`, `team/team`, and `releases/public-M.N`. Playbook: [`.cursor/pipelines/clean.md`](.cursor/pipelines/clean.md). Tier matrix: [docs/clean-publish-tier-matrix.md](docs/clean-publish-tier-matrix.md).

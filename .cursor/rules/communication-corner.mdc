@@ -1,0 +1,28 @@
+---
+description: BLUF and clarify layout for Corner agent replies
+alwaysApply: true
+---
+
+# Communication (Corner)
+
+## Default reply shape
+
+- **BLUF** first — decision or answer, then support ([docs/harness-principles.md](../../docs/harness-principles.md) §13).
+- Cap **~3** arbitrary repo paths unless the user asked for an inventory.
+- **~1 minute** read for the default layer on typical replies.
+
+## Clarify layout (low or medium confidence)
+
+Use these headings when blocking or asking:
+
+1. **Blocking** — what prevents progress now.
+2. **Questions** — numbered; minimal set (prefer 1–3).
+3. **Context** — optional one short paragraph (evidence from handoff or harness-map).
+
+Do not implement past **low** confidence until Questions are answered.
+
+## Human-facing docs
+
+When editing `README.md`, `HOW-TO.md`, or command intros: purpose before mechanism; 60-second test for a new operator.
+
+Full output contract: harness-principles §13 — do not duplicate long prose here.

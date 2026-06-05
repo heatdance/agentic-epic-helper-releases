@@ -1,0 +1,12 @@
+{
+  "jira_user": "mshram",
+  "eligible_epics": [
+    "CRT-525",
+    "CRT-572",
+    "CRT-593",
+    "CRT-601",
+    "CRT-609"
+  ],
+  "included_issue_keys_count": 9,
+  "candidates": []
+}

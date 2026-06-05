@@ -372,6 +372,48 @@
           "mcp_hint": "Requires -ref.json schema v4 obligations_proposed. Phase 1.5 obligations_coverage; section subprocesses; 4b invariants; coverage_verify obligations+emit. Phase 7 merges epic-ref implementation.hits. No CRTQA in production. focus= optional. Durable: -coverage.json schema v2 + .md; delete EpicDir temp/."
         },
         {
+          "id": "coverage_reinforce_pipeline",
+          "keywords": [
+            "COVERAGE-REINFORCE",
+            "COVERAGE-REINFORCE:",
+            "coverage reinforce",
+            "coverage pass 2",
+            "reinforced coverage",
+            "affordances-slice",
+            "operator-feedback.md"
+          ],
+          "read": [
+            ".cursor/pipelines/coverage-reinforce.md",
+            "docs/coverage-obligation-contract.json",
+            "automation/docs/coverage-verify.md",
+            "automation/tools/crtqa_helper_affordances.py",
+            "docs/dxtrade5-harness/README.md",
+            "docs/webbroker-harness/README.md"
+          ],
+          "mcp_hint": "After TEST-DISCOVER. Merge base -coverage.json; jq slices from -discover.json + helper/affordances-slice.json + operator-feedback.md. coverage_pass 2; coverage_verify obligations+emit. No CRTQA."
+        },
+        {
+          "id": "crtqa_helper",
+          "keywords": [
+            "/crtqa-helper",
+            "crtqa-helper",
+            "crtqa helper",
+            "epic orchestrator",
+            "helper/session.json",
+            "coverage review gate",
+            "one stage per turn"
+          ],
+          "read": [
+            "docs/crtqa-helper-contract.json",
+            ".cursor/commands/crtqa-helper.md",
+            ".cursor/skills/crtqa-helper/SKILL.md",
+            "automation/docs/crtqa-helper.md",
+            "docs/harness-principles.md",
+            "automation/tools/crtqa_helper_affordances.py"
+          ],
+          "mcp_hint": "One pipeline per agent turn; gates env, coverage_review, discover_creds. Scratch epics/<KEY>/helper/ gitignored; archives to context/helper/ on CLOSE. Does not start console from helper."
+        },
+        {
           "id": "analysis_pipeline",
           "keywords": [
             "ANALYSE",
@@ -547,6 +589,29 @@
           "mcp_hint": "Read docs/harness-principles.md for production-only generation, CRTQA non-reliance, coverage vs E2E, operator gold under .cursor/calibrate/."
         },
         {
+          "id": "crtqa_stats",
+          "keywords": [
+            "/crtqa-stats",
+            "crtqa-stats",
+            "crtqa stats",
+            "TCD stats",
+            "latest-mshpak",
+            "initial_assessment",
+            "latest-team",
+            "incremental_update stats"
+          ],
+          "read": [
+            "docs/crtqa-stats-contract.json",
+            ".cursor/skills/crtqa-stats/SKILL.md",
+            "stats/crtqa-stats/README.md",
+            ".cursor/commands/crtqa-stats.md",
+            "automation/docs/crtqa-stats.md",
+            "stats/crtqa-stats/epic-categories.json",
+            "stats/crtqa-stats/temp/categories.json"
+          ],
+          "mcp_hint": "Follow crtqa-stats SKILL; incremental_update: team_readiness.py gate + AskQuestion baselines, fetch/process_incremental per user + scope confirm, crtqa_stats_team_rollup.py → latest-team.md; initial/full_refresh need jira_user."
+        },
+        {
           "id": "calibrate_operator",
           "keywords": [
             "crtqa-calibrate",
@@ -586,6 +651,122 @@
             ".cursor/commands/release-notes.md"
           ],
           "mcp_hint": "/release-notes v3: four JQL per fixVersion; FX Epic not CRT-650/644; Master Epic in CRT-650/644; fx base also excludes resolved and won't fix; adaptive queries omit project=."
+        },
+        {
+          "id": "jira_structure",
+          "keywords": [
+            "Structure",
+            "ALM Works",
+            "formula column",
+            "QA RA",
+            "QA TC",
+            "QA CR",
+            "roadmap",
+            "Enterprise Corner Roadmap",
+            "structure board",
+            "QA End Date",
+            "QA Est",
+            "customfield_11250",
+            "draft estimate",
+            "Structure formula",
+            "Expr column"
+          ],
+          "read": [
+            "docs/jira-structure-contract.json",
+            "automation/structure/README.md",
+            "automation/docs/jira-structure.md"
+          ],
+          "mcp_hint": "Paste-deploy Expr snippets only; live Structure board 603 is source of truth. Roadmap columns: automation/structure/roadmap-columns/metadata.json. QA Est: automation/structure/qa-est/metadata.json (draft customfield_11250 vs remaining). Do not invent formulas."
+        },
+        {
+          "id": "operator_assist",
+          "keywords": [
+            "better-prompt",
+            "better-skill",
+            "/better-prompt",
+            "/better-skill",
+            "coach",
+            "prompt coach",
+            "skill coach",
+            "operator assist",
+            "grounding"
+          ],
+          "read": [
+            "docs/grounding-integration.json",
+            "docs/operator-assist-contract.json",
+            "docs/skill-authoring-patterns.json",
+            ".cursor/commands/better-prompt.md",
+            ".cursor/commands/better-skill.md",
+            ".cursor/skills/better-prompt/SKILL.md",
+            ".cursor/skills/better-skill/SKILL.md"
+          ],
+          "mcp_hint": "Conversation-only coaches before pipeline runs or harness doc edits. No epic writes; no verifier runs for the coached task."
+        },
+        {
+          "id": "auto_tests_teach",
+          "keywords": [
+            "/teach",
+            "teach stop",
+            "auto-tests",
+            "auto tests",
+            "smoke test",
+            "smoke automation",
+            "playwright",
+            "pytest smoke",
+            "delivery smoke",
+            "teach mode",
+            "teach-first"
+          ],
+          "read": [
+            "docs/auto-tests-contract.json",
+            "auto-tests/README.md",
+            "auto-tests/docs/README.md",
+            "auto-tests/specs/README.md",
+            "auto-tests/specs/schema.json",
+            "auto-tests/specs/smoke-manifest.json",
+            ".cursor/commands/teach.md",
+            ".cursor/skills/teach/SKILL.md"
+          ],
+          "mcp_hint": "Teach mode for pytest/Playwright under auto-tests/. Cold /teach may load optional gitignored temp/profile/teach-context.json on personal branch (operator goals, learning phase). No complete test unless operator asks. No epic pipeline or epics/ writes. Use /teach stop to exit."
+        },
+        {
+          "id": "harness_hygiene",
+          "keywords": [
+            "corner-harness-verify",
+            "inject-corner",
+            "hooks.json",
+            "grounding-integration",
+            "grounding remediation",
+            "refresh-inject-corner",
+            "workspace hooks"
+          ],
+          "read": [
+            "docs/grounding-integration.json",
+            "automation/docs/corner-harness-verify.md",
+            "HOW-TO.md"
+          ],
+          "mcp_hint": "Harness hygiene only: corner-harness-verify.ps1 profiles, sessionStart inject, not epic pipeline verifiers."
+        },
+        {
+          "id": "karpathy_coding",
+          "keywords": [
+            "karpathy",
+            "karpathy guidelines",
+            "coding guidelines",
+            "surgical diff",
+            "surgical changes",
+            "automation python",
+            "implement tool",
+            "refactor script",
+            "python tool",
+            "automation/tools"
+          ],
+          "read": [
+            "docs/karpathy-guidelines-contract.json",
+            ".cursor/skills/karpathy-guidelines/SKILL.md",
+            "automation/docs/"
+          ],
+          "mcp_hint": "Opt-in skill for automation/ Python only. Invoke skill explicitly; not for EPIC-PREP/Coverage pipelines or harness doc edits. Verifiers remain authoritative for epic JSON."
         },
         {
           "id": "clean_pipeline",

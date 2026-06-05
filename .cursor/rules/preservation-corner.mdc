@@ -1,0 +1,47 @@
+---
+description: Corner shipped core frozen unless operator entrusts harness behavior change
+alwaysApply: true
+---
+
+# Preservation (Corner)
+
+Distributed clones must stay **predictable**. Treat **shipped core** as behavior-frozen unless the operator clearly authorizes a harness behavior change.
+
+## Shipped core (do not edit casually)
+
+Listed in [docs/grounding-integration.json](../../docs/grounding-integration.json) `shipped_core[]`, including:
+
+- [pipeline-router.mdc](pipeline-router.mdc) and normative [`.cursor/pipelines/`](../../pipelines/) playbooks
+- `docs/*-contract.json`, `epics/templates/*-ref.json`
+- `automation/tools/*_verify.py` gate logic (unless fixing documented bugs)
+
+## Optional skills (opt-in coding discipline)
+
+- **karpathy-guidelines** — [docs/karpathy-guidelines-contract.json](../../docs/karpathy-guidelines-contract.json); not `shipped_core` or `soft_core`
+- Behaviour change to the SKILL: bump `version` in contract; not the same as coach golden releases unless you add maintainer fixtures later
+
+## Soft core (hooks + coaches)
+
+Listed in [docs/grounding-integration.json](../../docs/grounding-integration.json) `soft_core[]`:
+
+- Hooks, inject snapshot, `corner-harness-verify.ps1`, coach commands/skills, `operator-assist-contract.json`, teach command/skill, `auto-tests-contract.json`
+- **Hook behavior** (sessionStart-only inject, guard advisory) and **coach/teach rubric** changes require explicit operator entrust or a versioned release
+- Coach behavior change: bump `betterPrompt.version` / `betterSkill.version` and update [automation/tools/fixtures/operator-assist/](../../automation/tools/fixtures/operator-assist/) goldens
+- Teach behavior change: bump `teach.version` in [docs/auto-tests-contract.json](../../docs/auto-tests-contract.json) and update `teach-golden.json` when rubric is stable
+
+## Allowed without behavioral entrust
+
+- Epic work under `epics/<KEY>/` per pipelines
+- Task-scoped docs when user requests
+- Bugfixes restoring documented behavior (typo, broken path, verifier false negative)
+- Pass 1/2 grounding artefacts in `pass1_artifacts[]` / `pass2_artifacts[]` when fixing documented drift (not weakening gates)
+
+## Requires explicit behavioral entrust
+
+Examples: weaken intent gate, change pipeline trigger semantics, auto-run pipelines from coaches, remove verifier checks.
+
+Vague “smarter agent” → Conversation coaching or one clarifying question; do not edit shipped core by default.
+
+## Relation to maintenance
+
+Doc path/keyword changes still require [harness-maintenance.mdc](harness-maintenance.mdc) (AGENTS, README, harness-map) — that is not “behavior entrust.”

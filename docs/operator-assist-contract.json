@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "description": "Versioned operator coach contracts (Conversation-only). Bump version when slash command or skill behavior changes.",
+  "betterPrompt": {
+    "version": 1,
+    "command": ".cursor/commands/better-prompt.md",
+    "skill": ".cursor/skills/better-prompt/SKILL.md",
+    "mode": "conversation_only",
+    "rubric_gaps": ["scope", "done", "environment", "constraints", "verification"],
+    "surface_max_gaps": 2
+  },
+  "betterSkill": {
+    "version": 1,
+    "command": ".cursor/commands/better-skill.md",
+    "skill": ".cursor/skills/better-skill/SKILL.md",
+    "mode": "conversation_only",
+    "rubrics_ref": "docs/skill-authoring-patterns.json"
+  },
+  "maintainer_goldens": {
+    "better_prompt": "automation/tools/fixtures/operator-assist/better-prompt-golden.json",
+    "better_skill": "automation/tools/fixtures/operator-assist/better-skill-golden.json"
+  }
+}

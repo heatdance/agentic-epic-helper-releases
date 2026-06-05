@@ -18,6 +18,7 @@ The interface shapes reasoning. Treat the context window as finite working memor
 
 - For substantive QA work, **read [qa-handoff.md](qa-handoff.md)** at the start of a session and **update it** before ending with what changed, current focus, and next steps.
 - Treat **[AGENTS.md](AGENTS.md)** as the short map; follow pointers to deeper docs rather than loading everything at once (**progressive disclosure**).
+- **Intent / delegation / coaches:** [intent-corner.mdc](intent-corner.mdc), [delegation-corner.mdc](delegation-corner.mdc), [preservation-corner.mdc](preservation-corner.mdc), [communication-corner.mdc](communication-corner.mdc); charter [docs/grounding-integration.json](../../docs/grounding-integration.json). **`/better-prompt`** and **`/better-skill`** are Conversation-only (no repo writes). **`/teach`** is Teach mode ([docs/auto-tests-contract.json](../../docs/auto-tests-contract.json)); **`/teach stop`** exits.
 
 ## Harness doctrine (MUST when relevant)
 
@@ -27,7 +28,7 @@ If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:
 
 ## Output norms (short)
 
-- **BLUF** first; cap **~3** repo path references in a typical answer unless the user asked for a full inventory. **Two layers:** default reply is complete but scannable; deeper dumps **below** or on request. Full norms: **harness-principles § Agent output contract**.
+- **BLUF** first; cap **~3** repo path references in a typical answer unless the user asked for a full inventory. **Two layers:** default reply is complete but scannable; deeper dumps **below** or on request. Full norms: **harness-principles section 13** (agent output contract).
 
 ## Tiered context ([docs/harness-map.json](docs/harness-map.json))
 

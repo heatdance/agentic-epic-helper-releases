@@ -93,6 +93,14 @@ def main() -> int:
     if tests_dir.is_dir():
         _move(tests_dir, ctx / "tests")
 
+    helper_dir = epic_dir / "helper"
+    if helper_dir.is_dir():
+        dst_helper = ctx / "helper"
+        if dst_helper.exists():
+            print(f"skip helper archive: {dst_helper} exists", file=sys.stderr)
+        else:
+            _move(helper_dir, dst_helper)
+
     # close.json written at root during pipeline — ensure it ends in context
     root_close = epic_dir / f"{key}-close.json"
     ctx_close = ctx / f"{key}-close.json"

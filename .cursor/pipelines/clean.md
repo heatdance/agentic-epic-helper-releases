@@ -68,6 +68,7 @@ After each tier subprocess: **`clean_verify.py --mode align`** (retry until pass
 |-------------|---------|----------|
 | `epic-prep` | **`EPIC-PREP:`** | [epic-prep.md](epic-prep.md) |
 | `coverage` | **`COVERAGE:`** | [coverage.md](coverage.md) |
+| `coverage-reinforce` | **`COVERAGE-REINFORCE:`** | [coverage-reinforce.md](coverage-reinforce.md) |
 | `analysis` | **`ANALYSE:`** | [analysis.md](analysis.md) |
 | `test-discover` | **`TEST-DISCOVER:`** | [test-discover.md](test-discover.md) |
 | `test-precon` | **`TEST-PRECON:`** | [test-precon.md](test-precon.md) |
@@ -94,6 +95,8 @@ If **`scope=personal`**, **stop**.
 ---
 
 ## Phase T — Team strip and direct push
+
+**Team tier policy (this phase):** delete **stats**, **coaches** (`better-prompt` / `better-skill`), and **teach** artefacts; **keep** full **`/crtqa-helper`** (command, contract, affordances tool, `coverage-reinforce.md`). HOW-TO/AGENTS/README rewritten from [clean-entry-templates/](../../docs/clean-entry-templates/).
 
 **Input**: `origin/personal` tip. **Output**: `team/team` updated in place. **No new branch names.**
 
@@ -157,6 +160,7 @@ Example: **`git checkout -B public-1.4 team/team`**.
 
 Mechanical public transform (no agent improvisation for readmes):
 
+- **Public tier policy:** delete executable **`/crtqa-helper`**, stats, coaches, teach, calibrate command, and verifiers; HOW-TO describes **orchestrator** and **calibration** patterns only (conceptual). Ship **`coverage-reinforce-readme.md`** with other pipeline readmes.
 - Seeds from [`docs/clean-public-content/`](../../docs/clean-public-content/) (entry docs + pipeline `*-readme.md`)
 - Template overlays from [`epics/templates/public/`](../../epics/templates/public/) per [`docs/clean-contract.json`](../../docs/clean-contract.json) `public.template_overlays`
 - Deletes `.cursor/mcp.json.example` and other `public.delete_paths` (never deletes **gitignored** `.cursor/mcp.json` — operator restores from `.cursor/mcp.json.example` if missing after U5)

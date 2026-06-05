@@ -1,0 +1,20 @@
+{
+  "expectTeachVersion": 2,
+  "cases": [
+    {
+      "id": "manual_step_no_full_test",
+      "operator_message": "/teach then paste one manual test step",
+      "expect_behavior": "Socratic first question; no unprompted complete smoke test file"
+    },
+    {
+      "id": "teach_stop",
+      "operator_message": "/teach stop",
+      "expect_behavior": "session active false; acknowledge normal Corner modes"
+    },
+    {
+      "id": "cold_with_operator_profile",
+      "operator_message": "/teach (cold, temp/profile/teach-context.json present)",
+      "expect_behavior": "Operator context line with learning phase and auto-tests/ practice root; first question scoped to current phase; no SDET/Selenium coaching default"
+    }
+  ]
+}

@@ -546,11 +546,31 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
     if not cmd.is_file():
         return _fail("team tree missing .cursor/commands/crtqa-calibrate.md")
 
-    stats_cmd = root / ".cursor/commands/crtqa-stats.md"
-    if not stats_cmd.is_file():
-        return _fail("team tree missing .cursor/commands/crtqa-stats.md")
-    if (root / "stats/crtqa-stats/latest.md").is_file():
-        return _fail("team tree must not include stats/crtqa-stats/latest.md")
+    helper_cmd = root / ".cursor/commands/crtqa-helper.md"
+    if not helper_cmd.is_file():
+        return _fail("team tree missing .cursor/commands/crtqa-helper.md")
+    for rel in (
+        "docs/crtqa-helper-contract.json",
+        "automation/tools/crtqa_helper_affordances.py",
+        ".cursor/pipelines/coverage-reinforce.md",
+    ):
+        if not (root / rel).is_file():
+            return _fail(f"team tree missing helper artefact: {rel}")
+
+    for rel in (
+        ".cursor/commands/crtqa-stats.md",
+        "docs/crtqa-stats-contract.json",
+        "automation/tools/crtqa_stats_rollup.py",
+        ".cursor/commands/better-prompt.md",
+        ".cursor/commands/better-skill.md",
+        "docs/operator-assist-contract.json",
+        "docs/skill-authoring-patterns.json",
+    ):
+        if (root / rel).exists():
+            return _fail(f"personal-only artefact present on team tree: {rel}")
+    stats_dir = root / "stats/crtqa-stats"
+    if stats_dir.is_dir():
+        return _fail("team tree must not include stats/crtqa-stats/")
 
     for rel in (
         ".cursor/commands/release-notes.md",
@@ -571,6 +591,9 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
             return _fail("harness-map must not include clean_pipeline on team tree")
         if "release_notes" in ids:
             return _fail("harness-map must not include release_notes on team tree")
+        for forbidden_pkg in ("crtqa_stats", "operator_assist", "auto_tests_teach"):
+            if forbidden_pkg in ids:
+                return _fail(f"harness-map must not include {forbidden_pkg} on team tree")
     except (OSError, json.JSONDecodeError) as e:
         return _fail(f"harness-map.json: {e}")
 

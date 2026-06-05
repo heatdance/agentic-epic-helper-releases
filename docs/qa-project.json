@@ -34,6 +34,7 @@
     "checklists": "Jira Smart Checklist: .cursor/pipelines/coverage.md (Smart Checklist markdown; epic_verification_focus; verification_role; calculation ladders; out_of_epic fork not in body; evidence-gated dimensions; Adaptive when client_shell_impact says affected). COVERAGE: → epics/<KEY>/<KEY>-coverage.md + -coverage.json (see epics/README.md).",
     "defects": "Align with docs/dr-ref.",
     "automation_docs": "automation/docs/",
+    "jira_structure_formulas": "docs/jira-structure-contract.json → automation/structure/ (roadmap columns, QA End Date, QA Est; board 603)",
     "automation_temp": "automation/temp/",
     "handoff": "qa-handoff.md at repository root"
   },

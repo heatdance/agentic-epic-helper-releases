@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "bundle_id": "qa_est",
+  "description": "Structure formula column QA Est — aggregated estimate hours for QA lanes under scoped Epics.",
+  "recommended": "v1",
+  "versions_root": "automation/structure/qa-est/versions",
+  "versions": [
+    {
+      "id": "v1",
+      "dir": "v1",
+      "status": "recommended",
+      "behavior": "Exclude QA CR (Test cases review) from SUM#leaves rollup; Epic scope adds Under Implementation; leaf display unchanged for CR rows.",
+      "formula_file": "formula.expr",
+      "structure_column": "QA Est",
+      "rollup_lanes": ["RA", "TC", "Validation"],
+      "structure_view_hint": "Default Corner Roadmap view — paste v1 into QA Est column"
+    },
+    {
+      "id": "v2",
+      "dir": "v2",
+      "status": "alternate",
+      "behavior": "Include QA CR in rollup; same Epic scope (Validation, Pending Fix, Under Implementation).",
+      "formula_file": "formula.expr",
+      "structure_column": "QA Est",
+      "rollup_lanes": ["RA", "CR", "TC", "Validation"],
+      "structure_view_hint": "Duplicate Structure view — paste v2 into QA Est column for include-CR rollup"
+    }
+  ]
+}

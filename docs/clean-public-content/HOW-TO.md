@@ -10,9 +10,10 @@ This tree is a **methodology sample**, not a turnkey QA system. The steps below 
 | 2 | [coverage-readme.md](.cursor/pipelines/coverage-readme.md) | Verification checklist / smart checklist shape |
 | 3 | [analysis-readme.md](.cursor/pipelines/analysis-readme.md) | Gap analysis before deep exploration |
 | 4 | [test-discover-readme.md](.cursor/pipelines/test-discover-readme.md) | Optional obligation-closure and fixture map |
-| 5 | [test-precon-readme.md](.cursor/pipelines/test-precon-readme.md) | Preconditions and session placeholders |
-| 6 | [test-prep-readme.md](.cursor/pipelines/test-prep-readme.md) | Regression test draft bundles |
-| 7 | [close-readme.md](.cursor/pipelines/close-readme.md) | Integrity review and archive pattern |
+| 5 | [coverage-reinforce-readme.md](.cursor/pipelines/coverage-reinforce-readme.md) | Second coverage pass using discover affordances + operator feedback |
+| 6 | [test-precon-readme.md](.cursor/pipelines/test-precon-readme.md) | Preconditions and session placeholders |
+| 7 | [test-prep-readme.md](.cursor/pipelines/test-prep-readme.md) | Regression test draft bundles |
+| 8 | [close-readme.md](.cursor/pipelines/close-readme.md) | Integrity review and archive pattern |
 
 You may skip optional phases when your risk model allows; document that choice in your private harness.
 
@@ -32,6 +33,12 @@ You may skip optional phases when your risk model allows; document that choice i
 ## Style and redaction
 
 Public prose rules: [docs/clean-public-style.md](docs/clean-public-style.md). When you maintain a private harness, keep hostnames, product brands, and credentials out of public forks.
+
+## Related patterns (conceptual)
+
+**Orchestrator pattern:** A private harness may bind one epic per chat session and advance **one pipeline stage per agent turn**, with human gates for environment readiness, coverage draft review, and UI credentials. Session state lives in gitignored scratch under the epic folder and archives with close. This export does not ship slash commands or session tooling — only the phase ordering above.
+
+**Calibration pattern:** After a full artefact chain, operators may compare production outputs to curated **gold** JSON in a local folder and run a questionnaire-style review to surface harness drift. Gold and compare tooling are maintainer-local; this export describes the idea, not executable calibrate commands.
 
 ## Related files
 

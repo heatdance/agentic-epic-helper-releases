@@ -1,0 +1,119 @@
+{
+  "schema_version": 1,
+  "description": "Smoke automation norms, env shape, teach track, and pointers. Grid rows live in smoke-manifest.json.",
+  "project": {
+    "name": "corner-delivery-smoke",
+    "suite": "smoke",
+    "purpose": "Delivery smoke automation: one statistical pass/fail per behavior with execution evidence. Not epic TEST-PREP manual drafts.",
+    "source_execution": {
+      "key": "CRTQA-10247",
+      "summary": "[Corner][Smoke Test] Test Template",
+      "jira_url": "https://jira.in.devexperts.com/browse/CRTQA-10247",
+      "execution_components": ["dxSCA", "dxTrade5", "WebBroker"]
+    },
+    "manifest_ref": "auto-tests/specs/smoke-manifest.json",
+    "implementation_root": "auto-tests/tests/"
+  },
+  "principles": {
+    "narrow_oracle": "Exactly one narrow_oracle per manifest row; no unrelated assertions in a single test.",
+    "no_hardcoding": "No URLs, usernames, or passwords in tests/; resolve via env_profile and gitignored credentials overlay.",
+    "evidence_required": "Pass is invalid if required evidence artifacts are missing for that row.",
+    "grid_first": "No new test module without a matching manifest.rows[].id.",
+    "sandbox": "Experiments only under auto-tests/tmp/ or other gitignored paths — not under tests/."
+  },
+  "env_profiles": {
+    "confirmation_status": "pending",
+    "platform_map_ref": "docs/corner-platform-map.json",
+    "default_profile_id": "ct_qa",
+    "profiles": [
+      {
+        "id": "ct_qa",
+        "label": "CT QA",
+        "platform_map_environment_id": "ct_qa",
+        "base_host": "ctqa.prosp.devexperts.com",
+        "application_url_keys": [
+          "ipf",
+          "dxtrade5",
+          "webbroker",
+          "dxmc",
+          "dxweb",
+          "dxsca_swagger"
+        ],
+        "note": "Hosts only — confirm roles and credentials in /teach before flipping confirmation_status to confirmed."
+      }
+    ],
+    "credentials_overlay": {
+      "path": "auto-tests/credentials.local.json",
+      "gitignored": true,
+      "note": "Maps logical roles to secrets; see auto-tests/docs/. Never commit."
+    },
+    "cli_tokens_planned": ["--env-profile", "--manifest-id"]
+  },
+  "verdict_types": {
+    "ui_state": "Playwright — one UI state or visible condition after a bounded flow.",
+    "http_status": "Reserved for phase 2 API suite — fixed endpoint returns expected status.",
+    "metric_match": "One metric or value matches console or declared oracle within tolerance.",
+    "absence": "Specific error, banner, or element must not appear.",
+    "job_allowed": "WebBroker job monitor — allowed jobs present or executable.",
+    "component_health": "dxCore component check — no exceptions / health signal."
+  },
+  "evidence_types": ["screenshot", "playwright_trace", "api_response_redacted", "log_excerpt"],
+  "report_contract": {
+    "status": "stub",
+    "required_run_fields": ["run_id", "env_profile", "started_at", "manifest_ref"],
+    "required_row_fields": ["id", "crtqa_key", "status", "duration_ms", "evidence_paths"]
+  },
+  "teach_track": {
+    "phases": [
+      {
+        "id": "0",
+        "name": "spec",
+        "goal": "Define automation_scope and narrow_oracle for one manifest row.",
+        "allowed_writes": ["auto-tests/specs/smoke-manifest.json"],
+        "exit_criteria": "Row has non-null automation_scope and narrow_oracle.statement."
+      },
+      {
+        "id": "1",
+        "name": "fixtures",
+        "goal": "Env profile and session fixtures; wiring test only.",
+        "allowed_writes": ["auto-tests/tests/_framework/", "auto-tests/tests/conftest.py"],
+        "exit_criteria": "pytest can load env_profile without product oracle."
+      },
+      {
+        "id": "2",
+        "name": "oracle",
+        "goal": "Single test module implementing one row verdict.",
+        "allowed_writes": ["auto-tests/tests/smoke/"],
+        "exit_criteria": "One test tied to manifest id; single assert path."
+      },
+      {
+        "id": "3",
+        "name": "evidence",
+        "goal": "Evidence hooks and report row shape.",
+        "allowed_writes": ["auto-tests/tests/_framework/", "auto-tests/tmp/"],
+        "exit_criteria": "Required evidence_paths populated on pass."
+      }
+    ]
+  },
+  "phase2": {
+    "api_suite": {
+      "status": "deferred",
+      "note": "Fixed endpoint list; separate api-manifest.json. Not smoke v1."
+    },
+    "adaptive": {
+      "status": "deferred",
+      "note": "Adaptive shell not in smoke v1; execution description mentions adaptive for manual scope only."
+    },
+    "dxsca": {
+      "status": "deferred",
+      "note": "Execution lists dxSCA component; no dxSCA automation in v1."
+    }
+  },
+  "smoke_execution_context": {
+    "narrative": "CRTQA-10247 is the Corner delivery smoke template execution. It bundles 32 CRTQA Test issues across dxTrade5, WebBroker, dxWeb (one API case), and dxCore health checks. Manual execution uses a Smart Checklist on the execution (Zabbix, login across surfaces, header metrics, widgets, order lifecycle, positions, charts, watchlists, WB administration, API transaction).",
+    "automation_stance": "Each CRTQA manual test may describe many steps. Each smoke-manifest row automates one narrow proof only — fill automation_scope and narrow_oracle in /teach phase 0 before implementation.",
+    "surfaces_in_scope_v1": ["dxtrade5", "webbroker", "dxweb", "dxcore"],
+    "surfaces_out_of_scope_v1": ["adaptive", "dxsca"],
+    "sync_jql": "issue in testExecutionTests(CRTQA-10247)"
+  }
+}

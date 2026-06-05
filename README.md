@@ -9,7 +9,7 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 | Branch | Remote | Role |
 |--------|--------|------|
 | **`personal`** | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (`origin`) | **Personal production** — day-to-day work: epics, stats, calibrate gold, temp, and harness changes. Commit and push here first. |
-| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness without personal epics, stats corpus, or scratch. Updated via **`CLEAN:`** (direct push to `team/team` from `personal`). |
+| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness + **`/crtqa-helper`** + calibrate; no personal epics, stats, coaches, teach, or scratch. Updated via **`CLEAN:`** (direct push to `team/team` from `personal`). |
 | **`public-M.N`** (e.g. `public-1.2`) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public guide export** — methodology and template shapes only. Updated only via **`CLEAN:`** from **`personal`**. |
 
 **Checkout (personal):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
@@ -18,7 +18,7 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 
 | Who | First reads |
 |-----|-------------|
-| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, calibrate; CTQA prep: tunnel [README](automation/tools/tunnel/README.md), **`/crtqa-console`**, **`/crtqa-env`**; **jq** on PATH: [automation/docs/jq.md](automation/docs/jq.md)) |
+| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, calibrate; **`/crtqa-helper`** epic orchestrator; **`/better-prompt`** before vague tasks; CTQA prep: tunnel [README](automation/tools/tunnel/README.md), **`/crtqa-console`**, **`/crtqa-env`**; **jq** on PATH: [automation/docs/jq.md](automation/docs/jq.md)) |
 | **AI agents** | [AGENTS.md](AGENTS.md) (map + MCP policy), [docs/harness-principles.md](docs/harness-principles.md) (harness doctrine for pipelines & calibrate), [docs/harness-map.json](docs/harness-map.json) (keyword → which files to open; tiers T0–T2) |
 
 ## Satellite / planned
@@ -50,6 +50,9 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 | `/crtqa-calibrate` | [crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md) — prod vs gold; [calibrate.md](.cursor/pipelines/calibrate.md); gold under [.cursor/calibrate/](.cursor/calibrate/README.md) |
 | `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — optional; documentation integrity ladder + archive to `context/`; **no** MCP |
 | `CLEAN:` | [clean.md](.cursor/pipelines/clean.md) — optional `scope=full` \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** — align harness, push personal, publish team + public ([clean-verify.md](automation/docs/clean-verify.md)) |
+| `/better-prompt` | [better-prompt.md](.cursor/commands/better-prompt.md) — coach task wording (**Conversation only**; no pipeline run) |
+| `/better-skill` | [better-skill.md](.cursor/commands/better-skill.md) — coach playbook/command/skill drafts (**Conversation only**) |
+| `/teach` | [teach.md](.cursor/commands/teach.md) — teach-first smoke under [auto-tests/](auto-tests/) (`/teach stop` exits) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
@@ -57,11 +60,12 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
 ## Stats (CRTQA TCD)
 
-Measure ROI of the agentic epic helper on done **Test Case Development** work: **manual corpus** vs **AI-assisted comparison**, sized by **draft estimate hours** (not Jira Story Points).
+Measure ROI of the agentic epic helper on **Test Case Development** (v5 test-first corpus): **manual corpus** vs **AI-assisted comparison**, per engineer.
 
-- Operator steps: [HOW-TO.md §1](HOW-TO.md) (modes, read order for `latest.md`).
-- Summary: [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md) — **`/crtqa-stats`** playbook [crtqa-stats.md](.cursor/commands/crtqa-stats.md); rollup [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py) + [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md).
-- Output: committed [`stats/crtqa-stats/latest.md`](stats/crtqa-stats/latest.md); state under `stats/crtqa-stats/state/` (gitignored).
+- Operator steps: [HOW-TO.md §1](HOW-TO.md) (**personal branch only** — modes + how to run).
+- Contract: [docs/crtqa-stats-contract.json](docs/crtqa-stats-contract.json); summary [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md).
+- **`/crtqa-stats`** [crtqa-stats.md](.cursor/commands/crtqa-stats.md); per-user rollup `python automation/tools/crtqa_stats_rollup.py --jira-user <you>`; team `python automation/tools/crtqa_stats_team_rollup.py` — [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md).
+- Output: `stats/crtqa-stats/latest-<you>.md`, `latest-team.md`, `state/`, `raw/` (gitignored); **not** shipped on team/public tiers.
 
 ## Epics and templates
 
@@ -71,7 +75,7 @@ Measure ROI of the agentic epic helper on done **Test Case Development** work: *
 
 ## Automation
 
-- Tool docs: [automation/docs/](automation/docs/) (e.g. [yogi-url-resolve.md](automation/docs/yogi-url-resolve.md), [jq.md](automation/docs/jq.md), [figma-mcp.md](automation/docs/figma-mcp.md), [chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md)).
+- Tool docs: [automation/docs/](automation/docs/) (e.g. [yogi-url-resolve.md](automation/docs/yogi-url-resolve.md), [jq.md](automation/docs/jq.md), [jira-structure.md](automation/docs/jira-structure.md), [figma-mcp.md](automation/docs/figma-mcp.md), [chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md)).
 - Runnable tools: [automation/tools/](automation/tools/) — **CTQA Postgres SSH tunnel / probe**: [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (`ctqa_pg.py`, PuTTY plink default on Windows).
 - Scratch: [automation/temp/](automation/temp/) (short-lived; see [automation/temp/README.md](automation/temp/README.md)).
 

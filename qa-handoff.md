@@ -2,8 +2,48 @@
 
 Read at the start of substantive QA work; **update before ending** (date, focus, next steps). Detail lives in **`epics/<KEY>/`** and **[AGENTS.md](AGENTS.md)** — do not duplicate long pipeline logs here.
 
+Turn model: **[docs/harness-principles.md](docs/harness-principles.md)** §14 (Conversation vs Teach vs Action). Coaches: **`/better-prompt`**, **`/better-skill`**. Smoke teach: **`/teach`**, **`/teach stop`** → [auto-tests/](auto-tests/). Epic orchestrator: **`/crtqa-helper`**, **`/crtqa-helper resume`** → [docs/crtqa-helper-contract.json](docs/crtqa-helper-contract.json).
+
+## Resume
+
+**`/crtqa-helper` shipped** (v1): contract, command, skill, **`COVERAGE-REINFORCE:`** playbook, `close_archive` helper → `context/helper/`, `corner-harness-verify` minimal+full OK. Pilot on a **fresh** epic (not CRT-663).
+
+**CRT-663** (manual path): coverage v1 done; operator may continue **ANALYSE** / **TEST-DISCOVER** without helper.
+
+**CRTQA stats v5** promoted: test-first corpus, per-user `latest-<user>.md`, contract [docs/crtqa-stats-contract.json](docs/crtqa-stats-contract.json), library under `automation/tools/crtqa_stats/`. Experiment `temp/stats-test/` removed. Regenerate per engineer via `/crtqa-stats mode=initial_assessment`.
+
+**Smoke specs** landed: [auto-tests/specs/schema.json](auto-tests/specs/schema.json) + [smoke-manifest.json](auto-tests/specs/smoke-manifest.json) (32 rows, CRTQA-10247). **`/teach`** + operator profile (v2). Pytest/Playwright implementation **next** via teach phases.
+
+## Next
+
+1. **`/crtqa-helper CRT-…`** on a fresh epic when ready to validate orchestrator end-to-end.
+2. **`/teach`** — confirm `ct_qa` env profile; phase 0 for first manifest row (`automation_scope` + narrow oracle).
+3. Phase 1–2: fixtures + first smoke test under `auto-tests/tests/smoke/`.
+4. Commit specs + harness wiring on `personal`.
+5. When implementing harness Python only, attach **karpathy-guidelines** (not default for smoke teach).
+
+## Anchors
+
+- Teach / smoke: [docs/auto-tests-contract.json](docs/auto-tests-contract.json) · [auto-tests/](auto-tests/)
+- Charter: [docs/grounding-integration.json](docs/grounding-integration.json)
+- Karpathy (opt-in): [docs/karpathy-guidelines-contract.json](docs/karpathy-guidelines-contract.json)
+- Doctrine §14: [docs/harness-principles.md](docs/harness-principles.md)
+- Epic (closed): `epics/CRT-639/context/`
+
 ## Last updated
 
+- **Date**: 2026-06-04 — **CLEAN + HOW-TO tier update:** stats/coaches/teach personal-only; `/crtqa-helper` on team (full), public (concept in HOW-TO); HOW-TO restructured (shared intro, helper + prep table); tier matrix + `clean_verify` team checks updated.
+- **Date**: 2026-06-04 — **`/crtqa-helper` orchestrator v1:** `docs/crtqa-helper-contract.json`, command/skill, `COVERAGE-REINFORCE:` pipeline + router, `crtqa_helper_affordances.py`, `close_archive` helper archive, harness-map/AGENTS/HOW-TO/README, golden fixture; `corner-harness-verify` full OK.
+- **Date**: 2026-06-04 — **COVERAGE: CRT-663** (production): `CRT-663-coverage.json` v2 + `.md` — archetype `widget_ui`, 15 checks, 16 matrix rows, 13 obligations covered; `coverage_verify.py` obligations+emit OK; `temp/` deleted.
+- **Date**: 2026-06-04 — **EPIC-PREP: CRT-663** (production): `CRT-663-ref.json` v4 — FX_SPOT visibility in Orders/Transactions/Positions (Web+WB+Adaptive parity); 14 `obligations_proposed[]`; workflow states from CT Order Statuses; child CRs XT-7210–7212; `epic_prep_verify.py` ref+reconcile OK; `temp/` deleted.
+- **Date**: 2026-05-25 — **Smoke specs:** `schema.json` + `smoke-manifest.json` (CRTQA-10247, 32 rows); teach cold reads; CLEAN team-keep for minimal specs; manifest verify in `corner-harness-verify`.
+- **Date**: 2026-05-25 — **Teach harness prep:** `auto-tests/` entity; `/teach` + `/teach stop`; contract, CLEAN tiers, `corner-harness-verify` teach checks.
+- **Date**: 2026-05-25 — **Karpathy Pass 4 (complete):** opt-in `.cursor/skills/karpathy-guidelines/SKILL.md`; `docs/karpathy-guidelines-contract.json`; charter `optional_skills` + `pass4_artifacts`; T1 `karpathy_coding`; CLEAN tier rows; `corner-harness-verify` karpathy checks; pipelines unchanged.
+- **Date**: 2026-05-25 — **Grounding remediation Pass 3 (complete):** qa-artifacts pointer; harness-principles section 16 paths; charter `remediation.status=complete`; final regression pass.
+- **Date**: 2026-05-25 — **Grounding remediation Pass 2:** soft_core in charter; preservation; HOW-TO guard advisory; README coaches; clean-publish-tier-matrix.md grounding table.
+- **Date**: 2026-05-25 — **Grounding remediation Pass 1:** `operator_assist` + `harness_hygiene` T1; pipeline-router recap; golden checks in `corner-harness-verify`; [automation/docs/corner-harness-verify.md](automation/docs/corner-harness-verify.md).
+- **Date**: 2026-05-25 — **Grounding remediation Pass 0:** charter `passes` 1+2 complete; sessionStart-only hooks; ASCII `inject-corner.json`; regression block incl. epic_prep + coverage smoke; `corner-harness-verify` mojibake + hooks_session_start_only gates.
+- **Date**: 2026-05-25 — **Grounding-kit pass 1:** `/better-prompt`, `/better-skill`, corner rules (`intent-`, `delegation-`, `preservation-`, `communication-`), `docs/grounding-integration.json`, harness-principles §14; pass 2 scaffold (`hooks.json`, `inject-corner.json`, `corner-harness-verify.ps1`).
 - **Date**: 2026-05-20 — **`/release-notes` JQL:** FX Epic **not in** CRT-650, CRT-644 (+ base excludes resolved, won't fix); Master Epic **in** CRT-650, CRT-644; adaptive still `status not in (aborted)`.
 - **Date**: 2026-05-21 — **`CLEAN:` full run:** **P** `origin/personal` → **`e901a47`** (+ harness fixes **`ad034fb`**); **T** `team/team` → **`1c02e27`** (force-push); **U** `releases/public-1.5` → **`c8025f2`** (new branch). Tier rules applied (no release-notes on team; org maps kept on team; stats toolkit on team; public guide-only). **Postflight FAIL:** delete **`public-1.4`** blocked — GitHub default branch still **`public-1.4`**; set default to **`public-1.5`**, then `clean_verify.py --mode public_remote --superseded public-1.4` + `--mode postflight`.
 - **Date**: 2026-05-21 — **CLEAN tier alignment** (operator-confirmed): **personal** = full private backup; **team** = private squad + **shared org-map truth** + runnable harness (no release-notes, no maintainer stats `latest.md`); **public** = guide-only (no stats/release-notes). Contract `tier_goals` locked.
@@ -28,6 +68,7 @@ Read at the start of substantive QA work; **update before ending** (date, focus,
 
 ## Current focus
 
+- **CRT-663:** COVERAGE done — **TEST-DISCOVER:** / **ANALYSE:** next (EURUSD.spot, console orders, parity across dxTrade5 + WB + Adaptive).
 - **CRT-639:** **closed** — do not rerun upstream pipelines without restoring JSON from `context/` to epic root.
 - **Release notes:** v3 playbook + contract; run `/release-notes` to populate `releases/<batch>/` (no corner-map).
 - **Harness:** Mandatory-chain doc reconciliation (discover always required in all playbooks) — **deferred** separate pass.

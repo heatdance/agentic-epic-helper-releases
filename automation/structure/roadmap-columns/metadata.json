@@ -4,9 +4,12 @@
     "purpose": "Agent-oriented map of four ALM Works Structure formula columns (Expr) that render QA workflow buttons and statuses on Epic rows. Describes shared Jira parameters, child-issue filters, and intentional or accidental behavioral differences between snippets.",
     "jira_host": "https://jira.in.devexperts.com",
     "create_issue_path": "/secure/CreateIssueDetails!init.jspa",
-    "last_reviewed": "2026-05-05"
+    "last_reviewed": "2026-05-26",
+    "live_sync_note": "v04 RA/TC/CR/Validation and qa-end-date v1 match Structure board 603 as of 2026-05-26 operator paste."
   },
-  "version_history_dir": "temp/structure-columns — versioned formula files only; shared metadata in temp/dependencies.json + temp/README.md.",
+  "versions_manifest": "automation/structure/roadmap-columns/versions-manifest.json",
+  "recommended_version": "v04-epic-aborted-skip-with-jql-counter",
+  "version_history_dir": "automation/structure/roadmap-columns/versions — formula bodies per version; metadata.json + README.md at bundle root.",
   "epic_aborted_skip": {
     "applies_when": "`this.status = \"Aborted\"` — evaluated immediately after Epic type gate on all four columns.",
     "count_source": "`abortMatches`: same lane semantics as each column’s `tctasks` filter but **without** excluding child `Aborted` status, so aborted Epics still count existing lane tickets.",
@@ -34,9 +37,9 @@
     "intent": "If a Validation-column-style Test Execution (*Epic Validation* or *Epic Testing*, type Test Execution) is Closed and this column would otherwise show only the prefilled-create branch (no matching child for that column’s own filter), emit literal Skipped.",
     "applies_when": "Only when `tctasks.SIZE() = 0` after each snippet’s QA Task / TC filters (not applied when SIZE = 1 or > 1).",
     "expr_used_in": [
-      "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/CR",
-      "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/RA",
-      "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC"
+      "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/CR",
+      "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/RA",
+      "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC"
     ],
     "validation_te_closed_predicate": "stories.FILTER(MATCH($.issuetype, \"Test Execution\") AND $.status = \"Closed\" AND (MATCH($.summary, \"*Epic Validation*\") OR MATCH($.summary, \"*Epic Testing*\"))).SIZE() > 0",
     "placement_in_formula": "Chained immediately after ELSE for the zero-match branch: `ELSE: IF <validation_te_closed_predicate>: \"Skipped\" ELSE:` then the existing icon + CreateIssueDetails block."
@@ -69,10 +72,10 @@
     "structure_id": 603,
     "structure_url": "https://jira.in.devexperts.com/secure/StructureBoard.jspa?s=603#",
     "column_mapping": [
-      { "repo_file": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/RA", "structure_column": "QA RA" },
-      { "repo_file": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC", "structure_column": "QA TC" },
-      { "repo_file": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/CR", "structure_column": "QA CR" },
-      { "repo_file": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation", "structure_column": "Validation" }
+      { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/RA", "structure_column": "QA RA" },
+      { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC", "structure_column": "QA TC" },
+      { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/CR", "structure_column": "QA CR" },
+      { "repo_file": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation", "structure_column": "Validation" }
     ],
     "editing_ui": "Structure → open board → column settings → Formula; Saved column: Custom.",
     "formula_options_observed": {
@@ -87,13 +90,14 @@
     }
   },
   "source_paths": {
-    "note": "Snippet bodies live only under structure-columns/v##. v04 is the recommended deploy set.",
-    "versions_root": "temp/structure-columns",
-    "recommended_v04_dir": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter",
-    "CR": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/CR",
-    "RA": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/RA",
-    "TC": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC",
-    "Validation": "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation"
+    "note": "Snippet bodies live only under versions/v##. v04 is the recommended deploy set.",
+    "versions_root": "automation/structure/roadmap-columns/versions",
+    "recommended_dir": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter",
+    "recommended_v04_dir": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter",
+    "CR": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/CR",
+    "RA": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/RA",
+    "TC": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC",
+    "Validation": "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation"
   },
   "variable_bindings": {
     "RA_only": {
@@ -119,16 +123,16 @@
       "customfield_18082": {
         "value": "26700",
         "used_in": [
-          "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC",
-          "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation"
+          "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC",
+          "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation"
         ]
       }
     },
     "components": {
       "ids": ["42593", "42588"],
       "used_in": [
-        "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC",
-        "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation"
+        "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC",
+        "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation"
       ]
     },
     "test_type_field": {
@@ -140,9 +144,9 @@
     "default_project_id": {
       "pid": "31060",
       "used_in": [
-        "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/CR",
-        "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/TC",
-        "temp/structure-columns/v04-epic-aborted-skip-with-jql-counter/Validation"
+        "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/CR",
+        "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/TC",
+        "automation/structure/roadmap-columns/versions/v04-epic-aborted-skip-with-jql-counter/Validation"
       ],
       "exception": "RA uses `qa_pid` instead of a hardcoded pid."
     },
@@ -196,8 +200,8 @@
         "dynamic_segment_keys": ["summary", "customfield_15471", "description"],
         "summary_prefix_token": "[Test+Coverage+Review]+"
       },
-      "description_template_ref": "structure-columns/v04/CR — gated create branch (after Epic Aborted + Validation-te-closed gates)",
-      "icon_logic_ref": "structure-columns/v04/CR — customfield_61071 in create branch"
+      "description_template_ref": "versions/v04-epic-aborted-skip-with-jql-counter/CR — gated create branch (after Epic Aborted + Validation-te-closed gates)",
+      "icon_logic_ref": "versions/v04-epic-aborted-skip-with-jql-counter/CR — customfield_61071 in create branch"
     },
     {
       "id": "RA",
@@ -221,8 +225,8 @@
         "assignee_source": "qa_alias",
         "summary_prefix_token": "[Requirement+Analysis]+"
       },
-      "description_template_ref": "structure-columns/v04/RA — percent-encoded Description in create branch",
-      "icon_logic_ref": "structure-columns/v04/RA — customfield_61070 in gated create branch"
+      "description_template_ref": "versions/v04-epic-aborted-skip-with-jql-counter/RA — percent-encoded Description in create branch",
+      "icon_logic_ref": "versions/v04-epic-aborted-skip-with-jql-counter/RA — customfield_61070 in gated create branch"
     },
     {
       "id": "TC",
@@ -248,8 +252,8 @@
         "reporter": "ME()",
         "summary_prefix_token": "[Test+Case+Development]+"
       },
-      "description_template_ref": "structure-columns/v04/TC — repository links in gated create branch",
-      "icon_logic_ref": "structure-columns/v04/TC — customfield_61071 in gated create branch"
+      "description_template_ref": "versions/v04-epic-aborted-skip-with-jql-counter/TC — repository links in gated create branch",
+      "icon_logic_ref": "versions/v04-epic-aborted-skip-with-jql-counter/TC — customfield_61071 in gated create branch"
     },
     {
       "id": "Validation",
@@ -270,8 +274,8 @@
         "reporter": "ME()",
         "summary_prefix_token": "[Epic+Validation]+"
       },
-      "description_template_ref": "structure-columns/v04/Validation — workflow + comment templates in create branch",
-      "icon_logic_ref": "structure-columns/v04/Validation — no customfield_6107x"
+      "description_template_ref": "versions/v04-epic-aborted-skip-with-jql-counter/Validation — workflow + comment templates in create branch",
+      "icon_logic_ref": "versions/v04-epic-aborted-skip-with-jql-counter/Validation — no customfield_6107x"
     }
   ],
   "embedded_docs": {
@@ -306,5 +310,5 @@
       "Display names for customfield_61070/61071: resolve in Jira UI or GET /rest/api/2/field; update completion_icon_fields.jira_display_names when known."
     ]
   },
-  "relationship_summary": "Each formula gates on Epic, then Epic `Aborted` short-circuits to literal `Skipped` or `Skipped ([n|issues/?jql=…])` before other rules. Else: consult `stories`, then >1 match → (!), 1 match → [status|KEY], 0 matches → conditional Validation-TE Closed `Skipped` or create URL per `validation_te_closed_skip`. RA/TC keep unconditional *Epic Testing* early skip. Iterations frozen under `temp/structure-columns/v01`–`v04`. TC and Validation share components, customfield_18082, and Test Execution type but differ in priority and customfield_11250."
+  "relationship_summary": "Each formula gates on Epic, then Epic `Aborted` short-circuits to literal `Skipped` or `Skipped ([n|issues/?jql=…])` before other rules. Else: consult `stories`, then >1 match → (!), 1 match → [status|KEY], 0 matches → conditional Validation-TE Closed `Skipped` or create URL per `validation_te_closed_skip`. RA/TC keep unconditional *Epic Testing* early skip. Iterations frozen under automation/structure/roadmap-columns/versions v01–v04 (see versions-manifest.json). TC and Validation share components, customfield_18082, and Test Execution type but differ in priority and customfield_11250."
 }

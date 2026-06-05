@@ -124,7 +124,7 @@ For each level in order **L0 → L4**, for each `bundle_id` in `test_bundles[]` 
 ### G. Archive
 
 1. Write final `<KEY>-close.json` at root (if not already).
-2. Run `python automation/tools/close_archive.py --epic-dir {EpicDir} --close {EpicDir}<KEY>-close.json`.
+2. Run `python automation/tools/close_archive.py --epic-dir {EpicDir} --close {EpicDir}<KEY>-close.json` (moves JSON to `context/`; if present, gitignored `{EpicDir}helper/` → `{EpicDir}context/helper/` per [`crtqa-helper-contract.json`](../../docs/crtqa-helper-contract.json)).
 3. Run `close_verify.py --mode archive` then `--mode emit --close {EpicDir}context/<KEY>-close.json`.
 4. **Delete** `{EpicDir}temp/`.
 5. Append `validation_log` step `archive` (complete).

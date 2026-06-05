@@ -1,0 +1,167 @@
+{
+  "schema_version": 1,
+  "description": "Corner adapted embed of grounding-kit operator discipline. Epic pipelines and Python verifiers remain authoritative for deliverables.",
+  "content_policy": "Functional/process only; no people rosters; no secrets.",
+  "upstream": {
+    "repo": "https://github.com/heatdance/grounding-kit",
+    "commit": null,
+    "sync_note": "Pin commit when syncing coach rubrics from upstream; do not copy structure.mdc allowlist wholesale.",
+    "karpathy_skill_sha": "94cd690c5927224a9ac97254eaad20cbb31228e6"
+  },
+  "passes": {
+    "1": "complete",
+    "2": "complete",
+    "4": "complete"
+  },
+  "optional_skills": [
+    {
+      "id": "karpathy-guidelines",
+      "contract": "docs/karpathy-guidelines-contract.json",
+      "version": 1,
+      "mode": "opt_in",
+      "apply_paths": ["automation/tools/", "automation/docs/"]
+    }
+  ],
+  "pass4_artifacts": [
+    ".cursor/skills/karpathy-guidelines/SKILL.md",
+    "docs/karpathy-guidelines-contract.json"
+  ],
+  "pass1_artifacts": [
+    ".cursor/commands/better-prompt.md",
+    ".cursor/commands/better-skill.md",
+    ".cursor/skills/better-prompt/SKILL.md",
+    ".cursor/skills/better-skill/SKILL.md",
+    "docs/operator-assist-contract.json",
+    "docs/skill-authoring-patterns.json",
+    ".cursor/rules/intent-corner.mdc",
+    ".cursor/rules/delegation-corner.mdc",
+    ".cursor/rules/preservation-corner.mdc",
+    ".cursor/rules/communication-corner.mdc",
+    "docs/harness-principles.md"
+  ],
+  "pass2_artifacts": [
+    ".cursor/hooks.json",
+    ".cursor/hooks/inject-context-corner.ps1",
+    ".cursor/hooks/guard-paths-corner.ps1",
+    ".cursor/docs/inject-corner.json",
+    ".cursor/scripts/refresh-inject-corner.ps1",
+    ".cursor/scripts/corner-harness-verify.ps1"
+  ],
+  "hook_contract": {
+    "inject": "sessionStart_only",
+    "note": "beforeSubmitPrompt must not refresh or inject; later turns use qa-handoff.md and always-on rules."
+  },
+  "doc_close": {
+    "machine_detected": false,
+    "note": "docClose.pending in inject-corner.json is static false; action-close is human and harness-principles section 14 only."
+  },
+  "soft_core": [
+    ".cursor/hooks.json",
+    ".cursor/hooks/inject-context-corner.ps1",
+    ".cursor/hooks/guard-paths-corner.ps1",
+    ".cursor/docs/inject-corner.json",
+    ".cursor/scripts/refresh-inject-corner.ps1",
+    ".cursor/scripts/corner-harness-verify.ps1",
+    "docs/operator-assist-contract.json",
+    ".cursor/commands/better-prompt.md",
+    ".cursor/commands/better-skill.md",
+    ".cursor/skills/better-prompt/",
+    ".cursor/skills/better-skill/",
+    "docs/auto-tests-contract.json",
+    ".cursor/commands/teach.md",
+    ".cursor/skills/teach/",
+    "docs/crtqa-helper-contract.json",
+    ".cursor/commands/crtqa-helper.md",
+    ".cursor/skills/crtqa-helper/"
+  ],
+  "soft_core_note": "Behavior changes require operator entrust; coach and teach slash commands require version bump + maintainer goldens where applicable.",
+  "shipped_core": [
+    ".cursor/rules/pipeline-router.mdc",
+    ".cursor/pipelines/*.md",
+    "docs/*-contract.json",
+    "epics/templates/*-ref.json",
+    "automation/tools/epic_prep_verify.py",
+    "automation/tools/coverage_verify.py",
+    "automation/tools/analysis_verify.py",
+    "automation/tools/discover_verify.py",
+    "automation/tools/precon_verify.py",
+    "automation/tools/test_prep_verify.py",
+    "automation/tools/close_verify.py",
+    "automation/tools/clean_verify.py"
+  ],
+  "pipeline_trigger_exceptions": [
+    {
+      "triggers": ["EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"],
+      "confidence": "high",
+      "scope": "One epic key per run; playbook steps only; no scope widen without user"
+    },
+    {
+      "triggers": ["CLEAN:"],
+      "confidence": "high",
+      "scope": "Branch personal only; docs/clean-contract.json phases"
+    },
+    {
+      "triggers": ["/crtqa-calibrate", "/crtqa-stats", "/release-notes", "/crtqa-env", "/crtqa-console"],
+      "confidence": "high",
+      "scope": "Per matching .cursor/commands/*.md playbook"
+    }
+  ],
+  "conversation_triggers": ["/better-prompt", "/better-skill"],
+  "teach_triggers": ["/teach", "/teach stop"],
+  "regression_notes": "Run clean_file_map.py before clean_verify --mode file_map. Epic checks use archived CRT-639 context JSON (smoke, not live pipeline emit).",
+  "regression_commands": [
+    "powershell -NoProfile -File .cursor/scripts/corner-harness-verify.ps1 -Profile full",
+    "python automation/tools/calibrate_verify.py --self-test",
+    "python automation/tools/test_prep_verify.py --mode draft --coverage automation/tools/fixtures/test_prep/coverage_snippet.json --tests automation/tools/fixtures/test_prep/tests_tb002_good_skeleton.json --bundle-id tb-002 --plan automation/tools/fixtures/test_prep/plan_tb002_minimal.json",
+    "python automation/tools/epic_prep_verify.py --mode ref --ref epics/CRT-639/context/CRT-639-ref.json",
+    "python automation/tools/coverage_verify.py --mode obligations --coverage epics/CRT-639/context/CRT-639-coverage.json --ref epics/CRT-639/context/CRT-639-ref.json",
+    "python automation/tools/clean_file_map.py",
+    "python automation/tools/clean_verify.py --mode file_map"
+  ],
+  "remediation": {
+    "status": "complete",
+    "passes_completed": ["0", "1", "2", "3"],
+    "completed_when": "2026-05-25"
+  },
+  "commit_guidance": {
+    "include_globs": [
+      ".cursor/commands/better-*.md",
+      ".cursor/skills/better-*/**",
+      ".cursor/rules/*-corner.mdc",
+      ".cursor/hooks.json",
+      ".cursor/hooks/**",
+      ".cursor/docs/inject-corner.json",
+      ".cursor/scripts/corner-harness-verify.ps1",
+      ".cursor/scripts/refresh-inject-corner.ps1",
+      "docs/grounding-integration.json",
+      "docs/operator-assist-contract.json",
+      "docs/skill-authoring-patterns.json",
+      "docs/karpathy-guidelines-contract.json",
+      ".cursor/skills/karpathy-guidelines/**",
+      "docs/auto-tests-contract.json",
+      ".cursor/commands/teach.md",
+      ".cursor/skills/teach/**",
+      "auto-tests/**",
+      "automation/docs/corner-harness-verify.md",
+      "automation/tools/fixtures/operator-assist/**",
+      "docs/harness-map.json",
+      "docs/harness-principles.md",
+      "docs/clean-publish-tier-matrix.md",
+      "AGENTS.md",
+      "HOW-TO.md",
+      "README.md",
+      "qa-handoff.md"
+    ],
+    "exclude": [
+      "automation/temp/clean/**",
+      "releases/443/**"
+    ]
+  },
+  "regression_last_run": {
+    "when": "2026-05-25",
+    "branch": "personal",
+    "result": "pass",
+    "pass_completed": "0-3",
+    "notes": "Full charter regression after remediation Pass 3: corner-harness-verify full; calibrate self-test; test_prep draft; epic_prep ref; coverage obligations; clean file_map"
+  }
+}

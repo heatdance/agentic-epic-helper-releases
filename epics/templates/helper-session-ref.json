@@ -1,0 +1,12 @@
+{
+  "_comment": "Reference shape for epics/<KEY>/helper/session.json — gitignored at runtime",
+  "epic_key": "CRT-0000",
+  "active": true,
+  "current_stage": "env",
+  "next_stage": "epic_prep",
+  "completed_stages": [],
+  "awaiting_gate": null,
+  "started_at": "2026-01-01T00:00:00Z",
+  "last_resumed_at": "2026-01-01T00:00:00Z",
+  "coverage_md_sha_at_gate": null
+}

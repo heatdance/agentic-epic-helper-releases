@@ -17,17 +17,18 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 | Environments / repos | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Tiered context | [docs/harness-map.json](docs/harness-map.json) |
 | Harness doctrine | [docs/harness-principles.md](docs/harness-principles.md) |
+| Epic orchestrator | [docs/crtqa-helper-contract.json](docs/crtqa-helper-contract.json) |
 | Calibrate contract | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
-| Publish tier matrix (reference) | [docs/clean-publish-tier-matrix.md](docs/clean-publish-tier-matrix.md) |
 
 ### Pipelines (agent playbooks)
 
 | Area | Path |
 |------|------|
-| Epic pipelines | [`.cursor/pipelines/`](.cursor/pipelines/) — `EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` |
+| Epic orchestrator | [crtqa-helper.md](.cursor/commands/crtqa-helper.md) · [crtqa-helper/SKILL.md](.cursor/skills/crtqa-helper/SKILL.md) |
+| Epic pipelines | [`.cursor/pipelines/`](.cursor/pipelines/) — `EPIC-PREP:`, `COVERAGE:`, `COVERAGE-REINFORCE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` |
 | Calibrate (slash only) | [crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md) · [calibrate.md](.cursor/pipelines/calibrate.md) |
 
-**No** publish playbook in this repo — maintainer-only upstream.
+**No** publish playbook, stats, coaches, or teach in this repo — maintainer-only upstream.
 
 ### Epics
 
@@ -41,11 +42,11 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 |------|------|
 | `/crtqa-env` | [automation/docs/crtqa-env.md](automation/docs/crtqa-env.md) |
 | `/crtqa-console` | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) |
+| `/crtqa-helper` affordances | [crtqa_helper_affordances.py](automation/tools/crtqa_helper_affordances.py) |
 | `/crtqa-calibrate` | [automation/docs/calibrate.md](automation/docs/calibrate.md) · [calibrate_verify.py](automation/tools/calibrate_verify.py) |
-| `/crtqa-stats` | [crtqa-stats.md](.cursor/commands/crtqa-stats.md) · [crtqa_stats_rollup.py](automation/tools/crtqa_stats_rollup.py) · [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md) |
 | jq inspection | [automation/docs/jq.md](automation/docs/jq.md) |
 
-**Not in this repo:** `/release-notes`, `releases/**` (maintainer personal branch only).
+**Not in this repo:** `/release-notes`, `releases/**`, `/crtqa-stats`, coaches, teach (maintainer personal branch only).
 
 ## How to start a session
 

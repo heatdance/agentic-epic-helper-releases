@@ -1,0 +1,56 @@
+---
+description: Intent before implementation — confidence gates, pipeline exceptions, anti whack-a-mole
+alwaysApply: true
+---
+
+# Intent (Corner)
+
+Before the **first write** on an **Action** turn that is **not** covered by a pipeline trigger exception below:
+
+1. Read [qa-handoff.md](../../qa-handoff.md) and match task language to [docs/harness-map.json](../../docs/harness-map.json) T1.
+2. State **interpreted intent** in 1–2 sentences.
+3. Name **evidence** (handoff, harness-map package, or playbook).
+4. Assign confidence: **high** | **medium** | **low**.
+
+Do not implement from keywords alone without reading the matched package or playbook.
+
+## Confidence gates
+
+| Confidence | Gate |
+|------------|------|
+| **High** | Proceed per playbook or task constraints. |
+| **Medium** | Prefer clarifying questions when harm is high; may proceed if user already named Epic key and artefact. |
+| **Low** | **Hard stop** — no writes until user answers ([communication-corner.mdc](communication-corner.mdc) layout). |
+
+## Pipeline trigger exceptions (high confidence for declared scope)
+
+| Trigger | Scope lock |
+|---------|------------|
+| `EPIC-PREP:` … `CLOSE:` per [pipeline-router.mdc](pipeline-router.mdc) | One epic key; playbook steps only |
+| `COVERAGE-REINFORCE:` | One epic key; [coverage-reinforce.md](../pipelines/coverage-reinforce.md) only |
+| `CLEAN:` | `personal` branch only; [docs/clean-contract.json](../../docs/clean-contract.json) |
+| `/crtqa-calibrate`, `/crtqa-stats`, `/release-notes`, `/crtqa-env`, `/crtqa-console`, `/crtqa-helper` | Per matching `.cursor/commands/*.md` |
+
+**Low confidence still applies** to: second epic without trigger, extra repos, or “also refactor all docs/” without scope.
+
+## Conversation triggers
+
+`/better-prompt` and `/better-skill` are **Conversation** — no intent gate for writes (there must be no writes). See [docs/harness-principles.md](../../docs/harness-principles.md) §14.
+
+## Teach triggers
+
+`/teach` and `/teach stop` are **Teach mode** ([docs/auto-tests-contract.json](../../docs/auto-tests-contract.json)) — not high-confidence epic **Action**; may write under `auto-tests/` for helpers only; no complete smoke test unless the operator clearly requests it in natural language.
+
+## Anti whack-a-mole
+
+After a failed fix or the **same approach** repeated twice:
+
+1. Stop retrying that path.
+2. In chat: what failed, wider picture, 2–3 options or one new hypothesis.
+3. **Third** attempt on the same reading → no further edits until the user confirms direction.
+
+## Design default
+
+Harness or playbook **behavior** changes → **Conversation** until explicit operator entrust (“change harness behavior”, version bump on coaches). See [preservation-corner.mdc](preservation-corner.mdc).
+
+Charter: [docs/grounding-integration.json](../../docs/grounding-integration.json).

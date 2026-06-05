@@ -1,0 +1,193 @@
+{
+  "id": "1915762",
+  "key": "CRTQA-10033",
+  "summary": "[Corner][Epic Validation] CRT-632: Support FX_SPOT in the widgets 'Search', 'Watchlist' and on the 'Instrument' page",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 4,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1915762/worklog/7013992",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-03-31T20:23:03.459+0000",
+        "updated": "2026-03-31T20:23:05.208+0000",
+        "started": "2026-03-13T14:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "7013992",
+        "issueId": "1915762"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1915762/worklog/7013995",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-03-31T20:24:39.212+0000",
+        "updated": "2026-03-31T20:24:50.518+0000",
+        "started": "2026-03-16T07:00:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "7013995",
+        "issueId": "1915762"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1915762/worklog/7013998",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-03-31T20:25:14.422+0000",
+        "updated": "2026-03-31T20:25:17.759+0000",
+        "started": "2026-03-16T10:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "7013998",
+        "issueId": "1915762"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1915762/worklog/7014003",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=318440",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=318440",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=318440",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=318440"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-03-31T20:25:50.474+0000",
+        "updated": "2026-03-31T20:25:58.207+0000",
+        "started": "2026-03-16T14:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "7014003",
+        "issueId": "1915762"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "1d",
+    "remainingEstimate": "2h 30m",
+    "timeSpent": "5h 30m",
+    "originalEstimateSeconds": 28800,
+    "remainingEstimateSeconds": 9000,
+    "timeSpentSeconds": 19800
+  },
+  "customfield_11250": 8.0,
+  "customfield_10006": null
+}

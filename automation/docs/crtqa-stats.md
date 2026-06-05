@@ -1,64 +1,76 @@
-# CRTQA stats rollup (`crtqa_stats_rollup.py`) — schema v4
+# CRTQA stats (`automation/tools/crtqa_stats/`) — schema v5
 
-Deterministic enrich, `report_profile`, medians, attribution, and `latest.md` for [`/crtqa-stats`](../../.cursor/commands/crtqa-stats.md).
+Per-user rollups: **corpus** vs **comparison**, categories, epic breakdown. Team incremental → **`latest-team.md`**. Agent playbook: [`.cursor/skills/crtqa-stats/SKILL.md`](../../.cursor/skills/crtqa-stats/SKILL.md). Slash: [`/crtqa-stats`](../../.cursor/commands/crtqa-stats.md). Contract: [docs/crtqa-stats-contract.json](../../docs/crtqa-stats-contract.json).
 
-## When to run
+## Greenfield (from zero)
 
-After every stats run once `stats/crtqa-stats/state/last-sync.json` exists:
+1. **Harvest** — MCP or `fetch_initial_assessment.py` → `stats/crtqa-stats/temp/initial-<user>/` (`qa-search.json`, `issues/`, `epic-meta.json`).
+2. **State** — `process_initial_assessment.py` with `--epic-meta` → `state/last-sync-<user>.json`.
+3. **Meta** — `fetch_epic_meta.py --jira-user <user>` if summaries missing.
+4. **Categories** — [stats/crtqa-stats/epic-categories.json](../../stats/crtqa-stats/epic-categories.json) via `set_epic_category.py` (research FE/BE/API/Other per epic).
+5. **Report** — `crtqa_stats_rollup.py --jira-user <user>` → `latest-<user>.md`.
+
+## Incremental update (team — 3 phases)
+
+1. **Baseline gate** — `team_readiness.py` (operator confirms all `latest-*` current).
+2. **Per user** — `fetch_incremental.py` → operator confirms scope → `process_incremental.py` (`--all` or `--include-keys`) → `crtqa_stats_rollup.py --jira-user <user>`.
+3. **Team** — `crtqa_stats_team_rollup.py` → `latest-team.md`.
+
+Requires existing per-user state from greenfield.
+
+## Scripts
+
+| Script | When |
+|--------|------|
+| [`fetch_initial_assessment.py`](../tools/crtqa_stats/fetch_initial_assessment.py) | Jira REST harvest → temp dir |
+| [`process_initial_assessment.py`](../tools/crtqa_stats/process_initial_assessment.py) | Build v5 state from harvest |
+| [`fetch_incremental.py`](../tools/crtqa_stats/fetch_incremental.py) | Done TCD candidates not in state |
+| [`process_incremental.py`](../tools/crtqa_stats/process_incremental.py) | Append scoped comparison rows |
+| [`team_readiness.py`](../tools/crtqa_stats/team_readiness.py) | Phase 1 baseline checklist |
+| [`fetch_epic_meta.py`](../tools/crtqa_stats/fetch_epic_meta.py) | Backfill `epic_meta` on state |
+| [`set_epic_category.py`](../tools/crtqa_stats/set_epic_category.py) | Record one epic category review |
+| [`seed_epic_categories_from_states.py`](../tools/crtqa_stats/seed_epic_categories_from_states.py) | Bulk registry from state files |
+| [`patch_epic_categories.py`](../tools/crtqa_stats/patch_epic_categories.py) | Maintainer category patches |
+| [`crtqa_stats_rollup.py`](../tools/crtqa_stats_rollup.py) | Apply categories + render `latest-<user>.md` |
+| [`crtqa_stats_team_rollup.py`](../tools/crtqa_stats_team_rollup.py) | Render `latest-team.md` |
+
+## Library modules
+
+| Module | Role |
+|--------|------|
+| `gather.py` | Jira parse, lanes, worklogs, estimates |
+| `categories.py` | Hint classifier + size bands |
+| `apply_categories.py` | Registry → state rows |
+| `ingest.py` | State I/O, team discovery, readiness |
+| `render_report.py` | Per-user markdown; `pack_user_collapsed_bands` |
+| `render_team_report.py` | Team collapsed rollup |
+| `epic_breakdown.py` | Epic / AI epic tables |
+| `jira_rest.py` | Shared Jira REST + normalize_issue |
+
+## Rollup
 
 ```bash
-python automation/tools/crtqa_stats_rollup.py --append-longitudinal
+python automation/tools/crtqa_stats_rollup.py --jira-user mshpak
+python automation/tools/crtqa_stats_rollup.py --jira-user mshpak --append-longitudinal
+python automation/tools/crtqa_stats_team_rollup.py
+python automation/tools/crtqa_stats_team_rollup.py --users mshpak,amukanova
+python automation/tools/crtqa_stats/team_readiness.py
 ```
 
-## v3 → v4 migration
+Applies `apply_epic_categories_to_state` before render. Exit **1** on missing state or schema mismatch (`team_readiness.py` exits **1** when baselines incomplete).
 
-Existing v3 state is rejected unless:
+## State (v5)
 
-```bash
-python automation/tools/crtqa_stats_rollup.py --allow-v3-migrate --repair-draft-from-estimate
-```
+`stats/crtqa-stats/state/last-sync-<jira_user>.json` (gitignored): `rows[]`, `corpus_epic_keys[]`, `epic_classifications[]`, `epic_meta`, `attestation_by_epic`, `report_meta`. v4 state is not migrated.
 
-This only copies `estimate_hours` → `draft_estimate_hours` when `estimate_hours >= 8` (avoids the 1.92h `original_estimate` mistake). **Recommended:** `/crtqa-stats mode=full_refresh jira_user=…` to reload `customfield_11250` from Jira, then rollup.
+## Report sections
 
-## Jira fields (ingest — agent, not this script)
+**Per user (`latest-<user>.md`):**
 
-| Purpose | Field |
-|---------|--------|
-| Draft estimate (hours) | `customfield_11250` → `draft_estimate_hours` |
-| Logged time | `timetracking.time_spent` → `hours_logged` |
-| Do **not** use | `timetracking.original_estimate` for draft/size |
+- **Collapsed rollup** — two Small/Big rows when both size bands have ≥4 corpus epics; else one row (or micro corpus layout).
+- **Category rollup** — FE/BE/API/Other × Small/Big TCD.
+- **Epic breakdown** / **AI Epic breakdown** — per-epic sums, Jira links, `FE+S` labels.
 
-Devex SP: `devex_sp = draft_estimate_hours / 8`. Size bands: &lt;8h, 8–16h, &gt;16h.
+**Team (`latest-team.md`):** header (Generated, Users, Scope); **collapsed rollup** — always Small + Big rows; team **Saved %** from team `median logged` and `AI logged avg` on that row; **per-user rollup** — same columns per user×band with individual Saved %.
 
-## Rollup outputs
-
-| Output | Action |
-|--------|--------|
-| `state/last-sync.json` | Updates `corpus_cells`, enriches `rows`, sets `report_profile`, `report_meta`, `schema_version` 4 |
-| `latest.md` | Overwritten (dynamic sections) |
-| `state/longitudinal.json` | Optional append (`--append-longitudinal`) |
-
-## Report profiles
-
-| Profile | Layout emphasis |
-|---------|-----------------|
-| `task_detail` | Task table + draft/logged chart; benchmark tables show “pending” |
-| `directional` | Above + category charts when partial corpus |
-| `benchmark` | Corpus vs comparison medians where n≥4 |
-
-Profiles recompute on every rollup, including `rollup_only` incremental runs.
-
-## Options
-
-```bash
-python automation/tools/crtqa_stats_rollup.py
-python automation/tools/crtqa_stats_rollup.py --state stats/crtqa-stats/state/last-sync.json
-python automation/tools/crtqa_stats_rollup.py --append-longitudinal
-python automation/tools/crtqa_stats_rollup.py --allow-v3-migrate --repair-draft-from-estimate
-```
-
-Exit **1** on schema mismatch or missing state file.
-
-## Longitudinal entry (v4)
-
-Includes: `report_profile`, `total_hours_vs_draft_comparison`, `corpus_n`, `comparison_n`, `representable_cells`, `saved_pct_by_category`.
+**Metrics:** medians from corpus rows in scope; AI logged avg = mean comparison logged; Saved % = `(median_corpus_logged − ai_avg) / median_corpus_logged`. Team row uses **means of per-user band metrics** (see contract).

@@ -1,0 +1,175 @@
+{
+  "schema_version": 1,
+  "description": "Epic pipeline orchestrator: /crtqa-helper binds one epic per session, one pipeline stage per agent turn, three human gates. Charter: HOW-TO §2 helper; playbook stages invoke normative .cursor/pipelines/*.md triggers.",
+  "content_policy": "Functional/process only; no secrets in session or scratch files.",
+  "crtqaHelper": {
+    "version": 1,
+    "command": ".cursor/commands/crtqa-helper.md",
+    "skill": ".cursor/skills/crtqa-helper/SKILL.md",
+    "mode": "action_orchestrator",
+    "start_phrases": ["/crtqa-helper"],
+    "resume_phrase": "/crtqa-helper resume",
+    "maintainer_golden": "automation/tools/fixtures/operator-assist/crtqa-helper-golden.json"
+  },
+  "scratch_paths": {
+    "root": "epics/<KEY>/helper/",
+    "gitignore_glob": "epics/*/helper/",
+    "files": {
+      "session": "session.json",
+      "operator_feedback": "operator-feedback.md",
+      "stage_log": "stage-log.jsonl",
+      "affordances_slice": "affordances-slice.json"
+    },
+    "archive_on_close": {
+      "from": "epics/<KEY>/helper/",
+      "to": "epics/<KEY>/context/helper/",
+      "tool": "automation/tools/close_archive.py"
+    }
+  },
+  "session_schema": {
+    "epic_key": "string",
+    "active": "boolean",
+    "current_stage": "stage id or null when awaiting_gate",
+    "next_stage": "stage id after gate cleared",
+    "completed_stages": "string[]",
+    "awaiting_gate": "env | coverage_review | discover_creds | null",
+    "started_at": "ISO-8601",
+    "last_resumed_at": "ISO-8601",
+    "coverage_md_sha_at_gate": "optional hex for coverage review gate",
+    "transient_discover_tokens": "never persist creds; build trigger line in chat only"
+  },
+  "stages": [
+    {
+      "id": "env",
+      "pipeline_trigger": null,
+      "human_gate": true,
+      "gate_id": "env",
+      "action": "python automation/tools/crtqa_env_probe.py [--coverage when coverage exists]",
+      "on_pass_next": "epic_prep"
+    },
+    {
+      "id": "epic_prep",
+      "pipeline_trigger": "EPIC-PREP:",
+      "human_gate": false,
+      "verifier": "python automation/tools/epic_prep_verify.py --mode ref --ref epics/<KEY>/<KEY>-ref.json",
+      "on_pass_next": "coverage_v1"
+    },
+    {
+      "id": "coverage_v1",
+      "pipeline_trigger": "COVERAGE:",
+      "human_gate": false,
+      "pre_subagent": "explore dxtrade5-harness + webbroker-harness locations (read-only)",
+      "verifier": "python automation/tools/coverage_verify.py --mode emit",
+      "on_pass_next": "coverage_review_gate"
+    },
+    {
+      "id": "coverage_review_gate",
+      "pipeline_trigger": null,
+      "human_gate": true,
+      "gate_id": "coverage_review",
+      "action": "operator edits -coverage.md and/or comments on resume → operator-feedback.md",
+      "on_pass_next": "analyse"
+    },
+    {
+      "id": "analyse",
+      "pipeline_trigger": "ANALYSE:",
+      "human_gate": false,
+      "default_on": true,
+      "verifier": "python automation/tools/analysis_verify.py",
+      "on_pass_next": "discover"
+    },
+    {
+      "id": "discover",
+      "pipeline_trigger": "TEST-DISCOVER:",
+      "human_gate": true,
+      "gate_id": "discover_creds",
+      "post_action": "python automation/tools/crtqa_helper_affordances.py",
+      "verifier": "python automation/tools/discover_verify.py",
+      "on_pass_next": "coverage_reinforce"
+    },
+    {
+      "id": "coverage_reinforce",
+      "pipeline_trigger": "COVERAGE-REINFORCE:",
+      "human_gate": false,
+      "pre_subagent": "explore harness maps (read-only)",
+      "inputs": [
+        "epics/<KEY>/helper/operator-feedback.md",
+        "epics/<KEY>/helper/affordances-slice.json",
+        "epics/<KEY>/<KEY>-discover.json jq slices only",
+        "epics/<KEY>/<KEY>-coverage.json merge base"
+      ],
+      "verifier": "python automation/tools/coverage_verify.py --mode emit",
+      "on_pass_next": "precon"
+    },
+    {
+      "id": "precon",
+      "pipeline_trigger": "TEST-PRECON:",
+      "human_gate": false,
+      "always_on": true,
+      "verifier": "python automation/tools/precon_verify.py",
+      "on_pass_next": "test_prep"
+    },
+    {
+      "id": "test_prep",
+      "pipeline_trigger": "TEST-PREP:",
+      "human_gate": false,
+      "verifier": "python automation/tools/test_prep_verify.py --mode tests",
+      "on_pass_next": "close"
+    },
+    {
+      "id": "close",
+      "pipeline_trigger": "CLOSE:",
+      "human_gate": false,
+      "post_action": "archive helper/ → context/helper/",
+      "verifier": "python automation/tools/close_verify.py",
+      "on_pass_next": "done"
+    }
+  ],
+  "gates": [
+    {
+      "id": "env",
+      "label": "CTQA environment",
+      "recovery": ["/crtqa-console start", "postgres tunnel", "/crtqa-env"],
+      "agent_must_not": ["invoke Start-CrtqaConsole from helper", "store passwords"]
+    },
+    {
+      "id": "coverage_review",
+      "label": "Coverage draft review",
+      "recovery": ["edit epics/<KEY>/<KEY>-coverage.md", "/crtqa-helper resume with optional comments"]
+    },
+    {
+      "id": "discover_creds",
+      "label": "FE credentials for discover",
+      "recovery": ["append dxtrade5_creds= webbroker_creds= on resume line", "or fe_exploration_waived=yes after ack"]
+    }
+  ],
+  "execution_limits": {
+    "one_pipeline_per_agent_turn": true,
+    "forbid_playbook_concatenation": true,
+    "forbid_summarization_instead_of_artefacts": true,
+    "mandatory_jq_before_large_json": true,
+    "jq_doc": "automation/docs/jq.md",
+    "single_chat_default": true,
+    "session_file_is_source_of_truth": true,
+    "subagent_explore_before_coverage_stages": ["coverage_v1", "coverage_reinforce"],
+    "subagent_type": "explore",
+    "max_parallel_subagents": 2
+  },
+  "pipeline_chain_default": [
+    "EPIC-PREP",
+    "COVERAGE",
+    "ANALYSE",
+    "TEST-DISCOVER",
+    "COVERAGE-REINFORCE",
+    "TEST-PRECON",
+    "TEST-PREP",
+    "CLOSE"
+  ],
+  "cold_reads": [
+    "docs/crtqa-helper-contract.json",
+    ".cursor/commands/crtqa-helper.md",
+    ".cursor/skills/crtqa-helper/SKILL.md",
+    "docs/harness-principles.md",
+    "HOW-TO.md"
+  ]
+}

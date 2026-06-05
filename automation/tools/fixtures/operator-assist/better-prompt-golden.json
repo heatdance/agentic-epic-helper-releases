@@ -1,0 +1,15 @@
+{
+  "expectCoachVersion": 1,
+  "cases": [
+    {
+      "id": "vague_epic",
+      "draft": "work on CRT-639",
+      "expect_gaps_include": ["scope", "done"]
+    },
+    {
+      "id": "strong_trigger",
+      "draft": "COVERAGE: CRT-639 after CRT-639-ref.json exists",
+      "expect_minimal_mode": true
+    }
+  ]
+}

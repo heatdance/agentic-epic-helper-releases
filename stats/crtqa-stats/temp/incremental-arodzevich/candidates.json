@@ -1,0 +1,9 @@
+{
+  "jira_user": "arodzevich",
+  "eligible_epics": [
+    "CRT-632",
+    "CRT-639"
+  ],
+  "included_issue_keys_count": 3,
+  "candidates": []
+}

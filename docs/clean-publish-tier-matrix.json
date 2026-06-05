@@ -71,20 +71,49 @@
     {
       "match": "docs/harness-map.json",
       "personal": { "action": "keep" },
-      "team": { "action": "transform", "strip_package_ids": ["clean_pipeline"] },
+      "team": { "action": "transform", "strip_package_ids": ["clean_pipeline", "crtqa_stats", "operator_assist", "auto_tests_teach", "release_notes"] },
       "public": { "action": "transform", "strip_package_ids": ["clean_pipeline", "calibrate_pipeline"] }
     },
     {
       "match": "stats/crtqa-stats/**",
       "personal": { "action": "keep" },
-      "team": {
-        "action": "keep",
-        "drop_personal_results": [
-          "stats/crtqa-stats/latest.md",
-          "stats/crtqa-stats/raw/**",
-          "stats/crtqa-stats/state/**"
-        ]
-      },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/crtqa-stats.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/crtqa-stats/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/crtqa-stats-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/docs/crtqa-stats.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/crtqa_stats_rollup.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/crtqa_stats/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
@@ -165,6 +194,222 @@
       "personal": { "action": "keep", "gitignored": true },
       "team": { "action": "forbid_tracked" },
       "public": { "action": "forbid_tracked" }
+    },
+    {
+      "match": ".cursor/commands/better-prompt.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/better-skill.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/better-prompt/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/better-skill/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/karpathy-guidelines/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/karpathy-guidelines-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/operator-assist-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/skill-authoring-patterns.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/grounding-integration.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/fixtures/operator-assist/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/hooks.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/hooks/*.ps1",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/docs/inject-corner.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/scripts/corner-harness-verify.ps1",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/scripts/refresh-inject-corner.ps1",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/auto-tests-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/teach.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/teach/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/fixtures/operator-assist/teach-golden.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/docs/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/specs/schema.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/specs/smoke-manifest.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/specs/README.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/specs/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/tests/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/tmp/**",
+      "personal": { "action": "keep", "gitignored": true },
+      "team": { "action": "forbid_tracked" },
+      "public": { "action": "forbid_tracked" }
+    },
+    {
+      "match": "auto-tests/.teacher-session.example.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/README.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "auto-tests/tests/README.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "docs/crtqa-helper-contract.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/crtqa-helper.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/skills/crtqa-helper/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/docs/crtqa-helper.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/crtqa_helper_affordances.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/fixtures/operator-assist/crtqa-helper-golden.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "epics/templates/helper-session-ref.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
     }
   ],
   "default": {

@@ -1,5 +1,5 @@
 {
-  "schema_version": 3,
+  "schema_version": 4,
   "categories": [
     {
       "id": "fe",
@@ -51,6 +51,20 @@
     }
   ],
   "size_bands": [
+    {
+      "id": "small_tcd",
+      "label": "Small TCD (≤16h)",
+      "draft_hours_min": null,
+      "draft_hours_max": 16,
+      "notes": "v5 primary size band for latest-<user>.md rollups"
+    },
+    {
+      "id": "big_tcd",
+      "label": "Big TCD (>16h)",
+      "draft_hours_min": 16.01,
+      "draft_hours_max": null,
+      "notes": "v5 primary size band for latest-<user>.md rollups"
+    },
     {
       "id": "sp_lt_1",
       "label": "< 1 SP",

@@ -39,5 +39,22 @@
     "obligation_without_check_or_exclusion",
     "invariant_obligation_in_dimensions_only"
   ],
-  "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"]
+  "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"],
+  "reinforce_allowed_inputs": {
+    "_comment": "COVERAGE-REINFORCE: only — production COVERAGE still forbids -discover.json",
+    "playbook": ".cursor/pipelines/coverage-reinforce.md",
+    "discover_jq_paths": [
+      "verification_affordances",
+      "obligation_ledger",
+      "fixture_needs",
+      "client_shell_impact",
+      "discovery_status"
+    ],
+    "helper_files": [
+      "epics/<KEY>/helper/affordances-slice.json",
+      "epics/<KEY>/helper/operator-feedback.md"
+    ],
+    "merge_base": "epics/<KEY>/<KEY>-coverage.json",
+    "emit_fields": ["coverage_pass", "reinforced_at", "sources.reinforce_inputs"]
+  }
 }

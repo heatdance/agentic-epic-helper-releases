@@ -66,9 +66,9 @@
     "enforce_branch_policy_on_remotes": true
   },
   "tier_goals": {
-    "personal": "Maintainer-only backup on origin/personal: full tree except gitignore; includes epics, qa-handoff, releases/**, /release-notes, calibrate gold, and committed stats/latest.md.",
-    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness on clone after MCP/creds; no maintainer epics, release-notes, publish flow, or personal stats results (latest/raw/state).",
-    "public": "External guide on releases/public-M.N: same file names/structure as teaching stubs; no playbooks, verifiers, org truth, MCP recipes, crtqa-stats, or release-notes."
+    "personal": "Maintainer-only backup on origin/personal: full tree except gitignore; includes epics, qa-handoff, releases/**, /release-notes, calibrate gold; stats latest-*.md optional locally (gitignored by default).",
+    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness + /crtqa-helper + calibrate on clone after MCP/creds; no maintainer epics, release-notes, publish flow, stats, coaches, or teach.",
+    "public": "External guide on releases/public-M.N: *-readme.md methodology; orchestrator and calibrate conceptual in HOW-TO only; no playbooks, verifiers, org truth, MCP recipes, crtqa-stats, coaches, teach, or release-notes."
   },
   "team": {
     "audience": "private_squad",
@@ -90,15 +90,26 @@
       ".cursor/calibrate/reports/**",
       ".cursor/pipelines/clean.md",
       "temp/crtqa-console/**",
-      "stats/crtqa-stats/latest.md",
-      "stats/crtqa-stats/raw/**",
-      "stats/crtqa-stats/state/**"
+      "stats/crtqa-stats/**",
+      ".cursor/skills/crtqa-stats/**",
+      "automation/tools/crtqa_stats/**",
+      ".cursor/skills/better-prompt/**",
+      ".cursor/skills/better-skill/**"
     ],
     "delete_paths": [
       ".cursor/pipelines/test-exec.md",
       ".cursor/commands/release-notes.md",
       "docs/release-notes-contract.json",
-      "automation/tools/release_notes.py"
+      "automation/tools/release_notes.py",
+      ".cursor/commands/crtqa-stats.md",
+      "docs/crtqa-stats-contract.json",
+      "automation/docs/crtqa-stats.md",
+      "automation/tools/crtqa_stats_rollup.py",
+      ".cursor/commands/better-prompt.md",
+      ".cursor/commands/better-skill.md",
+      "docs/operator-assist-contract.json",
+      "docs/skill-authoring-patterns.json",
+      "automation/tools/fixtures/operator-assist/crtqa-helper-golden.json"
     ],
     "keep_globs": [
       ".cursor/pipelines/*.md",
@@ -110,8 +121,6 @@
       "automation/tools/**",
       "automation/docs/**",
       "docs/**",
-      "stats/crtqa-stats/README.md",
-      "stats/crtqa-stats/temp/categories.json",
       "AGENTS.md",
       "README.md",
       "HOW-TO.md",
@@ -130,10 +139,10 @@
       "docs/corner-platform-map.json",
       "HOW-TO.md",
       ".cursor/rules/pipeline-router.mdc",
-      ".cursor/commands/crtqa-stats.md",
-      "automation/tools/crtqa_stats_rollup.py",
-      "stats/crtqa-stats/README.md",
-      "stats/crtqa-stats/temp/categories.json"
+      ".cursor/commands/crtqa-helper.md",
+      "docs/crtqa-helper-contract.json",
+      "automation/tools/crtqa_helper_affordances.py",
+      ".cursor/pipelines/coverage-reinforce.md"
     ],
     "required_mcp_examples": [
       ".cursor/mcp.json.example",
@@ -142,7 +151,7 @@
     "router": {
       "exclude_triggers": ["CLEAN:"]
     },
-    "harness_map_strip_package_ids": ["clean_pipeline", "release_notes"],
+    "harness_map_strip_package_ids": ["clean_pipeline", "release_notes", "crtqa_stats", "operator_assist", "auto_tests_teach"],
     "entry_templates": {
       "README.md": "README.team.md",
       "HOW-TO.md": "HOW-TO.team.md",
@@ -237,6 +246,7 @@
       "coverage",
       "analysis",
       "test-discover",
+      "coverage-reinforce",
       "test-precon",
       "test-prep",
       "close"
@@ -309,6 +319,7 @@
     "registry_pipeline_ids": [
       "epic-prep",
       "coverage",
+      "coverage-reinforce",
       "analysis",
       "test-discover",
       "test-precon",
@@ -327,7 +338,7 @@
   },
   "router_tiers": {
     "personal": {
-      "include_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"]
+      "include_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "COVERAGE-REINFORCE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"]
     },
     "team": {
       "exclude_triggers": ["CLEAN:"]

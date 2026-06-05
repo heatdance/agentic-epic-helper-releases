@@ -1,71 +1,82 @@
-# CRTQA stats (v4)
+# CRTQA stats (v5)
 
-Management rollups for **Test Case Development** time: **manual corpus** vs **AI-assisted comparison**, with **draft-hour** sizing and honest **attribution**.
+Per-engineer rollups for **Test Case Development** and related QA work: **manual corpus** vs **AI-assisted comparison**, with draft-hour sizing and honest attribution.
 
 | Doc | Role |
 |-----|------|
-| [`/crtqa-stats`](../../.cursor/commands/crtqa-stats.md) | Agent playbook (Jira ingest, attestation, schema v4) |
-| [HOW-TO.md §1](../../HOW-TO.md) | Human operator steps and read order |
-| [automation/docs/crtqa-stats.md](../../automation/docs/crtqa-stats.md) | Rollup script (`crtqa_stats_rollup.py`) |
+| [`/crtqa-stats`](../../.cursor/commands/crtqa-stats.md) | Slash entry |
+| [`.cursor/skills/crtqa-stats/SKILL.md`](../../.cursor/skills/crtqa-stats/SKILL.md) | **Canonical agent playbook** (greenfield, modes, metrics) |
+| [docs/crtqa-stats-contract.json](../../docs/crtqa-stats-contract.json) | Normative JQL, paths, gates |
+| [HOW-TO.md § stats](../../HOW-TO.md) | Human operator steps |
+| [automation/docs/crtqa-stats.md](../../automation/docs/crtqa-stats.md) | Rollup CLI |
 
-## Model
+## Model (v5)
 
 | Role | Use |
 |------|-----|
-| **corpus** | Manual baseline — medians for “expected hours” when n≥4 |
-| **comparison** | AI-assisted (agentic epic helper) — vs corpus and/or draft |
+| **corpus** | Manual baseline — user worklogs on cross-project QA tasks; epic gate: user QA logged > 0 |
+| **comparison** | AI-assisted Done TCD (incremental) — vs corpus medians |
 
-**Draft estimate:** Jira **`customfield_11250`** (hours). **Logged:** `timetracking.time_spent` (8h = 1 Devex day). **Do not** use `original_estimate` for draft or SP bands.
+**Discovery:** CRTQA **Tests** reported by user → epics → **any project** QA tasks on Epic Link (incl. BROQA Release notes).
 
-**Devex SP** = draft ÷ 8. Size bands: &lt;1 SP (&lt;8h), 1–2 SP (8–16h), 3+ SP (&gt;16h).
+**Draft:** `customfield_11250` (hours), then original estimate, then 8h default. **Logged:** user worklogs only (not issue `time_spent`).
 
-**Attribution (comparison rows):** `estimate_only` (under draft, no corpus yet), `corpus_benchmark`, `corpus_and_estimate`, `none` (corpus rows).
+**Size:** `small_tcd` ≤16h, `big_tcd` >16h (from draft hours).
 
 ## Modes
 
 | Mode | Use |
 |------|-----|
-| `initial_assessment` | First time: full done-TCD cohort + per-epic AI attestation |
-| `incremental_update` | New done tasks only; rollup still refreshes `latest.md` if there are no new keys |
-| `full_refresh` | Re-fetch Jira for existing keys — **redo assessment** with same epic decisions, or fix draft/logged after v4 upgrade |
+| `initial_assessment` | First time: tests → epics → QA corpus + state |
+| `incremental_update` | Phase 1 baseline gate → scoped Done TCD per user → `latest-team.md` |
+| `full_refresh` | Re-fetch keys; roles unchanged without entrust |
 
 Example:
 
 ```text
-/crtqa-stats mode=initial_assessment jira_user=<you>
+/crtqa-stats mode=initial_assessment jira_user=mshpak
+/crtqa-stats mode=incremental_update
 ```
 
-Then (agent or terminal):
+Rollup (per user):
 
 ```bash
-python automation/tools/crtqa_stats_rollup.py --append-longitudinal
+python automation/tools/crtqa_stats_rollup.py --jira-user mshpak
+python automation/tools/crtqa_stats_rollup.py --jira-user mshpak --append-longitudinal
 ```
 
-## Report profiles (dynamic)
+Team rollup (after incremental):
 
-Recomputed on **every** rollup from current `rows`:
+```bash
+python automation/tools/crtqa_stats_team_rollup.py
+```
 
-| Profile | Typical situation |
-|---------|-------------------|
-| `task_detail` | Few tasks or no corpus n≥4 — read **Task-level** + draft vs logged chart first |
-| `directional` | Some manual history (corpus 1–3 per category), benchmark not stable |
-| `benchmark` | At least one category×size with ≥4 corpus tasks — corpus % saved in tables |
+If `jira_user` is omitted on **`initial_assessment`** or **`full_refresh`**, the agent asks via **AskQuestion**. **`incremental_update`** uses contract `team_users[]` (or `users=` override).
 
-**Read order:** header (profile) → **Task-level** → charts → benchmark tables → footer (attribution legend).
+## Generate from zero
 
-## Cohort (Jira)
+Follow [`.cursor/skills/crtqa-stats/SKILL.md`](../../.cursor/skills/crtqa-stats/SKILL.md) § Greenfield:
 
-- Epics: `project = CRT AND issuetype = Epic AND "test lead" = <user>`
-- Tasks: `project = CRTQA AND issuetype = "Test Execution" AND summary ~ "Test Case Development" AND "Epic Link" = <CRT-KEY> AND statusCategory = Done`
+1. MCP harvest (or `fetch_initial_assessment.py`) → temp JSON  
+2. `process_initial_assessment.py` + `--epic-meta` → `state/last-sync-<user>.json`  
+3. `fetch_epic_meta.py` if needed  
+4. `epic-categories.json` via `set_epic_category.py` per epic  
+5. `crtqa_stats_rollup.py --jira-user <user>` → `latest-<user>.md`
 
-## Files
+## Report
 
-| Path | Git |
-|------|-----|
-| `latest.md` | committed — management report |
-| `temp/categories.json` | committed — taxonomy v3 (draft-hour bands) |
-| `state/last-sync.json` | gitignored — schema v4 cumulative state |
-| `state/longitudinal.json` | gitignored — per-run snapshots |
-| `raw/run-*.jsonl` | gitignored — audit trail |
+`stats/crtqa-stats/latest-<username>.md` — header, display tier, **collapsed rollup**, **category rollup**, **Epic breakdown**, **AI Epic breakdown**.
+
+`stats/crtqa-stats/latest-team.md` — **Generated**, **Users**, **Scope**; **collapsed rollup** (team Saved % from team row medians); **per-user rollup** (individual Saved % per Small/Big band).
+
+Optional **`epic_meta`** in state; **`epic-categories.json`** for FE/BE/API/Other (rollup applies before render).
+
+## Git / CLEAN
+
+| Path | personal | team / public |
+|------|----------|----------------|
+| `latest-*.md` (incl. `latest-team.md`) | local / optional commit on personal | **omitted** |
+| `state/`, `raw/` | gitignored | omitted |
+| `README.md`, `temp/categories.json`, command, rollup script | kept on team | stats tree omitted on public |
 
 Association, not causation.

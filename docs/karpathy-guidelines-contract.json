@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "description": "Opt-in Karpathy coding discipline for automation/ Python. Not shipped_core or soft_core.",
+  "skill": ".cursor/skills/karpathy-guidelines/SKILL.md",
+  "version": 1,
+  "mode": "opt_in",
+  "apply_paths": [
+    "automation/tools/",
+    "automation/docs/"
+  ],
+  "exclude_paths": [
+    "epics/",
+    ".cursor/pipelines/",
+    ".cursor/rules/",
+    "docs/*-contract.json"
+  ],
+  "upstream": {
+    "skill_repo": "https://github.com/heatdance/grounding-kit",
+    "skill_path": ".cursor/skills/karpathy-guidelines/SKILL.md",
+    "skill_sha": "94cd690c5927224a9ac97254eaad20cbb31228e6"
+  }
+}

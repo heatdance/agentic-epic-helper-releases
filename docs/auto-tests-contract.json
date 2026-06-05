@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "description": "auto-tests entity charter and /teach session mode. Separate from operator-assist coaches and epic pipelines.",
+  "content_policy": "Functional/process only; no people rosters; no secrets in repo files.",
+  "entity": {
+    "root": "auto-tests/",
+    "not": "automation/",
+    "automation_purpose": "Harness verifiers, epic pipeline tools, CTQA probes, Yogi — see automation/docs/",
+    "auto_tests_purpose": "Delivery smoke pytest + Playwright; manual/orchestrated runs (not CI in v1)"
+  },
+  "directories": {
+    "docs": { "role": "Private pedagogy, env runbooks", "clean_team": "delete" },
+    "specs": {
+      "role": "schema.json norms + smoke-manifest.json grid; team keeps these two only",
+      "clean_team": "keep schema.json and smoke-manifest.json; delete other files under specs/"
+    },
+    "tests": { "role": "Executable smoke tests", "clean_team": "keep" },
+    "tmp": { "role": "Ephemeral artifacts", "gitignore": true }
+  },
+  "specs": {
+    "schema": "auto-tests/specs/schema.json",
+    "smoke_manifest": "auto-tests/specs/smoke-manifest.json"
+  },
+  "orchestration": {
+    "script": "auto-tests/run_smoke.ps1",
+    "status": "planned",
+    "note": "Entry for manual delivery smoke; schema ties to specs/ in a follow-up change"
+  },
+  "teach": {
+    "version": 2,
+    "command": ".cursor/commands/teach.md",
+    "skill": ".cursor/skills/teach/SKILL.md",
+    "session_file": "auto-tests/.teacher-session.json",
+    "session_example": "auto-tests/.teacher-session.example.json",
+    "start_phrase": "/teach",
+    "stop_phrase": "/teach stop",
+    "disable_model_invocation": true,
+    "operator_profile": {
+      "optional": true,
+      "gitignored": true,
+      "root": "temp/profile/",
+      "cold_reads": [
+        "temp/profile/teach-context.json",
+        "temp/profile/automation-learning-plan.json"
+      ],
+      "if_missing": "Skip silently; one-line note in output that personal profile was not found.",
+      "session_fields_from_profile": ["learning_phase", "profile_loaded_at"]
+    },
+    "pedagogy": {
+      "default": "Socratic teach-first: concept, operator attempt, review, next step",
+      "complete_test_solution": "Only when operator clearly requests in natural language — no harness escape tokens",
+      "allowed_without_asking": [
+        "Short illustrations and snippets for teaching",
+        "Verification helpers and orchestration stubs under auto-tests/",
+        "Run and interpret pytest or Playwright output when useful for teaching"
+      ],
+      "forbidden": [
+        "Full implemented smoke test unless operator asked for the solution",
+        "Epic pipeline triggers and writes under epics/",
+        "Harness doc or shipped-core edits unless operator pivots to harness work"
+      ]
+    },
+    "cold_reads": [
+      "docs/auto-tests-contract.json",
+      "auto-tests/README.md",
+      "auto-tests/docs/README.md",
+      "auto-tests/specs/README.md",
+      "auto-tests/specs/schema.json",
+      "auto-tests/specs/smoke-manifest.json",
+      "docs/harness-map.json"
+    ],
+    "maintainer_golden": "automation/tools/fixtures/operator-assist/teach-golden.json"
+  },
+  "clean_tier_summary": {
+    "personal": "Full auto-tests tree including private docs and specs",
+    "team": "Keep auto-tests/tests/** and specs/schema.json + specs/smoke-manifest.json; delete auto-tests/docs/** and other specs/**; teach command/skill delete on team",
+    "public": "Delete auto-tests/ (methodology export does not include smoke automation)"
+  }
+}

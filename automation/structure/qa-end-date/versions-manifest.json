@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "bundle_id": "qa_end_date",
+  "description": "Single Structure formula column QA End Date (Epic rollup over QA Task / Test Execution children).",
+  "recommended": "v1",
+  "versions_root": "automation/structure/qa-end-date/versions",
+  "versions": [
+    {
+      "id": "v1",
+      "dir": "v1",
+      "status": "recommended",
+      "behavior": "Replaces Epic MAX + Ticket ED columns; direct children only; literals done/aborted.",
+      "formula_file": "formula.expr",
+      "structure_variable": "EndDate",
+      "jira_field": "End Date",
+      "column_format": "General or Text",
+      "sum_over_sub_items": false
+    }
+  ]
+}
