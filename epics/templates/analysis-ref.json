@@ -1,5 +1,5 @@
 {
-  "_comment": "ANALYSE v2 handoff. Pre-CLOSE: epics/<KEY>/<KEY>-analysis.json + .md at epic root; after CLOSE: JSON under context/. Gaps-first .md. No /temp/ in durable JSON. Known issues + coverage mutation only when trigger known_issues=yes. Contract: docs/analysis-gap-contract.json.",
+  "_comment": "ANALYSE v2 handoff. Pre-CLOSE: epics/<KEY>/<KEY>-analysis.json + .md at epic root; after CLOSE: JSON under context/. Gaps-first .md. No /temp/ in durable JSON. Known issues + coverage mutation only when trigger known_issues=yes. Contracts: docs/analysis-gap-contract.json; topology: docs/analysis-topology-contract.json; principal: docs/analysis-principal-contract.json.",
   "schema_version": 2,
   "epic_key": null,
   "sources": {
@@ -10,9 +10,25 @@
     "coverage_loaded": false,
     "known_issues_enabled": false,
     "resolve_enabled": true,
+    "topology_loaded": false,
+    "ref_topology_fields": [],
+    "principal_loaded": false,
+    "ref_principal_fields": [],
+    "_ref_topology_fields": [
+      "verification_topology.delivery_notes",
+      "verification_topology.pricing_oracle_rules"
+    ],
+    "_ref_principal_fields": [
+      "obligations_proposed.deferral",
+      "verification_topology.delivery_notes.linked_obligation_ids"
+    ],
     "note": "known_issues_enabled / resolve_enabled mirror trigger tokens for audit."
   },
   "summary": null,
+  "draft_truth_round": 1,
+  "_draft_truth_round": "Copy from coverage.draft_truth_round; 1 or 2",
+  "draft_truth_recommendation": null,
+  "_draft_truth_recommendation": "rerun_coverage | human_coverage_review per docs/analysis-draft-truth-contract.json",
   "_summary": {
     "text": "Optional one line max; copy epic_verification_focus only — no new prose.",
     "derived_from": ["coverage.epic_verification_focus"]
@@ -20,13 +36,16 @@
   "gaps": [],
   "_gaps_item": {
     "id": "gap-001",
-    "kind": "deferred_check | nested_req_unresolved | obligation_uncovered | snippet_missing | ungrounded_check | grounding_weak | tooling_blocked | env_blocked | anti_pattern | human_ba",
+    "kind": "deferred_check | deferral_coverage_drift | nested_req_unresolved | obligation_uncovered | snippet_missing | ungrounded_check | grounding_weak | tooling_blocked | env_blocked | anti_pattern | human_ba | delivery_known_fail | delivery_excluded | surface_oracle_unresolved | delivery_coverage_drift",
     "confidence": "high | medium",
     "summary": "Short gap description",
     "pointers": {
       "check_id": "chk-optional",
-      "obligation_id": "obl-optional",
-      "requirement_key": "CRT-optional"
+      "obligation_id": "obl-optional (required for principal deferred_check)",
+      "requirement_key": "CRT-optional",
+      "delivery_note_id": "dn-optional",
+      "oracle_rule_id": "por-optional",
+      "topology_surface_id": "jss-optional"
     },
     "evidence": "Artifact path or field pointer only",
     "recommended_action": "rerun_coverage | rerun_epic_prep | confluence_resolve | human_ba | ignore_for_discover | ignore_for_prep",
@@ -42,7 +61,7 @@
   "exploration_suppressed": [],
   "_exploration_suppressed_item": {
     "check_id": "chk-001",
-    "reason": "deferred_in_check | human_ba | analysis_gap",
+    "reason": "deferred_in_check | deferral_obligation_keyed | human_ba | analysis_gap | delivery_known_fail | delivery_excluded",
     "blocks_fixture_probe": true,
     "until_action": "rerun_coverage | human_ba"
   },

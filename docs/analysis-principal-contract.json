@@ -1,0 +1,93 @@
+{
+  "schema_version": 1,
+  "_comment": "ANALYSE consumption of EPIC-PREP deferral obligations and COVERAGE keyed deferrals. Playbook phases 1, 2, 3, 4a, 5, 10. Verifier: analysis_verify.py --strict-principal. Upstream: docs/epic-prep-principal-contract.json, docs/coverage-principal-contract.json.",
+  "upstream": {
+    "epic_prep_principal": "docs/epic-prep-principal-contract.json",
+    "coverage_principal": "docs/coverage-principal-contract.json"
+  },
+  "deferral_obligation_scan": {
+    "ref_filter": "obligations_proposed[] where kind == explicit_deferral OR disposition == deferral_candidate",
+    "fields": ["id", "deferral_reason", "requirement_keys", "kind", "disposition"]
+  },
+  "coverage_deferral_scan": {
+    "obligations_coverage_status": "deferred_in_check",
+    "check_match": "checks[] with obligation_ids[] containing deferral obligation id",
+    "ambiguity_flag": "!"
+  },
+  "work_queue_sources": [
+    {
+      "id": "deferral_obligation_keyed",
+      "scan": "ref deferral obligations cross obligations_coverage.deferred_in_check and checks with obligation_ids"
+    },
+    {
+      "id": "deferral_coverage_drift",
+      "scan": "ref deferral obligation missing obligations_coverage row or status != deferred_in_check"
+    },
+    {
+      "id": "delivery_linked_obligation",
+      "scan": "ref.verification_topology.delivery_notes[].linked_obligation_ids enrich delivery gap pointers"
+    }
+  ],
+  "gap_emit_rules": {
+    "deferred_check": {
+      "confidence": "high",
+      "status": "confirmed_gap",
+      "required_pointers": ["obligation_id"],
+      "optional_pointers": ["check_id", "requirement_key"],
+      "summary_source": "ref.deferral_reason when present else coverage.ambiguity.reason",
+      "recommended_action": "ignore_for_discover"
+    },
+    "deferral_coverage_drift": {
+      "confidence": "high",
+      "status": "open",
+      "required_pointers": ["obligation_id"],
+      "recommended_action": "rerun_coverage"
+    }
+  },
+  "delivery_principal_rules": {
+    "when": "ref delivery_notes[].linked_obligation_ids non-empty",
+    "action": "delivery_known_fail and delivery_excluded gaps should include obligation_id from linked_obligation_ids when single id",
+    "gap_kinds": ["delivery_known_fail", "delivery_excluded"]
+  },
+  "forbidden_gaps": [
+    {
+      "kind": "obligation_uncovered",
+      "when": "pointers.obligation_id is a ref deferral obligation with coverage deferred_in_check"
+    }
+  ],
+  "exploration_suppression": {
+    "deferral_obligation_keyed": {
+      "reason": "deferral_obligation_keyed",
+      "blocks_fixture_probe": true,
+      "until_action": "rerun_coverage",
+      "applies_to": "checks linked via obligations_coverage.deferred_in_check"
+    },
+    "deferred_in_check_legacy": {
+      "reason": "deferred_in_check",
+      "blocks_fixture_probe": true,
+      "until_action": "rerun_coverage",
+      "applies_to": "checks with calculation_contract deferred_ambiguous without keyed obligation_ids"
+    }
+  },
+  "strict_principal_verifier": {
+    "requires_ref_and_coverage": true,
+    "skip_when_no_principal": "ref has no deferral obligations and no verification_focus_proposed or principal_coverage_threads",
+    "rules": [
+      "each ref deferral obligation id has deferred_check gap with pointers.obligation_id",
+      "each obligations_coverage deferred_in_check row has matching deferred_check gap",
+      "no obligation_uncovered gap for deferral obligation ids",
+      "delivery gaps for notes with linked_obligation_ids include obligation_id when single link",
+      "validation_log contains step 3-principal when ref has deferral obligations"
+    ]
+  },
+  "downstream_handoff": {
+    "TEST-DISCOVER": {
+      "reads": ["exploration_suppressed[]", "gaps with kind deferred_check"],
+      "use": "Fixture probe suppression and deferral ledger (Round 2 step 4)"
+    }
+  },
+  "gap_kinds_extension": ["deferral_coverage_drift"],
+  "recommended_action_by_kind": {
+    "deferral_coverage_drift": "rerun_coverage"
+  }
+}

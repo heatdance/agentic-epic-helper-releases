@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "_comment": "GROUND pipeline: runtime console probes on coverage before ANALYSE. Master: docs/draft-truth-contract.json. Playbook: .cursor/pipelines/ground.md",
+  "trigger": "GROUND:",
+  "prerequisites": [
+    "-coverage.json with coverage_pass 1 or 2",
+    "-ref.json",
+    "crtqa_console_probe.py pass",
+    "/crtqa-console start for live probes"
+  ],
+  "optional_tokens": {
+    "probe_waive=yes": "Log waiver_reason on console checks when env unavailable; must not invent verified_syntax",
+    "proceed": "After Phase 0 env stop"
+  },
+  "mutations_allowed": [
+    "checks[].runtime_probes[]",
+    "checks[].detail_lines",
+    "checks[].linker_trace_lines",
+    "checks[].ambiguity",
+    "checks[].probe_waived",
+    "checks[].waiver_reason",
+    "grounding_audit",
+    "validation_log"
+  ],
+  "mutations_forbidden": [
+    "new checks[] ids",
+    "scenario_coverage_map shrink",
+    "smart_checklist_markdown top-level - scenario lines (detail_lines only)"
+  ],
+  "runtime_probe_item": {
+    "probe_id": "gp-001",
+    "command_attempted": "string sent to console",
+    "outcome": "success | failed | blocked",
+    "verified_syntax": "working command or null",
+    "evidence_note": "short",
+    "probed_at": "ISO-8601"
+  },
+  "console_check_detection": [
+    "checks[].section or detail_lines mention console or show prices",
+    "checks[].topology_surface_id links console surface",
+    "ref pricing_oracle_rules surface console_show_prices"
+  ],
+  "emit_dod": [
+    "every console-tagged primary check has runtime_probes or probe_waived with waiver_reason",
+    "no temp/ in durable JSON",
+    "verified_syntax in detail_lines when outcome success; no internal oracle enums in md",
+    "smart_checklist_markdown must not contain > Discover: or > Discovery: or platform reuse heading — see docs/coverage-operator-hints.json"
+  ],
+  "downstream": {
+    "analyse": "docs/analysis-draft-truth-contract.json"
+  }
+}

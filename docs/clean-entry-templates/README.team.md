@@ -1,6 +1,6 @@
 # Agentic epic helper — team harness
 
-Runnable **Corner Trader QA** harness for contributors: epic pipelines, **`/crtqa-helper`**, verifiers, templates, org maps, and calibrate — **without** maintainer epics, release-notes tooling, stats, coaches, teach, or publish tooling.
+Runnable **Corner Trader QA** harness for contributors: epic pipelines, **`/epic-helper`**, verifiers, templates, org maps, and calibrate — **without** maintainer epics, release-notes tooling, stats, or publish tooling.
 
 ## Repository
 
@@ -30,9 +30,9 @@ Playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 
 | Entry | When |
 |-------|------|
-| **`/crtqa-helper`** + Epic key | Full chain — one stage per turn ([crtqa-helper.md](.cursor/commands/crtqa-helper.md)) |
+| **`/epic-helper`** + Epic key | Full chain — one stage per turn ([epic-helper.md](.cursor/commands/epic-helper.md)) |
 | `EPIC-PREP:` … `CLOSE:` | Individual stages — see [HOW-TO.md](HOW-TO.md) pipeline table |
-| `/crtqa-calibrate` | Prod vs gold ([crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md); gold folders are local) |
+| `/epic-calibrate` | Prod vs gold ([epic-calibrate.md](.cursor/commands/epic-calibrate.md); gold folders are local) |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 

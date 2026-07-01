@@ -117,7 +117,6 @@ def main() -> int:
         f"{key}-coverage.md",
         f"{key}-analysis.md",
         f"{key}-tests.md",
-        f"{key}-precon.md",
     ]
     archive["context_json"] = sorted(
         p.name for p in ctx.glob("*.json")

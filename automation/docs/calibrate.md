@@ -1,6 +1,6 @@
-# Calibrate (`/crtqa-calibrate`)
+# Calibrate (`/epic-calibrate`)
 
-Post-hoc **production vs operator gold** analysis. **Not** a pipeline trigger.
+Post-hoc **production vs operator gold** analysis. **Not** a pipeline trigger and **not** in the draft+truth epic chain ([`docs/draft-truth-contract.json`](../../docs/draft-truth-contract.json)). Use **after CLOSE** when comparing machine output to teammate gold under `.cursor/calibrate/<KEY>-gold/` — optional diagnostic, not a blocking gate.
 
 ## When
 

@@ -1,0 +1,70 @@
+{
+  "id": "1407505",
+  "key": "CRTQA-1206",
+  "summary": "[Release notes] [CRT-41] Available Balance For Withdrawal - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1407505/worklog/5205919",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2023-09-21T14:59:53.406+0000",
+        "updated": "2023-09-21T14:59:58.602+0000",
+        "started": "2023-09-21T09:01:00.000+0000",
+        "timeSpent": "3h 14m",
+        "timeSpentSeconds": 11640,
+        "id": "5205919",
+        "issueId": "1407505"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "5h",
+    "remainingEstimate": "1h 1m",
+    "timeSpent": "3h 14m",
+    "originalEstimateSeconds": 18000,
+    "remainingEstimateSeconds": 3660,
+    "timeSpentSeconds": 11640
+  },
+  "customfield_11250": 5.0,
+  "customfield_10006": null
+}

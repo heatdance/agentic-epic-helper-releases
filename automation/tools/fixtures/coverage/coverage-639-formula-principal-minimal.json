@@ -1,0 +1,100 @@
+{
+  "_comment": "formula_first + focus copy from ref verification_focus_proposed; ref-639-topology-minimal",
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "epic_ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+  "sources": {
+    "jira_fetched_at": "2026-06-18T12:00:00Z",
+    "epic_ref_loaded_at": "2026-06-18T12:00:00Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "fixture principal"
+  },
+  "archetype": "metrics_calculation",
+  "emit_layout": "formula_first",
+  "topology_provenance": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+    "fields_consumed": ["epic_archetype.value", "verification_focus_proposed"],
+    "archetype_source": "copied_from_ref",
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "principal_provenance": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+    "focus_source": "epic_ref_proposed",
+    "threads_consumed": [],
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "epic_verification_focus": {
+    "statement": "Verify weighted-average cash settlement formulas and ladders for FX Spot per CRT-1738–1743 configuration and metric parity.",
+    "source": "epic_ref_proposed",
+    "keywords": ["FX Spot", "WeightedAvg", "cash settlement"]
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Weighted-average ladder and metrics",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["console", "dxtrade5", "webbroker", "adaptive"],
+      "requirement_keys": ["CRT-1738", "CRT-1740"],
+      "obligation_ids": ["obl-011", "obl-005"]
+    }
+  ],
+  "obligations_coverage": {
+    "obl-003": {
+      "status": "deferred_in_check",
+      "check_id": "chk-def-001"
+    },
+    "obl-015": {
+      "status": "deferred_in_check",
+      "check_id": "chk-def-002"
+    },
+    "obl-005": { "status": "covered", "check_id": "chk-001" },
+    "obl-011": { "status": "covered", "check_id": "chk-001" }
+  },
+  "checks": [
+    {
+      "id": "chk-001",
+      "section": "## Primary focus",
+      "scenario_line": "- [CRT-1738] Weighted-average ladder: open two lots, partial close — average fill unchanged on remainder.",
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": ["obl-005", "obl-011"],
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present"
+    },
+    {
+      "id": "chk-def-001",
+      "section": "## Deferred obligations",
+      "coverage_thread": "deferral_only",
+      "scenario_line": "- ! reason: Scenarios that reconfigure valuation method for already-existing instrument types may be skipped in regression scope.",
+      "ambiguity": {
+        "flag": "!",
+        "reason": "Scenarios that reconfigure valuation method for already-existing instrument types may be skipped in regression scope."
+      },
+      "requirement_keys": ["CRT-1741"],
+      "obligation_ids": ["obl-003"],
+      "verification_role": "out_of_epic"
+    },
+    {
+      "id": "chk-def-002",
+      "section": "## Deferred obligations",
+      "coverage_thread": "deferral_only",
+      "scenario_line": "- ! reason: Authoritative cent-level numeric outputs for the full CRT-1738 worked ladder table remain deferred pending upstream XT-7911 alignment.",
+      "ambiguity": {
+        "flag": "!",
+        "reason": "Authoritative cent-level numeric outputs for the full CRT-1738 worked ladder table remain deferred pending upstream XT-7911 alignment."
+      },
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": ["obl-015"],
+      "verification_role": "out_of_epic"
+    }
+  ],
+  "explicitly_out_of_scope": [],
+  "grounding_audit": {
+    "by_check_id": [],
+    "ungrounded_check_ids": []
+  },
+  "anti_pattern_findings": [],
+  "validation_log": [],
+  "smart_checklist_markdown": null
+}

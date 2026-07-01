@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "_comment": "TEST-DISCOVER linker-only (draft_truth_v2). Master: docs/draft-truth-contract.json",
+  "discovery_mode": "linker_only",
+  "forbidden": [
+    "Phase 0 env gates on DISCOVER trigger",
+    "Chrome MCP or browser automation",
+    "setup_depth probe_executed or command_family from live probes",
+    "fe_credentials",
+    "fe_ui_sessions on emit",
+    "operator_recovery blocks",
+    "Step E affordance smoke",
+    "writing -coverage.json"
+  ],
+  "required_inputs": [
+    "frozen -coverage.json (sources.coverage_frozen_at)",
+    "-ref.json",
+    "optional -analysis.json"
+  ],
+  "optional_harness_reads": [
+    "docs/dxtrade5-harness/locations/",
+    "docs/webbroker-harness/"
+  ],
+  "required_emit": [
+    "sources.discovery_mode linker_only",
+    "obligation_ledger[] row per primary check with disposition != pending",
+    "verification_affordances[] with harness_location_ref or pattern_ref or oracle_binding for UI/console checks",
+    "fixture_needs[] setup_depth classified_only max"
+  ],
+  "verifier": "python automation/tools/discover_verify.py --mode linker --coverage epics/<KEY>/<KEY>-coverage.json --discover epics/<KEY>/<KEY>-discover.json",
+  "emit_dod": [
+    "coverage.sources.coverage_frozen_at set",
+    "no probe_executed or fe_credentials on discover json",
+    "obligation_closure.verifier_passed true when discovery_status complete"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "jira_user": "mtavadze",
+  "tests_total": 312,
+  "epics_all": 39,
+  "epics_qa": 39,
+  "qa_tasks": 60,
+  "issues_fetched": 60,
+  "excluded_epics": [],
+  "epic_meta_fetched": 39
+}

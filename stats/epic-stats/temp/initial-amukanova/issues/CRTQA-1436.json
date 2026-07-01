@@ -1,0 +1,480 @@
+{
+  "id": "1470146",
+  "key": "CRTQA-1436",
+  "summary": "[Release notes] [CRT-80] Borrowing charges for short CFD stocks - dxMC",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 11,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5434394",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-22T06:51:25.431+0000",
+        "updated": "2024-01-22T06:58:16.910+0000",
+        "started": "2024-01-19T06:27:00.000+0000",
+        "timeSpent": "1h 50m",
+        "timeSpentSeconds": 6600,
+        "id": "5434394",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5434455",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-22T06:57:32.274+0000",
+        "updated": "2024-01-22T06:57:34.327+0000",
+        "started": "2024-01-19T11:00:00.000+0000",
+        "timeSpent": "30m",
+        "timeSpentSeconds": 1800,
+        "id": "5434455",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5434456",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-22T06:57:37.669+0000",
+        "updated": "2024-01-22T06:58:27.524+0000",
+        "started": "2024-01-19T13:00:00.000+0000",
+        "timeSpent": "1h 33m",
+        "timeSpentSeconds": 5580,
+        "id": "5434456",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5440223",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-24T06:10:52.266+0000",
+        "updated": "2024-01-24T06:11:10.328+0000",
+        "started": "2024-01-22T09:12:00.000+0000",
+        "timeSpent": "1h 48m",
+        "timeSpentSeconds": 6480,
+        "id": "5440223",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5440226",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-24T06:11:47.717+0000",
+        "updated": "2024-01-29T05:24:44.995+0000",
+        "started": "2024-01-23T05:17:00.000+0000",
+        "timeSpent": "1h 24m",
+        "timeSpentSeconds": 5040,
+        "id": "5440226",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5440230",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-24T06:12:35.075+0000",
+        "updated": "2024-01-24T06:12:37.454+0000",
+        "started": "2024-01-23T11:30:00.000+0000",
+        "timeSpent": "1h 46m",
+        "timeSpentSeconds": 6360,
+        "id": "5440230",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5444732",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-26T06:31:22.137+0000",
+        "updated": "2024-01-26T06:31:57.890+0000",
+        "started": "2024-01-24T12:00:00.000+0000",
+        "timeSpent": "3h 22m",
+        "timeSpentSeconds": 12120,
+        "id": "5444732",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5444741",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-26T06:33:09.647+0000",
+        "updated": "2024-01-26T06:33:12.790+0000",
+        "started": "2024-01-25T09:10:00.000+0000",
+        "timeSpent": "1h 20m",
+        "timeSpentSeconds": 4800,
+        "id": "5444741",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5448535",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-29T05:21:51.866+0000",
+        "updated": "2024-01-29T05:22:06.134+0000",
+        "started": "2024-01-26T09:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5448535",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5455891",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-31T07:41:31.370+0000",
+        "updated": "2024-01-31T07:41:35.270+0000",
+        "started": "2024-01-29T07:30:00.000+0000",
+        "timeSpent": "57m",
+        "timeSpentSeconds": 3420,
+        "id": "5455891",
+        "issueId": "1470146"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1470146/worklog/5459211",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=imakarova",
+          "name": "imakarova",
+          "key": "imakarova",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=imakarova&avatarId=268603",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=imakarova&avatarId=268603",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=imakarova&avatarId=268603",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=imakarova&avatarId=268603"
+          },
+          "displayName": "Irina Makarova [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-31T18:21:00.269+0000",
+        "updated": "2024-01-31T18:21:07.362+0000",
+        "started": "2024-01-30T12:00:00.000+0000",
+        "timeSpent": "2h 55m",
+        "timeSpentSeconds": 10500,
+        "id": "5459211",
+        "issueId": "1470146"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "6h",
+    "remainingEstimate": "0m",
+    "timeSpent": "2d 2h 25m",
+    "originalEstimateSeconds": 21600,
+    "remainingEstimateSeconds": 0,
+    "timeSpentSeconds": 66300
+  },
+  "customfield_11250": 6.0,
+  "customfield_10006": null
+}

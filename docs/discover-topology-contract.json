@@ -1,0 +1,76 @@
+{
+  "schema_version": 1,
+  "_comment": "TEST-DISCOVER topology consumption from EPIC-PREP ref, COVERAGE delivery/oracle bindings, and ANALYSE exploration_suppressed. Playbook: .cursor/pipelines/test-discover.md Steps A, B, E, F. Verifier: automation/tools/discover_verify.py --strict-topology. Upstream: docs/epic-prep-topology-contract.json, docs/coverage-topology-contract.json, docs/analysis-topology-contract.json.",
+  "oracle_binding": {
+    "fields": {
+      "oracle_rule_id": "ref.verification_topology.pricing_oracle_rules[].id or coverage.checks[].oracle_rule_id",
+      "oracle_rule": "enum from ref rule row (e.g. first_tier_quote, text_configuration_closest_gte_qty, console_show_prices_first_tier, unresolved)",
+      "volume_control": "from ref rule row (e.g. first_tier, order_default_qty, not_applicable)",
+      "surface": "ref rule surface id (e.g. dxtrade5_watchlist, dxtrade5_derivatives, console_show_prices)",
+      "source": "ref | coverage_check | merged"
+    },
+    "emit_on": "verification_affordances[] when linked primary check has oracle_rule_id and disposition is not tooling_blocked for delivery",
+    "unresolved_rule": {
+      "affordance_status": "blocked",
+      "blocked_reason": "oracle_unresolved",
+      "note": "ANALYSE owns surface_oracle_unresolved gap; discover does not re-emit gap rows"
+    },
+    "summary_norm": "Affordance summary MUST name surface-specific oracle (e.g. first_tier_quote on Derivatives), not generic tier-appropriate language"
+  },
+  "ledger_delivery_disposition": {
+    "tooling_blocked_when": {
+      "analysis_exploration_suppressed_reason": ["delivery_known_fail", "delivery_excluded"],
+      "coverage_delivery_status": ["failed", "excluded"]
+    },
+    "disposition_note": "Cite analysis gap id and/or ref delivery_note_id; honest delivery blocker — not rework churn",
+    "forbidden_disposition": "scope_gap",
+    "skip_step_e_probes": true,
+    "validation_log_step": "phaseE_skipped_delivery_blocked"
+  },
+  "ledger_deferred_disposition": {
+    "analysis_exploration_suppressed_reason": ["deferred_in_check", "deferral_obligation_keyed"],
+    "primary_disposition": "fixture_need_mapped",
+    "forbidden_disposition": "scope_gap",
+    "skip_step_e_probes": true,
+    "validation_log_step_deferral_keyed": "phaseE_skipped_deferral_keyed",
+    "note": "Do not auto-scope_gap on !-only primaries or keyed deferrals; fixture_need_mapped with disposition_note citing obligation_id (639 XT-7911; Round 2 deferral_obligation_keyed from ANALYSE step 3)"
+  },
+  "work_queue": {
+    "phase_a_jq": [
+      "ref.verification_topology.pricing_oracle_rules",
+      "ref.verification_topology.jira_scenario_surfaces",
+      "coverage.emit_layout",
+      "coverage.checks[] | {id, oracle_rule_id, delivery_status, topology_surface_id}",
+      "analysis.exploration_suppressed[]"
+    ],
+    "merge_oracle_rules": "Union ref pricing_oracle_rules with coverage checks[].oracle_rule_id; bind affordances from ref rule row when both present",
+    "skip_probes_for": "check_ids with tooling_blocked delivery disposition or exploration_suppressed blocks_fixture_probe for delivery reasons"
+  },
+  "shell_first_probes": {
+    "when": "coverage.emit_layout == shell_first AND ref.jira_scenario_surfaces non-empty",
+    "batch_by": "topology_surface_id on checks and fixture_needs",
+    "surfaces_example": "Watchlist vs Position Book vs Derivatives via jss-001..jss-004"
+  },
+  "forbidden": [
+    "scope_gap on delivery-blocked primary checks (delivery_known_fail, delivery_excluded, coverage delivery_status failed/excluded)",
+    "inventing oracle_rule text not present on ref pricing_oracle_rules",
+    "CRTQA structural input when crtqa_index_enabled is false",
+    "widening obligation universe beyond primary coverage checks"
+  ],
+  "strict_topology_verifier": {
+    "requires_ref": true,
+    "requires_coverage": true,
+    "analysis_recommended": true,
+    "checks": [
+      "delivery-suppressed primary check_ids → ledger tooling_blocked, not scope_gap",
+      "each primary coverage check with oracle_rule_id (non-delivery-blocked) → linked affordance with matching oracle_binding.oracle_rule_id",
+      "each ref pricing_oracle_rules row with disposition primary_candidate → ≥1 linked affordance with oracle_binding OR primary check tooling_blocked for delivery",
+      "no oracle_binding required when ref/coverage have no oracle topology (639 regression)",
+      "legacy discover without topology_loaded: strict mode no-op when ref has empty delivery_notes and pricing_oracle_rules"
+    ],
+    "validation_log_steps": ["phaseA-topology", "phaseB-oracle", "phaseE-oracle", "phaseE_skipped_delivery_blocked"]
+  },
+  "downstream_handoff": {
+    "coverage_reinforce": "verification_affordances slice + topology_surface_id split for shell_first — see .cursor/pipelines/coverage-reinforce.md (5/8); no reinforce implementation in TEST-DISCOVER"
+  }
+}

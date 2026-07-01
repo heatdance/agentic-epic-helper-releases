@@ -14,10 +14,11 @@ Copy into chat when running **`TEST-DISCOVER: <KEY>`**. Doctrine: [docs/harness-
 - [ ] `{EpicDir}<KEY>-ref.json` and `{EpicDir}<KEY>-coverage.json` exist
 - [ ] Optional: `-analysis.json` (degraded OK)
 
-## Step 0 — Cold gates (hard stop)
+## Step 0 — Cold gates (legacy only — skip for linker)
 
-- [ ] Operator prep (recommended): tunnel tab → **`/crtqa-console start`** → **`/crtqa-env`**
-- [ ] Run `python automation/tools/crtqa_env_probe.py --coverage {EpicDir}<KEY>-coverage.json` (both gates always)
+**draft_truth_v3 linker:** no Phase 0. Do not run env probe or browser. See [`.cursor/pipelines/test-discover.md`](../pipelines/test-discover.md).
+
+Legacy exploratory discover (not in production chain):
 - [ ] Apply tooling intent rubric from coverage; set **`sources.discovery_mode`** and **`sources.crtqa_index_enabled`**
 - [ ] If postgres **required** and tunnel gate pass: MCP **`list_tables`** on **`postgres-ctqa`**
 - [ ] If console **required**: `Get-CrtqaConsoleStatus.ps1` exit **0** (agent-run; no UI confirmation)

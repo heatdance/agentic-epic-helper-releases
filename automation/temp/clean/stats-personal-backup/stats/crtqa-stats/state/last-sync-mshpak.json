@@ -1,0 +1,1616 @@
+{
+  "schema_version": 5,
+  "jira_user": "mshpak",
+  "included_issue_keys": [
+    "BROQA-18411",
+    "BROQA-18610",
+    "CRTQA-10199",
+    "CRTQA-10201",
+    "CRTQA-1045",
+    "CRTQA-1059",
+    "CRTQA-1099",
+    "CRTQA-1112",
+    "CRTQA-1136",
+    "CRTQA-1141",
+    "CRTQA-1148",
+    "CRTQA-1170",
+    "CRTQA-1171",
+    "CRTQA-1197",
+    "CRTQA-1198",
+    "CRTQA-1199",
+    "CRTQA-1206",
+    "CRTQA-1234",
+    "CRTQA-1257",
+    "CRTQA-1264",
+    "CRTQA-1267",
+    "CRTQA-1269",
+    "CRTQA-1272",
+    "CRTQA-1288",
+    "CRTQA-1295",
+    "CRTQA-1315",
+    "CRTQA-1331",
+    "CRTQA-1346",
+    "CRTQA-1374",
+    "CRTQA-1390",
+    "CRTQA-1412",
+    "CRTQA-1415",
+    "CRTQA-1425",
+    "CRTQA-1426",
+    "CRTQA-1433",
+    "CRTQA-1439",
+    "CRTQA-1450",
+    "CRTQA-1471",
+    "CRTQA-1477",
+    "CRTQA-1505",
+    "CRTQA-1507",
+    "CRTQA-1514",
+    "CRTQA-1532",
+    "CRTQA-1533",
+    "CRTQA-1545",
+    "CRTQA-1548",
+    "CRTQA-1567",
+    "CRTQA-1578",
+    "CRTQA-1597",
+    "CRTQA-1606",
+    "CRTQA-1615",
+    "CRTQA-1629",
+    "CRTQA-1636",
+    "CRTQA-1641",
+    "CRTQA-1646",
+    "CRTQA-1976",
+    "CRTQA-1985",
+    "CRTQA-1989",
+    "CRTQA-9963"
+  ],
+  "rows": [
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-1",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 21.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 20.549999999999997,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-110",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 14.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 8.8,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "BROQA-18411",
+      "epic_link": "CRT-129",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 16.0,
+      "estimate_source": "draft",
+      "hours_logged": 9.38,
+      "others_logged_hours": 0.0,
+      "summary": "[Release notes] [CRT-129] Risk management EOD report - XT",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-131",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 18.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 5.95,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "BROQA-18610",
+      "epic_link": "CRT-147",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 18.0,
+      "estimate_source": "draft",
+      "hours_logged": 18.73,
+      "others_logged_hours": 0.0,
+      "summary": "[Release notes] [CRT-147] Process raw parameter files from IG - Swap Rates Update - XT",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1269",
+      "epic_link": "CRT-171",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 4.0,
+      "estimate_source": "draft",
+      "hours_logged": 6.55,
+      "others_logged_hours": 0.0,
+      "summary": "[Release notes] [CRT-171] [PenTest] Sensitive Information Sent via HTTTP GET",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-18",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 24.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 28.15,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1374",
+      "epic_link": "CRT-183",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 30.0,
+      "estimate_source": "draft",
+      "hours_logged": 16.93,
+      "others_logged_hours": 0.0,
+      "summary": "[Release notes] [CRT-183] [CT ETD] Portfolio metrics",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-19",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 24.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 20.1,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1199",
+      "epic_link": "CRT-236",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 30.0,
+      "estimate_source": "draft",
+      "hours_logged": 30.25,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-236] CFDs Shares - updating parameters (Horn-365 High)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1507",
+      "epic_link": "CRT-264",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "api",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 20.0,
+      "estimate_source": "draft",
+      "hours_logged": 22.8,
+      "others_logged_hours": 5.98,
+      "summary": "[Epic Testing] [CRT-264] Consider Last Trade Time on Last Trade Date of options ",
+      "anomalies": [
+        "multi_person_task"
+      ]
+    },
+    {
+      "issue": "CRTQA-1545",
+      "epic_link": "CRT-286",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 6.65,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-286] CPS commission per underlying (FUTURE and OPTION commissions) - Recheck in phase 2.5",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1636",
+      "epic_link": "CRT-286",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 8.17,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-286] CPS commission per underlying (FUTURE and OPTION commissions)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1433",
+      "epic_link": "CRT-287",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 16.0,
+      "estimate_source": "draft",
+      "hours_logged": 13.97,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-287] Collateral Profile",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1646",
+      "epic_link": "CRT-290",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 4.47,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-290]  Mapping algorithm update for Hong-Kong CFD_STOCK",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-30",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 13.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 19.439999999999998,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1450",
+      "epic_link": "CRT-306",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 9.13,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-306] Fix metrics when there is a short equity position",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1272",
+      "epic_link": "CRT-308",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 0.33,
+      "estimate_source": "original",
+      "hours_logged": 7.1,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-308] Add Slide-In Coefficient to Position Book in dxTrade",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1045",
+      "epic_link": "CRT-320",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "default_8h",
+      "hours_logged": 0.0,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-320] Fix price for spreads in all transaction and trade widgets",
+      "anomalies": [
+        "estimate_defaulted_1sp"
+      ]
+    },
+    {
+      "issue": "CRTQA-1267",
+      "epic_link": "CRT-320",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 16.0,
+      "estimate_source": "draft",
+      "hours_logged": 7.0,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-320] Fix price for spreads in all transaction and trade widgets",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1532",
+      "epic_link": "CRT-340",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 16.0,
+      "estimate_source": "draft",
+      "hours_logged": 5.43,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-340] Value Position CCY / %change (HORN-511)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1315",
+      "epic_link": "CRT-341",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 4.17,
+      "estimate_source": "original",
+      "hours_logged": 21.87,
+      "others_logged_hours": 51.0,
+      "summary": "[Epic Testing] [CRT-341] Liquidation proposal (HORN-502) - Mark Price update based on trading hours",
+      "anomalies": [
+        "multi_person_task",
+        "worklog_pagination_needed"
+      ]
+    },
+    {
+      "issue": "CRTQA-1412",
+      "epic_link": "CRT-350",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 40.0,
+      "estimate_source": "draft",
+      "hours_logged": 41.02,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-350] Liquidation proposal (HORN-502) - Liquidation improvements",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1171",
+      "epic_link": "CRT-373",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 18.0,
+      "estimate_source": "draft",
+      "hours_logged": 9.93,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-373] Price snapshot and backup price update schedules should depend on instrument type",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1234",
+      "epic_link": "CRT-380",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 32.0,
+      "estimate_source": "draft",
+      "hours_logged": 23.7,
+      "others_logged_hours": 0.0,
+      "summary": "[Epic Testing] [CRT-380] Liquidation proposal - Fix remaining issues (instruments without close price + summary gap)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1629",
+      "epic_link": "CRT-380",
+      "lane": "epic_testing",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 0.0,
+      "others_logged_hours": 13.58,
+      "summary": "[Epic Testing] [CRT-380] Liquidation proposal - Fix remaining issues (instruments without close price + summary gap)",
+      "anomalies": [
+        "multi_person_task"
+      ]
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-41",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 5.17,
+      "estimate_source": "aggregated",
+      "hours_logged": 3.23,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1099",
+      "epic_link": "CRT-46",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "api",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 9.25,
+      "others_logged_hours": 0.0,
+      "summary": "[Release notes] [CRT-46] FIX trading integration with IG (OTC) - dxCore",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-49",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 1.25,
+      "estimate_source": "aggregated",
+      "hours_logged": 2.8,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1989",
+      "epic_link": "CRT-530",
+      "lane": "epic_validation",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 24.0,
+      "estimate_source": "draft",
+      "hours_logged": 36.47,
+      "others_logged_hours": 17.0,
+      "summary": "[Corner][Epic Validation][CRT-530] CA management between AF and DX with quantity impact (HORN-372) - Simplified version",
+      "anomalies": [
+        "multi_person_task",
+        "worklog_pagination_needed"
+      ]
+    },
+    {
+      "issue": "CRTQA-1976",
+      "epic_link": "CRT-544",
+      "lane": "epic_validation",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 3.0,
+      "estimate_source": "draft",
+      "hours_logged": 2.1,
+      "others_logged_hours": 0.0,
+      "summary": "[Corner][Epic Validation][CRT-544] Console command to move positions to new instrument symbols (HORN-747)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-1985",
+      "epic_link": "CRT-563",
+      "lane": "epic_validation",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 4.0,
+      "estimate_source": "draft",
+      "hours_logged": 0.97,
+      "others_logged_hours": 0.0,
+      "summary": "[Corner][Epic Validation][CRT-563] Add filters by Instrument fields in Order Book widget in Web Broker (HORN-1092)",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-10199",
+      "epic_link": "CRT-672",
+      "lane": "tcd",
+      "role": "corpus",
+      "category_id": "api",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 16.0,
+      "estimate_source": "draft",
+      "hours_logged": 10.28,
+      "others_logged_hours": 0.0,
+      "summary": "[Corner][Test Case Development] CRT-672: Add Taxes, Commissions and External Fees to CA API",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-10201",
+      "epic_link": "CRT-672",
+      "lane": "epic_validation",
+      "role": "corpus",
+      "category_id": "api",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 8.0,
+      "estimate_source": "draft",
+      "hours_logged": 10.63,
+      "others_logged_hours": 0.0,
+      "summary": "[Corner][Epic Validation] CRT-672: Add Taxes, Commissions and External Fees to CA API",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-76",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "small_tcd",
+      "draft_estimate_hours": 15.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 7.9799999999999995,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-79",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 19.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 20.35,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "Multiple",
+      "epic_link": "CRT-91",
+      "lane": "release_notes",
+      "role": "corpus",
+      "category_id": "be",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 18.0,
+      "estimate_source": "aggregated",
+      "hours_logged": 21.75,
+      "others_logged_hours": 0.0,
+      "summary": "Aggregated release_notes",
+      "anomalies": []
+    },
+    {
+      "issue": "CRTQA-9963",
+      "epic_link": "CRT-594",
+      "lane": "tcd",
+      "role": "comparison",
+      "category_id": "fe",
+      "size_id": "big_tcd",
+      "draft_estimate_hours": 24.0,
+      "estimate_source": "draft",
+      "hours_logged": 24.28,
+      "others_logged_hours": 0.0,
+      "summary": "[Corner][Test Case Development] CRT-594: FX_SPOT Pricing (groups and mapping to dxFeed)",
+      "anomalies": []
+    }
+  ],
+  "corpus_epic_keys": [
+    "CRT-1",
+    "CRT-110",
+    "CRT-129",
+    "CRT-131",
+    "CRT-147",
+    "CRT-171",
+    "CRT-18",
+    "CRT-183",
+    "CRT-19",
+    "CRT-236",
+    "CRT-264",
+    "CRT-286",
+    "CRT-287",
+    "CRT-290",
+    "CRT-30",
+    "CRT-306",
+    "CRT-308",
+    "CRT-320",
+    "CRT-340",
+    "CRT-341",
+    "CRT-350",
+    "CRT-373",
+    "CRT-380",
+    "CRT-41",
+    "CRT-46",
+    "CRT-49",
+    "CRT-530",
+    "CRT-544",
+    "CRT-563",
+    "CRT-672",
+    "CRT-76",
+    "CRT-79",
+    "CRT-91"
+  ],
+  "epic_classifications": [
+    {
+      "epic_key": "CRT-1",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: CFD Margining.",
+      "evidence": [
+        "epic_meta:CRT-1"
+      ]
+    },
+    {
+      "epic_key": "CRT-110",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: [CRT] Undefined margin rates.",
+      "evidence": [
+        "epic_meta:CRT-110"
+      ]
+    },
+    {
+      "epic_key": "CRT-129",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Risk management EOD report.",
+      "evidence": [
+        "epic_meta:CRT-129"
+      ]
+    },
+    {
+      "epic_key": "CRT-131",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Fix Liquidation order statuses.",
+      "evidence": [
+        "epic_meta:CRT-131"
+      ]
+    },
+    {
+      "epic_key": "CRT-147",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Process raw parameter files from IG - Swap Rates Update.",
+      "evidence": [
+        "epic_meta:CRT-147"
+      ]
+    },
+    {
+      "epic_key": "CRT-171",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [PenTest] Sensitive Information Sent via HTTTP GET.",
+      "evidence": [
+        "epic_meta:CRT-171"
+      ]
+    },
+    {
+      "epic_key": "CRT-18",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Margin calls and liquidation.",
+      "evidence": [
+        "epic_meta:CRT-18"
+      ]
+    },
+    {
+      "epic_key": "CRT-183",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: [CT ETD] Portfolio metrics.",
+      "evidence": [
+        "epic_meta:CRT-183"
+      ]
+    },
+    {
+      "epic_key": "CRT-19",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Financing.",
+      "evidence": [
+        "epic_meta:CRT-19"
+      ]
+    },
+    {
+      "epic_key": "CRT-236",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: CFDs Shares - updating parameters (Horn-365 High).",
+      "evidence": [
+        "epic_meta:CRT-236"
+      ]
+    },
+    {
+      "epic_key": "CRT-264",
+      "category_id": "api",
+      "category_label": "API / Integration",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "dxFeed LAST_TRADE_TIME in IPF and platform trading-end logic (external market data).",
+      "evidence": [
+        "CRT-871",
+        "MDD-8089"
+      ]
+    },
+    {
+      "epic_key": "CRT-286",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "CPS commission rules per underlying for FUTURE/OPTION.",
+      "evidence": [
+        "summary:CPS commission"
+      ]
+    },
+    {
+      "epic_key": "CRT-287",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Collateral Profile.",
+      "evidence": [
+        "epic_meta:CRT-287"
+      ]
+    },
+    {
+      "epic_key": "CRT-290",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "DXTF charting update using Candle.bid when instrument flagged (CRT-983); client chart UI.",
+      "evidence": [
+        "epic_meta:CRT-290"
+      ]
+    },
+    {
+      "epic_key": "CRT-30",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Exposure limits by instrument.",
+      "evidence": [
+        "epic_meta:CRT-30"
+      ]
+    },
+    {
+      "epic_key": "CRT-306",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Fix metrics when there is a short equity position.",
+      "evidence": [
+        "epic_meta:CRT-306"
+      ]
+    },
+    {
+      "epic_key": "CRT-308",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Add Slide-In Coefficient to Position Book in dxTrade.",
+      "evidence": [
+        "epic_meta:CRT-308"
+      ]
+    },
+    {
+      "epic_key": "CRT-320",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Fix price for spreads in all transaction and trade widgets.",
+      "evidence": [
+        "epic_meta:CRT-320"
+      ]
+    },
+    {
+      "epic_key": "CRT-340",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Value Position CCY / %change (HORN-511).",
+      "evidence": [
+        "epic_meta:CRT-340"
+      ]
+    },
+    {
+      "epic_key": "CRT-341",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal (HORN-502) - Mark Price update based on trading hours.",
+      "evidence": [
+        "epic_meta:CRT-341"
+      ]
+    },
+    {
+      "epic_key": "CRT-350",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal - Liquidation improvements.",
+      "evidence": [
+        "epic_meta:CRT-350"
+      ]
+    },
+    {
+      "epic_key": "CRT-373",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Price snapshot and backup price update schedules should depend on instrument typ.",
+      "evidence": [
+        "epic_meta:CRT-373"
+      ]
+    },
+    {
+      "epic_key": "CRT-380",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal - Fix remaining issues (instruments without close price + s.",
+      "evidence": [
+        "epic_meta:CRT-380"
+      ]
+    },
+    {
+      "epic_key": "CRT-41",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Withdrawal balance metric and liquidation-domain limit calculation (CRT-069, CRT-091).",
+      "evidence": [
+        "CRT-069",
+        "CRT-091"
+      ]
+    },
+    {
+      "epic_key": "CRT-46",
+      "category_id": "api",
+      "category_label": "API / Integration",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "FIX trading integration with IG OTC (CRT-096).",
+      "evidence": [
+        "CRT-096"
+      ]
+    },
+    {
+      "epic_key": "CRT-49",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Instrument master field for IG instrument ID.",
+      "evidence": [
+        "summary:IG instrument ID"
+      ]
+    },
+    {
+      "epic_key": "CRT-530",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): CA management between AF and DX with quantity impact (HORN-372) - Simplified ver.",
+      "evidence": [
+        "epic_meta:CRT-530"
+      ]
+    },
+    {
+      "epic_key": "CRT-544",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Console command to move positions to new instrument symbols (HORN-747).",
+      "evidence": [
+        "epic_meta:CRT-544"
+      ]
+    },
+    {
+      "epic_key": "CRT-563",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Add filters by Instrument fields in Order Book widget in Web Broker (HORN-1092).",
+      "evidence": [
+        "epic_meta:CRT-563"
+      ]
+    },
+    {
+      "epic_key": "CRT-672",
+      "category_id": "api",
+      "category_label": "API / Integration",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Extend Apply CA Transactions API with tax, commission, and fee fields (CRT-1918–1920).",
+      "evidence": [
+        "CRT-1918",
+        "CRT-1250"
+      ]
+    },
+    {
+      "epic_key": "CRT-76",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Taxes support in UI.",
+      "evidence": [
+        "epic_meta:CRT-76"
+      ]
+    },
+    {
+      "epic_key": "CRT-79",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Align financing with IG rules.",
+      "evidence": [
+        "epic_meta:CRT-79"
+      ]
+    },
+    {
+      "epic_key": "CRT-91",
+      "category_id": "be",
+      "category_label": "BE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Portfolio statement.",
+      "evidence": [
+        "epic_meta:CRT-91"
+      ]
+    },
+    {
+      "epic_key": "CRT-594",
+      "category_id": "fe",
+      "category_label": "FE Epic",
+      "category_confidence": "high",
+      "hint_score": 0,
+      "classification_source": "manual_review",
+      "rationale": "FX_SPOT pricing groups and mapping UI/configuration for client pricing (AI-assisted epic).",
+      "evidence": [
+        "epic_meta:CRT-594"
+      ]
+    }
+  ],
+  "report_meta": {
+    "tests_scanned": 1059,
+    "last_mode": "initial_assessment",
+    "last_sync_utc": "2026-06-12T10:45:59Z",
+    "epics_discovered": 62,
+    "epics_gated": 33,
+    "epics_dropped_zero_logged": 29,
+    "epics_excluded_operator": [
+      "CRT-594"
+    ],
+    "qa_tasks_in_scope": 107
+  },
+  "attestation_by_epic": {
+    "CRT-594": {
+      "ai_assisted": true,
+      "reason": "operator_excluded_initial_assessment"
+    }
+  },
+  "contract_schema_version": 5,
+  "epic_meta": {
+    "CRT-1": {
+      "summary": "CFD Margining",
+      "labels": [],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Configuration requirements: [https://confluence.in.devexperts.com/requirements/CT/CRT-005]\r\n # Margin tiers storage and loading: [https://confluence.in.devexperts.com/requirements/CT/CRT-003]{color:#de350b} {color}\r\n # {color:#172b4d}Margin calculation for accounts level only (portfolio level will be done in separate ticket): [https://confluence.in.devexperts.com/requirements/CT/CRT-004] {color}",
+      "fetched_utc": "2026-06-12T10:22:58Z"
+    },
+    "CRT-100": {
+      "summary": "Fix inconsistencies in trade ids",
+      "labels": [],
+      "components": [],
+      "description": "*Business Context*\r\n\r\nThe request to add taxes as trades' legs via correction, revealed a number of inconsistencies in the way trading transactions are identified throughout the system, namely:\r\n * EOD report and Account transactions widgets in DXTrade and WebBroker client's area use internal transaction id.\r\n * Transactions API, FIX drop-copy, and multi-account Transactions widget in WebBroker use external transaction id.\r\n * Trades widget in DXTrade show{color:#172b4d}s the internal transaction id of the execution, w{color}hich changes after correction. Shall be replaced with the internal id of the execution chain.\r\n\r\n_Note to analysts: All ids listed above have the <session code>:<action code> format. Please be more specific than that and indicate whether the id is (1) of the internal or external order/execution and (2) of a particular execution/order or of an execution/order chain. For orders, whenever we display the current/latest state of the order, we shall use the order chain id that doesn't change when the order changes states; for the detailed history of the order execution (aka order history), each change of the state (= record in the history) is identified by an order id; in both cases, we shall use ids of the internal order._\r\n\r\nWe have two problems to fix immediately for Corner:\r\n\r\n(1) In the Corner configuration, we shall use the same trade id on all steps of the trade flow between DX and Corner: FIX drop copy, EOD Trades report, Transactions API.\r\n\r\n(2) The user of the WebBroker shall be able to identify a trade by the same id which is displayed in the client's UIs (internal id).\r\n\r\nAs the most safe and easy solution, the following shall be done:\r\n # Introduce external transaction id as an additional field to EOD Trades report and let CB know that the new field shall be used to refer to the trade in the Transaction API in case of a bust or correct.\r\n # Add an internal transaction id to the Transactions widget in WebBroker to allow operators cross-ref",
+      "fetched_utc": "2026-06-12T10:22:58Z"
+    },
+    "CRT-101": {
+      "summary": "Fallback for midpoint mark price",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # Introduce one place with mark price (midpoint) calculated for non-equity instruments as [https://confluence.in.devexperts.com/requirements/CT/CRT-323] , having fallback same as a current mark price\r\n # Introduced mark price (midpoint) having fallback should be used in:\r\n ## margining [https://confluence.in.devexperts.com/requirements/CT/CRT-004] \r\n ## exposure [https://confluence.in.devexperts.com/requirements/CT/CRT-075] ",
+      "fetched_utc": "2026-06-12T10:22:58Z"
+    },
+    "CRT-109": {
+      "summary": "Support Tax leg for cash transfers",
+      "labels": [
+        "F&F_CR"
+      ],
+      "components": [],
+      "description": "h2. Requirements\r\n # Allow for a cash transfer with a Tax leg to be CREATEed via Transactions API: [https://confluence.in.devexperts.com/requirements/CT/CRT-384]\r\n # Make sure this Tax is displayed in \r\n ** Transactions widget in DXTrade [https://confluence.in.devexperts.com/requirements/CT/CRT-218] \r\n ** Transactions + Transaction History widget in WebBroker [https://confluence.in.devexperts.com/requirements/CT/CRT-216] , [https://confluence.in.devexperts.com/requirements/CT/CRT-214] \r\n ** Account Transactions widget in WebBroker Client Area\r\n # Add Tax value to the main transfer \"quantity\" in EOD Transfer report: [https://confluence.in.devexperts.com/requirements/CT/CRT-388] \r\n # Transaction UPDATE currently deletes all transaction fields not defined by the UPDATE request. We make sure the extension where we keep a conversion rate remains available after UPDATE.\r\n\r\nh2. Scenarios\r\n # Create cash transactions via transaction API with tax leg. Following activity types should be used: Dividend, Adjustment, Commission \r\n!image-2023-11-17-21-04-22-396.png!\r\n # Check that tax is displayed in a separate column in transaction widget in dxTrade for all transactions created above\r\n # Check that tax is displayed in a separate column in transaction widget + transaction history in WB for all transactions created above\r\n # Check that tax is displayed in a separate column in Cash adjustmnents section in Account Statement for all transactions created above\r\n # Check that tax is propagated in EOD Transfer report for all transactions created above\r\n # Delete cash transactions create above in 2 variants: specifing and non-specifing tax leg - the result should be the same - transaction is deleted with all the legs.\r\n # Perform on the platform trade with commission and conversion. Update this trade via transaction API non-specifing comission and changing qty (or price, or any other trade field). As a result comission should be removed, conversion rate should remain",
+      "fetched_utc": "2026-06-12T10:22:58Z"
+    },
+    "CRT-110": {
+      "summary": "[CRT] Undefined margin rates",
+      "labels": [],
+      "components": [],
+      "description": "*To Do:*\r\n||Requirements||Yogi||\r\n|\"CFD Margin Rates Check\" job|[https://confluence.in.devexperts.com/requirements/CT/CRT-374] |\r\n|update allowedJobs parameter in Live environment|[https://confluence.in.devexperts.com/requirements/CT/CRT-375] |\r\n|update allowedJobs parameter in Demo environment|[https://confluence.in.devexperts.com/requirements/CT/CRT-376] |",
+      "fetched_utc": "2026-06-12T10:22:59Z"
+    },
+    "CRT-12": {
+      "summary": "Portfolio metrics",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n\r\nCalculate metrics according to the [https://confluence.in.devexperts.com/requirements/CT/CRT-035] :\r\n * Metrics on position level should be calculated according to the instrument type\r\n * Metrics on account level should be calculated according to [https://confluence.in.devexperts.com/requirements/CT/CRT-023] \r\n ** Metrics calculated on a segregated account are similar to the metrics on portfolio level but will be used only in next phase, so could be skipped for MVP\r\n * Metrics on portfolio level should be calculated according to [https://confluence.in.devexperts.com/requirements/CT/CRT-018] \r\n * Prospective portfolio evaluation: [https://confluence.in.devexperts.com/requirements/CT/CRT-016] \r\n * Pre-trade order validations: [https://confluence.in.devexperts.com/requirements/CT/CRT-034] (same reject reason as in product)\r\n * Introduce haircut field on equity instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-047] ",
+      "fetched_utc": "2026-06-12T10:22:59Z"
+    },
+    "CRT-129": {
+      "summary": "Risk management EOD report",
+      "labels": [
+        "GoLive_CR"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # New metrics should be introduced available for calculation on account and portfolio level:\r\n\r\n ## \r\n ### Net Free Equity: [https://confluence.in.devexperts.com/requirements/CT/CRT-408] \r\n ### Cost to Close: [https://confluence.in.devexperts.com/requirements/CT/CRT-420] \r\n # One more file should be generated during daily EOD report for portfolio and segregated account metrics: [https://confluence.in.devexperts.com/requirements/CT/CRT-406] \r\n # Example of new file: [https://confluence.in.devexperts.com/requirements/CT/CRT-410] ",
+      "fetched_utc": "2026-06-12T10:22:59Z"
+    },
+    "CRT-131": {
+      "summary": "Fix Liquidation order statuses",
+      "labels": [],
+      "components": [],
+      "description": "h2. Requirements\r\n\r\nEpic to fix liquidation statuses in Web Broker according to Corner functionality:\r\n # Distinguish automatic and manual liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-412] \r\n # Show only liquidation orders that are available in Corner: Manual, Margin Utilization\r\n\r\nShow new message for manual liquidation in dxTrade: [https://confluence.in.devexperts.com/requirements/CT/CRT-411] \r\nh2. Scenarios\r\n # Make an automatic Liquidation happen on account (increase margin utilization) -> See Order book in Web Broker, column \"Liquidation\" should be filled with \"Margin Utilization\" for liquidation orders\r\n # Execute manual liquidation on account via Account List in WB\r\n ## -> see Notification in dxTrade according to [https://confluence.in.devexperts.com/requirements/CT/CRT-411] \r\n ## -> See Order book in Web Broker, column \"Liquidation\" should be filled with \"Manual\" for liquidation orders\r\n # Execute usual order from account -> See Order book in Web Broker, column \"Liquidation\" should be not be filled for this order\r\n # Check filter for column \"Liquidation\" -> it should contain only 2 values: \"Manual\" and \"Margin Utilization\", these values should be according to the new associated data setting webBrokerSupportedLiquidationRules@PreciseCalibrationDomain\r\n # optionally: check that product works the same way as before: all the previous values according to [https://confluence.in.devexperts.com/requirements/DR/WEBBROKER-120] should be in new setting webBrokerSupportedLiquidationRules@PreciseCalibrationDomain and be shown in WB",
+      "fetched_utc": "2026-06-12T10:22:59Z"
+    },
+    "CRT-133": {
+      "summary": "Enable separate Fee column for trades",
+      "labels": [
+        "GoLive_CR"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Enable a separate fee value in the Transactions API for scenarios update/delete Trade: [https://confluence.in.devexperts.com/requirements/CT/CRT-418]  (applicable for product transactions)\r\n # Add the fee column to the trades list in the account statement report: [https://confluence.in.devexperts.com/requirements/CT/CRT-419] \r\n ## check that all values that were calculated in Account Statement considering commissions - also considers fees (Cash Effect excludes, Total Cash Effect includes)\r\n # Check that all account/portfolio metrics considers fees as well as commissions (Reserved Cash, prospective metrics)\r\n\r\nFor QA:\r\n # make sure it is displayed as a column in transactions widgets in DXTrade Web and WebBroker\r\n # make sure the fee is propagated to the Trades list in the EOD report\r\n\r\nh2. Scenarios\r\n # Via transaction API:\r\n\r\n ## Pre-condition - trade without fee. Send transaction Update trade with Fee leg - check that trade updated in system with Fee leg\r\n ## Pre-condition - trade with fee. Send transaction Update trade with Fee leg - new value - check that trade updated in system with Fee leg\r\n ## Pre-condition - trade with fee. Send transaction Delete trade without legs - check that in system trade is deleted with all legs \r\n ## Pre-condition - trade with fee and commission. Send transaction Delete trade with fee/commission leg - check that in system trade is deleted with all legs \r\n # Upload trade with fee via API:\r\n ## Check that trade is shown in Transaction widget in dxTrade, Fee column is filled according what recieved in API\r\n ## Check that trade is shown in Transactions and Transactions history widgets in Webbroker, Fee column is filled according what recieved in API",
+      "fetched_utc": "2026-06-12T10:22:59Z"
+    },
+    "CRT-146": {
+      "summary": "Process raw parameter files from IG - Interest Rates Update",
+      "labels": [
+        "GoLive_CR"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Update interest rate job ([https://confluence.in.devexperts.com/requirements/CT/CRT-263] ) to be automatic and accept one more file, from IG: [https://confluence.in.devexperts.com/requirements/CT/CRT-480] \r\n # Update job log: [https://confluence.in.devexperts.com/requirements/CT/CRT-478] \r\n # Introduce admin fee configuration (simple 2 parameters, without UI) - for CFD stock and CFD indices: [https://confluence.in.devexperts.com/requirements/CT/CRT-476] \r\n # Update calculations for interest charges to include admin fee: \r\n ## long: [https://confluence.in.devexperts.com/requirements/CT/CRT-474] \r\n ## short: [https://confluence.in.devexperts.com/requirements/CT/CRT-475] \r\n # Update calculation of the value that for unmarked quantity used in EOD report: [https://confluence.in.devexperts.com/requirements/CT/CRT-479] \r\n # Update day multipliers and make them enabled for editing in UI: [https://confluence.in.devexperts.com/requirements/CT/CRT-463] \r\n\r\nh2. Scenarios:\r\n # Upload 2 files on sftp: Master Finance.csv, Interest_rates.csv:\r\n ## Master Finance.csv file according to the example in requirements + add some currency that doesn't exist on the platform according to the mapping.\r\n ## Interest_rates.csv file contains:\r\n ### some currencies (A, B, C) that are in master file.\r\n ### some currencies (D, E, F) that are not in master file. \r\n # At a configured time Interest Rates job should start and read files from sftp\r\n # Files processed in the order (1) Master Finance.csv, (2) Interest_rates.csv (A, B, C currencies are overridden with values from  Interest_rates.csv).\r\n # All instruments from both files found on the platform and having correct fields are updated with interest rates for the related date\r\n # The log contains information about all files according to the requirements: total updated instruments, number of instruments updated for each file, and errors found in each file.\r\n # Open Webbroker and run the job manually.\r\n # Upload Master Finance",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-147": {
+      "summary": "Process raw parameter files from IG - Swap Rates Update",
+      "labels": [
+        "GoLive_CR"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Update Swap Rate update job ([https://confluence.in.devexperts.com/requirements/CT/CRT-258] ) to be automatic and accept one more file, from IG: [https://confluence.in.devexperts.com/requirements/CT/CRT-461] \r\n # Introduce Long and Short Markups in the model and save values calculated from the file: [https://confluence.in.devexperts.com/requirements/CT/CRT-462] \r\n # Update job log: [https://confluence.in.devexperts.com/requirements/CT/CRT-471] \r\n # It should be possible to load manually IG file as well: [https://confluence.in.devexperts.com/requirements/CT/CRT-259] \r\n # Make roll days configurable in UI (as it was in first requirements): [https://confluence.in.devexperts.com/requirements/CT/CRT-464] \r\n # Introduce coefficient for CB markup: [https://confluence.in.devexperts.com/requirements/CT/CRT-460] \r\n # Update calculations to include saved markup multiplied by coefficient:\r\n ## long: [https://confluence.in.devexperts.com/requirements/CT/CRT-458]\r\n ## short: [https://confluence.in.devexperts.com/requirements/CT/CRT-459] \r\n # Copy of Swap Rates should be disabled in Go-Live: [https://confluence.in.devexperts.com/requirements/CT/CRT-424] , but stay for F&F\r\n\r\n \r\n\r\nValidate functionality with examples from file attached in [https://confluence.in.devexperts.com/requirements/CT/CRT-461] and example for financing: [https://confluence.in.devexperts.com/requirements/CT/CRT-043] \r\n\r\n+Informative requirements:+\r\n * Assumptions for the process: [https://confluence.in.devexperts.com/requirements/CT/CRT-465] \r\n * Copy of swap rates: [https://confluence.in.devexperts.com/requirements/CT/CRT-260] \r\n * Swap rates routine: [https://confluence.in.devexperts.com/requirements/CT/CRT-473] (please test this process e2e)\r\n\r\nh2. Scenarios:\r\n # Upload 2 files on sftp: DDMMYYYY_IG Funding Charges & Index Dividends.csv, swap_rates.csv, where DDMMYYYY is a current day.\r\n ## DDMMYYYY_IG Funding Charges & Index Dividends.csv file according to the example in requirements ",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-171": {
+      "summary": "[PenTest] Sensitive Information Sent via HTTTP GET",
+      "labels": [
+        "ct_ph2"
+      ],
+      "components": [],
+      "description": "see linked BL for description: CRTBL-394\r\n\r\nNew token login flows should be created here:\r\n1. GET request with path \"api/auth/login/token\" with header \"Authorization: Bearer <token>\". Should be used in adaptive app.\r\n2. POST request with path \"api/auth/login/token\", which should set session cookie. Should be used in regular web app.\r\n3. POST request with path api/auth/login/form-with-token. Should be used from HTML form with parameter \"token\"\r\n4. GET request with path \"api/auth/login/token\" and token parameter. Should be used only in testing. It should be disabled by default.\r\n\r\nOld flows with root path \"/\" and path \"api/auth/login/external\" should be removed.\r\n\r\nJSON format for POST request:\r\n{code:java}\r\n{\r\n\"username\": \"testuser\",\r\n\"token\": \"XXX\"\r\n}\r\n{code}\r\n\r\n\r\nHTML Form example:\r\n{code:java}\r\n<html>\r\n  <body>\r\n    <form target=\"_blank\" action=\"https://broqa.prosp.devexperts.com/api/auth/login/form-with-token\" method=\"POST\">\r\n\t  <input type=\"text\" name=\"token\" value=\"\" />\r\n      <input type=\"submit\" value=\"Submit request\" />\r\n    </form>\r\n  </body>\r\n</html>\r\n{code}\r\n",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-18": {
+      "summary": "Margin calls and liquidation",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # Introduce configuration for liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-040] \r\n # Introduce {_}InitialToMaintenaceRatio c{_}oefficient: [https://confluence.in.devexperts.com/requirements/CT/CRT-041] (used to calculate Maintenance margin as well)\r\n # Monitoring: [https://confluence.in.devexperts.com/requirements/CT/CRT-036]\r\n # Margin call alerts: [https://confluence.in.devexperts.com/requirements/CT/CRT-037] (Message text - TBD)\r\n # Liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-038]\r\n # Manual initiation/stop of liquidation from WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-039] ",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-183": {
+      "summary": "[CT ETD] Portfolio metrics",
+      "labels": [
+        "ct_ph2"
+      ],
+      "components": [],
+      "description": "h2. Requirements\r\n # Add new OPTION and FUTURE to the related cash flow setting: [https://confluence.in.devexperts.com/requirements/CT/CRT-119] \r\n\r\n*Margin:*\r\n # Covered Call should have 0 margin: [https://confluence.in.devexperts.com/requirements/CT/CRT-505] \r\n # Margin for Stock/ETF should be considered as 0 for calculations: [https://confluence.in.devexperts.com/requirements/CT/CRT-587] \r\n # Disregard Protective Put: [https://confluence.in.devexperts.com/requirements/CT/CRT-556] \r\n # Include CFD, Futures to the list of strategies available for dissection: ([https://confluence.in.devexperts.com/requirements/CT/CRT-510])\r\n ## Futures:[https://confluence.in.devexperts.com/requirements/CT/CRT-588] \r\n ## CFD: [https://confluence.in.devexperts.com/requirements/CT/CRT-589] \r\n # Margin calculation on the underlying level:\r\n ## IM: [https://confluence.in.devexperts.com/requirements/CT/CRT-582] \r\n ## MM: [https://confluence.in.devexperts.com/requirements/CT/CRT-583] \r\n # Portfolio dissection: [https://confluence.in.devexperts.com/requirements/CT/CRT-511] \r\n\r\n*Portfolio evaluation:*\r\n # Underlying margin on portfolio is introduced for all instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-574] \r\n # Margin calculation on portfolio level: sum all values from underlyings:\r\n ## IM: [https://confluence.in.devexperts.com/requirements/CT/CRT-085]\r\n ## MM: [https://confluence.in.devexperts.com/requirements/CT/CRT-086]\r\n # Available Funds should be calculated based on AFEffectWithOrders: [https://confluence.in.devexperts.com/requirements/CT/CRT-580] \r\n # AFEffectWithOrders should be calculated according to [https://confluence.in.devexperts.com/requirements/CT/CRT-572] \r\n # Portfolio reg-t simulation for equity cash flow for AF: [https://confluence.in.devexperts.com/requirements/CT/CRT-513]\r\n # Worst case portfolio of Non-Equity Cash Flow should be defined based on AFEffect: [https://confluence.in.devexperts.com/requirements/CT/CRT-573] \r\n # On Pre-validation for ",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-19": {
+      "summary": "Financing",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n\r\nTake the most recent Financing implementation from the OTC platform with small adjustments:\r\n # Configuration + dxMC: [https://confluence.in.devexperts.com/requirements/CT/CRT-042] \r\n # Calculations: [https://confluence.in.devexperts.com/requirements/CT/CRT-043] \r\n ** Use official closing prices\r\n ** Add descriptions to the transactions\r\n # Add 'FINANCING' Activity Type to:\r\n\r\n\"Transactions\" Widget in Webbroker [https://confluence.in.devexperts.com/requirements/CT/CRT-252] \r\n\r\n\"Transactions\" Widget in WebTrader: [https://confluence.in.devexperts.com/requirements/CT/CRT-251] ",
+      "fetched_utc": "2026-06-12T10:23:00Z"
+    },
+    "CRT-190": {
+      "summary": "[CT ETD] Option Levels",
+      "labels": [
+        "ct_ph2"
+      ],
+      "components": [],
+      "description": "h2. Requirements: \r\n # Option level should be defined on a portfolio of netted prospective positions: [https://confluence.in.devexperts.com/requirements/CT/CRT-516] \r\n # Consider main account option level as portfolio option level for validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-515] \r\n # Besides option orders, check stock/etf closing orders if it's not increasing uncovered option position in the following case: [https://confluence.in.devexperts.com/requirements/CT/CRT-593] \r\n\r\nOption levels remains as in product: [https://confluence.in.devexperts.com/requirements/CT/CRT-552] ",
+      "fetched_utc": "2026-06-12T10:23:01Z"
+    },
+    "CRT-203": {
+      "summary": "[CT ETD] Options exercise: reserve cash",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # New option expiration setting: [https://confluence.in.devexperts.com/requirements/CT/CRT-646] \r\n # Options monitoring concept: [https://confluence.in.devexperts.com/requirements/CT/CRT-737] \r\n # Option expiration monitoring and cash reservation: [https://confluence.in.devexperts.com/requirements/CT/CRT-712]\r\n ## Exp. Cash Reservation on underlying level: [https://confluence.in.devexperts.com/requirements/CT/CRT-772] \r\n ## Exp. Cash reservation on account level: [https://confluence.in.devexperts.com/requirements/CT/CRT-771] \r\n ## Exp. Cash Reservation on underlying level Calculation: [https://confluence.in.devexperts.com/requirements/CT/CRT-770] \r\n ## Cash and Stock coverage: [https://confluence.in.devexperts.com/requirements/CT/CRT-725] \r\n ## Example: [https://confluence.in.devexperts.com/requirements/CT/CRT-794] \r\n # Include Exp. Cash reservation to Reserved cash: [https://confluence.in.devexperts.com/requirements/CT/CRT-655] \r\n # Order cancelation and pre-trade validations: [https://confluence.in.devexperts.com/requirements/CT/CRT-775] \r\n ## Order cancelation: [https://confluence.in.devexperts.com/requirements/CT/CRT-795] \r\n ## Option order pre-trade validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-762] \r\n *** related reject reason: [https://confluence.in.devexperts.com/requirements/CT/CRT-763] \r\n ## Stock order pre-trade validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-764] \r\n *** related reject reason: [https://confluence.in.devexperts.com/requirements/CT/CRT-763] \r\n # dxTrade notifications: [https://confluence.in.devexperts.com/requirements/CT/CRT-791] \r\n # Adjusted contracts: [https://confluence.in.devexperts.com/requirements/CT/CRT-792] \r\n # Monitoring and Error handling: [https://confluence.in.devexperts.com/requirements/CT/CRT-793] \r\n ## Expiration Reserved cash should be shown in dxTrade on underlying and account levels: [https://confluence.in.devexperts.com/requirements/CT/CRT-796] \r\n ## Expi",
+      "fetched_utc": "2026-06-12T10:23:01Z"
+    },
+    "CRT-232": {
+      "summary": "Detect current client country by IP and send to SocGen via FIX",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "* Job to Download Maxmind DB to AssociatedData according to schedule in BINARY format https://confluence.in.devexperts.com/display/CT/Maxmind+DB+for+Country+codes#req-CRT-804\r\n* Detect country by Maxmind DB https://confluence.in.devexperts.com/display/CT/SSO+Login+and+Auto+Log+Out#req-CRT-803\r\n* Send country code to SocGen in 142 FIX tag https://confluence.in.devexperts.com/display/CT/FIX+trading+integrations#req-CRT-640",
+      "fetched_utc": "2026-06-12T10:23:01Z"
+    },
+    "CRT-233": {
+      "summary": "Market data and DxFeed Subscriptions for OPTIONS and FUTURES",
+      "labels": [
+        "ct_ph2"
+      ],
+      "components": [],
+      "description": "* Quoting scheme is present here [https://confluence.in.devexperts.com/pages/viewpage.action?pageId=387515254&#req-CRT-639].\r\n ** OPTIONs, FUTUREs, SPREADs, PRODUCTs, INDEXes are loaded with original DxFeed symbols to the platform (we don't change symbols for them as for STOCKs and CFD_STOCKs). So DxFeed prices for original symbols should be used here (already works in GoLive phase. No code changes needed here)\r\n ** *Prices for such instruments should be available in client UIs, WebBroker and Server components*\r\n ** Note that DxFeed provides only REALTIME prices for INDEX instruments. And clients have no ability to buy REALTIME subscription for them. *So  prices for INDEX instruments are not available in UIs. It's expected behavior*\r\n * Load only indexes required by Corner [https://confluence.in.devexperts.com/pages/viewpage.action?pageId=354978123&#req-CRT-776]\r\n * Update mapping rules to show REALTIME prices on UI [https://confluence.in.devexperts.com/display/CT/Market+Data+feeds+subscription+for+user#req-CRT-136]\r\n * GBX based Options and Future quoting and trading [https://confluence.in.devexperts.com/display/CT/Instrument+Mapping#req-CRT-371], [https://confluence.in.devexperts.com/display/CT/FIX+trading+integrations#req-CRT-781]",
+      "fetched_utc": "2026-06-12T10:23:01Z"
+    },
+    "CRT-236": {
+      "summary": "CFDs Shares - updating parameters (Horn-365 High)",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "h2. Requirements\r\n # Introduce new job in CornerTrader to calculate exposure limit for CFD Shares: [https://confluence.in.devexperts.com/requirements/CT/CRT-800] \r\n # New flag to \"Disable automatic Exposure Limit update\" should be introduced: [https://confluence.in.devexperts.com/requirements/CT/CRT-842] \r\n # Related fields in IPF:\r\n ## Market Cap: [https://confluence.in.devexperts.com/requirements/CT/CRT-798]\r\n ## 30D volume: [https://confluence.in.devexperts.com/requirements/CT/CRT-799]\r\n ## IG trading status [https://confluence.in.devexperts.com/requirements/CT/CRT-844]\r\n # Schedule job after instrument universe update: [https://confluence.in.devexperts.com/requirements/CT/CRT-805] \r\n # Minor update in CFD_STOCK generation algorithm:\r\n ## Do not delete margin rates if new ones are not set in IG file for existing CFD stock [https://confluence.in.devexperts.com/display/CT/Final+algorithms#req-CRT-843]\r\n\r\n # Update the job to check cfd parameters: [https://confluence.in.devexperts.com/requirements/CT/CRT-374]  \r\n ## change the name and change the execution type: [https://confluence.in.devexperts.com/requirements/CT/CRT-820] \r\n ## change the validating parameters: [https://confluence.in.devexperts.com/requirements/CT/CRT-824] \r\n ## update the log: [https://confluence.in.devexperts.com/requirements/CT/CRT-825] ",
+      "fetched_utc": "2026-06-12T10:23:01Z"
+    },
+    "CRT-262": {
+      "summary": "Recalculate instrument exposure in EOD report",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "h2. Requirements\r\n # Recalculate net_exposure value in EOD report according to the logic as in exposure limit validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-865] ",
+      "fetched_utc": "2026-06-12T10:23:02Z"
+    },
+    "CRT-264": {
+      "summary": "Consider Last Trade Time on Last Trade Date of options",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "h2. Context\r\n\r\nSome options end trading on Last Trading Day not at end of regular session, but at a specific time. This time was not provided by dxFeed before, but after https://jira.in.devexperts.com/browse/MDD-8089 LAST_TRADE_TIME field will be added to IPF, so we need to consider this time in different places on the platform.\r\nh2. Requirements\r\n # Fill LAST TRADE TIME field in IPF from dxfeed: [https://confluence.in.devexperts.com/requirements/CT/CRT-871] \r\n # System should use Last Trade Time on the last trade date (if filled) to define the trading end: [https://confluence.in.devexperts.com/requirements/CT/CRT-875]\r\n # Check that logic from point 2 is used in:\r\n ## expiring options monitoring: [https://confluence.in.devexperts.com/requirements/CT/CRT-730] \r\n ## liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-615] \r\n ## fully tradable instrument definition: [https://confluence.in.devexperts.com/requirements/CT/CRT-671] \r\n ## non-tradable instrument definition: [https://confluence.in.devexperts.com/requirements/CT/CRT-668] ",
+      "fetched_utc": "2026-06-12T10:23:02Z"
+    },
+    "CRT-267": {
+      "summary": "(1) Bulk Executions (Liquidation) + (4) Liquidation Order Flag",
+      "labels": [
+        "ct_ph2.6"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Introduce new actions from Webbroker Account List - single and bulk, to liquidate expiring options: [https://confluence.in.devexperts.com/requirements/CT/CRT-881] \r\n # Liquidation of expiring options should be performed according to the following rules: [https://confluence.in.devexperts.com/requirements/CT/CRT-877] \r\n # Margin Uitilization Liquidation should cancel in-progress expiring option liquidation if triggered: [https://confluence.in.devexperts.com/requirements/CT/CRT-879] \r\n # A new metric \"Expiring Option Liquidation\" should be shown in WB Account List: [https://confluence.in.devexperts.com/requirements/CT/CRT-878] \r\n # A new liquidation value should be shown for the orders related to the new liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-880] \r\n # Validation to reject orders during liquidation: [CRT-902|https://confluence.in.devexperts.com/requirements/CT/CRT-902]\r\n # UI message should be shown upon actions initiation: [https://confluence.in.devexperts.com/requirements/CT/CRT-903] \r\n # It should be possible to stop expiring option liquidation: \r\n ## action from WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-910] \r\n ## process: [https://confluence.in.devexperts.com/requirements/CT/CRT-909] ",
+      "fetched_utc": "2026-06-12T10:23:02Z"
+    },
+    "CRT-285": {
+      "summary": "Physically Settled Futures Closing Procedures",
+      "labels": [
+        "ct_ph3.2"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Add liquidation of positions for phys. settled futures: [https://confluence.in.devexperts.com/requirements/CT/CRT-939] \r\n # Update notification according to: [https://confluence.in.devexperts.com/requirements/CT/CRT-941] \r\n # New liquidation attribute for the orders related to futures liquidation should be shown in WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-943] \r\n # It should be possible to stop futures expiration from WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-942] \r\n # Stop futures liquidation when margin liquidation happens: [https://confluence.in.devexperts.com/requirements/CT/CRT-944] \r\n # Add expiring futures liquidation status in WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-945] \r\n # Updated job log: [https://confluence.in.devexperts.com/requirements/CT/CRT-715] \r\n\r\nh2. Scenarios:\r\n\r\n*Sunny day:*\r\n # Open several positions on different phys-settled futures expiring nearby on different accounts on the same portfolio\r\n # Repeat for couple portfolios.\r\n # Remember the number of accounts with expiring phys settled futures and related positions.\r\n # Open position on cash-settled futures expiring at the same day\r\n # Wait for the job to liquidate phys futures to start:\r\n ## One notification about liquidation should appear in portfolio\r\n ## All futures positions should be liquidated. \r\n ## Orders related to liquidation are marked in order book with liquidation attribute: FUTURE PHYSICAL SETTLEMENT\r\n ## Expiring Futures Liquidation column in acc book should be marked as Done, should be set to No at clearing day end (22:00 London)\r\n ## Job to start liquidation is marked as completed. Compare the number of accounts in the log with p.3. Should be the same. Check the list of instruments in the log.\r\n ## Cash settled futures is not touched\r\n # Instruments mentioned above a moved to close only and are not available in the list of instruments in dxTrade.\r\n #  \r\n\r\n \r\n\r\n*Rainy day:*\r\n # Open several ",
+      "fetched_utc": "2026-06-12T10:23:02Z"
+    },
+    "CRT-286": {
+      "summary": "CPS commission per underlying (FUTURE and OPTION commissions)",
+      "labels": [
+        "ct_ph2.6"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n * CPS per symbol commission type should apply commission per underlying for OPTION and FUTURE: [https://confluence.in.devexperts.com/requirements/CT/CRT-946] ",
+      "fetched_utc": "2026-06-12T10:23:02Z"
+    },
+    "CRT-287": {
+      "summary": "Collateral Profile",
+      "labels": [
+        "ct_ph3.1"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Introduce Collateral Usage domain and new profile with the following logic: [https://confluence.in.devexperts.com/requirements/CT/CRT-961] \r\n # Exemption from collateral usage should be applied in:\r\n ## Equity: [https://confluence.in.devexperts.com/requirements/CT/CRT-028] \r\n ## AFEffect: [https://confluence.in.devexperts.com/requirements/CT/CRT-587] \r\n ## Non-available for margin collateral: [https://confluence.in.devexperts.com/requirements/CT/CRT-087] \r\n ## Make sure collateral_deduction in EOD is taken from portfolio metric: [https://confluence.in.devexperts.com/requirements/CT/CRT-966] ",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-288": {
+      "summary": "Exposure profile (HORN-381 High)",
+      "labels": [
+        "ct_ph3.1"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Add new attribute to \"Exposure Limit\" risk setting: Exposure Limit Coefficient: [https://confluence.in.devexperts.com/requirements/CT/CRT-967] \r\n # Update calculations for Exposure Limit: [https://confluence.in.devexperts.com/requirements/CT/CRT-969] with Exposure Limit Coefficient: [https://confluence.in.devexperts.com/requirements/CT/CRT-968] ",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-290": {
+      "summary": " Mapping algorithm update for Hong-Kong CFD_STOCK",
+      "labels": [
+        "ct_ph2.5"
+      ],
+      "components": [],
+      "description": "1. CFD_STOCK generating ALGO updates:\r\nhttps://confluence.in.devexperts.com/requirements/CT/CRT-976\r\nhttps://confluence.in.devexperts.com/requirements/CT/CRT-977\r\nhttps://confluence.in.devexperts.com/requirements/CT/CRT-978\r\nMarking such CFD_STOCKs with new flag: https://confluence.in.devexperts.com/requirements/CT/CRT-984\r\n\r\n2. Update charting in DXTF. If instrument is marked with https://confluence.in.devexperts.com/requirements/CT/CRT-983 then use Candle.bid for charts creation",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-30": {
+      "summary": "Exposure limits by instrument",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # Introduce new Risk Setting: [https://confluence.in.devexperts.com/requirements/CT/CRT-073] \r\n # Add exposure limit to margin rate upload: [https://confluence.in.devexperts.com/requirements/CT/CRT-059] \r\n ## Update validations to allow uploading exposure limits for non-CFD instruments, but ignore margin rate for them: [https://confluence.in.devexperts.com/requirements/CT/CRT-124] \r\n # Introduce new pre-trade validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-075] ",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-303": {
+      "summary": "Exposure Coverage calculation (HORN-420)",
+      "labels": [
+        "ct_ph3.4"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Absolute net exposure calculation is moved from [https://confluence.in.devexperts.com/requirements/CT/CRT-865] to [https://confluence.in.devexperts.com/requirements/CT/CRT-981] (not shown in UIs)\r\n # Introduce Exposure Coverage metric: [https://confluence.in.devexperts.com/requirements/CT/CRT-982] (show in dxTrade, in %)\r\n # Show Exposure Coverage metric in WB: [https://confluence.in.devexperts.com/requirements/CT/CRT-991]  (add filter and sorting)\r\n # Add Exposure Coverage in EOD report: [https://confluence.in.devexperts.com/requirements/CT/CRT-992] \r\n\r\n \r\nh4. Scenario:\r\n # Net exposure:\r\nThe account has no orders and positions. Portfolio value = Account value. Open a position on Futures ZL Sep 25*10, ZL OCT 25*3, and create a limit order that won't be filled.\r\nCalculate the Absolute Net exposure manually: sum of all Instrument exposure on open positions:  (10*49,36 * 600)+ (3 * 49,36 *600) =  385008\r\n # Exposure coverage: \r\nAfter Scenario 1, see the portfolio equity. The Portfolio’s Exposure coverage should be equal to the result of “Equity / Absolute net exposure * 100%”: 121453/ 385008 *100  = 31,54= 32.00%\r\nCompare with Exposure coverage metric in Portfolio Metrics.\r\nBuy ZL Sep 25*2, see the Exposure coverage metric decreased.\r\n # Exposure coverage metric in WB:\r\n ## Go to WB, click on the “Account list” widget. In the list of columns see “Exposure coverage”. In list of filters there is filter “Exposure coverage”. Once the column title clicked, the sorting happens.\r\n ## Open the Client Area -> “Portfolio overview” widget. See the metric there.\r\n # Exposure coverage in EOD report:\r\nRequest the \"EODPortfolioMetrics\" report. See there is exposure_coverage metric filled with value in scenario 2 in decimal format. ",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-306": {
+      "summary": "Fix metrics when there is a short equity position",
+      "labels": [
+        "ct_ph3.1"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n\r\nAdd logic for short equity position in the following places:\r\n # Equity: [https://confluence.in.devexperts.com/requirements/CT/CRT-997] \r\n # AfEffect: [https://confluence.in.devexperts.com/requirements/CT/CRT-998] ",
+      "fetched_utc": "2026-06-12T10:23:03Z"
+    },
+    "CRT-308": {
+      "summary": "Add Slide-In Coefficient to Position Book in dxTrade",
+      "labels": [
+        "ct_ph3.1"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n\r\nAdd Slide-In Coefficient to Position Book in dxTrade: [https://confluence.in.devexperts.com/requirements/CT/CRT-1000] \r\nh2. Scenarios:\r\n # Account has EU options and US options expiring at the same day. \r\n # Monitoring starts for EU: T0 - Reservation % should be shown 25% for EU underlying (no matter if account or portfolio is selected) in position book in dxTrade and Webbroker\r\n # Monitoring starts for US: T0 - Reservation % should be shown 25% for US underlying (no matter if account or portfolio is selected) in position book in dxTrade and Webbroker\r\nFor EU - Reservation % should be show the value according to the period of time for EU.",
+      "fetched_utc": "2026-06-12T10:23:04Z"
+    },
+    "CRT-320": {
+      "summary": "Fix price for spreads in all transaction and trade widgets",
+      "labels": [
+        "ct_ph2.6"
+      ],
+      "components": [],
+      "description": "Fix price for spreads in transactions and trade widgets - instead of SUM of all legs it should be calculated same way as in option chain and OE ([https://confluence.in.devexperts.com/requirements/CT/CRT-1019]  ), but using fill price of legs (if executions are received separately, and price is not received from execution itself (!)).\r\n\r\nPlaces to fix:\r\n # Transactions widget in dxTrade: [https://confluence.in.devexperts.com/requirements/CT/CRT-1022] \r\n # Trades widget in dxTrade: [https://confluence.in.devexperts.com/requirements/CT/CRT-1023] \r\n # Transactions widget in Webbroker: [https://confluence.in.devexperts.com/requirements/CT/CRT-1021] ",
+      "fetched_utc": "2026-06-12T10:23:04Z"
+    },
+    "CRT-340": {
+      "summary": "Value Position CCY / %change (HORN-511)",
+      "labels": [
+        "ct_ph3.2"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Introduce metric to calculate position market value in account currency: [https://confluence.in.devexperts.com/requirements/CT/CRT-1071] \r\n # Show new metric in:\r\n ## Position book dxtrade:\r\n ### Market Value (acc currency): [https://confluence.in.devexperts.com/requirements/CT/CRT-1073] \r\n ## Account Statement:\r\n ### Market Value (acc currency): [https://confluence.in.devexperts.com/requirements/CT/CRT-1075] \r\n ## EOD Report:\r\n ### Market Value (acc currency): [https://confluence.in.devexperts.com/requirements/CT/CRT-1077] ",
+      "fetched_utc": "2026-06-12T10:23:04Z"
+    },
+    "CRT-341": {
+      "summary": "Liquidation proposal (HORN-502) - Mark Price update based on trading hours",
+      "labels": [
+        "ct_ph2.6"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Split logic for Mark Price (and Midpoint) calculation based on Trading hours of the instrument: [https://confluence.in.devexperts.com/requirements/CT/CRT-1106] .\r\n ** It should be applicable to all places where mark price is used, including order price: [https://confluence.in.devexperts.com/requirements/CT/CRT-017] \r\n # Show mark price in UI same as calculated on BE, including backup price: [https://confluence.in.devexperts.com/requirements/CT/CRT-1042] \r\n\r\nh2. Scenarios:\r\n # Stock/ETF instrument that has Last Trade Price (check each instrument):\r\n ## during trading hours mark price is taken as Last Trade Price or according to the table in [https://confluence.in.devexperts.com/requirements/CT/CRT-010] . Check that following metrics are calculated based on this value (consider real-time prices):\r\n ### Mark price in watchlist\r\n ### Market value in position book\r\n ### Market value component in Available Funds (x haircut)\r\n ### Market Order is estimated by this price (Est. cost)\r\n ## during non-trading hours mark price is taken as Day Close (before instrument midnight) / Prev Day Close (after midnight). Check that following metrics are calculated based on this value (consider real-time prices):\r\n ### Mark price in watchlist\r\n ### Market value in position book\r\n ### Market value component in Available Funds (x haircut)\r\n ### Market Order is estimated by this price (Est. cost)\r\n # Stock/ETF instrument that doesn't have Last Trade Price, Day Close, Prev Day Close: during any hours (trading and non-trading):\r\n ## position is estimated by backup price\r\n ## order is not estimated -> rejected.\r\n # CFD Stock instrument:\r\n ## during trading hours mark price is taken as current Bid or Ask. Check that following metrics are calculated based on this value (consider real-time prices):\r\n ### Mark price in watchlist: midpoint\r\n ### Market value in position book: \r\n #### Bid for long position\r\n #### Ask for short position\r\n ### Initial and Maintenance margin: midpo",
+      "fetched_utc": "2026-06-12T10:23:04Z"
+    },
+    "CRT-350": {
+      "summary": "Liquidation proposal - Liquidation improvements",
+      "labels": [
+        "ct_ph3.3"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Introduce common liquidation steps applicable for all types of liquidations (margin, futures and options) that define priorities between liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1126] \r\n # Use these common liquidation steps in all liquidation types:\r\n ## Margin liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1128] \r\n ## Physical futures liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1124] \r\n ## Expiring option liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1127] \r\n # Margin Utilization level should be rechecked on market open for the instruments under liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1135] \r\n # Physical futures liquidations shouldn't be canceled when margin liquidation starts: [https://confluence.in.devexperts.com/requirements/CT/CRT-944] \r\n # Expiring option liquidation shouldn't be canceled when margin liquidation starts: [https://confluence.in.devexperts.com/requirements/CT/CRT-879] \r\n # Stock Purchase process shouldn't be canceled when margin liquidation starts: [https://confluence.in.devexperts.com/requirements/CT/CRT-908] \r\n # Stock Purchase orders shouldn't be canceled during margin liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1121] \r\n # It should be possible to execute Expiring Option Liquidation from WB even if there is working margin liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-881] \r\n # It should be possible to execute Purchase Stock process from WB even if there is working margin liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-905] \r\n # Phys settlement futures liquidation should start even if there is margin liquidation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1131] \r\n # New status \"IN REVIEW\" should be introduced for the liquidation that failed all re-tries: [https://confluence.in.devexperts.com/requirem",
+      "fetched_utc": "2026-06-12T10:23:04Z"
+    },
+    "CRT-351": {
+      "summary": "Pre-check validation: only on portfolio level (HORN-504) - Part 1",
+      "labels": [
+        "ct_ph3.4"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Calculate Prospective Portfolio Prospective Cash instead of Account Prospective Cash during pre-trade validation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1146] \r\n # if at least one leg of the order is opening, the validation should be based on Available Funds and Prospective PORTFOLIO Cash: [https://confluence.in.devexperts.com/requirements/CT/CRT-1147] \r\n # Skip AF validation for non-equity cash flow orders if it's improving situation: [https://confluence.in.devexperts.com/requirements/CT/CRT-1154]\r\n\r\n*Scenario:*\r\n # A profile with 2 accounts: Balance on account 1 is 16, balance on account 2 is 5000USD. Portfolio available Cash is 5010. Buy 10 AAPL  at 203. \r\nResult: The order placed. \r\n # Exit the AAPl position. \r\nSell 1 BA:xnys Jun 06 25 222.5 Call 222.5 at 0.16. \r\nBuy 26 AAPL at 202.05, \r\nBuy 75 BOE:xasx at 3,5 so that Portfolio Available Cash is approx. 4 USD. \r\nBuy 1 BA:xnys Jun 06 25 222.5 Call 222.5, see that Order's estimated cost is 48USD.  \r\nResult: the order has no 101 error and could be placed. Once order filled, the Available cash is a negative value (-44 in this case).",
+      "fetched_utc": "2026-06-12T10:23:05Z"
+    },
+    "CRT-367": {
+      "summary": " Client Area Improvements - Add Risk Profile to Client Area and Remove Terminated Accounts",
+      "labels": [
+        "ct_ph3.3"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Hide TERMINATED and simulated accounts from account selector in client area: [https://confluence.in.devexperts.com/requirements/CT/CRT-1144] \r\n # Add Risk Profile to client area: [https://confluence.in.devexperts.com/requirements/CT/CRT-1145] . Note that it should build portfolio same way as in dxtrade (through all accounts)\r\n\r\nh3. Scenarios:\r\nh4. Scenario 1. Hide Terminated and Simulated accounts from the account selector\r\n\r\nPre-condition:\r\n\r\nA user with multiple accounts:\r\n # at least 1 is active,\r\n # 1 simulated and\r\n # 1 to be terminated accounts.\r\n\r\nh4. Scenario 1.1. Terminated account\r\n # Prepare:\r\n ** there is a trader user with 2 accounts (“test_tatiana_USD” and “test_tatiana_EUR”)\r\n # Log in as webbroker. See that the 2 accounts available in the account selector.\r\n # Go to Accounts list, find the user (e.g. “test_tatiana”) and the account (“test_tatiana_EUR”)), set “Terminated” and save changes.\r\n # ** Result: **\r\n ** Check the accounts dropdown: there is no account that has been terminated (e.g. there is 1 account remaining, the “test_tatiana_USD”)\r\n ** The trader does not see the terminated account.\r\n\r\nh4. Scenario 1.2 Simulated account\r\n # Prepare:\r\n ** there is a an account (“test_tatiana_USD”) with an order (e.g. TSLA Call option 250411C170 of ‘buy to Open” side) in “analyze” mode.\r\n # Log in as web broker. In the account selector enter the first 8 symbols account (in this case “test_tat”) and see the list of available accounts.\r\n # ** Result: **\r\n ** There are only the active accounts which start with the input string (in this case, “test_tatiana_USD” and “test_tatiana_EUR”).\r\n ** There is no simulated accounts in the list.\r\n\r\nh4. Scenario 2. Add Risk Profile added to Client area\r\n\r\nPre-condition:\r\n\r\nA user with multiple accounts:\r\n # “test_tatiana_USD”, “test_tatiana_EUR” - each have open position of 1 TSLA:xnas call option;\r\n # “test_tatiana_EUR” has 1 TSLA:xnas stock\r\n # another user with active account (e.g “ana” account)\r\n\r\n",
+      "fetched_utc": "2026-06-12T10:23:05Z"
+    },
+    "CRT-373": {
+      "summary": "Price snapshot and backup price update schedules should depend on instrument type",
+      "labels": [
+        "ct_ph2.6"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n * Price snapshot and backup price update schedules should depend on instrument type: [https://confluence.in.devexperts.com/requirements/CT/CRT-1155] \r\n * Set up price snapshot and backup price update schedules for CFD and CFD_FOREX at 22:00 (London): [https://confluence.in.devexperts.com/requirements/CT/CRT-236] \r\nScheme of Daily jobs was updated for to reflect this change: https://confluence.in.devexperts.com/requirements/CT/CRT-423\r\n * dayClose and backup price for CFD_STOCK should be collected same way as for STOCKs but with additional fallback to (BID+ASK)/2: [https://confluence.in.devexperts.com/requirements/CT/CRT-1166] \r\n * for CFD and CFD_FOREX instruments snapshot and backup prices should be saved only if there was a regular session during the day: [https://confluence.in.devexperts.com/requirements/CT/CRT-281] \r\n ** Technical implementation: If there is NO REGULAR SESSION for today in  CFD/CFD_FOREX instrument schedule then \r\nSummary.closePrice is copied from current Backup Price\r\n ** (backup price is captured as Summary.closePrice from snapshot:[ [https://confluence.in.devexperts.com/requirements/CT/CRT-237] )",
+      "fetched_utc": "2026-06-12T10:23:05Z"
+    },
+    "CRT-380": {
+      "summary": "Liquidation proposal - Fix remaining issues (instruments without close price + summary gap)",
+      "labels": [
+        "ct_ph3.2"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Daily Data Recorder and Backup price saver should be scheduled by OPOL: [https://confluence.in.devexperts.com/requirements/CT/CRT-1172] (can be done in product too)\r\nConfiguration: [https://confluence.in.devexperts.com/requirements/CT/CRT-1171] \r\n # Save CFD_STOCK instruments backup prices always: [https://confluence.in.devexperts.com/requirements/CT/CRT-1173] \r\n # Add same conditions to save quotes during non-trading day for CFD_STOCK Hong Kong as for CFD_FOREX: [https://confluence.in.devexperts.com/requirements/CT/CRT-1174]\r\n ** Other CFD_STOCKs should have the same condition to fallback during non-trading day: [https://confluence.in.devexperts.com/requirements/CT/CRT-1166] \r\n # Split CFD_STOCK Hong Kong and CFD_STOCK others: probably this flag could be renamed and used: [https://confluence.in.devexperts.com/requirements/CT/CRT-984] (smth like \"cfd_stock_no_trade_prices\"\r\n # CFD_STOCK Hong Kong should be evaluated the same way as CFD and CFD_FOREX: [https://confluence.in.devexperts.com/requirements/CT/CRT-1178] \r\n # CFD_STOCK except Hong Kong should be evaluated the same way as STOCKs: [https://confluence.in.devexperts.com/requirements/CT/CRT-1179] \r\n # Add Last Trade Price to evaluation fallback outside of trading hours: [https://confluence.in.devexperts.com/requirements/CT/CRT-1168] \r\n # *Make sure that for CFD_STOCK (Hong Kong), CFD and CFD_FOREX mark price calculation switches to backup only after backup price is updated with the today's midpoint at the end of session!*\r\n # Update backup price precision in dxmc: \r\n ## table: [https://confluence.in.devexperts.com/requirements/CT/CRT-1181] \r\n ## pop-up: [https://confluence.in.devexperts.com/requirements/CT/CRT-1182] ** \r\n\r\nh2. Scenarios to test:\r\n\r\n+Hong Kong CFD STOCK:+\r\n # Create a position of some Hong Kong cfd stock (trading day for HK)\r\n # At next 08:00 London check that backup price for this HK cfd stock is created as midpoint of quotes on 08:00. \r\n # Check that mark price and positio",
+      "fetched_utc": "2026-06-12T10:23:05Z"
+    },
+    "CRT-388": {
+      "summary": "Allow closing option in monitoring orders if AF is enough (HORN-832)",
+      "labels": [
+        "ct_ph3.2"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n\r\nSkip cash validation for closing equity orders: [https://confluence.in.devexperts.com/requirements/CT/CRT-1148] ",
+      "fetched_utc": "2026-06-12T10:23:05Z"
+    },
+    "CRT-389": {
+      "summary": "Update option exposure calculation (HORN-866)",
+      "labels": [
+        "ct_ph3.2"
+      ],
+      "components": [],
+      "description": "# Update option exposure calculation: [https://confluence.in.devexperts.com/requirements/CT/CRT-990] (applied in EOD Report, Exposure Limits)\r\n ** options without greeks should have old calculations\r\n # Consider multilieg orders in exposure calculation for options without greeks: [https://confluence.in.devexperts.com/requirements/CT/CRT-1209] ",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-41": {
+      "summary": "Available Balance For Withdrawal",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # Available Balance for withdrawal metric should be calculated according to [https://confluence.in.devexperts.com/requirements/CT/CRT-069] \r\n # New Withdrawal limit should be introduced in corner trader liquidation domain: [https://confluence.in.devexperts.com/requirements/CT/CRT-091] ",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-46": {
+      "summary": "FIX trading integration with IG (OTC)",
+      "labels": [],
+      "components": [],
+      "description": "FIX trading integration: [CRT-096|https://confluence.in.devexperts.com/requirements/CT/CRT-096]",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-48": {
+      "summary": "FIX trading integration with UBS",
+      "labels": [],
+      "components": [],
+      "description": "FIX trading integration: [CRT-098|https://confluence.in.devexperts.com/requirements/CT/CRT-098]\r\nRouting instructions: https://confluence.in.devexperts.com/requirements/CT/CRT-250\r\n\r\nConnection details are attached",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-49": {
+      "summary": "Add IG instrument ID field to instruments",
+      "labels": [],
+      "components": [],
+      "description": "New field for CFD forex and CFD indicies, its management in dxMC, support in IPF loader and IPF service: [CRT-099|https://confluence.in.devexperts.com/requirements/CT/CRT-099]",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-50": {
+      "summary": "Support \"No automatic adjustment\" mode for simplified reconciliation",
+      "labels": [],
+      "components": [],
+      "description": "To Do:\r\n||Requirements||Yogi||\r\n|Introduce configurable modes for simplified reconciliation\r\n{*}Note{*}:(i) Let's discuss the name and location of the parameter.|[https://confluence.in.devexperts.com/requirements/DR/DXBRO-133] |\r\n|Support \"NO_ADJUSTMENT\" mode in Positions reconciliation\r\n \r\nPlease note, that Job Log messages will be different. |[https://confluence.in.devexperts.com/requirements/DR/DXBRO-22] |\r\n|Support \"NO_ADJUSTMENT\" mode in Balance reconciliation\r\n \r\nPlease note, that Job Log messages will be different.  |[https://confluence.in.devexperts.com/requirements/DR/DXBRO-23] |\r\n\r\n*Note for QA*: Could you please check that job result statuses set correctly?",
+      "fetched_utc": "2026-06-12T10:23:06Z"
+    },
+    "CRT-51": {
+      "summary": "Import lists of instruments to disable and enable trading",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements: \r\n * Implement trading status update according to following requirements: [https://confluence.in.devexperts.com/requirements/CT/CRT-100] \r\n * Consider special liquidation rules during implementation: [https://confluence.in.devexperts.com/requirements/CT/CRT-106] ",
+      "fetched_utc": "2026-06-12T10:23:07Z"
+    },
+    "CRT-525": {
+      "summary": "Fix automatic DAY orders expiration in non-trading day",
+      "labels": [
+        "ct_ph3.4"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Turn on automatic DAY orders expiration: [https://confluence.in.devexperts.com/requirements/CT/CRT-1211] \r\n # Do not expire DAY orders in non-trading day: [https://confluence.in.devexperts.com/requirements/CT/CRT-1248] ",
+      "fetched_utc": "2026-06-12T10:23:07Z"
+    },
+    "CRT-530": {
+      "summary": "CA management between AF and DX with quantity impact (HORN-372) - Simplified version",
+      "labels": [
+        "ct_ph4"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n\r\nProcess overview: [https://confluence.in.devexperts.com/requirements/CT/CRT-1264] \r\n # Introduce 3 new APIs:\r\n ## Start corporate action on instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-1249] \r\n ## Apply corporate action transactions: [https://confluence.in.devexperts.com/requirements/CT/CRT-1250] \r\n ## Unlock accounts and instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-1251]\r\n # Introduce \"CA Status\" field on Account and show/filter it in Webbroker: [https://confluence.in.devexperts.com/requirements/CT/CRT-1259] \r\n ## Trading availability should depend on the value of the field: [https://confluence.in.devexperts.com/requirements/CT/CRT-1257] \r\n ## Liquidation monitoring should depend on the value of the field: [https://confluence.in.devexperts.com/requirements/CT/CRT-1258] \r\n ## Allow clearing of the flag via WB (single/bulk): [https://confluence.in.devexperts.com/requirements/CT/CRT-1260] \r\n ## Add new permission for CA Management: \r\n ### CH accounts: [https://confluence.in.devexperts.com/requirements/CT/CRT-1261] \r\n ### BS accounts: [https://confluence.in.devexperts.com/requirements/CT/CRT-1262] \r\n # Introduce new Transaction Type \"CORPORATE_ACTION\" that can be passed in API for CA Transactions: [https://confluence.in.devexperts.com/requirements/CT/CRT-1272] \r\n ## This transaction type should be shown in Transactions widget in WebTrader and Webbroker\r\n # Introduce flag \"Evaluate with backup price\" on instrument: [https://confluence.in.devexperts.com/requirements/CT/CRT-1253] . Show it in dxMC\r\n # Perform following actions when API to start corporate actions on instruments is received: [https://confluence.in.devexperts.com/requirements/CT/CRT-1252] \r\n # Perform following actions when API to apply corporate actions is received: [https://confluence.in.devexperts.com/requirements/CT/CRT-1254] \r\n # Perform following actions when API to unlock accounts and instruments is received: [https://confluence.",
+      "fetched_utc": "2026-06-12T10:23:07Z"
+    },
+    "CRT-536": {
+      "summary": "Extend swap rates update job with backup swap rates (HORN-522)",
+      "labels": [
+        "ct_ph3.5"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Schedule Swap Rates update job twice a day, second time at 01:00 - [https://confluence.in.devexperts.com/requirements/CT/CRT-1290] \r\n # Find different file depending on time when job triggered: https://confluence.in.devexperts.com/requirements/CT/CRT-1289 ",
+      "fetched_utc": "2026-06-12T10:23:07Z"
+    },
+    "CRT-539": {
+      "summary": "Use adjusted order leg price instead mark price during prospective calculations",
+      "labels": [
+        "ct_ph3.5"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n # Calculate adjusted order leg price to use in prospective metrics calculations: [https://confluence.in.devexperts.com/requirements/CT/CRT-1291] \r\n # Use adjusted leg price to calculate prospective AF Effect for positions from multileg orders: [https://confluence.in.devexperts.com/requirements/CT/CRT-1292] ",
+      "fetched_utc": "2026-06-12T10:23:07Z"
+    },
+    "CRT-544": {
+      "summary": "Console command to move positions to new instrument symbols (HORN-747)",
+      "labels": [
+        "ct_ph3.6"
+      ],
+      "components": [],
+      "description": "Introduce a new console command for S2 according to this spec: https://confluence.in.devexperts.com/requirements/CT/CRT-1296",
+      "fetched_utc": "2026-06-12T10:23:08Z"
+    },
+    "CRT-563": {
+      "summary": "Add filters by Instrument fields in Order Book widget in Web Broker (HORN-1092)",
+      "labels": [
+        "ct_ph3.5"
+      ],
+      "components": [],
+      "description": "Add filtering by following Instrument fields in Order Book widget in Web Broker:\r\n * OPOL: [https://confluence.in.devexperts.com/requirements/CT/CRT-1306] \r\n * COUNTRY: [https://confluence.in.devexperts.com/requirements/CT/CRT-1307] \r\n * UBS_MIC_CODE: [https://confluence.in.devexperts.com/requirements/CT/CRT-1308] ",
+      "fetched_utc": "2026-06-12T10:23:08Z"
+    },
+    "CRT-585": {
+      "summary": "New instrument subtype - FX_SPOT, static list",
+      "labels": [
+        "ct_ph5"
+      ],
+      "components": [],
+      "description": "Requirements:\r\n # Introduce new corner subtype fo FOREX type: FX_SPOT: [https://confluence.in.devexperts.com/requirements/CT/CRT-1733] \r\n ** FOREX type should be extended with\r\nTrading Hours, CFD Tiered Margin Rates, Disable Automatic Margin Rates Update, Exposure Limit, EPIC:\r\n[https://confluence.in.devexperts.com/requirements/CT/CRT-1473] ,  \r\n ** fill OPOL with \"ET\": [https://confluence.in.devexperts.com/requirements/CT/CRT-1598] \r\n ** New field ROLLOVER_CUT_OFF should be added: [https://confluence.in.devexperts.com/requirements/CT/CRT-1524] \r\n ** Field OCO min amplitude should be available: [https://confluence.in.devexperts.com/requirements/CT/CRT-1474] \r\n ** EPIC should be set on FX_SPOT according to the similar CFD_FOREX: [https://confluence.in.devexperts.com/requirements/CT/CRT-1731] \r\n # Instrument type should be defined according to the following logic: [https://confluence.in.devexperts.com/requirements/CT/CRT-1734] (should already work)\r\n # IPF Synchronization job shouldn't impact on FOREX (should already work): [https://confluence.in.devexperts.com/requirements/CT/CRT-101] \r\n # Instruments static list: [https://confluence.in.devexperts.com/requirements/CT/CRT-1480] \r\nLot size, quantity inc and multiplier should be copied from the relevant currency pair of cfd forex DMA(!)\r\n # Trading hours for FX_SPOT: [https://confluence.in.devexperts.com/requirements/CT/CRT-1481] \r\n # Margin rates should be taken from IG: [https://confluence.in.devexperts.com/requirements/CT/CRT-1522]  (matched by EPIC)\r\n # Add FX_SPOT to configurations (all except routing related):\r\n ## Supported instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-1527] \r\n ## Instrument tree: [https://confluence.in.devexperts.com/requirements/CT/CRT-1529] \r\n ## Cash flow mapping: [https://confluence.in.devexperts.com/requirements/CT/CRT-1528] \r\n ## Liquidation instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-1530] \r\n ## Short sell allowed instruments: [https://c",
+      "fetched_utc": "2026-06-12T10:23:08Z"
+    },
+    "CRT-594": {
+      "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+      "labels": [
+        "ct_ph5"
+      ],
+      "components": [],
+      "description": "*Business Context*\r\n\r\nFX Spot instruments have a specific pricing depending on the acccount group and order volume. In this ticket the system should learn how to get the tier-based prices from dxFeed per each account group and map it to the prices that should be shown in UI for the client. \r\n\r\n*Requirements*\r\n * Quoting scheme for FX_SPOT [https://confluence.in.devexperts.com/requirements/CT/CRT-1761]\r\n\r\n1. FX_SPOT pricing description: \r\n\r\n1.1. Prices for FX_SPOT instruments should be provided by ET Trader via dxFeed.\r\n\r\n1.2. Price determination should depend on account group and volume.\r\nSee details in [CRT-1717|https://confluence.in.devexperts.com/requirements/CT/CRT-1717]\r\n\r\n2. Price mapping to dxFeed:\r\nDxFeed is going to subscribe to continuous tradable price streams from ET Trader and distribute prices to CT per symbol defining currency pair and group - FX_SPOT_BASE_SYMBOL [CRT-1908. |https://confluence.in.devexperts.com/requirements/CT/CRT-1908]\r\nUpon request, DxFeed should provide two types of records to DX:\r\n * Bid/ask prices [CRT-1713|https://confluence.in.devexperts.com/requirements/CT/CRT-1713]\r\n * Order Book [CRT-1714|https://confluence.in.devexperts.com/requirements/CT/CRT-1714]\r\nSee details in [CRT-1718|https://confluence.in.devexperts.com/requirements/CT/CRT-1718]\r\n\r\n3. Account groups:\r\n\r\n3.1. New settings domain should be created - [CRT-1630.|https://confluence.in.devexperts.com/requirements/CT/CRT-1630]\r\n3.2. New groups in Settings\\{FxConfiguration}  should be created for RAG-CH-broker (see in [CRT-1766|https://confluence.in.devexperts.com/requirements/CT/CRT-1766] ) and RAG-BS-broker (see in [CRT-1767|https://confluence.in.devexperts.com/requirements/CT/CRT-1767] [)|https://confluence.in.devexperts.com/requirements/CT/CRT-1716]. Account group name to get prices for the group is to be sourced from FxSpotSuffix [CRT-1768|https://confluence.in.devexperts.com/requirements/CT/CRT-1768].\r\n\r\n{*}Note{*}: only 1 group (Energy) will be created in the scope o",
+      "fetched_utc": "2026-06-12T10:23:08Z"
+    },
+    "CRT-609": {
+      "summary": "FX_SPOT chart ",
+      "labels": [
+        "ct_ph5"
+      ],
+      "components": [],
+      "description": "h2. Requirements: \r\n\r\nCharts for FX_SPOT should be build only based on midpoint, other price types shouldn't be available: [https://confluence.in.devexperts.com/requirements/CT/CRT-1737] \r\n\r\nAdaptive: not a part of this epic, see CRT-632 \r\nh2. Scenarios:\r\n * Open chart for FX_SPOT instrument -> chart should be build based on midpoint price. In web and client area in webbroker.\r\n * Try to change price type in settings in web: change shouldn't be available.",
+      "fetched_utc": "2026-06-12T10:23:08Z"
+    },
+    "CRT-669": {
+      "summary": "Liquidation in chunks for CFDs",
+      "labels": [
+        "ct_ph5"
+      ],
+      "components": [],
+      "description": "h2. Requirements:\r\n * Introduce max liquidation qty on instrument level for CFD/CFD_FOREX/CFD_STOCK instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-1891] \r\n * Value should be available for update via dxMC\r\n * Split positions in chunks when max liquidation qty is defined: [https://confluence.in.devexperts.com/requirements/CT/CRT-1785] \r\n\r\nBy default:\r\n * all instruments with CFD_FOREX_OTC subtype should have max liquidation qty = 200\r\n * all instruments with CFD_FOREX_DMA subtype should have max liquidation qty = 20 000 000\r\n * all instruments on CFD/CFD_STOCKS shouldn't have any value and shouldn't be liquidated in chunks by default\r\n\r\n{color:#ff0000}(!) Functionality should be ported to 270 branch{color}\r\nh2. Scenario:\r\n # Create position with qty > max liquidation qty of the instrument (CFD Forex), e.g. 500. There shouldn't be any restriction to send an order > max liquidation qty\r\n # Increase margin or withdraw cash to make Margin Utilization metric > 100% during trading hours.\r\n # Liquidation should start and send 2 orders with qty 200 and 1 order with qty 100.\r\n # Liquidation should complete only after all orders are completed\r\n\r\nRepeat the test for non-trading hours: liquidation should wait for trading hours and send same 3 orders. Set one of the orders to be rejected max number of rejections according to config. The other 2 orders should be completed, one remain rejected (according to step 4 in [https://confluence.in.devexperts.com/requirements/CT/CRT-1126] ) -> liquidation status should become in review.\r\n\r\n \r\n\r\nSee the cause of these requirements in the attached email.",
+      "fetched_utc": "2026-06-12T10:23:09Z"
+    },
+    "CRT-672": {
+      "summary": "Add Taxes, Commissions and External Fees to CA API",
+      "labels": [
+        "ct_ph4"
+      ],
+      "components": [],
+      "description": "*Business Context* \r\n\r\nWith the new interface for CA Management AF currently does not send the tax values, which therefore are not displayed in the Taxes field in DX. In addition to the Taxes field, AF also does not send the values for Commission and External Fee.\r\n\r\nThese fields should be added to the CA API in DX.\r\n\r\n*Requirements* \r\n\r\n1. Add three new fields to transaction fields of 'Apply CA Transactions' API:\r\n * commissions - [CRT-1918|https://confluence.in.devexperts.com/requirements/CT/CRT-1918] \r\n * fees - [CRT-1919|https://confluence.in.devexperts.com/requirements/CT/CRT-1919] \r\n * taxes - [CRT-1920|https://confluence.in.devexperts.com/requirements/CT/CRT-1920] \r\n\r\nRequirement [CRT-1250|https://confluence.in.devexperts.com/requirements/CT/CRT-1250] was updated accordingly.\r\n\r\n*Scenarios*\r\n\r\n1. Initiate CA for the instrument. \r\n\r\n2. On 'Apply CA Transactions' step check that API includes three new fields. \r\n\r\n3. Check that the values are displayed in 'Transactions' widget in all UIs (web and wb) and in Account Statement.\r\n\r\n4. Check that the values are debited/credited to Total Cash Effect and Balance values. ",
+      "fetched_utc": "2026-06-12T10:23:09Z"
+    },
+    "CRT-76": {
+      "summary": "Taxes support in UI",
+      "labels": [],
+      "components": [],
+      "description": "New type of activity leg introduced in [CRT-062|https://confluence.in.devexperts.com/requirements/CT/CRT-062] should be properly supported in UI, in particular in:\r\n - Account/Portfolio statement ({*}Note{*}: this one should be implemented in scope of CRTBL-21 Portfolio statement) \r\n - Transactions widget in WebTrader\r\n - Transactions widget in WebBroker\r\n\r\nThe idea is to show aggregated tax value in UI, without breakdown to a subtypes.\r\n\r\n \r\n\r\n*To Do:*\r\n||Requirements||Yogi||\r\n|*WebBroker \"Transactions\" widget:*\r\n-Add Taxes column\r\n-Update calculation of \"Total Cash Effect column\"\r\n-Update Export to CSV accordingly\r\nAssumptions: Create/Edit Transactions and Transactions upload are remained untouched, currently.|Transactions widget\r\nTaxes Column: [https://confluence.in.devexperts.com/requirements/CT/CRT-216] \r\nTotal Cash Effect: [https://confluence.in.devexperts.com/requirements/CT/CRT-213] \r\nExport to CSV: [https://confluence.in.devexperts.com/requirements/CT/CRT-212]  |\r\n|*WebBroker \"Transactions\" widget -> Transaction History*\r\n-Add Taxes column\r\n-Update calculation of \"Total Cash Effect column\"|Transactions History widget \r\nTaxes Column: [https://confluence.in.devexperts.com/requirements/CT/CRT-214] \r\nTotal Cash Effect: [https://confluence.in.devexperts.com/requirements/CT/CRT-215] |\r\n|*WebTrader \"Account Transactions\" widget:*\r\n-Add Taxes column\r\n-Update calculation of \"Total Cash Effect column\"\r\n-Update Export to CSV accordingly.\r\nNote: All changed should be applied for WebBroker's Client Area too.|Account Transactions widget\r\nTaxes Column: [https://confluence.in.devexperts.com/requirements/CT/CRT-218] \r\nTotal Cash Effect: [https://confluence.in.devexperts.com/requirements/CT/CRT-219] \r\nExport to CSV: [https://confluence.in.devexperts.com/requirements/CT/CRT-209] |\r\n\r\n ",
+      "fetched_utc": "2026-06-12T10:23:09Z"
+    },
+    "CRT-79": {
+      "summary": "Align financing with IG rules",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # Swap Rates:\r\n ## Introduce new job: [https://confluence.in.devexperts.com/requirements/CT/CRT-258] \r\n *** Roll Days should be added to the upload file and schedule should be removed from markup configuration\r\n ## Allow Manual job run: [https://confluence.in.devexperts.com/requirements/CT/CRT-259] \r\n ## Remove import and add new rates from Financing widget [https://confluence.in.devexperts.com/requirements/CT/CRT-042]\r\n ## Copy swap rates overnight: [https://confluence.in.devexperts.com/requirements/CT/CRT-260] \r\n ## Calculations: [https://confluence.in.devexperts.com/requirements/CT/CRT-043] \r\n # Interest Rates:\r\n ## Introduce new job: [https://confluence.in.devexperts.com/requirements/CT/CRT-263] \r\n ## Allow Manual job run: [https://confluence.in.devexperts.com/requirements/CT/CRT-264] \r\n ## Remove import and add new rates from Financing widget: [https://confluence.in.devexperts.com/requirements/CT/CRT-201] \r\n ## Copy interest rates overnight: [https://confluence.in.devexperts.com/requirements/CT/CRT-265] \r\n ## Calculations: [https://confluence.in.devexperts.com/requirements/CT/CRT-200] ",
+      "fetched_utc": "2026-06-12T10:23:09Z"
+    },
+    "CRT-85": {
+      "summary": "Changing TradeType",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements\r\n\r\nReconsider Instrument availability on account: [https://confluence.in.devexperts.com/requirements/CT/CRT-227] \r\n # Fully trading available instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-224] \r\n ** only fully trading available instruments should be shown in instrument suggestion: [https://confluence.in.devexperts.com/requirements/CT/CRT-130] \r\n # Treatment of close only instruments: [https://confluence.in.devexperts.com/requirements/CT/CRT-207]\r\n ** dxCore part: [https://confluence.in.devexperts.com/requirements/CT/CRT-233] \r\n # Introduce default TIF per instrument type for liquidation and \"close with market\" orders: [https://confluence.in.devexperts.com/requirements/CT/CRT-269] \r\n # Close with Market and cancel existing orders action in dxCore should be changed: [https://confluence.in.devexperts.com/requirements/CT/CRT-249]\r\n # Liquidation orders should have default TIF according to the instrument type:  [https://confluence.in.devexperts.com/requirements/CT/CRT-270] ",
+      "fetched_utc": "2026-06-12T10:23:09Z"
+    },
+    "CRT-91": {
+      "summary": "Portfolio statement",
+      "labels": [],
+      "components": [],
+      "description": "h3. Requirements:\r\n # introduce selection of account or portfolio statement: [https://confluence.in.devexperts.com/requirements/CT/CRT-276] \r\n # Update title and header: [https://confluence.in.devexperts.com/requirements/CT/CRT-288] \r\n ## currency: [https://confluence.in.devexperts.com/requirements/CT/CRT-289] \r\n ## user: [https://confluence.in.devexperts.com/requirements/CT/CRT-291]\r\n ## accounts: [https://confluence.in.devexperts.com/requirements/CT/CRT-290] \r\n # Update account summary and show related metrics: [https://confluence.in.devexperts.com/requirements/CT/CRT-292] \r\n # introduce portfolio summary and related metrics: [https://confluence.in.devexperts.com/requirements/CT/CRT-293]\r\n # update open positions section according to: [https://confluence.in.devexperts.com/requirements/CT/CRT-294] \r\n # update transactions section according to: [https://confluence.in.devexperts.com/requirements/CT/CRT-295] \r\n # update cash adjustment section according to: [https://confluence.in.devexperts.com/requirements/CT/CRT-296] \r\n # Transaction ID should be renamed to Transaction Code in all Transaction and Cash Adjustment sections:\r\n ## [https://confluence.in.devexperts.com/requirements/CT/CRT-338] \r\n ## [https://confluence.in.devexperts.com/requirements/CT/CRT-339] \r\n # remove closed positions\r\n # Adjust pdf layout (all tables should be visible, printable, with correct margins etc.)\r\n\r\nExample: [^Account Statement for default_bro1-E_v6.html]",
+      "fetched_utc": "2026-06-12T10:23:10Z"
+    },
+    "CRT-93": {
+      "summary": "Add Clearing Code to Reconciliation, and Transactions widget",
+      "labels": [],
+      "components": [],
+      "description": "*To Do:*\r\n||Reconciliation||Yogi||\r\n|*WebBroker \"Transactions\" widget:*\r\nAdd \"Portfolio Code\" (=Clearing Code) column with filtering (also should be applied for CSV Export)\r\n * Transaction Upload function should be hidden\r\n * Transaction Create/Edit action should be hidden|[https://confluence.in.devexperts.com/requirements/CT/CRT-300] |\r\n|*Reconciliation* From the perspective of Reconciliation, the Account should be matched based on a pair of parameters: Portfolio Code and Account Code. Therefore: \r\n*Positions and Balances Files should also include an additional \"Portfolio Code\" parameter. Therefore, the account matching should work based on a pair of parameters: Portfolio Code and Account Code.\r\n*Job Log messages should also show Portfolio Code: <Portfolio Code> and Account: <Account Code> as an \"Account\".|Simplified Reconciliation Files Formats: [https://confluence.in.devexperts.com/requirements/CT/CRT-315] \r\nPositions Reconciliation: [https://confluence.in.devexperts.com/requirements/CT/CRT-314] \r\nCash Reconciliation: [https://confluence.in.devexperts.com/requirements/CT/CRT-313] \r\nReconciliation Job Log organization: [https://confluence.in.devexperts.com/requirements/CT/CRT-317] |\r\n|*Break Report:*\r\nThe Break Report File should include two additional columns, \"System Portfolio Code\" (aka Clearing Code) and \"File Portfolio Code\"|[https://confluence.in.devexperts.com/requirements/CT/CRT-321] |",
+      "fetched_utc": "2026-06-12T10:23:10Z"
+    }
+  }
+}

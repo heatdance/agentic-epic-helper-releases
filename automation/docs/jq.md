@@ -33,7 +33,7 @@ There is **no** vendored `jq.exe` in this repo — use system PATH.
 |-----------|---------|
 | **Inspect** epic/harness JSON (~60+ lines or need a subset) | **Yes** — run filter, summarize output in chat |
 | **Edit / emit** durable `*-*.json` | **No** requirement — Read/write the file; jq optional for spot-check |
-| **Schema / pipeline gate** | **No** — use `discover_verify.py`, `calibrate_verify.py`, `crtqa_env_probe.py`, etc. |
+| **Schema / pipeline gate** | **No** — use `discover_verify.py`, `calibrate_verify.py`, `crtqa_console_probe.py`, etc. |
 | **Small JSON** (&lt; ~60 lines) | Optional |
 | **Invalid JSON** | Fix file or use Python; jq will error |
 | **Repo-wide file find** | `grep` / Glob — not jq |

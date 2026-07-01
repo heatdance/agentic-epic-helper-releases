@@ -53,7 +53,7 @@ def apply(root: Path) -> None:
         lines = [
             ln
             for ln in text.splitlines()
-            if "CLEAN:" not in ln and "clean.md" not in ln and "clean_pipeline" not in ln
+            if "CLEAN:" not in ln and "clean.md" not in ln and "clean_release" not in ln
         ]
         filtered = []
         skip = False

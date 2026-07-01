@@ -1,6 +1,39 @@
 {
-  "schema_version": 2,
-  "_comment": "TBD allowlist/forbidden patterns for TEST-PREP crtqa_outline profile. Agent executes templates only—no live execution trade during PREP. v3.1: expansion_policy.",
+  "schema_version": 4,
+  "_comment": "TBD allowlist/forbidden patterns for TEST-PREP profiles. scenario_intent (v3 default): docs/test-prep-scenario-intent-contract.json. Legacy crtqa_outline below.",
+  "profiles": {
+    "scenario_intent": {
+      "default": true,
+      "tbd_allowlist": {
+        "tagged_gaps": ["[oracle:TBD]", "[tolerance:TBD]"],
+        "note": "No session literals in actions — use plain English; formulas in results with formula_provenance"
+      },
+      "tbd_forbidden_patterns": [
+        {
+          "id": "bare_tbd",
+          "regex": "(?<!:)\\[TBD\\](?!:)",
+          "message": "Bare [TBD] forbidden; use plain English intent or [oracle:TBD] in results only"
+        },
+        {
+          "id": "attach_tbd",
+          "regex": "\\[attach:TBD\\]",
+          "message": "[attach:TBD] is crtqa_outline only; scenario_intent has no attach steps"
+        },
+        {
+          "id": "ui_placeholder",
+          "regex": "<(username|account_code|instrument_symbol)>",
+          "message": "Angle-bracket session literals forbidden in scenario_intent actions"
+        }
+      ],
+      "expansion_policy": {
+        "one_bundle_per_scenario_group": "Each scenario_groups[] row → one test_bundles[] entry; variant_sequence → one intent step per check variant"
+      }
+    },
+    "crtqa_outline": {
+      "default": false,
+      "legacy": true
+    }
+  },
   "profile": "crtqa_outline",
   "tbd_allowlist": {
     "session_literals": [
@@ -56,15 +89,23 @@
   "expansion_policy": {
     "single_pair_per_case_outline_row": {
       "applies_when": {
-        "pattern_ref_any": ["ladder_step"],
+        "pattern_ref_any": [
+          "ladder_step",
+          "watchlist_tier_by_qty",
+          "position_first_tier_quote",
+          "console_show_prices_first_tier",
+          "midpoint_invariant_observe",
+          "mark_from_midpoint_observe",
+          "console_config_show"
+        ],
         "verification_class_any": ["stateful_ladder", "rounding_matrix"]
       },
       "rules": [
         "One top-level numbered Action and one numbered Result per case_outline[] row.",
-        "command_patterns.ladder_step lines are sub-steps inside that Action (bullets or indented lines), not separate numbered pairs.",
-        "Results summarize observable metrics for the row; use [oracle:TBD] for deferred numerics."
+        "command_patterns[pattern_ref] lines are sub-steps inside that Action (bullets or indented lines), not separate numbered pairs.",
+        "Results summarize observable metrics for the row; use [oracle:TBD] for deferred numerics or cite oracle rule enum when topology loaded."
       ],
-      "anti_pattern": "Do not emit N numbered Action/Result pairs for N lines in command_patterns.ladder_step."
+      "anti_pattern": "Do not emit N numbered Action/Result pairs for N lines in command_patterns[pattern_ref]."
     }
   },
   "command_patterns": {
@@ -76,6 +117,24 @@
       "show position_metrics_from_publisher"
     ],
     "ladder_step_note": "Literary template in Actions only; agent must not execute during PREP."
+  },
+  "observation_pattern_templates": {
+    "watchlist_tier_by_qty": [
+      "Observe Watchlist bid/ask for default order qty; compare to TextConfiguration tier closest >= qty"
+    ],
+    "position_first_tier_quote": [
+      "Observe Position Book bid/ask from first tier Quote stream only"
+    ],
+    "console_show_prices_first_tier": [
+      "show prices for <instrument_symbol>",
+      "verify bid/ask from first TextConfiguration tier"
+    ],
+    "midpoint_invariant_observe": [
+      "Compare midpoint across account groups on mark column surfaces"
+    ],
+    "mark_from_midpoint_observe": [
+      "Verify mark column equals midpoint for FX_SPOT on configured surfaces"
+    ]
   },
   "stateful_ladder_requirements": {
     "min_template_markers_per_case": 2,

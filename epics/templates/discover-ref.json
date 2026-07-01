@@ -1,9 +1,9 @@
 {
-  "_comment": "TEST-DISCOVER pipeline output schema v3. Final instance: epics/<KEY>/<KEY>-discover.json (or shadow EpicDir). Single durable JSON only—no paired .md in v1. Do not persist secrets; do not store /temp/ path segments or raw credentials. discovery_status: complete requires obligation_closure.verifier_passed when emitting complete. v1/v2 instances remain readable; re-run TEST-DISCOVER to upgrade.",
+  "_comment": "TEST-DISCOVER linker-only (draft_truth_v2). Final: epics/<KEY>/<KEY>-discover.json. No browser/fe_credentials on emit. Contract: docs/discover-linker-contract.json",
   "schema_version": 3,
   "epic_key": null,
   "discovery_status": null,
-  "_discovery_status": "complete | incomplete | aborted — complete only when obligation_closure.verifier_passed is true; generation complete also requires setup depth rules (see test-discover.md)",
+  "_discovery_status": "complete | incomplete — linker: complete when obligation_closure.verifier_passed and discover_verify --mode linker passes",
   "sources": {
     "jira_fetched_at": null,
     "ref_path": null,
@@ -17,13 +17,27 @@
     "cold_gate_resolved_at": null,
     "discover_schema_version": 3,
     "discover_run_started_at": null,
-    "discovery_mode": "generation",
+    "discovery_mode": "linker_only",
+    "_discovery_mode": "linker_only only in generation; legacy generation/benchmark values readable for old epics",
     "crtqa_index_enabled": false,
     "fe_exploration_waived": false,
     "_fe_exploration_waived": "true when fe_exploration_waived=yes on trigger after Phase 0b stop; caps dxtrade5/webbroker Chrome at shell_only.",
     "_discover_run_started_at": "ISO-8601 set once when Step A starts after Phase 0 pass; all validation_log.at must be >= this.",
     "_cold_gate_resolved_at": "Optional ISO-8601 when operator re-ran after TEST-DISCOVER … proceed and Phase 0 passed.",
-    "_crtqa_index_enabled": "true when crtqa_index=yes on trigger."
+    "_crtqa_index_enabled": "true when crtqa_index=yes on trigger.",
+    "topology_loaded": false,
+    "_topology_loaded": "true when ref and/or coverage expose verification_topology fields consumed in Step A (pricing_oracle_rules, jira_scenario_surfaces, emit_layout, oracle_rule_id, delivery_status).",
+    "ref_topology_fields": [],
+    "_ref_topology_fields": "Subset of ref.verification_topology paths jq-loaded in Step A; e.g. pricing_oracle_rules, jira_scenario_surfaces, delivery_notes.",
+    "principal_loaded": false,
+    "ref_principal_fields": [],
+    "_ref_principal_fields": "e.g. obligations_proposed.downstream_hints, verification_topology.principal_coverage_threads"
+  },
+  "principal_provenance": null,
+  "_principal_provenance": {
+    "ref_path": "epics/<KEY>/<KEY>-ref.json",
+    "fields_consumed": ["obligations_proposed.downstream_hints", "verification_topology.principal_coverage_threads"],
+    "copied_at": "ISO-8601"
   },
   "obligation_closure": {
     "primary_count": null,
@@ -46,6 +60,8 @@
     "_evidence_need_values": "ui | console | sql | api | pr | doc_only",
     "disposition": "pending | affordance_mapped | fixture_need_mapped | prerequisite_mapped | tooling_blocked | scope_gap",
     "disposition_note": null,
+    "_disposition_note_delivery_example": "delivery_known_fail: gap-001 / dn-001 blocks Derivatives widget probe (analysis exploration_suppressed); not scope_gap",
+    "_disposition_note_deferred_example": "deferred_in_check: XT-7911 ladder numerics deferred per analysis; fixture_need_mapped or existing deferral — not delivery tooling_blocked",
     "affordance_ids": [],
     "fixture_need_ids": [],
     "prerequisite_keys": []
@@ -53,10 +69,14 @@
   "fixture_needs": [],
   "_fixture_needs_item": {
     "id": "fix-001",
-    "kind": "weighted_avg_fx_spot_account | console_ladder_session | webbroker_dealer_metrics | unknown",
+    "kind": "account_group_environment_setup | weighted_avg_fx_spot_account | console_ladder_session | webbroker_dealer_metrics | dxtrade5_retail_positions | unknown",
     "surfaces": [],
     "linked_check_ids": [],
-    "derivation": "coverage_matrix_m004 | check_surfaces | ref_client_shell",
+    "linked_obligation_ids": [],
+    "_linked_obligation_ids": "Required for ref_principal_provision fixture rows (Round 2 step 4).",
+    "topology_surface_id": null,
+    "_topology_surface_id": "Optional link to ref.verification_topology.jira_scenario_surfaces[].id for shell_first batching.",
+    "derivation": "coverage_matrix_m004 | check_surfaces | ref_client_shell | ref_principal_provision",
     "setup_depth": "classified_only | shell_only | command_family | probe_executed",
     "affordance_ids": [],
     "notes": "No Jira key; operator-facing gap text only"
@@ -158,7 +178,7 @@
     "required_when_note": "Why this gate applied (ties to tooling.intent required).",
     "actions": ["Numbered operator steps; no secrets; no temp/ path segments in any string."],
     "documentation_refs": [
-      "automation/tools/tunnel/README.md",
+      "automation/archive/legacy-ctqa-env/tunnel/README.md",
       "automation/tools/crtqa-console/README.md",
       ".cursor/commands/crtqa-console.md"
     ]
@@ -186,7 +206,19 @@
     "artifacts": [],
     "_artifacts_example": [{ "kind": "widget_label_list | sql_shape | dxcore_command_family", "sanitized_detail": null }],
     "status": "satisfied | partial | blocked | skipped",
-    "blocked_reason": null
+    "blocked_reason": null,
+    "topology_surface_id": null,
+    "harness_location_ref": null,
+    "_harness_location_ref": "dxtrade5/webbroker location id from docs/*-harness/locations/ when linker maps UI checks",
+    "oracle_binding": null,
+    "_oracle_binding": {
+      "oracle_rule_id": "por-001",
+      "oracle_rule": "text_configuration_closest_gte_qty | first_tier_quote | console_show_prices_first_tier | midpoint_invariant | mark_from_midpoint | unresolved",
+      "volume_control": "order_default_qty | first_tier | not_applicable",
+      "surface": "dxtrade5_watchlist | dxtrade5_positions | dxtrade5_derivatives | console_show_prices | cross_group | fx_spot_mark",
+      "source": "ref | coverage_check | merged"
+    },
+    "_blocked_reason_oracle_example": "oracle_unresolved when ref pricing_oracle_rules[].oracle_rule is unresolved — ANALYSE owns gap"
   },
   "exploration_budgets": {
     "max_cycles_frontend": null,

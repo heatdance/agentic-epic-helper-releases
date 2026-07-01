@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Preflight and compare gates for /crtqa-calibrate.
+Preflight and compare gates for /epic-calibrate.
 
 Examples:
   python automation/tools/calibrate_verify.py --mode gold_gate --epic CRT-639

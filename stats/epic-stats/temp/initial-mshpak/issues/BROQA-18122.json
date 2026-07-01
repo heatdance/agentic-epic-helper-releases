@@ -1,0 +1,70 @@
+{
+  "id": "1471941",
+  "key": "BROQA-18122",
+  "summary": "[Release notes] [CRT-109] Support Tax leg for cash transfers - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1471941/worklog/5435786",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2024-01-22T10:25:12.415+0000",
+        "updated": "2024-01-22T10:25:43.788+0000",
+        "started": "2024-01-19T09:00:00.000+0000",
+        "timeSpent": "4h",
+        "timeSpentSeconds": 14400,
+        "id": "5435786",
+        "issueId": "1471941"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "4h",
+    "remainingEstimate": "2h 50m",
+    "timeSpent": "4h",
+    "originalEstimateSeconds": 14400,
+    "remainingEstimateSeconds": 10200,
+    "timeSpentSeconds": 14400
+  },
+  "customfield_11250": 4.0,
+  "customfield_10006": null
+}

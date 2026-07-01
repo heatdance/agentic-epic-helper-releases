@@ -1,0 +1,70 @@
+{
+  "id": "1632787",
+  "key": "CRTQA-1646",
+  "summary": "[Epic Testing] [CRT-290]  Mapping algorithm update for Hong-Kong CFD_STOCK",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1632787/worklog/6024152",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-10-25T14:38:18.748+0000",
+        "updated": "2024-10-25T14:39:14.246+0000",
+        "started": "2024-10-25T10:38:00.000+0000",
+        "timeSpent": "4h 28m",
+        "timeSpentSeconds": 16080,
+        "id": "6024152",
+        "issueId": "1632787"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "1d",
+    "remainingEstimate": "3h 32m",
+    "timeSpent": "4h 28m",
+    "originalEstimateSeconds": 28800,
+    "remainingEstimateSeconds": 12720,
+    "timeSpentSeconds": 16080
+  },
+  "customfield_11250": 8.0,
+  "customfield_10006": null
+}

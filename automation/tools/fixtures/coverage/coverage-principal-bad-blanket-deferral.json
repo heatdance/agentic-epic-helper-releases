@@ -1,0 +1,64 @@
+{
+  "_comment": "Negative fixture: blanket Dimensions deferral without obligation_ids; ref ref-639-topology-minimal",
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "epic_ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+  "sources": {
+    "jira_fetched_at": "2026-06-18T12:00:00Z",
+    "epic_ref_loaded_at": "2026-06-18T12:00:00Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "fixture bad principal"
+  },
+  "archetype": "metrics_calculation",
+  "emit_layout": "formula_first",
+  "epic_verification_focus": {
+    "statement": "Verify weighted-average cash settlement formulas and ladders for FX Spot per CRT-1738–1743 configuration and metric parity.",
+    "source": "epic_ref_proposed",
+    "keywords": ["FX Spot"]
+  },
+  "principal_provenance": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+    "focus_source": "epic_ref_proposed",
+    "threads_consumed": [],
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Weighted-average metrics",
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["dxtrade5"],
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": ["obl-005"]
+    }
+  ],
+  "obligations_coverage": {
+    "obl-003": { "status": "deferred_in_check", "check_id": "chk-bad-001" },
+    "obl-005": { "status": "covered", "check_id": "chk-001" }
+  },
+  "checks": [
+    {
+      "id": "chk-001",
+      "section": "## Primary focus",
+      "scenario_line": "- [CRT-1738] Average fill price ladder on partial close.",
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": ["obl-005"],
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-bad-001",
+      "section": "## Dimensions",
+      "scenario_line": "- ! reason: epic silent on multi-group quote permutations",
+      "ambiguity": { "flag": "!", "reason": "epic silent on multi-group quote permutations" },
+      "requirement_keys": [],
+      "obligation_ids": [],
+      "verification_role": "out_of_epic"
+    }
+  ],
+  "explicitly_out_of_scope": [],
+  "grounding_audit": { "by_check_id": [], "ungrounded_check_ids": [] },
+  "anti_pattern_findings": [],
+  "validation_log": [],
+  "smart_checklist_markdown": null
+}

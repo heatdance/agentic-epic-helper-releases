@@ -62,7 +62,27 @@ SHOW_IN_ACTION_RE = re.compile(r"\bshow\b", re.I)
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 LADDER_PATH = REPO_ROOT / "docs" / "exploration-depth-ladder.json"
+TOPOLOGY_PATH = REPO_ROOT / "docs" / "precon-topology-contract.json"
+PRECON_PRINCIPAL_CONTRACT_PATH = REPO_ROOT / "docs" / "precon-principal-contract.json"
 DEPTH_ORDER = ["smoke", "discover_probe", "precon_drill", "prep_verify_view"]
+
+WIDGET_PATTERN_KEYS = frozenset(
+    {
+        "watchlist_tier_by_qty",
+        "position_first_tier_quote",
+        "console_show_prices_first_tier",
+        "midpoint_invariant_observe",
+        "mark_from_midpoint_observe",
+    }
+)
+
+ORACLE_RULE_TO_PATTERN: dict[str, str] = {
+    "text_configuration_closest_gte_qty": "watchlist_tier_by_qty",
+    "first_tier_quote": "position_first_tier_quote",
+    "console_show_prices_first_tier": "console_show_prices_first_tier",
+    "midpoint_invariant": "midpoint_invariant_observe",
+    "mark_from_midpoint": "mark_from_midpoint_observe",
+}
 
 
 def _load_json(path: Path) -> dict[str, Any] | None:
@@ -85,6 +105,401 @@ def _primary_check_ids(coverage: dict[str, Any]) -> list[str]:
         if chk.get("verification_role") == "primary":
             ids.append(str(cid))
     return sorted(set(ids))
+
+
+def _resolve_archetype_emit(
+    coverage: dict[str, Any],
+    ref: dict[str, Any] | None,
+) -> tuple[str, str]:
+    arch = coverage.get("archetype")
+    emit = coverage.get("emit_layout")
+    if ref and not arch:
+        ea = ref.get("epic_archetype") or {}
+        if isinstance(ea, dict) and ea.get("value"):
+            arch = ea.get("value")
+    return str(arch or ""), str(emit or "")
+
+
+def _is_metrics_archetype(arch: str, emit: str) -> bool:
+    return arch == "metrics_calculation" or emit == "formula_first"
+
+
+def _is_widget_archetype(arch: str, emit: str) -> bool:
+    return arch == "widget_ui" or emit == "shell_first"
+
+
+def _delivery_blocked_check_ids(
+    coverage: dict[str, Any],
+    discover: dict[str, Any] | None,
+) -> set[str]:
+    blocked: set[str] = set()
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        cid = chk.get("id")
+        if not cid:
+            continue
+        if str(chk.get("delivery_status") or "").lower() in ("failed", "excluded"):
+            blocked.add(str(cid))
+    if discover:
+        for row in discover.get("obligation_ledger") or []:
+            if not isinstance(row, dict):
+                continue
+            if row.get("disposition") == "tooling_blocked" and row.get("check_id"):
+                blocked.add(str(row["check_id"]))
+    return blocked
+
+
+def _pattern_keys(cp: dict[str, Any]) -> set[str]:
+    return {str(k) for k in cp if not str(k).startswith("_") and cp.get(k)}
+
+
+def _verify_command_patterns_archetype(
+    cp: dict[str, Any],
+    *,
+    coverage: dict[str, Any],
+    ref: dict[str, Any] | None,
+    strict_topology: bool,
+    errors: list[str],
+) -> None:
+    if not isinstance(cp, dict) or not cp:
+        errors.append("schema v5: command_patterns must be non-empty object")
+        return
+    arch, emit = _resolve_archetype_emit(coverage, ref)
+    keys = _pattern_keys(cp)
+    if _is_metrics_archetype(arch, emit) or (not arch and not emit):
+        if not cp.get("ladder_step"):
+            errors.append(
+                "schema v5: command_patterns.ladder_step required for "
+                "metrics_calculation / formula_first"
+            )
+    elif _is_widget_archetype(arch, emit):
+        widget_keys = keys & WIDGET_PATTERN_KEYS
+        if not widget_keys:
+            errors.append(
+                "schema v5: widget_ui / shell_first requires >=1 observation "
+                "command_patterns key (e.g. watchlist_tier_by_qty)"
+            )
+        if keys == {"ladder_step"}:
+            errors.append(
+                "schema v5: ladder_step must not be the only command_patterns "
+                "key on widget_ui / shell_first epics"
+            )
+        if strict_topology and len(widget_keys) < 1:
+            errors.append(
+                "strict-topology: widget/shell_first needs >=1 widget/console "
+                "observation pattern"
+            )
+    elif not cp.get("ladder_step"):
+        errors.append("schema v5: command_patterns.ladder_step required")
+
+
+def _outline_pattern_refs(precon: dict[str, Any]) -> dict[str, set[str]]:
+    by_chk: dict[str, set[str]] = {}
+    for row in precon.get("test_skeleton") or []:
+        if not isinstance(row, dict):
+            continue
+        for item in row.get("case_outline") or []:
+            if not isinstance(item, dict):
+                continue
+            chk = str(item.get("check_id") or "")
+            pref = item.get("pattern_ref")
+            if chk and pref:
+                by_chk.setdefault(chk, set()).add(str(pref))
+    return by_chk
+
+
+def _verify_strict_topology(
+    coverage: dict[str, Any],
+    precon: dict[str, Any],
+    *,
+    discover: dict[str, Any] | None,
+    ref: dict[str, Any] | None,
+    errors: list[str],
+) -> None:
+    if ref is None:
+        errors.append("strict-topology: --ref required")
+        return
+
+    sources = precon.get("sources") or {}
+    topology_loaded = bool(sources.get("topology_loaded"))
+    if not topology_loaded:
+        return
+
+    cp = precon.get("command_patterns") or {}
+    arch, emit = _resolve_archetype_emit(coverage, ref)
+    keys = _pattern_keys(cp) if isinstance(cp, dict) else set()
+
+    if _is_metrics_archetype(arch, emit) and not cp.get("ladder_step"):
+        errors.append("strict-topology: metrics epic missing command_patterns.ladder_step")
+
+    if _is_widget_archetype(arch, emit):
+        widget_keys = keys & WIDGET_PATTERN_KEYS
+        if len(widget_keys) < 1:
+            errors.append(
+                "strict-topology: widget/shell_first needs >=1 observation pattern key"
+            )
+        if keys == {"ladder_step"}:
+            errors.append(
+                "strict-topology: ladder_step forbidden as sole pattern on widget epic"
+            )
+
+    if not discover:
+        return
+
+    outline_refs = _outline_pattern_refs(precon)
+    cp_keys = keys
+    checks_by_id = {
+        str(c.get("id")): c
+        for c in (coverage.get("checks") or [])
+        if isinstance(c, dict) and c.get("id")
+    }
+
+    for aff in discover.get("verification_affordances") or []:
+        if not isinstance(aff, dict):
+            continue
+        binding = aff.get("oracle_binding")
+        if not isinstance(binding, dict):
+            continue
+        rule = str(binding.get("oracle_rule") or "")
+        if not rule:
+            continue
+        expected_pattern = ORACLE_RULE_TO_PATTERN.get(rule)
+        for chk in aff.get("linked_check_ids") or []:
+            chk = str(chk)
+            if chk not in _primary_check_ids(coverage):
+                continue
+            cov_chk = checks_by_id.get(chk) or {}
+            if cov_chk.get("oracle_rule_id") and not outline_refs.get(chk):
+                errors.append(
+                    f"strict-topology: check {chk} has oracle_rule_id but no "
+                    "case_outline.pattern_ref"
+                )
+            if expected_pattern:
+                refs = outline_refs.get(chk) or set()
+                if expected_pattern not in refs and expected_pattern not in cp_keys:
+                    if refs and not (refs & cp_keys):
+                        errors.append(
+                            f"strict-topology: check {chk} oracle {rule!r} expects "
+                            f"pattern_ref {expected_pattern!r}"
+                        )
+
+    blocked = _delivery_blocked_check_ids(coverage, discover)
+    excluded: set[str] = set()
+    for row in precon.get("excluded_checks_with_reason") or []:
+        if isinstance(row, dict) and row.get("check_id"):
+            excluded.add(str(row["check_id"]))
+    covered: set[str] = set()
+    for row in precon.get("test_skeleton") or []:
+        if isinstance(row, dict):
+            for cid in row.get("covers_check_ids") or []:
+                covered.add(str(cid))
+
+    for cid in blocked:
+        if cid not in _primary_check_ids(coverage):
+            continue
+        if cid in covered and cid not in excluded:
+            errors.append(
+                f"strict-topology: delivery-blocked check {cid} still in "
+                "test_skeleton covers_check_ids"
+            )
+        if cid not in excluded and cid not in covered:
+            errors.append(
+                f"strict-topology: delivery-blocked check {cid} must appear in "
+                "excluded_checks_with_reason"
+            )
+
+
+def _provision_obligations(ref: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for obl in ref.get("obligations_proposed") or []:
+        if not isinstance(obl, dict):
+            continue
+        oid = obl.get("id")
+        if not oid:
+            continue
+        hints = obl.get("downstream_hints") or {}
+        if isinstance(hints, dict) and hints.get("needs_environment_provision"):
+            out[str(oid)] = obl
+        elif obl.get("kind") == "environment_setup":
+            out[str(oid)] = obl
+    return out
+
+
+def _provision_fixtures_ref_principal(discover: dict[str, Any]) -> list[dict[str, Any]]:
+    out: list[dict[str, Any]] = []
+    for fix in discover.get("fixture_needs") or []:
+        if isinstance(fix, dict) and fix.get("derivation") == "ref_principal_provision":
+            out.append(fix)
+    return out
+
+
+def _ref_needs_dual_account_contrast(ref: dict[str, Any]) -> bool:
+    for obl in ref.get("obligations_proposed") or []:
+        if not isinstance(obl, dict):
+            continue
+        hints = obl.get("downstream_hints") or {}
+        if isinstance(hints, dict) and hints.get("needs_dual_account_contrast"):
+            return True
+    return False
+
+
+def _precon_validation_log_steps(precon: dict[str, Any]) -> set[str]:
+    steps: set[str] = set()
+    for row in precon.get("validation_log") or []:
+        if isinstance(row, dict) and row.get("step"):
+            steps.add(str(row["step"]))
+    return steps
+
+
+def _discover_deferral_keyed_skip(discover: dict[str, Any] | None) -> bool:
+    if discover is None:
+        return False
+    for row in discover.get("validation_log") or []:
+        if isinstance(row, dict) and row.get("step") == "phaseE_skipped_deferral_keyed":
+            return True
+    return False
+
+
+def _deferral_keyed_check_ids(coverage: dict[str, Any]) -> set[str]:
+    ids: set[str] = set()
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        cid = chk.get("id")
+        if not cid:
+            continue
+        if chk.get("verification_role") == "out_of_epic" and chk.get(
+            "coverage_thread"
+        ) == "deferral_only":
+            ids.add(str(cid))
+    return ids
+
+
+def _ref_has_principal_precon_handoff(
+    ref: dict[str, Any],
+    discover: dict[str, Any] | None,
+) -> bool:
+    if _provision_obligations(ref):
+        return True
+    if discover is None:
+        return False
+    sources = discover.get("sources") or {}
+    return isinstance(sources, dict) and sources.get("principal_loaded") is True
+
+
+def verify_strict_precon_principal(
+    coverage: dict[str, Any],
+    precon: dict[str, Any],
+    ref: dict[str, Any],
+    discover: dict[str, Any] | None,
+) -> list[str]:
+    errors: list[str] = []
+    if discover is None:
+        errors.append("strict-principal: --discover required")
+        return errors
+
+    if not _ref_has_principal_precon_handoff(ref, discover):
+        return errors
+
+    sources = precon.get("sources") or {}
+    if not isinstance(sources, dict):
+        sources = {}
+    discover_sources = discover.get("sources") or {}
+    if not isinstance(discover_sources, dict):
+        discover_sources = {}
+
+    provision_obls = _provision_obligations(ref)
+    provision_fixtures = _provision_fixtures_ref_principal(discover)
+    log_steps = _precon_validation_log_steps(precon)
+
+    expects_loaded = bool(provision_obls) or discover_sources.get("principal_loaded") is True
+    if expects_loaded and not sources.get("principal_loaded"):
+        errors.append(
+            "strict-principal: sources.principal_loaded must be true "
+            "when ref provision or discover principal_loaded"
+        )
+
+    if expects_loaded and "phase1-principal" not in log_steps:
+        errors.append(
+            "strict-principal: validation_log missing phase1-principal"
+        )
+
+    if provision_obls and provision_fixtures:
+        if "phase3-provision" not in log_steps:
+            errors.append(
+                "strict-principal: validation_log missing phase3-provision"
+            )
+
+        setup_cluster: dict[str, Any] | None = None
+        for cluster in precon.get("precon_clusters") or []:
+            if isinstance(cluster, dict) and str(cluster.get("id")) == "pc-setup":
+                setup_cluster = cluster
+                break
+        if setup_cluster is None:
+            errors.append(
+                "strict-principal: precon_clusters missing pc-setup for "
+                "ref_principal_provision fixture"
+            )
+        else:
+            for fix in provision_fixtures:
+                fix_id = str(fix.get("id") or "")
+                sat_fix = {
+                    str(x)
+                    for x in (setup_cluster.get("satisfies_fixture_ids") or [])
+                }
+                sat_chk = {
+                    str(x)
+                    for x in (setup_cluster.get("satisfies_check_ids") or [])
+                }
+                if fix_id and fix_id not in sat_fix:
+                    errors.append(
+                        f"strict-principal: pc-setup must satisfy_fixture_ids "
+                        f"include {fix_id!r}"
+                    )
+                for cid in fix.get("linked_check_ids") or []:
+                    cid_s = str(cid)
+                    if cid_s not in sat_chk:
+                        errors.append(
+                            f"strict-principal: pc-setup satisfies_check_ids "
+                            f"must include {cid_s!r}"
+                        )
+
+        if _ref_needs_dual_account_contrast(ref):
+            ph = precon.get("session_placeholders") or {}
+            if not isinstance(ph, dict):
+                ph = {}
+            for token in ("group_key_enrg", "group_key_oppt"):
+                if token not in ph:
+                    errors.append(
+                        f"strict-principal: session_placeholders missing "
+                        f"{token!r} when needs_dual_account_contrast"
+                    )
+
+    deferral_ids = _deferral_keyed_check_ids(coverage)
+    if deferral_ids or _discover_deferral_keyed_skip(discover):
+        if "phase4_skipped_deferral_keyed" not in log_steps:
+            errors.append(
+                "strict-principal: validation_log missing "
+                "phase4_skipped_deferral_keyed"
+            )
+        excluded: set[str] = set()
+        for row in precon.get("excluded_checks_with_reason") or []:
+            if isinstance(row, dict) and row.get("check_id"):
+                excluded.add(str(row["check_id"]))
+        covered: set[str] = set()
+        for row in precon.get("test_skeleton") or []:
+            if isinstance(row, dict):
+                for cid in row.get("covers_check_ids") or []:
+                    covered.add(str(cid))
+        for cid in deferral_ids:
+            if cid in covered and cid not in excluded:
+                errors.append(
+                    f"strict-principal: deferral-keyed check {cid} in "
+                    "test_skeleton without excluded_checks_with_reason"
+                )
+
+    return errors
 
 
 def _walk_strings(obj: Any, path: str = "$") -> list[tuple[str, str]]:
@@ -350,6 +765,9 @@ def verify(
     precon: dict[str, Any],
     *,
     discover: dict[str, Any] | None = None,
+    ref: dict[str, Any] | None = None,
+    strict_topology: bool = False,
+    strict_principal: bool = False,
     md_path: Path | None = None,
 ) -> list[str]:
     errors: list[str] = []
@@ -391,8 +809,13 @@ def verify(
         if not isinstance(ph, dict) or not ph:
             errors.append("schema v5: session_placeholders must be non-empty object")
         cp = precon.get("command_patterns")
-        if not isinstance(cp, dict) or not cp.get("ladder_step"):
-            errors.append("schema v5: command_patterns.ladder_step required")
+        _verify_command_patterns_archetype(
+            cp if isinstance(cp, dict) else {},
+            coverage=coverage,
+            ref=ref,
+            strict_topology=strict_topology,
+            errors=errors,
+        )
         outline_by_chk: dict[str, int] = {}
         for row in skeleton:
             if not isinstance(row, dict):
@@ -616,8 +1039,74 @@ def verify(
         if MD_FOOTER_RE.search(md_text):
             errors.append("jira hygiene (precon.md): bundle/ladder footer")
 
+    if strict_topology:
+        _verify_strict_topology(
+            coverage,
+            precon,
+            discover=discover,
+            ref=ref,
+            errors=errors,
+        )
+
+    if strict_principal:
+        if ref is None:
+            errors.append("strict-principal: --ref required")
+        else:
+            errors.extend(
+                verify_strict_precon_principal(coverage, precon, ref, discover)
+            )
+
     for w in warnings:
         print(f"warning: {w}", file=sys.stderr)
+
+    return errors
+
+
+def verify_draft_truth_precon(
+    coverage: dict[str, Any],
+    precon: dict[str, Any],
+) -> list[str]:
+    """Draft+truth precon: frozen coverage; console patterns grounded when probes exist."""
+    errors: list[str] = []
+    sources = coverage.get("sources") if isinstance(coverage.get("sources"), dict) else {}
+    if not sources.get("coverage_frozen_at"):
+        errors.append(
+            "coverage.sources.coverage_frozen_at required for draft_truth precon"
+        )
+    if coverage.get("coverage_pass") == 2 and sources.get("reinforce_inputs"):
+        errors.append(
+            "draft_truth precon: coverage_pass 2 with reinforce_inputs suggests legacy reinforce path"
+        )
+
+    checks_by_id = {
+        str(c["id"]): c
+        for c in (coverage.get("checks") or [])
+        if isinstance(c, dict) and c.get("id")
+    }
+    cp = precon.get("command_patterns") if isinstance(precon.get("command_patterns"), dict) else {}
+    cp_text = json.dumps(cp, ensure_ascii=False).lower()
+
+    for cid, chk in checks_by_id.items():
+        shells = chk.get("shell") or []
+        if "console" not in shells:
+            continue
+        probes = chk.get("runtime_probes") or []
+        if not isinstance(probes, list) or not probes:
+            if chk.get("probe_waived"):
+                continue
+            errors.append(f"{cid}: console check missing runtime_probes for draft_truth precon")
+            continue
+        verified = [
+            str(p.get("verified_syntax"))
+            for p in probes
+            if isinstance(p, dict) and p.get("verified_syntax")
+        ]
+        if not verified:
+            continue
+        if not any(v.lower() in cp_text for v in verified):
+            errors.append(
+                f"{cid}: command_patterns must cite runtime_probes.verified_syntax when present"
+            )
 
     return errors
 
@@ -627,13 +1116,33 @@ def main() -> int:
     ap.add_argument("--coverage", type=Path, required=True)
     ap.add_argument("--precon", type=Path, required=True)
     ap.add_argument("--discover", type=Path, default=None)
+    ap.add_argument("--ref", type=Path, default=None, help="Epic ref for topology/principal strict mode")
+    ap.add_argument(
+        "--strict-topology",
+        action="store_true",
+        help="Enforce precon-topology-contract (requires --ref)",
+    )
+    ap.add_argument(
+        "--strict-principal",
+        action="store_true",
+        help="Enforce precon-principal-contract (requires --ref and --discover)",
+    )
+    ap.add_argument(
+        "--mode",
+        choices=("full", "principal", "draft_truth"),
+        default="full",
+        help="principal = principal-only lint (requires --ref, --discover)",
+    )
     ap.add_argument("--md", type=Path, default=None, help="Optional -precon.md Jira paste file")
     args = ap.parse_args()
 
     coverage = _load_json(args.coverage.resolve())
     precon = _load_json(args.precon.resolve())
     discover = _load_json(args.discover.resolve()) if args.discover else None
+    ref = _load_json(args.ref.resolve()) if args.ref else None
     md_path = args.md.resolve() if args.md else None
+
+    strict_princ = args.strict_principal or args.mode == "principal"
 
     if coverage is None:
         print(f"cannot read coverage: {args.coverage}", file=sys.stderr)
@@ -641,8 +1150,30 @@ def main() -> int:
     if precon is None:
         print(f"cannot read precon: {args.precon}", file=sys.stderr)
         return 2
+    if args.strict_topology and ref is None:
+        print("strict-topology requires --ref", file=sys.stderr)
+        return 2
+    if strict_princ and ref is None:
+        print("--ref required with --strict-principal / --mode principal", file=sys.stderr)
+        return 2
+    if strict_princ and discover is None:
+        print("--discover required with --strict-principal / --mode principal", file=sys.stderr)
+        return 2
 
-    errors = verify(coverage, precon, discover=discover, md_path=md_path)
+    if args.mode == "principal":
+        errors = verify_strict_precon_principal(coverage, precon, ref, discover)
+    elif args.mode == "draft_truth":
+        errors = verify_draft_truth_precon(coverage, precon)
+    else:
+        errors = verify(
+            coverage,
+            precon,
+            discover=discover,
+            ref=ref,
+            strict_topology=args.strict_topology,
+            strict_principal=strict_princ,
+            md_path=md_path,
+        )
     if errors:
         print("precon_verify failures:", file=sys.stderr)
         for e in errors:

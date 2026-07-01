@@ -1,0 +1,4448 @@
+{
+  "expand": "schema,names",
+  "startAt": 150,
+  "maxResults": 50,
+  "total": 312,
+  "issues": [
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860521",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860521",
+      "key": "CRTQA-3821",
+      "fields": {
+        "summary": "Client Area - Portfolio Overview - Check Exposure Coverage",
+        "issuelinks": [
+          {
+            "id": "3168481",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168481",
+            "outwardIssue": {
+              "id": "1643761",
+              "key": "CRT-303",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1643761",
+              "fields": {
+                "summary": "Exposure Coverage calculation (HORN-420)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860522",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860522",
+      "key": "CRTQA-3822",
+      "fields": {
+        "summary": "Account List - Check Exposure Coverage",
+        "issuelinks": [
+          {
+            "id": "3168482",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168482",
+            "outwardIssue": {
+              "id": "1643761",
+              "key": "CRT-303",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1643761",
+              "fields": {
+                "summary": "Exposure Coverage calculation (HORN-420)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860523",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860523",
+      "key": "CRTQA-3823",
+      "fields": {
+        "summary": "Account List - Exposure Coverage sorting",
+        "issuelinks": [
+          {
+            "id": "3168484",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168484",
+            "outwardIssue": {
+              "id": "1755484",
+              "key": "XT-4672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1755484",
+              "fields": {
+                "summary": "[CT][WebBroker] Account List - Sorting Not Available for 'Exposure Coverage' Column",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3168483",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168483",
+            "outwardIssue": {
+              "id": "1816856",
+              "key": "XT-5697",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1816856",
+              "fields": {
+                "summary": "[Corner] Account List \u2013 Missing Data in Columns on WebBroker",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3168485",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168485",
+            "outwardIssue": {
+              "id": "1643761",
+              "key": "CRT-303",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1643761",
+              "fields": {
+                "summary": "Exposure Coverage calculation (HORN-420)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860524",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860524",
+      "key": "CRTQA-3824",
+      "fields": {
+        "summary": "Account List - Add new Exposure Coverage filter",
+        "issuelinks": [
+          {
+            "id": "3168475",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168475",
+            "outwardIssue": {
+              "id": "1755518",
+              "key": "XT-4674",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1755518",
+              "fields": {
+                "summary": "[CT][WebBroker] Account List - 'Exposure Coverage' Filter Does Not Apply Correctly",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3168474",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168474",
+            "outwardIssue": {
+              "id": "1816856",
+              "key": "XT-5697",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1816856",
+              "fields": {
+                "summary": "[Corner] Account List \u2013 Missing Data in Columns on WebBroker",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3168476",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168476",
+            "outwardIssue": {
+              "id": "1643761",
+              "key": "CRT-303",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1643761",
+              "fields": {
+                "summary": "Exposure Coverage calculation (HORN-420)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860529",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860529",
+      "key": "CRTQA-3829",
+      "fields": {
+        "summary": "[Corner Trader] Account Selector - Terminated accounts not displayed in account selector",
+        "issuelinks": [
+          {
+            "id": "3168471",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168471",
+            "outwardIssue": {
+              "id": "1688693",
+              "key": "CRT-367",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1688693",
+              "fields": {
+                "summary": " Client Area Improvements - Add Risk Profile to Client Area and Remove Terminated Accounts",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860530",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860530",
+      "key": "CRTQA-3830",
+      "fields": {
+        "summary": "Account List - Check Margin Utilization if Maintenance Margin != 0 and Equity \u2264 0",
+        "issuelinks": [
+          {
+            "id": "3168472",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168472",
+            "outwardIssue": {
+              "id": "1701311",
+              "key": "CRT-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1701311",
+              "fields": {
+                "summary": "Margin Utilization to be 0 when MM is 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1860531",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1860531",
+      "key": "CRTQA-3831",
+      "fields": {
+        "summary": "Account List - Check Margin Utilization if Maintenance Margin=0",
+        "issuelinks": [
+          {
+            "id": "3168473",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3168473",
+            "outwardIssue": {
+              "id": "1701311",
+              "key": "CRT-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1701311",
+              "fields": {
+                "summary": "Margin Utilization to be 0 when MM is 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1864088",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864088",
+      "key": "CRTQA-4219",
+      "fields": {
+        "summary": "Metrics - Check Margin Utilization if Maintenance Margin=0",
+        "issuelinks": [
+          {
+            "id": "3175801",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3175801",
+            "outwardIssue": {
+              "id": "1701311",
+              "key": "CRT-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1701311",
+              "fields": {
+                "summary": "Margin Utilization to be 0 when MM is 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1864093",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864093",
+      "key": "CRTQA-4224",
+      "fields": {
+        "summary": "Metrics - Check Exposure Coverage for Portfolio",
+        "issuelinks": [
+          {
+            "id": "3175798",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3175798",
+            "outwardIssue": {
+              "id": "1643761",
+              "key": "CRT-303",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1643761",
+              "fields": {
+                "summary": "Exposure Coverage calculation (HORN-420)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1864099",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864099",
+      "key": "CRTQA-4230",
+      "fields": {
+        "summary": "Metrics - Check Margin Utilization if Maintenance Margin != 0 and Equity \u2264 0",
+        "issuelinks": [
+          {
+            "id": "3175826",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3175826",
+            "outwardIssue": {
+              "id": "1701311",
+              "key": "CRT-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1701311",
+              "fields": {
+                "summary": "Margin Utilization to be 0 when MM is 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1864534",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864534",
+      "key": "CRTQA-4266",
+      "fields": {
+        "summary": "[Corner] Dropcopy - Check Encoding of FIX TAG 11 (ClOrdID)",
+        "issuelinks": [
+          {
+            "id": "3176559",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3176559",
+            "outwardIssue": {
+              "id": "1782034",
+              "key": "CRT-533",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1782034",
+              "fields": {
+                "summary": "FIX Drop Copy - new tag for order chain ID (Esecuzione parziale e modifica ordine (HORN-508))",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1865238",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1865238",
+      "key": "CRTQA-4722",
+      "fields": {
+        "summary": "Position Book - Add 'Last Trade Date' filter",
+        "issuelinks": [
+          {
+            "id": "3177746",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3177746",
+            "outwardIssue": {
+              "id": "1723495",
+              "key": "DXBRO-843",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1723495",
+              "fields": {
+                "summary": "Adapt new format of Last Trade Time from dxFeed",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1866440",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1866440",
+      "key": "CRTQA-5310",
+      "fields": {
+        "summary": "Account Statement - Report Summary Metrics for Cash Account",
+        "issuelinks": [
+          {
+            "id": "3179642",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3179642",
+            "outwardIssue": {
+              "id": "1645317",
+              "key": "DXBRO-772",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645317",
+              "fields": {
+                "summary": "Account Statement for Futures accounts",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1866441",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1866441",
+      "key": "CRTQA-5311",
+      "fields": {
+        "summary": "Account Statement - Report Summary Metrics for Equity Account",
+        "issuelinks": [
+          {
+            "id": "3179643",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3179643",
+            "outwardIssue": {
+              "id": "1645317",
+              "key": "DXBRO-772",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645317",
+              "fields": {
+                "summary": "Account Statement for Futures accounts",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1866442",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1866442",
+      "key": "CRTQA-5312",
+      "fields": {
+        "summary": "Account Statement - Report Summary Metrics for Futures Accounts",
+        "issuelinks": [
+          {
+            "id": "3179644",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3179644",
+            "outwardIssue": {
+              "id": "1645317",
+              "key": "DXBRO-772",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645317",
+              "fields": {
+                "summary": "Account Statement for Futures accounts",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1866997",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1866997",
+      "key": "CRTQA-5537",
+      "fields": {
+        "summary": "[Corner] 2FA Exclusion - Verify Login Flow for User Included in 2FA Exclusion List",
+        "issuelinks": [
+          {
+            "id": "3182028",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182028",
+            "outwardIssue": {
+              "id": "1864293",
+              "key": "XT-6633",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864293",
+              "fields": {
+                "summary": "2FA exclusion for client users doesn't work",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3180411",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3180411",
+            "outwardIssue": {
+              "id": "1853248",
+              "key": "CRT-588",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1853248",
+              "fields": {
+                "summary": "2FA exclusion for autotests",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1866998",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1866998",
+      "key": "CRTQA-5538",
+      "fields": {
+        "summary": "[Corner] 2FA Exclusion - Verify Login Flow for User Not Included in 2FA Exclusion List",
+        "issuelinks": [
+          {
+            "id": "3182030",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182030",
+            "outwardIssue": {
+              "id": "1864293",
+              "key": "XT-6633",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864293",
+              "fields": {
+                "summary": "2FA exclusion for client users doesn't work",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3180413",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3180413",
+            "outwardIssue": {
+              "id": "1853248",
+              "key": "CRT-588",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1853248",
+              "fields": {
+                "summary": "2FA exclusion for autotests",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1867173",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1867173",
+      "key": "CRTQA-5565",
+      "fields": {
+        "summary": "BRO Demo (Futures) - dxTrade5 - Default Layout",
+        "issuelinks": [
+          {
+            "id": "3180812",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3180812",
+            "outwardIssue": {
+              "id": "1722471",
+              "key": "DXBRO-842",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1722471",
+              "fields": {
+                "summary": "Update the default layout for the Futures WL on XT Demo",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1867174",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1867174",
+      "key": "CRTQA-5566",
+      "fields": {
+        "summary": "BRO Demo (Futures) - dxTrade5 - Default Widgets",
+        "issuelinks": [
+          {
+            "id": "3180813",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3180813",
+            "outwardIssue": {
+              "id": "1722471",
+              "key": "DXBRO-842",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1722471",
+              "fields": {
+                "summary": "Update the default layout for the Futures WL on XT Demo",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868246",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868246",
+      "key": "CRTQA-6424",
+      "fields": {
+        "summary": "Option Chain - Save Selected Future Instrument in Workspace Layout",
+        "issuelinks": [
+          {
+            "id": "3181734",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3181734",
+            "outwardIssue": {
+              "id": "1720248",
+              "key": "XT-4045",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1720248",
+              "fields": {
+                "summary": "[NoCommits] dxTrade5/Webbroker - Changes to Workspace Lost on BROQA",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3181735",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3181735",
+            "outwardIssue": {
+              "id": "1669180",
+              "key": "DXBRO-812",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1669180",
+              "fields": {
+                "summary": "Option Chain for Futures: Add Futures Selection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868247",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868247",
+      "key": "CRTQA-6425",
+      "fields": {
+        "summary": "Option Chain - Future Selection in Instrument Table",
+        "issuelinks": [
+          {
+            "id": "3181736",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3181736",
+            "outwardIssue": {
+              "id": "1669180",
+              "key": "DXBRO-812",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1669180",
+              "fields": {
+                "summary": "Option Chain for Futures: Add Futures Selection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868248",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868248",
+      "key": "CRTQA-6426",
+      "fields": {
+        "summary": "Option Chain - Default Current Columns in 'Instruments Table Columns'",
+        "issuelinks": [
+          {
+            "id": "3181729",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3181729",
+            "outwardIssue": {
+              "id": "1669180",
+              "key": "DXBRO-812",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1669180",
+              "fields": {
+                "summary": "Option Chain for Futures: Add Futures Selection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868249",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868249",
+      "key": "CRTQA-6427",
+      "fields": {
+        "summary": "Option Chain - Default Columns in Instrument info",
+        "issuelinks": [
+          {
+            "id": "3181730",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3181730",
+            "outwardIssue": {
+              "id": "1669180",
+              "key": "DXBRO-812",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1669180",
+              "fields": {
+                "summary": "Option Chain for Futures: Add Futures Selection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868799",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868799",
+      "key": "CRTQA-6826",
+      "fields": {
+        "summary": "[Corner] 2FA Exclusion - Verify Login Flow After Removing a Previously Included User in 2FA Exclusion List",
+        "issuelinks": [
+          {
+            "id": "3182113",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182113",
+            "outwardIssue": {
+              "id": "1864293",
+              "key": "XT-6633",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864293",
+              "fields": {
+                "summary": "2FA exclusion for client users doesn't work",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3182112",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182112",
+            "outwardIssue": {
+              "id": "1853248",
+              "key": "CRT-588",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1853248",
+              "fields": {
+                "summary": "2FA exclusion for autotests",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868811",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868811",
+      "key": "CRTQA-6827",
+      "fields": {
+        "summary": "Risk Profile - Positions - Check Last Trade Date for positions on Futures account",
+        "issuelinks": [
+          {
+            "id": "3182160",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182160",
+            "outwardIssue": {
+              "id": "1738158",
+              "key": "XT-4356",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1738158",
+              "fields": {
+                "summary": "Risk Profile - Missing Columns in Positions Section",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10009",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/needinfo.png",
+                  "name": "Waiting for clarification",
+                  "id": "10009",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3182161",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182161",
+            "outwardIssue": {
+              "id": "1723495",
+              "key": "DXBRO-843",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1723495",
+              "fields": {
+                "summary": "Adapt new format of Last Trade Time from dxFeed",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1868812",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1868812",
+      "key": "CRTQA-6828",
+      "fields": {
+        "summary": "Risk Profile - Positions - Check Last Trade Date for positions on Equity account",
+        "issuelinks": [
+          {
+            "id": "3182156",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182156",
+            "outwardIssue": {
+              "id": "1738158",
+              "key": "XT-4356",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1738158",
+              "fields": {
+                "summary": "Risk Profile - Missing Columns in Positions Section",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10009",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/needinfo.png",
+                  "name": "Waiting for clarification",
+                  "id": "10009",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3182157",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3182157",
+            "outwardIssue": {
+              "id": "1723495",
+              "key": "DXBRO-843",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1723495",
+              "fields": {
+                "summary": "Adapt new format of Last Trade Time from dxFeed",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1870087",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870087",
+      "key": "CRTQA-7762",
+      "fields": {
+        "summary": "Risk Settings - Download CSV file in Exposure Limit (per Symbol) setting",
+        "issuelinks": [
+          {
+            "id": "3183608",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183608",
+            "outwardIssue": {
+              "id": "1645928",
+              "key": "DXBRO-774",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645928",
+              "fields": {
+                "summary": "[Prop] Size Limit Per Instrument",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1870088",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870088",
+      "key": "CRTQA-7763",
+      "fields": {
+        "summary": "Risk Settings - Upload CSV file in Exposure Limit (per Symbol) setting",
+        "issuelinks": [
+          {
+            "id": "3183601",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183601",
+            "outwardIssue": {
+              "id": "1731574",
+              "key": "XT-4246",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1731574",
+              "fields": {
+                "summary": "Risk Settings - Warning Message for Missing Instruments Covers Entire Screen and Is Not Fully Visible",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3183600",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183600",
+            "outwardIssue": {
+              "id": "1731593",
+              "key": "XT-4247",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1731593",
+              "fields": {
+                "summary": "Risk Settings - Possible to Upload CSV with Negative Exposure Limit",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3183599",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183599",
+            "outwardIssue": {
+              "id": "1645928",
+              "key": "DXBRO-774",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645928",
+              "fields": {
+                "summary": "[Prop] Size Limit Per Instrument",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1870089",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870089",
+      "key": "CRTQA-7764",
+      "fields": {
+        "summary": "Risk Settings - Create profile with Exposure Limit (per Symbol) setting",
+        "issuelinks": [
+          {
+            "id": "3183603",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183603",
+            "outwardIssue": {
+              "id": "1731600",
+              "key": "XT-4248",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1731600",
+              "fields": {
+                "summary": "Risk Settings - Possible to Paste Negative Value in Default Exposure Limit Input",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3183602",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183602",
+            "outwardIssue": {
+              "id": "1645928",
+              "key": "DXBRO-774",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1645928",
+              "fields": {
+                "summary": "[Prop] Size Limit Per Instrument",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1870114",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870114",
+      "key": "CRTQA-7784",
+      "fields": {
+        "summary": "Client Area - Risk Profile - Check widget for not supported account",
+        "issuelinks": [
+          {
+            "id": "3183665",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3183665",
+            "outwardIssue": {
+              "id": "1688693",
+              "key": "CRT-367",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1688693",
+              "fields": {
+                "summary": " Client Area Improvements - Add Risk Profile to Client Area and Remove Terminated Accounts",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1870849",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870849",
+      "key": "CRTQA-8423",
+      "fields": {
+        "summary": "Position Book - Add 'Last Trade Date' filter",
+        "issuelinks": [
+          {
+            "id": "3184656",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3184656",
+            "outwardIssue": {
+              "id": "1723495",
+              "key": "DXBRO-843",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1723495",
+              "fields": {
+                "summary": "Adapt new format of Last Trade Time from dxFeed",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1873150",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1873150",
+      "key": "CRTQA-9671",
+      "fields": {
+        "summary": "Client Area - Orders - Verify \u201cCancel all\u201d Button",
+        "issuelinks": [
+          {
+            "id": "3187836",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3187836",
+            "outwardIssue": {
+              "id": "1864270",
+              "key": "CRT-613",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864270",
+              "fields": {
+                "summary": "Return collapse/expand and cancel all buttons to dxtrade Orders widget in Webbroker",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1873154",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1873154",
+      "key": "CRTQA-9672",
+      "fields": {
+        "summary": "Client Area - Orders - Verify \u201cCollapse all\u201d Button",
+        "issuelinks": [
+          {
+            "id": "3187846",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3187846",
+            "outwardIssue": {
+              "id": "1864270",
+              "key": "CRT-613",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864270",
+              "fields": {
+                "summary": "Return collapse/expand and cancel all buttons to dxtrade Orders widget in Webbroker",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1873155",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1873155",
+      "key": "CRTQA-9673",
+      "fields": {
+        "summary": "Client Area - Orders - Verify \u201cExpand all\u201d Button",
+        "issuelinks": [
+          {
+            "id": "3187848",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3187848",
+            "outwardIssue": {
+              "id": "1864270",
+              "key": "CRT-613",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1864270",
+              "fields": {
+                "summary": "Return collapse/expand and cancel all buttons to dxtrade Orders widget in Webbroker",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1874840",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1874840",
+      "key": "CRTQA-9842",
+      "fields": {
+        "summary": "[Corner] Order Entry - Verify Strike Selector Dropdown Positioning and Keyboard Input",
+        "issuelinks": [
+          {
+            "id": "3190911",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3190911",
+            "outwardIssue": {
+              "id": "1833942",
+              "key": "CRT-569",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833942",
+              "fields": {
+                "summary": "Web: Option trading UX/UI improvements (HORN-1196)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1875012",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1875012",
+      "key": "CRTQA-9855",
+      "fields": {
+        "summary": "[Corner] Derivatives - PRODUCT selected Single mode shows futures",
+        "issuelinks": [
+          {
+            "id": "3191221",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3191221",
+            "outwardIssue": {
+              "id": "1833942",
+              "key": "CRT-569",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833942",
+              "fields": {
+                "summary": "Web: Option trading UX/UI improvements (HORN-1196)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1875013",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1875013",
+      "key": "CRTQA-9856",
+      "fields": {
+        "summary": "[Corner] Derivatives - PRODUCT selected Calendar mode shows grouped spreads",
+        "issuelinks": [
+          {
+            "id": "3192756",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3192756",
+            "outwardIssue": {
+              "id": "1869307",
+              "key": "XT-6690",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1869307",
+              "fields": {
+                "summary": "[Corner] Derivatives - Spread Filter - 'Calendar' spreads in open status are not shown in UI",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3191223",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3191223",
+            "outwardIssue": {
+              "id": "1833942",
+              "key": "CRT-569",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833942",
+              "fields": {
+                "summary": "Web: Option trading UX/UI improvements (HORN-1196)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1875014",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1875014",
+      "key": "CRTQA-9857",
+      "fields": {
+        "summary": "[Corner] Derivatives - PRODUCT selected No spreads available message",
+        "issuelinks": [
+          {
+            "id": "3191225",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3191225",
+            "outwardIssue": {
+              "id": "1833942",
+              "key": "CRT-569",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833942",
+              "fields": {
+                "summary": "Web: Option trading UX/UI improvements (HORN-1196)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1899722",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1899722",
+      "key": "CRTQA-9974",
+      "fields": {
+        "summary": "dxWeb - Transaction Import - Verify conversionRate is saved but not used when calculateCashEffect = false",
+        "issuelinks": [
+          {
+            "id": "3344762",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344762",
+            "outwardIssue": {
+              "id": "1952592",
+              "key": "XT-8256",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1952592",
+              "fields": {
+                "summary": "[Corner] Transaction Import - Conversion Rate Stored Only When calculateCashEffect = true",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3343745",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3343745",
+            "outwardIssue": {
+              "id": "1833936",
+              "key": "CRT-567",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833936",
+              "fields": {
+                "summary": "Change for TotalCashEffect (HORN-501)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1899724",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1899724",
+      "key": "CRTQA-9975",
+      "fields": {
+        "summary": "dxWeb - Transaction Import - Verify transaction creation with valid conversionRate",
+        "issuelinks": [
+          {
+            "id": "3343736",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3343736",
+            "outwardIssue": {
+              "id": "1833936",
+              "key": "CRT-567",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833936",
+              "fields": {
+                "summary": "Change for TotalCashEffect (HORN-501)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1899725",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1899725",
+      "key": "CRTQA-9976",
+      "fields": {
+        "summary": "dxWeb - Transaction Import - Verify platform conversion rate is used when conversionRate is not provided",
+        "issuelinks": [
+          {
+            "id": "3343746",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3343746",
+            "outwardIssue": {
+              "id": "1833936",
+              "key": "CRT-567",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1833936",
+              "fields": {
+                "summary": "Change for TotalCashEffect (HORN-501)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1908878",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1908878",
+      "key": "CRTQA-10009",
+      "fields": {
+        "summary": "Order Book - Verify Liquidation column data",
+        "issuelinks": [
+          {
+            "id": "3256751",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3256751",
+            "outwardIssue": {
+              "id": "1870598",
+              "key": "CRTQA-8182",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1870598",
+              "fields": {
+                "summary": "Order Book - Verify Liquidation column data",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3256754",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3256754",
+            "outwardIssue": {
+              "id": "1114932",
+              "key": "DXBRO-379",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114932",
+              "fields": {
+                "summary": "[WB FE] WebBroker - Order/Order Book History (Audit Trail) Additional Columns",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3256753",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3256753",
+            "outwardIssue": {
+              "id": "1433574",
+              "key": "CRT-131",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1433574",
+              "fields": {
+                "summary": "Fix Liquidation order statuses",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3256752",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3256752",
+            "inwardIssue": {
+              "id": "1581247",
+              "key": "DXBRO-694",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1581247",
+              "fields": {
+                "summary": "Physic. settl. futures liquidation - show statuses in Webbroker ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927279",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927279",
+      "key": "CRTQA-10098",
+      "fields": {
+        "summary": "Instrument suggest - Verify Display of FX_SPOT Instruments in \u201cAll\u201d tab",
+        "issuelinks": [
+          {
+            "id": "3296974",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296974",
+            "outwardIssue": {
+              "id": "1924647",
+              "key": "XT-7667",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1924647",
+              "fields": {
+                "summary": "[Corner] Instrument Suggest - Exchange Column Name Cut Off in Instrument Suggest",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296969",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296969",
+            "outwardIssue": {
+              "id": "1917279",
+              "key": "XT-7530",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1917279",
+              "fields": {
+                "summary": "[Corner] Instrument suggest, filters - Not correct name for FX_SPOT in Instrument type column",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10001",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/assigned.png",
+                  "name": "Confirmed",
+                  "id": "10001",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296285",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296285",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927313",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927313",
+      "key": "CRTQA-10099",
+      "fields": {
+        "summary": "Instrument suggest - Verify Display of FX_SPOT Instruments in \u201cFX Spot\u201d tab",
+        "issuelinks": [
+          {
+            "id": "3296981",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296981",
+            "outwardIssue": {
+              "id": "1924647",
+              "key": "XT-7667",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1924647",
+              "fields": {
+                "summary": "[Corner] Instrument Suggest - Exchange Column Name Cut Off in Instrument Suggest",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296979",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296979",
+            "outwardIssue": {
+              "id": "1924649",
+              "key": "XT-7668",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1924649",
+              "fields": {
+                "summary": "[Corner] Instrument Suggest - FX Spot Tab Label Shows Lowercase 's'",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296333",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296333",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927325",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927325",
+      "key": "CRTQA-10100",
+      "fields": {
+        "summary": "Instrument suggest - Visibility and Selection of FX_SPOT Instruments Based on Trading Permissions",
+        "issuelinks": [
+          {
+            "id": "3296354",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296354",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927390",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927390",
+      "key": "CRTQA-10101",
+      "fields": {
+        "summary": "Filtering - Verify Instrument Column Filter Functionality for FX_SPOT Instruments",
+        "issuelinks": [
+          {
+            "id": "3296961",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296961",
+            "outwardIssue": {
+              "id": "1917279",
+              "key": "XT-7530",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1917279",
+              "fields": {
+                "summary": "[Corner] Instrument suggest, filters - Not correct name for FX_SPOT in Instrument type column",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10001",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/assigned.png",
+                  "name": "Confirmed",
+                  "id": "10001",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296449",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296449",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927720",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927720",
+      "key": "CRTQA-10102",
+      "fields": {
+        "summary": "Filtering - Verify Symbol Column Filter Functionality for FX_SPOT Instruments",
+        "issuelinks": [
+          {
+            "id": "3296935",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296935",
+            "inwardIssue": {
+              "id": "1927722",
+              "key": "CRTQA-10103",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927722",
+              "fields": {
+                "summary": "Filtering - Verify Instrument Type Column Filter Functionality for FX_SPOT Instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10013",
+                  "description": "Issue implementation ready for review",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/visible.png",
+                  "name": "Waiting for review",
+                  "id": "10013",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3296964",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296964",
+            "outwardIssue": {
+              "id": "1917279",
+              "key": "XT-7530",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1917279",
+              "fields": {
+                "summary": "[Corner] Instrument suggest, filters - Not correct name for FX_SPOT in Instrument type column",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10001",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/assigned.png",
+                  "name": "Confirmed",
+                  "id": "10001",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296930",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296930",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927722",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927722",
+      "key": "CRTQA-10103",
+      "fields": {
+        "summary": "Filtering - Verify Instrument Type Column Filter Functionality for FX_SPOT Instruments",
+        "issuelinks": [
+          {
+            "id": "3296935",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296935",
+            "outwardIssue": {
+              "id": "1927720",
+              "key": "CRTQA-10102",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927720",
+              "fields": {
+                "summary": "Filtering - Verify Symbol Column Filter Functionality for FX_SPOT Instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10013",
+                  "description": "Issue implementation ready for review",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/visible.png",
+                  "name": "Waiting for review",
+                  "id": "10013",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3296963",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296963",
+            "outwardIssue": {
+              "id": "1917279",
+              "key": "XT-7530",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1917279",
+              "fields": {
+                "summary": "[Corner] Instrument suggest, filters - Not correct name for FX_SPOT in Instrument type column",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10001",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/assigned.png",
+                  "name": "Confirmed",
+                  "id": "10001",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3296936",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3296936",
+            "outwardIssue": {
+              "id": "1887479",
+              "key": "CRT-638",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1887479",
+              "fields": {
+                "summary": "Add FX Spot to instrument suggestion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929103",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929103",
+      "key": "CRTQA-10109",
+      "fields": {
+        "summary": "CT Adaptive Transactions - Verify Default State for Transaction Type Filter",
+        "issuelinks": [
+          {
+            "id": "3299188",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3299188",
+            "outwardIssue": {
+              "id": "1908263",
+              "key": "CAN-12174",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1908263",
+              "fields": {
+                "summary": "[CT Adaptive] Transactions - Type Filter Label Is Incorrect",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3299200",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3299200",
+            "outwardIssue": {
+              "id": "1910275",
+              "key": "CAN-12244",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1910275",
+              "fields": {
+                "summary": "[CT Adaptive] Transactions - Excessive Spacing Between \u201cAll\u201d Checkbox and First Account in Account Filter",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3298872",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3298872",
+            "outwardIssue": {
+              "id": "1857285",
+              "key": "CRT-596",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1857285",
+              "fields": {
+                "summary": "[Transactions] Filtering by time range and transaction type",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929104",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929104",
+      "key": "CRTQA-10110",
+      "fields": {
+        "summary": "CT Adaptive Transactions - Verify Values and Ordering for Transaction Type Filter",
+        "issuelinks": [
+          {
+            "id": "3299175",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3299175",
+            "outwardIssue": {
+              "id": "1911688",
+              "key": "CAN-12287",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1911688",
+              "fields": {
+                "summary": "[CT Adaptive] Transactions - Widget Fails to Load When \u201cCorporate Action\u201d Transaction Exists and Type Is Missing from Filter List",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3298875",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3298875",
+            "outwardIssue": {
+              "id": "1857285",
+              "key": "CRT-596",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1857285",
+              "fields": {
+                "summary": "[Transactions] Filtering by time range and transaction type",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    }
+  ],
+  "warningMessages": null,
+  "names": null,
+  "schema": null
+}

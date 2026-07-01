@@ -1,0 +1,21 @@
+{
+  "id": "1590545",
+  "key": "CRTQA-870",
+  "summary": "[Test cases review] [CRT-236] CFDs Shares - updating parameters (Horn-365 High) - Ready",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {},
+  "customfield_11250": null,
+  "customfield_10006": null
+}

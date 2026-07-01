@@ -1,0 +1,70 @@
+{
+  "id": "1432418",
+  "key": "CRTQA-1534",
+  "summary": "[Release notes] [CRT-93] Add Clearing Code to Reconciliation, and Transactions widget - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1432418/worklog/5334164",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-11-27T07:45:32.967+0000",
+        "updated": "2023-11-27T07:45:40.007+0000",
+        "started": "2023-11-24T09:00:00.000+0000",
+        "timeSpent": "7h 30m",
+        "timeSpentSeconds": 27000,
+        "id": "5334164",
+        "issueId": "1432418"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "6h",
+    "remainingEstimate": "4h 55m",
+    "timeSpent": "7h 30m",
+    "originalEstimateSeconds": 21600,
+    "remainingEstimateSeconds": 17700,
+    "timeSpentSeconds": 27000
+  },
+  "customfield_11250": 6.0,
+  "customfield_10006": null
+}

@@ -1,0 +1,141 @@
+{
+  "schema_version": 1,
+  "_comment": "COVERAGE consumption of EPIC-PREP verification_topology on -ref.json. Playbook: .cursor/pipelines/coverage.md phases 1, 3, 4, 8-9, 13-14. Verifier: automation/tools/coverage_verify.py --strict-topology. Upstream: docs/epic-prep-topology-contract.json.",
+  "emit_layout": {
+    "enum": ["formula_first", "shell_first"],
+    "map_from_archetype": {
+      "metrics_calculation": "formula_first",
+      "widget_ui": "shell_first",
+      "mixed": "shell_first"
+    },
+    "_note": "Single -coverage.md; layout chosen by emit_layout, not two files."
+  },
+  "topology_provenance": {
+    "type": "object",
+    "properties": {
+      "ref_path": "epics/<KEY>/<KEY>-ref.json",
+      "fields_consumed": [
+        "epic_archetype.value",
+        "verification_topology.jira_scenario_surfaces",
+        "verification_topology.shell_roles",
+        "verification_topology.pricing_oracle_rules",
+        "verification_topology.delivery_notes",
+        "verification_topology.platform_reuse_candidates",
+        "verification_focus_proposed",
+        "verification_topology.principal_coverage_threads",
+        "obligations_proposed[].downstream_hints"
+      ],
+      "archetype_source": "copied_from_ref | inferred",
+      "copied_at": "ISO-8601"
+    }
+  },
+  "check_extensions": {
+    "delivery_status": {
+      "enum": ["delivered", "failed", "excluded", "deferred"],
+      "maps_from_delivery_note_status": {
+        "known_fail": "failed",
+        "excluded": "excluded",
+        "waived": "deferred",
+        "pending_verification": "deferred"
+      },
+      "_note": "Distinct from requirement ! deferral (ambiguity). Markdown markers: [FAILED] for failed; x or excluded wording for excluded."
+    },
+    "oracle_rule_id": {
+      "type": "string",
+      "must_match": "ref.verification_topology.pricing_oracle_rules[].id"
+    }
+  },
+  "platform_reuse_annex": {
+    "optional": true,
+    "binding": "suggestion_only",
+    "emit_to_markdown": false,
+    "heading": "## Platform reuse candidates (verify in Jira)",
+    "_note": "JSON field only on -coverage.json; human-readable patterns; no CRTQA keys. Never paste into smart_checklist_markdown or -coverage.md — see docs/coverage-operator-hints.json."
+  },
+  "section_spine": {
+    "formula_first": {
+      "required_h2_contains": ["Primary focus"],
+      "optional_h2": [
+        "Invariants under configuration change",
+        "Rounding and display policy"
+      ],
+      "forbidden_when_empty_topology": []
+    },
+    "shell_first": {
+      "required_h2_source": "ref.verification_topology.jira_scenario_surfaces",
+      "preface_threads": "ref.verification_topology.principal_coverage_threads[] H2 sections before surface sections",
+      "heading_pattern": "## {shell_label} — {widget}",
+      "shell_labels": {
+        "console": "dxCore",
+        "dxtrade5": "dxTrade5",
+        "adaptive": "Adaptive",
+        "webbroker_dealer": "WebBroker (dealer)",
+        "webbroker_client": "WebBroker (client)"
+      },
+      "trailing_sections": ["## Cross-surface invariants"]
+    }
+  },
+  "ref_consumers": [
+    {
+      "field": "epic_archetype.value",
+      "coverage_phase": "3",
+      "use": "Copy to coverage.archetype; set emit_layout from map_from_archetype"
+    },
+    {
+      "field": "verification_topology.jira_scenario_surfaces",
+      "coverage_phase": "4",
+      "use": "Seed coverage_matrix.surfaces and shell_first H2 order"
+    },
+    {
+      "field": "verification_topology.shell_roles",
+      "coverage_phase": "4",
+      "use": "Dealer vs client WebBroker matrix notes"
+    },
+    {
+      "field": "verification_topology.pricing_oracle_rules",
+      "coverage_phase": "9",
+      "use": "Bind checks[].oracle_rule_id; oracle-specific > hints"
+    },
+    {
+      "field": "verification_topology.delivery_notes",
+      "coverage_phase": "9",
+      "use": "Bind checks[].delivery_status and markdown [FAILED]/excluded markers"
+    },
+    {
+      "field": "verification_topology.platform_reuse_candidates",
+      "coverage_phase": "9",
+      "use": "Optional platform_reuse_annex JSON field only (emit_to_markdown false)"
+    },
+    {
+      "field": "verification_focus_proposed",
+      "coverage_phase": "3a",
+      "use": "Copy verbatim to epic_verification_focus when present"
+    },
+    {
+      "field": "verification_topology.principal_coverage_threads",
+      "coverage_phase": "8.5",
+      "use": "Ordered H2 spine before jira_scenario_surfaces when shell_first"
+    },
+    {
+      "field": "obligations_proposed[].downstream_hints",
+      "coverage_phase": "4",
+      "use": "Matrix obligation binding and provisioning hints"
+    }
+  ],
+  "anti_pattern_ids": [
+    "shell_section_orphan",
+    "oracle_unbound",
+    "delivery_silent",
+    "thematic_only_widget_epic"
+  ],
+  "strict_topology_verifier": {
+    "requires_ref": true,
+    "checks": [
+      "emit_layout matches map_from_archetype[ref.epic_archetype.value]",
+      "shell_first: each jira_scenario_surfaces[].id has >=1 check with matching section or topology_surface_id",
+      "oracle_rule_id on checks subset of ref pricing_oracle_rules[].id",
+      "when ref delivery_notes non-empty: affected checks have delivery_status and markdown marker",
+      "markdown H2 spine matches emit_layout section_spine"
+    ]
+  }
+}

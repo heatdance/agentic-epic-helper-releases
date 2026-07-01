@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "_comment": "CLOSE terminal cross-artifact principal lint. Playbook: .cursor/pipelines/close.md Phase E¾. Verifier: automation/tools/close_verify.py --mode principal --strict-principal. Upstream: docs/epic-prep-principal-contract.json through docs/test-prep-principal-contract.json.",
+  "upstream": {
+    "epic_prep_principal": "docs/epic-prep-principal-contract.json",
+    "discover_principal": "docs/discover-principal-contract.json",
+    "precon_principal": "docs/precon-principal-contract.json",
+    "test_prep_principal": "docs/test-prep-principal-contract.json",
+    "close_topology": "docs/close-topology-contract.json"
+  },
+  "input_slices": {
+    "ref_slices": [
+      "obligations_proposed[].downstream_hints.needs_environment_provision",
+      "obligations_proposed[].downstream_hints.needs_dual_account_contrast",
+      "obligations_proposed[].downstream_hints.personas"
+    ],
+    "coverage_slices": [
+      "sources.reinforce_principal_loaded",
+      "principal_provenance",
+      "checks[].verification_role",
+      "checks[].coverage_thread",
+      "obligations_coverage"
+    ],
+    "discover_slices": [
+      "sources.principal_loaded",
+      "fixture_needs[].derivation",
+      "fixture_needs[].linked_obligation_ids",
+      "fixture_needs[].id",
+      "obligation_ledger"
+    ],
+    "precon_slices": [
+      "sources.principal_loaded",
+      "session_placeholders",
+      "test_skeleton",
+      "precon_clusters",
+      "excluded_checks_with_reason"
+    ],
+    "tests_slices": [
+      "sources.principal_loaded",
+      "sources.session_placeholders",
+      "test_bundles[].persona_tags",
+      "test_bundles[].precon_cluster_refs",
+      "test_bundles[].covers_check_ids",
+      "excluded_checks_with_reason",
+      "reverse_validation.coverage_gaps"
+    ]
+  },
+  "cross_artifact_checks": {
+    "principal_loaded_alignment": "discover / precon / tests sources.principal_loaded flags consistent when any true",
+    "provision_chain": "ref provision obligation -> discover fixture_needs derivation ref_principal_provision -> precon pc-setup satisfies_fixture_ids",
+    "setup_skeleton_parity": "precon test_skeleton tb-setup covers_check_ids equals tests tb-setup bundle covers_check_ids",
+    "deferral_parity": "coverage out_of_epic deferral_only check ids match precon and tests excluded_checks_with_reason deferral_obligation_keyed and tests coverage_gaps",
+    "placeholder_chain": "precon session_placeholders keys copied to tests sources.session_placeholders when principal active"
+  },
+  "finding_kinds": {
+    "provision_mismatch": "ref/discover/precon provision chain broken",
+    "persona_drift": "retail/dealer primaries mixed across tests bundles",
+    "deferral_drift": "deferral-keyed check sets differ across coverage/precon/tests",
+    "principal_drift": "principal_loaded or placeholder chain inconsistent"
+  },
+  "legacy_no_op": {
+    "rule": "When none of discover, precon, or tests have sources.principal_loaded true and ref has no provision obligations or downstream_hints personas, strict principal checks skip entirely",
+    "note": "Round 1 epics and archived 639 without principal_loaded do not force strict lint"
+  },
+  "strict_close_principal_verifier": {
+    "mode": "principal",
+    "requires_strict_flag": true,
+    "requires_artifacts": ["ref", "coverage", "discover", "precon", "tests"],
+    "optional_path_overrides": ["--ref", "--coverage", "--discover", "--precon", "--tests"],
+    "validation_log_step": "principal",
+    "trigger_token": "strict_principal=yes on CLOSE: line",
+    "delegates_tests_leg": "automation/tools/test_prep_verify.py verify_strict_test_prep_principal",
+    "checks": [
+      "principal_loaded alignment across discover precon tests when principal handoff active",
+      "provision fixture ids chain ref -> discover -> precon pc-setup",
+      "precon tb-setup skeleton parity with tests tb-setup bundle",
+      "deferral-keyed ID parity coverage precon tests",
+      "precon session_placeholders copied to tests sources.session_placeholders",
+      "test_prep principal rules via delegated verifier"
+    ]
+  },
+  "program_complete": {
+    "note": "Round 2 steps 1-8 correction program complete after CLOSE principal lint; no downstream pipeline"
+  }
+}

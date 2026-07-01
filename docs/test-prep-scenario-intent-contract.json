@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "_comment": "Default TEST-PREP draft profile (draft_truth_v3). Playbook: .cursor/pipelines/test-prep.md. Verifier: test_prep_verify.py --mode scenario_intent.",
+  "profile_id": "scenario_intent",
+  "default": true,
+  "description": "Honest scenario drafts: grouping + plain-English intent actions + requirement-linked results. Not a final CRTQA executable suite.",
+  "inputs": {
+    "required": ["-coverage.json with scenario_groups[] and coverage_frozen_at", "-ref.json recommended"],
+    "optional": ["-discover.json linker slices", "-analysis.json deferrals"]
+  },
+  "forbidden_inputs": ["-precon.json in production chain", "live Chrome/console during generation", "CRTQA Jira test search"],
+  "bundle_shape": {
+    "one_bundle_per": "scenario_groups[] row",
+    "fields": {
+      "bundle_id": "tb-001",
+      "proposed_title": "from scenario_groups[].title",
+      "covers_check_ids": "copy scenario_groups[].check_ids",
+      "scenario_intent": "one-line what this test proves",
+      "intent_steps": "ordered plain-English steps from combinatorics"
+    }
+  },
+  "draft_sections": {
+    "preconditions": {
+      "policy": "Single shared_preconditions[] block from coverage principal setup thread — not per-bundle console paste",
+      "forbidden": ["-precon.md cite", "probe account names", "long console blocks"]
+    },
+    "actions": {
+      "policy": "Describe what must be achieved in simple English; one numbered step per intent variant when combinatorics is variant_sequence",
+      "forbidden_without_observed_certainty": [
+        "widget names (Watchlist, Position Book, Backup Prices)",
+        "menu paths and click sequences",
+        "harness oracle enum tokens (text_configuration_closest_gte_qty)",
+        "url_path or view_id literals"
+      ],
+      "grounding_certainty": "checks[].grounding_certainty observed allows UI-specific wording only when set on check in coverage"
+    },
+    "results": {
+      "policy": "Requirement-linked observable claims; requirement keys (CRT-####) only in results[]",
+      "formula_allowed": true,
+      "formula_provenance_enum": ["agent_inferred", "ground_verified"],
+      "formula_rules": [
+        "agent_inferred: paraphrase from check scenario_line, Yogi snippet, or ref oracle description — cite requirement_keys[]",
+        "ground_verified: when runtime_probes.verified_syntax present on check"
+      ]
+    },
+    "peculiarities": {
+      "policy": "Formulas, rounding rules, deferral notes; no requirement tags"
+    }
+  },
+  "deferrals": {
+    "policy": "Delivery-blocked, deferred, out_of_epic checks → excluded_checks_with_reason only",
+    "forbidden": "action/result rows for deferred primary checks"
+  },
+  "verifier_mode": "scenario_intent",
+  "verifier_command": "python automation/tools/test_prep_verify.py --mode scenario_intent --ref epics/<KEY>/<KEY>-ref.json --coverage epics/<KEY>/<KEY>-coverage.json --tests epics/<KEY>/<KEY>-tests.json",
+  "forbidden_ui_patterns": [
+    "\\bWatchlist\\b",
+    "\\bPosition Book\\b",
+    "\\bBackup Prices\\b",
+    "\\bClient Area\\b",
+    "\\bclick\\s+(the\\s+)?[A-Z]",
+    "\\bnavigate to\\b",
+    "\\bopen\\s+(the\\s+)?[A-Z][a-z]+\\s+(widget|tab|page)\\b",
+    "text_configuration_closest_gte_qty",
+    "first_tier_quote",
+    "oracle_rule_id\\s*="
+  ],
+  "legacy_profiles": {
+    "crtqa_outline": "Opt-in draft_profile=crtqa_outline for calibrate/benchmark only; requires operator-supplied plan rows; no PRECON"
+  }
+}

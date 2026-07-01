@@ -24,11 +24,10 @@ You may skip optional phases when your risk model allows; document that choice i
 3. **Add verification scripts** that validate JSON against templates before agents or humans publish artefacts.
 4. **Connect issue tracking** so requirement text is fetched from authoritative sourcesΓÇönever invented in generation mode.
 
-## MCP and environments (generic)
+## MCP (generic)
 
 - Use **issue/wiki MCP** or exports for requirements; keep tokens out of git.
-- Optional **readonly database MCP** through your own tunnelΓÇödefine server names and allowlists locally; this export does not ship connection templates.
-- Optional **browser MCP** for UI exploration during discover/precon/prepΓÇöconfigure in gitignored project or global IDE config.
+- Optional **browser MCP** for UI exploration during legacy discover/precon/prep — configure in gitignored project or global IDE config.
 
 ## Style and redaction
 
@@ -36,7 +35,7 @@ Public prose rules: [docs/clean-public-style.md](docs/clean-public-style.md). Wh
 
 ## Related patterns (conceptual)
 
-**Orchestrator pattern:** A private harness may bind one epic per chat session and advance **one pipeline stage per agent turn**, with human gates for environment readiness, coverage draft review, and UI credentials. Session state lives in gitignored scratch under the epic folder and archives with close. This export does not ship slash commands or session tooling — only the phase ordering above.
+**Orchestrator pattern:** A private harness may bind one epic per chat session and advance **one pipeline stage per agent turn**, with human gates for **console readiness**, coverage draft review, and UI credentials.
 
 **Calibration pattern:** After a full artefact chain, operators may compare production outputs to curated **gold** JSON in a local folder and run a questionnaire-style review to surface harness drift. Gold and compare tooling are maintainer-local; this export describes the idea, not executable calibrate commands.
 

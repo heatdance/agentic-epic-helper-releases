@@ -1,0 +1,21 @@
+{
+  "id": "1632788",
+  "key": "CRTQA-840",
+  "summary": "[Test cases review] [CRT-290]  Mapping algorithm update for Hong-Kong CFD_STOCK - Not Ready",
+  "status": {
+    "name": "Aborted",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {},
+  "customfield_11250": null,
+  "customfield_10006": null
+}

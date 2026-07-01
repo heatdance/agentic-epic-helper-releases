@@ -1,0 +1,12 @@
+stats/crtqa-stats/latest-amukanova.md
+stats/crtqa-stats/latest-arodzevich.md
+stats/crtqa-stats/latest-mshpak.md
+stats/crtqa-stats/latest-mshram.md
+stats/crtqa-stats/latest-mtavadze.md
+stats/crtqa-stats/latest-team.md
+stats/crtqa-stats/state
+stats/crtqa-stats/state/last-sync-amukanova.json
+stats/crtqa-stats/state/last-sync-arodzevich.json
+stats/crtqa-stats/state/last-sync-mshpak.json
+stats/crtqa-stats/state/last-sync-mshram.json
+stats/crtqa-stats/state/last-sync-mtavadze.json

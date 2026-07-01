@@ -1,6 +1,6 @@
 # Prompt scaffold: calibrate subprocess
 
-Use with **`/crtqa-calibrate`** after **`compare`** JSON is available.
+Use with **`/epic-calibrate`** after **`compare`** JSON is available.
 
 ## Inputs
 

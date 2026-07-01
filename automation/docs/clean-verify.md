@@ -25,12 +25,14 @@ Normative contract: [docs/clean-contract.json](../../docs/clean-contract.json) (
 python automation/tools/clean_verify.py --mode preflight
 python automation/tools/clean_verify.py --mode semver_next --json
 python automation/tools/clean_verify.py --mode align
+python automation/tools/clean_stats_personal.py backup
 git checkout team
 python automation/tools/clean_verify.py --mode team --root .
 git push team team
 python automation/tools/clean_verify.py --mode prune_team_remote
 python automation/tools/clean_verify.py --mode team_tip --sha "$(git rev-parse HEAD)"
 git checkout personal
+python automation/tools/clean_stats_personal.py restore
 python automation/tools/clean_verify.py --mode legacy_remote
 python automation/tools/clean_verify.py --mode postflight
 ```
@@ -41,6 +43,7 @@ python automation/tools/clean_verify.py --mode postflight
 |--------|------|
 | `clean_file_map.py` | S1 inventory from tier matrix + `git ls-files` |
 | `clean_apply_team.py` | Team strip + `clean_apply_t1_docs --tier team` |
+| `clean_stats_personal.py` | Phase T guard: backup/restore gitignored `stats/epic-stats/{state,raw,latest-*}` on **`personal`** |
 | `clean_apply_t1_docs.py` | Render contributor T1 from `docs/clean-entry-templates/` |
 | `clean_apply_public.py` | Public sterilize; seeds [`docs/clean-public-content/`](../../docs/clean-public-content/); template overlays from `epics/templates/public/` |
 | `clean_public_supersede.py` | U4b delete superseded `public-*`, `--legacy-only` for `release-*` |

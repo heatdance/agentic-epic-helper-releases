@@ -1,0 +1,85 @@
+{
+  "_comment": "Minimal analysis fixture vs coverage-594-shell-minimal + CRT-594-ref delivery topology",
+  "schema_version": 2,
+  "epic_key": "CRT-594",
+  "sources": {
+    "ref_path": "epics/CRT-594/CRT-594-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "automation/tools/fixtures/coverage/coverage-594-shell-minimal.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.delivery_notes",
+      "verification_topology.pricing_oracle_rules"
+    ]
+  },
+  "summary": {
+    "text": "Verify FX_SPOT tier-based bid/ask and mark pricing per account group and volume tier across dxCore, dxTrade5, Adaptive, and WebBroker surfaces named in Jira Scenarios.",
+    "derived_from": ["coverage.epic_verification_focus"]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Derivatives widget delivery known_fail per ref dn-001; coverage marks chk-004 [FAILED].",
+      "pointers": {
+        "delivery_note_id": "dn-001",
+        "check_id": "chk-004",
+        "requirement_key": "CRT-1713"
+      },
+      "evidence": "ref.verification_topology.delivery_notes[dn-001]; checks[chk-004].delivery_status=failed",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-002",
+      "kind": "delivery_excluded",
+      "confidence": "high",
+      "summary": "Chart candles for fx-spot excluded per ref dn-002; coverage documents chk-010 excluded.",
+      "pointers": {
+        "delivery_note_id": "dn-002",
+        "check_id": "chk-010"
+      },
+      "evidence": "ref.verification_topology.delivery_notes[dn-002]; checks[chk-010].delivery_status=excluded",
+      "recommended_action": "ignore_for_discover",
+      "status": "confirmed_gap"
+    }
+  ],
+  "resolved_gaps": [],
+  "exploration_suppressed": [
+    {
+      "check_id": "chk-004",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-010",
+      "reason": "delivery_excluded",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    }
+  ],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": []
+  },
+  "questions": [],
+  "known_issues_search": { "at": null, "queries": [] },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "3-topology",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "2 delivery gaps (dn-001 known_fail, dn-002 excluded); 0 unresolved oracle rules"
+    }
+  ]
+}

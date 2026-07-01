@@ -1,0 +1,180 @@
+{
+  "_comment": "Principal TEST-PRECON fixture paired with coverage-639-formula-reinforce-principal-minimal + discover-639-formula-principal-minimal; metrics no env cluster; deferrals excluded",
+  "schema_version": 5,
+  "epic_key": "CRT-639",
+  "precon_status": "complete",
+  "exploration_budgets": {
+    "max_cluster_iterations": 3,
+    "max_fe_nav_cycles_per_surface": 6,
+    "max_console_commands": 12
+  },
+  "exploration_gaps": [],
+  "sources": {
+    "coverage_path": "automation/tools/fixtures/coverage/coverage-639-formula-reinforce-principal-minimal.json",
+    "coverage_loaded": true,
+    "discover_path": "automation/tools/fixtures/discover/discover-639-formula-principal-minimal.json",
+    "discover_loaded": true,
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+    "ref_loaded": true,
+    "analysis_loaded": false,
+    "precon_run_started_at": "2026-06-18T16:00:00Z",
+    "cold_gate_skip_token_used": false,
+    "cold_gate_resolved_at": "2026-06-18T16:00:01Z",
+    "fe_exploration_waived": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules"
+    ],
+    "principal_loaded": true,
+    "ref_principal_fields": ["verification_focus_proposed"]
+  },
+  "principal_provenance": {
+    "ref_obligation_ids": [],
+    "discover_fixture_ids": [],
+    "coverage_setup_check_ids": []
+  },
+  "fe_credentials": {
+    "dxtrade5": "waived",
+    "webbroker": "waived",
+    "adaptive": "not_required"
+  },
+  "fe_ui_sessions": {
+    "dxtrade5": "waived",
+    "webbroker": "waived",
+    "adaptive": "not_required"
+  },
+  "environment": {
+    "tier": "ct_qa",
+    "client_shell_impact": {
+      "corner_trader": { "status": "affected", "note": null },
+      "adaptive": { "status": "affected", "note": null }
+    }
+  },
+  "session_placeholders": {
+    "console_principal": "<username>",
+    "account_code": "<account_code>",
+    "instrument_symbol": "<instrument_symbol>"
+  },
+  "command_patterns": {
+    "ladder_step": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> at <price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+      "show position_metrics_from_publisher"
+    ],
+    "console_config_show": [
+      "show console_guide output=MARKDOWN",
+      "show account_group_hierarchy"
+    ]
+  },
+  "test_skeleton": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-639: WeightedAvg FX_SPOT configuration",
+      "covers_check_ids": ["chk-001"],
+      "covers_sections": ["## Primary focus"],
+      "precon_cluster_id": "pc-001",
+      "surfaces": ["console"],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-001",
+          "title": "WeightedAvg FX_SPOT instrument posture",
+          "intent": "Functional Configuration selects WeightedAvg for FOREX FX_SPOT",
+          "pattern_ref": "ladder_step"
+        }
+      ]
+    }
+  ],
+  "precon_clusters": [
+    {
+      "id": "pc-001",
+      "title": "CRT-639: Account and system configuration",
+      "jira_issue_key": null,
+      "surfaces": ["console"],
+      "satisfies_fixture_ids": ["fix-001"],
+      "satisfies_check_ids": ["chk-001"],
+      "served_bundle_ids": ["tb-001"],
+      "exploration_log": [
+        {
+          "at": "2026-06-18T16:01:00Z",
+          "surface": "console",
+          "action": "Replay discover probe: show console_guide output=MARKDOWN",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "discover_probe",
+          "discover_fixture_id": "fix-001",
+          "replay_of": "discover_probe",
+          "view_id": "console_guide_family",
+          "commands_seen": ["show console_guide output=MARKDOWN"],
+          "widgets_seen": []
+        },
+        {
+          "at": "2026-06-18T16:01:30Z",
+          "surface": "console",
+          "action": "Precon drill: console config show families",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-001",
+          "replay_of": "precon_deepen",
+          "view_id": "console_guide_family",
+          "commands_seen": ["show account_group_hierarchy"],
+          "widgets_seen": []
+        }
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "surface": "console",
+          "body": "Log in to the dxCore console on CTQA using the shared QA principal.",
+          "provenance": "exploration",
+          "code_examples": ["use <account_code>"],
+          "branch_notes": []
+        },
+        {
+          "order": 2,
+          "surface": "console",
+          "body": "Verify WeightedAvg FX_SPOT configuration posture via read-only show commands.",
+          "provenance": "exploration",
+          "code_examples": ["show console_guide output=MARKDOWN"],
+          "branch_notes": []
+        }
+      ]
+    }
+  ],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-def-001",
+      "reason": "deferral_obligation_keyed",
+      "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+    },
+    {
+      "check_id": "chk-def-002",
+      "reason": "deferral_obligation_keyed",
+      "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+    }
+  ],
+  "precon_verify_passed": true,
+  "validation_log": [
+    { "step": "phase1", "at": "2026-06-18T16:00:02Z" },
+    { "step": "phase1-topology", "at": "2026-06-18T16:00:03Z", "note": "formula_first" },
+    {
+      "step": "phase1-principal",
+      "at": "2026-06-18T16:00:04Z",
+      "note": "metrics_calculation; 0 provision fixtures"
+    },
+    { "step": "phase2_skeleton", "at": "2026-06-18T16:00:10Z" },
+    { "step": "phase2b_topology_tb-001", "at": "2026-06-18T16:00:12Z" },
+    {
+      "step": "phase4_skipped_deferral_keyed",
+      "at": "2026-06-18T16:00:50Z",
+      "note": "skipped 4D for chk-def-001 chk-def-002"
+    },
+    { "step": "phase5_emit", "at": "2026-06-18T16:01:00Z" }
+  ],
+  "anti_pattern_findings": []
+}

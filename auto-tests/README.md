@@ -13,8 +13,8 @@ Executable **pytest** + **Playwright** smoke tests for Corner Trader deliveries.
 
 ## Session
 
-- **`/teach`** — teach-first agent mode; loads contract and context.
-- **`/teach stop`** — end teach mode.
+- **``** — teach-first agent mode; loads contract and context.
+- **` stop`** — end teach mode.
 - Session state: [`.teacher-session.example.json`](.teacher-session.example.json) (live file gitignored).
 
 ## Contract

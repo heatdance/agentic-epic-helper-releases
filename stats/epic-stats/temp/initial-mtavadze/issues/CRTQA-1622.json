@@ -1,0 +1,26 @@
+{
+  "id": "1796968",
+  "key": "CRTQA-1622",
+  "summary": "[Epic Testing] [CRT-496] Consider adjusted EUREX options as non-standard (HORN-986)",
+  "status": {
+    "name": "Aborted",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {
+    "originalEstimate": "0m",
+    "remainingEstimate": "0m",
+    "originalEstimateSeconds": 0,
+    "remainingEstimateSeconds": 0
+  },
+  "customfield_11250": null,
+  "customfield_10006": null
+}

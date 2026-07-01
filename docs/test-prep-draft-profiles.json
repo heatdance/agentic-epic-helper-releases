@@ -1,16 +1,28 @@
 {
-  "schema_version": 1,
-  "_comment": "TEST-PREP draft profiles. Default: crtqa_outline (v3). Playbook: .cursor/pipelines/test-prep.md. TBD rules: docs/test-prep-tbd-contract.json.",
-  "default_profile": "crtqa_outline",
+  "schema_version": 2,
+  "_comment": "TEST-PREP draft profiles. Default: scenario_intent (draft_truth_v3). Playbook: .cursor/pipelines/test-prep.md.",
+  "default_profile": "scenario_intent",
   "profiles": {
+    "scenario_intent": {
+      "description": "Honest scenario drafts: one bundle per scenario_groups[] row; plain-English intent actions; requirement-linked results.",
+      "actions_policy": "Describe what must be achieved; variant_sequence = one step per check variant in group order.",
+      "results_policy": "Requirement keys (CRT-####) in results[]; formulas with formula_provenance when present.",
+      "tbd_contract": "docs/test-prep-tbd-contract.json",
+      "uses_scenario_groups": true,
+      "uses_case_outline": false,
+      "uses_illustration_budget": false,
+      "requires_ladder_template_for_stateful_ladder": false,
+      "contract": "docs/test-prep-scenario-intent-contract.json"
+    },
     "crtqa_outline": {
-      "description": "CRTQA-shaped executable outline: full case matrix from case_outline[]; human-fill session literals only.",
-      "actions_policy": "Expand every case_outline row into numbered action/result pair; 1:1 parity required.",
-      "results_policy": "Observable check per action; requirement keys (CRT-####) only in results[].",
+      "description": "LEGACY CRTQA-shaped executable outline (calibrate/benchmark only; no PRECON).",
+      "actions_policy": "Expand case_outline rows when operator supplies plan in temp/",
+      "results_policy": "Observable check per action; requirement keys only in results[].",
       "tbd_contract": "docs/test-prep-tbd-contract.json",
       "uses_case_outline": true,
       "uses_illustration_budget": false,
-      "requires_ladder_template_for_stateful_ladder": true
+      "requires_ladder_template_for_stateful_ladder": true,
+      "legacy": true
     },
     "teaching": {
       "description": "Legacy TEST-PREP v2 teaching drafts (opt-in via draft_profile=teaching).",
@@ -20,80 +32,14 @@
       "uses_case_outline": false,
       "uses_illustration_budget": true,
       "default_illustration_budget": 2,
-      "requires_ladder_template_for_stateful_ladder": false
+      "requires_ladder_template_for_stateful_ladder": false,
+      "legacy": true
     }
   },
-  "min_case_count_matrix": [
-    {
-      "verification_class": "stateful_ladder",
-      "calculation_contract": "ladder_present",
-      "min_case_count": 6,
-      "note": "Aligned with CRTQA-10177 ladder vignette count."
-    },
-    {
-      "verification_class": "stateful_ladder",
-      "calculation_contract": null,
-      "min_case_count": 4
-    },
-    {
-      "verification_class": "derived_metric",
-      "calculation_contract": "ladder_present",
-      "min_case_count": 3,
-      "note": "Parity / formula cases (CRTQA-10182-style)."
-    },
-    {
-      "verification_class": "cross_surface_parity",
-      "calculation_contract": null,
-      "min_case_count": 3
-    },
-    {
-      "verification_class": "rounding_matrix",
-      "calculation_contract": null,
-      "min_case_count": 7,
-      "note": "CRTQA-10183-style rounding lab."
-    },
-    {
-      "verification_class": "invariant_under_change",
-      "calculation_contract": null,
-      "min_case_count": 2,
-      "note": "CRTQA-10184-style group-change invariant."
-    },
-    {
-      "verification_class": "config_posture",
-      "calculation_contract": null,
-      "min_case_count": 2
-    },
-    {
-      "verification_class": "settlement_stress",
-      "calculation_contract": null,
-      "min_case_count": 2
-    },
-    {
-      "verification_class": "journey_smoke",
-      "calculation_contract": null,
-      "min_case_count": 1
-    },
-    {
-      "verification_class": "doc_or_pr_only",
-      "calculation_contract": null,
-      "min_case_count": 1
-    }
-  ],
-  "default_min_case_count": 2,
+  "min_case_count_matrix": [],
+  "_min_case_count_note": "scenario_intent uses scenario_groups combinatorics; min_case_count matrix applies to legacy crtqa_outline only.",
+  "default_min_case_count": 1,
   "draft_split_rule": {
-    "per_check_when": {
-      "verification_classes_any": [
-        "stateful_ladder",
-        "derived_metric",
-        "invariant_under_change",
-        "rounding_matrix"
-      ],
-      "and_any": [
-        "covers_check_ids_count_gt_1",
-        "min_case_count_gt_4"
-      ]
-    },
     "default": "per_bundle"
-  },
-  "_min_case_lookup": "First matching matrix row (verification_class + calculation_contract); else class default_min_case_count from test-verification-classes.json; else default_min_case_count."
+  }
 }

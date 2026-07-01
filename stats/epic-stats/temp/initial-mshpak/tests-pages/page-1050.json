@@ -1,0 +1,2172 @@
+{
+  "expand": "schema,names",
+  "startAt": 1050,
+  "maxResults": 50,
+  "total": 1064,
+  "issues": [
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1947652",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947652",
+      "key": "CRTQA-10190",
+      "fields": {
+        "summary": "Option Level Validation \u2014 OPTION order rejected when it increases uncovered position qty",
+        "issuelinks": [
+          {
+            "id": "3331575",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331575",
+            "outwardIssue": {
+              "id": "1947647",
+              "key": "CRTQA-10189",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947647",
+              "fields": {
+                "summary": "Option Level Validation \u2014 OPTION order rejected when Prospective OL > Current OL",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331586",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331586",
+            "inwardIssue": {
+              "id": "1947658",
+              "key": "CRTQA-10191",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947658",
+              "fields": {
+                "summary": "Option Level Validation \u2014 STOCK/ETF opening order accepted when Portfolio OL = 0 and Prospective OL = 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331576",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331576",
+            "outwardIssue": {
+              "id": "1504326",
+              "key": "CRT-190",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1504326",
+              "fields": {
+                "summary": "[CT ETD] Option Levels",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1947658",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947658",
+      "key": "CRTQA-10191",
+      "fields": {
+        "summary": "Option Level Validation \u2014 STOCK/ETF opening order accepted when Portfolio OL = 0 and Prospective OL = 0",
+        "issuelinks": [
+          {
+            "id": "3331586",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331586",
+            "outwardIssue": {
+              "id": "1947652",
+              "key": "CRTQA-10190",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947652",
+              "fields": {
+                "summary": "Option Level Validation \u2014 OPTION order rejected when it increases uncovered position qty",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331647",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331647",
+            "inwardIssue": {
+              "id": "1947685",
+              "key": "CRTQA-10192",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947685",
+              "fields": {
+                "summary": "Option Level Validation \u2014 STOCK closing order accepted when Portfolio OL = 0 and no options on underlying",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331587",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331587",
+            "outwardIssue": {
+              "id": "1504326",
+              "key": "CRT-190",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1504326",
+              "fields": {
+                "summary": "[CT ETD] Option Levels",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1947685",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947685",
+      "key": "CRTQA-10192",
+      "fields": {
+        "summary": "Option Level Validation \u2014 STOCK closing order accepted when Portfolio OL = 0 and no options on underlying",
+        "issuelinks": [
+          {
+            "id": "3331647",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331647",
+            "outwardIssue": {
+              "id": "1947658",
+              "key": "CRTQA-10191",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947658",
+              "fields": {
+                "summary": "Option Level Validation \u2014 STOCK/ETF opening order accepted when Portfolio OL = 0 and Prospective OL = 0",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331655",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331655",
+            "inwardIssue": {
+              "id": "1947688",
+              "key": "CRTQA-10193",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947688",
+              "fields": {
+                "summary": "Option Level Validation \u2014 OPTION order rejected when Portfolio OL = 0 (any option order increases Prospective OL above 0)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331648",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331648",
+            "outwardIssue": {
+              "id": "1504326",
+              "key": "CRT-190",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1504326",
+              "fields": {
+                "summary": "[CT ETD] Option Levels",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1947688",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947688",
+      "key": "CRTQA-10193",
+      "fields": {
+        "summary": "Option Level Validation \u2014 OPTION order rejected when Portfolio OL = 0 (any option order increases Prospective OL above 0)",
+        "issuelinks": [
+          {
+            "id": "3331655",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331655",
+            "outwardIssue": {
+              "id": "1947685",
+              "key": "CRTQA-10192",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1947685",
+              "fields": {
+                "summary": "Option Level Validation \u2014 STOCK closing order accepted when Portfolio OL = 0 and no options on underlying",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3331656",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3331656",
+            "outwardIssue": {
+              "id": "1504326",
+              "key": "CRT-190",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1504326",
+              "fields": {
+                "summary": "[CT ETD] Option Levels",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1949979",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1949979",
+      "key": "CRTQA-10202",
+      "fields": {
+        "summary": "CA management - Apply CA Transactions without commissions, fees, taxes for STOCK+OPTION",
+        "issuelinks": [
+          {
+            "id": "3336185",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3336185",
+            "inwardIssue": {
+              "id": "1950168",
+              "key": "CRTQA-10203",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950168",
+              "fields": {
+                "summary": "CA management - Apply CA Transactions with commissions, fees, taxes ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3335755",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3335755",
+            "outwardIssue": {
+              "id": "1932070",
+              "key": "CRT-672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1932070",
+              "fields": {
+                "summary": "Add Taxes, Commissions and External Fees to CA API",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1950168",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950168",
+      "key": "CRTQA-10203",
+      "fields": {
+        "summary": "CA management - Apply CA Transactions with commissions, fees, taxes ",
+        "issuelinks": [
+          {
+            "id": "3336185",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3336185",
+            "outwardIssue": {
+              "id": "1949979",
+              "key": "CRTQA-10202",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1949979",
+              "fields": {
+                "summary": "CA management - Apply CA Transactions without commissions, fees, taxes for STOCK+OPTION",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3337323",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3337323",
+            "inwardIssue": {
+              "id": "1950762",
+              "key": "CRTQA-10204",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950762",
+              "fields": {
+                "summary": "CA management - Apply CA Transactions with several rules in commissions, fees, taxes ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3336186",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3336186",
+            "outwardIssue": {
+              "id": "1932070",
+              "key": "CRT-672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1932070",
+              "fields": {
+                "summary": "Add Taxes, Commissions and External Fees to CA API",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1950762",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950762",
+      "key": "CRTQA-10204",
+      "fields": {
+        "summary": "CA management - Apply CA Transactions with several rules in commissions, fees, taxes ",
+        "issuelinks": [
+          {
+            "id": "3337323",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3337323",
+            "outwardIssue": {
+              "id": "1950168",
+              "key": "CRTQA-10203",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950168",
+              "fields": {
+                "summary": "CA management - Apply CA Transactions with commissions, fees, taxes ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3338624",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338624",
+            "inwardIssue": {
+              "id": "1951517",
+              "key": "CRTQA-10205",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951517",
+              "fields": {
+                "summary": "CA management - Check CA Transactions with several rules for charges in Adaptive - TBD",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3340026",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3340026",
+            "outwardIssue": {
+              "id": "1952383",
+              "key": "XT-8253",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1952383",
+              "fields": {
+                "summary": "[Corner] Account Statement - Commission/ Fee/ Taxes values are unsigned",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3337324",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3337324",
+            "outwardIssue": {
+              "id": "1932070",
+              "key": "CRT-672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1932070",
+              "fields": {
+                "summary": "Add Taxes, Commissions and External Fees to CA API",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1951517",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951517",
+      "key": "CRTQA-10205",
+      "fields": {
+        "summary": "CA management - Check CA Transactions with several rules for charges in Adaptive - TBD",
+        "issuelinks": [
+          {
+            "id": "3338624",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338624",
+            "outwardIssue": {
+              "id": "1950762",
+              "key": "CRTQA-10204",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950762",
+              "fields": {
+                "summary": "CA management - Apply CA Transactions with several rules in commissions, fees, taxes ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3338988",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338988",
+            "inwardIssue": {
+              "id": "1951680",
+              "key": "CRTQA-10206",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951680",
+              "fields": {
+                "summary": "CA management - Send CA Transactions with charges if qnt value is empty",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3338933",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338933",
+            "outwardIssue": {
+              "id": "1949627",
+              "key": "CAN-13562",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1949627",
+              "fields": {
+                "summary": "[CT Adaptive] Transactions widget does not load if there are CA transactions on the account",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3338625",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338625",
+            "outwardIssue": {
+              "id": "1932070",
+              "key": "CRT-672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1932070",
+              "fields": {
+                "summary": "Add Taxes, Commissions and External Fees to CA API",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1951680",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951680",
+      "key": "CRTQA-10206",
+      "fields": {
+        "summary": "CA management - Send CA Transactions with charges if qnt value is empty",
+        "issuelinks": [
+          {
+            "id": "3338988",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338988",
+            "outwardIssue": {
+              "id": "1951517",
+              "key": "CRTQA-10205",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951517",
+              "fields": {
+                "summary": "CA management - Check CA Transactions with several rules for charges in Adaptive - TBD",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/1",
+                  "description": "The issue is open and ready for the assignee to start work on it.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Open",
+                  "id": "1",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3338991",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338991",
+            "outwardIssue": {
+              "id": "1949627",
+              "key": "CAN-13562",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1949627",
+              "fields": {
+                "summary": "[CT Adaptive] Transactions widget does not load if there are CA transactions on the account",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3338989",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3338989",
+            "outwardIssue": {
+              "id": "1932070",
+              "key": "CRT-672",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1932070",
+              "fields": {
+                "summary": "Add Taxes, Commissions and External Fees to CA API",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970929",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970929",
+      "key": "CRTQA-10309",
+      "fields": {
+        "summary": "FX_SPOT Pricing - Check prices for accounts from different account groups",
+        "issuelinks": [
+          {
+            "id": "3377963",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3377963",
+            "inwardIssue": {
+              "id": "1971900",
+              "key": "CRTQA-10320",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971900",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check volume-tier pricing dependency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379961",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379961",
+            "outwardIssue": {
+              "id": "1950690",
+              "key": "XT-8226",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950690",
+              "fields": {
+                "summary": "[Corner] Watchlist - FX_spot prices shows when account is NOT in CornerTraderFxConfiguration groups",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10003",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/inprogress.png",
+                  "name": "In development",
+                  "id": "10003",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3377758",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3377758",
+            "outwardIssue": {
+              "id": "1856985",
+              "key": "CRT-594",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1856985",
+              "fields": {
+                "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971900",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971900",
+      "key": "CRTQA-10320",
+      "fields": {
+        "summary": "FX_SPOT Pricing - Check volume-tier pricing dependency",
+        "issuelinks": [
+          {
+            "id": "3377963",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3377963",
+            "outwardIssue": {
+              "id": "1970929",
+              "key": "CRTQA-10309",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970929",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check prices for accounts from different account groups",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3378357",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378357",
+            "inwardIssue": {
+              "id": "1972112",
+              "key": "CRTQA-10322",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972112",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Change CornerTraderFxConfiguration account group for account",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3377964",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3377964",
+            "outwardIssue": {
+              "id": "1856985",
+              "key": "CRT-594",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1856985",
+              "fields": {
+                "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972112",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972112",
+      "key": "CRTQA-10322",
+      "fields": {
+        "summary": "FX_SPOT Pricing - Change CornerTraderFxConfiguration account group for account",
+        "issuelinks": [
+          {
+            "id": "3378357",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378357",
+            "outwardIssue": {
+              "id": "1971900",
+              "key": "CRTQA-10320",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971900",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check volume-tier pricing dependency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379101",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379101",
+            "inwardIssue": {
+              "id": "1972621",
+              "key": "CRTQA-10328",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972621",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check quotes in Positions and Derivatives widgets",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379958",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379958",
+            "outwardIssue": {
+              "id": "1972286",
+              "key": "CAN-14542",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972286",
+              "fields": {
+                "summary": "[CT Adaptive] The app is not logged out during FxConfiguration group changing",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10009",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/needinfo.png",
+                  "name": "Waiting for clarification",
+                  "id": "10009",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378358",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378358",
+            "outwardIssue": {
+              "id": "1856985",
+              "key": "CRT-594",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1856985",
+              "fields": {
+                "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972621",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972621",
+      "key": "CRTQA-10328",
+      "fields": {
+        "summary": "FX_SPOT Pricing - Check quotes in Positions and Derivatives widgets",
+        "issuelinks": [
+          {
+            "id": "3379101",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379101",
+            "outwardIssue": {
+              "id": "1972112",
+              "key": "CRTQA-10322",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972112",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Change CornerTraderFxConfiguration account group for account",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379819",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379819",
+            "inwardIssue": {
+              "id": "1973081",
+              "key": "CRTQA-10515",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973081",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check  backup prices in non-trading hours/day",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379102",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379102",
+            "outwardIssue": {
+              "id": "1856985",
+              "key": "CRT-594",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1856985",
+              "fields": {
+                "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973081",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973081",
+      "key": "CRTQA-10515",
+      "fields": {
+        "summary": "FX_SPOT Pricing - Check  backup prices in non-trading hours/day",
+        "issuelinks": [
+          {
+            "id": "3379819",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379819",
+            "outwardIssue": {
+              "id": "1972621",
+              "key": "CRTQA-10328",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972621",
+              "fields": {
+                "summary": "FX_SPOT Pricing - Check quotes in Positions and Derivatives widgets",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10118",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Actual",
+                  "id": "10118",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/10900",
+                  "id": "10900",
+                  "description": "Represents a Test",
+                  "iconUrl": "https://jira.in.devexperts.com/download/resources/com.xpandit.plugins.xray/images/test.png",
+                  "name": "Test",
+                  "subtask": false
+                }
+              }
+            },
+            "type": {
+              "id": "10031",
+              "name": "Cloners",
+              "inward": "has clone(s)",
+              "outward": "clone of",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10031"
+            }
+          },
+          {
+            "id": "3379820",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379820",
+            "outwardIssue": {
+              "id": "1856985",
+              "key": "CRT-594",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1856985",
+              "fields": {
+                "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    }
+  ],
+  "warningMessages": null,
+  "names": null,
+  "schema": null
+}

@@ -1,5 +1,5 @@
 ---
-description: Multiplex CRTQA SSH + scripted dx Core console (start | status | probe | stop)
+description: Start, status, probe, or stop the multiplexed CRTQA SSH console session.
 ---
 
 # /crtqa-console
@@ -62,12 +62,10 @@ Kills tracked **plink** PID; removes **session.active.json** + **DPAPI credentia
 | Network | VPN/routes to `sshHost` |
 | Windows | Desktop session for **`start`** modal |
 
-## Recommended preflight (with `/crtqa-env`)
+## Epic-helper preflight
 
-1. Postgres tunnel tab + MCP reload  
-2. **`/crtqa-console start`**  
-3. **`/crtqa-env`**  
-4. **`TEST-DISCOVER: <KEY>`**
+1. **`/crtqa-console start`** (human SSH password)
+2. **`python automation/tools/crtqa_console_probe.py`** or **`/epic-helper resume`** after cold-start gate
 
 ## Security
 
@@ -76,4 +74,4 @@ Kills tracked **plink** PID; removes **session.active.json** + **DPAPI credentia
 
 ## Docs
 
-[`automation/tools/crtqa-console/README.md`](../../automation/tools/crtqa-console/README.md) · [`automation/docs/crtqa-env.md`](../../automation/docs/crtqa-env.md)
+[`automation/tools/crtqa-console/README.md`](../../automation/tools/crtqa-console/README.md)

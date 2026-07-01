@@ -9,7 +9,7 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 | Branch | Remote | Role |
 |--------|--------|------|
 | **`personal`** | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (`origin`) | **Personal production** — day-to-day work: epics, stats, calibrate gold, temp, and harness changes. Commit and push here first. |
-| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness + **`/crtqa-helper`** + calibrate; no personal epics, stats, coaches, teach, or scratch. Updated via **`CLEAN:`** (direct push to `team/team` from `personal`). |
+| **`team`** | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) (`team`) | **Team private share** — runnable harness + **`/epic-helper`** + calibrate; no personal epics, stats, or scratch. Updated via **`CLEAN:`** (direct push to `team/team` from `personal`). |
 | **`public-M.N`** (e.g. `public-1.2`) | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (`releases`) | **Public guide export** — methodology and template shapes only. Updated only via **`CLEAN:`** from **`personal`**. |
 
 **Checkout (personal):** `git fetch origin && git checkout personal` (tracks `origin/personal`).
@@ -18,7 +18,7 @@ Three tiers: **personal** (full workspace), **team** (shareable private harness 
 
 | Who | First reads |
 |-----|-------------|
-| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, calibrate; **`/crtqa-helper`** epic orchestrator; **`/better-prompt`** before vague tasks; CTQA prep: tunnel [README](automation/tools/tunnel/README.md), **`/crtqa-console`**, **`/crtqa-env`**; **jq** on PATH: [automation/docs/jq.md](automation/docs/jq.md)) |
+| **Humans** | [qa-handoff.md](qa-handoff.md) (session focus), [HOW-TO.md](HOW-TO.md) (pipelines, stats, calibrate; **`/epic-helper`** epic orchestrator; **`/crtqa-console`**; **jq** on PATH: [automation/docs/jq.md](automation/docs/jq.md)) |
 | **AI agents** | [AGENTS.md](AGENTS.md) (map + MCP policy), [docs/harness-principles.md](docs/harness-principles.md) (harness doctrine for pipelines & calibrate), [docs/harness-map.json](docs/harness-map.json) (keyword → which files to open; tiers T0–T2) |
 
 ## Satellite / planned
@@ -41,18 +41,23 @@ All playbooks: [.cursor/pipelines/](.cursor/pipelines/)
 
 | Trigger | Playbook |
 |---------|----------|
-| `EPIC-PREP:` + Epic key | [epic-prep.md](.cursor/pipelines/epic-prep.md) — v4 obligations; [epic-prep-verify.md](automation/docs/epic-prep-verify.md) |
-| `COVERAGE:` + Epic key | [coverage.md](.cursor/pipelines/coverage.md) — v2 obligations_coverage; [coverage-verify.md](automation/docs/coverage-verify.md) |
-| `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) v2 — requires coverage; [analysis-verify.md](automation/docs/analysis-verify.md) |
-| `TEST-DISCOVER:` + Epic key | [test-discover.md](.cursor/pipelines/test-discover.md) — schema v3 **`fixture_needs`**; CRTQA index opt-in (`crtqa_index=yes`); [discover_verify.py](automation/tools/discover_verify.py); may end **`incomplete`** when setup depth insufficient |
-| `TEST-PRECON:` + Epic key | [test-precon.md](.cursor/pipelines/test-precon.md) v5 — [exploration-depth-ladder.json](docs/exploration-depth-ladder.json); Phase 4R/4D/4C; [precon_verify.py](automation/tools/precon_verify.py) `--discover` |
-| `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) — v3 executable outlines (default); [test-prep-draft-profiles.json](docs/test-prep-draft-profiles.json) |
-| `/crtqa-calibrate` | [crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md) — prod vs gold; [calibrate.md](.cursor/pipelines/calibrate.md); gold under [.cursor/calibrate/](.cursor/calibrate/README.md) |
-| `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — optional; documentation integrity ladder + archive to `context/`; **no** MCP |
-| `CLEAN:` | [clean.md](.cursor/pipelines/clean.md) — optional `scope=full` \| `align` \| `personal` \| `team` \| `public`; `version=M.N`; **`personal` branch only** — align harness, push personal, publish team + public ([clean-verify.md](automation/docs/clean-verify.md)) |
-| `/better-prompt` | [better-prompt.md](.cursor/commands/better-prompt.md) — coach task wording (**Conversation only**; no pipeline run) |
-| `/better-skill` | [better-skill.md](.cursor/commands/better-skill.md) — coach playbook/command/skill drafts (**Conversation only**) |
-| `/teach` | [teach.md](.cursor/commands/teach.md) — teach-first smoke under [auto-tests/](auto-tests/) (`/teach stop` exits) |
+| `EPIC-PREP:` + Epic key | [epic-prep.md](.cursor/pipelines/epic-prep.md) — v4 obligations |
+| `COVERAGE:` + Epic key | [coverage.md](.cursor/pipelines/coverage.md) — v2 + **scenario_groups[]** at freeze |
+| `GROUND:` + Epic key | [ground.md](.cursor/pipelines/ground.md) — console probes (needs env) |
+| `ANALYSE:` + Epic key | [analysis.md](.cursor/pipelines/analysis.md) v2 — requires coverage |
+| `TEST-DISCOVER:` + Epic key | [test-discover.md](.cursor/pipelines/test-discover.md) — **linker** (no browser) |
+| `TEST-PREP:` + Epic key | [test-prep.md](.cursor/pipelines/test-prep.md) — **scenario_intent** default |
+| `/epic-helper` | [epic-helper.md](.cursor/commands/epic-helper.md) — v5 orchestrator (two gates) |
+| `CLOSE:` + Epic key | [close.md](.cursor/pipelines/close.md) — three root `.md`; archive to `context/` |
+| `TEST-PRECON:` + Epic key | **LEGACY** — [test-precon.md](.cursor/pipelines/test-precon.md) (calibrate only) |
+| `COVERAGE-REINFORCE:` | **LEGACY opt-in** — [coverage-reinforce.md](.cursor/pipelines/coverage-reinforce.md) |
+| `/epic-calibrate` | [epic-calibrate.md](.cursor/commands/epic-calibrate.md) — prod vs gold; [calibrate.md](.cursor/pipelines/calibrate.md) |
+| `/clean-release` | [clean-release.md](.cursor/commands/clean-release.md) — runs **`CLEAN:`** playbook |
+| `CLEAN:` | [clean.md](.cursor/pipelines/clean.md) — **`personal` branch only** — publish personal / team / public |
+| `/epic-stats` | [epic-stats.md](.cursor/commands/epic-stats.md) — TCD stats (personal branch) |
+| `/release-notes` | [release-notes.md](.cursor/commands/release-notes.md) — Jira release notes (personal) |
+| `/crtqa-console` | [crtqa-console.md](.cursor/commands/crtqa-console.md) — multiplexed dxCore console |
+| `/crtqa-console` | [crtqa-console.md](.cursor/commands/crtqa-console.md) — multiplexed console |
 
 Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 
@@ -63,9 +68,9 @@ Router: [.cursor/rules/pipeline-router.mdc](.cursor/rules/pipeline-router.mdc).
 Measure ROI of the agentic epic helper on **Test Case Development** (v5 test-first corpus): **manual corpus** vs **AI-assisted comparison**, per engineer.
 
 - Operator steps: [HOW-TO.md §1](HOW-TO.md) (**personal branch only** — modes + how to run).
-- Contract: [docs/crtqa-stats-contract.json](docs/crtqa-stats-contract.json); summary [stats/crtqa-stats/README.md](stats/crtqa-stats/README.md).
-- **`/crtqa-stats`** [crtqa-stats.md](.cursor/commands/crtqa-stats.md); per-user rollup `python automation/tools/crtqa_stats_rollup.py --jira-user <you>`; team `python automation/tools/crtqa_stats_team_rollup.py` — [automation/docs/crtqa-stats.md](automation/docs/crtqa-stats.md).
-- Output: `stats/crtqa-stats/latest-<you>.md`, `latest-team.md`, `state/`, `raw/` (gitignored); **not** shipped on team/public tiers.
+- Contract: [docs/epic-stats-contract.json](docs/epic-stats-contract.json); summary [stats/epic-stats/README.md](stats/epic-stats/README.md).
+- **`/epic-stats`** [epic-stats.md](.cursor/commands/epic-stats.md); per-user rollup `python automation/tools/epic_stats_rollup.py --jira-user <you>`; team `python automation/tools/epic_stats_team_rollup.py` — [automation/docs/epic-stats.md](automation/docs/epic-stats.md).
+- Output: `stats/epic-stats/latest-<you>.md`, `latest-team.md`, `state/`, `raw/` (gitignored); **not** shipped on team/public tiers.
 
 ## Epics and templates
 
@@ -76,14 +81,14 @@ Measure ROI of the agentic epic helper on **Test Case Development** (v5 test-fir
 ## Automation
 
 - Tool docs: [automation/docs/](automation/docs/) (e.g. [yogi-url-resolve.md](automation/docs/yogi-url-resolve.md), [jq.md](automation/docs/jq.md), [jira-structure.md](automation/docs/jira-structure.md), [figma-mcp.md](automation/docs/figma-mcp.md), [chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md)).
-- Runnable tools: [automation/tools/](automation/tools/) — **CTQA Postgres SSH tunnel / probe**: [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (`ctqa_pg.py`, PuTTY plink default on Windows).
+- Runnable tools: [automation/tools/](automation/tools/) — console probe: [crtqa_console_probe.py](automation/tools/crtqa_console_probe.py); console multiplex: [crtqa-console/README.md](automation/tools/crtqa-console/README.md).
 - Scratch: [automation/temp/](automation/temp/) (short-lived; see [automation/temp/README.md](automation/temp/README.md)).
 
 ## Rules, prompts, MCP config
 
 - Rules: [.cursor/rules/](.cursor/rules/).
 - Prompt scaffolds: [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for ad-hoc ticket/incident Q&A).
-- Optional MCP: **`postgres-ctqa`** — snippet in [automation/tools/tunnel/README.md](automation/tools/tunnel/README.md) (*MCP — PostgreSQL*); **`chrome-devtools`** (ad-hoc UI / discover-precon-prep) — [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md). Merge into **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); template **[`.cursor/mcp.json.example`](.cursor/mcp.json.example)**; SSH tunnel + local URI for Postgres; no secrets in git.
+- Optional MCP: **`chrome-devtools`** (ad-hoc UI / legacy PRECON) — [automation/docs/chrome-devtools-mcp.md](automation/docs/chrome-devtools-mcp.md). Merge into **gitignored** `.cursor/mcp.json` and/or **global** `~/.cursor/mcp.json` (Windows: `%USERPROFILE%\.cursor\mcp.json`); template **[`.cursor/mcp.json.example`](.cursor/mcp.json.example)**.
 
 ## Reference docs
 

@@ -40,26 +40,8 @@ $out = [ordered]@{
     "Low confidence on non-pipeline Action: Blocking + Questions only; no writes."
     "Inspect large JSON with jq (jq-json.mdc); verifiers authoritative for epics."
   )
-  coaches = @{
-    betterPrompt = "/better-prompt"
-    betterSkill = "/better-skill"
-    teach = "/teach"
-    teachStop = "/teach stop"
-    mode = "conversation_only"
-    teachMode = "teach_first"
-  }
 }
 if ($resume) { $out.currentResume = $resume }
-
-$sessionPath = Join-Path $Root "auto-tests/.teacher-session.json"
-if (Test-Path $sessionPath) {
-  if (Get-Command jq -ErrorAction SilentlyContinue) {
-    $active = jq -r '.active // false' $sessionPath 2>$null
-    if ($active -eq "true") {
-      $out.teachModeReminder = "Teach mode may still be active (auto-tests/.teacher-session.json). Confirm with operator or use /teach stop."
-    }
-  }
-}
 
 $path = Join-Path $Root ".cursor/docs/inject-corner.json"
 $json = $out | ConvertTo-Json -Depth 8 -Compress

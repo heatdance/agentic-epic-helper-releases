@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "_comment": "CLOSE terminal cross-artifact topology lint. Playbook: .cursor/pipelines/close.md. Verifier: automation/tools/close_verify.py --mode topology --strict-topology. Upstream: docs/precon-topology-contract.json, docs/test-prep-topology-contract.json.",
+  "inputs": {
+    "ref_slices": [
+      "verification_topology.pricing_oracle_rules",
+      "verification_topology.platform_reuse_candidates"
+    ],
+    "coverage_slices": [
+      "checks[].oracle_rule_id",
+      "checks[].delivery_status",
+      "checks[].verification_role",
+      "platform_reuse_annex"
+    ],
+    "discover_slices": [
+      "verification_affordances[].oracle_binding",
+      "obligation_ledger",
+      "sources.topology_loaded",
+      "fixture_needs"
+    ],
+    "precon_slices": [
+      "command_patterns",
+      "test_skeleton[].case_outline[].pattern_ref",
+      "session_placeholders",
+      "excluded_checks_with_reason",
+      "precon_clusters",
+      "sources.topology_loaded"
+    ],
+    "tests_slices": [
+      "sources.topology_loaded",
+      "reverse_validation.coverage_gaps",
+      "platform_reuse_annex",
+      "test_bundles[].precon_cluster_refs",
+      "test_bundles[].covers_check_ids",
+      "test_bundles[].draft"
+    ]
+  },
+  "oracle_rule_to_pattern_ref": {
+    "inherits": "docs/precon-topology-contract.json",
+    "text_configuration_closest_gte_qty": "watchlist_tier_by_qty",
+    "first_tier_quote": "position_first_tier_quote",
+    "console_show_prices_first_tier": "console_show_prices_first_tier",
+    "midpoint_invariant": "midpoint_invariant_observe",
+    "mark_from_midpoint": "mark_from_midpoint_observe"
+  },
+  "strict_topology_checks": {
+    "oracle_error": [
+      "coverage.checks[].oracle_rule_id subset of ref pricing_oracle_rules[].id when topology_loaded",
+      "primary non-blocked check with oracle_rule_id has discover affordance with matching oracle_binding.oracle_rule_id",
+      "check with oracle_rule_id has precon case_outline.pattern_ref; maps via oracle_rule_to_pattern_ref when discover oracle_rule present",
+      "delivery-blocked primary excluded in precon and tests; not in bundle covers_check_ids",
+      "tests.platform_reuse_annex when ref has platform_reuse_candidates (no CRTQA keys)",
+      "bundle precon_cluster_refs resolve in precon.precon_clusters"
+    ],
+    "session_warning": [
+      "topology_loaded flag alignment across discover / precon / tests sources",
+      "angle-bracket tokens in precon command_patterns and test draft text subset of session_placeholders keys"
+    ]
+  },
+  "legacy_no_op": {
+    "rule": "When none of discover, precon, or tests have sources.topology_loaded true, strict topology checks skip entirely",
+    "note": "Ref-only verification_topology without downstream topology_loaded does not force strict lint (639 archived regression)"
+  },
+  "strict_topology_verifier": {
+    "mode": "topology",
+    "requires_strict_flag": true,
+    "requires_artifacts": ["ref", "coverage", "discover", "precon", "tests"],
+    "optional_path_overrides": ["--ref", "--coverage", "--discover", "--precon", "--tests"],
+    "validation_log_step": "topology",
+    "trigger_token": "strict_topology=yes on CLOSE: line"
+  },
+  "principal_contract": "docs/close-principal-contract.json",
+  "lint_phases": {
+    "topology": "Phase E½ strict_topology=yes independent opt-in",
+    "principal": "Phase E¾ strict_principal=yes independent opt-in"
+  },
+  "program_complete": {
+    "note": "Round 1 topology lint (Plan 8) plus Round 2 principal lint (step 8); see close-principal-contract.json"
+  }
+}

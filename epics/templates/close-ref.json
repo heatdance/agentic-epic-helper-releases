@@ -46,6 +46,20 @@
     "at": "ISO-8601"
   },
   "epic_verdict": "pass | pass_with_warnings | fail",
+  "topology_lint": {
+    "strict_topology_applied": false,
+    "error_count": 0,
+    "warning_count": 0,
+    "skipped_no_topology_loaded": false,
+    "completed_at": null
+  },
+  "principal_lint": {
+    "strict_principal_applied": false,
+    "error_count": 0,
+    "warning_count": 0,
+    "skipped_no_principal_loaded": false,
+    "completed_at": null
+  },
   "archive": {
     "layout_version": 1,
     "archived_at": null,
@@ -55,7 +69,7 @@
   },
   "validation_log": [],
   "_validation_log_item": {
-    "step": "preflight | ladder_l0 | finalize | md_regen | archive | emit",
+    "step": "preflight | ladder_l0 | topology | principal | finalize | md_regen | archive | emit",
     "action": "pass | fail | warn",
     "detail": "short machine-readable note"
   }

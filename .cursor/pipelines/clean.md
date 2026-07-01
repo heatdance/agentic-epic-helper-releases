@@ -71,7 +71,7 @@ After each tier subprocess: **`clean_verify.py --mode align`** (retry until pass
 | `coverage-reinforce` | **`COVERAGE-REINFORCE:`** | [coverage-reinforce.md](coverage-reinforce.md) |
 | `analysis` | **`ANALYSE:`** | [analysis.md](analysis.md) |
 | `test-discover` | **`TEST-DISCOVER:`** | [test-discover.md](test-discover.md) |
-| `test-precon` | **`TEST-PRECON:`** | [test-precon.md](test-precon.md) |
+| `test-precon` | **`TEST-PRECON:`** (LEGACY) | [test-precon.md](test-precon.md) |
 | `test-prep` | **`TEST-PREP:`** | [test-prep.md](test-prep.md) |
 | `close` | **`CLOSE:`** | [close.md](close.md) |
 | `clean` | **`CLEAN:`** | [clean.md](clean.md) (this file) |
@@ -96,9 +96,15 @@ If **`scope=personal`**, **stop**.
 
 ## Phase T — Team strip and direct push
 
-**Team tier policy (this phase):** delete **stats**, **coaches** (`better-prompt` / `better-skill`), and **teach** artefacts; **keep** full **`/crtqa-helper`** (command, contract, affordances tool, `coverage-reinforce.md`). HOW-TO/AGENTS/README rewritten from [clean-entry-templates/](../../docs/clean-entry-templates/).
+**Team tier policy (this phase):** delete **stats**, **coaches** (`` / ``), and **teach** artefacts; **keep** full **`/epic-helper`** (command, contract, affordances tool, `coverage-reinforce.md`). HOW-TO/AGENTS/README rewritten from [clean-entry-templates/](../../docs/clean-entry-templates/).
 
 **Input**: `origin/personal` tip. **Output**: `team/team` updated in place. **No new branch names.**
+
+**Personal stats guard (required):** while still on **`personal`**, backup gitignored CRTQA stats artefacts before team strip deletes `stats/epic-stats/**` in the shared working tree:
+
+```text
+python automation/tools/clean_stats_personal.py backup
+```
 
 ```text
 git fetch origin personal
@@ -119,6 +125,7 @@ git push team team
 python automation/tools/clean_verify.py --mode prune_team_remote
 python automation/tools/clean_verify.py --mode team_tip --sha %TEAM_SHA%
 git checkout personal
+python automation/tools/clean_stats_personal.py restore
 ```
 
 - **`prune_team_remote`**: deletes every head on **`team`** remote except **`team`** (removes prior `clean/*` PR branches).
@@ -160,7 +167,7 @@ Example: **`git checkout -B public-1.4 team/team`**.
 
 Mechanical public transform (no agent improvisation for readmes):
 
-- **Public tier policy:** delete executable **`/crtqa-helper`**, stats, coaches, teach, calibrate command, and verifiers; HOW-TO describes **orchestrator** and **calibration** patterns only (conceptual). Ship **`coverage-reinforce-readme.md`** with other pipeline readmes.
+- **Public tier policy:** delete executable **`/epic-helper`**, stats, coaches, teach, calibrate command, and verifiers; HOW-TO describes **orchestrator** and **calibration** patterns only (conceptual). Ship **`coverage-reinforce-readme.md`** with other pipeline readmes.
 - Seeds from [`docs/clean-public-content/`](../../docs/clean-public-content/) (entry docs + pipeline `*-readme.md`)
 - Template overlays from [`epics/templates/public/`](../../epics/templates/public/) per [`docs/clean-contract.json`](../../docs/clean-contract.json) `public.template_overlays`
 - Deletes `.cursor/mcp.json.example` and other `public.delete_paths` (never deletes **gitignored** `.cursor/mcp.json` — operator restores from `.cursor/mcp.json.example` if missing after U5)

@@ -18,11 +18,11 @@ The interface shapes reasoning. Treat the context window as finite working memor
 
 - For substantive QA work, **read [qa-handoff.md](qa-handoff.md)** at the start of a session and **update it** before ending with what changed, current focus, and next steps.
 - Treat **[AGENTS.md](AGENTS.md)** as the short map; follow pointers to deeper docs rather than loading everything at once (**progressive disclosure**).
-- **Intent / delegation / coaches:** [intent-corner.mdc](intent-corner.mdc), [delegation-corner.mdc](delegation-corner.mdc), [preservation-corner.mdc](preservation-corner.mdc), [communication-corner.mdc](communication-corner.mdc); charter [docs/grounding-integration.json](../../docs/grounding-integration.json). **`/better-prompt`** and **`/better-skill`** are Conversation-only (no repo writes). **`/teach`** is Teach mode ([docs/auto-tests-contract.json](../../docs/auto-tests-contract.json)); **`/teach stop`** exits.
+- **Intent / delegation / coaches:** [intent-corner.mdc](intent-corner.mdc), [delegation-corner.mdc](delegation-corner.mdc), [preservation-corner.mdc](preservation-corner.mdc), [communication-corner.mdc](communication-corner.mdc); charter [docs/grounding-integration.json](../../docs/grounding-integration.json). **`/`** and **`/`** are Conversation-only (no repo writes). **``** is Teach mode ([docs/auto-tests-contract.json](../../docs/auto-tests-contract.json)); **` stop`** exits.
 
 ## Harness doctrine (MUST when relevant)
 
-If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:`, …), **calibrate** (`/crtqa-calibrate`, operator gold under `.cursor/calibrate/`), **epic deliverables** under `epics/<KEY>/`, or **coverage vs test-draft** behaviour:
+If the task involves **pipeline triggers** (`EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:`, …), **calibrate** (`/epic-calibrate`, operator gold under `.cursor/calibrate/`), **epic deliverables** under `epics/<KEY>/`, or **coverage vs test-draft** behaviour:
 
 - **Read [docs/harness-principles.md](docs/harness-principles.md)** before proposing norms (after `qa-handoff.md` / **AGENTS.md** as needed). It defines production generation vs operator calibrate, CRTQA non-reliance in generation, coverage vs E2E shape, reference ownership, and **TEST-DISCOVER obligation closure** (§8).
 

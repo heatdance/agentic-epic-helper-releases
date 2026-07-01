@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "_comment": "COVERAGE-REINFORCE topology consumption from TEST-DISCOVER pass. Playbook: .cursor/pipelines/coverage-reinforce.md. Verifier: automation/tools/coverage_verify.py --mode reinforce. Upstream: docs/coverage-topology-contract.json, docs/discover-topology-contract.json. Principal: docs/coverage-reinforce-principal-contract.json.",
+  "principal_contract": "docs/coverage-reinforce-principal-contract.json",
+  "inputs": {
+    "discover_slices": [
+      "verification_affordances[] (oracle_binding, topology_surface_id, artifacts, setup_depth)",
+      "obligation_ledger[] (delivery tooling_blocked rows)",
+      "fixture_needs[]",
+      "sources.topology_loaded",
+      "environment.client_shell_impact"
+    ],
+    "helper_slice": "epics/<KEY>/helper/affordances-slice.json",
+    "merge_base": "epics/<KEY>/<KEY>-coverage.json pass 1"
+  },
+  "merge_rules": {
+    "oracle_binding": {
+      "action": "Append or verify checks[].detail_lines (>) with human Oracle/Harness hints; machine oracle enum tokens in linker_trace_lines when not human-readable; retain checks[].oracle_rule_id",
+      "forbidden": "Generic tier-appropriate language when discover names first_tier_quote or text_configuration_closest_gte_qty; > Discover: in detail_lines"
+    },
+    "artifacts_probe_executed": {
+      "action": "Sanitized widget/console tokens from affordance artifacts into detail_lines when human-readable; else linker_trace_lines only"
+    },
+    "delivery_tooling_blocked": {
+      "action": "Skip new executable top-level scenario lines; preserve delivery_status and [FAILED]/excluded markers from pass 1",
+      "forbidden": "Reopen delivery-blocked primary as new - lines"
+    },
+    "shell_first_batches": {
+      "when": "coverage.emit_layout == shell_first",
+      "group_by": "topology_surface_id matching ref.verification_topology.jira_scenario_surfaces[].id"
+    },
+    "formula_first_batches": {
+      "when": "coverage.emit_layout == formula_first",
+      "group_by": "fixture/console affordances",
+      "forbidden": "New shell H2 sections"
+    }
+  },
+  "emit_fields": {
+    "coverage_pass": 2,
+    "reinforced_at": "ISO-8601 UTC",
+    "sources.reinforce_inputs": "array of {path, loaded_at}",
+    "sources.reinforce_topology_loaded": "boolean when discover.sources.topology_loaded consumed"
+  },
+  "forbidden": [
+    "New primary checks[] ids for delivery-blocked rows",
+    "CRTQA keys in durable JSON",
+    "Executable - lines on discover tooling_blocked delivery primaries",
+    "Weakening pass-1 strict-topology bindings"
+  ],
+  "strict_reinforce_verifier": {
+    "requires_ref": true,
+    "discover_recommended": true,
+    "checks": [
+      "coverage_pass == 2 with reinforced_at and sources.reinforce_inputs",
+      "discover oracle_binding on linked affordance → check oracle_rule_id + detail_lines mention oracle_rule",
+      "discover delivery tooling_blocked → coverage delivery_status preserved; check id count stable",
+      "legacy pass-2 without discover oracle_binding: oracle lint no-op",
+      "pass-2 must still pass --strict-topology when ref has topology"
+    ],
+    "validation_log_steps": [
+      "reinforce-1-topology",
+      "reinforce-1-principal",
+      "reinforce-2-oracle",
+      "reinforce-2-fixture-provision",
+      "reinforce-2-skipped-delivery",
+      "reinforce-2-skipped-deferral-keyed"
+    ]
+  },
+  "downstream_handoff": {
+    "test_precon": "command_patterns from ref topology — see .cursor/pipelines/test-precon.md (6/8); no precon implementation in COVERAGE-REINFORCE"
+  }
+}

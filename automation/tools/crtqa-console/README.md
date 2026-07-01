@@ -49,7 +49,7 @@ Cleanup:
 pwsh -NoProfile -File automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps1
 ```
 
-Slash commands: [`.cursor/commands/crtqa-console.md`](../../../.cursor/commands/crtqa-console.md) (`start` | `status` | `probe` | `stop`). Environment checklist: [`/crtqa-env`](../../../.cursor/commands/crtqa-env.md) via [`crtqa_env_probe.py`](../crtqa_env_probe.py).
+Slash commands: [`.cursor/commands/crtqa-console.md`](../../../.cursor/commands/crtqa-console.md) (`start` | `status` | `probe` | `stop`). Console gate: [`crtqa_console_probe.py`](../crtqa_console_probe.py) (epic-helper + GROUND).
 
 ## Security / limitations
 

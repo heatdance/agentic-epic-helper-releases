@@ -1,6 +1,6 @@
 {
   "schema_version": 2,
-  "_comment": "Operator calibration: prod epics/<KEY>/ vs .cursor/calibrate/<KEY>-gold/. Playbook: .cursor/pipelines/calibrate.md. Command: /crtqa-calibrate.",
+  "_comment": "Operator calibration: prod epics/<KEY>/ vs .cursor/calibrate/<KEY>-gold/. Playbook: .cursor/pipelines/calibrate.md. Command: /epic-calibrate.",
   "gold_root": ".cursor/calibrate",
   "gold_dir_pattern": "{gold_root}/{epic_key}-gold",
   "prod_root_pattern": "epics/{epic_key}",

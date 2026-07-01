@@ -1,26 +1,29 @@
 {
   "schema_version": 1,
-  "_comment": "Shared exploration depth ladder: DISCOVER → PRECON → PREP. Phase 0c = smoke only (L0). Real navigation in PRECON Phase 4 and PREP Phase 8a-three-quarter. Verifiers: precon_verify.py, test_prep_verify.py --mode explore. Playbooks: test-precon.md, test-prep.md.",
+  "_comment": "Exploration depth ladder — LEGACY (TEST-PRECON / crtqa_outline PREP). Not used in draft_truth_v3 scenario_intent generation.",
   "depth_levels": {
     "smoke": {
       "level": 0,
-      "description": "Login / shell visible only. Produced in Phase 0c post_login_smoke.",
-      "producers": ["TEST-DISCOVER Phase 0c", "TEST-PRECON Phase 0c", "TEST-PREP Phase 0c"]
+      "description": "Login / shell visible only. PRECON/PREP Phase 0c post_login_smoke.",
+      "producers": ["TEST-PRECON Phase 0c", "TEST-PREP Phase 0c"]
     },
     "discover_probe": {
       "level": 1,
-      "description": "Discover fixture probe recipe completed (setup_depth probe_executed).",
-      "producers": ["TEST-DISCOVER Step E"]
+      "description": "DEPRECATED in generation — legacy benchmark fixtures only.",
+      "producers": [],
+      "deprecated": true
     },
     "precon_drill": {
       "level": 2,
-      "description": "Replay L1 + open setup-relevant views/forms (read-only). PRECON Phase 4R/4D/4C.",
-      "producers": ["TEST-PRECON Phase 4"]
+      "description": "LEGACY — TEST-PRECON Phase 4 only.",
+      "producers": [],
+      "deprecated": true
     },
     "prep_verify_view": {
       "level": 3,
-      "description": "Verification-target grids/metrics for plan class (read-only Chrome/console).",
-      "producers": ["TEST-PREP Phase 8a-three-quarter"]
+      "description": "LEGACY — crtqa_outline TEST-PREP 8a¾ only.",
+      "producers": [],
+      "deprecated": true
     }
   },
   "depth_order": ["smoke", "discover_probe", "precon_drill", "prep_verify_view"],

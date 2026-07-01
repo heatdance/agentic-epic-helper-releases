@@ -1,6 +1,6 @@
 # Session handoff: harness, benchmark vs generation, tests shape, communication (2026-05-15)
 
-> **Retired (2026-05-19):** Harness **benchmark** shadow runs removed. Use **`/crtqa-calibrate`**, [`.cursor/calibrate/README.md`](../.cursor/calibrate/README.md), [docs/calibrate-contract.json](../docs/calibrate-contract.json). Content below is historical.
+> **Retired (2026-05-19):** Harness **benchmark** shadow runs removed. Use **`/epic-calibrate`**, [`.cursor/calibrate/README.md`](../.cursor/calibrate/README.md), [docs/calibrate-contract.json](../docs/calibrate-contract.json). Content below is historical.
 
 **Purpose:** Exhaustive context from one Cursor session—**pre-implementation only**. No harness/pipeline edits were made in this chat; this file is the thinking artifact for a later implementation pass.
 

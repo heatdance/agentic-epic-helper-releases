@@ -1,6 +1,6 @@
 # Playbook: calibrate (prod vs operator gold)
 
-**Invocation:** **`/crtqa-calibrate`** only ([`.cursor/commands/crtqa-calibrate.md`](../commands/crtqa-calibrate.md)). **Not** a `CALIBRATE:` router trigger in v1.
+**Invocation:** **`/epic-calibrate`** only ([`.cursor/commands/epic-calibrate.md`](../commands/epic-calibrate.md)). **Not** a `CALIBRATE:` router trigger in v1. **Not** in the draft+truth machine loop — run optionally after **`CLOSE:`** to compare prod artefacts to operator gold ([`docs/draft-truth-contract.json`](../../docs/draft-truth-contract.json)).
 
 **Contract:** [`docs/calibrate-contract.json`](../../docs/calibrate-contract.json) (schema v2). **Gold how-to:** [`.cursor/calibrate/README.md`](../calibrate/README.md).
 

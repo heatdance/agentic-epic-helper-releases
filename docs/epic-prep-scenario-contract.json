@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "_comment": "EPIC-PREP scenario capability inventory for draft+truth breadth. Playbook step 3f½. Verifier: epic_prep_verify.py --mode scenario. Master: docs/draft-truth-contract.json",
+  "ref_path": "verification_topology.scenario_capability_rows[]",
+  "scenario_capability_row_item": {
+    "id": "scr-001",
+    "jira_surface_id": "jss-001 optional link to jira_scenario_surfaces[].id",
+    "platform_reuse_id": "prc-001 optional link to platform_reuse_candidates[].id",
+    "source_quote": "Verbatim or synthesized capability statement",
+    "surface": "Stable surface id",
+    "capability_kind": "jira_scenario | platform_invariant | cross_surface | setup",
+    "promotion": "primary_candidate | platform_invariant | deferral_candidate",
+    "linked_requirement_keys": ["CRT-1714"],
+    "obligation_ids": ["obl-003"]
+  },
+  "emit_rules": {
+    "jira_scenario_rows": "One scr-* per jira_scenario_surfaces[] row when widget_ui and surfaces non-empty",
+    "platform_invariant_rows": "One scr-* per platform_reuse_candidates[] row with binding suggestion_only; capability_kind platform_invariant; promotion platform_invariant",
+    "cross_surface": "Midpoint/mark/console invariants may be separate scr-* with capability_kind cross_surface",
+    "subprocess": "When >5 scr rows, temp/epic-scenario-<slug>.json per section; parent merges"
+  },
+  "emit_dod": [
+    "widget_ui with jira_scenario_surfaces.length >= 1 implies scenario_capability_rows.length >= jira_scenario_surfaces.length",
+    "each platform_reuse_candidates[] id has matching scenario_capability_rows[].platform_reuse_id",
+    "ids unique scr-### prefix",
+    "promotion in enum",
+    "no CRTQA keys in durable strings"
+  ],
+  "downstream": {
+    "coverage": "docs/coverage-draft-truth-contract.json scenario_coverage_map"
+  }
+}

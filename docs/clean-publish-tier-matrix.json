@@ -51,7 +51,7 @@
       "public": { "action": "delete" }
     },
     {
-      "match": ".cursor/commands/crtqa-calibrate.md",
+      "match": ".cursor/commands/epic-calibrate.md",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
@@ -71,47 +71,41 @@
     {
       "match": "docs/harness-map.json",
       "personal": { "action": "keep" },
-      "team": { "action": "transform", "strip_package_ids": ["clean_pipeline", "crtqa_stats", "operator_assist", "auto_tests_teach", "release_notes"] },
-      "public": { "action": "transform", "strip_package_ids": ["clean_pipeline", "calibrate_pipeline"] }
+      "team": { "action": "transform", "strip_package_ids": ["clean_release", "epic_stats", "release_notes"] },
+      "public": { "action": "transform", "strip_package_ids": ["clean_release", "calibrate_pipeline"] }
     },
     {
-      "match": "stats/crtqa-stats/**",
+      "match": "stats/epic-stats/**",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
-      "match": ".cursor/commands/crtqa-stats.md",
+      "match": ".cursor/commands/epic-stats.md",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
-      "match": ".cursor/skills/crtqa-stats/**",
+      "match": "docs/epic-stats-contract.json",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
-      "match": "docs/crtqa-stats-contract.json",
+      "match": "automation/docs/epic-stats.md",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
-      "match": "automation/docs/crtqa-stats.md",
+      "match": "automation/tools/epic_stats_rollup.py",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },
     {
-      "match": "automation/tools/crtqa_stats_rollup.py",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": "automation/tools/crtqa_stats/**",
+      "match": "automation/tools/epic_stats/**",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
@@ -196,54 +190,6 @@
       "public": { "action": "forbid_tracked" }
     },
     {
-      "match": ".cursor/commands/better-prompt.md",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/commands/better-skill.md",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/skills/better-prompt/**",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/skills/better-skill/**",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/skills/karpathy-guidelines/**",
-      "personal": { "action": "keep" },
-      "team": { "action": "keep" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": "docs/karpathy-guidelines-contract.json",
-      "personal": { "action": "keep" },
-      "team": { "action": "keep" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": "docs/operator-assist-contract.json",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": "docs/skill-authoring-patterns.json",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
       "match": "docs/grounding-integration.json",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
@@ -287,24 +233,6 @@
     },
     {
       "match": "docs/auto-tests-contract.json",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/commands/teach.md",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": ".cursor/skills/teach/**",
-      "personal": { "action": "keep" },
-      "team": { "action": "delete" },
-      "public": { "action": "delete" }
-    },
-    {
-      "match": "automation/tools/fixtures/operator-assist/teach-golden.json",
       "personal": { "action": "keep" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
@@ -370,38 +298,62 @@
       "public": { "action": "delete" }
     },
     {
-      "match": "docs/crtqa-helper-contract.json",
+      "match": "docs/epic-helper-contract.json",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
     },
     {
-      "match": ".cursor/commands/crtqa-helper.md",
+      "match": ".cursor/commands/epic-helper.md",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
     },
     {
-      "match": ".cursor/skills/crtqa-helper/**",
+      "match": "automation/docs/epic-helper.md",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
     },
     {
-      "match": "automation/docs/crtqa-helper.md",
+      "match": "automation/tools/epic_helper_affordances.py",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
     },
     {
-      "match": "automation/tools/crtqa_helper_affordances.py",
+      "match": "automation/tools/fixtures/operator-assist/epic-helper-golden.json",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/clean-release.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "delete" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/archive/legacy-ctqa-env/**",
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
     },
     {
-      "match": "automation/tools/fixtures/operator-assist/crtqa-helper-golden.json",
+      "match": "automation/tools/crtqa_console_probe.py",
       "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/crtqa_console_common.py",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": ".cursor/commands/crtqa-env.md",
+      "personal": { "action": "delete" },
       "team": { "action": "delete" },
       "public": { "action": "delete" }
     },

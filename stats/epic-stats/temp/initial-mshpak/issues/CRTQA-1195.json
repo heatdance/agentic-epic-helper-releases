@@ -1,0 +1,193 @@
+{
+  "id": "1475606",
+  "key": "CRTQA-1195",
+  "summary": "[Release notes] [CRT-85] Changing TradeType - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 4,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1475606/worklog/5523698",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-02-29T23:24:36.917+0000",
+        "updated": "2024-02-29T23:24:38.231+0000",
+        "started": "2024-02-07T07:00:00.000+0000",
+        "timeSpent": "30m",
+        "timeSpentSeconds": 1800,
+        "id": "5523698",
+        "issueId": "1475606"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1475606/worklog/5523699",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-02-29T23:24:47.674+0000",
+        "updated": "2024-02-29T23:24:48.970+0000",
+        "started": "2024-02-08T07:00:00.000+0000",
+        "timeSpent": "30m",
+        "timeSpentSeconds": 1800,
+        "id": "5523699",
+        "issueId": "1475606"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1475606/worklog/5523700",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-02-29T23:24:52.657+0000",
+        "updated": "2024-02-29T23:24:57.197+0000",
+        "started": "2024-02-08T09:00:00.000+0000",
+        "timeSpent": "6h",
+        "timeSpentSeconds": 21600,
+        "id": "5523700",
+        "issueId": "1475606"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1475606/worklog/5523701",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-02-29T23:25:09.627+0000",
+        "updated": "2024-02-29T23:25:13.510+0000",
+        "started": "2024-02-09T14:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5523701",
+        "issueId": "1475606"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "1d",
+    "remainingEstimate": "0m",
+    "timeSpent": "1d",
+    "originalEstimateSeconds": 28800,
+    "remainingEstimateSeconds": 0,
+    "timeSpentSeconds": 28800
+  },
+  "customfield_11250": 8.0,
+  "customfield_10006": null
+}

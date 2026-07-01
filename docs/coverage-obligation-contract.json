@@ -23,9 +23,12 @@
   "section_requirements": {
     "invariants_section_heading": "## Invariants under configuration change",
     "rounding_section_heading": "## Rounding and display policy",
+    "environment_setup_section_heading": "## Data setup — account groups and quote publication",
     "require_invariants_section_when": "ref.obligations_proposed has any kind invariant with disposition primary_candidate",
-    "require_rounding_section_when": "ref.obligations_proposed has any kind rounding with disposition primary_candidate"
+    "require_rounding_section_when": "ref.obligations_proposed has any kind rounding with disposition primary_candidate",
+    "require_environment_setup_section_when": "ref.verification_topology.principal_coverage_threads has coverage_thread environment_setup OR ref.obligations_proposed has kind environment_setup with disposition primary_candidate"
   },
+  "deferral_obligations_coverage_status": "deferred_in_check",
   "dimensions_phase_rules": {
     "allow_dimension_line_only_when": [
       "jira_epic_text_mentions_dimension",
@@ -37,7 +40,10 @@
   "anti_pattern_ids": [
     "dimension_deferral_without_obligation_review",
     "obligation_without_check_or_exclusion",
-    "invariant_obligation_in_dimensions_only"
+    "invariant_obligation_in_dimensions_only",
+    "deferral_without_obligation_id",
+    "setup_thread_missing_checks",
+    "focus_drift_from_ref_proposed"
   ],
   "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"],
   "reinforce_allowed_inputs": {
@@ -45,9 +51,16 @@
     "playbook": ".cursor/pipelines/coverage-reinforce.md",
     "discover_jq_paths": [
       "verification_affordances",
+      "verification_affordances[].oracle_binding",
+      "verification_affordances[].topology_surface_id",
       "obligation_ledger",
       "fixture_needs",
-      "client_shell_impact",
+      "fixture_needs[].linked_obligation_ids",
+      "fixture_needs[].derivation",
+      "sources.principal_loaded",
+      "principal_provenance",
+      "environment.client_shell_impact",
+      "sources.topology_loaded",
       "discovery_status"
     ],
     "helper_files": [
@@ -55,6 +68,14 @@
       "epics/<KEY>/helper/operator-feedback.md"
     ],
     "merge_base": "epics/<KEY>/<KEY>-coverage.json",
-    "emit_fields": ["coverage_pass", "reinforced_at", "sources.reinforce_inputs"]
+    "emit_fields": [
+      "coverage_pass",
+      "reinforced_at",
+      "sources.reinforce_inputs",
+      "sources.reinforce_topology_loaded",
+      "sources.reinforce_principal_loaded"
+    ],
+    "topology_contract": "docs/coverage-reinforce-topology-contract.json",
+    "principal_contract": "docs/coverage-reinforce-principal-contract.json"
   }
 }

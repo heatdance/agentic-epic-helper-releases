@@ -1,0 +1,127 @@
+{
+  "schema_version": 1,
+  "epic_key": "CRT-663",
+  "sources": {
+    "ref_path": "epics/CRT-663/CRT-663-ref.json",
+    "coverage_path": "epics/CRT-663/CRT-663-coverage.json",
+    "discover_path": "epics/CRT-663/CRT-663-discover.json",
+    "precon_path": "epics/CRT-663/CRT-663-precon.json",
+    "tests_path": "epics/CRT-663/CRT-663-tests.json",
+    "analysis_path": "epics/CRT-663/CRT-663-analysis.json",
+    "analysis_loaded": true,
+    "heal_enabled": true,
+    "note": "Pre-archive paths; JSON under context/ after archive."
+  },
+  "ladder_summary": [
+    {
+      "level": "L0",
+      "bundles_processed": 9,
+      "finding_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "completed_at": "2026-06-08T12:00:00Z"
+    },
+    {
+      "level": "L1",
+      "bundles_processed": 9,
+      "finding_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "completed_at": "2026-06-08T12:00:00Z"
+    },
+    {
+      "level": "L2",
+      "bundles_processed": 9,
+      "finding_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "completed_at": "2026-06-08T12:00:00Z"
+    },
+    {
+      "level": "L3",
+      "bundles_processed": 9,
+      "finding_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "completed_at": "2026-06-08T12:00:00Z"
+    },
+    {
+      "level": "L4",
+      "bundles_processed": 9,
+      "finding_count": 0,
+      "error_count": 0,
+      "warning_count": 0,
+      "completed_at": "2026-06-08T12:00:00Z"
+    }
+  ],
+  "findings": [],
+  "corrections": [],
+  "epic_verdict": "pass",
+  "archive": {
+    "layout_version": 1,
+    "archived_at": "2026-06-08T12:17:16Z",
+    "manifest_applied": true,
+    "root_md": [
+      "CRT-663-coverage.md",
+      "CRT-663-analysis.md",
+      "CRT-663-tests.md",
+      "CRT-663-precon.md"
+    ],
+    "context_json": [
+      "CRT-663-analysis.json",
+      "CRT-663-close.json",
+      "CRT-663-coverage.json",
+      "CRT-663-discover.json",
+      "CRT-663-precon.json",
+      "CRT-663-ref.json",
+      "CRT-663-tests.json"
+    ]
+  },
+  "validation_log": [
+    {
+      "step": "preflight",
+      "action": "pass",
+      "detail": "required artifacts at epic root"
+    },
+    {
+      "step": "ladder_l0",
+      "action": "pass",
+      "detail": "9 bundles"
+    },
+    {
+      "step": "ladder_l1",
+      "action": "pass",
+      "detail": "precon skeleton aligned"
+    },
+    {
+      "step": "ladder_l2",
+      "action": "pass",
+      "detail": "discover gates ok"
+    },
+    {
+      "step": "ladder_l3",
+      "action": "pass",
+      "detail": "coverage refs ok"
+    },
+    {
+      "step": "ladder_l4",
+      "action": "pass",
+      "detail": "ref snippets ok"
+    },
+    {
+      "step": "epic",
+      "action": "pass",
+      "detail": "24 primary checks covered by 9 bundles"
+    },
+    {
+      "step": "finalize",
+      "action": "pass",
+      "detail": "no corrections needed"
+    },
+    {
+      "step": "md_regen",
+      "action": "pass",
+      "detail": "four root md present"
+    }
+  ]
+}

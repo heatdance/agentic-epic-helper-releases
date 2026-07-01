@@ -39,11 +39,12 @@
           "dxweb",
           "dxsca_swagger"
         ],
-        "note": "Hosts only — confirm roles and credentials in /teach before flipping confirmation_status to confirmed."
+        "note": "Hosts only — confirm roles and credentials in  before flipping confirmation_status to confirmed."
       }
     ],
     "credentials_overlay": {
-      "path": "auto-tests/credentials.local.json",
+      "path": "auto-tests/dependencies/credentials.local.json",
+      "example_path": "auto-tests/dependencies/credentials.local.example.json",
       "gitignored": true,
       "note": "Maps logical roles to secrets; see auto-tests/docs/. Never commit."
     },
@@ -111,7 +112,7 @@
   },
   "smoke_execution_context": {
     "narrative": "CRTQA-10247 is the Corner delivery smoke template execution. It bundles 32 CRTQA Test issues across dxTrade5, WebBroker, dxWeb (one API case), and dxCore health checks. Manual execution uses a Smart Checklist on the execution (Zabbix, login across surfaces, header metrics, widgets, order lifecycle, positions, charts, watchlists, WB administration, API transaction).",
-    "automation_stance": "Each CRTQA manual test may describe many steps. Each smoke-manifest row automates one narrow proof only — fill automation_scope and narrow_oracle in /teach phase 0 before implementation.",
+    "automation_stance": "Each CRTQA manual test may describe many steps. Each smoke-manifest row automates one narrow proof only — fill automation_scope and narrow_oracle in  phase 0 before implementation.",
     "surfaces_in_scope_v1": ["dxtrade5", "webbroker", "dxweb", "dxcore"],
     "surfaces_out_of_scope_v1": ["adaptive", "dxsca"],
     "sync_jql": "issue in testExecutionTests(CRTQA-10247)"

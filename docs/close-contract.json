@@ -4,7 +4,7 @@
   "ladder_levels": ["L0", "L1", "L2", "L3", "L4"],
   "ladder_sources": {
     "L0": "tests.json",
-    "L1": "precon.json",
+    "L1": "tests.json",
     "L2": "discover.json",
     "L3": "coverage.json",
     "L4": "ref.json"
@@ -22,6 +22,9 @@
     "path_string",
     "md_drift",
     "forbidden_edit_attempt",
+    "oracle_mismatch",
+    "topology_drift",
+    "session_mismatch",
     "other"
   ],
   "finding_severities": ["error", "warning", "info"],
@@ -32,10 +35,12 @@
       "{epic_key}-ref.json",
       "{epic_key}-coverage.json",
       "{epic_key}-discover.json",
-      "{epic_key}-precon.json",
       "{epic_key}-tests.json"
     ],
-    "optional_artifacts": ["{epic_key}-analysis.json"],
+    "optional_artifacts": [
+      "{epic_key}-analysis.json",
+      "{epic_key}-precon.json"
+    ],
     "forbid_temp_dir": true,
     "artifact_location": "epic_dir_root"
   },
@@ -69,8 +74,7 @@
     "root_human_md": [
       "{epic_key}-coverage.md",
       "{epic_key}-analysis.md",
-      "{epic_key}-tests.md",
-      "{epic_key}-precon.md"
+      "{epic_key}-tests.md"
     ],
     "move_to_context_globs": [
       "{epic_key}-*.json",
@@ -79,7 +83,7 @@
     "close_json_name": "{epic_key}-close.json",
     "close_json_location_after_archive": "context",
     "archive_always": true,
-    "note": "After CLOSE, all JSON including -close.json live under context/. Four md remain at EpicDir root. Legacy tests/*.spec.ts move to context/tests/."
+    "note": "After CLOSE, all JSON including -close.json live under context/. Three md remain at EpicDir root (v3). Legacy -precon.json archived when present."
   },
   "md_regen_sources": {
     "{epic_key}-coverage.md": {
@@ -111,12 +115,11 @@
       "covers_check_ids exist in coverage.checks",
       "draft actions/results 1:1 when draft present",
       "no CRTQA keys in generation_mode bundles",
-      "precon cite resolvable in precon.json"
+      "scenario_intent profile when draft_truth_v3"
     ],
     "L1": [
-      "test_skeleton case_outline aligns with bundle covers_check_ids",
-      "session_placeholders not literal secrets",
-      "command_patterns referenced by bundle"
+      "shared_preconditions present when scenario_intent",
+      "scenario_groups 1:1 with bundles when frozen coverage"
     ],
     "L2": [
       "obligation_ledger vs bundle checks",
@@ -137,10 +140,22 @@
   "epic_wide_checks": [
     "orphan coverage checks not in any bundle",
     "orphan bundles with empty covers_check_ids",
-    "cross-file check_id namespace consistent"
+    "cross-file check_id namespace consistent",
+    "topology oracle consistency vs ref pricing_oracle_rules when strict_topology=yes",
+    "topology_loaded alignment across discover precon tests",
+    "session placeholder token resolution"
   ],
+  "strict_topology_verifier": {
+    "contract": "docs/close-topology-contract.json",
+    "mode": "topology",
+    "requires_flag": "--strict-topology",
+    "trigger_token": "strict_topology=yes",
+    "validation_log_step": "topology",
+    "legacy_no_op": "skip when no downstream sources.topology_loaded"
+  },
   "trigger_options": {
     "heal_default": true,
-    "heal_no_token": "heal=no"
+    "heal_no_token": "heal=no",
+    "strict_topology_token": "strict_topology=yes"
   }
 }

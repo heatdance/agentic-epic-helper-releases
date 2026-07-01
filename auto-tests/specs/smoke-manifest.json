@@ -152,14 +152,15 @@
       ],
       "primary_surface": "dxtrade5",
       "status": "planned",
-      "automation_scope": null,
+      "automation_scope": "Log in to dxTrade5 on ct_qa env profile as role dxtf_bot. Out of scope: DB session check, server logs, first-login vs returning layout.",
       "narrow_oracle": {
         "type": "ui_state",
-        "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "statement": "After opening system actions (hamburger, top-right), the menu shows the authenticated username on the line above Log out, matching role dxtf_bot.",
+        "notes": "Open hamburger after login to read username; compare to credentials overlay, not hardcoded in test."
       },
       "evidence_required": [
-        "screenshot"
+        "screenshot",
+        "playwright_trace"
       ],
       "test_module": "auto-tests/tests/smoke/test_crtqa_1692.py",
       "phase2_flags": {
@@ -180,7 +181,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -204,7 +205,7 @@
       "narrow_oracle": {
         "type": "component_health",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -228,7 +229,7 @@
       "narrow_oracle": {
         "type": "metric_match",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -252,7 +253,7 @@
       "narrow_oracle": {
         "type": "job_allowed",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -276,7 +277,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -300,7 +301,7 @@
       "narrow_oracle": {
         "type": "metric_match",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -324,7 +325,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -348,7 +349,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -372,7 +373,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -396,7 +397,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -420,7 +421,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -444,7 +445,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -468,7 +469,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -492,7 +493,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -516,7 +517,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -540,7 +541,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -564,7 +565,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -588,7 +589,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -612,7 +613,7 @@
       "narrow_oracle": {
         "type": "absence",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -636,7 +637,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -661,7 +662,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -686,7 +687,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -711,7 +712,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -736,7 +737,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -760,7 +761,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -784,7 +785,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -808,7 +809,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -832,7 +833,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -857,7 +858,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -882,7 +883,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"
@@ -906,7 +907,7 @@
       "narrow_oracle": {
         "type": "ui_state",
         "statement": null,
-        "notes": "TBD in /teach phase 0"
+        "notes": "TBD in  phase 0"
       },
       "evidence_required": [
         "screenshot"

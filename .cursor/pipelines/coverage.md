@@ -4,9 +4,12 @@
 
 - **`repo=…`** — Bitbucket default for this run: Cloud `workspace/slug` or Stash `PROJECT_KEY/repo_slug` (e.g. `COVERAGE: CRT-593 repo=BRO/xt`; Adaptive-focused runs may use `repo=CAN/corner`).
 - **`focus=...`** — free-text **verification focus override** when Jira is ambiguous or to stress a subset (e.g. `COVERAGE: CRT-639 focus=FX_SPOT_WeightedAvg_metrics`). Sets `epic_verification_focus.source` to `user_trigger_focus` and merges into `epic_verification_focus.statement` (see phase 3a). If `focus=` **conflicts** with Jira summary/description, record in `validation_log` and `anti_pattern_findings` rather than silently overriding Jira.
-**Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
+- **`strict_principal=yes`** — opt-in; finalize runs **`coverage_verify.py --strict-principal`** when ref has principal fields per [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json). May combine with implicit **`--strict-topology`** when ref has topology.
+- **`fix_breadth=yes`** — draft+truth pass 2 only: requires **`-analysis.json`** with open gaps **`recommended_action: rerun_coverage`**; increments **`draft_truth_round`** (max **2** per [`docs/draft-truth-contract.json`](../../docs/draft-truth-contract.json)). Must close prior ANALYSE gaps in **`scenario_coverage_map`** / checks.
 
-**Version note (obligation subprocesses)**: schema **`schema_version: 2`** with **`obligations_coverage`** and per-check **`obligation_ids[]`**. Contract: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json). Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md). Epic obligations: ref **`obligations_proposed[]`** (schema v4).
+**Version note (obligation subprocesses + topology + principal + draft_truth)**: schema **`schema_version: 2`** with **`obligations_coverage`**, **`scenario_coverage_map`**, **`coverage_pass`**, **`draft_truth_round`**. Contracts: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json), [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json), [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json), [`docs/coverage-draft-truth-contract.json`](../../docs/coverage-draft-truth-contract.json). Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md) (`--mode draft_truth` requires **`--ref`**).
+
+**Scope**: **one Epic** per run. **Router rule**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
 **Forbidden inputs (production)**: CRTQA Jira issues, operator gold under **`.cursor/calibrate/`**, **`-tests.json`**, **`-discover.json`**, **`-precon.json`** — coverage reads **`-ref.json`** + Jira/tools only.
 
@@ -34,7 +37,7 @@ Resolve **`{EpicDir}`** = `epics/<KEY>/` per [`epic-prep.md`](epic-prep.md).
 
 **Context anchors**: [`docs/project.json`](../../docs/project.json) (CT **342168339**, XT **402589545**), [`docs/qa-project.json`](../../docs/qa-project.json) (QAPORTAL Corner **497097273** subtree; **Corner Trader + Adaptive** client shells per `product_outline`), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) (environment hosts, Jira index, Stash defaults).
 
-**Epic ref**: Read **`client_shell_impact`** from `{EpicDir}<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note.
+**Epic ref**: Read **`client_shell_impact`** from `{EpicDir}<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note. When ref includes **`epic_archetype`** and **`verification_topology`** (EPIC-PREP steps **2c**, **3f**–**3h**), **MUST** consume per [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json) — copy archetype, set **`emit_layout`**, seed scenario surfaces, bind oracle/delivery on checks — **do not re-infer** archetype or ignore delivery/oracle handoff. When ref includes **`verification_focus_proposed`** / **`principal_coverage_threads`** (EPIC-PREP step **3i**), **MUST** consume per [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json) — copy focus verbatim, materialize thread H2 spine, keyed deferrals.
 
 **Format norms**: [Smart Checklist markdown](#smart-checklist-markdown-normative) (this file).
 
@@ -48,8 +51,12 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 |--------|-----|
 | `##` / `###` | Sections and subsections. Prefer **one E2E thread per major `##` section** (prerequisites → checks → variants). |
 | `- ` | **One scenario per line** — **one primary observable outcome** per line. |
-| `> ` | **Details**: execution variants, grep examples, formulas, Figma/Slack links, secondary evidence — not a separate scenario when the outcome is the same family. |
+| `> ` | **Details**: execution variants, grep examples, formulas, Figma/Slack links, secondary evidence — not a separate scenario when the outcome is the same family. **Operator hints only** — prefixes from [`docs/coverage-operator-hints.json`](../../docs/coverage-operator-hints.json) (`Oracle`, `Harness`, `Verified`, `Prerequisite`, `Contrast`, `Note`). |
 | `!` | **Ambiguity only** — include a **short reason** (e.g. `! reason: insufficient context in requirements`). Do **not** use vague “TBD” on executable lines. |
+
+**Operator vs linker lines**: Machine audit strings (`> Discover:`, fixture ids, affordance ids, obligation ids) belong in **`checks[].linker_trace_lines[]`** on **`-coverage.json` only** — **never** in **`smart_checklist_markdown`** or **`-coverage.md`**. Expand human setup/harness hints from [`docs/coverage-operator-hints.json`](../../docs/coverage-operator-hints.json) when COVERAGE-REINFORCE merges discover fixtures.
+
+**Platform reuse annex**: When ref has **`platform_reuse_candidates`**, set **`platform_reuse_annex`** on JSON for CLOSE/tests topology — **do not** paste into **`-coverage.md`** (JSON-only; `emit_to_markdown: false` per topology contract).
 
 **Traceability**: put the **primary** `[REQ-KEY]` at the **start** of the scenario line (e.g. `[CRT-856] Console - …`). Use `>` for secondary links and extra keys. Repeat `[KEY]` when the dominant requirement changes (or once per section if the team prefers DRY + section note).
 
@@ -87,7 +94,14 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 1. Load epic ref + Jira refresh
 
-- **MUST** project `{EpicDir}<KEY>-ref.json` with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file into context; then read fields needed for coverage (`requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`** from EPIC-PREP). If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
+- **MUST** project `{EpicDir}<KEY>-ref.json` with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file into context; then read fields needed for coverage (`requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`**, **`epic_archetype`**, **`verification_topology`** from EPIC-PREP). Recommended jq slice for topology (store in working memory or `temp/ref-topology-slice.json` — **do not** persist secrets):
+
+```bash
+jq '{ epic_archetype, verification_topology, verification_focus_proposed, principal_coverage_threads: .verification_topology.principal_coverage_threads, obligations_proposed: [.obligations_proposed[] | {id, kind, disposition, deferral_reason, downstream_hints}] }' epics/<KEY>/<KEY>-ref.json
+```
+
+- If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
+- If **`epic_archetype`** / **`verification_topology`** missing → **legacy path** (infer archetype in phase **3**; thematic emit in phases **8**–**9**). If present → set **`topology_provenance.ref_path`**, **`fields_consumed[]`**, **`copied_at`** when copying in phases **3** / **4** / **9**.
 - MCP `jira_get_issue` for `<KEY>`; optional save raw JSON to `temp/jira-epic.json`.
 - **`sources.bitbucket_repo`** (resolve in order; **`repo=`** on the trigger **wins** and **short-circuits** the rest for **this run only**):
   1. **`repo=`** on the **COVERAGE** trigger when present.
@@ -101,7 +115,8 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 1½. Load epic obligations (required)
 
-- From epic-ref **`obligations_proposed[]`**, initialize **`obligations_coverage`** map: for each row with **`disposition: primary_candidate`**, draft `status` `covered` | `deferred_in_check` | `excluded_with_reason` (finalized in phases **4b**, **9**, **11**).
+- From epic-ref **`obligations_proposed[]`**, initialize **`obligations_coverage`** map: for each row with **`disposition: primary_candidate`**, draft `status` `covered` | `deferred_in_check` | `excluded_with_reason` (finalized in phases **4b**, **8.5**, **9**, **11**).
+- For each row with **`disposition: deferral_candidate`** or **`kind: explicit_deferral`**, initialize **`obligations_coverage`** with **`status: deferred_in_check`** (pending keyed check in phase **9**).
 - **`deferral_candidate`** obligations may map to structured **`!`** checks only with **`obligation_ids[]`** on the check — not silent Dimensions deferral.
 - If ref **`schema_version` < 4** or obligations missing: **STOP** — instruct **EPIC-PREP** re-run with obligation subprocesses.
 - Append `validation_log`: step `1.5`, count primary vs deferral obligations.
@@ -115,17 +130,21 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 3. Archetype classification
 
-- Set `archetype` to one of:
+- **When `ref.epic_archetype.value` is present** (topology path): copy to **`coverage.archetype`**; set **`emit_layout`** from [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json) **`map_from_archetype`** (`metrics_calculation` → **`formula_first`**; **`widget_ui`** / **`mixed`** → **`shell_first`**). Set **`topology_provenance.archetype_source`**: `copied_from_ref`. **Skip** inference subprocess.
+- **Else (legacy path)**: set `archetype` to one of:
   - **`widget_ui`** — primary deliverable is widgets, screens, cards; heavy Figma; calculation is secondary.
   - **`metrics_calculation`** — primary deliverable is metrics, formulas, pre-trade validation, cross-surface numeric consistency.
   - **`mixed`** — both materially present.
+  - Set **`emit_layout`** from the same map once archetype is inferred; set **`topology_provenance.archetype_source`**: `inferred`.
 - Evidence must cite Jira text or `requirements[].snippet_text`; if inferred, note in `validation_log`.
-- Append `validation_log`: step `3`.
+- Append `validation_log`: step `3`, action summary (include `archetype`, `emit_layout`, `copied_from_ref` | `inferred`).
 
 ### 3a. Epic verification focus (required before matrix completion)
 
-- Populate **`epic_verification_focus`** in the coverage artifact (`statement`, `source`, optional `keywords[]`). **`statement`**: 1–3 sentences describing what this epic **primarily** verifies.
-- **`source`**: `jira_summary` | `jira_description` | `epic_ref_synthesis` | `user_trigger_focus`. If the user passed **`focus=`**, set `source` to `user_trigger_focus` and merge that text into `statement` (or append with clear delimiter). If `focus=` **contradicts** Jira summary/description, log in `validation_log` and add `anti_pattern_findings` with `fix_hint`; do not hide the conflict.
+- **Principal path (preferred when ref has `verification_focus_proposed.statement`)**: copy **verbatim** to **`epic_verification_focus.statement`**; set **`source`**: **`epic_ref_proposed`**; copy **`keywords[]`** when present; set **`principal_provenance.focus_source`**: **`epic_ref_proposed`**.
+- **Else**: populate **`epic_verification_focus`** from Jira summary/description/synthesis (`statement`, `source`, optional `keywords[]`) per existing rules below.
+- **`statement`**: 1–3 sentences describing what this epic **primarily** verifies.
+- **`source`**: `jira_summary` | `jira_description` | `epic_ref_synthesis` | **`epic_ref_proposed`** | `user_trigger_focus`. If the user passed **`focus=`**, set `source` to `user_trigger_focus` and merge that text into `statement` (or append with clear delimiter). If `focus=` **contradicts** ref **`verification_focus_proposed`** or Jira summary/description, log in `validation_log` and add `anti_pattern_findings` with `fix_hint`; do not hide the conflict.
 - If requirement text is **broader** than Jira (e.g. full FIFO vs WeightedAvg matrix while Jira only names FX Spot migration), **Jira wins** for primary scope unless `focus=` overrides.
 - **Obligation gate**: Do **not** drop **`primary_candidate`** obligations from scope without logging **`validation_log`** conflict (e.g. `focus=` vs invariant obligation) and updating **`obligations_coverage`** to `excluded_with_reason` with rationale.
 - **`epic_verification_focus` must be set before building `coverage_matrix[]`** so each row can be tagged with `verification_role`.
@@ -133,7 +152,7 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 4. Coverage matrix
 
-- Build `coverage_matrix[]`: rows with `id`, `capability`, `semantic_variants[]`, **`verification_role`** (`primary` | `supporting` | `out_of_epic`), `aggregation_level` (position/account/portfolio where relevant), `surfaces[]`, `requirement_keys[]`, optional **`obligation_ids[]`**, `notes_from_epic`.
+- Build `coverage_matrix[]` from ref **`verification_topology.scenario_capability_rows[]`** when present (draft+truth per [`docs/coverage-draft-truth-contract.json`](../../docs/coverage-draft-truth-contract.json)): one matrix row per **`scr-*`** requiring coverage; else legacy obligation-driven rows.
 - Optional **matrix subprocess** per major section slug when matrix is large — output `temp/coverage-matrix-<slug>.json` merged by orchestrator.
 - **Stable matrix `id` (normative)**: `id` must identify the **same semantic row** across reruns. **Assign ids after deterministic ordering**: sort rows by `capability` (string), then `aggregation_level`, then joined sorted `requirement_keys` (e.g. `KEY1|KEY2`), then label **`m-001`**, **`m-002`**, … in order. Do **not** add ad-hoc suffixes such as **`m-006b`** for the same conceptual capability across runs; if you **split** one row into two, note the retired id in `notes_from_epic` and log the change in `validation_log` (step `4`).
 - **`supporting` vs `out_of_epic` decision ladder**:
@@ -147,7 +166,11 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
   - **`out_of_epic`** — must **not** appear as standalone top-level `-` for that branch alone; record under **`explicitly_out_of_scope`** with rationale (consolidate duplicate rationales when possible).
 - **Row-complete gate**: every row in the Epic’s **impacted metrics / capabilities table** and every **explicit scenario bullet** must map to at least one matrix row or `explicitly_out_of_scope` with rationale (no silent omission). **Row-complete does not mean** every semantic variant of every linked requirement gets its **own top-level `-` line** — non-primary branches are **`supporting`** or **`out_of_epic`**, not peer scenarios, unless both are **`primary`** per `epic_verification_focus`.
 - **Single-class / narrow epic**: When **`epic_verification_focus`** names **one instrument class** or one-way migration, **do not** add a **second top-level `-`** whose only purpose is enumerating a **full configuration type matrix** from a linked requirement (e.g. entire FIFO vs WA instrument-type table); fold into **one** primary config check or a single **`>`** under it, with **`supporting`** / **`out_of_epic`** matrix rows as needed.
-- **Surfaces**: Seed `surfaces[]` from **`client_shell_impact`** (dxTrade5, WebBroker, **Adaptive**, console/API as applicable) plus epic text; include **Adaptive** when status is **`affected`** or **`qa_default_both`** — do not omit unless **`not_applicable`** with Jira evidence.
+- **Surfaces**:
+  - **When `verification_topology.jira_scenario_surfaces[]` is non-empty** (`shell_first` or mixed with scenario block): **primary seed** for matrix `surfaces[]` and phase **8** section order — preserve array order (= runner view). Map each row’s `shell` / `widget` into matrix notes; attach **`obligation_ids[]`** from the surface row when present. Merge/dedupe with **`client_shell_impact`**; **topology order wins** for **`shell_first`** emit.
+  - **When topology surfaces empty** (`formula_first`, e.g. CRT-639): seed `surfaces[]` from **`client_shell_impact`** (dxTrade5, WebBroker, **Adaptive**, console/API as applicable) plus epic text; keep matrix-first obligation mapping (639 regression).
+  - Include **Adaptive** when status is **`affected`** or **`qa_default_both`** — do not omit unless **`not_applicable`** with Jira evidence.
+  - Apply **`verification_topology.shell_roles`**: when **`webbroker_dealer`** / **`webbroker_client`** differ, add matrix **`notes_from_epic`** hints (dealer Backup Prices vs client Client Area) — no credentials in durable JSON.
 - Append `validation_log`: step `4`.
 
 ### 4b. Invariants section subprocess (when ref has `kind: invariant`)
@@ -186,18 +209,66 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 8. E2E spine from epic scenarios
 
+**Layout by `emit_layout`** ([`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json)):
+
+**`formula_first`** ( **`metrics_calculation`** — CRT-639 regression; phases **8**–**9** unchanged in substance):
+
 - Derive **section structure** for `smart_checklist_markdown`: one **##** section per E2E thread (CRTQA-10034 style): prerequisites / data setup → capability group → variants (groups, quotes, hours).
 - **Primary focus block (required, verbatim)**: The **first substantive `##`** after any title/header must satisfy [Smart Checklist markdown — Epic verification focus](#smart-checklist-markdown-normative) (verbatim **`epic_verification_focus.statement`**), and must anchor the **primary thread** (data/instrument/config under test → metrics or UI outcomes). Place additional narrative **after** that block or under following **`##`** sections — do not paraphrase the focus line. Avoid symmetric **FIFO section / WeightedAvg section** (or equivalent forks) **unless** both forks are **`verification_role: primary`** in the matrix.
 - **Algorithm stressors** that **define** a metric (e.g. **position crosses zero**, **partial close without changing weighted average**, **opening-trade-only contribution**) belong in the **same `##` section** as the parent capability (e.g. average fill / open P/L tied to CRT-1740 / CRT-1738), not isolated under a generic **Dimensions** section unless they are **genuinely cross-cutting** with phase-10 evidence.
 - **Section requirements**: When ref has **`primary_candidate`** **`invariant`** → include **`## Invariants under configuration change`**. When ref has **`rounding`** → include **`## Rounding and display policy`** (headings per coverage-obligation-contract).
-- Subsections **`###`** for logical UI groupings (filters, widgets) when archetype is `widget_ui`.
-- Append `validation_log`: step `8`.
+- Subsections **`###`** for logical UI groupings only when they clarify a formula/ladder thread — not shell-per-widget layout.
+
+**`shell_first`** ( **`widget_ui`** / UI-heavy **`mixed`** — CRT-594 runner view):
+
+- **One `##` per `jira_scenario_surfaces[]` row** in ref order. Heading pattern: **`## {shell_label} — {widget}`** using contract **`shell_labels`** (e.g. `## dxTrade5 — Derivatives`, `## dxCore — show prices` when console surface present in matrix).
+- **Primary focus**: still required — use **`## Primary focus`** as first substantive **`##`** with verbatim **`epic_verification_focus.statement`** on the following **`-`** line (same normative rule); **then** surface sections in topology order.
+- Trailing **`## Cross-surface invariants`** for midpoint/mark/backup rules that span surfaces (from obligations + **`pricing_oracle_rules`** with `cross_group` / mark surfaces).
+- **Do not** emit **`## Platform reuse candidates`** in markdown — set **`platform_reuse_annex`** on JSON only when ref has **`platform_reuse_candidates`**.
+- **Anti-pattern `thematic_only_widget_epic`**: do **not** use only thematic sections (setup → mapping → invariants) when **`emit_layout: shell_first`** — runner order must match Jira Scenarios.
+
+- Append `validation_log`: step `8`, include `emit_layout`.
+
+### 8.5. Principal thread materialization (when ref has `principal_coverage_threads[]`)
+
+**Requires:** step **8** spine; ref **`verification_topology.principal_coverage_threads[]`** non-empty; contract [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json).
+
+1. For each thread in **ref array order**, emit **`## {title}`** (use thread **`title`** or **`thread_section_map`** default for **`coverage_thread`**).
+2. Draft **≥1 primary `-`** per **`obligation_ids[]`** in that thread (executable preconditions for **`environment_setup`**; set optional **`checks[].coverage_thread`** for audit).
+3. **`shell_first` order normative:** **`## Primary focus`** (verbatim statement) → **principal thread `##`** sections → **surface `##`** from **`jira_scenario_surfaces`** → trailing sections (Cross-surface invariants only).
+4. Set **`principal_provenance.threads_consumed[]`**: `{ thread_id, section_heading, obligation_ids[] }`; **`principal_provenance.copied_at`** (ISO-8601).
+5. Subprocess: `temp/coverage-section-thread-<thread_id>.json` when **>4** threads; parent merges before phase **9**.
+6. Append `validation_log`: step `8.5`.
+
+**`metrics_calculation` short-circuit:** setup thread optional; still copy focus when **`verification_focus_proposed`** present.
+
+### 8.6. Scenario groups (draft for TEST-PREP)
+
+**Contract:** [`docs/scenario-groups-contract.json`](../../docs/scenario-groups-contract.json).
+
+**Requires:** step **8** / **8.5** complete; **`checks[]`** primary rows emitted.
+
+1. Derive initial **`scenario_groups[]`** on **`-coverage.json`**:
+   - From ref **`principal_coverage_threads[]`**: one group per thread when thread maps to distinct test narrative; merge surface checks within same thread when combinatorics fit **`variant_sequence`**.
+   - From Smart Checklist **`##`** sections: checks sharing a section may share a group when they exercise the same capability variant set.
+   - Default **`combinatorics`**: **`variant_sequence`** when ≥2 checks in group are parallel variants (e.g. order types); **`single_flow`** otherwise.
+   - Set **`source`**: **`principal_thread`** | **`section`**; **`source_ref`**: thread id or section heading.
+2. **Human gate (`coverage_review`):** operator **may merge/split** groups (e.g. three order-type checks → one group **`Issuing orders`**); set **`source`**: **`operator_merge`** on edited rows.
+3. **Finalize at freeze:** when operator sets **`sources.coverage_frozen_at`**, **`scenario_groups[]`** **MUST** partition all **`verification_role: primary`** checks (each **`check_id`** in exactly one group).
+4. Append **`validation_log`**: step **`8.6`**.
+
+**Downstream:** TEST-PREP emits one **`test_bundles[]`** row per group — see [`.cursor/pipelines/test-prep.md`](test-prep.md).
 
 ### 9. Draft checks (archetype branches) — per-section subprocesses
 
 **Orchestrator**: one subprocess per major **`##`** section (+ **invariants** / **rounding** passes from **4b**). Input: section slug, matrix rows, obligations slice, snippets. Output: `temp/coverage-section-<slug>.json` with `checks[]` fragment. Merge into artifact; set **`obligation_ids[]`** / **`obligation_kinds[]`** on each check.
 
 **Forbidden**: moving **`invariant`** obligations to generic **Dimensions** `!` deferrals ([`dimension_deferral_without_obligation_review`](../../docs/coverage-obligation-contract.json)).
+
+**Keyed deferrals (required for ref deferral obligations)**
+
+- For each **`deferral_candidate`** / **`explicit_deferral`** row: emit **one** check with **`scenario_line`**: `- ! reason: <deferral_reason from ref>` and **`obligation_ids: [obl-###]`**; set **`ambiguity`**: `{ "flag": "!", "reason": "<deferral_reason>" }`; update **`obligations_coverage`** → **`deferred_in_check`** + **`check_id`**.
+- **Forbidden:** generic Dimensions `!` without **`obligation_ids`** when ref lists deferral obligations ([`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json)).
 
 **All archetypes**
 
@@ -219,7 +290,10 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 **`widget_ui` / `mixed` (UI-heavy)**
 
-- Align sections with Figma frames (links in `>`); scope strictly to epic; use `explicitly_out_of_scope` for adjacent features. Apply the same **`epic_verification_focus`** / **`verification_role`** discipline when the epic is directional (e.g. one widget family or one instrument class).
+- When **`emit_layout: shell_first`**: align **`-`** checks to the **surface `##`** section for each **`jira_scenario_surfaces`** row; set optional **`topology_surface_id`** (`jss-###`) on checks for verifier binding.
+- **Oracle binding**: When ref has **`pricing_oracle_rules[]`**, set **`checks[].oracle_rule_id`** to matching rule **`id`**; put surface-specific oracle in **`>`** hints (e.g. **first tier** for Positions/Derivatives, **TextConfiguration tier closest ≥ qty** for Watchlist/OE) — avoid generic “tier-appropriate” on every line.
+- **Delivery honesty**: Map ref **`delivery_notes[]`** to affected checks — set **`delivery_status`**: `known_fail` → **`failed`** (markdown **`[FAILED]`** on scenario line); `excluded` → **`excluded`** (markdown **`x`** or “excluded” wording); `waived` / `pending_verification` → **`deferred`**. **Distinct** from requirement **`!`** ambiguity deferral.
+- Align sections with Figma frames (links in `>`) when design links exist; scope strictly to epic; use `explicitly_out_of_scope` for adjacent features. Apply the same **`epic_verification_focus`** / **`verification_role`** discipline when the epic is directional (e.g. one widget family or one instrument class).
 
 - Append `validation_log`: step `9`.
 
@@ -270,6 +344,13 @@ Candidate dimensions (each requires the evidence gate above):
 - **`invariant_obligation_in_dimensions_only`**: invariant obligation only deferred under Dimensions.
 - **`missing_calculation_ladder`**: primary metric row without **ladder `!` pair** per calculation scenario contract.
 - **`adaptive_missing_when_in_scope`**: **`client_shell_impact.adaptive`** is **`affected`** or **`qa_default_both`** but no Adaptive-targeted **`-`** in cross-surface section (unless every metric has `!` N/A on Adaptive).
+- **`shell_section_orphan`**: **`shell_first`** and ref **`jira_scenario_surfaces`** row has **no** check in matching **`##`** section (or missing **`topology_surface_id`** binding).
+- **`oracle_unbound`**: ref **`pricing_oracle_rules`** rule with **`disposition: primary_candidate`** has **no** check with matching **`oracle_rule_id`**.
+- **`delivery_silent`**: ref **`delivery_notes`** with **`known_fail`** or **`excluded`** has **no** check with **`delivery_status`** **`failed`** / **`excluded`** and markdown marker.
+- **`thematic_only_widget_epic`**: **`widget_ui`** epic with scenario surfaces emitted only as thematic sections (no per-surface **`##`**) **without** principal thread preface when ref has **`principal_coverage_threads`**.
+- **`deferral_without_obligation_id`**: deferral obligation in ref with **`!`** check missing **`obligation_ids[]`**.
+- **`setup_thread_missing_checks`**: ref **`environment_setup`** thread obligation with no check in setup section.
+- **`focus_drift_from_ref_proposed`**: ref **`verification_focus_proposed.statement`** present but **`epic_verification_focus.statement`** differs (no **`focus=`** override logged).
 
 - Append `validation_log`: step `13`.
 
@@ -286,11 +367,16 @@ Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant s
 ### 14. Emit
 
 - Set **`schema_version`: 2** on coverage JSON.
-- Set `smart_checklist_markdown` to the full checklist string. **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase); **`coverage_matrix[].id`** ordering matches phase **4** deterministic scheme; every **`out_of_epic`** matrix row has a matching **`explicitly_out_of_scope`** rationale (or consolidated single bullet per theme); no unjustified **`verification_role`** drift versus logged evidence.
+- Set **`emit_layout`**, **`topology_provenance`**, optional **`platform_reuse_annex`** when topology path was used.
+- Set `smart_checklist_markdown` to the full checklist string — assembled **only** from **`checks[].scenario_line`** + **`checks[].detail_lines`** (no **`platform_reuse_annex`**, no **`linker_trace_lines`**). **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase); **`shell_first`**: surface **`##`** order matches ref **`jira_scenario_surfaces`**; **`coverage_matrix[].id`** ordering matches phase **4** deterministic scheme; every **`out_of_epic`** matrix row has a matching **`explicitly_out_of_scope`** rationale (or consolidated single bullet per theme); no unjustified **`verification_role`** drift versus logged evidence; no **`> Discover:`** / platform reuse heading in markdown body.
 - Write `{EpicDir}<KEY>-coverage.md` (optional top lines: checklist title, XRay folder hint — functional only).
 - Write `{EpicDir}<KEY>-coverage.json` (validate JSON).
 - Run **`python automation/tools/coverage_verify.py --mode emit --coverage {EpicDir}<KEY>-coverage.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
+- When ref has **`epic_archetype`** + **`verification_topology`**, also run **`python automation/tools/coverage_verify.py --mode emit --strict-topology --coverage {EpicDir}<KEY>-coverage.json --ref {EpicDir}<KEY>-ref.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
+- When trigger includes **`strict_principal=yes`** or ref has **`verification_focus_proposed`** + **`principal_coverage_threads`**, also run **`--strict-principal`** on the same command line.
 - **Delete** `{EpicDir}temp/`.
+
+**Downstream handoff (no action in this pipeline):** **ANALYSE** consumes unresolved **`delivery_notes`** / **`oracle_rule=unresolved`** gaps; **COVERAGE-REINFORCE** may split surface checks after **TEST-DISCOVER**.
 
 ---
 
@@ -314,6 +400,8 @@ Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant s
 
 - Template: [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json) (**schema v2**)
 - Obligation contract: [`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)
+- Topology contract: [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json)
+- Upstream topology: [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json)
 - Verifier: [`automation/docs/coverage-verify.md`](../../automation/docs/coverage-verify.md)
 - Smart Checklist norms: [above](#smart-checklist-markdown-normative)
 - Epic handoff: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json), [`epics/README.md`](../../epics/README.md)

@@ -1,0 +1,273 @@
+{
+  "_comment": "Minimal shell_first fixture for coverage_verify --strict-topology vs epics/CRT-594/CRT-594-ref.json",
+  "schema_version": 2,
+  "epic_key": "CRT-594",
+  "epic_ref_path": "epics/CRT-594/CRT-594-ref.json",
+  "sources": {
+    "jira_fetched_at": "2026-06-18T12:00:00Z",
+    "epic_ref_loaded_at": "2026-06-18T12:00:00Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "fixture"
+  },
+  "archetype": "widget_ui",
+  "emit_layout": "shell_first",
+  "topology_provenance": {
+    "ref_path": "epics/CRT-594/CRT-594-ref.json",
+    "fields_consumed": [
+      "epic_archetype.value",
+      "verification_topology.jira_scenario_surfaces",
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules",
+      "verification_topology.delivery_notes",
+      "verification_topology.platform_reuse_candidates"
+    ],
+    "archetype_source": "copied_from_ref",
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "platform_reuse_annex": "- EOD backup trading day — platform regression TC family for daily_data_recorder (verify in Jira).",
+  "epic_verification_focus": {
+    "statement": "Verify FX_SPOT tier-based bid/ask and mark pricing per account group and volume tier across dxCore, dxTrade5, Adaptive, and WebBroker surfaces named in Jira Scenarios.",
+    "source": "jira_description",
+    "keywords": [
+      "FX_SPOT",
+      "FxSpotSuffix"
+    ]
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Group-specific bid/ask on UI surfaces",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "dxtrade5",
+        "adaptive",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-1714",
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-002",
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-002",
+      "capability": "FX configuration groups and backup/EOD",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "console",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-1761",
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-001",
+        "obl-004"
+      ]
+    }
+  ],
+  "obligations_coverage": {
+    "obl-001": {
+      "status": "covered",
+      "check_id": "chk-006"
+    },
+    "obl-002": {
+      "status": "covered",
+      "check_id": "chk-001"
+    },
+    "obl-003": {
+      "status": "covered",
+      "check_id": "chk-003"
+    },
+    "obl-004": {
+      "status": "covered",
+      "check_id": "chk-006"
+    }
+  },
+  "checks": [
+    {
+      "id": "chk-001",
+      "section": "## dxTrade5 — Watchlist",
+      "topology_surface_id": "jss-001",
+      "scenario_line": "- [CRT-1714] Watchlist bid/ask reflects account group suffix and TextConfiguration tier closest to order quantity.",
+      "detail_lines": [
+        "> Oracle: text_configuration_closest_gte_qty for default order qty."
+      ],
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-001",
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-002",
+      "section": "## dxTrade5 — Position Book",
+      "topology_surface_id": "jss-002",
+      "scenario_line": "- [CRT-1713] Position Book bid/ask uses Quote stream first tier for the instrument.",
+      "detail_lines": [
+        "> Oracle: first_tier_quote — first TextConfiguration tier only."
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-002",
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-003",
+      "section": "## Adaptive — Instrument page",
+      "topology_surface_id": "jss-003",
+      "scenario_line": "- [CRT-1717] Instrument page shows group-specific bid/ask for the logged-in account.",
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Harness: Adaptive Instrument page — bid/ask reflects logged-in account group."
+      ]
+    },
+    {
+      "id": "chk-004",
+      "section": "## dxTrade5 — Derivatives",
+      "topology_surface_id": "jss-004",
+      "scenario_line": "- [CRT-1713] Derivatives widget bid/ask uses first tier Quote stream [FAILED]",
+      "detail_lines": [
+        "> Oracle: first_tier_quote. Delivery: known_fail per post-implementation validation."
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-003",
+      "delivery_status": "failed",
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-005",
+      "section": "## WebBroker (client) — Client Area",
+      "topology_surface_id": "jss-005",
+      "scenario_line": "- [CRT-1761] Client Area quote matches account group mapping for FX_SPOT.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-006",
+      "section": "## WebBroker (dealer) — Backup Prices",
+      "topology_surface_id": "jss-006",
+      "scenario_line": "- [CRT-1621] Backup Prices widget includes FX_SPOT in asset type filter; EOD midpoint captured.",
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-001",
+        "obl-004"
+      ],
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-007",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1717] Midpoint invariant: same midpoint across account groups while spreads may differ.",
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "oracle_rule_id": "por-005",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Contrast: same FX_SPOT instrument — different account groups may show different bid/ask; midpoint must match across groups."
+      ]
+    },
+    {
+      "id": "chk-008",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1714] Mark price equals midpoint for FX_SPOT on mark column surfaces.",
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-006",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Note: Mark column on Positions/Watchlist FX_SPOT rows must equal midpoint (not bid/ask)."
+      ]
+    },
+    {
+      "id": "chk-009",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1761] dxCore show prices bid/ask from first TextConfiguration tier.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-001"
+      ],
+      "oracle_rule_id": "por-004",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Prerequisite (console): show prices for target FX_SPOT symbol; bid/ask from first TextConfiguration tier (min volume)."
+      ]
+    },
+    {
+      "id": "chk-010",
+      "section": "## Out of scope",
+      "scenario_line": "- Chart candles for fx-spot excluded (x) per operator final coverage.",
+      "requirement_keys": [],
+      "obligation_ids": [],
+      "delivery_status": "excluded",
+      "verification_role": "out_of_epic",
+      "detail_lines": []
+    }
+  ],
+  "explicitly_out_of_scope": [
+    {
+      "item": "Chart candles for fx-spot",
+      "rationale": "Excluded (x) per operator final coverage; out of epic UI scope."
+    }
+  ],
+  "grounding_audit": {
+    "by_check_id": [
+      {
+        "check_id": "chk-001",
+        "evidence_keys": [
+          "CRT-1714"
+        ],
+        "status": "grounded"
+      }
+    ],
+    "ungrounded_check_ids": []
+  },
+  "anti_pattern_findings": [],
+  "validation_log": [],
+  "smart_checklist_markdown": "# CRT-594\n\n## Primary focus\n\n- Verify FX_SPOT tier-based bid/ask and mark pricing per account group and volume tier across dxCore, dxTrade5, Adaptive, and WebBroker surfaces named in Jira Scenarios.\n\n## dxTrade5 — Watchlist\n\n- [CRT-1714] Watchlist bid/ask reflects account group suffix and TextConfiguration tier closest to order quantity.\n> Oracle: text_configuration_closest_gte_qty for default order qty.\n\n## dxTrade5 — Position Book\n\n- [CRT-1713] Position Book bid/ask uses Quote stream first tier for the instrument.\n> Oracle: first_tier_quote — first TextConfiguration tier only.\n\n## Adaptive — Instrument page\n\n- [CRT-1717] Instrument page shows group-specific bid/ask for the logged-in account.\n> Harness: Adaptive Instrument page — bid/ask reflects logged-in account group.\n\n## dxTrade5 — Derivatives\n\n- [CRT-1713] Derivatives widget bid/ask uses first tier Quote stream [FAILED]\n> Oracle: first_tier_quote. Delivery: known_fail per post-implementation validation.\n\n## WebBroker (client) — Client Area\n\n- [CRT-1761] Client Area quote matches account group mapping for FX_SPOT.\n\n## WebBroker (dealer) — Backup Prices\n\n- [CRT-1621] Backup Prices widget includes FX_SPOT in asset type filter; EOD midpoint captured.\n\n## Cross-surface invariants\n\n- [CRT-1717] Midpoint invariant: same midpoint across account groups while spreads may differ.\n> Contrast: same FX_SPOT instrument — different account groups may show different bid/ask; midpoint must match across groups.\n\n- [CRT-1714] Mark price equals midpoint for FX_SPOT on mark column surfaces.\n> Note: Mark column on Positions/Watchlist FX_SPOT rows must equal midpoint (not bid/ask).\n\n- [CRT-1761] dxCore show prices bid/ask from first TextConfiguration tier.\n> Prerequisite (console): show prices for target FX_SPOT symbol; bid/ask from first TextConfiguration tier (min volume).\n\n## Out of scope\n\n- Chart candles for fx-spot excluded (x) per operator final coverage.\n"
+}

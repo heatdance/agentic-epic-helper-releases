@@ -6,6 +6,7 @@
     "ladder",
     "formula",
     "config_posture",
+    "environment_setup",
     "settlement",
     "rounding",
     "parity",
@@ -22,7 +23,7 @@
     "instrument_type_config": "CRT-1741-style FIFO vs WeightedAvg mapping for instrument families; 'skip config-change scenarios' applies here, not to open-position metrics.",
     "account_group_assignment": "Moving account between instrument groups (e.g. OPPORTUNITY vs ENERGY); distinct from instrument-type remap.",
     "position_state": "Metrics on an open position (avg price, open P/L) must not change when only group/markup context changes.",
-    "routing_or_markup": "Quote/routing/markup path changes without position metric rewrite."
+    "routing_or_markup": "Quote/routing/markup path changes without position metric rewrite. When snippets name UI surfaces and bid/ask/tier/mark streams, EPIC-PREP step 3g should emit verification_topology.pricing_oracle_rules[] rows (see docs/epic-prep-topology-contract.json)—do not rely on obligation prose alone for per-widget oracle binding."
   },
   "disposition_values": ["primary_candidate", "deferral_candidate"],
   "coverage_mapping_hint": {
@@ -41,6 +42,11 @@
     "config_posture": {
       "section": "## Functional configuration & instrument posture",
       "verification_class": "config_posture"
+    },
+    "environment_setup": {
+      "section": "## Data setup — account groups and quote publication",
+      "verification_class": "config_posture",
+      "needs_environment_provision": true
     },
     "settlement": {
       "section": "## Cash settlement stresses",

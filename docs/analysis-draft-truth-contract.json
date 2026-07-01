@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "_comment": "ANALYSE draft+truth consumption after GROUND. Master: docs/draft-truth-contract.json",
+  "prerequisites": [
+    "-coverage.json with scenario_coverage_map",
+    "runtime_probes on console checks when GROUND ran",
+    "-ref.json scenario_capability_rows"
+  ],
+  "forbidden_inputs": [
+    ".cursor/calibrate gold during generation"
+  ],
+  "gap_kinds_additions": [
+    "scenario_row_uncovered",
+    "platform_invariant_annex_only",
+    "console_probe_failed",
+    "draft_truth_loop_exhausted"
+  ],
+  "analysis_fields": {
+    "draft_truth_round": "copy from coverage.draft_truth_round",
+    "draft_truth_recommendation": "rerun_coverage | human_coverage_review"
+  },
+  "recommendation_rules": {
+    "rerun_coverage": "draft_truth_round < max_rounds AND open gaps with recommended_action rerun_coverage",
+    "human_coverage_review": "draft_truth_round >= max_rounds OR no machine-fixable gaps remain"
+  },
+  "emit_dod": [
+    "gap per uncovered primary_candidate or platform_invariant scenario row",
+    "gap per failed/blocked runtime_probe without ambiguity",
+    "gaps non-empty when scenario_coverage_map has uncovered primaries",
+    "draft_truth_recommendation set"
+  ],
+  "downstream": {
+    "coverage_fix_breadth": "COVERAGE: fix_breadth=yes",
+    "human_gate": "coverage_review"
+  }
+}

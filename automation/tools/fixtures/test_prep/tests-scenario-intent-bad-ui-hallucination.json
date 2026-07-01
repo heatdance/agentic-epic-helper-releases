@@ -1,0 +1,55 @@
+{
+  "_comment": "Must fail scenario_intent — Watchlist widget name in action",
+  "schema_version": 4,
+  "epic_key": "CRT-594",
+  "sources": {
+    "draft_profile": "scenario_intent",
+    "generation_mode": true
+  },
+  "shared_preconditions": ["Setup."],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "Bad UI hallucination",
+      "scenario_group_ref": "sg-001",
+      "covers_check_ids": ["chk-001", "chk-002"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": [
+          "Open Watchlist widget and compare bid/ask."
+        ],
+        "results": [
+          "OK. [CRT-1714]"
+        ],
+        "peculiarities": []
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-594: Adaptive and WebBroker shells",
+      "scenario_group_ref": "sg-002",
+      "covers_check_ids": ["chk-003", "chk-005", "chk-006"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": ["A", "B", "C"],
+        "results": ["R1. [CRT-1717]", "R2. [CRT-1761]", "R3. [CRT-1621]"],
+        "peculiarities": []
+      }
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-594: Cross-surface invariants",
+      "scenario_group_ref": "sg-003",
+      "covers_check_ids": ["chk-007", "chk-008", "chk-009"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": ["A", "B", "C"],
+        "results": ["R1. [CRT-1717]", "R2. [CRT-1714]", "R3. [CRT-1761]"],
+        "peculiarities": []
+      }
+    }
+  ],
+  "excluded_checks_with_reason": [
+    {"check_id": "chk-004", "reason": "delivery_blocked"}
+  ]
+}

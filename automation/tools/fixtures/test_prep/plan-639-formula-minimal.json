@@ -1,0 +1,57 @@
+{
+  "draft_profile": "crtqa_outline",
+  "bundles": [
+    {
+      "bundle_id": "tb-001",
+      "verification_plan": [
+        {
+          "check_id": "chk-001",
+          "verification_class": "config_posture",
+          "selection_rule_priority": 70,
+          "min_case_count": 2,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-001",
+              "title": "WeightedAvg FX_SPOT instrument posture",
+              "intent": "Functional Configuration selects WeightedAvg for FOREX FX_SPOT"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-002",
+              "title": "Configuration row for cross-surface replay",
+              "intent": "Reproducible config across shells"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-002",
+      "ladder_dependency_declared": true,
+      "verification_plan": [
+        {
+          "check_id": "chk-004",
+          "verification_class": "stateful_ladder",
+          "selection_rule_priority": 40,
+          "min_case_count": 2,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-004",
+              "title": "Realized P/L from average position price",
+              "intent": "No FIFO opening-match on closes",
+              "pattern_ref": "ladder_step"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-005",
+              "title": "Percent PL gross rounding",
+              "intent": "Two decimal places on display surfaces"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

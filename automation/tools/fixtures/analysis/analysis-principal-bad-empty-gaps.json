@@ -1,0 +1,43 @@
+{
+  "_comment": "Negative fixture: empty gaps despite ref deferrals and coverage keyed deferrals — expect --mode principal exit 1",
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "sources": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-639-topology-minimal.json",
+    "ref_loaded": true,
+    "coverage_path": "automation/tools/fixtures/coverage/coverage-639-formula-principal-minimal.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [],
+    "principal_loaded": true,
+    "ref_principal_fields": ["obligations_proposed.deferral"]
+  },
+  "summary": {
+    "text": "Verify weighted-average cash settlement formulas and ladders for FX Spot per CRT-1738–1743 configuration and metric parity.",
+    "derived_from": ["coverage.epic_verification_focus"]
+  },
+  "gaps": [],
+  "resolved_gaps": [],
+  "exploration_suppressed": [],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": []
+  },
+  "questions": [],
+  "known_issues_search": { "at": null, "queries": [] },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "3",
+      "at": "2026-06-18T14:00:00Z",
+      "action": "0 gaps (incorrect — deferrals present on ref)"
+    }
+  ]
+}

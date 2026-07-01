@@ -1,0 +1,21 @@
+{
+  "id": "1485914",
+  "key": "BROQA-18627",
+  "summary": "[Test cases automation][CRT-146] Process raw parameter files from IG - Interest Rates Update",
+  "status": {
+    "name": "Open",
+    "category": "new"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {},
+  "customfield_11250": null,
+  "customfield_10006": null
+}

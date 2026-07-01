@@ -17,18 +17,18 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 | Environments / repos | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Tiered context | [docs/harness-map.json](docs/harness-map.json) |
 | Harness doctrine | [docs/harness-principles.md](docs/harness-principles.md) |
-| Epic orchestrator | [docs/crtqa-helper-contract.json](docs/crtqa-helper-contract.json) |
+| Epic orchestrator | [docs/epic-helper-contract.json](docs/epic-helper-contract.json) |
 | Calibrate contract | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
 
 ### Pipelines (agent playbooks)
 
 | Area | Path |
 |------|------|
-| Epic orchestrator | [crtqa-helper.md](.cursor/commands/crtqa-helper.md) · [crtqa-helper/SKILL.md](.cursor/skills/crtqa-helper/SKILL.md) |
+| Epic orchestrator | [epic-helper.md](.cursor/commands/epic-helper.md) |
 | Epic pipelines | [`.cursor/pipelines/`](.cursor/pipelines/) — `EPIC-PREP:`, `COVERAGE:`, `COVERAGE-REINFORCE:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` |
-| Calibrate (slash only) | [crtqa-calibrate.md](.cursor/commands/crtqa-calibrate.md) · [calibrate.md](.cursor/pipelines/calibrate.md) |
+| Calibrate (slash only) | [epic-calibrate.md](.cursor/commands/epic-calibrate.md) · [calibrate.md](.cursor/pipelines/calibrate.md) |
 
-**No** publish playbook, stats, coaches, or teach in this repo — maintainer-only upstream.
+**No** publish playbook or stats in this repo — maintainer-only upstream.
 
 ### Epics
 
@@ -40,13 +40,13 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 
 | Tool | Path |
 |------|------|
-| `/crtqa-env` | [automation/docs/crtqa-env.md](automation/docs/crtqa-env.md) |
 | `/crtqa-console` | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) |
-| `/crtqa-helper` affordances | [crtqa_helper_affordances.py](automation/tools/crtqa_helper_affordances.py) |
-| `/crtqa-calibrate` | [automation/docs/calibrate.md](automation/docs/calibrate.md) · [calibrate_verify.py](automation/tools/calibrate_verify.py) |
+| Console gate probe | [crtqa_console_probe.py](automation/tools/crtqa_console_probe.py) |
+| `/epic-helper` affordances | [epic_helper_affordances.py](automation/tools/epic_helper_affordances.py) |
+| `/epic-calibrate` | [automation/docs/calibrate.md](automation/docs/calibrate.md) · [calibrate_verify.py](automation/tools/calibrate_verify.py) |
 | jq inspection | [automation/docs/jq.md](automation/docs/jq.md) |
 
-**Not in this repo:** `/release-notes`, `releases/**`, `/crtqa-stats`, coaches, teach (maintainer personal branch only).
+**Not in this repo:** release-notes command, `releases/**`, epic-stats (maintainer personal branch only).
 
 ## How to start a session
 
@@ -56,9 +56,9 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 
 ## MCP
 
-- **Templates (no secrets):** [`.cursor/mcp.json.example`](../.cursor/mcp.json.example) (postgres + chrome) and [`.cursor/mcp.json.team.example`](../.cursor/mcp.json.team.example) (full stack with `YOUR_*` placeholders).
+- **Templates (no secrets):** [`.cursor/mcp.json.team.example`](../.cursor/mcp.json.team.example) (full stack with `YOUR_*` placeholders).
 - **Jira / Confluence / Stash:** `user-mcp-atlassian` — see [docs/mcp-atlassian-tools.md](docs/mcp-atlassian-tools.md). Configure in **gitignored** `.cursor/mcp.json` and/or global `~/.cursor/mcp.json`.
-- **Optional:** postgres-ctqa, chrome-devtools, Figma — see [HOW-TO.md](HOW-TO.md) and [automation/tools/tunnel/README.md](../automation/tools/tunnel/README.md).
+- **Optional:** chrome-devtools, Figma — see [HOW-TO.md](HOW-TO.md).
 
 ## Rules
 

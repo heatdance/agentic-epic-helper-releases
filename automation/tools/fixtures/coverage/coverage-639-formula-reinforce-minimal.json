@@ -1,0 +1,148 @@
+{
+  "_comment": "Pass-2 reinforce fixture from coverage-639-formula-minimal + discover-639-formula-minimal",
+  "schema_version": 2,
+  "epic_key": "CRT-639",
+  "epic_ref_path": "epics/CRT-639/CRT-639-ref.json",
+  "coverage_pass": 2,
+  "reinforced_at": "2026-06-18T14:00:00Z",
+  "sources": {
+    "jira_fetched_at": "2026-06-18T12:00:00Z",
+    "epic_ref_loaded_at": "2026-06-18T12:00:00Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "fixture pass 2",
+    "reinforce_topology_loaded": true,
+    "reinforce_inputs": [
+      {
+        "path": "automation/tools/fixtures/coverage/coverage-639-formula-minimal.json",
+        "loaded_at": "2026-06-18T14:00:00Z"
+      },
+      {
+        "path": "automation/tools/fixtures/discover/discover-639-formula-minimal.json",
+        "loaded_at": "2026-06-18T14:00:00Z"
+      }
+    ]
+  },
+  "archetype": "metrics_calculation",
+  "emit_layout": "formula_first",
+  "topology_provenance": {
+    "ref_path": "epics/CRT-639/CRT-639-ref.json",
+    "fields_consumed": [
+      "epic_archetype.value",
+      "verification_topology.shell_roles"
+    ],
+    "archetype_source": "copied_from_ref",
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "epic_verification_focus": {
+    "statement": "Verify weighted-average cash settlement P/L for FOREX FX_SPOT when Functional Configuration selects WeightedAvg (CRT-1741): CRT-1740 average fill with zero-crossing reset, CRT-1738 realized versus open interplay, CRT-1743 mark-minus-average open P/L, and CRT-1742 gross percent denominators—observed on dxTrade5, WebBroker, and Adaptive.",
+    "source": "jira_description",
+    "keywords": ["FX_SPOT", "WeightedAvg"]
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Weighted-average ladder and metrics",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": "position",
+      "surfaces": ["console", "dxtrade5", "webbroker", "adaptive"],
+      "requirement_keys": ["CRT-1738", "CRT-1740"],
+      "obligation_ids": ["obl-011", "obl-005", "obl-014"]
+    }
+  ],
+  "obligations_coverage": {
+    "obl-001": { "status": "covered", "check_id": "chk-001" },
+    "obl-002": { "status": "covered", "check_id": "chk-001" },
+    "obl-004": { "status": "covered", "check_id": "chk-002" },
+    "obl-005": { "status": "covered", "check_id": "chk-003" },
+    "obl-006": { "status": "covered", "check_id": "chk-003" },
+    "obl-007": { "status": "covered", "check_id": "chk-003" },
+    "obl-008": { "status": "covered", "check_id": "chk-003" },
+    "obl-009": { "status": "covered", "check_id": "chk-003" },
+    "obl-010": { "status": "covered", "check_id": "chk-005" },
+    "obl-011": { "status": "covered", "check_id": "chk-003" },
+    "obl-012": { "status": "covered", "check_id": "chk-004" },
+    "obl-013": { "status": "covered", "check_id": "chk-004" },
+    "obl-014": { "status": "covered", "check_id": "chk-003" }
+  },
+  "checks": [
+    {
+      "id": "chk-001",
+      "section": "## Functional configuration and prerequisites",
+      "scenario_line": "- [CRT-1741] Arrange a FOREX FX_SPOT test instrument mapped to WeightedAvg via Functional Configuration.",
+      "detail_lines": [
+        "> Discover: console_ladder_session WeightedAvg FX_SPOT at command_family (fix-001)."
+      ],
+      "requirement_keys": ["CRT-1741"],
+      "obligation_ids": ["obl-001", "obl-002"],
+      "verification_role": "primary",
+      "calculation_contract": "ladder_present"
+    },
+    {
+      "id": "chk-002",
+      "section": "## Functional configuration and prerequisites",
+      "scenario_line": "- [CRT-1741] Record configuration row for reproducible cross-surface runs.",
+      "detail_lines": [
+        "> Discover: console ladder session notes capture config row for replay."
+      ],
+      "requirement_keys": ["CRT-1741"],
+      "obligation_ids": ["obl-004"],
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-003",
+      "section": "## Weighted-average ladder",
+      "scenario_line": "- [CRT-1738] Drive the weighted-average ladder on the configured FX_SPOT instrument; compare net size, average price, and realized P/L after each trade.",
+      "detail_lines": [
+        "> ! reason: authoritative cent-level ladder numerics pending XT-7911.",
+        "> Discover: console_ladder_session command_family; deferred_in_check per analysis."
+      ],
+      "requirement_keys": ["CRT-1738", "CRT-1740"],
+      "obligation_ids": ["obl-011", "obl-005", "obl-006", "obl-007", "obl-008", "obl-009", "obl-014"],
+      "verification_role": "primary",
+      "calculation_contract": "deferred_ambiguous",
+      "ambiguity": { "flag": "!", "reason": "XT-7911 blocks final numerics" }
+    },
+    {
+      "id": "chk-004",
+      "section": "## Invariants under configuration change",
+      "scenario_line": "- [CRT-1738] Realized P/L for each closing trade derives from average position price, not matched opening-trade prices.",
+      "detail_lines": [
+        "> Discover: console show family for realized P/L invariant at command_family (aff-001)."
+      ],
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": ["obl-012", "obl-013"],
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-005",
+      "section": "## Rounding and display policy",
+      "scenario_line": "- [CRT-1742] % P/L gross display rounds to two decimal places on surfaces that expose the field.",
+      "requirement_keys": ["CRT-1742"],
+      "obligation_ids": ["obl-010"],
+      "verification_role": "primary"
+    },
+    {
+      "id": "chk-006",
+      "section": "## Cross-surface parity",
+      "scenario_line": "- [CRT-1738] dxTrade5 — Capture Average Price and Open P/L from positions view; compare to dxCore/API truth.",
+      "requirement_keys": ["CRT-1738"],
+      "obligation_ids": [],
+      "verification_role": "supporting"
+    }
+  ],
+  "grounding_audit": {
+    "by_check_id": [
+      { "check_id": "chk-001", "evidence_keys": ["CRT-1741"], "status": "grounded" },
+      { "check_id": "chk-003", "evidence_keys": ["CRT-1738"], "status": "grounded" }
+    ],
+    "ungrounded_check_ids": []
+  },
+  "anti_pattern_findings": [],
+  "validation_log": [
+    { "step": "reinforce-1", "at": "2026-06-18T14:00:01Z", "action": "loaded pass-1 + discover slice" },
+    { "step": "reinforce-1-topology", "at": "2026-06-18T14:00:02Z", "action": "formula_first console batch; 0 oracle bindings" },
+    { "step": "reinforce-2-oracle", "at": "2026-06-18T14:00:03Z", "action": "0 oracle merges (639 no-op)" }
+  ],
+  "smart_checklist_markdown": null
+}

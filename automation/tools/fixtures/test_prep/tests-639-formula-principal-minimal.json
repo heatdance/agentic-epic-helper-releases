@@ -1,0 +1,84 @@
+{
+  "_comment": "Principal TEST-PREP fixture paired with precon-639-formula-principal-minimal + coverage-639-formula-reinforce-principal-minimal; deferrals excluded",
+  "schema_version": 4,
+  "epic_key": "CRT-639",
+  "sources": {
+    "draft_profile": "crtqa_outline",
+    "generation_mode": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules"
+    ],
+    "principal_loaded": true,
+    "ref_principal_fields": ["verification_focus_proposed"],
+    "session_placeholders": {
+      "console_principal": "<username>",
+      "account_code": "<account_code>",
+      "instrument_symbol": "<instrument_symbol>"
+    },
+    "precon_loaded": true,
+    "coverage_loaded": true,
+    "ref_loaded": true
+  },
+  "jira_test_search": {
+    "skipped": true,
+    "note": "generation_mode_greenfield"
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-def-001",
+      "reason": "deferral_obligation_keyed",
+      "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+    },
+    {
+      "check_id": "chk-def-002",
+      "reason": "deferral_obligation_keyed",
+      "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+    }
+  ],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-639: WeightedAvg FX_SPOT ladder",
+      "covers_check_ids": ["chk-001"],
+      "precon_cluster_refs": ["pc-001"],
+      "verification_classes_summary": ["stateful_ladder"],
+      "authoring": { "subprocess_completed": true },
+      "draft": {
+        "preconditions": ["See -precon.md cluster CRT-639: Account and system configuration."],
+        "actions": [
+          "c01 — use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher; partial close and verify average fill unchanged on remainder [oracle:TBD]"
+        ],
+        "results": [
+          "Weighted-average ladder: partial close leaves average fill unchanged on remainder. [CRT-1738]"
+        ],
+        "peculiarities": ["Literary ladder template only; no live execution during PREP."]
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [
+      {
+        "check_id": "chk-def-001",
+        "reason": "deferral_obligation_keyed",
+        "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+      },
+      {
+        "check_id": "chk-def-002",
+        "reason": "deferral_obligation_keyed",
+        "evidence": "Analysis deferral_obligation_keyed; coverage out_of_epic deferral_only"
+      }
+    ],
+    "orphan_bundles": [],
+    "notes": []
+  },
+  "validation_log": [
+    { "step": "phase1-topology", "at": "2026-06-18T16:00:01Z" },
+    { "step": "phase1-principal", "at": "2026-06-18T16:00:02Z", "note": "metrics_calculation; deferral skip" },
+    { "step": "phase8b_principal_paste", "at": "2026-06-18T16:00:07Z" },
+    { "step": "phase8b_topology_tb-001", "at": "2026-06-18T16:00:08Z" }
+  ],
+  "anti_pattern_findings": []
+}

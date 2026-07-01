@@ -1,5 +1,5 @@
 ---
-description: Assemble Corner release notes from Jira (four PMOPROC JQLs per fixVersion, v3)
+description: Assemble release-note markdown from four PMOPROC JQL queries per fixVersion batch.
 ---
 
 # /release-notes

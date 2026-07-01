@@ -1,6 +1,16 @@
 {
-  "_comment": "Coverage handoff for COVERAGE: pipeline schema v2. obligations_coverage maps epic-ref obligations_proposed[]. checks[].obligation_ids[]. Contract: docs/coverage-obligation-contract.json.",
+  "_comment": "Coverage handoff for COVERAGE: pipeline schema v2. obligations_coverage maps epic-ref obligations_proposed[]. Principal: docs/coverage-principal-contract.json (threads, focus copy, keyed deferrals). Topology: docs/coverage-topology-contract.json.",
   "schema_version": 2,
+  "coverage_pass": 1,
+  "_coverage_pass": "1 draft truth default; 2 legacy reinforce only",
+  "draft_truth_round": 1,
+  "_draft_truth_round": "1 or 2 per docs/draft-truth-contract.json draft_truth_loop.max_rounds",
+  "scenario_coverage_map": [],
+  "_scenario_coverage_map_item": {
+    "scenario_row_id": "scr-001 from ref verification_topology.scenario_capability_rows",
+    "check_id": "chk-001 or null when deferred/excluded",
+    "disposition": "covered | deferred | excluded"
+  },
   "epic_key": null,
   "epic_ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
   "sources": {
@@ -11,10 +21,34 @@
   },
   "archetype": null,
   "_archetype_enum": "widget_ui | metrics_calculation | mixed",
+  "emit_layout": null,
+  "_emit_layout": "formula_first | shell_first — from docs/coverage-topology-contract.json map_from_archetype when ref.epic_archetype present; else inferred with archetype in phase 3.",
+  "topology_provenance": null,
+  "_topology_provenance": {
+    "ref_path": "epics/<KEY>/<KEY>-ref.json",
+    "fields_consumed": ["epic_archetype.value", "verification_topology.jira_scenario_surfaces", "verification_topology.shell_roles", "verification_topology.pricing_oracle_rules", "verification_topology.delivery_notes", "verification_topology.platform_reuse_candidates"],
+    "archetype_source": "copied_from_ref | inferred",
+    "copied_at": "ISO-8601"
+  },
+  "principal_provenance": null,
+  "_principal_provenance": {
+    "ref_path": "epics/<KEY>/<KEY>-ref.json",
+    "focus_source": "epic_ref_proposed | jira_summary | jira_description | epic_ref_synthesis | user_trigger_focus",
+    "threads_consumed": [
+      {
+        "thread_id": "pct-001",
+        "section_heading": "## Data setup — account groups and quote publication",
+        "obligation_ids": ["obl-001"]
+      }
+    ],
+    "copied_at": "ISO-8601"
+  },
+  "platform_reuse_annex": null,
+  "_platform_reuse_annex": "Optional markdown block from ref platform_reuse_candidates; suggestion_only — no CRTQA keys. JSON field only; never paste into smart_checklist_markdown — see docs/coverage-operator-hints.json.",
   "epic_verification_focus": null,
   "_epic_verification_focus": {
     "statement": "1–3 sentences: what this epic primarily verifies (Jira narrative wins over broad requirement branching unless focus= override).",
-    "source": "jira_summary | jira_description | epic_ref_synthesis | user_trigger_focus",
+    "source": "jira_summary | jira_description | epic_ref_synthesis | epic_ref_proposed | user_trigger_focus",
     "keywords": ["optional tokens e.g. FX_SPOT", "WeightedAvg"]
   },
   "coverage_matrix": [],
@@ -68,15 +102,37 @@
     "subsection": "### optional",
     "scenario_line": "- [KEY] One observable outcome (platform prefix if needed)",
     "detail_lines": ["> execution variant or formula expansion"],
+    "linker_trace_lines": [],
+    "_linker_trace_lines": "Machine audit only (> Discover:, fixture ids, affordance ids). Never copied into smart_checklist_markdown or -coverage.md.",
     "ambiguity": null,
     "_ambiguity": "If set: { flag: '!', reason: 'not enough context | ambiguous spec | ...' } — model must not use vague TBD on executable lines.",
     "verification_role": "primary | supporting | out_of_epic | null",
     "_verification_role_check": "Mirror dominant matrix row; phase 12: top-level - with only supporting/out_of_epic → treat as ungrounded to epic focus unless justified",
     "calculation_contract": "ladder_present | deferred_ambiguous | null",
     "_calculation_contract": "metrics_calculation: ladder_present = executable preconditions + expected relation on primary metric; deferred_ambiguous = ! reason instead",
+    "delivery_status": null,
+    "_delivery_status": "delivered | failed | excluded | deferred — from ref delivery_notes; distinct from checks[].ambiguity ! deferral.",
+    "oracle_rule_id": null,
+    "_oracle_rule_id": "Must match ref verification_topology.pricing_oracle_rules[].id when bound.",
+    "topology_surface_id": null,
+    "_topology_surface_id": "Optional jss-### from ref jira_scenario_surfaces for shell_first section binding.",
+    "coverage_thread": null,
+    "_coverage_thread": "Optional audit bind to ref principal_coverage_threads[].coverage_thread (environment_setup, surface_quotes, ...).",
     "requirement_keys": [],
     "obligation_ids": [],
     "obligation_kinds": [],
+    "human_oracle_label": "Human-readable oracle label for markdown; not internal enum token",
+    "runtime_probes": [],
+    "_runtime_probes_item": {
+      "probe_id": "gp-001",
+      "command_attempted": "show prices SYMBOL",
+      "outcome": "success | failed | blocked",
+      "verified_syntax": "command that worked on CTQA or null",
+      "evidence_note": "short note",
+      "probed_at": "ISO-8601"
+    },
+    "probe_waived": false,
+    "_probe_waived": "true only when GROUND: probe_waive=yes on trigger",
     "implementation_hit_ids": []
   },
   "excluded_checks_with_reason": [],
@@ -113,6 +169,15 @@
     "step": "phase id or number",
     "at": "ISO-8601",
     "action": "short description"
+  },
+  "scenario_groups": [],
+  "_scenario_group_item": {
+    "group_id": "sg-001",
+    "title": "Issuing orders",
+    "check_ids": ["chk-001", "chk-002"],
+    "combinatorics": "variant_sequence | single_flow | matrix",
+    "source": "principal_thread | section | operator_merge",
+    "source_ref": "optional pct-001 or ## section heading"
   },
   "smart_checklist_markdown": null,
   "_smart_checklist_markdown": "Full markdown for Jira Smart Checklist; duplicate of sibling <KEY>-coverage.md body."

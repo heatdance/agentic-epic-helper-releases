@@ -6,12 +6,17 @@
     "snippet_missing",
     "nested_req_unresolved",
     "deferred_check",
+    "deferral_coverage_drift",
     "ungrounded_check",
     "grounding_weak",
     "tooling_blocked",
     "env_blocked",
     "anti_pattern",
-    "human_ba"
+    "human_ba",
+    "scenario_row_uncovered",
+    "platform_invariant_annex_only",
+    "console_probe_failed",
+    "draft_truth_loop_exhausted"
   ],
   "confidence_levels": ["high", "medium", "low"],
   "emit_forbidden_confidence": ["low"],
@@ -21,7 +26,8 @@
     "confluence_resolve",
     "human_ba",
     "ignore_for_discover",
-    "ignore_for_prep"
+    "ignore_for_prep",
+    "human_operator"
   ],
   "gap_status": ["open", "resolved", "confirmed_gap"],
   "resolution_types": [
@@ -55,6 +61,10 @@
     {
       "id": "anti_pattern",
       "scan": "coverage.anti_pattern_findings[]"
+    },
+    {
+      "id": "deferral_obligation_keyed",
+      "scan": "ref deferral obligations cross obligations_coverage.deferred_in_check and checks with obligation_ids"
     }
   ],
   "exploration_suppression_kinds": [
@@ -66,12 +76,17 @@
     "snippet_missing": "rerun_epic_prep",
     "nested_req_unresolved": "confluence_resolve",
     "deferred_check": "ignore_for_discover",
+    "deferral_coverage_drift": "rerun_coverage",
     "ungrounded_check": "rerun_coverage",
     "grounding_weak": "rerun_coverage",
     "tooling_blocked": "human_ba",
     "env_blocked": "human_ba",
     "anti_pattern": "rerun_coverage",
-    "human_ba": "human_ba"
+    "human_ba": "human_ba",
+    "scenario_row_uncovered": "rerun_coverage",
+    "platform_invariant_annex_only": "rerun_coverage",
+    "console_probe_failed": "human_operator",
+    "draft_truth_loop_exhausted": "human_operator"
   },
-  "_operator_notes": "Reserved for operator gap taxonomy pointers; playbook references this section when populated."
+  "_operator_notes": "Principal deferrals (Round 2): use deferred_check with pointers.obligation_id required; exploration_suppressed reason deferral_obligation_keyed for keyed ! checks. See docs/analysis-principal-contract.json."
 }

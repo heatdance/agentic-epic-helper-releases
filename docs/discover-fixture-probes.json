@@ -39,7 +39,7 @@
           "surface": "postgres",
           "tool": "postgres-ctqa MCP query",
           "optional": true,
-          "note": "When linked chk has sql in evidence_need; use readonly allowlist only when documented in automation/tools/tunnel/README.md discover subsection. Console path still required for probe_executed."
+          "note": "Legacy: sql evidence_need probes archived under automation/archive/legacy-ctqa-env/. Not used in linker mode."
         }
       ]
     },
@@ -56,6 +56,30 @@
           ],
           "depth_when": "probe_executed",
           "artifacts": ["widget_label_list"]
+        }
+      ]
+    },
+    "account_group_environment_setup": {
+      "surfaces": ["console"],
+      "complete_requires": "probe_executed",
+      "probes": [
+        {
+          "surface": "console",
+          "tool": "Invoke-CrtqaDxConsole.ps1",
+          "steps": [
+            "show console_guide",
+            "grep or narrow guide for account_group, FxConfiguration, publish tier streams (dxcore-console-harness corner_ct_xt_examples)",
+            "run read-only show commands from live guide only (no create/set/delete)",
+            "capture sanitized account_group_id and publish posture evidence for ENRG/OPPT contrast when dual_account"
+          ],
+          "depth_when": "probe_executed",
+          "artifacts": ["account_group_id", "fx_configuration_publish_evidence"]
+        },
+        {
+          "surface": "postgres",
+          "tool": "postgres-ctqa MCP query",
+          "optional": true,
+          "note": "Legacy: sql evidence_need probes archived under automation/archive/legacy-ctqa-env/. Not used in linker mode."
         }
       ]
     },

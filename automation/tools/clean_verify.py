@@ -451,8 +451,8 @@ def mode_align(root: Path, contract: dict[str, Any]) -> int:
 
     packages = hmap.get("tiers", [{}])[1].get("match_any_package", []) if hmap.get("tiers") else []
     ids = [p.get("id") for p in packages if isinstance(p, dict)]
-    if "clean_pipeline" not in ids:
-        return _fail("harness-map missing clean_pipeline package")
+    if "clean_release" not in ids:
+        return _fail("harness-map missing clean_release package")
     if "public_scrub_pipeline" in ids or "sync_pipeline" in ids:
         return _fail("harness-map still has public_scrub_pipeline or sync_pipeline")
 
@@ -542,35 +542,35 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
             if rep.is_file():
                 return _fail(f"calibrate report present: {rep.relative_to(root)}")
 
-    cmd = root / ".cursor/commands/crtqa-calibrate.md"
+    cmd = root / ".cursor/commands/epic-calibrate.md"
     if not cmd.is_file():
-        return _fail("team tree missing .cursor/commands/crtqa-calibrate.md")
+        return _fail("team tree missing .cursor/commands/epic-calibrate.md")
 
-    helper_cmd = root / ".cursor/commands/crtqa-helper.md"
+    helper_cmd = root / ".cursor/commands/epic-helper.md"
     if not helper_cmd.is_file():
-        return _fail("team tree missing .cursor/commands/crtqa-helper.md")
+        return _fail("team tree missing .cursor/commands/epic-helper.md")
     for rel in (
-        "docs/crtqa-helper-contract.json",
-        "automation/tools/crtqa_helper_affordances.py",
+        "docs/epic-helper-contract.json",
+        "automation/tools/epic_helper_affordances.py",
         ".cursor/pipelines/coverage-reinforce.md",
     ):
         if not (root / rel).is_file():
             return _fail(f"team tree missing helper artefact: {rel}")
 
     for rel in (
-        ".cursor/commands/crtqa-stats.md",
-        "docs/crtqa-stats-contract.json",
-        "automation/tools/crtqa_stats_rollup.py",
-        ".cursor/commands/better-prompt.md",
-        ".cursor/commands/better-skill.md",
-        "docs/operator-assist-contract.json",
-        "docs/skill-authoring-patterns.json",
+        ".cursor/commands/epic-stats.md",
+        "docs/epic-stats-contract.json",
+        "automation/tools/epic_stats_rollup.py",
+        ".cursor/commands/.md",
+        ".cursor/commands/.md",
+        "docs/.json",
+        "docs/.json",
     ):
         if (root / rel).exists():
             return _fail(f"personal-only artefact present on team tree: {rel}")
-    stats_dir = root / "stats/crtqa-stats"
+    stats_dir = root / "stats/epic-stats"
     if stats_dir.is_dir():
-        return _fail("team tree must not include stats/crtqa-stats/")
+        return _fail("team tree must not include stats/epic-stats/")
 
     for rel in (
         ".cursor/commands/release-notes.md",
@@ -587,11 +587,11 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
             hmap = json.load(f)
         packages = hmap.get("tiers", [{}])[1].get("match_any_package", []) if hmap.get("tiers") else []
         ids = [p.get("id") for p in packages if isinstance(p, dict)]
-        if "clean_pipeline" in ids:
-            return _fail("harness-map must not include clean_pipeline on team tree")
+        if "clean_release" in ids:
+            return _fail("harness-map must not include clean_release on team tree")
         if "release_notes" in ids:
             return _fail("harness-map must not include release_notes on team tree")
-        for forbidden_pkg in ("crtqa_stats", "operator_assist", "auto_tests_teach"):
+        for forbidden_pkg in ("epic_stats", "", ""):
             if forbidden_pkg in ids:
                 return _fail(f"harness-map must not include {forbidden_pkg} on team tree")
     except (OSError, json.JSONDecodeError) as e:

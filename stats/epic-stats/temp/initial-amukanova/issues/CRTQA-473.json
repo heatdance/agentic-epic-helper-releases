@@ -1,0 +1,21 @@
+{
+  "id": "1680301",
+  "key": "CRTQA-473",
+  "summary": "[Test cases automation] [CRT-347] Update encoding of 55 FIX tag for US Options",
+  "status": {
+    "name": "Aborted",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {},
+  "customfield_11250": null,
+  "customfield_10006": null
+}

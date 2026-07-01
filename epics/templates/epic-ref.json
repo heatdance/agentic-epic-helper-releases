@@ -1,5 +1,5 @@
 {
-  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/<KEY>-ref.json. EPIC-PREP v4: obligations_proposed[], obligations_reconcile. COVERAGE consumes obligations. schema_version 4. Prior v3: bitbucket hits. requirements[] + snippet_status. See docs/epic-obligation-kinds.json.",
+  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/<KEY>-ref.json. EPIC-PREP v4: obligations_proposed[], obligations_reconcile, downstream_hints, verification_focus_proposed, principal_coverage_threads, verification_topology. COVERAGE consumes obligations + topology + principal hints. schema_version 4. See docs/epic-obligation-kinds.json, docs/epic-prep-topology-contract.json, docs/epic-prep-principal-contract.json.",
   "schema_version": 4,
   "epic": {
     "key": null,
@@ -15,6 +15,77 @@
     "problem_gist_source": null,
     "impact_areas": [],
     "keywords": []
+  },
+  "epic_archetype": null,
+  "_epic_archetype": {
+    "value": "widget_ui | metrics_calculation | mixed",
+    "source": "jira_summary | jira_description | jira_scenarios | obligation_kinds | user_trigger_focus | inferred_from_jira",
+    "evidence": "Short citation; verbatim Jira quotes in verification_topology or client_shell_impact evidence only"
+  },
+  "verification_focus_proposed": null,
+  "_verification_focus_proposed": {
+    "statement": "1–3 sentences; Jira-derived primary focus for COVERAGE to copy without paraphrase",
+    "source": "jira_summary | jira_description | synthesis | operator_focus",
+    "keywords": ["FX_SPOT"]
+  },
+  "verification_topology": null,
+  "_verification_topology": {
+    "jira_scenario_surfaces": [],
+    "_jira_scenario_surface_item": {
+      "id": "jss-001",
+      "surface": "dxtrade5_watchlist",
+      "shell": "console | dxtrade5 | adaptive | webbroker_dealer | webbroker_client",
+      "widget": "Watchlist",
+      "metric": "bid_ask | mark | backup_price | config | null",
+      "source_quote": "Verbatim Jira scenario bullet",
+      "obligation_ids": ["obl-001"]
+    },
+    "shell_roles": {
+      "console": { "status": "in_scope | not_applicable", "evidence": null },
+      "dxtrade5": { "status": "in_scope | not_applicable", "evidence": null },
+      "adaptive": { "status": "in_scope | not_applicable", "evidence": null },
+      "webbroker_dealer": { "status": "in_scope | not_applicable", "evidence": null },
+      "webbroker_client": { "status": "in_scope | not_applicable", "evidence": null }
+    },
+    "pricing_oracle_rules": [],
+    "_pricing_oracle_rule_item": {
+      "id": "por-001",
+      "surface": "dxtrade5_watchlist",
+      "metric": "bid_ask | mark | midpoint | backup_price | close_price",
+      "volume_control": "order_default_qty | order_qty | position_qty | first_tier | not_applicable",
+      "oracle_rule": "first_tier_quote | text_configuration_closest_gte_qty | midpoint_invariant | mark_from_midpoint | console_show_prices_first_tier | console_agent_event_quote | console_agent_event_text_configuration | backup_midpoint_at_eod | unresolved",
+      "requirement_keys": ["CRT-1714"],
+      "evidence_anchor": "snippet excerpt",
+      "obligation_ids": ["obl-001"],
+      "disposition": "primary_candidate | deferral_candidate"
+    },
+    "delivery_notes": [],
+    "_delivery_note_item": {
+      "id": "dn-001",
+      "target": "dxtrade5_derivatives_widget",
+      "status": "known_fail | excluded | waived | pending_verification",
+      "source": "jira_comment | jira_description | operator_focus | post_implementation",
+      "evidence": "Verbatim citation required for known_fail/excluded",
+      "linked_obligation_ids": ["obl-002"],
+      "linked_surface_ids": ["jss-004"]
+    },
+    "principal_coverage_threads": [],
+    "_principal_coverage_thread_item": {
+      "thread_id": "pct-001",
+      "title": "Data setup — account groups and quote publication",
+      "coverage_thread": "environment_setup | functional_config | mapping_routing | surface_quotes | invariants | backup_eod | dimensions | deferral_only",
+      "obligation_ids": ["obl-001"],
+      "required_when": "widget_ui_setup_thread | widget_ui_invariants_thread | widget_ui_backup_thread | null"
+    },
+    "platform_reuse_candidates": [],
+    "_platform_reuse_candidate_item": {
+      "id": "prc-001",
+      "topic": "EOD backup",
+      "suggested_crtqa_pattern": "Platform regression TC family for daily_data_recorder",
+      "confidence": "high | medium | low",
+      "evidence": "Keyword or requirement trigger",
+      "binding": "suggestion_only"
+    }
   },
   "client_shell_impact": null,
   "_client_shell_impact": {
@@ -56,14 +127,21 @@
   "obligations_proposed": [],
   "_obligations_proposed_item": {
     "id": "obl-001",
-    "kind": "invariant | ladder | formula | config_posture | settlement | rounding | parity | explicit_deferral",
+    "kind": "invariant | ladder | formula | config_posture | environment_setup | settlement | rounding | parity | explicit_deferral",
     "statement": "Human-readable obligation (what must be verified)",
     "requirement_keys": ["CRT-1234"],
     "evidence_anchor": "snippet excerpt or jira field reference",
     "config_vs_position": "instrument_type_config | account_group_assignment | position_state | routing_or_markup | not_applicable",
     "disposition": "primary_candidate | deferral_candidate",
     "deferral_reason": null,
-    "implementation_hit_ids": []
+    "implementation_hit_ids": [],
+    "downstream_hints": {
+      "coverage_thread": "environment_setup | functional_config | mapping_routing | surface_quotes | invariants | backup_eod | dimensions | deferral_only",
+      "needs_environment_provision": false,
+      "needs_dual_account_contrast": false,
+      "linked_delivery_note_ids": [],
+      "personas": ["console", "retail"]
+    }
   },
   "obligations_reconcile": {
     "epic_summary_aligned": true,

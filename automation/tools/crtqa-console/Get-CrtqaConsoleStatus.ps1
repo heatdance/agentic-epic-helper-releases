@@ -5,7 +5,7 @@
 
 .DESCRIPTION
   Checks session.active.json, master plink PID, and plink -share echo.
-  Writes temp/crtqa-console/gate-status.json for agents and crtqa_env_probe.py.
+  Writes temp/crtqa-console/gate-status.json for agents and crtqa_console_probe.py.
   Exit 0 when all checks pass; 1 otherwise.
 #>
 [CmdletBinding()]

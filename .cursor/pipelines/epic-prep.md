@@ -4,8 +4,12 @@
 
 - **`repo=…`** — Bitbucket/Stash repository for the optional prep code search: Bitbucket Cloud `workspace/slug`, or internal Stash **`PROJECT_KEY/repo_slug`** (e.g. `EPIC-PREP: CRT-1234 repo=BRO/xt`). Defaults: [docs/project.json](../../docs/project.json) **`bitbucket.default_repo`** (see also [docs/corner-platform-map.json](../../docs/corner-platform-map.json) **`code_streams`** for `BRO/xt` vs `CAN/corner` vs packaging repos).
 - **`focus=...`** — free-text merge into synthesis and **obligations reconcile** (step **6b**), same spirit as COVERAGE `focus=` (e.g. `focus=FX_SPOT_WeightedAvg_metrics`).
+- **`strict_topology=yes`** — opt-in; finalize runs **`epic_prep_verify.py --strict-topology`** (required on new emits after topology rollout).
+- **`strict_principal=yes`** — opt-in; finalize runs **`epic_prep_verify.py --strict-principal`**; requires principal reconcile (step **3i**) per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json). May combine with **`strict_topology=yes`**.
 
-**Version note (obligation subprocesses)**: schema **`schema_version: 4`** with **`obligations_proposed[]`**; finalize gate **`epic_prep_verify.py`**. Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md).
+**Version note (obligation subprocesses + topology + principal)**: schema **`schema_version: 4`** with **`obligations_proposed[]`**, **`downstream_hints`**, **`verification_focus_proposed`**, **`principal_coverage_threads`**, **`epic_archetype`**, **`verification_topology`** (additive). Finalize gate **`epic_prep_verify.py`** (`--strict-topology` / `--strict-principal` on new emits). Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Topology contract: [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json). Principal contract: [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json). Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md).
+
+**Step execution order (normative)**: **1** → **3** → **3b** → **3c** → **3d** → **3e** → **2b** → **2c** → **3f** → **3g** → **3h** → **3i** → **4** → **5** → **5b** → **6** → **7** → **6b** → **8**. Steps **2b–2c**, **3f–3h**, and **3i** are documented out of numeric order but **must** run in this sequence. Renumbering map: legacy step **4** (Design) unchanged; topology/principal inserts do not renumber **5–8**.
 
 **Forbidden inputs (production)**: Do **not** read or copy from sibling **`-coverage.json`**, **`-discover.json`**, **`-precon.json`**, **`-tests.json`**, CRTQA Jira issues, or operator gold under **`.cursor/calibrate/`** (calibrate is post-hoc only).
 
@@ -38,7 +42,7 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 
 1. Ensure `{EpicDir}` exists.
 2. Create `{EpicDir}temp/`.
-3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), **`epic-obligation-<REQKEY>.json`** (per-requirement obligation slices), **`epic-obligation-reconcile.json`** (merge scratch), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
+3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), **`epic-obligation-<REQKEY>.json`** (per-requirement obligation slices), **`epic-topology-scenario-<slug>.json`** (per-section scenario surface slices), **`epic-topology-oracle-<slug>.json`** (pricing oracle slices), **`epic-obligation-reconcile.json`** (merge scratch), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
 4. Work: merge durable facts into `{EpicDir}<KEY>-ref.json`.
 5. **Exit**: delete `{EpicDir}temp/` recursively (`Remove-Item -Recurse` on Windows, `rm -rf` on Unix).
 6. **Self-check**: `<KEY>-ref.json` must **not** contain the substring `/temp/` (no stale paths).
@@ -75,6 +79,21 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 - **COVERAGE** consumes this object to seed **metric × surface** checks (including Adaptive).
 - **Bitbucket repo (post–client-shell)**: If **`sources.bitbucket_repo`** was set **only** from [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** (no **`repo=`** trigger, no **prior** ref override) **and** **`client_shell_impact.adaptive.status`** is **`affected`** **and** **`client_shell_impact.corner_trader.status`** is **`not_applicable`**, set **`sources.bitbucket_repo`** to **`CAN/corner`** (see [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) **`code_streams`** id **`can_corner`**; same value as **`bitbucket.adaptive_repo`** in `project.json`). Append **`validation_log`**. Do **not** override an explicit **`repo=`** or a **prior** ref repo.
 
+### 2c. Epic archetype (mandatory) — after 2b
+
+**Requires:** step **2b** `client_shell_impact`; step **1** `temp/jira-issue.json` description/summary; step **3e** `synthesis` (when available — re-read after 3e if 2c runs immediately after 2b).
+
+- Populate **`epic_archetype`** on the ref (template `_epic_archetype` shape). Same enum as COVERAGE phase **3**: `widget_ui` | `metrics_calculation` | `mixed`.
+- **Decision tree** (first match wins; tie-break on step 4):
+  1. Jira/synthesis primary deliverable = **formulas, ladders, settlement metrics, P/L calculation** → **`metrics_calculation`**
+  2. Primary = **widgets, quote display, configuration UI, Figma-driven screens** → **`widget_ui`**
+  3. **Material both** (e.g. tiered quotes **and** formula/metric proofs) → **`mixed`**
+  4. **Tie-break:** count **`primary_candidate`** obligation kinds — `formula|ladder|rounding|settlement` vs `config_posture|parity` with **`routing_or_markup`** plus Jira **Scenarios** naming UI surfaces; heavier count wins; equal → **`mixed`**
+- Set **`source`**: `jira_summary` | `jira_description` | `jira_scenarios` | `obligation_kinds` | `user_trigger_focus` | `inferred_from_jira`
+- Set **`evidence`**: one short citation (no long Jira paste — verbatim quotes belong in `verification_topology` or `client_shell_impact.evidence`)
+- Append **`validation_log`**: `{ "step": "2c", "at": "<ISO8601>", "action": "epic_archetype=<value> source=<source>" }`
+- **COVERAGE** (plan 2) **must** copy `epic_archetype.value` to `coverage.archetype` when present — do not re-infer.
+
 ### 3. Requirements (3.2) — Yogi
 
 - Collect requirement keys from the **Requirement Yogi** custom field if present; else regex for `/requirements/` URLs and `req-CRT-…` / similar in description and comments (best-effort). Treat this set as **`jira_linked_keys`** for finalize gating (step 8).
@@ -100,7 +119,12 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 
 1. **Input pack** (subprocess only): that row + Epic summary/description sentences mentioning **`key`** only.
 2. **Output**: write `temp/epic-obligation-<REQKEY>.json` with shape `{ "requirement_key": "<KEY>", "obligations_proposed": [ … ] }`.
-3. Each obligation: `id` (`obl-###` unique epic-wide), `kind` from [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json), `statement`, `requirement_keys[]`, `evidence_anchor`, optional `config_vs_position`, `disposition` (`primary_candidate` | `deferral_candidate`), `deferral_reason` when deferral.
+3. Each obligation: `id` (`obl-###` unique epic-wide), `kind` from [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json), `statement`, `requirement_keys[]`, `evidence_anchor`, optional `config_vs_position`, `disposition` (`primary_candidate` | `deferral_candidate`), `deferral_reason` when deferral, **`downstream_hints`** per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json):
+   - **`config_vs_position: account_group_assignment`** + **`primary_candidate`** → **`needs_dual_account_contrast: true`**; **`coverage_thread`**: `environment_setup` or `invariants` per statement.
+   - **`kind: environment_setup`** → **`needs_environment_provision: true`**, **`coverage_thread: environment_setup`**.
+   - **`kind: explicit_deferral`** or **`disposition: deferral_candidate`** → **`coverage_thread: deferral_only`**; require **`deferral_reason`**.
+   - **`config_vs_position: routing_or_markup`** / **`parity`** with UI surfaces → **`coverage_thread`**: `surface_quotes` or `mapping_routing`; set **`personas`** from shell impact.
+   - Bind **`linked_delivery_note_ids`** when step **3h** will emit matching **`delivery_notes`** (may back-fill in **3i**).
 4. Use **disambiguation_notes** — e.g. instrument-type config change ≠ account group assignment ≠ position-state invariant.
 5. **0 obligations** is valid when snippet is purely procedural with no testable obligation; log in subprocess output `notes`.
 
@@ -117,6 +141,83 @@ When `snippet_text` cites nested `/requirements/` URLs or sibling keys **not** i
   - `impact_areas[]`, `keywords[]` — prefer objects `{ "text": "...", "source": "from_jira_field" | "inferred_from_jira" }`.
 - Merge optional trigger **`focus=`** into keywords / problem_gist with `validation_log` note when it narrows scope.
 - Do not invent platform facts not present in Jira, snippets, or obligation evidence.
+
+### 3f. Jira scenario surfaces + shell roles (mandatory) — after 3e and 2c
+
+**Requires:** step **2c** `epic_archetype`; step **3e** `synthesis`; step **1** Jira description (Scenarios block); merged **`obligations_proposed[]`**.
+
+- Initialize **`verification_topology`** on the ref if null (see template `_verification_topology`).
+- Parse Jira **numbered scenarios**, nested `##` bullets, and post-condition lines (e.g. Watchlist, Position Book, Instrument page, Derivatives, Client Area, User Management, Backup Prices widget).
+- Emit **`verification_topology.jira_scenario_surfaces[]`** per [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json) `jira_scenario_surface_item`:
+  - **`id`**: `jss-001`, …
+  - **`surface`**: stable id e.g. `dxtrade5_watchlist`, `webbroker_client_area`
+  - **`shell`**: `console` | `dxtrade5` | `adaptive` | `webbroker_dealer` | `webbroker_client`
+  - **`widget`**, **`metric`**, **`source_quote`** (verbatim scenario bullet), **`obligation_ids[]`**
+- Emit **`verification_topology.shell_roles`**: `console`, `dxtrade5`, `adaptive`, `webbroker_dealer`, `webbroker_client` — each `{ status: in_scope | not_applicable, evidence }`. Split WebBroker **dealer** (User Management, Account groups) vs **client** (Client Area) when Jira mentions both.
+- **Subprocess rule:** when **>5** scenario surfaces, one subprocess per scenario **section**; write `temp/epic-topology-scenario-<slug>.json`; parent merges into ref.
+- **`metrics_calculation` short-circuit:** when Jira has **no** widget scenario block, set `jira_scenario_surfaces: []` and append **`validation_log`** `{ "step": "3f_skipped_no_ui_scenarios", … }` — **do not** invent Watchlist/Derivatives rows.
+- Append **`validation_log`**: step `3f`.
+
+### 3f½. Scenario capability inventory (mandatory for widget_ui / mixed) — after 3f
+
+**Requires:** step **3f** `jira_scenario_surfaces[]`; step **3h** `platform_reuse_candidates[]` (may be empty).
+
+Per [`docs/epic-prep-scenario-contract.json`](../../docs/epic-prep-scenario-contract.json):
+
+1. Emit **`verification_topology.scenario_capability_rows[]`**: one **`scr-*`** per **`jira_scenario_surfaces[]`** row (`capability_kind: jira_scenario`, `promotion: primary_candidate`, `jira_surface_id` link).
+2. For each **`platform_reuse_candidates[]`** with **`binding: suggestion_only`**, emit matching **`scr-*`** with **`platform_reuse_id`**, **`capability_kind: platform_invariant`**, **`promotion: platform_invariant`** (e.g. non-trading-day backup for FX_SPOT).
+3. Optional **`cross_surface`** rows for midpoint/mark/console invariants not tied to a single Jira widget bullet.
+4. **Subprocess:** when **>5** rows, `temp/epic-scenario-<slug>.json`; parent merges.
+5. **Verifier:** `epic_prep_verify.py --mode scenario` before finalize when archetype is **`widget_ui`** or **`mixed`**.
+
+- Append **`validation_log`**: step `3f_half`, row counts (jira vs platform_invariant vs cross_surface).
+
+### 3g. Pricing oracle rules (mandatory when quote/tier keywords) — after 3f½
+
+**Requires:** step **3f** `jira_scenario_surfaces`; **`requirements[].snippet_text`**; **`obligations_proposed[]`** with `routing_or_markup` or `parity` kinds where applicable.
+
+- For each quote/tier/mark-related obligation or snippet keyword (bid, ask, tier, TextConfiguration, midpoint, mark, Quote stream):
+  - Emit **`verification_topology.pricing_oracle_rules[]`** per contract `pricing_oracle_rule_item`
+  - **`oracle_rule`** from contract enum: `first_tier_quote`, `text_configuration_closest_gte_qty`, `midpoint_invariant`, `mark_from_midpoint`, `console_show_prices_first_tier`, `console_agent_event_quote`, `console_agent_event_text_configuration`, `backup_midpoint_at_eod`, or **`unresolved`**
+  - Bind **`surface`** to a `jira_scenario_surfaces[].surface` or `console_*` id
+  - **`volume_control`**: `order_default_qty` | `order_qty` | `position_qty` | `first_tier` | `not_applicable`
+- **Surface-specific defaults** (when snippet names tier behavior but not per-widget):
+  - Watchlist / OTC OE / Adaptive OE → prefer **`text_configuration_closest_gte_qty`** with **`order_default_qty`**
+  - Positions / Derivatives / Order book (position qty context) → prefer **`first_tier_quote`** unless snippet explicitly says tier-by-position-qty
+  - Console `show prices` → **`console_show_prices_first_tier`**
+  - Midpoint/mark invariants → **`midpoint_invariant`** / **`mark_from_midpoint`**
+- **Conflict rule:** snippet silent on a scenario surface → row with **`oracle_rule: unresolved`**, **`disposition: deferral_candidate`** (feeds ANALYSE plan 3 — **do not invent** oracle)
+- **Subprocess:** one `temp/epic-topology-oracle-<slug>.json` when **>4** rules; parent merges.
+- **`metrics_calculation` short-circuit:** when no quote/tier/mark keywords in Jira/snippets, set `pricing_oracle_rules: []` and log **`validation_log`** step `3g_skipped_no_quote_keywords`.
+- Append **`validation_log`**: step `3g`.
+
+### 3h. Delivery notes + platform reuse candidates — after 3g
+
+**Requires:** step **3g** oracle rules (for delivery/oracle conflicts); Jira description/comments; optional **`focus=`** when it explicitly states delivery status.
+
+- **`verification_topology.delivery_notes[]`**: `{ id, target, status, source, evidence }`
+  - **`status`**: `known_fail` | `excluded` | `waived` | `pending_verification`
+  - **Sources:** Jira comments, epic post-conditions, **`focus=`** only when explicit — **never infer `known_fail` from absence**
+- **`verification_topology.platform_reuse_candidates[]`**: `{ id, topic, suggested_crtqa_pattern, confidence, evidence, binding: suggestion_only }`
+  - Trigger on keywords from contract `platform_reuse_keyword_triggers` (EOD, backup price, daily_data_recorder, mark price column, …)
+  - **`suggested_crtqa_pattern`**: human-readable family label only — **no CRTQA issue keys** in durable JSON (harness §3)
+  - Every row **`binding`**: **`suggestion_only`** — not structural test input
+- Both arrays may be **`[]`** for **`metrics_calculation`** epics with no delivery/reuse signals.
+- Append **`validation_log`**: step `3h`.
+
+### 3i. Principal reconcile — after 3h, before 4
+
+**Requires:** merged **`obligations_proposed[]`** with **`downstream_hints`** (step **3c**); **`verification_topology`** from **3f–3h**; step **2c** **`epic_archetype`**.
+
+Per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json):
+
+1. Build **`verification_focus_proposed`**: `{ statement, source, keywords[] }` from Jira summary + synthesis (1–3 sentences; **no paraphrase** of epic one-liner — COVERAGE copies verbatim in step 2 Round 2).
+2. Assemble **`verification_topology.principal_coverage_threads[]`**: `{ thread_id, title, coverage_thread, obligation_ids[], required_when }` from obligations + **`archetype_rules`** (e.g. **`widget_ui`** + setup keywords → **`environment_setup`** thread; **`invariant`** primaries → **`invariants`** thread; backup/EOD keywords → **`backup_eod`** thread).
+3. Back-link **`delivery_notes[].linked_obligation_ids`** / **`linked_surface_ids`** from obligations and **`jira_scenario_surfaces`**.
+4. When **>6** threads, write `temp/epic-principal-reconcile.json` then merge to ref.
+5. Append **`validation_log`**: step `3i`.
+
+**`metrics_calculation` short-circuit:** **`environment_setup`** thread optional; still emit **`verification_focus_proposed`** when obligations exist.
 
 ### 4. Design (3.3)
 
@@ -169,6 +270,10 @@ When `snippet_text` cites nested `/requirements/` URLs or sibling keys **not** i
 - Set `sources.confluence_method` (`snippet` / `mcp` / `mixed`) as appropriate.
 - Ensure **`sources.bitbucket_repo`** reflects the resolved workspace/slug (step **1** / **5b**) for downstream **COVERAGE** when the user omits `repo=` on the coverage trigger.
 - Set **`schema_version`: 4** on the ref.
+- Ensure **`epic_archetype`** and **`verification_topology`** are populated per steps **2c**, **3f–3h** (null **`verification_topology`** object is invalid on **new** emits — use empty arrays inside the object).
+- Ensure **`verification_focus_proposed`** and **`principal_coverage_threads`** per step **3i** when trigger includes **`strict_principal=yes`** or operator expects principal handoff.
+- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}<KEY>-ref.json --strict-topology`** on **new** EPIC-PREP emits (after topology rollout). Legacy refs without topology pass **`ref`** without **`--strict-topology`** until re-prepped.
+- When trigger includes **`strict_principal=yes`**, also run **`--strict-principal`** on the same command line.
 - Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}<KEY>-ref.json`** — **block** delete of `temp/` and run completion until exit **0**.
 - Validate JSON.
 - **Delete** `{EpicDir}temp/`.
@@ -186,13 +291,19 @@ When `snippet_text` cites nested `/requirements/` URLs or sibling keys **not** i
 - **Downstream leakage** — Never read **`-coverage`** / CRTQA during EPIC-PREP.
 - **Yogi auth** — Skip live snippet or use MCP + `--storage-file` into `temp/` then merge; always set **`snippet_status`** / **`snippet_failure_reason`** when `snippet_text` is absent — do not leave unexplained nulls. Use step **3b** + finalize gate (step **8**) so first-pass flakiness does not ship silent gaps.
 - **Adaptive omission** — Do not default to dxTrade5-only; use **`client_shell_impact`** and **`qa_default_both`** when appropriate.
+- **Topology one-shot** — Skipping **3f–3g** subprocesses causes COVERAGE/PREP to over-generalise tier rules; parent must fan out like **3c**.
+- **CRTQA in prep** — **`platform_reuse_candidates`** are **`suggestion_only`**; never fetch or cite CRTQA keys in `-ref.json`.
+- **Delivery fabrication** — Do not emit **`known_fail`** / **`excluded`** without verbatim Jira or operator **`focus=`** evidence.
+- **Principal one-shot** — Skipping **3i** leaves COVERAGE without thread spine or focus seed; parent must reconcile after **3h**.
 - **Temp leakage** — Mandatory delete + grep self-check.
 
 ---
 
 ## Related
 
-- Template: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json) (**schema v4**, `obligations_proposed[]`)
+- Template: [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json) (**schema v4**, `obligations_proposed[]`, `downstream_hints`, `verification_focus_proposed`, `verification_topology`)
+- Topology contract: [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json)
+- Principal contract: [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json)
 - Obligation kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json)
 - Verifier: [`automation/docs/epic-prep-verify.md`](../../automation/docs/epic-prep-verify.md)
 - Layout: [`epics/README.md`](../../epics/README.md)

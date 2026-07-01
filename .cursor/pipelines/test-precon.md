@@ -1,4 +1,6 @@
-# Pipeline: test-precon (precondition materialization)
+# Pipeline: test-precon (LEGACY — not in draft_truth_v3 chain)
+
+> **LEGACY:** **TEST-PRECON** is **not** in the production chain after draft_truth_v3. **Do not run from `/epic-helper`.** Use for calibrate/benchmark fixtures only. Production path: **TEST-PREP scenario_intent** after **TEST-DISCOVER linker**. See [docs/draft-truth-contract.json](../../docs/draft-truth-contract.json).
 
 **Trigger**: user message starts with **`TEST-PRECON:`** and includes a Jira **Epic key** (e.g. `TEST-PRECON: CRT-639`). Optional tokens on the **same line**:
 
@@ -6,14 +8,15 @@
 - **`skip_cold_gate=yes`** — waive Phase **0** machine gates. **`sources.cold_gate_skip_token_used: true`**; **`validation_log`** **MUST** record **`cold_gate_skipped`**.
 - **`dxtrade5_creds=<user>/<password>`** and **`webbroker_creds=<user>/<password>`** — transient only (**MUST NOT** enter durable JSON).
 - **`fe_exploration_waived=yes`** — only after Phase **0b** hard stop + operator ack; caps UI at **`shell_only`**; **`sources.fe_exploration_waived: true`**.
+- **`strict_principal=yes`** — opt-in Round 2 principal handoff (session placeholders + **`pc-setup`** provisioning cluster). Phase **5** runs **`precon_verify.py --strict-principal`** when ref/discover principal loaded per [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json).
 
 **Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
-**Doctrine**: [docs/harness-principles.md](../../docs/harness-principles.md) §9 — **DISCOVER → PRECON → PREP** must produce **strictly deeper evidence** per [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json). Phase **0c** = **`smoke` only**; Phase **4** = **`precon_drill`** (replay discover + navigated views). PRECON authors **ordered environment setup** and **`test_skeleton[]`** for downstream **TEST-PREP**.
+**Doctrine**: [docs/harness-principles.md](../../docs/harness-principles.md) §9 — **PRECON** owns live exploration (Phase 0 + Phase 4). Load **`checks[].runtime_probes`** from frozen **`-coverage.json`** (GROUND); optional linker **`-discover.json`** for ledger hints only. See [`docs/precon-draft-truth-contract.json`](../../docs/precon-draft-truth-contract.json).
 
 **Jira shape reference (not fetched as SoT):** [CRTQA-10176](https://jira.in.devexperts.com/browse/CRTQA-10176) — action + commands + branches; no harness vocabulary.
 
-**Operator prep (recommended):** tunnel tab → **`/crtqa-console start`** → **`/crtqa-env`** — see [automation/docs/crtqa-env.md](../../automation/docs/crtqa-env.md) and [`.cursor/commands/crtqa-env.md`](../commands/crtqa-env.md).
+**Operator prep (legacy):** **`/crtqa-console start`** — see [automation/archive/legacy-ctqa-env/README.md](../../archive/legacy-ctqa-env/README.md) for deprecated Postgres/tunnel env probe.
 
 ---
 
@@ -26,15 +29,15 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 | Artefact | Required |
 |----------|----------|
 | `{EpicDir}<KEY>-coverage.json` | **Yes** — if missing: **STOP**; instruct **`COVERAGE: <KEY>`** |
-| `{EpicDir}<KEY>-discover.json` | **SHOULD** — warn + more **`[TBD]`** if missing |
+| `{EpicDir}<KEY>-discover.json` | **Optional** — linker slices when present |
 | `{EpicDir}<KEY>-ref.json` | **Recommended** |
 | `{EpicDir}<KEY>-analysis.json` | Optional |
 
-If **`-discover.json`** exists and **`test_prep_gates.blocked: true`**: **WARN** in **`validation_log`** after Phase 0 passes — **continue** (env gates are independent).
+**Frozen coverage:** **`sources.coverage_frozen_at`** should be set (draft+truth path).
 
 ### Outputs
 
-- **`{EpicDir}<KEY>-precon.json`** — [`epics/templates/precon-ref.json`](../../epics/templates/precon-ref.json) **schema_version 4**.
+- **`{EpicDir}<KEY>-precon.json`** — [`epics/templates/precon-ref.json`](../../epics/templates/precon-ref.json) **schema_version 5**.
 - **`{EpicDir}<KEY>-precon.md`** — Jira wiki paste body only (no preamble/footer; generated in phase 5).
 
 **Out of scope:** creating/updating Jira issues via API; **mutating** console/DB during PRECON; trade **ladders** in precon steps; CRTQA Pre-Condition search as **authoring** SoT.
@@ -45,11 +48,11 @@ If **`-discover.json`** exists and **`test_prep_gates.blocked: true`**: **WARN**
 
 | Layer | Answers | Human paste |
 |-------|---------|-------------|
-| **TEST-DISCOVER** | What areas must be satisfiable? | None |
+| **TEST-DISCOVER (linker)** | Classified affordances (no browser) | None |
 | **TEST-PRECON** | How to set up the environment once? | **`-precon.md`** |
 | **TEST-PREP** | How to run each test bundle? | `-tests.md` (separate playbook) |
 
-PRECON **re-explores deeper than discover** (read-only) — replay Step E probes then open setup views/forms per [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json). **MUST NOT** copy discover **`fixture_needs[].notes`** verbatim into **`body`** or **`-precon.md`**. Sanitized findings go to **`exploration_grounding`** / **`exploration_log[]`** (JSON only) with **`depth_level`**, **`view_id`**, **`discover_fixture_id`**.
+PRECON performs **live read-only exploration** in Phase **4D/4C** per [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json). **MUST NOT** replay discover probes (Phase 4R removed). Linker **`fixture_needs[].notes`** → **`exploration_grounding`** only — not **`body`**.
 
 ---
 
@@ -96,19 +99,10 @@ Partial grounding is OK: **`[TBD]`** + “run **`help <command>`** on CTQA”.
 
 1. Parse trigger tokens; if **`proceed`**: re-run this phase only, then restart from phase 1 with fresh ledger.
 2. If **`-coverage.json`** missing → **STOP** (instruct **`COVERAGE:`**).
-3. Run:
-
-```powershell
-python automation/tools/crtqa_env_probe.py --coverage {EpicDir}<KEY>-coverage.json
-```
-
-Optional scratch: **`{EpicDir}temp/precon-cold-gate.json`** (probe JSON) — **delete** before finish.
-
-4. If any gate **`status: fail`** and **`required_for_epic: true`** → **STOP**. Chat: BLUF + copy each failed gate’s **`recovery`** as **`operator_recovery`** (slash-first **`actions[]`**). **No** **`-precon.json`**.
-5. **Postgres depth** — when probe **`tooling_intent.postgres_ctqa`** is **`required`**: MCP **`list_tables`** on **`postgres-ctqa`**. Failure → **STOP** (tunnel up but MCP down).
-6. **Console depth** — when **`crtqa_dx_console`** is **`required`**: **`Get-CrtqaConsoleStatus.ps1`** exit **0** (agent runs script).
-7. **Chrome readiness** — when **`tooling_intent.chrome_devtools`** is **`required`** and phase 3/4 will use dxTrade5/webbroker/adaptive: confirm **`chrome-devtools`** MCP is configured ([`automation/docs/chrome-devtools-mcp.md`](automation/docs/chrome-devtools-mcp.md)). Configured ≠ logged in.
-8. If **`skip_cold_gate=yes`**: set **`sources.cold_gate_skip_token_used: true`**; log **`cold_gate_skipped`**; continue with degraded exploration honesty.
+3. **Legacy env probe (archived):** see [automation/archive/legacy-ctqa-env/](../../automation/archive/legacy-ctqa-env/) for former `crtqa_env_probe.py` + Postgres gates. For console only: **`crtqa_console_probe.py`**.
+4. **Console depth** — **`Get-CrtqaConsoleStatus.ps1`** or **`crtqa_console_probe.py`** exit **0**.
+5. **Chrome readiness** — when **`tooling_intent.chrome_devtools`** is **`required`** and phase 3/4 will use dxTrade5/webbroker/adaptive: confirm **`chrome-devtools`** MCP is configured ([`automation/docs/chrome-devtools-mcp.md`](../../automation/docs/chrome-devtools-mcp.md)). Configured ≠ logged in.
+6. If **`skip_cold_gate=yes`**: set **`sources.cold_gate_skip_token_used: true`**; log **`cold_gate_skipped`**; continue with degraded exploration honesty.
 
 #### Phase 0b — FE credential gate (same contract as discover)
 
@@ -122,7 +116,7 @@ Optional scratch: **`{EpicDir}temp/precon-cold-gate.json`** (probe JSON) — **d
 
 **chrome-devtools** + trigger creds only. Pass criteria: contract **`post_login_smoke`**. On fail → **STOP** (**`fe_ui_authentication_failed`**). Set **`fe_ui_sessions`** on scratch ledger for phase 1.
 
-9. On pass: set **`sources.cold_gate_resolved_at`** (ISO-8601); append **`validation_log`**: **`phase0`**.
+7. On pass: set **`sources.cold_gate_resolved_at`** (ISO-8601); append **`validation_log`**: **`phase0`**.
 
 **MUST NOT** emit **`-precon.json`** when required Phase 0 gates failed without **`skip_cold_gate=yes`** or FE waiver where applicable.
 
@@ -134,15 +128,26 @@ Optional scratch: **`{EpicDir}temp/precon-cold-gate.json`** (probe JSON) — **d
 
 1. Set **`{EpicDir}`** = `epics/<KEY>/`, **`epic_key`**.
 2. **MUST** project each present artifact with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading full files into context:
-   - **`-coverage.json`**: e.g. `jq '.checks[] | {id, summary, verification_role}'`, `jq '.surfaces'`
-   - **`-discover.json`** (when present): e.g. `jq '{discovery_status, test_prep_gates}'`, `jq '.fixture_needs[]'`
-   - **`-ref.json`**: e.g. `jq '.client_shell_impact'`
-   - **`-analysis.json`** (v2): `jq '.gaps[]'`, `jq '.resolved_gaps[]'`, `jq '.exploration_suppressed[]'` — seed **`case_outline[]`** from **`resolved_gaps`** + high-confidence **`gaps[]`** with `pointers.check_id`; skip checks in **`exploration_suppressed`** with **`blocks_fixture_probe: true`**
+   - **`-coverage.json`**: e.g. `jq '.checks[] | {id, summary, verification_role}'`, `jq '.surfaces'`, `jq '{archetype, emit_layout, coverage_pass}'`, `jq '.checks[] | select(.verification_role=="primary") | {id, oracle_rule_id, topology_surface_id, delivery_status}'`; when **`coverage_pass: 2`**, prefer reinforce **`detail_lines`** over pass-1 only
+   - **`-discover.json`** (when present): e.g. `jq '{discovery_status, test_prep_gates}'`, `jq '.fixture_needs[]'`, `jq '.verification_affordances[] | {id, linked_check_ids, oracle_binding, topology_surface_id}'`, `jq '.obligation_ledger[] | select(.disposition=="tooling_blocked")'`, `jq '.sources.topology_loaded'`, `jq '.sources.principal_loaded'`, `jq '[.fixture_needs[]? | select(.derivation == "ref_principal_provision")]'`
+   - **`-ref.json`**: e.g. `jq '.client_shell_impact'`, `jq '.verification_topology.shell_roles'`, `jq '.verification_topology.pricing_oracle_rules'`, `jq '.verification_topology.jira_scenario_surfaces'`, principal slice:
+
+```bash
+jq '{
+  provision_obligations: [.obligations_proposed[]? | select(.downstream_hints.needs_environment_provision == true or .kind == "environment_setup") | {id, downstream_hints}],
+  personas: [.obligations_proposed[]?.downstream_hints.personas[]?] | unique,
+  dual_contrast: [.obligations_proposed[]? | select(.downstream_hints.needs_dual_account_contrast == true) | .id]
+}' epics/<KEY>/<KEY>-ref.json
+```
+
+   - **`-analysis.json`** (v2): `jq '.gaps[]'`, `jq '.resolved_gaps[]'`, `jq '.exploration_suppressed[]'` — seed **`case_outline[]`** from **`resolved_gaps`** + high-confidence **`gaps[]`** with `pointers.check_id`; skip checks in **`exploration_suppressed`** with **`blocks_fixture_probe: true`**; extend deferral for **`delivery_known_fail`** / **`delivery_excluded`** / **`deferral_obligation_keyed`**
    Then **Read** only fields required for phase 2+ authoring (or use further `jq` for subprocess slices). **`-discover.json`** remains **SHOULD** when absent.
-3. Set **`sources.*`**, **`sources.precon_run_started_at`** (once per fresh run).
-4. Copy **`environment.client_shell_impact`** from ref when loaded (agent notes only — **must not** copy chk/pipeline text into Jira fields).
-5. Persist **`fe_credentials`**, **`fe_ui_sessions`**, **`sources.fe_exploration_waived`** from Phase **0b/0c** (and discover when loaded — discover values are informational; PRECON re-probes in phase 4).
-6. Initialize **`{EpicDir}temp/precon-ledger.json`**; **`validation_log`**: **`phase1`**.
+3. **Topology load** per [`docs/precon-topology-contract.json`](../../docs/precon-topology-contract.json): set **`sources.topology_loaded: true`** when ref/coverage/discover topology fields consumed; record **`sources.ref_topology_fields[]`**; build **skip-deepen set** from discover **`obligation_ledger`** delivery **`tooling_blocked`**, analysis **`exploration_suppressed`** delivery reasons and **`deferral_obligation_keyed`**, and coverage **`checks[].delivery_status`** **`failed`** / **`excluded`** and deferral **`out_of_epic`** keyed checks — checks in skip-deepen **MUST NOT** receive Phase **4R/4D** probes or new **`case_outline[]`** rows (document in **`excluded_checks_with_reason[]`**).
+4. **Principal load** per [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json): when ref has **`needs_environment_provision`** / **`environment_setup`** obligations, discover has **`ref_principal_provision`** fixtures, or ref **`downstream_hints.personas`** present — set **`sources.principal_loaded: true`**, record **`sources.ref_principal_fields[]`**, optional **`principal_provenance`**; append **`validation_log`**: **`phase1-principal`**.
+5. Set **`sources.*`**, **`sources.precon_run_started_at`** (once per fresh run).
+6. Copy **`environment.client_shell_impact`** from ref when loaded (agent notes only — **must not** copy chk/pipeline text into Jira fields).
+7. Persist **`fe_credentials`**, **`fe_ui_sessions`**, **`sources.fe_exploration_waived`** from Phase **0b/0c** (and discover when loaded — discover values are informational; PRECON re-probes in phase 4).
+8. Initialize **`{EpicDir}temp/precon-ledger.json`**; **`validation_log`**: **`phase1`**, **`phase1-topology`** when topology slices loaded.
 
 ### Phase 2 — Test skeleton (subprocess recommended)
 
@@ -155,7 +160,14 @@ Apply bundling from [test-prep.md § Bundling](test-prep.md#bundling-normative):
 3. Exclude per test-prep: **`explicitly_out_of_scope`**, **`checks[].ambiguity`**, analysis gaps.
 4. Assign **`bundle_id`**, **`proposed_title`**, **`covers_check_ids`**, **`covers_sections`**.
 5. Default **`precon_cluster_id`**: **`pc-001`**.
-6. **`excluded_checks_with_reason[]`** for skipped checks.
+6. **`excluded_checks_with_reason[]`** for skipped checks — include **skip-deepen** delivery-blocked and analysis-deferred primaries (reason **`delivery_blocked`** or **`deferred_ambiguous`**).
+
+**Archetype routing** (from coverage **`archetype`** / **`emit_layout`** + ref **`epic_archetype`** per [`docs/precon-topology-contract.json`](../../docs/precon-topology-contract.json)):
+
+| Archetype / layout | Bundling note |
+|--------------------|---------------|
+| **`metrics_calculation`** / **`formula_first`** | **`ladder_in_test: true`** for ladder/metric execution bundles; config-only bundles **`false`** |
+| **`widget_ui`** / **`shell_first`** | **`ladder_in_test: false`** — observation-only; batch by **`topology_surface_id`** when **`emit_layout: shell_first`** |
 
 **`validation_log`**: **`phase2_skeleton`**.
 
@@ -173,54 +185,56 @@ Apply bundling from [test-prep.md § Bundling](test-prep.md#bundling-normative):
 | **`check_id`** | Must be in **`covers_check_ids`** |
 | **`title`** | Human-readable scenario (CRTQA-shaped) |
 | **`intent`** | What to verify |
-| **`pattern_ref`** | Optional key into epic **`command_patterns`** (e.g. `ladder_step`) |
+| **`pattern_ref`** | Key into epic **`command_patterns`** — **MUST** when discover **`oracle_binding`** or coverage **`oracle_rule_id`** present; map **`oracle_rule`** enum via contract **`oracle_rule_to_pattern_ref`** |
+
+**Archetype `command_patterns` emit (once on epic root):**
+
+| Archetype | Emit |
+|-----------|------|
+| **`metrics_calculation`** (639) | **`ladder_step`**; optional **`console_config_show`** from ref **`shell_roles.console`** when in scope |
+| **`widget_ui`** / **`shell_first`** (594) | Widget observation blocks from discover **`oracle_binding`** + ref **`pricing_oracle_rules`** — e.g. **`watchlist_tier_by_qty`**, **`position_first_tier_quote`**, **`console_show_prices_first_tier`**; **MUST NOT** emit trade **`ladder_step`** as sole pattern |
+| Delivery blocked (skip-deepen) | **No** new outline rows; add **`excluded_checks_with_reason`** with **`delivery_blocked`** |
+
+Derive **`min_case_count`** hints from coverage **`calculation_contract`** + [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) (agent adds rows until count met).
 
 **Ephemeral:** **`{EpicDir}temp/precon-outline-<bundle_id>.json`** → merge into ledger **`test_skeleton[]`**.
 
 **Also emit on epic root (once):**
 
-- **`session_placeholders`** — angle-bracket tokens for PREP (no real session ids in repo).
-- **`command_patterns`** — reuse blocks; align with [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json).
+- **`session_placeholders`** — angle-bracket tokens for PREP (no real session ids in repo). When ref **`needs_dual_account_contrast`**: emit **`group_key_enrg`**, **`group_key_oppt`**. When ref **`downstream_hints.personas[]`** present and cluster surfaces require routing: optional persona tokens (e.g. **`dealer_principal`**, **`retail_account`**). Base tokens: **`console_principal`**, **`instrument_symbol`**, **`account_code`** per [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json).
+- **`command_patterns`** — reuse blocks per archetype table above; align with [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json).
 
-Derive **`min_case_count`** hints from coverage **`calculation_contract`** + [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) (agent adds rows until count met).
-
-**`validation_log`**: **`phase2b_outline_<bundle_id>`**.
+**`validation_log`**: **`phase2b_outline_<bundle_id>`**, **`phase2b_topology_<bundle_id>`** when topology-bound **`pattern_ref`** rows emitted; append **`phase1-principal`** when placeholders extended from ref principal slice.
 
 ### Phase 3 — Precon clusters (orchestrator)
 
-1. Default **`pc-001`**: title **`{KEY}: Account & system configuration`**.
-2. **`surfaces`**: from discover fixture kinds + coverage (console, webbroker; adaptive usually not in precon steps).
-3. **`satisfies_fixture_ids`**: config kinds (e.g. **`weighted_avg_fx_spot_account`**); **exclude** **`console_ladder_session`** from driving new steps.
-4. **`served_bundle_ids`**: bundles depending on this cluster.
-5. Initialize **`exploration_log: []`** on cluster.
-6. Split **`pc-002`** only for disjoint fixture kind groups (rare).
+1. **Provisioning cluster (principal)** — when discover **`fixture_needs[]`** has **`derivation: ref_principal_provision`**: emit **`pc-setup`** **before** observation **`pc-001`**. Title e.g. **`{KEY}: Account groups and quote publication`**. **`satisfies_fixture_ids`**: provision fixture id (e.g. **`fix-env-001`**). **`satisfies_check_ids`**: fixture **`linked_check_ids`** (e.g. **`chk-s1`**, **`chk-s2`**). Steps: console-first account group hierarchy, FxConfiguration posture, publish streams — imperative Jira voice, **`session_placeholders`** only; **MAY** merge reinforce setup **`detail_lines`** from coverage pass-2 into exploration grounding (not verbatim in **`body`**). Optional skeleton row **`tb-setup`** with **`covers_check_ids`** for setup primaries. Append **`validation_log`**: **`phase3-provision`**.
+2. Default **`pc-001`**: title **`{KEY}: Account & system configuration`** (observation / config cluster).
+3. **`surfaces`**: from discover fixture kinds + coverage (console, webbroker; adaptive usually not in precon steps).
+4. **`satisfies_fixture_ids`**: config kinds (e.g. **`weighted_avg_fx_spot_account`**); **exclude** **`console_ladder_session`** from driving new steps; provision fixtures belong on **`pc-setup`**, not **`pc-001`**.
+5. **`served_bundle_ids`**: bundles depending on this cluster; observation bundles depend on **`pc-setup`** completion order in **`-precon.md`** when **`pc-setup`** present.
+6. Initialize **`exploration_log: []`** on cluster.
+7. Split **`pc-002`** only for disjoint fixture kind groups (rare).
 
-**`validation_log`**: **`phase3_clusters`**.
+**`validation_log`**: **`phase3_clusters`**, **`phase3-provision`** when **`pc-setup`** emitted.
 
 ### Phase 4 — Exploration depth ladder (subprocesses per cluster)
 
 **Depth contract:** [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json). **MUST NOT** one-shot explore + author in a single completion.
 
-**If `-discover.json` missing:** **WARN** in **`validation_log`**; cap FE exploration at **`smoke`**; more **`[TBD]`** in steps.
+**If `-discover.json` missing:** **continue** — use coverage + ref + harness maps only.
 
 **Budgets (emit on `-precon.json`):** `exploration_budgets` from ladder defaults — **`max_cluster_iterations: 3`**, **`max_fe_nav_cycles_per_surface: 6`**, **`max_console_commands: 12`**.
-
-#### Phase 4R — Replay discover (one subprocess per `fixture_needs[].id` linked to cluster)
-
-**Input:** discover row (`kind`, `notes`, `setup_depth`), [`docs/discover-fixture-probes.json`](../../docs/discover-fixture-probes.json) probe steps.
-
-**Output:** **`{EpicDir}temp/precon-explore-<cluster_id>-<fix_id>.json`** → merge into cluster **`exploration_log[]`**:
-
-- Rows with **`depth_level: discover_probe`**, **`replay_of: discover_probe`**, **`discover_fixture_id`**
-- When going deeper in same subprocess, add **`depth_level: precon_drill`**, **`replay_of: precon_deepen`**, **`view_id`** per ladder **`required_views[]`**
-
-**MUST** re-execute Chrome/console actions from discover probes when **`setup_depth: probe_executed`** — not only read discover JSON.
 
 #### Phase 4D — FE deepen (one subprocess per surface in cluster)
 
 Surfaces: **`dxtrade5`**, **`webbroker`**, **`adaptive`** when in cluster **`surfaces`** or skeleton.
 
-**Output:** **`{EpicDir}temp/precon-explore-<cluster_id>-<surface>.json`**
+When **`emit_layout: shell_first`**, **MUST** batch subprocesses by **`topology_surface_id`** (Watchlist / Position Book / Adaptive / WebBroker per ref **`jira_scenario_surfaces`**) — one **`precon-explore-<cluster_id>-<topology_surface_id>.json`** per batch.
+
+**Skip Phase 4D** for checks in **skip-deepen** set; log **`phase4_skipped_delivery_blocked`** in **`validation_log`**. For deferral-keyed checks: skip Phase **4D**; log **`phase4_skipped_deferral_keyed`**; document in **`excluded_checks_with_reason[]`**.
+
+**Output:** **`{EpicDir}temp/precon-explore-<cluster_id>-<surface>.json`** (or **`-<topology_surface_id>.json`** when shell_first)
 
 **MUST** append **≥1** **`precon_drill`** row per **`required_views[]`** entry for linked fixture kinds (ladder JSON).
 
@@ -237,7 +251,9 @@ Surfaces: **`dxtrade5`**, **`webbroker`**, **`adaptive`** when in cluster **`sur
 
 #### Phase 4C — Console deepen (one subprocess per cluster)
 
-**Input:** discover notes with sanitized **`instrument_id`** / **`account_group_id`** when present.
+**Input:** discover notes with sanitized **`instrument_id`** / **`account_group_id`** when present; ref **`pricing_oracle_rules`** where **`surface`** matches **`console_show_prices`** or **`console_agent_event_*`**.
+
+**Skip Phase 4C** console oracle probes for delivery-blocked checks in **skip-deepen** set.
 
 **Output:** **`{EpicDir}temp/precon-explore-<cluster_id>-console.json`**
 
@@ -247,7 +263,7 @@ Surfaces: **`dxtrade5`**, **`webbroker`**, **`adaptive`** when in cluster **`sur
 
 #### Phase 4A — Author steps (one subprocess per cluster)
 
-**Input:** merged **`exploration_log[]`** from 4R/4D/4C.
+**Input:** merged **`exploration_log[]`** from 4D/4C.
 
 Emit **`steps[]`** — **`provenance: exploration`** only when matching exploration rows exist with **`precon_drill`** or console evidence.
 
@@ -261,12 +277,15 @@ WebBroker: three numbered steps when **`user_management_create_form`** view grou
 
 ```powershell
 python automation/tools/precon_verify.py `
+  --mode draft_truth `
   --coverage {EpicDir}<KEY>-coverage.json `
   --precon {EpicDir}temp/precon-ledger.json `
-  --discover {EpicDir}<KEY>-discover.json
+  --ref {EpicDir}<KEY>-ref.json
 ```
 
-On fail: re-run **4R/4D/4C** for failing cluster/surface/fixture only; append **`validation_log`**: **`closure_iteration_N`**.
+Optional **`--discover`** when linker file present. Optional **`--strict-topology`** / **`--strict-principal`**.
+
+On fail: re-run **4D/4C** for failing cluster/surface only; append **`validation_log`**: **`closure_iteration_N`**.
 
 **No-progress** (zero new log rows / no depth upgrade): set **`precon_status: incomplete`**, populate **`exploration_gaps[]`**, **do not** set **`precon_verify_passed: true`**.
 
@@ -288,11 +307,19 @@ On pass: proceed to Phase **5**.
 python automation/tools/precon_verify.py `
   --coverage {EpicDir}<KEY>-coverage.json `
   --precon {EpicDir}<KEY>-precon.json `
+  --discover {EpicDir}<KEY>-discover.json `
+  --ref {EpicDir}<KEY>-ref.json `
+  --strict-topology `
+  --strict-principal `
   --md {EpicDir}<KEY>-precon.md
 ```
 
+When topology not loaded (legacy precon), omit **`--strict-topology`**; when principal not loaded (legacy metrics-only), omit **`--strict-principal`**. Archetype **`command_patterns`** rules still apply from coverage **`archetype`** / **`emit_layout`**. Opt-in trigger **`strict_principal=yes`** enables **`--strict-principal`** per [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json).
+
 5. Set **`precon_verify_passed`** from exit code.
 6. **`validation_log`**: **`phase5_emit`**.
+
+**Downstream handoff (TEST-PREP 7/8):** emit **`case_outline[]`**, **`command_patterns`**, and oracle rule bindings for **`crtqa_outline`** expansion — **no** CRTQA test implementation in PRECON.
 
 ### Phase 6 — Cleanup
 
@@ -308,11 +335,13 @@ python automation/tools/precon_verify.py `
 | Discover fixtures | [`docs/discover-fixture-probes.json`](../../docs/discover-fixture-probes.json) |
 | Console harness | [`docs/dxcore-console-harness.json`](../../docs/dxcore-console-harness.json) |
 | CTQA URLs | [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) |
-| Environment probe | [`automation/tools/crtqa_env_probe.py`](../../automation/tools/crtqa_env_probe.py) |
+| Environment probe (archived) | [automation/archive/legacy-ctqa-env/](../../automation/archive/legacy-ctqa-env/) · active console: [`crtqa_console_probe.py`](../../automation/tools/crtqa_console_probe.py) |
 | Verifier | [`automation/tools/precon_verify.py`](../../automation/tools/precon_verify.py) |
 | WebBroker harness | [`docs/webbroker-harness/`](../../docs/webbroker-harness/) |
 | FE UI probe contract | [`docs/fe-ui-probe-contract.json`](../../docs/fe-ui-probe-contract.json) |
 | Exploration depth ladder | [`docs/exploration-depth-ladder.json`](../../docs/exploration-depth-ladder.json) |
+| Precon topology contract | [`docs/precon-topology-contract.json`](../../docs/precon-topology-contract.json) |
+| Precon principal contract | [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json) |
 | Precon verifier doc | [`automation/docs/precon-verify.md`](../../automation/docs/precon-verify.md) |
 
 ---

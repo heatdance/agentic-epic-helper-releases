@@ -1,6 +1,6 @@
 # Operator gold (calibrate)
 
-Curated **reference** artefacts for **`/crtqa-calibrate`**: compare production `epics/<KEY>/` (+ `context/` when archived) to operator gold here.
+Curated **reference** artefacts for **`/epic-calibrate`**: compare production `epics/<KEY>/` (+ `context/` when archived) to operator gold here.
 
 ## Layout
 
@@ -24,14 +24,14 @@ Curated **reference** artefacts for **`/crtqa-calibrate`**: compare production `
 2. Create **`<KEY>-gold/`** with **`README.md`** containing a line: **`gold_as_of: 2026-05-19`** (ISO date).
 3. Add **required** JSON (same schemas as production templates):
    - **Do not** copy `context/*.json` into gold without review — **`gold_distinct`** will **reject** byte-identical copies.
-4. Sources: final Jira Smart Checklist, CRTQA exports (scrub secrets), or MCP fetch from links during **`/crtqa-calibrate`** ingest.
+4. Sources: final Jira Smart Checklist, CRTQA exports (scrub secrets), or MCP fetch from links during **`/epic-calibrate`** ingest.
 5. Record source links in README.
 
 **`*-gold-meta.json`** is optional threshold hints only; it does **not** replace required coverage/tests JSON.
 
 ## Run calibrate
 
-**`/crtqa-calibrate`** in Cursor. See [automation/docs/calibrate.md](../../automation/docs/calibrate.md).
+**`/epic-calibrate`** in Cursor. See [automation/docs/calibrate.md](../../automation/docs/calibrate.md).
 
 ```bash
 python automation/tools/calibrate_verify.py --mode gold_gate --epic <KEY>

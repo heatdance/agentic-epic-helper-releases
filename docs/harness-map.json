@@ -116,24 +116,21 @@
           "mcp_hint": "Structured env URLs, Jira project index, Stash repo ladder, QAPORTAL/CT/XT scope recap—do not invent hosts or branches. Gaps: confluence_search scoped (ancestor=497097273 or space CT/XT) then confluence_get_page; Stash: bitbucket_list_repositories / browse / get_file; bitbucket_search_code may 404 on stash—use epic-prep 5b browse fallback; never copy credentials from Confluence into repo files."
         },
         {
-          "id": "crtqa_env",
+          "id": "crtqa_console_probe",
           "keywords": [
-            "/crtqa-env",
-            "crtqa-env",
-            "crtqa_env_probe",
-            "crtqa env probe",
-            "environment probe",
-            "CTQA environment",
-            "morning ritual",
-            "postgres tunnel check",
-            "gate-status.json"
+            "crtqa_console_probe",
+            "console gate",
+            "console multiplex",
+            "gate-status.json",
+            "/crtqa-console"
           ],
           "read": [
-            "automation/docs/crtqa-env.md",
-            "automation/tools/crtqa_env_probe.py",
-            ".cursor/commands/crtqa-env.md"
+            "automation/tools/crtqa_console_probe.py",
+            "automation/tools/crtqa-console/README.md",
+            ".cursor/commands/crtqa-console.md",
+            "automation/docs/epic-helper.md"
           ],
-          "mcp_hint": "Read-only TCP + console multiplex checks before TEST-DISCOVER. Always both gates; optional --coverage labels required_for_epic. Does not start tunnel or /crtqa-console start. Postgres MCP list_tables remains TEST-DISCOVER Phase 0 when port up."
+          "mcp_hint": "Console-only gate for epic-helper cold start and GROUND preflight. Run crtqa_console_probe.py; recovery /crtqa-console start. No Postgres tunnel in v3 chain."
         },
         {
           "id": "jq_json",
@@ -338,13 +335,15 @@
             ".cursor/pipelines/epic-prep.md",
             "epics/templates/epic-ref.json",
             "docs/epic-obligation-kinds.json",
+            "docs/epic-prep-topology-contract.json",
+            "docs/epic-prep-principal-contract.json",
             "automation/docs/epic-prep-verify.md",
             "epics/README.md",
             "docs/project.json",
             "docs/qa-project.json",
             "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Epic artifact schema v4: obligations_proposed[] per-requirement subprocesses (3c/3d), reconcile 6b, synthesis 3e, epic_prep_verify ref before finalize. Optional focus= and repo=. No CRTQA or downstream artefacts as input. Yogi snippets; Bitbucket 5b; XT cap ~8. delete EpicDir temp/."
+          "mcp_hint": "Epic artifact schema v4: obligations_proposed[] per-requirement subprocesses (3c/3d) with downstream_hints; principal reconcile 3i (threads, focus); topology steps 2c/3f-3h; reconcile 6b; epic_prep_verify ref --strict-topology / --strict-principal on new emits. Optional focus=, strict_topology=yes, strict_principal=yes, repo=. No CRTQA or downstream artefacts as input. Yogi snippets; Bitbucket 5b; XT cap ~8. delete EpicDir temp/."
         },
         {
           "id": "coverage_pipeline",
@@ -363,16 +362,65 @@
             ".cursor/pipelines/coverage.md",
             "epics/templates/coverage-ref.json",
             "docs/coverage-obligation-contract.json",
+            "docs/coverage-topology-contract.json",
+            "docs/coverage-principal-contract.json",
+            "docs/coverage-operator-hints.json",
+            "docs/epic-prep-topology-contract.json",
             "automation/docs/coverage-verify.md",
+            "automation/tools/coverage_md_sync.py",
             "epics/README.md",
             "docs/project.json",
             "docs/qa-project.json",
             "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Requires -ref.json schema v4 obligations_proposed. Phase 1.5 obligations_coverage; section subprocesses; 4b invariants; coverage_verify obligations+emit. Phase 7 merges epic-ref implementation.hits. No CRTQA in production. focus= optional. Durable: -coverage.json schema v2 + .md; delete EpicDir temp/."
+          "mcp_hint": "Requires -ref.json schema v4 obligations_proposed (+ optional epic_archetype/verification_topology/principal threads). Copy focus from verification_focus_proposed; materialize principal_coverage_threads H2 spine; keyed deferrals. Operator md: detail_lines only; linker_trace_lines + platform_reuse_annex JSON-only. coverage_verify obligations+emit+--mode draft_truth / --strict-topology / --strict-principal; coverage_md_sync.py --write. Phase 7 merges epic-ref implementation.hits. No CRTQA in production. fix_breadth=yes optional. Durable: -coverage.json schema v2 + .md; delete EpicDir temp/."
+        },
+        {
+          "id": "draft_truth_pipeline",
+          "keywords": [
+            "draft truth",
+            "draft+truth",
+            "draft_truth",
+            "draft_truth_v1",
+            "scenario_coverage_map",
+            "scenario_capability_rows",
+            "fix_breadth",
+            "human coverage review",
+            "coverage_frozen_at",
+            "coverage_immutable"
+          ],
+          "read": [
+            "docs/draft-truth-contract.json",
+            "docs/coverage-draft-truth-contract.json",
+            "docs/analysis-draft-truth-contract.json",
+            "docs/harness-principles.md",
+            "HOW-TO.md"
+          ],
+          "mcp_hint": "Master index for Round 3 workflow: bounded COVERAGE→GROUND→ANALYSE loop (max 2 rounds), human coverage review, frozen downstream packaging. Calibrate out-of-band."
+        },
+        {
+          "id": "ground_pipeline",
+          "keywords": [
+            "GROUND",
+            "GROUND:",
+            "ground pipeline",
+            "runtime_probes",
+            "console probe",
+            "verified_syntax",
+            "ground_verify"
+          ],
+          "read": [
+            ".cursor/pipelines/ground.md",
+            "docs/ground-contract.json",
+            "automation/docs/ground-verify.md",
+            "automation/tools/crtqa-console/README.md",
+            "docs/draft-truth-contract.json"
+          ],
+          "mcp_hint": "Requires -coverage.json coverage_pass 1 + -ref.json. Console probes before ANALYSE. Mutates runtime_probes and > detail_lines only."
         },
         {
           "id": "coverage_reinforce_pipeline",
+          "tier": "legacy_optional",
           "keywords": [
             "COVERAGE-REINFORCE",
             "COVERAGE-REINFORCE:",
@@ -380,36 +428,42 @@
             "coverage pass 2",
             "reinforced coverage",
             "affordances-slice",
-            "operator-feedback.md"
+            "operator-feedback.md",
+            "reinforce_topology",
+            "coverage-reinforce-topology",
+            "coverage-reinforce-principal",
+            "reinforce_principal_loaded",
+            "strict_principal"
           ],
           "read": [
             ".cursor/pipelines/coverage-reinforce.md",
+            "docs/coverage-reinforce-topology-contract.json",
+            "docs/coverage-reinforce-principal-contract.json",
             "docs/coverage-obligation-contract.json",
             "automation/docs/coverage-verify.md",
-            "automation/tools/crtqa_helper_affordances.py",
+            "automation/tools/epic_helper_affordances.py",
             "docs/dxtrade5-harness/README.md",
             "docs/webbroker-harness/README.md"
           ],
-          "mcp_hint": "After TEST-DISCOVER. Merge base -coverage.json; jq slices from -discover.json + helper/affordances-slice.json + operator-feedback.md. coverage_pass 2; coverage_verify obligations+emit. No CRTQA."
+          "mcp_hint": "After TEST-DISCOVER. Merge base -coverage.json; jq slices from -discover.json + helper/affordances-slice.json + operator-feedback.md. coverage_pass 2; coverage_verify --mode reinforce (--strict-principal when principal loaded). No CRTQA."
         },
         {
-          "id": "crtqa_helper",
+          "id": "epic_helper",
           "keywords": [
-            "/crtqa-helper",
-            "crtqa-helper",
-            "crtqa helper",
+            "/epic-helper",
+            "epic-helper",
+            "epic helper",
             "epic orchestrator",
             "helper/session.json",
             "coverage review gate",
             "one stage per turn"
           ],
           "read": [
-            "docs/crtqa-helper-contract.json",
-            ".cursor/commands/crtqa-helper.md",
-            ".cursor/skills/crtqa-helper/SKILL.md",
-            "automation/docs/crtqa-helper.md",
+            "docs/epic-helper-contract.json",
+            ".cursor/commands/epic-helper.md",
+            "automation/docs/epic-helper.md",
             "docs/harness-principles.md",
-            "automation/tools/crtqa_helper_affordances.py"
+            "automation/tools/epic_helper_affordances.py"
           ],
           "mcp_hint": "One pipeline per agent turn; gates env, coverage_review, discover_creds. Scratch epics/<KEY>/helper/ gitignored; archives to context/helper/ on CLOSE. Does not start console from helper."
         },
@@ -430,13 +484,16 @@
             ".cursor/pipelines/analysis.md",
             "epics/templates/analysis-ref.json",
             "docs/analysis-gap-contract.json",
+            "docs/analysis-topology-contract.json",
+            "docs/analysis-principal-contract.json",
+            "docs/coverage-topology-contract.json",
             "automation/docs/analysis-verify.md",
             "epics/README.md",
             ".cursor/pipelines/coverage.md",
             "docs/project.json",
             "docs/qa-project.json"
           ],
-          "mcp_hint": "ANALYSE v2: requires -coverage.json. Work queue from coverage/ref pointers; gaps[] high/medium confidence; exploration_suppressed[]; resolve subprocess max 8; known_issues=yes opt-in for Jira + > mutation. analysis_verify gaps/downstream/emit. Gaps-only .md. delete EpicDir temp/."
+          "mcp_hint": "ANALYSE v2: requires -coverage.json. Work queue from coverage/ref pointers + topology delivery_notes/unresolved oracle + principal deferrals (Round 2 step 3); gaps[] incl deferred_check with obligation_id; exploration_suppressed[] incl deferral_obligation_keyed and delivery blockers; resolve subprocess max 8; known_issues=yes opt-in; strict_principal=yes opt-in. analysis_verify gaps/downstream/emit + --strict-topology / --strict-principal when ref has topology/principal. Gaps-only .md. delete EpicDir temp/."
         },
         {
           "id": "test_discover_pipeline",
@@ -458,26 +515,32 @@
             "discover-fixture-probes",
             "fixture_needs",
             "weighted_avg_fx_spot_account",
-            "setup_depth"
+            "setup_depth",
+            "oracle_binding",
+            "discover-topology",
+            "topology_surface_id",
+            "discover-principal",
+            "needs_environment_provision",
+            "linked_obligation_ids",
+            "deferral_obligation_keyed",
+            "linker_only",
+            "harness_location_ref",
+            "discover-linker"
           ],
           "read": [
             ".cursor/pipelines/test-discover.md",
+            "docs/discover-linker-contract.json",
             "epics/templates/discover-ref.json",
+            "docs/discover-topology-contract.json",
+            "docs/discover-principal-contract.json",
             "docs/discover-fixture-probes.json",
-            "docs/fe-ui-probe-contract.json",
             "docs/harness-principles.md",
             "automation/docs/discover-verify.md",
             "automation/tools/discover_verify.py",
-            "automation/docs/chrome-devtools-mcp.md",
-            "automation/tools/crtqa-console/README.md",
-            "automation/docs/crtqa-env.md",
-            "automation/tools/crtqa_env_probe.py",
-            ".cursor/commands/crtqa-console.md",
-            ".cursor/commands/crtqa-env.md",
-            "docs/corner-platform-map.json",
-            ".cursor/rules/mcp-atlassian-search.mdc"
+            "docs/draft-truth-contract.json",
+            "docs/corner-platform-map.json"
           ],
-          "mcp_hint": "Phase 0 + 0b/0c FE gates (fe-ui-probe-contract.json); fe_credentials.supplied != fe_ui_sessions.authenticated. Step E capped by fe_ui_sessions. Hard stop without creds unless fe_exploration_waived=yes after ack. delete EpicDir temp/."
+          "mcp_hint": "Linker only after coverage_frozen_at. No Phase 0/browser. discover_verify --mode linker. Live FE → TEST-PRECON. delete EpicDir temp/."
         },
         {
           "id": "test_precon_pipeline",
@@ -492,11 +555,18 @@
             "precon_clusters",
             "test_skeleton",
             "precon-step-archetypes",
-            "precon_verify"
+            "precon_verify",
+            "precon-topology",
+            "strict-topology",
+            "precon-principal",
+            "strict-principal",
+            "pc-setup"
           ],
           "read": [
             ".cursor/pipelines/test-precon.md",
             "epics/templates/precon-ref.json",
+            "docs/precon-topology-contract.json",
+            "docs/precon-principal-contract.json",
             "docs/exploration-depth-ladder.json",
             "docs/fe-ui-probe-contract.json",
             "docs/discover-fixture-probes.json",
@@ -508,7 +578,7 @@
             "epics/templates/discover-ref.json",
             ".cursor/pipelines/test-prep.md"
           ],
-          "mcp_hint": "v5: Phase 2b case_outline; 0c smoke; Phase 4R/4D/4C precon_drill; precon_verify max 3 loops. delete EpicDir temp/."
+          "mcp_hint": "LEGACY — not in draft_truth_v3 chain. Calibrate/benchmark only. delete EpicDir temp/."
         },
         {
           "id": "test_prep_pipeline",
@@ -523,26 +593,23 @@
             "-tests.json",
             "tests-ref",
             "test bundle",
-            "coverage to tests"
+            "coverage to tests",
+            "test-prep-topology",
+            "strict-topology",
+            "test-prep-principal",
+            "strict-principal"
           ],
           "read": [
             ".cursor/pipelines/test-prep.md",
+            "docs/test-prep-scenario-intent-contract.json",
+            "docs/scenario-groups-contract.json",
             "epics/templates/tests-ref.json",
-            "docs/test-verification-classes.json",
             "docs/test-prep-draft-profiles.json",
-            "docs/test-prep-tbd-contract.json",
-            "docs/exploration-depth-ladder.json",
-            "docs/fe-ui-probe-contract.json",
             "automation/docs/test-prep-verify.md",
-            "epics/README.md",
-            ".cursor/pipelines/coverage.md",
-            "epics/templates/discover-ref.json",
-            ".cursor/pipelines/test-discover.md",
-            "epics/templates/precon-ref.json",
-            ".cursor/pipelines/test-precon.md",
-            "docs/qa-project.json"
+            "docs/draft-truth-contract.json",
+            "epics/README.md"
           ],
-          "mcp_hint": "v3 crtqa_outline default; obligation_coverage gate map_only or STOP. 8a -> 0c -> 8a-half -> 8b -> 8c. Modes plan/explore/draft/merge/tests. delete EpicDir temp/."
+          "mcp_hint": "draft_truth_v3 scenario_intent default; one bundle per scenario_groups[]; no Phase 0/browser; test_prep_verify --mode scenario_intent. draft_profile=crtqa_outline legacy only. delete EpicDir temp/."
         },
         {
           "id": "close_pipeline",
@@ -555,17 +622,23 @@
             "-close.json",
             "close-ref",
             "context/",
-            "archive epic"
+            "archive epic",
+            "close-topology",
+            "strict_topology",
+            "close-principal",
+            "strict_principal"
           ],
           "read": [
             ".cursor/pipelines/close.md",
             "docs/close-contract.json",
+            "docs/close-topology-contract.json",
+            "docs/close-principal-contract.json",
             "epics/templates/close-ref.json",
             "automation/docs/close-verify.md",
             "epics/README.md",
             ".cursor/pipelines/test-prep.md"
           ],
-          "mcp_hint": "Documentation-only after TEST-PREP. Requires ref, coverage, discover, precon, tests at EpicDir root. L0-L4 one subprocess per bundle per level; jq slices. Finalize whitelist corrections; regenerate four root md; archive always to context/ including -close.json. close_verify.py + close_archive.py. No MCP."
+          "mcp_hint": "Documentation-only after TEST-PREP. Requires ref, coverage, discover, tests at EpicDir root (precon optional legacy). L0-L4 one subprocess per bundle per level; jq slices. Optional Phase E½ topology lint (strict_topology=yes) and Phase E¾ principal lint (strict_principal=yes); close_verify.py --mode topology / --mode principal. Finalize whitelist corrections; regenerate three root md; archive always to context/ including -close.json. close_verify.py + close_archive.py. No MCP."
         },
         {
           "id": "corner_harness_doctrine",
@@ -589,11 +662,11 @@
           "mcp_hint": "Read docs/harness-principles.md for production-only generation, CRTQA non-reliance, coverage vs E2E, operator gold under .cursor/calibrate/."
         },
         {
-          "id": "crtqa_stats",
+          "id": "epic_stats",
           "keywords": [
-            "/crtqa-stats",
-            "crtqa-stats",
-            "crtqa stats",
+            "/epic-stats",
+            "epic-stats",
+            "epic stats",
             "TCD stats",
             "latest-mshpak",
             "initial_assessment",
@@ -601,21 +674,20 @@
             "incremental_update stats"
           ],
           "read": [
-            "docs/crtqa-stats-contract.json",
-            ".cursor/skills/crtqa-stats/SKILL.md",
-            "stats/crtqa-stats/README.md",
-            ".cursor/commands/crtqa-stats.md",
-            "automation/docs/crtqa-stats.md",
-            "stats/crtqa-stats/epic-categories.json",
-            "stats/crtqa-stats/temp/categories.json"
+            "docs/epic-stats-contract.json",
+            "stats/epic-stats/README.md",
+            ".cursor/commands/epic-stats.md",
+            "automation/docs/epic-stats.md",
+            "stats/epic-stats/epic-categories.json",
+            "stats/epic-stats/temp/categories.json"
           ],
-          "mcp_hint": "Follow crtqa-stats SKILL; incremental_update: team_readiness.py gate + AskQuestion baselines, fetch/process_incremental per user + scope confirm, crtqa_stats_team_rollup.py → latest-team.md; initial/full_refresh need jira_user."
+          "mcp_hint": "incremental_update: team_readiness.py gate + AskQuestion baselines, fetch/process_incremental per user + scope confirm, epic_stats_team_rollup.py → latest-team.md; initial/full_refresh need jira_user."
         },
         {
-          "id": "calibrate_operator",
+          "id": "epic_calibrate",
           "keywords": [
-            "crtqa-calibrate",
-            "/crtqa-calibrate",
+            "epic-calibrate",
+            "/epic-calibrate",
             "calibrate",
             "operator gold",
             "gold gate",
@@ -626,7 +698,7 @@
           "read": [
             "docs/calibrate-contract.json",
             ".cursor/calibrate/README.md",
-            ".cursor/commands/crtqa-calibrate.md",
+            ".cursor/commands/epic-calibrate.md",
             ".cursor/pipelines/calibrate.md",
             "automation/docs/calibrate.md",
             "docs/harness-principles.md"
@@ -679,57 +751,6 @@
           "mcp_hint": "Paste-deploy Expr snippets only; live Structure board 603 is source of truth. Roadmap columns: automation/structure/roadmap-columns/metadata.json. QA Est: automation/structure/qa-est/metadata.json (draft customfield_11250 vs remaining). Do not invent formulas."
         },
         {
-          "id": "operator_assist",
-          "keywords": [
-            "better-prompt",
-            "better-skill",
-            "/better-prompt",
-            "/better-skill",
-            "coach",
-            "prompt coach",
-            "skill coach",
-            "operator assist",
-            "grounding"
-          ],
-          "read": [
-            "docs/grounding-integration.json",
-            "docs/operator-assist-contract.json",
-            "docs/skill-authoring-patterns.json",
-            ".cursor/commands/better-prompt.md",
-            ".cursor/commands/better-skill.md",
-            ".cursor/skills/better-prompt/SKILL.md",
-            ".cursor/skills/better-skill/SKILL.md"
-          ],
-          "mcp_hint": "Conversation-only coaches before pipeline runs or harness doc edits. No epic writes; no verifier runs for the coached task."
-        },
-        {
-          "id": "auto_tests_teach",
-          "keywords": [
-            "/teach",
-            "teach stop",
-            "auto-tests",
-            "auto tests",
-            "smoke test",
-            "smoke automation",
-            "playwright",
-            "pytest smoke",
-            "delivery smoke",
-            "teach mode",
-            "teach-first"
-          ],
-          "read": [
-            "docs/auto-tests-contract.json",
-            "auto-tests/README.md",
-            "auto-tests/docs/README.md",
-            "auto-tests/specs/README.md",
-            "auto-tests/specs/schema.json",
-            "auto-tests/specs/smoke-manifest.json",
-            ".cursor/commands/teach.md",
-            ".cursor/skills/teach/SKILL.md"
-          ],
-          "mcp_hint": "Teach mode for pytest/Playwright under auto-tests/. Cold /teach may load optional gitignored temp/profile/teach-context.json on personal branch (operator goals, learning phase). No complete test unless operator asks. No epic pipeline or epics/ writes. Use /teach stop to exit."
-        },
-        {
           "id": "harness_hygiene",
           "keywords": [
             "corner-harness-verify",
@@ -748,28 +769,7 @@
           "mcp_hint": "Harness hygiene only: corner-harness-verify.ps1 profiles, sessionStart inject, not epic pipeline verifiers."
         },
         {
-          "id": "karpathy_coding",
-          "keywords": [
-            "karpathy",
-            "karpathy guidelines",
-            "coding guidelines",
-            "surgical diff",
-            "surgical changes",
-            "automation python",
-            "implement tool",
-            "refactor script",
-            "python tool",
-            "automation/tools"
-          ],
-          "read": [
-            "docs/karpathy-guidelines-contract.json",
-            ".cursor/skills/karpathy-guidelines/SKILL.md",
-            "automation/docs/"
-          ],
-          "mcp_hint": "Opt-in skill for automation/ Python only. Invoke skill explicitly; not for EPIC-PREP/Coverage pipelines or harness doc edits. Verifiers remain authoritative for epic JSON."
-        },
-        {
-          "id": "clean_pipeline",
+          "id": "clean_release",
           "keywords": [
             "CLEAN",
             "CLEAN:",
@@ -803,7 +803,7 @@
       "id": "T2",
       "name": "external_truth",
       "use": "user-mcp-atlassian; optional Figma MCP (Cursor-configured) for figma.com URLs; optional postgres-ctqa MCP when .cursor/mcp.json or global ~/.cursor/mcp.json includes postgres-ctqa and tunnel is up; optional chrome-devtools (Chrome DevTools MCP) for discover/precon/prep live UI",
-      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). For CTQA PostgreSQL ad-hoc checks, use postgres-ctqa after tunnel (automation/tools/tunnel/ctqa_pg.py) and Cursor MCP (gitignored .cursor/mcp.json or global)—see automation/tools/tunnel/README.md (MCP — PostgreSQL). CLOSE: does not use MCP. For live UI during exploration pipelines, configure chrome-devtools per automation/docs/chrome-devtools-mcp.md.",
+      "when": "Jira issues, Confluence bodies, search, or live boards—after T0/T1 as needed. For Figma frame/layer links, use Figma MCP when installed (automation/docs/figma-mcp.md). CLOSE: does not use MCP. Legacy Postgres MCP: automation/archive/legacy-ctqa-env/ (not in v3 pipeline). For live UI during legacy exploration, configure chrome-devtools per automation/docs/chrome-devtools-mcp.md.",
       "mcp_scope": "Scope Atlassian searches using docs/project.json, docs/qa-project.json, and docs/corner-platform-map.json mcp_scope_recap (CT, XT, QAPORTAL subtree rooted at 497097273)."
     }
   ],
@@ -817,6 +817,6 @@
     "For **dealer WebBroker** (`/webbroker/` app path) **screen maps**, **Order Book**, and **embedded dxTrade-class widgets**, prefer T1 package **webbroker_harness** (`docs/webbroker-harness/`) over **dxtrade5_harness** when the task is explicitly WebBroker/dealer shell—not retail Cornèrtrader root.",
     "Never copy passwords or secrets from Confluence into repo files.",
     "When adding new durable docs or paths, update AGENTS.md, README.md, and this map per harness-maintenance rule.",
-    "EpicDir for pipeline triggers is always epics/<KEY>/ (production). Post-hoc prod vs gold: /crtqa-calibrate and docs/calibrate-contract.json — do not mix gold into generation runs."
+    "EpicDir for pipeline triggers is always epics/<KEY>/ (production). Post-hoc prod vs gold: /epic-calibrate and docs/calibrate-contract.json — do not mix gold into generation runs."
   ]
 }

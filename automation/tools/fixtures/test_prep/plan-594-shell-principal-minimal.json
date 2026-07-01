@@ -1,0 +1,135 @@
+{
+  "draft_profile": "crtqa_outline",
+  "bundles": [
+    {
+      "bundle_id": "tb-setup",
+      "verification_plan": [
+        {
+          "check_id": "chk-s1",
+          "verification_class": "journey_smoke",
+          "selection_rule_priority": 99,
+          "min_case_count": 2,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-s1",
+              "title": "Account group hierarchy ENRG vs OPPT",
+              "intent": "Two account groups provisioned for dual-account quote contrast"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-s2",
+              "title": "Quote publication tier streams",
+              "intent": "FxConfiguration and publish streams aligned for setup primaries"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-001",
+      "verification_plan": [
+        {
+          "check_id": "chk-001",
+          "verification_class": "journey_smoke",
+          "selection_rule_priority": 99,
+          "min_case_count": 2,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-001",
+              "title": "Watchlist tier by order qty",
+              "intent": "Bid/ask reflects TextConfiguration tier closest to default order qty",
+              "pattern_ref": "watchlist_tier_by_qty"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-002",
+              "title": "Position Book first tier quote",
+              "intent": "Bid/ask uses Quote stream first tier only",
+              "pattern_ref": "position_first_tier_quote"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-002",
+      "verification_plan": [
+        {
+          "check_id": "chk-003",
+          "verification_class": "journey_smoke",
+          "selection_rule_priority": 99,
+          "min_case_count": 2,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-003",
+              "title": "Adaptive instrument page bid/ask",
+              "intent": "Group-specific bid/ask for logged-in account"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-005",
+              "title": "WebBroker Client Area quote",
+              "intent": "Quote matches account group mapping for FX_SPOT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-003",
+      "verification_plan": [
+        {
+          "check_id": "chk-006",
+          "verification_class": "journey_smoke",
+          "selection_rule_priority": 99,
+          "min_case_count": 1,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-006",
+              "title": "Backup Prices widget FX_SPOT filter",
+              "intent": "EOD midpoint captured for FX_SPOT"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-004",
+      "verification_plan": [
+        {
+          "check_id": "chk-007",
+          "verification_class": "invariant_under_change",
+          "selection_rule_priority": 30,
+          "min_case_count": 3,
+          "case_outline": [
+            {
+              "case_id": "c01",
+              "check_id": "chk-007",
+              "title": "Midpoint invariant across groups",
+              "intent": "Same midpoint while spreads may differ",
+              "pattern_ref": "midpoint_invariant_observe"
+            },
+            {
+              "case_id": "c02",
+              "check_id": "chk-008",
+              "title": "Mark from midpoint on FX_SPOT",
+              "intent": "Mark column equals midpoint",
+              "pattern_ref": "mark_from_midpoint_observe"
+            },
+            {
+              "case_id": "c03",
+              "check_id": "chk-009",
+              "title": "Console show prices first tier",
+              "intent": "dxCore bid/ask from first TextConfiguration tier",
+              "pattern_ref": "console_show_prices_first_tier"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

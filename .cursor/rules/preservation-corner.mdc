@@ -15,19 +15,13 @@ Listed in [docs/grounding-integration.json](../../docs/grounding-integration.jso
 - `docs/*-contract.json`, `epics/templates/*-ref.json`
 - `automation/tools/*_verify.py` gate logic (unless fixing documented bugs)
 
-## Optional skills (opt-in coding discipline)
-
-- **karpathy-guidelines** — [docs/karpathy-guidelines-contract.json](../../docs/karpathy-guidelines-contract.json); not `shipped_core` or `soft_core`
-- Behaviour change to the SKILL: bump `version` in contract; not the same as coach golden releases unless you add maintainer fixtures later
-
-## Soft core (hooks + coaches)
+## Soft core (hooks + epic-helper)
 
 Listed in [docs/grounding-integration.json](../../docs/grounding-integration.json) `soft_core[]`:
 
-- Hooks, inject snapshot, `corner-harness-verify.ps1`, coach commands/skills, `operator-assist-contract.json`, teach command/skill, `auto-tests-contract.json`
-- **Hook behavior** (sessionStart-only inject, guard advisory) and **coach/teach rubric** changes require explicit operator entrust or a versioned release
-- Coach behavior change: bump `betterPrompt.version` / `betterSkill.version` and update [automation/tools/fixtures/operator-assist/](../../automation/tools/fixtures/operator-assist/) goldens
-- Teach behavior change: bump `teach.version` in [docs/auto-tests-contract.json](../../docs/auto-tests-contract.json) and update `teach-golden.json` when rubric is stable
+- Hooks, inject snapshot, `corner-harness-verify.ps1`, epic-helper command + contract
+- **Hook behavior** (sessionStart-only inject, guard advisory) and **epic-helper orchestrator** changes require explicit operator entrust or a versioned release
+- Epic-helper behavior change: bump `epicHelper.version` in [docs/epic-helper-contract.json](../../docs/epic-helper-contract.json) and update [epic-helper-golden.json](../../automation/tools/fixtures/operator-assist/epic-helper-golden.json)
 
 ## Allowed without behavioral entrust
 
@@ -38,9 +32,9 @@ Listed in [docs/grounding-integration.json](../../docs/grounding-integration.jso
 
 ## Requires explicit behavioral entrust
 
-Examples: weaken intent gate, change pipeline trigger semantics, auto-run pipelines from coaches, remove verifier checks.
+Examples: weaken intent gate, change pipeline trigger semantics, remove verifier checks.
 
-Vague “smarter agent” → Conversation coaching or one clarifying question; do not edit shipped core by default.
+Do not edit shipped core by default without operator entrust.
 
 ## Relation to maintenance
 

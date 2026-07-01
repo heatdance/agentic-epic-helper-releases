@@ -1,0 +1,27 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-594",
+  "sources": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-594-topology-full.json",
+    "ref_loaded": true,
+    "coverage_path": "automation/tools/fixtures/ground/ground-594-pass-coverage-slice.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "draft_truth_loaded": true
+  },
+  "draft_truth_round": 1,
+  "draft_truth_recommendation": "human_coverage_review",
+  "gaps": [],
+  "exploration_suppressed": [],
+  "validation_log": [
+    {
+      "step": "2b",
+      "action": "scenario inventory scan — all scr rows covered"
+    },
+    {
+      "step": "2c",
+      "action": "console probe scan — no failed probes"
+    }
+  ]
+}

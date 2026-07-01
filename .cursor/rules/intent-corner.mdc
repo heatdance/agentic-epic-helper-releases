@@ -29,17 +29,9 @@ Do not implement from keywords alone without reading the matched package or play
 | `EPIC-PREP:` … `CLOSE:` per [pipeline-router.mdc](pipeline-router.mdc) | One epic key; playbook steps only |
 | `COVERAGE-REINFORCE:` | One epic key; [coverage-reinforce.md](../pipelines/coverage-reinforce.md) only |
 | `CLEAN:` | `personal` branch only; [docs/clean-contract.json](../../docs/clean-contract.json) |
-| `/crtqa-calibrate`, `/crtqa-stats`, `/release-notes`, `/crtqa-env`, `/crtqa-console`, `/crtqa-helper` | Per matching `.cursor/commands/*.md` |
+| `/epic-calibrate`, `/epic-stats`, `/release-notes`, `/crtqa-console`, `/epic-helper`, `/clean-release` | Per matching `.cursor/commands/*.md` |
 
 **Low confidence still applies** to: second epic without trigger, extra repos, or “also refactor all docs/” without scope.
-
-## Conversation triggers
-
-`/better-prompt` and `/better-skill` are **Conversation** — no intent gate for writes (there must be no writes). See [docs/harness-principles.md](../../docs/harness-principles.md) §14.
-
-## Teach triggers
-
-`/teach` and `/teach stop` are **Teach mode** ([docs/auto-tests-contract.json](../../docs/auto-tests-contract.json)) — not high-confidence epic **Action**; may write under `auto-tests/` for helpers only; no complete smoke test unless the operator clearly requests it in natural language.
 
 ## Anti whack-a-mole
 
@@ -51,6 +43,6 @@ After a failed fix or the **same approach** repeated twice:
 
 ## Design default
 
-Harness or playbook **behavior** changes → **Conversation** until explicit operator entrust (“change harness behavior”, version bump on coaches). See [preservation-corner.mdc](preservation-corner.mdc).
+Harness or playbook **behavior** changes → clarify with operator before editing shipped core. See [preservation-corner.mdc](preservation-corner.mdc).
 
 Charter: [docs/grounding-integration.json](../../docs/grounding-integration.json).

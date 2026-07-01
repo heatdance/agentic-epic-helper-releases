@@ -7,7 +7,7 @@ Normative path → tier actions for **`CLEAN:`**. Machine-readable source: [clea
 | Tier | Who | Goal |
 |------|-----|------|
 | **personal** | You only | Private backup: everything tracked except gitignore; **your** epics, handoff, **`releases/**` + `/release-notes`**, calibrate gold, stats, coaches, teach |
-| **team** | Squad on **private** `agentic-epic-helper-team` | Runnable harness + **`/crtqa-helper`** + calibrate; **no** stats, coaches, teach, epics, release-notes, or publish flow |
+| **team** | Squad on **private** `agentic-epic-helper-team` | Runnable harness + **`/epic-helper`** + calibrate; **no** stats, coaches, teach, epics, release-notes, or publish flow |
 | **public** | External readers | Guide-only **`*-readme.md`**; orchestrator + calibrate **conceptual** in HOW-TO only; **no** executable helper, stats, coaches, verifiers, org maps, or MCP recipes |
 
 Policy fields: `tier_goals` and `team.org_maps_policy` in [clean-contract.json](clean-contract.json).
@@ -30,11 +30,11 @@ personal (full)
 ├── .cursor/calibrate/*-gold → deleted on team/public
 ├── clean.md                 → personal only
 ├── stats + coaches + teach  → personal only
-├── /crtqa-helper (full)     → personal + team; conceptual on public HOW-TO only
+├── /epic-helper (full)     → personal + team; conceptual on public HOW-TO only
 └── org maps                 → keep on team; stubs on public
 
 team (runnable harness)
-├── templates + pipelines + verifiers + org maps + /crtqa-helper
+├── templates + pipelines + verifiers + org maps + /epic-helper
 ├── calibrate command (no gold)
 └── no stats / coaches / teach / release-notes
 
@@ -50,11 +50,11 @@ Paths for operator discipline ([grounding-integration.json](grounding-integratio
 
 | Path pattern | personal | team | public |
 |--------------|----------|------|--------|
-| `.cursor/commands/better-prompt.md`, `better-skill.md` | keep | delete | delete |
-| `.cursor/skills/better-prompt/**`, `better-skill/**` | keep | delete | delete |
-| `docs/operator-assist-contract.json`, `skill-authoring-patterns.json` | keep | delete | delete |
-| `docs/crtqa-helper-contract.json`, `crtqa-helper` command/skill | keep | keep | delete |
-| `automation/tools/crtqa_helper_affordances.py` | keep | keep | delete |
+| `.cursor/commands/.md`, `.md` | keep | delete | delete |
+| `/**`, `/**` | keep | delete | delete |
+| `docs/.json`, `.json` | keep | delete | delete |
+| `docs/epic-helper-contract.json`, `epic-helper` command/skill | keep | keep | delete |
+| `automation/tools/epic_helper_affordances.py` | keep | keep | delete |
 | `.cursor/hooks.json`, hooks scripts, `corner-harness-verify.ps1` | keep | keep | delete |
 
 ## Path rules (selected)
@@ -63,7 +63,7 @@ Paths for operator discipline ([grounding-integration.json](grounding-integratio
 |-------|----------|------|--------|
 | `releases/**` | keep | delete | delete |
 | `/release-notes` command + contract + `release_notes.py` | keep | delete | delete |
-| `stats/crtqa-stats/**` + crtqa-stats command/rollup | keep | delete | delete |
+| `stats/epic-stats/**` + epic-stats command/rollup | keep | delete | delete |
 | `docs/project.json`, `qa-project.json`, `corner-platform-map.json` | keep | **keep** | example stubs only |
 
 Phase **S1** merges this matrix with `git ls-files` into `automation/temp/clean/file-map.json`.

@@ -1,0 +1,99 @@
+{
+  "_comment": "scenario_intent pass fixture paired with automation/temp/coverage-594-frozen-shell.json",
+  "schema_version": 4,
+  "epic_key": "CRT-594",
+  "sources": {
+    "draft_profile": "scenario_intent",
+    "generation_mode": true,
+    "scenario_groups_loaded": true
+  },
+  "shared_preconditions": [
+    "Configure FX_SPOT account groups and quote publication per coverage setup thread (environment setup before surface checks)."
+  ],
+  "jira_test_search": {
+    "skipped": true,
+    "note": "generation_mode_greenfield"
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-004",
+      "reason": "delivery_blocked",
+      "evidence": "Derivatives widget delivery_known_fail"
+    }
+  ],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-594: dxTrade5 quote sourcing",
+      "scenario_group_ref": "sg-001",
+      "combinatorics": "variant_sequence",
+      "scenario_intent": "Verify tier-based bid/ask sourcing rules on dxTrade5 surfaces.",
+      "covers_check_ids": ["chk-001", "chk-002"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": [
+          "Verify bid/ask on the retail trading surface reflects the TextConfiguration tier closest to default order quantity.",
+          "Verify bid/ask on the position view uses the first tier Quote stream only."
+        ],
+        "results": [
+          "Bid/ask reflects tier for default order quantity. [CRT-1714]",
+          "Bid/ask uses first tier Quote stream only. [CRT-1713]"
+        ],
+        "peculiarities": []
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-594: Adaptive and WebBroker shells",
+      "scenario_group_ref": "sg-002",
+      "combinatorics": "variant_sequence",
+      "scenario_intent": "Verify group-specific quotes on Adaptive and WebBroker client surfaces.",
+      "covers_check_ids": ["chk-003", "chk-005", "chk-006"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": [
+          "Verify group-specific bid/ask for the logged-in account on the adaptive instrument view.",
+          "Verify client-area quote matches account group mapping for FX_SPOT.",
+          "Verify EOD midpoint capture includes FX_SPOT in the dealer backup workflow."
+        ],
+        "results": [
+          "Group-specific bid/ask shown for account. [CRT-1717]",
+          "Client quote matches group mapping. [CRT-1761]",
+          "EOD midpoint captured for FX_SPOT. [CRT-1621]"
+        ],
+        "peculiarities": []
+      }
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-594: Cross-surface invariants",
+      "scenario_group_ref": "sg-003",
+      "combinatorics": "single_flow",
+      "scenario_intent": "Verify cross-surface pricing invariants hold.",
+      "covers_check_ids": ["chk-007", "chk-008", "chk-009"],
+      "draft": {
+        "preconditions": ["See shared_preconditions."],
+        "actions": [
+          "Confirm midpoint invariant across account groups while spreads may differ.",
+          "Confirm mark price equals midpoint on mark-column surfaces.",
+          "Confirm console price show uses first TextConfiguration tier for bid/ask."
+        ],
+        "results": [
+          "Midpoint consistent across groups. [CRT-1717]",
+          "Mark equals midpoint for FX_SPOT. [CRT-1714]",
+          "Console bid/ask from first tier. [CRT-1761]"
+        ],
+        "peculiarities": []
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [
+      {
+        "check_id": "chk-004",
+        "reason": "delivery_blocked"
+      }
+    ]
+  }
+}

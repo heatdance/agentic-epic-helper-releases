@@ -1,0 +1,253 @@
+{
+  "_comment": "Minimal TEST-PRECON fixture paired with coverage-594-shell-reinforce-minimal + discover-594-shell-minimal",
+  "schema_version": 5,
+  "epic_key": "CRT-594",
+  "precon_status": "complete",
+  "exploration_budgets": {
+    "max_cluster_iterations": 3,
+    "max_fe_nav_cycles_per_surface": 6,
+    "max_console_commands": 12
+  },
+  "exploration_gaps": [],
+  "sources": {
+    "coverage_path": "automation/tools/fixtures/coverage/coverage-594-shell-reinforce-minimal.json",
+    "coverage_loaded": true,
+    "discover_path": "automation/tools/fixtures/discover/discover-594-shell-minimal.json",
+    "discover_loaded": true,
+    "ref_path": "epics/CRT-594/CRT-594-ref.json",
+    "ref_loaded": true,
+    "analysis_loaded": false,
+    "precon_run_started_at": "2026-06-18T15:00:00Z",
+    "cold_gate_skip_token_used": false,
+    "cold_gate_resolved_at": "2026-06-18T15:00:01Z",
+    "fe_exploration_waived": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules",
+      "verification_topology.jira_scenario_surfaces"
+    ]
+  },
+  "fe_credentials": {
+    "dxtrade5": "waived",
+    "webbroker": "waived",
+    "adaptive": "not_required"
+  },
+  "fe_ui_sessions": {
+    "dxtrade5": "waived",
+    "webbroker": "waived",
+    "adaptive": "not_required"
+  },
+  "environment": {
+    "tier": "ct_qa",
+    "client_shell_impact": {
+      "corner_trader": { "status": "affected", "note": null },
+      "adaptive": { "status": "affected", "note": null }
+    }
+  },
+  "session_placeholders": {
+    "console_principal": "<username>",
+    "account_code": "<account_code>",
+    "instrument_symbol": "<instrument_symbol>"
+  },
+  "command_patterns": {
+    "watchlist_tier_by_qty": [
+      "Observe Watchlist bid/ask for default order qty; compare to TextConfiguration tier closest >= qty"
+    ],
+    "position_first_tier_quote": [
+      "Observe Position Book bid/ask from first tier Quote stream only"
+    ],
+    "console_show_prices_first_tier": [
+      "show prices for <instrument_symbol>",
+      "verify bid/ask from first TextConfiguration tier"
+    ],
+    "midpoint_invariant_observe": [
+      "Compare midpoint across account groups on mark column surfaces"
+    ],
+    "mark_from_midpoint_observe": [
+      "Verify mark column equals midpoint for FX_SPOT on configured surfaces"
+    ]
+  },
+  "test_skeleton": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-594: dxTrade5 Watchlist and Position Book",
+      "covers_check_ids": ["chk-001", "chk-002"],
+      "covers_sections": ["## dxTrade5 — Watchlist", "## dxTrade5 — Position Book"],
+      "precon_cluster_id": "pc-001",
+      "surfaces": ["dxtrade5"],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-001",
+          "title": "Watchlist tier by order qty",
+          "intent": "Bid/ask reflects TextConfiguration tier closest to default order qty",
+          "pattern_ref": "watchlist_tier_by_qty"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-002",
+          "title": "Position Book first tier quote",
+          "intent": "Bid/ask uses Quote stream first tier only",
+          "pattern_ref": "position_first_tier_quote"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-594: Adaptive and WebBroker shells",
+      "covers_check_ids": ["chk-003", "chk-005", "chk-006"],
+      "covers_sections": [
+        "## Adaptive — Instrument page",
+        "## WebBroker (client) — Client Area",
+        "## WebBroker (dealer) — Backup Prices"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": ["adaptive", "webbroker"],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-003",
+          "title": "Adaptive instrument page bid/ask",
+          "intent": "Group-specific bid/ask for logged-in account"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-005",
+          "title": "WebBroker Client Area quote",
+          "intent": "Quote matches account group mapping for FX_SPOT"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-006",
+          "title": "Backup Prices widget FX_SPOT filter",
+          "intent": "EOD midpoint captured for FX_SPOT"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-594: Cross-surface invariants",
+      "covers_check_ids": ["chk-007", "chk-008", "chk-009"],
+      "covers_sections": ["## Cross-surface invariants"],
+      "precon_cluster_id": "pc-001",
+      "surfaces": ["console", "dxtrade5"],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-007",
+          "title": "Midpoint invariant across groups",
+          "intent": "Same midpoint while spreads may differ",
+          "pattern_ref": "midpoint_invariant_observe"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-008",
+          "title": "Mark from midpoint on FX_SPOT",
+          "intent": "Mark column equals midpoint",
+          "pattern_ref": "mark_from_midpoint_observe"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-009",
+          "title": "Console show prices first tier",
+          "intent": "dxCore bid/ask from first TextConfiguration tier",
+          "pattern_ref": "console_show_prices_first_tier"
+        }
+      ]
+    }
+  ],
+  "precon_clusters": [
+    {
+      "id": "pc-001",
+      "title": "CRT-594: FX_SPOT shell observation setup",
+      "jira_issue_key": null,
+      "surfaces": ["console", "dxtrade5", "webbroker", "adaptive"],
+      "satisfies_fixture_ids": ["fix-001", "fix-002", "fix-003"],
+      "satisfies_check_ids": [
+        "chk-001",
+        "chk-002",
+        "chk-003",
+        "chk-005",
+        "chk-006",
+        "chk-007",
+        "chk-008",
+        "chk-009"
+      ],
+      "served_bundle_ids": ["tb-001", "tb-002", "tb-003"],
+      "exploration_log": [
+        {
+          "at": "2026-06-18T15:02:00Z",
+          "surface": "console",
+          "action": "Console oracle probe: show prices first tier",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-003",
+          "replay_of": "precon_deepen",
+          "view_id": "console_show_prices",
+          "commands_seen": ["show prices for <instrument_symbol>"],
+          "widgets_seen": []
+        },
+        {
+          "at": "2026-06-18T15:02:45Z",
+          "surface": "console",
+          "action": "Read-only show account group hierarchy for group keys",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "view_id": "console_guide_family",
+          "commands_seen": ["show account_group_hierarchy"],
+          "widgets_seen": []
+        }
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "surface": "console",
+          "body": "Log in to the dxCore console on CTQA and confirm FX_SPOT group keys via read-only show commands.",
+          "provenance": "exploration",
+          "code_examples": ["show account_group_hierarchy"],
+          "branch_notes": []
+        },
+        {
+          "order": 2,
+          "surface": "console",
+          "body": "Run show prices for the target instrument and record first-tier bid/ask for cross-surface comparison.",
+          "provenance": "exploration",
+          "code_examples": ["show prices for <instrument_symbol>"],
+          "branch_notes": []
+        }
+      ]
+    }
+  ],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-004",
+      "reason": "delivery_blocked",
+      "evidence": "Derivatives widget delivery_known_fail; discover disposition tooling_blocked dn-001"
+    }
+  ],
+  "precon_verify_passed": true,
+  "validation_log": [
+    { "step": "phase1", "at": "2026-06-18T15:00:02Z" },
+    {
+      "step": "phase1-topology",
+      "at": "2026-06-18T15:00:03Z",
+      "note": "shell_first; skip-deepen chk-004"
+    },
+    { "step": "phase2_skeleton", "at": "2026-06-18T15:00:10Z" },
+    { "step": "phase2b_topology_tb-001", "at": "2026-06-18T15:00:11Z" },
+    { "step": "phase2b_topology_tb-003", "at": "2026-06-18T15:00:12Z" },
+    {
+      "step": "phase4_skipped_delivery_blocked",
+      "at": "2026-06-18T15:00:50Z",
+      "note": "skipped 4D for chk-004 jss-004"
+    },
+    { "step": "phase5_emit", "at": "2026-06-18T15:01:00Z" }
+  ],
+  "anti_pattern_findings": []
+}

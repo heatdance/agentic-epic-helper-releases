@@ -67,8 +67,17 @@
   },
   "tier_goals": {
     "personal": "Maintainer-only backup on origin/personal: full tree except gitignore; includes epics, qa-handoff, releases/**, /release-notes, calibrate gold; stats latest-*.md optional locally (gitignored by default).",
-    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness + /crtqa-helper + calibrate on clone after MCP/creds; no maintainer epics, release-notes, publish flow, stats, coaches, or teach.",
-    "public": "External guide on releases/public-M.N: *-readme.md methodology; orchestrator and calibrate conceptual in HOW-TO only; no playbooks, verifiers, org truth, MCP recipes, crtqa-stats, coaches, teach, or release-notes."
+    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness + /epic-helper + calibrate on clone after MCP/creds; no maintainer epics, release-notes, publish flow, stats, coaches, or teach.",
+    "public": "External guide on releases/public-M.N: *-readme.md methodology; orchestrator and calibrate conceptual in HOW-TO only; no playbooks, verifiers, org truth, MCP recipes, epic-stats, coaches, teach, or release-notes."
+  },
+  "stats_personal_preserve": {
+    "_comment": "Gitignored personal-only CRTQA stats paths — backup on personal before Phase T checkout, restore after return to personal. See automation/tools/clean_stats_personal.py.",
+    "backup_dir": "automation/temp/clean/stats-personal-backup",
+    "globs": [
+      "state/**",
+      "raw/**",
+      "latest-*.md"
+    ]
   },
   "team": {
     "audience": "private_squad",
@@ -90,26 +99,26 @@
       ".cursor/calibrate/reports/**",
       ".cursor/pipelines/clean.md",
       "temp/crtqa-console/**",
-      "stats/crtqa-stats/**",
-      ".cursor/skills/crtqa-stats/**",
-      "automation/tools/crtqa_stats/**",
-      ".cursor/skills/better-prompt/**",
-      ".cursor/skills/better-skill/**"
+      "stats/epic-stats/**",
+      "epic-stats/**",
+      "automation/tools/epic_stats/**",
+      "/**",
+      "/**"
     ],
     "delete_paths": [
       ".cursor/pipelines/test-exec.md",
       ".cursor/commands/release-notes.md",
       "docs/release-notes-contract.json",
       "automation/tools/release_notes.py",
-      ".cursor/commands/crtqa-stats.md",
-      "docs/crtqa-stats-contract.json",
-      "automation/docs/crtqa-stats.md",
-      "automation/tools/crtqa_stats_rollup.py",
-      ".cursor/commands/better-prompt.md",
-      ".cursor/commands/better-skill.md",
-      "docs/operator-assist-contract.json",
-      "docs/skill-authoring-patterns.json",
-      "automation/tools/fixtures/operator-assist/crtqa-helper-golden.json"
+      ".cursor/commands/epic-stats.md",
+      "docs/epic-stats-contract.json",
+      "automation/docs/epic-stats.md",
+      "automation/tools/epic_stats_rollup.py",
+      ".cursor/commands/.md",
+      ".cursor/commands/.md",
+      "docs/.json",
+      "docs/.json",
+      "automation/tools/fixtures/operator-assist/epic-helper-golden.json"
     ],
     "keep_globs": [
       ".cursor/pipelines/*.md",
@@ -139,9 +148,9 @@
       "docs/corner-platform-map.json",
       "HOW-TO.md",
       ".cursor/rules/pipeline-router.mdc",
-      ".cursor/commands/crtqa-helper.md",
-      "docs/crtqa-helper-contract.json",
-      "automation/tools/crtqa_helper_affordances.py",
+      ".cursor/commands/epic-helper.md",
+      "docs/epic-helper-contract.json",
+      "automation/tools/epic_helper_affordances.py",
       ".cursor/pipelines/coverage-reinforce.md"
     ],
     "required_mcp_examples": [
@@ -151,7 +160,7 @@
     "router": {
       "exclude_triggers": ["CLEAN:"]
     },
-    "harness_map_strip_package_ids": ["clean_pipeline", "release_notes", "crtqa_stats", "operator_assist", "auto_tests_teach"],
+    "harness_map_strip_package_ids": ["clean_release", "release_notes", "epic_stats", "", ""],
     "entry_templates": {
       "README.md": "README.team.md",
       "HOW-TO.md": "HOW-TO.team.md",
@@ -159,7 +168,7 @@
     },
     "forbidden_substrings": [
       "CLEAN:",
-      "clean_pipeline",
+      "clean_release",
       "/release-notes",
       "release-notes-contract",
       "release_notes.py",
@@ -192,7 +201,7 @@
       "automation/tools/*_verify.py",
       "automation/tools/calibrate_verify.py",
       "automation/tools/close_archive.py",
-      "stats/crtqa-stats/**",
+      "stats/epic-stats/**",
       "temp/**",
       "automation/temp/**"
     ],
@@ -333,7 +342,7 @@
   },
   "calibrate": {
     "_comment": "Operator gold folders may stay on personal; scrub secrets in reports.",
-    "team_keep_globs": [".cursor/calibrate/README.md", ".cursor/commands/crtqa-calibrate.md", "docs/calibrate-contract.json"],
+    "team_keep_globs": [".cursor/calibrate/README.md", ".cursor/commands/epic-calibrate.md", "docs/calibrate-contract.json"],
     "team_delete_globs": [".cursor/calibrate/reports/**", ".cursor/calibrate/*-gold/**"]
   },
   "router_tiers": {

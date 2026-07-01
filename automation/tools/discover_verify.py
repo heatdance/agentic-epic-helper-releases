@@ -15,6 +15,13 @@ Examples:
   python automation/tools/discover_verify.py \\
     --coverage epics/CRT-639/CRT-639-coverage.json \\
     --discover epics/CRT-639/CRT-639-discover.json
+
+  python automation/tools/discover_verify.py \\
+    --coverage automation/tools/fixtures/coverage/coverage-594-shell-minimal.json \\
+    --discover automation/tools/fixtures/discover/discover-594-shell-minimal.json \\
+    --strict-topology \\
+    --ref epics/CRT-594/CRT-594-ref.json \\
+    --analysis automation/tools/fixtures/analysis/analysis-594-shell-minimal.json
 """
 
 from __future__ import annotations
@@ -47,6 +54,11 @@ ADAPTIVE_AFFECTED_STATUSES = frozenset({"affected", "likely_affected"})
 ADAPTIVE_NOT_PROBED_RE = re.compile(r"adaptive.*not.*probed|adaptive_surface_not_smoke_probed", re.I)
 REPO_ROOT = Path(__file__).resolve().parents[2]
 FIXTURE_PROBES_PATH = REPO_ROOT / "docs" / "discover-fixture-probes.json"
+DISCOVER_TOPOLOGY_CONTRACT_PATH = REPO_ROOT / "docs" / "discover-topology-contract.json"
+DISCOVER_PRINCIPAL_CONTRACT_PATH = REPO_ROOT / "docs" / "discover-principal-contract.json"
+
+DELIVERY_SUPPRESSION_REASONS = frozenset({"delivery_known_fail", "delivery_excluded"})
+DELIVERY_COVERAGE_STATUS = frozenset({"failed", "excluded"})
 
 ISSUE_KEY_RE = re.compile(r"\b(CRTQA|CRTBL|CRT|XT)-\d+\b", re.I)
 CRTQA_KEY_RE = re.compile(r"^CRTQA-\d+$", re.I)
@@ -370,6 +382,297 @@ def _walk_strings(obj: Any, path: str = "$") -> list[tuple[str, str]]:
     return found
 
 
+def _ref_has_oracle_delivery_topology(ref: dict[str, Any]) -> bool:
+    topo = ref.get("verification_topology")
+    if not isinstance(topo, dict):
+        return False
+    notes = topo.get("delivery_notes") or []
+    rules = topo.get("pricing_oracle_rules") or []
+    return bool(notes or rules)
+
+
+def _coverage_has_oracle_delivery_topology(coverage: dict[str, Any]) -> bool:
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        if chk.get("oracle_rule_id"):
+            return True
+        if chk.get("delivery_status") in DELIVERY_COVERAGE_STATUS:
+            return True
+    return False
+
+
+def _delivery_blocked_check_ids(
+    coverage: dict[str, Any],
+    analysis: dict[str, Any] | None,
+    primary_ids: set[str],
+) -> set[str]:
+    blocked: set[str] = set()
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        cid = chk.get("id")
+        if not cid or str(cid) not in primary_ids:
+            continue
+        if chk.get("delivery_status") in DELIVERY_COVERAGE_STATUS:
+            blocked.add(str(cid))
+    if analysis:
+        for row in analysis.get("exploration_suppressed") or []:
+            if not isinstance(row, dict):
+                continue
+            reason = row.get("reason")
+            cid = row.get("check_id")
+            if (
+                reason in DELIVERY_SUPPRESSION_REASONS
+                and cid
+                and str(cid) in primary_ids
+            ):
+                blocked.add(str(cid))
+    return blocked
+
+
+def _affordance_oracle_binding_matches(
+    doc: dict[str, Any], check_id: str, oracle_rule_id: str
+) -> bool:
+    row = _ledger_by_check(doc).get(check_id) or {}
+    aff_ids = row.get("affordance_ids") or []
+    aff_by_id: dict[str, dict[str, Any]] = {}
+    for aff in doc.get("verification_affordances") or []:
+        if isinstance(aff, dict) and aff.get("id"):
+            aff_by_id[str(aff["id"])] = aff
+    for aid in aff_ids:
+        aff = aff_by_id.get(str(aid))
+        if not aff:
+            continue
+        binding = aff.get("oracle_binding")
+        if isinstance(binding, dict) and binding.get("oracle_rule_id") == oracle_rule_id:
+            return True
+    for aff in doc.get("verification_affordances") or []:
+        if not isinstance(aff, dict):
+            continue
+        linked = aff.get("linked_check_ids") or []
+        binding = aff.get("oracle_binding")
+        if (
+            check_id in [str(c) for c in linked]
+            and isinstance(binding, dict)
+            and binding.get("oracle_rule_id") == oracle_rule_id
+        ):
+            return True
+    return False
+
+
+def verify_strict_topology(
+    doc: dict[str, Any],
+    ref: dict[str, Any],
+    coverage: dict[str, Any],
+    analysis: dict[str, Any] | None,
+) -> list[str]:
+    errors: list[str] = []
+    if not _ref_has_oracle_delivery_topology(ref) and not _coverage_has_oracle_delivery_topology(
+        coverage
+    ):
+        return errors
+
+    primary_ids = set(_primary_check_ids(coverage))
+    blocked = _delivery_blocked_check_ids(coverage, analysis, primary_ids)
+    by_check = _ledger_by_check(doc)
+    aff_by_rule: dict[str, list[dict[str, Any]]] = {}
+    for aff in doc.get("verification_affordances") or []:
+        if not isinstance(aff, dict):
+            continue
+        binding = aff.get("oracle_binding")
+        if not isinstance(binding, dict):
+            continue
+        rid = binding.get("oracle_rule_id")
+        if rid:
+            aff_by_rule.setdefault(str(rid), []).append(aff)
+
+    for cid in sorted(blocked):
+        row = by_check.get(cid)
+        if row is None:
+            errors.append(f"topology: delivery-blocked primary {cid!r} missing ledger row")
+            continue
+        disp = row.get("disposition")
+        if disp == "scope_gap":
+            errors.append(
+                f"topology: {cid} delivery-blocked must be tooling_blocked not scope_gap"
+            )
+        elif disp != "tooling_blocked":
+            errors.append(
+                f"topology: {cid} delivery-blocked expected tooling_blocked got {disp!r}"
+            )
+
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        cid = str(chk.get("id") or "")
+        if cid not in primary_ids:
+            continue
+        oracle_id = chk.get("oracle_rule_id")
+        if not oracle_id or cid in blocked:
+            continue
+        if not _affordance_oracle_binding_matches(doc, cid, str(oracle_id)):
+            errors.append(
+                f"topology: primary {cid} oracle_rule_id={oracle_id!r} "
+                "missing linked affordance with matching oracle_binding"
+            )
+
+    topo = ref.get("verification_topology") or {}
+    if not isinstance(topo, dict):
+        topo = {}
+    for rule in topo.get("pricing_oracle_rules") or []:
+        if not isinstance(rule, dict):
+            continue
+        if rule.get("disposition") != "primary_candidate":
+            continue
+        rid = rule.get("id")
+        if not rid:
+            continue
+        rid_s = str(rid)
+        linked_checks = [
+            str(c.get("id"))
+            for c in coverage.get("checks") or []
+            if isinstance(c, dict)
+            and c.get("oracle_rule_id") == rid
+            and str(c.get("id")) in primary_ids
+        ]
+        if linked_checks and all(c in blocked for c in linked_checks):
+            continue
+        if rid_s not in aff_by_rule and linked_checks:
+            errors.append(
+                f"topology: ref pricing_oracle_rules {rid_s!r} missing affordance "
+                "with oracle_binding (non-delivery-blocked primary)"
+            )
+
+    return errors
+
+
+def _provision_obligations(ref: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    out: dict[str, dict[str, Any]] = {}
+    for obl in ref.get("obligations_proposed") or []:
+        if not isinstance(obl, dict):
+            continue
+        oid = obl.get("id")
+        if not oid:
+            continue
+        hints = obl.get("downstream_hints") or {}
+        if hints.get("needs_environment_provision") or obl.get("kind") == "environment_setup":
+            out[str(oid)] = obl
+    return out
+
+
+def _ref_has_principal(ref: dict[str, Any]) -> bool:
+    if _provision_obligations(ref):
+        return True
+    focus = ref.get("verification_focus_proposed")
+    if isinstance(focus, dict) and focus.get("statement"):
+        return True
+    topo = ref.get("verification_topology") or {}
+    if isinstance(topo, dict):
+        threads = topo.get("principal_coverage_threads") or []
+        if isinstance(threads, list) and threads:
+            return True
+    return False
+
+
+def _primary_checks_for_obligation(coverage: dict[str, Any], oid: str) -> list[str]:
+    found: list[str] = []
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        if chk.get("verification_role") != "primary":
+            continue
+        oids = [str(x) for x in (chk.get("obligation_ids") or [])]
+        if oid in oids and chk.get("id"):
+            found.append(str(chk["id"]))
+    return found
+
+
+def verify_strict_principal(
+    doc: dict[str, Any],
+    ref: dict[str, Any],
+    coverage: dict[str, Any],
+    analysis: dict[str, Any] | None,
+) -> list[str]:
+    errors: list[str] = []
+    if not _ref_has_principal(ref):
+        return errors
+
+    provisions = _provision_obligations(ref)
+    fixture_needs = doc.get("fixture_needs") or []
+    primary_ids = set(_primary_check_ids(coverage))
+    by_check = _ledger_by_check(doc)
+
+    for oid, obl in provisions.items():
+        primary_for_oid = _primary_checks_for_obligation(coverage, oid)
+        if not primary_for_oid:
+            continue
+        matching_fixtures = [
+            fn
+            for fn in fixture_needs
+            if isinstance(fn, dict)
+            and oid in [str(x) for x in (fn.get("linked_obligation_ids") or [])]
+        ]
+        if not matching_fixtures:
+            errors.append(
+                f"principal: missing fixture_needs row with linked_obligation_ids "
+                f"containing {oid!r} (--strict-principal)"
+            )
+            continue
+        linked_checks: set[str] = set()
+        for fn in matching_fixtures:
+            for cid in fn.get("linked_check_ids") or []:
+                linked_checks.add(str(cid))
+        if not any(cid in linked_checks for cid in primary_for_oid):
+            errors.append(
+                f"principal: provision obligation {oid!r}: fixture_needs not linked "
+                f"to primary check {primary_for_oid!r}"
+            )
+
+    if provisions:
+        has_step = any(
+            isinstance(e, dict) and e.get("step") == "phaseC-principal"
+            for e in (doc.get("validation_log") or [])
+        )
+        if not has_step:
+            errors.append(
+                "validation_log missing step phaseC-principal when ref has "
+                "provision obligations (--strict-principal)"
+            )
+
+    if analysis:
+        for row in analysis.get("exploration_suppressed") or []:
+            if not isinstance(row, dict):
+                continue
+            if row.get("reason") != "deferral_obligation_keyed":
+                continue
+            cid = row.get("check_id")
+            if not cid or str(cid) not in primary_ids:
+                continue
+            ledger = by_check.get(str(cid))
+            if ledger is None:
+                errors.append(
+                    f"principal: deferral_obligation_keyed primary {cid!r} "
+                    "missing ledger row"
+                )
+                continue
+            disp = ledger.get("disposition")
+            if disp == "scope_gap":
+                errors.append(
+                    f"principal: {cid!r} deferral_obligation_keyed must not be "
+                    "scope_gap (--strict-principal)"
+                )
+            elif disp == "fixture_need_mapped":
+                note = str(ledger.get("disposition_note") or "").lower()
+                if "defer" not in note and "obl-" not in note:
+                    errors.append(
+                        f"principal: {cid!r} fixture_need_mapped needs deferral "
+                        "disposition_note citing obligation_id"
+                    )
+
+    return errors
+
+
 def verify(
     coverage: dict[str, Any],
     *,
@@ -378,6 +681,9 @@ def verify(
     strict_complete: bool = True,
     mode_override: str | None = None,
     ref_doc: dict[str, Any] | None = None,
+    analysis_doc: dict[str, Any] | None = None,
+    strict_topology: bool = False,
+    strict_principal: bool = False,
 ) -> list[str]:
     errors: list[str] = []
     warnings: list[str] = []
@@ -677,6 +983,144 @@ def verify(
     for w in warnings:
         print(f"warning: {w}", file=sys.stderr)
 
+    if strict_topology:
+        if ref_doc is None:
+            errors.append("--strict-topology requires --ref")
+        else:
+            errors.extend(
+                verify_strict_topology(doc, ref_doc, coverage, analysis_doc)
+            )
+
+    if strict_principal:
+        if ref_doc is None:
+            errors.append("--strict-principal requires --ref")
+        elif discover is None:
+            errors.append("--strict-principal requires --discover")
+        else:
+            errors.extend(
+                verify_strict_principal(doc, ref_doc, coverage, analysis_doc)
+            )
+
+    return errors
+
+
+def verify_draft_truth_discover(coverage: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    sources = coverage.get("sources") if isinstance(coverage.get("sources"), dict) else {}
+    if not sources.get("coverage_frozen_at"):
+        errors.append(
+            "coverage.sources.coverage_frozen_at required before discover (draft_truth)"
+        )
+    if sources.get("coverage_immutable") is False:
+        errors.append("coverage.sources.coverage_immutable must not be false after human gate")
+    return errors
+
+
+def verify_linker(
+    coverage: dict[str, Any],
+    discover: dict[str, Any],
+) -> list[str]:
+    """Linker-only discover emit per docs/discover-linker-contract.json."""
+    errors: list[str] = []
+    errors.extend(verify_draft_truth_discover(coverage))
+
+    sources = discover.get("sources") if isinstance(discover.get("sources"), dict) else {}
+    mode = sources.get("discovery_mode")
+    if mode != "linker_only":
+        errors.append(f"sources.discovery_mode must be linker_only (got {mode!r})")
+
+    if discover.get("fe_credentials"):
+        errors.append("linker discover must not contain fe_credentials")
+    if discover.get("fe_ui_sessions"):
+        errors.append("linker discover must not contain fe_ui_sessions")
+    if discover.get("operator_recovery"):
+        rec = discover.get("operator_recovery")
+        if isinstance(rec, list) and rec:
+            errors.append("linker discover must not contain operator_recovery entries")
+
+    for path, s in _walk_strings(discover):
+        if TEMP_PATH_RE.search(s):
+            errors.append(f"discover json contains /temp/ at {path}")
+        if PASSWORDISH_RE.search(s):
+            errors.append(f"discover json may contain secret at {path}")
+
+    primary_ids = _primary_check_ids(coverage)
+    ledger = {
+        str(r["check_id"]): r
+        for r in (discover.get("obligation_ledger") or [])
+        if isinstance(r, dict) and r.get("check_id")
+    }
+    for cid in primary_ids:
+        row = ledger.get(cid)
+        if not row:
+            errors.append(f"obligation_ledger missing primary check {cid}")
+            continue
+        disp = row.get("disposition")
+        if disp not in DISPOSITION_OK:
+            errors.append(f"{cid}: invalid or pending disposition {disp!r}")
+
+    for i, fn in enumerate(discover.get("fixture_needs") or []):
+        if not isinstance(fn, dict):
+            continue
+        depth = fn.get("setup_depth")
+        if depth not in ("classified_only", None):
+            errors.append(
+                f"fixture_needs[{i}] setup_depth {depth!r} forbidden in linker (max classified_only)"
+            )
+
+    checks_by_id = {
+        str(c["id"]): c
+        for c in (coverage.get("checks") or [])
+        if isinstance(c, dict) and c.get("id")
+    }
+    aff_by_check: dict[str, list[dict[str, Any]]] = {}
+    for aff in discover.get("verification_affordances") or []:
+        if not isinstance(aff, dict):
+            continue
+        depth = aff.get("setup_depth")
+        if depth in ("probe_executed", "command_family", "shell_only"):
+            errors.append(
+                f"affordance {aff.get('id')}: setup_depth {depth!r} forbidden in linker"
+            )
+        for cid in aff.get("linked_check_ids") or []:
+            aff_by_check.setdefault(str(cid), []).append(aff)
+
+    for cid in primary_ids:
+        chk = checks_by_id.get(cid)
+        if not chk:
+            continue
+        row = ledger.get(cid)
+        if row and row.get("disposition") == "tooling_blocked":
+            continue
+        shells = chk.get("shell") or []
+        needs_aff = any(s in shells for s in ("console", "dxtrade5", "webbroker"))
+        if not needs_aff:
+            continue
+        affs = aff_by_check.get(cid) or []
+        if not affs:
+            errors.append(f"{cid}: UI/console check missing verification_affordances")
+            continue
+        ok = False
+        for aff in affs:
+            if aff.get("harness_location_ref") or aff.get("oracle_binding") or aff.get(
+                "pattern_ref"
+            ):
+                ok = True
+                break
+            if "console" in shells and (chk.get("runtime_probes") or chk.get("oracle_rule_id")):
+                ok = True
+                break
+        if not ok:
+            errors.append(
+                f"{cid}: affordance must cite harness_location_ref, oracle_binding, "
+                "pattern_ref, or coverage runtime_probes"
+            )
+
+    status = discover.get("discovery_status")
+    closure = discover.get("obligation_closure") or {}
+    if status == "complete" and not closure.get("verifier_passed"):
+        errors.append("discovery_status complete but obligation_closure.verifier_passed false")
+
     return errors
 
 
@@ -702,9 +1146,9 @@ def main() -> int:
     )
     ap.add_argument(
         "--mode",
-        choices=("generation", "benchmark"),
+        choices=("generation", "benchmark", "principal", "draft_truth", "linker"),
         default=None,
-        help="Override discovery_mode / crtqa_index_enabled inference from discover doc",
+        help="Override discovery_mode / crtqa_index_enabled inference, or principal-only lint",
     )
     ap.add_argument(
         "--ref",
@@ -712,7 +1156,31 @@ def main() -> int:
         default=None,
         help="Optional epic-ref.json when environment.client_shell_impact snapshot is missing",
     )
+    ap.add_argument(
+        "--analysis",
+        type=Path,
+        default=None,
+        help="Optional analysis.json for --strict-topology delivery suppression cross-check",
+    )
+    ap.add_argument(
+        "--strict-topology",
+        action="store_true",
+        help="Lint delivery tooling_blocked and oracle_binding vs ref/coverage/analysis topology",
+    )
+    ap.add_argument(
+        "--strict-principal",
+        action="store_true",
+        help="Lint provision fixture_needs and deferral ledger vs ref/coverage/analysis principal",
+    )
     args = ap.parse_args()
+
+    strict_princ = args.strict_principal or args.mode == "principal"
+    if strict_princ and (args.ref is None or args.discover is None):
+        print(
+            "--ref and --discover required with --strict-principal / --mode principal",
+            file=sys.stderr,
+        )
+        return 2
 
     coverage = _load_json(args.coverage.resolve())
     if coverage is None:
@@ -734,14 +1202,40 @@ def main() -> int:
         print(f"cannot read ref: {args.ref}", file=sys.stderr)
         return 2
 
-    errors = verify(
-        coverage,
-        ledger=ledger_doc,
-        discover=discover_doc,
-        strict_complete=not args.allow_incomplete,
-        mode_override=args.mode,
-        ref_doc=ref_doc,
-    )
+    analysis_doc = _load_json(args.analysis.resolve()) if args.analysis else None
+    if args.analysis and analysis_doc is None:
+        print(f"cannot read analysis: {args.analysis}", file=sys.stderr)
+        return 2
+
+    if args.strict_topology and ref_doc is None:
+        print("--strict-topology requires --ref", file=sys.stderr)
+        return 2
+
+    if args.mode == "principal":
+        if discover_doc is None or ref_doc is None:
+            return 2
+        errors = verify_strict_principal(
+            discover_doc, ref_doc, coverage, analysis_doc
+        )
+    elif args.mode == "draft_truth":
+        errors = verify_draft_truth_discover(coverage)
+    elif args.mode == "linker":
+        if discover_doc is None:
+            print("--discover required for mode linker", file=sys.stderr)
+            return 2
+        errors = verify_linker(coverage, discover_doc)
+    else:
+        errors = verify(
+            coverage,
+            ledger=ledger_doc,
+            discover=discover_doc,
+            strict_complete=not args.allow_incomplete,
+            mode_override=args.mode if args.mode != "principal" else None,
+            ref_doc=ref_doc,
+            analysis_doc=analysis_doc,
+            strict_topology=args.strict_topology,
+            strict_principal=strict_princ,
+        )
 
     if errors:
         print("discover_verify failures:", file=sys.stderr)

@@ -1,0 +1,238 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-671",
+  "sources": {
+    "ref_path": "epics/CRT-671/CRT-671-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-671/CRT-671-coverage.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.delivery_notes",
+      "verification_topology.pricing_oracle_rules"
+    ],
+    "principal_loaded": true,
+    "ref_principal_fields": [
+      "verification_focus_proposed",
+      "verification_topology.principal_coverage_threads"
+    ],
+    "draft_truth_loaded": true
+  },
+  "draft_truth_round": 1,
+  "draft_truth_recommendation": "human_coverage_review",
+  "summary": {
+    "text": "Verify that when dxCore order status is ACCEPTED, client shells show UI label 'Sending' (not 'Working') on dxTrade5 web, WebBroker, and Adaptive, and that Adaptive lists Sending orders in Working orders on Portfolio and Account pages.",
+    "derived_from": [
+      "coverage.epic_verification_focus"
+    ]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: XT-8496 Corner Orders widget - Orders status is displayed as Working instead of Sending",
+      "pointers": {
+        "delivery_note_id": "dn-001",
+        "check_id": "chk-001",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-001",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-002",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: XT-8494 Corner Order book widget - Orders in Sending status are not displayed",
+      "pointers": {
+        "delivery_note_id": "dn-002",
+        "check_id": "chk-002",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-002",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-003",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: XT-8615 Corner Order History - Status Filter Displays Incorrect Status List",
+      "pointers": {
+        "delivery_note_id": "dn-003",
+        "check_id": "chk-006",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-003",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-004",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: XT-8616 Corner Orders - Modify and Cancel Actions Are Not Available for Sending Orders",
+      "pointers": {
+        "delivery_note_id": "dn-004",
+        "check_id": "chk-012",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-004",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-005",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: CAN-14623 CT Adaptive - Incorrect Status Display in Order History for \"Sending\" Orders",
+      "pointers": {
+        "delivery_note_id": "dn-005",
+        "check_id": "chk-013",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-005",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-006",
+      "kind": "delivery_known_fail",
+      "confidence": "high",
+      "summary": "Epic validation defect documented: XT-8216 WBBE[Order Book] Duplicated Order Status columns (OrderStatus and CtOrderStatus) for corner",
+      "pointers": {
+        "delivery_note_id": "dn-006",
+        "check_id": "chk-014",
+        "obligation_id": "obl-001"
+      },
+      "evidence": "ref.verification_topology.delivery_notes dn-006",
+      "recommended_action": "human_ba",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-007",
+      "kind": "console_probe_failed",
+      "confidence": "high",
+      "summary": "Console probe blocked on chk-e1: CTQA account key must be selected at test time before show order last open",
+      "pointers": {
+        "check_id": "chk-e1"
+      },
+      "evidence": "checks[chk-e1].runtime_probes[gp-chk-e1b].outcome=blocked",
+      "recommended_action": "human_operator",
+      "status": "confirmed_gap"
+    }
+  ],
+  "resolved_gaps": [],
+  "exploration_suppressed": [
+    {
+      "check_id": "chk-001",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-002",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-006",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-012",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-013",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    },
+    {
+      "check_id": "chk-014",
+      "reason": "delivery_known_fail",
+      "blocks_fixture_probe": true,
+      "until_action": "human_ba"
+    }
+  ],
+  "coverage_writebacks": [
+    {
+      "kind": "delivery_status_normalize",
+      "target": "checks[].delivery_status known_fail→failed",
+      "evidence": "docs/coverage-topology-contract.json maps_from_delivery_note_status"
+    }
+  ],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": [
+      "Six epic-validation defects marked [FAILED] in coverage; retest expected per Jira comment."
+    ]
+  },
+  "questions": [],
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "topology_loaded=true principal_loaded=true"
+    },
+    {
+      "step": "2",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "work_queue=7"
+    },
+    {
+      "step": "2-topology",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "topology_queue=6 delivery_known_fail"
+    },
+    {
+      "step": "2-principal",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "principal_queue=0"
+    },
+    {
+      "step": "2c",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "console probe scan — chk-e1 blocked probe → console_probe_failed gap"
+    },
+    {
+      "step": "3",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "mechanical gaps=7"
+    },
+    {
+      "step": "3-topology",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "delivery_known_fail=6 confirmed_gap"
+    },
+    {
+      "step": "5",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "exploration_suppressed=6"
+    },
+    {
+      "step": "9",
+      "at": "2026-06-30T07:49:06Z",
+      "action": "coverage writeback delivery_status failed normalization"
+    }
+  ]
+}

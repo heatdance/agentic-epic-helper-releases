@@ -1,0 +1,849 @@
+{
+  "id": "1680339",
+  "key": "CRTQA-1419",
+  "summary": "[Epic Testing] [CRT-285] Physically Settled Futures Closing Procedures",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 30,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6208393",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-29T08:59:05.344+0000",
+        "updated": "2025-01-29T08:59:05.344+0000",
+        "started": "2025-01-29T08:12:00.000+0000",
+        "timeSpent": "47m",
+        "timeSpentSeconds": 2820,
+        "id": "6208393",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6209158",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-29T13:20:34.835+0000",
+        "updated": "2025-01-29T13:20:34.835+0000",
+        "started": "2025-01-29T12:19:00.000+0000",
+        "timeSpent": "1h 1m",
+        "timeSpentSeconds": 3660,
+        "id": "6209158",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6210886",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-30T10:23:32.685+0000",
+        "updated": "2025-01-30T10:23:32.685+0000",
+        "started": "2025-01-30T09:35:00.000+0000",
+        "timeSpent": "48m",
+        "timeSpentSeconds": 2880,
+        "id": "6210886",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6212924",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-31T07:59:28.437+0000",
+        "updated": "2025-01-31T07:59:28.437+0000",
+        "started": "2025-01-31T07:18:00.000+0000",
+        "timeSpent": "41m",
+        "timeSpentSeconds": 2460,
+        "id": "6212924",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6243194",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-12T12:59:12.479+0000",
+        "updated": "2025-02-12T12:59:12.479+0000",
+        "started": "2025-02-12T12:22:00.000+0000",
+        "timeSpent": "37m",
+        "timeSpentSeconds": 2220,
+        "id": "6243194",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6243600",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-12T15:08:15.844+0000",
+        "updated": "2025-02-12T15:08:18.170+0000",
+        "started": "2025-02-12T13:44:00.000+0000",
+        "timeSpent": "1h 44m",
+        "timeSpentSeconds": 6240,
+        "id": "6243600",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6244732",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-13T09:00:22.201+0000",
+        "updated": "2025-02-13T09:00:22.201+0000",
+        "started": "2025-02-13T07:03:00.000+0000",
+        "timeSpent": "1h 57m",
+        "timeSpentSeconds": 7020,
+        "id": "6244732",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6245195",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-13T11:09:10.900+0000",
+        "updated": "2025-02-13T11:09:10.900+0000",
+        "started": "2025-02-13T09:42:00.000+0000",
+        "timeSpent": "1h 27m",
+        "timeSpentSeconds": 5220,
+        "id": "6245195",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6245583",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-13T12:39:31.728+0000",
+        "updated": "2025-02-13T13:33:58.346+0000",
+        "started": "2025-02-13T11:46:00.000+0000",
+        "timeSpent": "59m",
+        "timeSpentSeconds": 3540,
+        "id": "6245583",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6246303",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-13T16:05:51.735+0000",
+        "updated": "2025-02-13T16:05:54.346+0000",
+        "started": "2025-02-13T13:33:00.000+0000",
+        "timeSpent": "2h 34m",
+        "timeSpentSeconds": 9240,
+        "id": "6246303",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6247121",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-14T08:58:53.488+0000",
+        "updated": "2025-02-14T08:58:53.488+0000",
+        "started": "2025-02-14T07:00:00.000+0000",
+        "timeSpent": "1h 58m",
+        "timeSpentSeconds": 7080,
+        "id": "6247121",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6247609",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-14T11:26:25.092+0000",
+        "updated": "2025-02-14T11:26:25.092+0000",
+        "started": "2025-02-14T09:25:00.000+0000",
+        "timeSpent": "2h 1m",
+        "timeSpentSeconds": 7260,
+        "id": "6247609",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6247744",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-14T11:57:00.476+0000",
+        "updated": "2025-02-14T11:57:00.476+0000",
+        "started": "2025-02-14T11:50:00.000+0000",
+        "timeSpent": "7m",
+        "timeSpentSeconds": 420,
+        "id": "6247744",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6250780",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-17T08:58:47.123+0000",
+        "updated": "2025-02-17T08:58:47.123+0000",
+        "started": "2025-02-17T07:24:00.000+0000",
+        "timeSpent": "1h 34m",
+        "timeSpentSeconds": 5640,
+        "id": "6250780",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6251236",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-17T10:02:43.872+0000",
+        "updated": "2025-02-17T11:40:17.630+0000",
+        "started": "2025-02-17T09:36:00.000+0000",
+        "timeSpent": "37m",
+        "timeSpentSeconds": 2220,
+        "id": "6251236",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6253289",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-17T16:13:17.245+0000",
+        "updated": "2025-02-17T16:13:17.245+0000",
+        "started": "2025-02-17T11:40:00.000+0000",
+        "timeSpent": "4h 33m",
+        "timeSpentSeconds": 16380,
+        "id": "6253289",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6254305",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-18T08:58:19.948+0000",
+        "updated": "2025-02-18T08:58:26.723+0000",
+        "started": "2025-02-18T08:02:00.000+0000",
+        "timeSpent": "56m",
+        "timeSpentSeconds": 3360,
+        "id": "6254305",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6255414",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-18T14:47:19.321+0000",
+        "updated": "2025-02-18T14:47:19.321+0000",
+        "started": "2025-02-18T12:35:00.000+0000",
+        "timeSpent": "2h 12m",
+        "timeSpentSeconds": 7920,
+        "id": "6255414",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6256456",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-19T09:00:04.542+0000",
+        "updated": "2025-02-19T09:00:04.542+0000",
+        "started": "2025-02-19T08:08:00.000+0000",
+        "timeSpent": "52m",
+        "timeSpentSeconds": 3120,
+        "id": "6256456",
+        "issueId": "1680339"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680339/worklog/6256853",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=ddemchuk",
+          "name": "ddemchuk",
+          "key": "ddemchuk",
+          "emailAddress": "ddemchuk@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?avatarId=10122",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&avatarId=10122",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&avatarId=10122",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&avatarId=10122"
+          },
+          "displayName": "Denis Demchuk",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-19T11:40:30.666+0000",
+        "updated": "2025-02-19T11:40:30.666+0000",
+        "started": "2025-02-19T09:28:00.000+0000",
+        "timeSpent": "2h 12m",
+        "timeSpentSeconds": 7920,
+        "id": "6256853",
+        "issueId": "1680339"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "2d",
+    "remainingEstimate": "1d 4h 37m",
+    "timeSpent": "1w 3h",
+    "originalEstimateSeconds": 57600,
+    "remainingEstimateSeconds": 45420,
+    "timeSpentSeconds": 154800
+  },
+  "customfield_11250": 16.0,
+  "customfield_10006": null
+}

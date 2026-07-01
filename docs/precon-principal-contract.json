@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "_comment": "TEST-PRECON consumption of EPIC-PREP downstream_hints provisioning, discover ref_principal_provision fixtures, and COVERAGE-REINFORCE setup detail_lines. Playbook: .cursor/pipelines/test-precon.md. Verifier: precon_verify.py --strict-principal / --mode principal. Upstream: docs/epic-prep-principal-contract.json, docs/discover-principal-contract.json, docs/coverage-reinforce-principal-contract.json, docs/precon-topology-contract.json.",
+  "upstream": {
+    "epic_prep_principal": "docs/epic-prep-principal-contract.json",
+    "discover_principal": "docs/discover-principal-contract.json",
+    "coverage_reinforce_principal": "docs/coverage-reinforce-principal-contract.json",
+    "precon_topology": "docs/precon-topology-contract.json"
+  },
+  "placeholder_scan": {
+    "ref_filter": "obligations_proposed[] where downstream_hints.needs_environment_provision == true OR kind == environment_setup",
+    "personas_union": "downstream_hints.personas[] across obligations_proposed",
+    "dual_account": "when any obligation has downstream_hints.needs_dual_account_contrast == true emit group_key_enrg and group_key_oppt (or documented alias pair per epic-prep-principal)"
+  },
+  "placeholder_emit_rules": {
+    "base_tokens": ["console_principal", "instrument_symbol", "account_code"],
+    "provision_extras": "per placeholder_scan; all values angle-bracket form e.g. <group_key_enrg>",
+    "forbidden": "password-like literals, long numeric account_group_id digits, probe account names"
+  },
+  "provision_cluster_rules": {
+    "cluster_id": "pc-setup",
+    "when": "discover fixture_needs[] has derivation ref_principal_provision",
+    "order": "before observation cluster pc-001",
+    "satisfies_fixture_ids": "from provision fixture id e.g. fix-env-001",
+    "satisfies_check_ids": "from fixture linked_check_ids e.g. chk-s1 chk-s2",
+    "step_voice": "imperative Jira action-result; console-first account group hierarchy FxConfiguration publish streams; placeholders only",
+    "coverage_setup": "MAY link tb-setup skeleton covers_check_ids or satisfy via cluster satisfies_check_ids only"
+  },
+  "deferral_skip_rules": {
+    "sources": [
+      "analysis exploration_suppressed reason deferral_obligation_keyed",
+      "coverage checks verification_role out_of_epic with coverage_thread deferral_only",
+      "discover validation_log phaseE_skipped_deferral_keyed"
+    ],
+    "action": "skip Phase 4R/4D for deferral-keyed checks; excluded_checks_with_reason or omit from skeleton case_outline",
+    "validation_log_step": "phase4_skipped_deferral_keyed"
+  },
+  "emit_fields": {
+    "sources.principal_loaded": "true when provision obligations/fixtures or principal personas consumed",
+    "sources.ref_principal_fields": "e.g. downstream_hints.needs_environment_provision, needs_dual_account_contrast",
+    "principal_provenance": "optional block documenting ref/discover/coverage principal slice ids",
+    "validation_log": ["phase1-principal", "phase3-provision", "phase4_skipped_deferral_keyed"]
+  },
+  "strict_precon_principal_verifier": {
+    "requires": ["--ref", "--precon", "--discover", "--coverage"],
+    "skip_when": "no ref provision obligations and discover sources.principal_loaded false (metrics env-thread optional)",
+    "checks": [
+      "when ref provision + discover ref_principal_provision: sources.principal_loaded true",
+      "precon_clusters row pc-setup satisfies fixture id and setup linked_check_ids",
+      "session_placeholders includes group_key_enrg and group_key_oppt when ref needs_dual_account_contrast",
+      "validation_log contains phase1-principal and phase3-provision when provision cluster emitted",
+      "deferral-keyed checks not in test_skeleton covers_check_ids without excluded_checks_with_reason",
+      "validation_log phase4_skipped_deferral_keyed when deferral skip applied"
+    ]
+  },
+  "downstream_handoff": {
+    "TEST-PREP": {
+      "reads": ["session_placeholders", "test_skeleton tb-setup", "precon_clusters pc-setup", "command_patterns"],
+      "use": "Persona split bundles and provisioning paste (Round 2 step 7); see docs/test-prep-principal-contract.json"
+    },
+    "CLOSE": {
+      "reads": ["session_placeholders", "test_skeleton tb-setup", "precon_clusters pc-setup", "sources.principal_loaded"],
+      "use": "Terminal cross-artifact principal lint (Round 2 step 8); see docs/close-principal-contract.json"
+    }
+  }
+}

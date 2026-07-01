@@ -1,0 +1,96 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-594",
+  "sources": {
+    "ref_path": "epics/CRT-594/CRT-594-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-594/CRT-594-coverage.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "topology_loaded": true,
+    "ref_topology_fields": [
+      "verification_topology.delivery_notes",
+      "verification_topology.pricing_oracle_rules"
+    ],
+    "principal_loaded": true,
+    "ref_principal_fields": [
+      "verification_focus_proposed",
+      "verification_topology.principal_coverage_threads"
+    ],
+    "draft_truth_loaded": true
+  },
+  "draft_truth_round": 1,
+  "draft_truth_recommendation": "human_coverage_review",
+  "summary": {
+    "text": "Verify FX_SPOT group-specific bid/ask on named client surfaces (Watchlist, Position Book, Instrument page, Derivatives, Client Area), tier/oracle rules per widget, midpoint invariant across groups, and backup/EOD midpoint capture.",
+    "derived_from": [
+      "coverage.epic_verification_focus"
+    ]
+  },
+  "gaps": [],
+  "resolved_gaps": [],
+  "exploration_suppressed": [],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": false,
+    "rerun_epic_prep": false,
+    "focus_hint": null,
+    "human_notes": []
+  },
+  "questions": [],
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "topology_loaded=true principal_loaded=true"
+    },
+    {
+      "step": "2",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "work_queue=0"
+    },
+    {
+      "step": "2-topology",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "topology_queue=0 (no delivery_notes; no unresolved oracles)"
+    },
+    {
+      "step": "2-principal",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "principal_queue=0 (no deferral obligations)"
+    },
+    {
+      "step": "3",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "mechanical gaps=0"
+    },
+    {
+      "step": "4a",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "short-circuit to emit"
+    },
+    {
+      "step": "5",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "exploration_suppressed=0"
+    },
+    {
+      "step": "2b",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "scenario inventory scan — all scr rows covered"
+    },
+    {
+      "step": "2c",
+      "at": "2026-06-29T14:41:39Z",
+      "action": "console probe scan — no failed/blocked probes without ambiguity"
+    }
+  ]
+}

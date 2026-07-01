@@ -1,6 +1,7 @@
 .cursor/mcp.json
 
 # Personal career profile (PII) — personal branch / local only
+profile/
 temp/profile/
 
 # CRTQA dxCore console launcher — local overlays and ephemeral session metadata
@@ -15,10 +16,10 @@ __pycache__/
 
 .playwright-mcp/
 
-# CRTQA stats — per-user results, state, audit (see stats/crtqa-stats/README.md)
-stats/crtqa-stats/latest-*.md
-stats/crtqa-stats/state/
-stats/crtqa-stats/raw/
+# Epic stats — per-user results, state, audit (see stats/epic-stats/README.md)
+stats/epic-stats/latest-*.md
+stats/epic-stats/state/
+stats/epic-stats/raw/
 
 # Calibrate — optional local history (see docs/calibrate-contract.json)
 .cursor/calibrate/history.jsonl
@@ -27,11 +28,12 @@ stats/crtqa-stats/raw/
 automation/temp/release-notes/
 automation/temp/release-map/
 
-# crtqa-helper — per-epic orchestrator scratch (see docs/crtqa-helper-contract.json)
+# epic-helper — per-epic orchestrator scratch (see docs/epic-helper-contract.json)
 epics/*/helper/
 
 # auto-tests — teach session + ephemeral (see docs/auto-tests-contract.json)
 auto-tests/.teacher-session.json
 auto-tests/credentials.local.json
+auto-tests/dependencies/credentials.local.json
 auto-tests/tmp/*
 !auto-tests/tmp/.gitkeep

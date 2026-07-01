@@ -1,0 +1,19 @@
+{
+  "_comment": "Minimal ref slice for surface_oracle_unresolved strict-topology test",
+  "verification_topology": {
+    "delivery_notes": [],
+    "pricing_oracle_rules": [
+      {
+        "id": "por-unresolved-001",
+        "surface": "dxtrade5_watchlist",
+        "metric": "bid_ask",
+        "volume_control": "order_default_qty",
+        "oracle_rule": "unresolved",
+        "requirement_keys": ["CRT-1714"],
+        "evidence_anchor": "Snippet silent on tier selection rule",
+        "obligation_ids": ["obl-002"],
+        "disposition": "deferral_candidate"
+      }
+    ]
+  }
+}

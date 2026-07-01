@@ -1,9 +1,9 @@
 {
   "schema_version": 2,
-  "_comment": "Shared FE UI probe contract for TEST-DISCOVER / TEST-PRECON / TEST-PREP Phase 0b/0c (smoke only). Deeper exploration: docs/exploration-depth-ladder.json (PRECON Phase 4, PREP Phase 8a-three-quarter). URLs: docs/corner-platform-map.json application_urls (ct_qa). Creds on trigger line only—never in durable JSON.",
+  "_comment": "FE UI probe contract — LEGACY manual execution / legacy TEST-PRECON only. Not used in TEST-PREP scenario_intent generation (draft_truth_v3).",
   "exploration_depth_ladder": "docs/exploration-depth-ladder.json",
   "trigger_tokens": {
-    "dxtrade5_creds": "dxtrade5_creds=<user>/<password> on same line as TEST-DISCOVER: or TEST-PRECON:",
+    "dxtrade5_creds": "dxtrade5_creds=<user>/<password> on same line as TEST-PRECON: or TEST-PREP:",
     "webbroker_creds": "webbroker_creds=<user>/<password> on same line",
     "fe_exploration_waived": "fe_exploration_waived=yes — only after Phase 0b hard stop + operator ack; caps UI depth at shell_only"
   },

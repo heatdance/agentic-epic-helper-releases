@@ -10,7 +10,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 ## 1. Purpose
 
-- Align every session on **production pipelines** (`epics/<KEY>/`), **operator calibration** (`/crtqa-calibrate`), **coverage vs manual E2E drafts**, and **reference ownership**—without depending on polluted or shortened chat history.
+- Align every session on **production pipelines** (`epics/<KEY>/`), **operator calibration** (`/epic-calibrate`), **coverage vs manual E2E drafts**, and **reference ownership**—without depending on polluted or shortened chat history.
 - Separate **session log** ([`qa-handoff.md`](../qa-handoff.md)) from **stable invariants** (this doc).
 
 ---
@@ -19,8 +19,18 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 | Concept | Rule |
 |---------|------|
-| **Triggers** | `EPIC-PREP:`, `COVERAGE:`, `ANALYSE:`, `TEST-DISCOVER:`, `COVERAGE-REINFORCE:`, `TEST-PRECON:`, `TEST-PREP:`, `CLOSE:` — see [pipeline-router](../.cursor/rules/pipeline-router.mdc) |
+| **Triggers** | `EPIC-PREP:`, `COVERAGE:`, `GROUND:`, `ANALYSE:`, `TEST-DISCOVER:`, `TEST-PREP:`, `CLOSE:` — see [pipeline-router](../.cursor/rules/pipeline-router.mdc). **`TEST-PRECON:`** and **`COVERAGE-REINFORCE:`** legacy only. |
+| **Draft+truth (v3)** | Bounded loop **COVERAGE → GROUND → ANALYSE** (max **2** rounds) → **human coverage review** (+ **`scenario_groups[]`**) → **DISCOVER linker** → **TEST-PREP scenario_intent** → CLOSE. No PRECON; no generation UI exploration. Master: [docs/draft-truth-contract.json](draft-truth-contract.json). **`/epic-calibrate`** out-of-band after CLOSE. |
 | **`EpicDir`** | Always `epics/<KEY>/` (after **CLOSE:** JSON under `epics/<KEY>/context/`) |
+| **EPIC-PREP topology** | `-ref.json` emits **`epic_archetype`** and **`verification_topology`** (surfaces, oracle rules, delivery notes, reuse hints) per [docs/epic-prep-topology-contract.json](epic-prep-topology-contract.json); **COVERAGE** copies archetype, sets **`emit_layout`**, dual markdown spine per [docs/coverage-topology-contract.json](coverage-topology-contract.json); `coverage_verify.py --strict-topology` when ref has topology |
+| **EPIC-PREP principal (good draft)** | `-ref.json` also encodes **principal QA decisions**: per-obligation **`downstream_hints`**, **`principal_coverage_threads[]`**, **`verification_focus_proposed`** per [docs/epic-prep-principal-contract.json](epic-prep-principal-contract.json). Target is a **good draft** handoff—not gold parity; manual QA refinement expected; **`strict_principal=yes`** opt-in gates skipping primary obligations harder. Downstream pipelines consume in Round 2 steps 2–8. |
+| **COVERAGE principal (Round 2 step 2)** | **COVERAGE** copies **`verification_focus_proposed`** verbatim to **`epic_verification_focus`**, materializes **`principal_coverage_threads[]`** as ordered H2 spine (setup before surfaces on **`shell_first`**), and requires **keyed deferrals** with **`obligation_ids[]`** per [docs/coverage-principal-contract.json](coverage-principal-contract.json); **`coverage_verify.py --strict-principal`** opt-in. |
+| **ANALYSE principal (Round 2 step 3)** | **ANALYSE** consumes ref deferral obligations and coverage keyed deferrals: **`deferred_check`** gaps with **`pointers.obligation_id`**, delivery gaps enriched with **`linked_obligation_ids`**, **`exploration_suppressed`** reason **`deferral_obligation_keyed`** per [docs/analysis-principal-contract.json](analysis-principal-contract.json); **`analysis_verify.py --strict-principal`** opt-in; no silent zero gaps when deferrals exist. |
+| **TEST-DISCOVER principal (Round 2 step 4)** | **TEST-DISCOVER** consumes ref **`downstream_hints.needs_environment_provision`** into **`fixture_needs[]`** with **`linked_obligation_ids`**, and ANALYSE **`deferral_obligation_keyed`** into honest ledger disposition per [docs/discover-principal-contract.json](discover-principal-contract.json); **`discover_verify.py --strict-principal`** opt-in. |
+| **COVERAGE-REINFORCE principal (Round 2 step 5)** | **COVERAGE-REINFORCE** merges discover provision **`fixture_needs`** into pass-2 setup **`linker_trace_lines`** + human **`detail_lines`** (operator-hints catalog) and skip-deepens deferral-keyed checks per [docs/coverage-reinforce-principal-contract.json](coverage-reinforce-principal-contract.json); **`coverage_verify.py --mode reinforce --strict-principal`** opt-in. |
+| **TEST-PRECON principal (Round 2 step 6)** | **TEST-PRECON** consumes ref **`downstream_hints`** (personas, provisioning, dual-account contrast), discover **`ref_principal_provision`** fixtures, and reinforce setup **`detail_lines`** into **`session_placeholders`** and **`pc-setup`** cluster per [docs/precon-principal-contract.json](precon-principal-contract.json); **`precon_verify.py --strict-principal`** / **`--mode principal`** opt-in. |
+| **TEST-PREP principal (Round 2 step 7)** | **TEST-PREP** adopts PRECON **`tb-setup`** / **`pc-setup`**, pastes **`session_placeholders`**, persona-splits mixed retail/dealer bundles, and skip-deepens deferral-keyed checks per [docs/test-prep-principal-contract.json](test-prep-principal-contract.json); **`test_prep_verify.py --strict-principal`** / **`--mode principal`** opt-in. |
+| **CLOSE principal (Round 2 step 8)** | **CLOSE** Phase **E¾** terminal cross-artifact principal lint: provision chain, placeholder parity, deferral alignment, delegated tests-leg checks per [docs/close-principal-contract.json](close-principal-contract.json); **`close_verify.py --mode principal --strict-principal`** opt-in on **`strict_principal=yes`**. |
 | **CRTQA Tests** | **Assumed not to exist** yet during **TEST-PREP**; operators create Jira tests **after** drafts |
 
 ---
@@ -36,8 +46,8 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 | Artefact | Role |
 |----------|------|
-| **Coverage** (`-coverage.json` / Smart Checklist) | **Full** manual-ideal checklist—what could be verified in principle. **Must not hallucinate:** ground only in available requirements and tool-backed text. |
-| **E2E test drafts** (`TEST-PREP` output) | **Fewer** manual tests that cover **topics/sections** of the checklist—not every line—with **maximum execution context** (how to use DB, dxCore, instruments, shells, etc.) and **minimal** proof steps. |
+| **Coverage** (`-coverage.json` / Smart Checklist) | **Full** manual-ideal checklist—what could be verified in principle. **Must not hallucinate:** ground only in available requirements and tool-backed text. **Operator paste** (`-coverage.md`, `-tests.md`): human hints in **`checks[].detail_lines`** only. **Machine trace** (`> Discover:`, fixture/affordance ids, **`platform_reuse_annex`**) stays in JSON only — see [docs/coverage-operator-hints.json](coverage-operator-hints.json). |
+| **E2E test drafts** (`TEST-PREP` output) | **Fewer** scenario-group tests (`scenario_groups[]` → one bundle each): plain-English **intent** actions, requirement-linked results, formulas when inferable — **not** fake CRTQA executable steps. |
 
 **Not** one Jira test per checklist bullet by default; **not** one giant bundle that exceeds a reasonable manual session.
 
@@ -60,7 +70,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 ## 5. `ANALYSE:` (v2)
 
 - Runs **after** **`COVERAGE:`** (coverage JSON **required**). **Not** human BA — no hypothesis questions in generation mode.
-- **Role:** coverage-grounded **gap auditor** + bounded Confluence resolve (max 8 gaps/run) + **`exploration_suppressed[]`** for discover/precon. Contract: [`docs/analysis-gap-contract.json`](analysis-gap-contract.json). Verifier: [`analysis_verify.py`](../automation/tools/analysis_verify.py).
+- **Role:** coverage-grounded **gap auditor** + bounded Confluence resolve (max 8 gaps/run) + **`exploration_suppressed[]`** for discover/precon. Contracts: [`docs/analysis-gap-contract.json`](analysis-gap-contract.json), topology [`docs/analysis-topology-contract.json`](analysis-topology-contract.json) (`delivery_known_fail`, `delivery_excluded`, `surface_oracle_unresolved`), principal [`docs/analysis-principal-contract.json`](analysis-principal-contract.json) (keyed deferrals, delivery **`linked_obligation_ids`**). Verifier: [`analysis_verify.py`](../automation/tools/analysis_verify.py) (`--strict-topology` when ref has delivery/oracle topology; **`--strict-principal`** opt-in when ref has deferrals/principal fields).
 - **Human `.md`:** **Gaps** + **Actions** only by default; **`known_issues=yes`** on trigger for Jira mining (off by default).
 - **Machine contract:** **`-analysis.json` schema v2** is authoritative for downstream; use **`jq`** slices.
 - Direction remains **right-to-left** for **gaps** (coverage/ref pointers), not epic-summary invention.
@@ -75,7 +85,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 ---
 
-## 7. Calibration (`/crtqa-calibrate`)
+## 7. Calibration (`/epic-calibrate`)
 
 - **When:** After full pipeline run (+ optional **CLOSE**); operator has **curated** gold (not a prod copy).
 - **Inputs:** `epics/<KEY>/` (`context/*.json` when archived) vs `.cursor/calibrate/<KEY>-gold/`.
@@ -88,62 +98,55 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 ---
 
-## 8. Discovery closure contract (`TEST-DISCOVER:`)
+## 8. Discovery linker contract (`TEST-DISCOVER:`)
 
-**TEST-DISCOVER** is a **closure engine** over **coverage obligations**, not a Jira or tooling inventory. It runs after **`EPIC-PREP:`** and **`COVERAGE:`** (and may follow optional **`ANALYSE:`** or human coverage polish). The **universe** of work is **primary** `checks[]` and **primary** `coverage_matrix[]` rows in **`-coverage.json`** only—do not add obligations from Jira breadth.
+**TEST-DISCOVER** is a **deterministic linker** over **frozen coverage** — not a browser exploration phase. It runs **after human coverage review** (`coverage.sources.coverage_frozen_at`). The **universe** is **primary** `checks[]` in **`-coverage.json`** only.
 
-Three lanes (epic-agnostic; content varies per Epic):
+| Lane | Question | Durable fields |
+|------|----------|----------------|
+| **Obligations** | What must we prove? | **`obligation_ledger[]`** |
+| **Affordances** | How observe? (harness refs, GROUND probes, oracle ids) | **`verification_affordances[]`** |
+| **Fixture needs** | What env class? (classified only) | **`fixture_needs[]`** at **`classified_only`** |
 
-| Lane | Question | Durable fields (schema v3) |
-|------|----------|----------------------------|
-| **Obligations** | What must we be able to prove? (from coverage) | **`obligation_ledger[]`** |
-| **Affordances** | How can we observe each proof? (tools, surfaces, probes) | **`verification_affordances[]`**, **`tooling`** |
-| **Fixture needs** | What must exist in the environment before observation is meaningful? | **`fixture_needs[]`** (from coverage/ref + setup-depth probes)—**not** CRTQA tickets by default |
+**Forbidden on DISCOVER:** Phase 0 env gates, Chrome MCP, **`setup_depth: probe_executed`**, **`fe_credentials`**, coverage mutation. Contract: [`docs/discover-linker-contract.json`](discover-linker-contract.json). Verifier: **`discover_verify.py --mode linker`**.
 
-**CRTQA index (opt-in):** **MUST NOT** populate **`reference_index[]`** / **`precondition_signals`** or **`prerequisite_edges`** unless the operator adds **`crtqa_index=yes`** on the same line as **`TEST-DISCOVER:`**. Generation **must not** treat existing CRTQA Tests as structural prerequisites.
+**Finished** means every primary check has ledger **disposition** ≠ `pending` and linker verifier passes. Delivery blockers from ANALYSE/coverage → **`tooling_blocked`**.
 
-**Finished** means every primary obligation has a **disposition** (`affordance_mapped`, `fixture_need_mapped`, `prerequisite_mapped` when CRTQA index on, `tooling_blocked`, or `scope_gap`), and **`discover_verify.py`** passes for the target **`discovery_status`**. In generation, **`discovery_status: complete`** additionally requires **setup depth** honesty (fixture needs not stuck at shallow depth without **`setup_depth_gaps`**)—not merely “found a Pre-Condition issue in Jira.” When **`-ref.json`** marks **Adaptive** **`affected`**, **`complete`** also requires bounded **Chrome** smoke on CTQA Adaptive (**shared principal** from Confluence—no **`adaptive_creds`** token). Configuration fixture kinds use kind-specific probes in [`docs/discover-fixture-probes.json`](discover-fixture-probes.json), not **`console_guide`** alone. **`discovery_status: incomplete`** is valid when gaps are explicit (e.g. Adaptive not probed, setup depth insufficient).
+**Not in scope:** test drafts, **`scenario_groups[]`**, or live probes — **TEST-PREP** / coverage freeze.
 
-**Self-heal** = iterate the closure loop until the **verifier** passes or **no-progress** / iteration cap → emit with honest gaps. **Not** unbounded Jira search.
-
-**Outputs:** **`-discover.json`** (schema v3: **`fixture_needs`**, **`obligation_ledger`**, **`obligation_closure`** including **`setup_depth_gaps`**, optional **`reference_index`** when CRTQA index on). Playbook: [`.cursor/pipelines/test-discover.md`](../.cursor/pipelines/test-discover.md). Verifier: [`automation/tools/discover_verify.py`](../automation/tools/discover_verify.py).
-
-**Phase 0 hard stop:** Agents run **`crtqa_env_probe.py --coverage`** (both machine gates; labels **`required_for_epic`**), then MCP **`list_tables`** when postgres is required, then **`Get-CrtqaConsoleStatus.ps1`** when console is required, then **Phase 0b/0c** FE gates ([`docs/fe-ui-probe-contract.json`](fe-ui-probe-contract.json)): missing **`dxtrade5_creds`** / **`webbroker_creds`** when Chrome UI is required → **STOP** unless operator re-runs with **`fe_exploration_waived=yes`** after ack. **`fe_credentials.supplied`** (token on trigger) **≠** **`fe_ui_sessions.authenticated`** (post-login smoke). With creds, Chrome MCP must pass post-login smoke before Step **E** may claim **`probe_executed`** on dxTrade5/WebBroker fixture kinds. Recommended operator prep: tunnel tab → **`/crtqa-console start`** → **`/crtqa-env`**. **`TEST-DISCOVER: <KEY> proceed`** re-runs Phase 0 fresh. **`discovery_status: incomplete`** applies only **after** Phase 0 passed.
-
-**Not in scope for discover:** authoring full ordered precondition recipes or **`test_skeleton[]`** bundling—that is **TEST-PRECON** (`-precon.json` / `-precon.md`). Discover does not replace **coverage** as traceability SoT.
+**Outputs:** **`-discover.json`** schema v3 with **`sources.discovery_mode: linker_only`**. Playbook: [`.cursor/pipelines/test-discover.md`](../.cursor/pipelines/test-discover.md).
 
 ---
 
-## 9. Precondition authoring and chain (`TEST-PRECON:`)
+## 9. Production chain and helper (`draft_truth_v3`)
 
-**Exploration map (deepening):** **DISCOVER** (what must be satisfiable) → **PRECON** (how to set up once) → **PREP** (how to verify each bundle). Each layer **must produce strictly deeper evidence** than the previous ([`docs/exploration-depth-ladder.json`](exploration-depth-ladder.json)): `smoke` → `discover_probe` → `precon_drill` → `prep_verify_view`. **Authenticated ≠ explored.**
+**Recommended chain:** `EPIC-PREP` → `COVERAGE` → **`GROUND`** → `ANALYSE` → *(optional `COVERAGE fix_breadth=yes`, max **2** rounds)* → **human coverage review** (edit **`scenario_groups[]`**, set **`coverage_frozen_at`**) → `TEST-DISCOVER` (**linker only**) → `TEST-PREP` (**`scenario_intent`**) → `CLOSE`. Master: [`docs/draft-truth-contract.json`](draft-truth-contract.json).
 
-**Recommended chain:** `EPIC-PREP` → `COVERAGE` → `ANALYSE` → `TEST-DISCOVER` → **`COVERAGE-REINFORCE`** → **`TEST-PRECON`** → `TEST-PREP` → **`CLOSE`**. Optional stages may be skipped when not using **`/crtqa-helper`**; helper runs the full chain by default.
+**`/epic-helper` v4:** one pipeline **per agent turn**; **two** human gates (env, coverage review); scratch `epics/<KEY>/helper/` → `context/helper/` on CLOSE. Contract: [`epic-helper-contract.json`](epic-helper-contract.json).
 
-**`/crtqa-helper`:** one pipeline **per agent turn**; three human gates (env, coverage review, discover creds); scratch `epics/<KEY>/helper/` → `context/helper/` on CLOSE. Contract: [`crtqa-helper-contract.json`](crtqa-helper-contract.json).
+**`CLOSE:`** — backward documentation integrity ladder + archive. Post-close: **three** human `.md` at `{EpicDir}` root (coverage, analysis, tests); all JSON under `{EpicDir}context/` ([`docs/close-contract.json`](close-contract.json)). **No** `-precon.json` required in v3. Optional **`strict_topology=yes`** / **`strict_principal=yes`** for legacy cross-artifact lint. **No** MCP. Does not re-run **ANALYSE**.
 
-**`CLOSE:`** — backward documentation integrity ladder + archive. Post-close: four human `.md` at `{EpicDir}` root; all JSON under `{EpicDir}context/` ([`docs/close-contract.json`](close-contract.json)). **No** MCP. Does not re-run **ANALYSE**. Rerunning upstream pipelines on a closed epic breaks paths unless JSON is moved back from `context/`.
+**`TEST-PRECON:` (legacy):** retained for calibrate/benchmark fixtures only — **not** in production chain. Playbook marked LEGACY.
 
-- **`TEST-PRECON:` (v5)** — **Phase 0c** = **`smoke` only**. **Phase 2b** authors **`test_skeleton[].case_outline[]`**, **`session_placeholders`**, **`command_patterns`**. **Phase 4R/4D/4C** reach **`precon_drill`**. Schema v5: [`precon-ref.json`](../epics/templates/precon-ref.json). Verifier: [`precon_verify.py`](../automation/tools/precon_verify.py).
-- **`TEST-PREP`** **SHOULD** load **`-precon.json`** (thin precon cite; **`case_outline`** merged in **8a½**; adopt **`test_skeleton[]`** in **8a**).
+**Console gate:** [`crtqa_console_probe.py`](automation/tools/crtqa_console_probe.py) — epic-helper cold start and GROUND; recovery **`/crtqa-console start`**. Not a blocking gate for TEST-PREP generation.
 
 ---
 
-## 10. Verification outlines (`TEST-PREP:` v3)
+## 10. Scenario intent drafts (`TEST-PREP:` v3)
 
-**Default output:** **CRTQA-shaped executable outlines** ([`docs/test-prep-draft-profiles.json`](test-prep-draft-profiles.json) **`crtqa_outline`**). Legacy: **`draft_profile=teaching`**. **TBD policy:** [`docs/test-prep-tbd-contract.json`](test-prep-tbd-contract.json) — session placeholders and `[oracle:TBD]` only; full **case_outline** expansion (no whole-scenario deferrals).
+**Default output:** **`scenario_intent`** profile ([`docs/test-prep-scenario-intent-contract.json`](test-prep-scenario-intent-contract.json)). One **`test_bundles[]`** per **`scenario_groups[]`** on frozen coverage. **Actions:** what must be achieved (plain English). **Results:** requirement keys + observable claims; formulas in results/peculiarities with **`formula_provenance`** (`agent_inferred` | `ground_verified`). **Deferrals:** **`excluded_checks_with_reason`** only — no fake action rows.
 
-**Exploration depth:** **DISCOVER** → **PRECON** → **PREP** per [`exploration-depth-ladder.json`](exploration-depth-ladder.json). **8a¾** = **`prep_verify_view`**. **No live `execution trade`** during PREP — literary ladder **templates** with placeholders are **required** for **`stateful_ladder`**.
+**Legacy:** **`draft_profile=crtqa_outline`** or **`teaching`** for calibrate/benchmark only.
 
-**Greenfield:** no live **CRTQA Jira** fetch; no **`[REQUIRES: CRTQA-*]`** or CRTQA keys in durable drafts.
+**No generation exploration:** no Phase 0 env gates, no Chrome MCP, no **`prep_verify_view`** in TEST-PREP. UI detail is operator refinement or future UI-GROUND.
 
-**Obligation gate:** If **`-coverage.json`** **`obligations_coverage`** shows uncovered **`primary_candidate`** rows, **`TEST-PREP:`** must use **`map_only=yes`** or **STOP** with operator message — do not invent checks to fill gaps.
+**Greenfield:** no live **CRTQA Jira** fetch; no **`[REQUIRES: CRTQA-*]`** in durable drafts.
 
-**Verification ladder:** **8a½** plan + **`case_outline[]`** → **`--mode plan`** → **8a¾** → **`--mode explore`** → **8b** (per bundle or per check) → **8c** merge → **`--mode draft` / `merge` / `tests`**. **Yogi tags only in `draft.results[]`**.
+**Obligation gate:** uncovered **`primary_candidate`** rows → **`map_only=yes`** or **STOP**.
 
-**Phase 0 FE:** [`docs/fe-ui-probe-contract.json`](fe-ui-probe-contract.json); cred tokens on trigger.
+**Verifier:** **`test_prep_verify.py --mode scenario_intent`**. Contract: [`docs/scenario-groups-contract.json`](scenario-groups-contract.json).
 
-Playbook: [`.cursor/pipelines/test-prep.md`](../.cursor/pipelines/test-prep.md). Verifier: [`automation/docs/test-prep-verify.md`](../automation/docs/test-prep-verify.md).
+Playbook: [`.cursor/pipelines/test-prep.md`](../.cursor/pipelines/test-prep.md). Verifier doc: [`automation/docs/test-prep-verify.md`](../automation/docs/test-prep-verify.md).
 
 ---
 
@@ -165,7 +168,7 @@ Large epic and harness artefacts (`*-coverage.json`, `*-discover.json`, etc.) mu
 - **Project first:** agents run **`jq`** filters (see [automation/docs/jq.md](../automation/docs/jq.md)) and summarize stdout; default threshold **~60 lines** or any subset/array filter need.
 - **All epic pipelines** (including **TEST-PRECON** and **TEST-PREP**) follow the same inspect norm; playbook load steps **MUST NOT** contradict **MUST** in [`.cursor/rules/jq-json.mdc`](../.cursor/rules/jq-json.mdc).
 - **Edit separately:** writing or emitting durable JSON still uses Read/write on the file; jq is optional for spot-checks.
-- **Verifiers stay authoritative:** `discover_verify.py`, `calibrate_verify.py`, `crtqa_env_probe.py`, and other pipeline gates are not replaced by jq.
+- **Verifiers stay authoritative:** `discover_verify.py`, `calibrate_verify.py`, `crtqa_console_probe.py`, and other pipeline gates are not replaced by jq.
 - **Install:** system **PATH** per machine (`winget install --id jqlang.jq -e` on Windows) — not vendored in repo, not MCP.
 
 Rule detail: [`.cursor/rules/jq-json.mdc`](../.cursor/rules/jq-json.mdc).
@@ -187,9 +190,8 @@ Adapted from [grounding-kit](https://github.com/heatdance/grounding-kit); charte
 
 | Mode | Examples | Agent duty |
 |------|----------|------------|
-| **Conversation** | `/better-prompt`, `/better-skill`, questions, review-only | No epic or harness edits; no `qa-handoff` churn for chat-only turns |
-| **Teach** | `/teach`, `/teach stop` | Teach-first smoke under `auto-tests/`; no complete test unless operator asks; no `epics/` or pipeline emits; session file `auto-tests/.teacher-session.json` |
-| **Action** | `EPIC-PREP:` … `CLOSE:`, harness doc edits, epic artefacts | Playbooks + verifiers; update handoff before session end |
+| **Conversation** | Questions, review-only | No epic or harness edits; no `qa-handoff` churn for chat-only turns |
+| **Action** | `EPIC-PREP:` … `CLOSE:`, slash commands, harness doc edits, epic artefacts | Playbooks + verifiers; update handoff before session end |
 
 **Pipeline triggers** (`EPIC-PREP:` … `CLOSE:`, `CLEAN:`, slash commands in [`grounding-integration.json`](grounding-integration.json)) are **high confidence for declared scope** — see [`.cursor/rules/intent-corner.mdc`](../.cursor/rules/intent-corner.mdc).
 
@@ -199,7 +201,7 @@ When an **Action** changes durable harness files or ends a substantive session:
 
 1. Update [`qa-handoff.md`](../qa-handoff.md) — **Resume**, **Next**, **Anchors** (≤15 lines) + dated bullet under Last updated.
 2. If paths/keywords changed → [`docs/harness-map.json`](harness-map.json), [`AGENTS.md`](../AGENTS.md), [`README.md`](../README.md) per [harness-maintenance](../.cursor/rules/harness-maintenance.mdc).
-3. If coach behavior changed → bump versions in [`docs/operator-assist-contract.json`](operator-assist-contract.json) + fixture goldens.
+3. If epic-helper behavior changed → bump `epicHelper.version` in [`docs/epic-helper-contract.json`](epic-helper-contract.json) + [epic-helper-golden.json](../automation/tools/fixtures/operator-assist/epic-helper-golden.json).
 
 Epic pipeline runs do **not** require a machine `log.research[]` trail.
 
@@ -225,16 +227,15 @@ There is **no separate IDE “cache”** that injects a first-prompt summary on 
 |------|------|
 | Router / triggers | [`.cursor/rules/pipeline-router.mdc`](../.cursor/rules/pipeline-router.mdc) |
 | Calibrate | [`.cursor/calibrate/README.md`](../.cursor/calibrate/README.md) |
-| Command | [`.cursor/commands/crtqa-calibrate.md`](../.cursor/commands/crtqa-calibrate.md) |
+| Command | [`.cursor/commands/epic-calibrate.md`](../.cursor/commands/epic-calibrate.md) |
 | Entry map | [`docs/harness-map.json`](harness-map.json) |
 | Playbooks | [`.cursor/pipelines/`](../.cursor/pipelines/) |
 | TEST-DISCOVER verifier | [`automation/tools/discover_verify.py`](../automation/tools/discover_verify.py) |
 | TEST-PRECON verifier | [`automation/tools/precon_verify.py`](../automation/tools/precon_verify.py) |
 | jq filters / install | [automation/docs/jq.md](../automation/docs/jq.md) |
-| Grounding charter / coaches | [docs/grounding-integration.json](grounding-integration.json) |
+| Grounding charter | [docs/grounding-integration.json](grounding-integration.json) |
 | Corner harness verify | [automation/docs/corner-harness-verify.md](../automation/docs/corner-harness-verify.md) |
-| Karpathy coding (opt-in) | [docs/karpathy-guidelines-contract.json](karpathy-guidelines-contract.json) · [`.cursor/skills/karpathy-guidelines/SKILL.md`](../.cursor/skills/karpathy-guidelines/SKILL.md) |
-| Teach / smoke automation | [docs/auto-tests-contract.json](auto-tests-contract.json) · [`/teach`](../.cursor/commands/teach.md) · [`auto-tests/`](../auto-tests/) |
+| Smoke automation | [docs/auto-tests-contract.json](auto-tests-contract.json) · [`auto-tests/`](../auto-tests/) |
 
 ---
 

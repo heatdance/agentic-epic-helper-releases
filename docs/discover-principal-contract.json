@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "_comment": "TEST-DISCOVER consumption of EPIC-PREP downstream_hints provisioning and ANALYSE deferral_obligation_keyed suppression. Playbook Steps A, C-fixture, E, F. Verifier: discover_verify.py --strict-principal. Upstream: docs/epic-prep-principal-contract.json, docs/coverage-principal-contract.json, docs/analysis-principal-contract.json.",
+  "upstream": {
+    "epic_prep_principal": "docs/epic-prep-principal-contract.json",
+    "coverage_principal": "docs/coverage-principal-contract.json",
+    "analysis_principal": "docs/analysis-principal-contract.json"
+  },
+  "provision_scan": {
+    "ref_filter": "obligations_proposed[] where downstream_hints.needs_environment_provision == true OR kind == environment_setup",
+    "coverage_match": "primary checks[] with obligation_ids[] containing provision obligation id",
+    "fields": ["id", "kind", "downstream_hints.needs_environment_provision", "downstream_hints.needs_dual_account_contrast"]
+  },
+  "fixture_kind_map": {
+    "widget_ui_account_group_setup": {
+      "when": "ref.epic_archetype.value == widget_ui AND provision obligation with account_group or publish keywords",
+      "kind": "account_group_environment_setup"
+    },
+    "metrics_calculation_console": {
+      "when": "ref.epic_archetype.value == metrics_calculation AND ladder/console primary checks",
+      "kind": "weighted_avg_fx_spot_account"
+    },
+    "metrics_calculation_ladder": {
+      "when": "calculation_contract ladder_present on primary check",
+      "kind": "console_ladder_session"
+    }
+  },
+  "fixture_emit_rules": {
+    "derivation": "ref_principal_provision",
+    "required_fields": ["linked_obligation_ids", "linked_check_ids", "kind"],
+    "initial_setup_depth": "classified_only",
+    "dual_account_note": "When needs_dual_account_contrast true, notes mention ENRG/OPPT contrast — no secrets"
+  },
+  "deferral_ledger_rules": {
+    "analysis_suppression_reason": "deferral_obligation_keyed",
+    "primary_disposition": "fixture_need_mapped",
+    "forbidden_disposition": "scope_gap",
+    "skip_step_e_probes": true,
+    "validation_log_step": "phaseE_skipped_deferral_keyed",
+    "disposition_note": "Cite obligation_id from analysis deferred_check gap or coverage obligations_coverage.deferred_in_check"
+  },
+  "forbidden": [
+    "scope_gap on primary checks with analysis exploration_suppressed deferral_obligation_keyed",
+    "missing fixture_needs row when ref provision obligation has matching primary coverage check",
+    "probe_executed on deferral-keyed suppressed primary checks"
+  ],
+  "strict_principal_verifier": {
+    "requires_ref_and_coverage_and_discover": true,
+    "skip_when_no_principal": "ref has no provision obligations and no principal_coverage_threads and no verification_focus_proposed",
+    "rules": [
+      "each ref provision obligation id appears in fixture_needs[].linked_obligation_ids with linked primary check",
+      "each primary check with analysis deferral_obligation_keyed has ledger disposition != scope_gap",
+      "validation_log contains phaseC-principal when ref has provision obligations",
+      "validation_log may contain phaseE_skipped_deferral_keyed when keyed deferrals acknowledged"
+    ]
+  },
+  "downstream_handoff": {
+    "COVERAGE-REINFORCE": {
+      "reads": ["fixture_needs[]", "fixture_needs[].linked_obligation_ids", "validation_log phaseE_skipped_deferral_keyed"],
+      "use": "Pass-2 detail_lines merge for setup primaries and deferral skip-deepen (Round 2 step 5)"
+    },
+    "TEST-PRECON": {
+      "reads": ["fixture_needs[]", "fixture_needs[].linked_obligation_ids", "validation_log phaseE_skipped_deferral_keyed"],
+      "use": "Session placeholders, precon_clusters pc-setup provisioning paste (Round 2 step 6); see docs/precon-principal-contract.json"
+    }
+  }
+}

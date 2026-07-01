@@ -11,4 +11,4 @@ Machine-readable smoke automation specs (team-publishable minimal set).
 
 **CLEAN:** `schema.json` and `smoke-manifest.json` are **kept** on `team/team`; other files under `specs/` are not published. Private pedagogy stays in [../docs/](../docs/).
 
-Do not duplicate epic JSON under `epics/`; link manual tests via `crtqa_key` and fill `automation_scope` in `/teach` phase 0.
+Do not duplicate epic JSON under `epics/`; link manual tests via `crtqa_key` and fill `automation_scope` in `` phase 0.

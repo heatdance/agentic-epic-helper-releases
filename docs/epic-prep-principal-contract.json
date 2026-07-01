@@ -1,0 +1,173 @@
+{
+  "schema_version": 1,
+  "_comment": "Principal QA decision vocabulary on -ref.json (Round 2 EPIC-PREP). Additive to docs/epic-prep-topology-contract.json. Playbook step 3c downstream_hints + step 3i principal reconcile. Verifier: epic_prep_verify.py --strict-principal.",
+  "coverage_thread_values": [
+    "environment_setup",
+    "functional_config",
+    "mapping_routing",
+    "surface_quotes",
+    "invariants",
+    "backup_eod",
+    "dimensions",
+    "deferral_only"
+  ],
+  "persona_values": ["console", "retail", "dealer", "mobile", "cross_persona"],
+  "downstream_hints_item": {
+    "coverage_thread": "environment_setup | functional_config | mapping_routing | surface_quotes | invariants | backup_eod | dimensions | deferral_only",
+    "needs_environment_provision": "boolean — CTQA accounts/groups/publish/routing before UI/console proof",
+    "needs_dual_account_contrast": "boolean — two group/account personas (e.g. ENRG vs OPPT)",
+    "linked_delivery_note_ids": ["dn-001"],
+    "personas": ["console", "retail", "dealer", "mobile", "cross_persona"]
+  },
+  "verification_focus_proposed_item": {
+    "statement": "1–3 sentences; Jira-derived primary focus for COVERAGE to copy without paraphrase",
+    "source": "jira_summary | jira_description | synthesis | operator_focus",
+    "keywords": ["FX_SPOT", "account group"]
+  },
+  "principal_coverage_thread_item": {
+    "thread_id": "pct-001",
+    "title": "Human-readable thread title for COVERAGE section spine",
+    "coverage_thread": "environment_setup",
+    "obligation_ids": ["obl-001"],
+    "required_when": "Archetype rule id from archetype_rules[] when thread is mandatory"
+  },
+  "setup_keyword_triggers": [
+    "account group",
+    "fxconfiguration",
+    "cornertraderfxconfiguration",
+    "publish",
+    "tier",
+    " et ",
+    "suffix",
+    "fxspotsuffix"
+  ],
+  "backup_eod_keyword_triggers": [
+    "backup",
+    "eod",
+    "end of day",
+    "daily_data_recorder"
+  ],
+  "archetype_rules": [
+    {
+      "id": "widget_ui_setup_thread",
+      "archetype": "widget_ui",
+      "when": "jira_scenario_surfaces_non_empty AND setup_keywords_in_obligations_or_jira",
+      "requires": "principal_coverage_threads includes environment_setup OR obligations_proposed has kind environment_setup"
+    },
+    {
+      "id": "widget_ui_invariants_thread",
+      "archetype": "widget_ui",
+      "when": "any primary_candidate obligation with kind invariant",
+      "requires": "principal_coverage_threads includes invariants"
+    },
+    {
+      "id": "widget_ui_backup_thread",
+      "archetype": "widget_ui",
+      "when": "backup_eod_keywords_in_obligations_or_jira",
+      "requires": "principal_coverage_threads includes backup_eod"
+    },
+    {
+      "id": "metrics_calculation_setup_optional",
+      "archetype": "metrics_calculation",
+      "when": "always",
+      "requires": "environment_setup thread optional; formula_first downstream unchanged"
+    }
+  ],
+  "downstream_hints_mapping": {
+    "config_vs_position_account_group_primary": {
+      "needs_dual_account_contrast": true,
+      "coverage_thread": "environment_setup or invariants per statement"
+    },
+    "kind_environment_setup": {
+      "needs_environment_provision": true,
+      "coverage_thread": "environment_setup"
+    },
+    "kind_explicit_deferral_or_deferral_candidate": {
+      "coverage_thread": "deferral_only",
+      "deferral_reason_required": true
+    },
+    "config_vs_position_routing_or_markup_with_ui": {
+      "coverage_thread": "surface_quotes or mapping_routing"
+    }
+  },
+  "downstream_handoff": {
+    "COVERAGE": {
+      "reads": [
+        "principal_coverage_threads[]",
+        "verification_focus_proposed",
+        "obligations_proposed[].downstream_hints"
+      ],
+      "use": "Materialize checklist sections from threads; copy focus statement verbatim"
+    },
+    "ANALYSE": {
+      "reads": [
+        "obligations_proposed with disposition deferral_candidate",
+        "verification_topology.delivery_notes linked_obligation_ids"
+      ],
+      "use": "Deferral ↔ gap honesty; delivery drift"
+    },
+    "TEST-DISCOVER": {
+      "reads": ["obligations_proposed[].downstream_hints.needs_environment_provision"],
+      "use": "Provisioning fixture needs (step 4 Round 2)"
+    },
+    "TEST-PRECON": {
+      "reads": [
+        "downstream_hints.personas",
+        "downstream_hints.needs_environment_provision",
+        "downstream_hints.needs_dual_account_contrast"
+      ],
+      "use": "Session placeholders and provisioning paste (step 6 Round 2)"
+    },
+    "TEST-PREP": {
+      "reads": ["downstream_hints.personas", "principal_coverage_threads", "downstream_hints.needs_dual_account_contrast"],
+      "use": "Persona split bundles and dual-account placeholder paste (step 7 Round 2); see docs/test-prep-principal-contract.json"
+    }
+  },
+  "handoff_table": [
+    {
+      "field": "obligations_proposed[].downstream_hints",
+      "consumer_pipeline": "COVERAGE",
+      "consumer_phase": "3",
+      "use": "Per-obligation thread and provisioning flags"
+    },
+    {
+      "field": "verification_topology.principal_coverage_threads",
+      "consumer_pipeline": "COVERAGE",
+      "consumer_phase": "3",
+      "use": "Ordered checklist spine intent"
+    },
+    {
+      "field": "verification_focus_proposed",
+      "consumer_pipeline": "COVERAGE",
+      "consumer_phase": "1",
+      "use": "Primary focus seed — copy without paraphrase"
+    },
+    {
+      "field": "verification_topology.delivery_notes[].linked_obligation_ids",
+      "consumer_pipeline": "ANALYSE",
+      "consumer_phase": "2",
+      "use": "Delivery ↔ obligation linkage"
+    },
+    {
+      "field": "verification_topology.delivery_notes[].linked_surface_ids",
+      "consumer_pipeline": "ANALYSE",
+      "consumer_phase": "2",
+      "use": "Delivery ↔ surface linkage"
+    }
+  ],
+  "appendix_examples": {
+    "CRT-594": {
+      "verification_focus_proposed_sample": "Verify FX_SPOT group-specific bid/ask on named client surfaces, tier/oracle rules per widget, midpoint invariant across groups, and backup/EOD midpoint capture.",
+      "principal_coverage_threads_sample": [
+        "environment_setup",
+        "surface_quotes",
+        "invariants",
+        "backup_eod"
+      ]
+    },
+    "CRT-639": {
+      "verification_focus_proposed_sample": "Verify weighted-average cash settlement formulas and ladders for FX Spot per CRT-1738–1743.",
+      "principal_coverage_threads_optional": true
+    }
+  }
+}

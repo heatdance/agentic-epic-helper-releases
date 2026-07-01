@@ -1,0 +1,195 @@
+{
+
+  "schema_version": 5,
+
+  "description": "Epic stats v5 — test-first corpus, cross-project QA tasks, per-user latest-<username>.md, team incremental",
+
+  "jira_draft_estimate_field": "customfield_11250",
+
+  "default_estimate_hours": 8,
+
+  "corpus_tcd_small_max_hours": 16,
+
+  "micro_corpus_baseline_logged_hours": 15,
+
+  "corpus_require_user_logged": true,
+
+  "representable_min_epics_per_subcategory": 4,
+
+  "micro_corpus_note": "When corpus epics < representable_min_epics_per_subcategory: render collapsed rollup only (no Epics column); corpus medians use small TCD draft ceiling and micro_corpus_baseline_logged_hours; AI metrics from actual comparison rows",
+
+  "multi_person_others_hours_strict": 2,
+
+  "batch_size_search": 50,
+
+  "jira_browse_url_template": "https://jira.in.devexperts.com/browse/{issue_key}",
+
+  "team_users": ["mshpak", "amukanova", "mtavadze", "arodzevich", "mshram"],
+
+  "team_rollup_formulas": {
+
+    "epics": "sum of per-user corpus epic counts in size band",
+
+    "median_draft": "mean of per-user band median_est (micro users: small-TCD draft ceiling)",
+
+    "median_logged": "mean of per-user band median_log (micro users: micro_corpus_baseline_logged_hours on small band)",
+
+    "ai_epics": "sum of per-user n_ai_epics in band",
+
+    "ai_logged_avg": "mean of per-user ai_avg_log where defined",
+
+    "saved_pct": "(team median logged − team AI logged avg) / team median logged on the team row"
+
+  },
+
+  "state_optional_fields": {
+
+    "epic_meta": "Map CRT-KEY -> {summary, labels, components, description, fetched_utc} for Epic breakdown Note column"
+
+  },
+
+  "epic_categories_note": "Manual FE/BE/API/Other reviews in paths.epic_categories; applied on rollup via apply_epic_categories_to_state",
+
+  "report_sections": {
+
+    "collapsed_rollup": "One all-corpus row, or Small TCD + Big TCD rows when both bands have >= representable_min_epics_per_subcategory corpus epics",
+
+    "category_rollup": "FE/BE/API/Other x small_tcd|big_tcd",
+
+    "epic_breakdown": "Corpus epics with FE+S style labels and epic_meta Note",
+
+    "ai_epic_breakdown": "attestation_by_epic union comparison epics",
+
+    "team_collapsed_rollup": "latest-team.md — collapsed rollup (Small + Big; team Saved % from team row); per-user rollup table below"
+
+  },
+
+  "tests_jql_template": "project = CRTQA AND issuetype = Test AND reporter = {jira_user} ORDER BY created ASC",
+
+  "task_jql_template": "\"Epic Link\" = {epic_key} AND ((issuetype = \"Test Execution\" AND summary ~ \"Test Case Development\") OR (issuetype = \"Test Execution\" AND (summary ~ \"Epic Testing\" OR summary ~ \"Epic Validation\")) OR (issuetype = \"Test Execution\" AND summary ~ \"Release notes\") OR (issuetype = \"QA Task\" AND summary ~ \"Update test\")) ORDER BY key ASC",
+
+  "incremental_tcd_jql_template": "project = CRTQA AND issuetype = \"Test Execution\" AND summary ~ \"Test Case Development\" AND statusCategory = Done ORDER BY key ASC",
+
+  "near_miss_jql_template": "\"Epic Link\" = {epic_key} AND issuetype = \"Test Execution\" AND (summary ~ \"Case Develop\" OR summary ~ \"Epic Test\") ORDER BY key ASC",
+
+  "aggregate_lanes": ["release_notes", "update_test"],
+
+  "artifact_rules": [
+
+    {
+
+      "lane": "tcd",
+
+      "issuetype": "Test Execution",
+
+      "summary_needles": ["test case development"],
+
+      "logged_scope": "user_worklog"
+
+    },
+
+    {
+
+      "lane": "epic_testing",
+
+      "issuetype": "Test Execution",
+
+      "summary_needles": ["epic testing"],
+
+      "logged_scope": "user_worklog"
+
+    },
+
+    {
+
+      "lane": "epic_validation",
+
+      "issuetype": "Test Execution",
+
+      "summary_needles": ["epic validation"],
+
+      "logged_scope": "user_worklog"
+
+    },
+
+    {
+
+      "lane": "release_notes",
+
+      "issuetype": "Test Execution",
+
+      "summary_needles": ["release notes"],
+
+      "logged_scope": "user_worklog"
+
+    },
+
+    {
+
+      "lane": "update_test",
+
+      "issuetype": "QA Task",
+
+      "summary_needles": ["update test"],
+
+      "logged_scope": "user_worklog"
+
+    }
+
+  ],
+
+  "exclude_from_qa": [
+
+    {
+
+      "issuetype": "QA Task",
+
+      "summary_needles": ["requirements analysis"],
+
+      "reason": "e.g. CRTQA-1006"
+
+    },
+
+    {
+
+      "issuetype": "QA Task",
+
+      "summary_needles": ["test cases review", "test case review"],
+
+      "reason": "e.g. CRTQA-698"
+
+    }
+
+  ],
+
+  "paths": {
+
+    "stats_root": "stats/epic-stats",
+
+    "epic_categories": "stats/epic-stats/epic-categories.json",
+
+    "categories": "stats/epic-stats/temp/categories.json",
+
+    "state_template": "stats/epic-stats/state/last-sync-{jira_user}.json",
+
+    "latest_template": "stats/epic-stats/latest-{jira_user}.md",
+
+    "latest_team": "stats/epic-stats/latest-team.md",
+
+    "raw_template": "stats/epic-stats/raw/{jira_user}/run-{utc}.jsonl"
+
+  },
+
+  "modes": {
+
+    "initial_assessment": "Build corpus from tests + cross-project QA; write state and latest-<user>.md",
+
+    "incremental_update": "Phase 1: confirm per-user latest/state current; Phase 2: append scoped Done TCD as comparison per user; Phase 3: render latest-team.md from state",
+
+    "full_refresh": "Re-fetch Jira for included keys; do not change roles without operator entrust"
+
+  }
+
+}
+
+

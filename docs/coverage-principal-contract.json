@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "_comment": "COVERAGE consumption of EPIC-PREP principal fields on -ref.json. Playbook phases 3a, 8.5, 9. Verifier: coverage_verify.py --strict-principal. Upstream: docs/epic-prep-principal-contract.json.",
+  "focus_copy_rule": {
+    "when": "ref.verification_focus_proposed.statement non-empty",
+    "action": "Set coverage.epic_verification_focus.statement verbatim; source epic_ref_proposed; copy keywords[] when present",
+    "override": "user_trigger_focus from COVERAGE focus= wins with validation_log conflict per playbook phase 3a"
+  },
+  "thread_section_map": {
+    "environment_setup": "## Data setup — account groups and quote publication",
+    "functional_config": "## Functional configuration & instrument posture",
+    "mapping_routing": "## Mapping and routing",
+    "surface_quotes": "## Surface quotes",
+    "invariants": "## Invariants under configuration change",
+    "backup_eod": "## Backup and EOD capture",
+    "dimensions": "## Dimensions",
+    "deferral_only": "## Deferred obligations"
+  },
+  "shell_first_spine_order": [
+    "Primary focus",
+    "principal_coverage_threads in ref array order",
+    "jira_scenario_surfaces in ref array order",
+    "Cross-surface invariants"
+  ],
+  "keyed_deferral_rule": {
+    "applies_to": ["deferral_candidate", "explicit_deferral"],
+    "required_status": "deferred_in_check",
+    "required_check": "scenario_line with ! reason and obligation_ids[] containing deferral obl id",
+    "alternative": "excluded_with_reason plus excluded_checks_with_reason[] with obligation_id"
+  },
+  "forbidden_deferral_patterns": [
+    {
+      "id": "blanket_multi_group_silent",
+      "regex": "epic silent on multi-account|multi-group quote permutations",
+      "when": "ref_has_deferral_or_invariant_obligations",
+      "message": "Use keyed deferral with obligation_ids; do not blanket-defer under Dimensions."
+    }
+  ],
+  "metrics_calculation_short_circuit": {
+    "when": "ref.epic_archetype.value == metrics_calculation",
+    "setup_thread_optional": true,
+    "focus_copy_still_required_when_proposed": true
+  },
+  "downstream_handoff": {
+    "ANALYSE": {
+      "reads": ["checks with keyed deferrals", "obligations_coverage deferral rows"],
+      "use": "Deferral gap honesty (Round 2 step 3)"
+    }
+  },
+  "handoff_table": [
+    {
+      "field": "verification_focus_proposed",
+      "coverage_phase": "3a",
+      "use": "Copy to epic_verification_focus verbatim"
+    },
+    {
+      "field": "verification_topology.principal_coverage_threads",
+      "coverage_phase": "8.5",
+      "use": "Ordered H2 spine before surface sections"
+    },
+    {
+      "field": "obligations_proposed[].downstream_hints",
+      "coverage_phase": "4",
+      "use": "Matrix seed and thread obligation binding"
+    }
+  ]
+}

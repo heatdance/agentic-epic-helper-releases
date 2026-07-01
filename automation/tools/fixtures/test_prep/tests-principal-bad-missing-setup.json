@@ -1,0 +1,78 @@
+{
+  "_comment": "Negative principal fixture: principal_loaded but missing tb-setup / pc-setup (594 pairing)",
+  "schema_version": 4,
+  "epic_key": "CRT-594",
+  "sources": {
+    "draft_profile": "crtqa_outline",
+    "generation_mode": true,
+    "topology_loaded": true,
+    "principal_loaded": true,
+    "ref_principal_fields": [
+      "downstream_hints.needs_environment_provision",
+      "downstream_hints.needs_dual_account_contrast"
+    ],
+    "session_placeholders": {
+      "group_key_enrg": "<group_key_enrg>",
+      "group_key_oppt": "<group_key_oppt>"
+    },
+    "precon_loaded": true,
+    "coverage_loaded": true,
+    "ref_loaded": true
+  },
+  "platform_reuse_annex": "- EOD backup trading day — platform regression TC family for daily_data_recorder (verify in Jira).",
+  "jira_test_search": { "skipped": true, "note": "generation_mode_greenfield" },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-004",
+      "reason": "delivery_blocked",
+      "evidence": "Derivatives widget delivery_known_fail"
+    }
+  ],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-594: dxTrade5 Watchlist and Position Book",
+      "covers_check_ids": ["chk-001", "chk-002"],
+      "precon_cluster_refs": ["pc-001"],
+      "verification_classes_summary": ["journey_smoke"],
+      "authoring": { "subprocess_completed": true },
+      "draft": {
+        "preconditions": ["See -precon.md cluster pc-001."],
+        "actions": ["c01 — Observe Watchlist.", "c02 — Observe Position Book."],
+        "results": ["Watchlist OK. [CRT-1714]", "Position Book OK. [CRT-1713]"],
+        "peculiarities": []
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-594: Mixed personas (bad)",
+      "covers_check_ids": ["chk-003", "chk-005", "chk-006"],
+      "precon_cluster_refs": ["pc-001"],
+      "verification_classes_summary": ["journey_smoke"],
+      "authoring": { "subprocess_completed": true },
+      "draft": {
+        "preconditions": ["See -precon.md cluster pc-001."],
+        "actions": ["c01 — Adaptive.", "c02 — Client Area.", "c03 — Backup Prices."],
+        "results": ["OK. [CRT-1717]", "OK. [CRT-1761]", "OK. [CRT-1621]"],
+        "peculiarities": []
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [
+      {
+        "check_id": "chk-004",
+        "reason": "delivery_blocked",
+        "evidence": "Derivatives widget delivery_known_fail"
+      }
+    ],
+    "orphan_bundles": [],
+    "notes": []
+  },
+  "validation_log": [
+    { "step": "phase1-principal", "at": "2026-06-18T16:00:02Z" },
+    { "step": "phase8b_principal_paste", "at": "2026-06-18T16:00:07Z" }
+  ],
+  "anti_pattern_findings": []
+}

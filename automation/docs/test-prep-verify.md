@@ -1,6 +1,20 @@
-# TEST-PREP — mechanical verifier (v3.1)
+# TEST-PREP — mechanical verifier (scenario_intent v3 + legacy crtqa_outline)
 
-Gate **verification plan** (temp), **verification exploration** (8a¾), **8c merge**, and **`-tests.json`** drafts. Playbook: [`.cursor/pipelines/test-prep.md`](../../.cursor/pipelines/test-prep.md) (v3.1). Registry: [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) (`selection_rules_machine`). Profiles: [`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json). TBD + expansion: [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json). Fixtures: [`automation/tools/fixtures/test_prep/`](../tools/fixtures/test_prep/).
+**Production default (draft_truth_v3):** **`--mode scenario_intent`**. Contract: [`docs/test-prep-scenario-intent-contract.json`](../../docs/test-prep-scenario-intent-contract.json). Playbook: [`.cursor/pipelines/test-prep.md`](../../.cursor/pipelines/test-prep.md). Fixtures: [`tests-594-scenario-intent-pass.json`](../tools/fixtures/test_prep/tests-594-scenario-intent-pass.json), [`tests-scenario-intent-bad-ui-hallucination.json`](../tools/fixtures/test_prep/tests-scenario-intent-bad-ui-hallucination.json).
+
+```powershell
+python automation/tools/test_prep_verify.py --mode scenario_intent `
+  --coverage epics/CRT-594/CRT-594-coverage.json `
+  --tests epics/CRT-594/CRT-594-tests.json
+```
+
+**Legacy** modes (`plan`, `explore`, `draft`, `merge`, `tests`, `crtqa_outline`) below.
+
+---
+
+# TEST-PREP — mechanical verifier (v3.1 + topology + principal) — LEGACY
+
+Gate **verification plan** (temp), **verification exploration** (8a¾), **8c merge**, and **`-tests.json`** drafts. Playbook: [`.cursor/pipelines/test-prep.md`](../../.cursor/pipelines/test-prep.md). Topology: [`docs/test-prep-topology-contract.json`](../../docs/test-prep-topology-contract.json). Principal: [`docs/test-prep-principal-contract.json`](../../docs/test-prep-principal-contract.json). Registry: [`docs/test-verification-classes.json`](../../docs/test-verification-classes.json) (`selection_rules_machine`). Profiles: [`docs/test-prep-draft-profiles.json`](../../docs/test-prep-draft-profiles.json). TBD + expansion: [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json). Fixtures: [`automation/tools/fixtures/test_prep/`](../tools/fixtures/test_prep/).
 
 ## CLI
 
@@ -29,15 +43,24 @@ python automation/tools/test_prep_verify.py --mode draft `
   --coverage epics/CRT-639/CRT-639-coverage.json `
   --tests epics/CRT-639/CRT-639-tests.json `
   --bundle-id tb-002 `
-  --plan epics/CRT-639/temp/test-prep-plan.json
+  --plan epics/CRT-639/temp/test-prep-plan.json `
+  --precon epics/CRT-639/CRT-639-precon.json `
+  --ref epics/CRT-639/CRT-639-ref.json `
+  --strict-topology `
+  --strict-principal
 ```
 
 **Post-8c merge** (`crtqa_outline`) — **`--tests` and `--plan` required**:
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode merge `
+  --coverage epics/CRT-639/CRT-639-coverage.json `
   --tests epics/CRT-639/CRT-639-tests.json `
-  --plan epics/CRT-639/temp/test-prep-plan.json
+  --plan epics/CRT-639/temp/test-prep-plan.json `
+  --precon epics/CRT-639/CRT-639-precon.json `
+  --ref epics/CRT-639/CRT-639-ref.json `
+  --strict-topology `
+  --strict-principal
 ```
 
 **Emit gate** (before writing durable `-tests.json`) — **`--plan` required** for `crtqa_outline`:
@@ -46,10 +69,78 @@ python automation/tools/test_prep_verify.py --mode merge `
 python automation/tools/test_prep_verify.py --mode tests `
   --coverage epics/CRT-639/CRT-639-coverage.json `
   --tests epics/CRT-639/CRT-639-tests.json `
-  --plan epics/CRT-639/temp/test-prep-plan.json
+  --plan epics/CRT-639/temp/test-prep-plan.json `
+  --precon epics/CRT-639/CRT-639-precon.json `
+  --ref epics/CRT-639/CRT-639-ref.json `
+  --strict-topology `
+  --strict-principal
 ```
 
+**Principal-only lint** (Round 2 step 7):
+
+```powershell
+python automation/tools/test_prep_verify.py --mode principal `
+  --coverage epics/CRT-594/CRT-594-coverage.json `
+  --precon epics/CRT-594/CRT-594-precon.json `
+  --tests epics/CRT-594/CRT-594-tests.json `
+  --ref epics/CRT-594/CRT-594-ref.json
+```
+
+Legacy tests without **`sources.topology_loaded`** may omit **`--strict-topology`**. Legacy without **`sources.principal_loaded`** may omit **`--strict-principal`**.
+
 Exit code **0** = pass. Non-zero = fix and re-run the matching loop.
+
+## Fixture regression (topology)
+
+```powershell
+$fix = "automation/tools/fixtures"
+
+python automation/tools/test_prep_verify.py --mode tests `
+  --coverage "$fix/coverage/coverage-639-formula-reinforce-minimal.json" `
+  --tests "$fix/test_prep/tests-639-formula-minimal.json" `
+  --plan "$fix/test_prep/plan-639-formula-minimal.json" `
+  --precon "$fix/precon/precon-639-formula-minimal.json" `
+  --ref epics/CRT-639/CRT-639-ref.json `
+  --strict-topology
+
+python automation/tools/test_prep_verify.py --mode tests `
+  --coverage "$fix/coverage/coverage-594-shell-reinforce-minimal.json" `
+  --tests "$fix/test_prep/tests-594-shell-minimal.json" `
+  --plan "$fix/test_prep/plan-594-shell-minimal.json" `
+  --precon "$fix/precon/precon-594-shell-minimal.json" `
+  --ref epics/CRT-594/CRT-594-ref.json `
+  --strict-topology
+```
+
+## Fixture regression (principal)
+
+```powershell
+$fix = "automation/tools/fixtures"
+
+python automation/tools/test_prep_verify.py --mode tests `
+  --coverage "$fix/coverage/coverage-594-shell-reinforce-principal-minimal.json" `
+  --tests "$fix/test_prep/tests-594-shell-principal-minimal.json" `
+  --plan "$fix/test_prep/plan-594-shell-principal-minimal.json" `
+  --precon "$fix/precon/precon-594-shell-principal-minimal.json" `
+  --ref "$fix/epic-prep/ref-594-topology-full.json" `
+  --strict-topology `
+  --strict-principal
+
+python automation/tools/test_prep_verify.py --mode tests `
+  --coverage "$fix/coverage/coverage-639-formula-reinforce-principal-minimal.json" `
+  --tests "$fix/test_prep/tests-639-formula-principal-minimal.json" `
+  --plan "$fix/test_prep/plan-639-formula-principal-minimal.json" `
+  --precon "$fix/precon/precon-639-formula-principal-minimal.json" `
+  --ref "$fix/epic-prep/ref-639-topology-minimal.json" `
+  --strict-principal
+
+python automation/tools/test_prep_verify.py --mode principal `
+  --coverage "$fix/coverage/coverage-594-shell-reinforce-principal-minimal.json" `
+  --precon "$fix/precon/precon-594-shell-principal-minimal.json" `
+  --tests "$fix/test_prep/tests-principal-bad-missing-setup.json" `
+  --ref "$fix/epic-prep/ref-594-topology-full.json"
+# expect exit 1
+```
 
 ## Modes
 
@@ -57,32 +148,36 @@ Exit code **0** = pass. Non-zero = fix and re-run the matching loop.
 |------|--------|
 | **plan** | Primary checks in plan; registry classes; `case_outline[]` length ≥ `min_case_count`; required `case_id`, `title`, `intent`; **`selection_rules_machine`** class/priority lint unless `selection_override_reason` |
 | **explore** | `verification_exploration[]` at `prep_verify_view`; surfaces; prep labels ⊇ precon drill |
-| **draft** | Precon cite; action/result parity; Yogi only in results; forbidden TBD; ladder templates; **v3.1:** outline cardinality + duplicate actions when bundle uses `stateful_ladder` / `rounding_matrix` / `pattern_ref: ladder_step` (**requires `--plan`**) |
-| **merge** | **v3.1:** for single-pair bundles, `len(actions)==len(case_outline)` and no duplicate full action lines; else legacy `actions >= min_case_count` sum (**requires `--plan`**) |
-| **tests** | Traceability; greenfield; forbidden TBD / CRTQA keys; **v3.1:** excluded primary ↔ `coverage_gaps[]`; outline cardinality when `--plan` present (**required** for `crtqa_outline`) |
+| **draft** | Precon cite; action/result parity; Yogi only in results; forbidden TBD; ladder templates; **v3.1:** outline cardinality + duplicate actions when bundle uses `stateful_ladder` / `rounding_matrix` / topology **`pattern_ref`** keys (**requires `--plan`**) |
+| **merge** | Post-8c merged drafts match plan case counts; same cardinality gates as draft |
+| **tests** | Emit: primary traceability; `coverage_gaps[]` ↔ excluded; greenfield CRTQA skip; **v3.1** outline cardinality when `--plan` present |
+| **principal** | Principal-only lint per [`test-prep-principal-contract.json`](../../docs/test-prep-principal-contract.json) |
 
-## v3.1 expansion gates (single-pair bundles)
+## Topology checks (`--strict-topology`)
 
-Applies when any plan row has `verification_class` in `stateful_ladder`, `rounding_matrix`, or any `case_outline[].pattern_ref` is `ladder_step`.
+Requires **`--precon`** and **`--ref`**. Active when **`sources.topology_loaded`** on tests or precon.
 
-| Failure | Meaning |
-|---------|---------|
-| `actions count N != case_outline rows M` | Template lines were expanded as separate numbered pairs |
-| `duplicate action lines detected` | Same action text repeated (padding) |
-| `excluded primary chk-XXX must have coverage_gaps[] row` | Emit integrity: deferrals must mirror in `reverse_validation` |
-| `verification_class X != expected Y` | Plan class disagrees with `selection_rules_machine` |
+| Check | Failure when |
+|-------|----------------|
+| **`pattern_ref` expansion** | Plan row with `pattern_ref` but action missing sub-bullets from precon `command_patterns` key |
+| **Delivery excluded** | Blocked primary still in `covers_check_ids` or missing from `coverage_gaps[]` |
+| **`platform_reuse_annex`** | Missing when ref has `platform_reuse_candidates`; CRTQA keys in annex |
+| **Legacy** | No topology_loaded → strict oracle/reuse rules no-op |
 
-**Not gated globally:** `config_posture`, `journey_smoke`, etc. may have more than one command per row without `ladder_step` pattern.
+## Principal checks (`--strict-principal`)
 
-## Fixture proof
+Requires **`--precon`** and **`--ref`**. Skips when no principal handoff on precon/ref. Active when **`sources.principal_loaded`** or precon has **`pc-setup`**.
 
-See [automation/tools/fixtures/test_prep/README.md](../tools/fixtures/test_prep/README.md).
+| Check | Failure when |
+|-------|----------------|
+| **`sources.principal_loaded`** | Missing on tests when principal handoff active |
+| **`validation_log`** | Missing `phase1-principal`, `phase8b_principal_paste`; `phase8a_persona_split` when `pc-setup` present |
+| **`tb-setup` / `pc-setup`** | No setup bundle covering `chk-s1`/`chk-s2` when precon has `pc-setup` |
+| **Dual-account paste** | Missing `<group_key_enrg>` / `<group_key_oppt>` in draft when ref `needs_dual_account_contrast` |
+| **Persona split** | Retail-primary and dealer-primary checks share a bundle |
+| **Deferral skip** | Deferral-keyed check in `covers_check_ids` without exclusion + `coverage_gaps[]` |
+| **Observation order** | Non-setup bundle first precondition missing `pc-setup` cite |
 
-## Profiles
+## v3.1 expansion (reminder)
 
-- **`crtqa_outline`** (default): full case matrix; see TBD contract + expansion_policy.
-- **`teaching`** (`draft_profile=teaching`): legacy v2 illustration budget.
-
-## Generation (greenfield)
-
-No live CRTQA Jira fetch — [docs/harness-principles.md](../../docs/harness-principles.md) §3. Verifier forbids CRTQA keys in durable output.
+One numbered Action/Result pair per **`case_outline[]`** row. **`command_patterns[pattern_ref]`** lines are sub-bullets inside that Action — not separate numbered pairs. See [`docs/test-prep-tbd-contract.json`](../../docs/test-prep-tbd-contract.json) **`expansion_policy`**.

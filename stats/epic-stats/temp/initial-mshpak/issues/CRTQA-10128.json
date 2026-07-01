@@ -1,0 +1,234 @@
+{
+  "id": "1933851",
+  "key": "CRTQA-10128",
+  "summary": "[Corner][Test Case Development] CRT-609: FX_SPOT chart ",
+  "status": {
+    "name": "In Progress",
+    "category": "indeterminate"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 5,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933851/worklog/7059636",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-04-29T20:02:53.192+0000",
+        "updated": "2026-04-29T20:02:54.979+0000",
+        "started": "2026-04-22T07:00:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "7059636",
+        "issueId": "1933851"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933851/worklog/7059637",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-04-29T20:02:59.233+0000",
+        "updated": "2026-04-29T20:03:07.289+0000",
+        "started": "2026-04-22T09:50:00.000+0000",
+        "timeSpent": "5h 13m",
+        "timeSpentSeconds": 18780,
+        "id": "7059637",
+        "issueId": "1933851"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933851/worklog/7059640",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-04-29T20:03:15.479+0000",
+        "updated": "2026-04-29T20:03:20.836+0000",
+        "started": "2026-04-23T07:00:00.000+0000",
+        "timeSpent": "1d",
+        "timeSpentSeconds": 28800,
+        "id": "7059640",
+        "issueId": "1933851"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933851/worklog/7067515",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=320137",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=320137",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=320137",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=320137"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=arodzevich",
+          "name": "arodzevich",
+          "key": "arodzevich",
+          "emailAddress": "arodzevich@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=arodzevich&avatarId=320137",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=arodzevich&avatarId=320137",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=arodzevich&avatarId=320137",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=arodzevich&avatarId=320137"
+          },
+          "displayName": "Anton Rodzevich",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-05-01T09:45:26.224+0000",
+        "updated": "2026-05-01T09:45:29.274+0000",
+        "started": "2026-04-01T10:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "7067515",
+        "issueId": "1933851"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933851/worklog/7115450",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshram",
+          "name": "mshram",
+          "key": "mshram",
+          "emailAddress": "mshram@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshram&avatarId=320280",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshram&avatarId=320280",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshram&avatarId=320280",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshram&avatarId=320280"
+          },
+          "displayName": "Maksim Shram",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2026-06-01T08:23:40.678+0000",
+        "updated": "2026-06-01T08:23:55.100+0000",
+        "started": "2026-05-14T12:00:00.000+0000",
+        "timeSpent": "3h",
+        "timeSpentSeconds": 10800,
+        "id": "7115450",
+        "issueId": "1933851"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "2d",
+    "remainingEstimate": "1d 5h",
+    "timeSpent": "2d 3h 43m",
+    "originalEstimateSeconds": 57600,
+    "remainingEstimateSeconds": 46800,
+    "timeSpentSeconds": 70980
+  },
+  "customfield_11250": 16.0,
+  "customfield_10006": null
+}

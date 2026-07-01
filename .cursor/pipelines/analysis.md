@@ -5,8 +5,11 @@
 - **`known_issues=yes`** — run phases **6–8** (Jira search + optional coverage `>` mutation). **Default: off** (empty `known_issues[]`, no coverage mutation).
 - **`include_closed=yes`** — only when **`known_issues=yes`**; allow recent **closed** issues for `>` regression anchors (≤ 90 days when `updated` available).
 - **`resolve=no`** — audit-only: skip phase **4b** Confluence resolve subprocesses. **Default: resolve on** (omit token or `resolve=yes`).
+- **`strict_principal=yes`** — opt-in; phase **10** runs **`analysis_verify.py --strict-principal`** when ref has deferral obligations or principal fields per [`docs/analysis-principal-contract.json`](../../docs/analysis-principal-contract.json). May combine with **`--strict-topology`**.
 
-**Version note (v2):** Coverage-grounded **gap auditor** + bounded Confluence resolve + **`exploration_suppressed[]`** for downstream. Contract: [`docs/analysis-gap-contract.json`](../../docs/analysis-gap-contract.json). Verifier: [`automation/docs/analysis-verify.md`](../../automation/docs/analysis-verify.md). Template: [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json) **schema v2**.
+**Draft+truth (after `GROUND:`)**: Requires **`-coverage.json`** with **`runtime_probes`** on console checks when console-tagged checks exist (else **STOP** → `GROUND:`). Contract: [`docs/analysis-draft-truth-contract.json`](../../docs/analysis-draft-truth-contract.json). Phases **2b**–**2c** scan scenario inventory + probe failures; emit **`draft_truth_recommendation`**. Verifier: **`analysis_verify.py --mode draft_truth`**.
+
+**Version note (v2):** Coverage-grounded **gap auditor** + bounded Confluence resolve + **`exploration_suppressed[]`** for downstream. Contract: [`docs/analysis-gap-contract.json`](../../docs/analysis-gap-contract.json). **Topology gaps** (delivery/oracle from ref + coverage): [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json). **Principal deferrals** (Round 2 step 3): [`docs/analysis-principal-contract.json`](../../docs/analysis-principal-contract.json). Verifier: [`automation/docs/analysis-verify.md`](../../automation/docs/analysis-verify.md) (`--strict-topology` / `--strict-principal` when ref has topology/principal). Template: [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json) **schema v2**.
 
 **Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
@@ -34,7 +37,7 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 ## Preconditions
 
 - **Required:** `{EpicDir}<KEY>-coverage.json` from **`COVERAGE:`**. If missing → **STOP** → instruct `COVERAGE: <KEY>`.
-- **Required:** `{EpicDir}<KEY>-ref.json` when gaps need requirement/snippet context (almost always).
+- **Required:** `{EpicDir}<KEY>-ref.json` when gaps need requirement/snippet context (almost always). When ref has **`verification_topology`**, consume **`delivery_notes`** and **`pricing_oracle_rules`** per [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json) — do **not** re-emit COVERAGE shell layout gaps.
 - **user-mcp-atlassian** for optional known-issues search and Confluence resolve in **4b**.
 - **Yogi** (optional): [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md) for phase **4b** `--storage-file` path.
 - **jq** before loading full ref/coverage: [automation/docs/jq.md](../../automation/docs/jq.md).
@@ -58,12 +61,28 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 ### 1. Resolve inputs
 
-- Parse `<KEY>`, **`known_issues=yes`**, **`include_closed=yes`**, **`resolve=no`**.
+- Parse `<KEY>`, **`known_issues=yes`**, **`include_closed=yes`**, **`resolve=no`**, **`strict_principal=yes`**.
 - Set `sources.known_issues_enabled`, `sources.resolve_enabled` on the analysis artifact.
-- **MUST** `jq` project `-coverage.json` and `-ref.json` before full load.
+- **MUST** `jq` project `-coverage.json` and `-ref.json` before full load. Recommended topology slice:
+
+```bash
+jq '{ verification_topology: { delivery_notes, pricing_oracle_rules } }' epics/<KEY>/<KEY>-ref.json
+jq '{
+  deferral_obligations: [.obligations_proposed[] | select(.kind == "explicit_deferral" or .disposition == "deferral_candidate") | {id, deferral_reason, requirement_keys}],
+  delivery_links: [.verification_topology.delivery_notes[]? | {id, linked_obligation_ids}]
+}' epics/<KEY>/<KEY>-ref.json
+jq '{ emit_layout, checks: [.checks[] | { id, delivery_status, oracle_rule_id, topology_surface_id }] }' epics/<KEY>/<KEY>-coverage.json
+jq '{
+  obligations_coverage: [.obligations_coverage | to_entries[] | select(.value.status == "deferred_in_check") | {obligation_id: .key, check_id: .value.check_id}],
+  deferral_checks: [.checks[] | select(.ambiguity.flag == "!" or .calculation_contract == "deferred_ambiguous") | {id, obligation_ids}]
+}' epics/<KEY>/<KEY>-coverage.json
+```
+
 - Set `sources.coverage_loaded`, `sources.ref_loaded`, paths, `epic_key`.
+- When ref includes **`verification_topology.delivery_notes`** or **`pricing_oracle_rules`**: set **`sources.topology_loaded: true`**, **`sources.ref_topology_fields[]`**, log in `validation_log`. Else **`topology_loaded: false`** → legacy path for phases **2**–**3** topology scans.
+- When ref has deferral obligations or keyed deferral checks in coverage: set **`sources.principal_loaded: true`**, populate **`sources.ref_principal_fields[]`** per template; append `validation_log` step **`1-principal`** (deferral count). Else **`principal_loaded: false`**.
 - If coverage missing → **STOP**. If ref missing → log gap `snippet_missing` risk; continue only for coverage-only mechanical gaps.
-- Append `validation_log` step `1`.
+- Append `validation_log` step `1` (include `topology_loaded`).
 
 ### 2. Build work queue
 
@@ -78,20 +97,58 @@ Deterministic scan per [`docs/analysis-gap-contract.json`](../../docs/analysis-g
 | ref `obligations_proposed` vs `obligations_coverage` (only if coverage schema &lt; 2 or obvious row gap) | `obligation_uncovered` |
 | `anti_pattern_findings[]` | `anti_pattern` |
 
-Dedupe by `(kind, check_id, requirement_key, obligation_id)`. Assign provisional **`gap-001`**… ids. Store queue in `temp/` only until merged into `gaps[]` in phase **3** — do not leave queue-only files in durable JSON.
+**Topology scans** (when **`sources.topology_loaded`** — [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json)):
 
-Append `validation_log` step `2` (queue count).
+| Signal | Gap kind |
+|--------|----------|
+| ref `delivery_notes.status=known_fail` | `delivery_known_fail` |
+| ref `delivery_notes.status=excluded` | `delivery_excluded` |
+| ref note present, no coverage check with matching `delivery_status` | `delivery_coverage_drift` |
+| ref `pricing_oracle_rules.oracle_rule=unresolved` | `surface_oracle_unresolved` |
+
+Dedupe by `(kind, check_id, requirement_key, obligation_id, delivery_note_id, oracle_rule_id)`. Assign provisional **`gap-001`**… ids. Store queue in `temp/` only until merged into `gaps[]` in phase **3** — do not leave queue-only files in durable JSON.
+
+Append `validation_log` step `2` (queue count); when topology loaded also step **`2-topology`** with topology queue count.
+
+**Principal scans** (when **`sources.principal_loaded`** — [`docs/analysis-principal-contract.json`](../../docs/analysis-principal-contract.json)):
+
+| Signal | Gap kind | Notes |
+|--------|----------|-------|
+| Ref deferral oid + coverage `deferred_in_check` + keyed check | `deferred_check` | Dedupe by `(deferred_check, obligation_id)` |
+| Ref deferral oid missing coverage row / wrong status | `deferral_coverage_drift` | `open` + `rerun_coverage` |
+| Coverage `deferred_in_check` without ref deferral obligation | `deferred_check` | Still emit; evidence from coverage |
+| Ref delivery note + `linked_obligation_ids` | topology gaps | Enrich pointers with `obligation_id` |
+
+Append `validation_log` step **`2-principal`** with deferral queue count.
 
 ### 3. Mechanical gaps (high confidence)
 
 For each queue item, append **`gaps[]`** with:
 
 - `kind`, `confidence: high`, `status: open` (or `confirmed_gap` if clearly intentional deferral with `obligation_ids` on check)
-- `pointers`: `check_id` / `obligation_id` / `requirement_key` as applicable
+- `pointers`: `check_id` / `obligation_id` / `requirement_key` / `delivery_note_id` / `oracle_rule_id` as applicable
 - `evidence`: field path only (e.g. `checks[chk-015].calculation_contract`)
 - `recommended_action`: per contract **`recommended_action_by_kind`** (override only with `validation_log` reason)
 
 **Obligation reconciliation:** When coverage **`schema_version` ≥ 2** and `obligations_coverage` is row-complete per [`coverage_verify.py`](../../automation/tools/coverage_verify.py), **do not** emit duplicate `obligation_uncovered` gaps.
+
+**Topology gap emit** (phase **3** when **`topology_loaded`**):
+
+- **`delivery_known_fail` / `delivery_excluded`:** `confidence: high`; set **`pointers.delivery_note_id`**; link **`pointers.check_id`** when coverage already has matching **`delivery_status`** (`failed` / `excluded`); add **`pointers.obligation_id`** when ref note **`linked_obligation_ids`** has exactly one id; **`status: confirmed_gap`** when honest, **`open`** only for **`delivery_coverage_drift`**; **`recommended_action`** per topology contract.
+- **`surface_oracle_unresolved`:** `pointers.oracle_rule_id` + `requirement_keys` from ref rule; **`recommended_action: human_ba`**; do not invent oracle text.
+- **Dedup:** Do not emit **`deferred_check`** for the same **`check_id`** when a delivery gap already documents that check.
+- **Forbidden:** gaps about missing shell **`##`** sections or **`emit_layout`** (COVERAGE **`--strict-topology`** owns layout).
+
+Append `validation_log` step `3`; when topology gaps emitted also **`3-topology`** with counts by kind.
+
+**Principal gap emit** (when **`principal_loaded`**):
+
+- Principal deferrals: **`kind: deferred_check`**, **`status: confirmed_gap`**, summary cites ref **`deferral_reason`** when present else coverage **`ambiguity.reason`**.
+- **`pointers.obligation_id`** mandatory; **`pointers.check_id`** from **`obligations_coverage.check_id`**.
+- **Do not** emit **`obligation_uncovered`** for deferral oids when coverage marks **`deferred_in_check`**.
+- Dedup: one **`deferred_check`** per **`obligation_id`**, not per check field alone.
+
+Append `validation_log` step **`3-principal`** with deferral gap counts.
 
 **No hypothesis questions** — `questions[]` remains **empty** in v2 generation emit.
 
@@ -99,11 +156,11 @@ Optional **`summary.text`**: **one line** max, verbatim from `coverage.epic_veri
 
 Populate **`actions`**: `rerun_coverage`, `rerun_epic_prep`, `focus_hint` from gap actions aggregate.
 
-Append `validation_log` step `3`.
-
 ### 4a. Short-circuit
 
 If **`gaps[]`** empty after phase **3** and no resolve queue → skip to phase **5** (suppression may still be empty) → phase **10** emit.
+
+**Principal guard:** If **`2-principal`** queue count &gt; 0 and phase **3** produced no deferral gaps → **do not** short-circuit; emit deferral gaps and log blocking **`validation_log`** before emit.
 
 ### 4b. Per-gap resolve subprocess (when `resolve` enabled)
 
@@ -128,14 +185,27 @@ For gaps with kind **`deferred_check`** or `recommended_action: ignore_for_disco
 
 ```json
 {
-  "check_id": "chk-015",
-  "reason": "deferred_in_check | keyed deferral per obligations_coverage",
+  "check_id": "chk-def-001",
+  "reason": "deferral_obligation_keyed",
   "blocks_fixture_probe": true,
-  "until_action": "rerun_coverage | human_ba"
+  "until_action": "rerun_coverage"
 }
 ```
 
-Align with [`test-discover.md`](test-discover.md): do **not** instruct discover to `scope_gap` on `!`-only lines when coverage documents keyed deferral.
+Use **`reason: deferral_obligation_keyed`** for keyed deferrals via **`obligations_coverage.deferred_in_check`**. Use **`reason: deferred_in_check`** for legacy **`calculation_contract: deferred_ambiguous`** path without keyed **`obligation_ids`**.
+
+**Delivery suppression** (when coverage check has **`delivery_status: failed`** or **`excluded`**):
+
+```json
+{
+  "check_id": "chk-004",
+  "reason": "delivery_known_fail | delivery_excluded",
+  "blocks_fixture_probe": true,
+  "until_action": "human_ba"
+}
+```
+
+Per [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json) **`exploration_suppression`**. Align with [`test-discover.md`](test-discover.md): discover must **not** treat failed/excluded delivery as **`scope_gap`** rework — honest delivery blockers only.
 
 Append `validation_log` step `5`.
 
@@ -224,7 +294,21 @@ python automation/tools/analysis_verify.py --mode downstream --analysis {EpicDir
 python automation/tools/analysis_verify.py --mode emit --analysis {EpicDir}<KEY>-analysis.json --md {EpicDir}<KEY>-analysis.md
 ```
 
+When ref has **`verification_topology`** with **`delivery_notes`** or **`pricing_oracle_rules`**, also run:
+
+```text
+python automation/tools/analysis_verify.py --mode emit --strict-topology \
+  --analysis {EpicDir}<KEY>-analysis.json \
+  --ref {EpicDir}<KEY>-ref.json \
+  --coverage {EpicDir}<KEY>-coverage.json \
+  --md {EpicDir}<KEY>-analysis.md
+```
+
+When trigger includes **`strict_principal=yes`** or ref has deferral obligations / principal fields, also run **`--strict-principal`** on the same command line (requires **`--ref`** and **`--coverage`**).
+
 Block finish until all exit **0**. If open gaps &gt; 15, add `validation_log` entry `gap_cap_deferral` or split run.
+
+**Downstream handoff (no action here):** **TEST-DISCOVER (4/8)** consumes **`exploration_suppressed[]`** and oracle gaps for ledger disposition.
 
 4. **Delete** `{EpicDir}temp/`.
 
@@ -245,7 +329,9 @@ Block finish until all exit **0**. If open gaps &gt; 15, add `validation_log` en
 
 - Template: [`epics/templates/analysis-ref.json`](../../epics/templates/analysis-ref.json)
 - Gap contract: [`docs/analysis-gap-contract.json`](../../docs/analysis-gap-contract.json)
+- Topology contract: [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json)
+- Principal contract: [`docs/analysis-principal-contract.json`](../../docs/analysis-principal-contract.json)
 - Verifier: [`automation/docs/analysis-verify.md`](../../automation/docs/analysis-verify.md)
 - Coverage: [`coverage.md`](coverage.md)
 - Doctrine: [`docs/harness-principles.md`](../../docs/harness-principles.md) §5
-- Discover / precon consumption: [`test-discover.md`](test-discover.md), [`test-precon.md`](test-precon.md)
+- Discover linker: [`test-discover.md`](test-discover.md). Legacy precon: [`test-precon.md`](test-precon.md) (not in v3 chain)

@@ -1,0 +1,735 @@
+{
+  "schema_version": 4,
+  "epic_key": "CRT-663",
+  "taxonomy_note": "Regression drafts for FX_SPOT orders/transfers/positions visibility (CRT-663); atomic Market/Limit/Stop E2E legs.",
+  "sources": {
+    "jira_fetched_at": "2026-06-08T12:04:31Z",
+    "tests_run_started_at": "2026-06-08T12:04:31Z",
+    "ref_path": "epics/CRT-663/CRT-663-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-663/CRT-663-coverage.json",
+    "coverage_loaded": true,
+    "coverage_md_path": "epics/CRT-663/CRT-663-coverage.md",
+    "analysis_path": "epics/CRT-663/CRT-663-analysis.json",
+    "analysis_loaded": true,
+    "discover_path": "epics/CRT-663/CRT-663-discover.json",
+    "discover_loaded": true,
+    "discover_blocked_acknowledged": false,
+    "precon_path": "epics/CRT-663/CRT-663-precon.json",
+    "precon_loaded": true,
+    "precon_jira_title": null,
+    "map_only": false,
+    "draft_profile": "crtqa_outline",
+    "shape_ref": null,
+    "generation_mode": true,
+    "fe_ui_sessions": {
+      "dxtrade5": "authenticated",
+      "webbroker": "authenticated",
+      "adaptive": "authenticated"
+    },
+    "fe_exploration_waived": false,
+    "exploration_complete": true,
+    "note": "exploration_complete true when all bundles passed explore verify."
+  },
+  "jira_test_search": {
+    "at": "2026-06-08T12:04:31Z",
+    "skipped": true,
+    "note": "generation_mode_greenfield",
+    "queries": []
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-663: FX Spot account and instrument configuration",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-001",
+        "chk-002"
+      ],
+      "covers_sections": [
+        "## Primary focus",
+        "## Prerequisites and test data"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "cross_surface_parity",
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Epic scope: FX_SPOT orders, transfers, positions visibility: use <account_code>; place or locate EURUSD.spot activity per precon step 7; record order key for UI verification.",
+          "Console FX Spot market, limit, and stop orders on EURUSD.spot: use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Console FX Spot market, limit, and stop orders on EURUSD.spot \u2014 dxTrade5 shell: use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Console FX Spot market, limit, and stop orders on EURUSD.spot \u2014 WebBroker shell: use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+        ],
+        "results": [
+          "Observable outcome matches coverage: Cross-surface display for one .spot instrument and order\u2192transfer\u2192position workflow. [CRT-663]",
+          "Observable outcome matches coverage: Prerequisite orders exist for widget parity (console-only creation path). [CRT-663]",
+          "Observable outcome matches coverage: Prerequisite orders exist for widget parity (console-only creation path) (dxTrade5 shell). [CRT-663]",
+          "Observable outcome matches coverage: Prerequisite orders exist for widget parity (console-only creation path) (WebBroker shell). [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty)."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-663: dxTrade5 Orders, Transactions, Positions widgets",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-003",
+        "chk-004",
+        "chk-005",
+        "chk-006"
+      ],
+      "covers_sections": [
+        "## dxTrade5 \u2014 Orders, Transactions, Positions"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Orders widget FX Spot row: Log in to dxTrade5 as <account_code>; open Orders, Account Transactions, Positions, or Order History widget per case intent; filter or locate EURUSD.spot row.",
+          "Order History for .spot order: Log in to dxTrade5 as <account_code>; open Orders, Account Transactions, Positions, or Order History widget per case intent; filter or locate EURUSD.spot row.",
+          "Account Transactions TRADE for fill: Log in to dxTrade5 as <account_code>; open Orders, Account Transactions, Positions, or Order History widget per case intent; filter or locate EURUSD.spot row.",
+          "Positions widget net qty after fill: Log in to dxTrade5 as <account_code>; open Orders, Account Transactions, Positions, or Order History widget per case intent; filter or locate EURUSD.spot row."
+        ],
+        "results": [
+          "Observable outcome matches coverage: Status, symbol, side, quantity, filled qty visible. [CRT-663]",
+          "Observable outcome matches coverage: All statuses in chart flyout history band. [CRT-663]",
+          "Observable outcome matches coverage: TRADE activity tied to test order. [CRT-663]",
+          "Observable outcome matches coverage: Non-zero position row when account has FX Spot exposure. [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty)."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-663: WebBroker Client Area and dealer books",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-007",
+        "chk-008",
+        "chk-009"
+      ],
+      "covers_sections": [
+        "## WebBroker \u2014 Client Area and dealer books"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "cross_surface_parity",
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Client Area and dealer Order book parity: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>.",
+          "Client Area Account Transactions TRADE: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>.",
+          "Client Area Account Transactions TRADE \u2014 dxTrade5 shell: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>.",
+          "Client Area Account Transactions TRADE \u2014 WebBroker shell: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>.",
+          "Client Area and dealer Position book: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>."
+        ],
+        "results": [
+          "Observable outcome matches coverage: Same .spot order status/symbol/side/qty/filled qty. [CRT-663]",
+          "Observable outcome matches coverage: FX_SPOT TRADE matches dxTrade5 for same fill. [CRT-663]",
+          "Observable outcome matches coverage: FX_SPOT TRADE matches dxTrade5 for same fill (dxTrade5 shell). [CRT-663]",
+          "Observable outcome matches coverage: FX_SPOT TRADE matches dxTrade5 for same fill (WebBroker shell). [CRT-663]",
+          "Observable outcome matches coverage: Position row when qty \u2260 0. [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty)."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-004",
+      "proposed_title": "CRT-663: Adaptive cross-surface parity",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013"
+      ],
+      "covers_sections": [
+        "## Cross-surface parity \u2014 Adaptive (orders, transfers, positions)"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Adaptive Working Orders WORKING row: Open Adaptive Portfolio for <account_code>; verify Working Orders, Trade History, or Positions section shows EURUSD.spot row per case intent.",
+          "Adaptive orders for other statuses: Open Adaptive Portfolio for <account_code>; verify Working Orders, Trade History, or Positions section shows EURUSD.spot row per case intent.",
+          "Adaptive Trade History fill: Open Adaptive Portfolio for <account_code>; verify Working Orders, Trade History, or Positions section shows EURUSD.spot row per case intent.",
+          "Adaptive Positions qty/side/symbol: Open Adaptive Portfolio for <account_code>; verify Working Orders, Trade History, or Positions section shows EURUSD.spot row per case intent."
+        ],
+        "results": [
+          "Observable outcome matches coverage: Matches dxTrade5 Orders and WB Order book. [CRT-663]",
+          "Observable outcome matches coverage: Filled/cancelled/rejected parity across shells. [CRT-663]",
+          "Observable outcome matches coverage: Symbol, quantity, time match web Transactions. [CRT-663]",
+          "Observable outcome matches coverage: Matches dxTrade5 Positions and WB Position book. [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty)."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-005",
+      "proposed_title": "CRT-663: WebBroker dealer manual trade invariant",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-016"
+      ],
+      "covers_sections": [
+        "## Invariants under configuration change"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "config_posture"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Dealer manual trade on routed FX Spot order: use <account_code>; place or locate EURUSD.spot activity per precon step 7; record order key for UI verification.",
+          "Dealer manual trade on routed FX Spot order \u2014 dxTrade5 shell: use <account_code>; place or locate EURUSD.spot activity per precon step 7; record order key for UI verification."
+        ],
+        "results": [
+          "Observable outcome matches coverage: COMPLETED order plus TRADE and position rows consistent on all shells; ET path is auto fill/reject only. [CRT-663] Dealer manual trade path \u2014 ET FX Spot is auto fill/reject only.",
+          "Observable outcome matches coverage: COMPLETED order plus TRADE and position rows consistent on all shells; ET path is auto fill/reject only (dxTrade5 shell). [CRT-663] Dealer manual trade path \u2014 ET FX Spot is auto fill/reject only."
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty).",
+          "Manual fill is WebBroker/dxCore dealer action (Order Statuses transitions 17/23), not ET broker intervention."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-006",
+      "proposed_title": "CRT-663: Margin liquidation closing order invariant",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-017"
+      ],
+      "covers_sections": [
+        "## Invariants under configuration change"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "config_posture"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Margin liquidation FX Spot closing market order: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>.",
+          "Margin liquidation FX Spot closing market order \u2014 dxTrade5 shell: Log in to WebBroker dealer UI; open Client Area or Trading Order Book / Position Book; locate EURUSD.spot row for <account_code>."
+        ],
+        "results": [
+          "Observable outcome matches coverage: Closing order visible in Orders/Order book with liquidation origin marker. [CRT-663] Margin liquidation closing order shows liquidation origin marker when triggered.",
+          "Observable outcome matches coverage: Closing order visible in Orders/Order book with liquidation origin marker (dxTrade5 shell). [CRT-663] Margin liquidation closing order shows liquidation origin marker when triggered."
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty)."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-007",
+      "proposed_title": "CRT-663: Market FX Spot flow (atomic)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-018",
+        "chk-019",
+        "chk-020"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Market FX Spot flow (atomic)"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "cross_surface_parity",
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Market order visibility (atomic): use <account_code>; buy <qty> <instrument_symbol> mkt fok; show order last",
+          "Market TRADE row (atomic): use <account_code>; buy <qty> <instrument_symbol> mkt fok; show order last",
+          "Market TRADE row (atomic) \u2014 dxTrade5 shell: use <account_code>; buy <qty> <instrument_symbol> mkt fok; show order last",
+          "Market TRADE row (atomic) \u2014 WebBroker shell: use <account_code>; buy <qty> <instrument_symbol> mkt fok; show order last",
+          "Market position update (atomic): use <account_code>; buy <qty> <instrument_symbol> mkt fok; show order last"
+        ],
+        "results": [
+          "Observable outcome matches coverage: Order status/symbol/side/qty/filled qty on all shells. [CRT-663] Market UI placement may be defect-sensitive; console-issued row still drives check.",
+          "Observable outcome matches coverage: TRADE in Account Transactions and Trade History. [CRT-663] Market UI placement may be defect-sensitive; console-issued row still drives check.",
+          "Observable outcome matches coverage: TRADE in Account Transactions and Trade History (dxTrade5 shell). [CRT-663] Market UI placement may be defect-sensitive; console-issued row still drives check.",
+          "Observable outcome matches coverage: TRADE in Account Transactions and Trade History (WebBroker shell). [CRT-663] Market UI placement may be defect-sensitive; console-issued row still drives check.",
+          "Observable outcome matches coverage: Net qty/side/symbol after Market fill. [CRT-663] Market UI placement may be defect-sensitive; console-issued row still drives check."
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty).",
+          "Limit/Stop console prices must be significantly off market; use help buy and help stp_order on CTQA."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-008",
+      "proposed_title": "CRT-663: Limit FX Spot flow (atomic)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-021",
+        "chk-022",
+        "chk-023"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Limit FX Spot flow (atomic)"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Limit order COMPLETED visibility (atomic): use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Limit TRADE row (atomic): use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Limit position update (atomic): use <account_code>; buy <qty> <instrument_symbol> at <off_market_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+        ],
+        "results": [
+          "Observable outcome matches coverage: Order row on all shells after off-market fill. [CRT-663]",
+          "Observable outcome matches coverage: TRADE leg separate from order/position checks. [CRT-663]",
+          "Observable outcome matches coverage: Position net qty after Limit fill. [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty).",
+          "Limit/Stop console prices must be significantly off market; use help buy and help stp_order on CTQA."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-009",
+      "proposed_title": "CRT-663: Stop FX Spot flow (atomic)",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-024",
+        "chk-025",
+        "chk-026"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Stop FX Spot flow (atomic)"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "journey_smoke"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "console_order_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_metrics"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "client_area_books"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "adaptive_portfolio_orders"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-06-08T12:04:31Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-663-precon.md cluster *Account & FX Spot configuration* before executing this test."
+        ],
+        "actions": [
+          "Stop order visibility (atomic): use <account_code>; stp_order buy <qty> <instrument_symbol> stop=<stop_price> limit=<limit_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Stop TRADE row (atomic): use <account_code>; stp_order buy <qty> <instrument_symbol> stop=<stop_price> limit=<limit_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+          "Stop position update (atomic): use <account_code>; stp_order buy <qty> <instrument_symbol> stop=<stop_price> limit=<limit_price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+        ],
+        "results": [
+          "Observable outcome matches coverage: Triggered Stop order on all shells. [CRT-663]",
+          "Observable outcome matches coverage: TRADE after Stop fill. [CRT-663]",
+          "Observable outcome matches coverage: Position after Stop fill. [CRT-663]"
+        ],
+        "peculiarities": [
+          "Instrument symbology: EURUSD.spot per CT FX Spot docs; single instrument per pass.",
+          "Column labels grounded from prep_verify_view exploration (Orders Status/Symbol/Side/Qty/Filled Qty).",
+          "Limit/Stop console prices must be significantly off market; use help buy and help stp_order on CTQA."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [],
+    "orphan_bundles": [],
+    "notes": []
+  },
+  "draft_red_flags": [],
+  "validation_log": [
+    {
+      "step": "6-skip-crtqa-search",
+      "note": "generation_mode_greenfield"
+    },
+    {
+      "step": "8a",
+      "note": "Adopted precon skeleton 9 bundles"
+    },
+    {
+      "step": "8a-half-verify",
+      "note": "plan verify pass"
+    },
+    {
+      "step": "8a-three-quarter-verify",
+      "note": "explore verify pass all bundles"
+    },
+    {
+      "step": "8b-verify",
+      "note": "draft verify pass all bundles"
+    },
+    {
+      "step": "8c",
+      "note": "merge complete"
+    },
+    {
+      "step": "11-emit",
+      "note": "tests verify pass"
+    }
+  ],
+  "anti_pattern_findings": []
+}

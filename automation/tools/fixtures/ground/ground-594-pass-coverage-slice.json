@@ -1,0 +1,670 @@
+{
+  "_comment": "Pass-2 principal reinforce from coverage-594-shell-principal-minimal + discover-594-shell-principal-minimal",
+  "schema_version": 2,
+  "epic_key": "CRT-594",
+  "epic_ref_path": "automation/tools/fixtures/epic-prep/ref-594-topology-full.json",
+  "sources": {
+    "jira_fetched_at": "2026-06-18T12:00:00Z",
+    "epic_ref_loaded_at": "2026-06-18T12:00:00Z",
+    "bitbucket_repo": "BRO/xt",
+    "note": "fixture pass 2 principal",
+    "reinforce_topology_loaded": true,
+    "reinforce_principal_loaded": true,
+    "reinforce_inputs": [
+      {
+        "path": "automation/tools/fixtures/coverage/coverage-594-shell-principal-minimal.json",
+        "loaded_at": "2026-06-18T15:00:00Z"
+      },
+      {
+        "path": "automation/tools/fixtures/discover/discover-594-shell-principal-minimal.json",
+        "loaded_at": "2026-06-18T15:00:00Z"
+      }
+    ]
+  },
+  "archetype": "widget_ui",
+  "emit_layout": "shell_first",
+  "topology_provenance": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-594-topology-full.json",
+    "fields_consumed": [
+      "epic_archetype.value",
+      "verification_topology.jira_scenario_surfaces",
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules",
+      "verification_topology.delivery_notes",
+      "verification_topology.platform_reuse_candidates",
+      "verification_focus_proposed",
+      "verification_topology.principal_coverage_threads",
+      "obligations_proposed[].downstream_hints"
+    ],
+    "archetype_source": "copied_from_ref",
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "principal_provenance": {
+    "ref_path": "automation/tools/fixtures/epic-prep/ref-594-topology-full.json",
+    "focus_source": "epic_ref_proposed",
+    "threads_consumed": [
+      {
+        "thread_id": "pct-001",
+        "section_heading": "## Data setup — account groups and quote publication",
+        "obligation_ids": [
+          "obl-001",
+          "obl-005"
+        ]
+      },
+      {
+        "thread_id": "pct-002",
+        "section_heading": "## Surface quotes and tier oracle rules",
+        "obligation_ids": [
+          "obl-002",
+          "obl-003"
+        ]
+      },
+      {
+        "thread_id": "pct-003",
+        "section_heading": "## Backup and EOD midpoint capture",
+        "obligation_ids": [
+          "obl-004"
+        ]
+      }
+    ],
+    "copied_at": "2026-06-18T12:00:00Z"
+  },
+  "platform_reuse_annex": "- EOD backup trading day — platform regression TC family for daily_data_recorder (verify in Jira).",
+  "epic_verification_focus": {
+    "statement": "Verify FX_SPOT group-specific bid/ask on named client surfaces (Watchlist, Position Book, Instrument page, Derivatives, Client Area), tier/oracle rules per widget, midpoint invariant across groups, and backup/EOD midpoint capture.",
+    "source": "epic_ref_proposed",
+    "keywords": [
+      "FX_SPOT",
+      "account group",
+      "FxSpotSuffix",
+      "backup"
+    ]
+  },
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "Check that in client UIs quotes are shown according to the a",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "dxtrade5_watchlist"
+      ],
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-002",
+      "capability": "Check that in client UIs quotes are shown according to the a",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "dxtrade5_position_book"
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-003",
+      "capability": "Instrument page (Adaptive)",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "adaptive_instrument_page"
+      ],
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-004",
+      "capability": "Derivatives",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "dxtrade5_derivatives"
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-005",
+      "capability": "Client Area in Webbroker",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "webbroker_client_area"
+      ],
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-006",
+      "capability": "check that FX_SPOT is added to the Asset type filter in 'Bac",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "webbroker_backup_prices"
+      ],
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-004"
+      ]
+    },
+    {
+      "id": "m-007",
+      "capability": "EOD backup trading day — daily_data_recorder captures midpoi",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "backup_eod"
+      ],
+      "requirement_keys": [
+        "CRT-1621",
+        "CRT-1623"
+      ],
+      "obligation_ids": [
+        "obl-004"
+      ]
+    },
+    {
+      "id": "m-008",
+      "capability": "Non-trading day — published quotes do not affect backup pric",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "backup_non_trading_day"
+      ],
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-004"
+      ]
+    },
+    {
+      "id": "m-009",
+      "capability": "Mark price column equals midpoint for FX_SPOT on Positions",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "fx_spot_mark"
+      ],
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ]
+    },
+    {
+      "id": "m-010",
+      "capability": "Midpoint invariant across account groups while spreads may d",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "cross_group"
+      ],
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ]
+    },
+    {
+      "id": "m-011",
+      "capability": "dxCore show prices bid/ask from first TextConfiguration tier",
+      "semantic_variants": [],
+      "verification_role": "primary",
+      "aggregation_level": null,
+      "surfaces": [
+        "console_show_prices"
+      ],
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-001"
+      ]
+    }
+  ],
+  "obligations_coverage": {
+    "obl-001": {
+      "status": "covered",
+      "check_id": "chk-s1"
+    },
+    "obl-002": {
+      "status": "covered",
+      "check_id": "chk-001"
+    },
+    "obl-003": {
+      "status": "covered",
+      "check_id": "chk-003"
+    },
+    "obl-004": {
+      "status": "covered",
+      "check_id": "chk-006"
+    },
+    "obl-005": {
+      "status": "covered",
+      "check_id": "chk-s2"
+    }
+  },
+  "checks": [
+    {
+      "id": "chk-s1",
+      "section": "## Data setup — account groups and quote publication",
+      "coverage_thread": "environment_setup",
+      "scenario_line": "- [CRT-1761] CornerTraderFxConfiguration groups exist with FxSpotSuffix and domain profiles for RAG-CH and RAG-BS brokers (ENRG vs OPPT contrast).",
+      "detail_lines": [
+        "> Provision two account groups on CTQA before UI quote observation.",
+        "> Prerequisite (console): Confirm CornerTraderFxConfiguration account groups for RAG-CH-broker and RAG-BS-broker; profiles include FxSpotSuffix, minTolerance, maxTradableQty; FxSpotSuffix per CRT-1766 (CH) / CRT-1767 (BS).",
+        "> Contrast: use two accounts in ENRG vs OPPT groups before any UI quote check."
+      ],
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-001"
+      ],
+      "verification_role": "primary",
+      "linker_trace_lines": [
+        "> Discover: account_group_environment_setup fix-env-001; ENRG vs OPPT dual-account contrast; linked obl-001, obl-005."
+      ]
+    },
+    {
+      "id": "chk-s2",
+      "section": "## Data setup — account groups and quote publication",
+      "coverage_thread": "environment_setup",
+      "scenario_line": "- [CRT-1761] ET publish tier streams and instrument allow-list configured before quote checks on client surfaces.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-005"
+      ],
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Prerequisite (console): Confirm CornerTraderFxConfiguration account groups for RAG-CH-broker and RAG-BS-broker; profiles include FxSpotSuffix, minTolerance, maxTradableQty; FxSpotSuffix per CRT-1766 (CH) / CRT-1767 (BS).",
+        "> Contrast: use two accounts in ENRG vs OPPT groups before any UI quote check."
+      ],
+      "linker_trace_lines": [
+        "> Discover: account_group_environment_setup fix-env-001; ENRG vs OPPT dual-account contrast; linked obl-001, obl-005."
+      ]
+    },
+    {
+      "id": "chk-001",
+      "section": "## dxTrade5 — Watchlist",
+      "topology_surface_id": "jss-001",
+      "coverage_thread": "surface_quotes",
+      "scenario_line": "- [CRT-1714] Watchlist bid/ask reflects account group suffix and TextConfiguration tier closest to order quantity.",
+      "detail_lines": [
+        "> Oracle: text_configuration_closest_gte_qty for default order qty."
+      ],
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-001",
+      "verification_role": "primary",
+      "linker_trace_lines": [
+        "> Discover: dxtrade5_watchlist text_configuration_closest_gte_qty; volume_control order_default_qty (aff-001)."
+      ]
+    },
+    {
+      "id": "chk-002",
+      "section": "## dxTrade5 — Position Book",
+      "topology_surface_id": "jss-002",
+      "coverage_thread": "surface_quotes",
+      "scenario_line": "- [CRT-1713] Position Book bid/ask uses Quote stream first tier for the instrument.",
+      "detail_lines": [
+        "> Oracle: first_tier_quote — first TextConfiguration tier only."
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-002",
+      "verification_role": "primary",
+      "linker_trace_lines": [
+        "> Discover: dxtrade5_positions first_tier_quote at shell_only (aff-002)."
+      ]
+    },
+    {
+      "id": "chk-003",
+      "section": "## Adaptive — Instrument page",
+      "topology_surface_id": "jss-003",
+      "coverage_thread": "surface_quotes",
+      "scenario_line": "- [CRT-1717] Instrument page shows group-specific bid/ask for the logged-in account.",
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Harness: Adaptive Instrument page — bid/ask reflects logged-in account group."
+      ],
+      "linker_trace_lines": [
+        "> Discover: Adaptive instrument page group-specific bid/ask shell_only (aff-006)."
+      ]
+    },
+    {
+      "id": "chk-004",
+      "section": "## dxTrade5 — Derivatives",
+      "topology_surface_id": "jss-004",
+      "coverage_thread": "surface_quotes",
+      "scenario_line": "- [CRT-1713] Derivatives widget bid/ask uses first tier Quote stream [FAILED]",
+      "detail_lines": [
+        "> Oracle: first_tier_quote. Delivery: known_fail per post-implementation validation."
+      ],
+      "requirement_keys": [
+        "CRT-1713"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-003",
+      "delivery_status": "failed",
+      "verification_role": "primary",
+      "linker_trace_lines": [
+        "> Discovery: tooling_blocked dn-001; no reinforce executable lines."
+      ]
+    },
+    {
+      "id": "chk-005",
+      "section": "## WebBroker (client) — Client Area",
+      "topology_surface_id": "jss-005",
+      "coverage_thread": "surface_quotes",
+      "scenario_line": "- [CRT-1761] Client Area quote matches account group mapping for FX_SPOT.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "verification_role": "primary",
+      "detail_lines": [],
+      "linker_trace_lines": [
+        "> Discover: WebBroker Client Area shell observation (aff-005)."
+      ]
+    },
+    {
+      "id": "chk-006",
+      "section": "## WebBroker (dealer) — Backup Prices",
+      "topology_surface_id": "jss-006",
+      "coverage_thread": "backup_eod",
+      "scenario_line": "- [CRT-1621] Backup Prices widget includes FX_SPOT in asset type filter; EOD midpoint captured.",
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-004"
+      ],
+      "verification_role": "primary",
+      "detail_lines": [],
+      "linker_trace_lines": [
+        "> Discover: Backup Prices widget FX_SPOT filter shell_only (aff-005)."
+      ]
+    },
+    {
+      "id": "chk-007",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1717] Midpoint invariant: same midpoint across account groups while spreads may differ.",
+      "requirement_keys": [
+        "CRT-1717"
+      ],
+      "obligation_ids": [
+        "obl-003"
+      ],
+      "oracle_rule_id": "por-005",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Contrast: same FX_SPOT instrument — different account groups may show different bid/ask; midpoint must match across groups."
+      ],
+      "linker_trace_lines": [
+        "> Discover: midpoint_invariant cross_group (aff-004)."
+      ]
+    },
+    {
+      "id": "chk-008",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1714] Mark price equals midpoint for FX_SPOT on mark column surfaces.",
+      "requirement_keys": [
+        "CRT-1714"
+      ],
+      "obligation_ids": [
+        "obl-002"
+      ],
+      "oracle_rule_id": "por-006",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Note: Mark column on Positions/Watchlist FX_SPOT rows must equal midpoint (not bid/ask)."
+      ],
+      "linker_trace_lines": [
+        "> Discover: mark_from_midpoint fx_spot_mark (aff-007)."
+      ]
+    },
+    {
+      "id": "chk-009",
+      "section": "## Cross-surface invariants",
+      "scenario_line": "- [CRT-1761] dxCore show prices bid/ask from first TextConfiguration tier.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "obligation_ids": [
+        "obl-001"
+      ],
+      "oracle_rule_id": "por-004",
+      "verification_role": "primary",
+      "detail_lines": [
+        "> Verified on CTQA: show prices EUR/USD — bid/ask from first TextConfiguration tier.",
+        "> Prerequisite (console): show prices for target FX_SPOT symbol; bid/ask from first TextConfiguration tier (min volume)."
+      ],
+      "runtime_probes": [
+        {
+          "probe_id": "gp-001",
+          "command_attempted": "show prices EUR/USD",
+          "outcome": "success",
+          "verified_syntax": "show prices EUR/USD",
+          "evidence_note": "CTQA fixture probe",
+          "probed_at": "2026-06-18T18:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "chk-010",
+      "section": "## Out of scope",
+      "scenario_line": "- Chart candles for fx-spot excluded (x) per operator final coverage.",
+      "requirement_keys": [],
+      "obligation_ids": [],
+      "delivery_status": "excluded",
+      "verification_role": "out_of_epic",
+      "runtime_probes": [
+        {
+          "probe_id": "gp-chk-010",
+          "command_attempted": "backup_price show EUR/USD",
+          "outcome": "success",
+          "verified_syntax": "backup_price show EUR/USD",
+          "evidence_note": "fixture",
+          "probed_at": "2026-06-18T18:00:00Z"
+        }
+      ],
+      "detail_lines": []
+    },
+    {
+      "id": "chk-011",
+      "section": "## Backup and EOD",
+      "scenario_line": "- [CRT-1621] EOD backup trading day captures midpoint for FX_SPOT.",
+      "detail_lines": [
+        "> daily_data_recorder_config show; backup_price after snapshot."
+      ],
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "obligation_ids": [
+        "obl-004"
+      ],
+      "verification_role": "primary",
+      "human_oracle_label": "EOD backup midpoint",
+      "runtime_probes": [
+        {
+          "probe_id": "gp-chk-011",
+          "command_attempted": "backup_price show EUR/USD",
+          "outcome": "success",
+          "verified_syntax": "backup_price show EUR/USD",
+          "evidence_note": "fixture",
+          "probed_at": "2026-06-18T18:00:00Z"
+        }
+      ]
+    }
+  ],
+  "explicitly_out_of_scope": [
+    {
+      "item": "Chart candles for fx-spot",
+      "rationale": "Excluded (x) per operator final coverage; out of epic UI scope."
+    }
+  ],
+  "grounding_audit": {
+    "by_check_id": [
+      {
+        "check_id": "chk-s1",
+        "evidence_keys": [
+          "CRT-1761"
+        ],
+        "status": "grounded"
+      }
+    ],
+    "ungrounded_check_ids": []
+  },
+  "anti_pattern_findings": [],
+  "validation_log": [
+    {
+      "step": "reinforce-1",
+      "at": "2026-06-18T15:00:01Z",
+      "action": "loaded pass-1 principal + discover slice"
+    },
+    {
+      "step": "reinforce-1-topology",
+      "at": "2026-06-18T15:00:02Z",
+      "action": "shell_first surface batches; 5 oracle bindings"
+    },
+    {
+      "step": "reinforce-1-principal",
+      "at": "2026-06-18T15:00:02Z",
+      "action": "principal_loaded; 1 provision fixture fix-env-001"
+    },
+    {
+      "step": "reinforce-2-oracle",
+      "at": "2026-06-18T15:00:03Z",
+      "action": "5 oracle_binding merges"
+    },
+    {
+      "step": "reinforce-2-fixture-provision",
+      "at": "2026-06-18T15:00:03Z",
+      "action": "1 provision fixture merged into chk-s1/chk-s2"
+    },
+    {
+      "step": "reinforce-2-skipped-delivery",
+      "at": "2026-06-18T15:00:04Z",
+      "action": "skipped deepen chk-004"
+    }
+  ],
+  "smart_checklist_markdown": "# CRT-594 — fixture shell_first + principal threads (pass 2 reinforce)\n\n## Primary focus\n\n- Verify FX_SPOT group-specific bid/ask on named client surfaces (Watchlist, Position Book, Instrument page, Derivatives, Client Area), tier/oracle rules per widget, midpoint invariant across groups, and backup/EOD midpoint capture.\n\n## Data setup — account groups and quote publication\n\n- [CRT-1761] CornerTraderFxConfiguration groups exist with FxSpotSuffix and domain profiles for RAG-CH and RAG-BS brokers (ENRG vs OPPT contrast).\n> Provision two account groups on CTQA before UI quote observation.\n> Prerequisite (console): Confirm CornerTraderFxConfiguration account groups for RAG-CH-broker and RAG-BS-broker; profiles include FxSpotSuffix, minTolerance, maxTradableQty; FxSpotSuffix per CRT-1766 (CH) / CRT-1767 (BS).\n> Contrast: use two accounts in ENRG vs OPPT groups before any UI quote check.\n\n- [CRT-1761] ET publish tier streams and instrument allow-list configured before quote checks on client surfaces.\n> Prerequisite (console): Confirm CornerTraderFxConfiguration account groups for RAG-CH-broker and RAG-BS-broker; profiles include FxSpotSuffix, minTolerance, maxTradableQty; FxSpotSuffix per CRT-1766 (CH) / CRT-1767 (BS).\n> Contrast: use two accounts in ENRG vs OPPT groups before any UI quote check.\n\n## dxTrade5 — Watchlist\n\n- [CRT-1714] Watchlist bid/ask reflects account group suffix and TextConfiguration tier closest to order quantity.\n> Oracle: text_configuration_closest_gte_qty for default order qty.\n\n## dxTrade5 — Position Book\n\n- [CRT-1713] Position Book bid/ask uses Quote stream first tier for the instrument.\n> Oracle: first_tier_quote — first TextConfiguration tier only.\n\n## Adaptive — Instrument page\n\n- [CRT-1717] Instrument page shows group-specific bid/ask for the logged-in account.\n> Harness: Adaptive Instrument page — bid/ask reflects logged-in account group.\n\n## dxTrade5 — Derivatives\n\n- [CRT-1713] Derivatives widget bid/ask uses first tier Quote stream [FAILED]\n> Oracle: first_tier_quote. Delivery: known_fail per post-implementation validation.\n\n## WebBroker (client) — Client Area\n\n- [CRT-1761] Client Area quote matches account group mapping for FX_SPOT.\n\n## WebBroker (dealer) — Backup Prices\n\n- [CRT-1621] Backup Prices widget includes FX_SPOT in asset type filter; EOD midpoint captured.\n\n## Cross-surface invariants\n\n- [CRT-1717] Midpoint invariant: same midpoint across account groups while spreads may differ.\n> Contrast: same FX_SPOT instrument — different account groups may show different bid/ask; midpoint must match across groups.\n\n- [CRT-1714] Mark price equals midpoint for FX_SPOT on mark column surfaces.\n> Note: Mark column on Positions/Watchlist FX_SPOT rows must equal midpoint (not bid/ask).\n\n- [CRT-1761] dxCore show prices bid/ask from first TextConfiguration tier.\n> Verified on CTQA: show prices EUR/USD — bid/ask from first TextConfiguration tier.\n> Prerequisite (console): show prices for target FX_SPOT symbol; bid/ask from first TextConfiguration tier (min volume).\n\n## Out of scope\n\n- Chart candles for fx-spot excluded (x) per operator final coverage.\n\n## Backup and EOD\n\n- [CRT-1621] EOD backup trading day captures midpoint for FX_SPOT.\n> daily_data_recorder_config show; backup_price after snapshot.\n",
+  "coverage_pass": 1,
+  "reinforced_at": "2026-06-18T15:00:00Z",
+  "draft_truth_round": 1,
+  "scenario_coverage_map": [
+    {
+      "scenario_row_id": "scr-001",
+      "check_id": "chk-001",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-002",
+      "check_id": "chk-002",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-003",
+      "check_id": "chk-003",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-004",
+      "check_id": "chk-004",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-005",
+      "check_id": "chk-005",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-006",
+      "check_id": "chk-006",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-007",
+      "check_id": "chk-011",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-008",
+      "check_id": "chk-010",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-009",
+      "check_id": "chk-008",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-010",
+      "check_id": "chk-007",
+      "disposition": "covered"
+    },
+    {
+      "scenario_row_id": "scr-011",
+      "check_id": "chk-009",
+      "disposition": "covered"
+    }
+  ]
+}
