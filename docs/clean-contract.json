@@ -102,8 +102,12 @@
       "stats/epic-stats/**",
       "epic-stats/**",
       "automation/tools/epic_stats/**",
-      "/**",
-      "/**"
+      ".cursor/skills/better-prompt/**",
+      ".cursor/skills/better-skill/**",
+      ".cursor/skills/teach/**",
+      ".cursor/skills/karpathy-guidelines/**",
+      ".cursor/skills/crtqa-helper/**",
+      "auto-tests/docs/**"
     ],
     "delete_paths": [
       ".cursor/pipelines/test-exec.md",
@@ -114,10 +118,20 @@
       "docs/epic-stats-contract.json",
       "automation/docs/epic-stats.md",
       "automation/tools/epic_stats_rollup.py",
-      ".cursor/commands/.md",
-      ".cursor/commands/.md",
-      "docs/.json",
-      "docs/.json",
+      "automation/tools/epic_stats_team_rollup.py",
+      ".cursor/commands/better-prompt.md",
+      ".cursor/commands/better-skill.md",
+      ".cursor/commands/teach.md",
+      ".cursor/commands/crtqa-helper.md",
+      ".cursor/commands/crtqa-stats.md",
+      ".cursor/commands/clean-release.md",
+      ".cursor/commands/clean.md",
+      "docs/operator-assist-contract.json",
+      "docs/skill-authoring-patterns.json",
+      "docs/karpathy-guidelines-contract.json",
+      "docs/auto-tests-contract.json",
+      "auto-tests/README.md",
+      "auto-tests/.teacher-session.example.json",
       "automation/tools/fixtures/operator-assist/epic-helper-golden.json"
     ],
     "keep_globs": [
@@ -160,7 +174,7 @@
     "router": {
       "exclude_triggers": ["CLEAN:"]
     },
-    "harness_map_strip_package_ids": ["clean_release", "release_notes", "epic_stats", "", ""],
+    "harness_map_strip_package_ids": ["clean_release", "release_notes", "epic_stats", "operator_assist", "auto_tests_teach"],
     "entry_templates": {
       "README.md": "README.team.md",
       "HOW-TO.md": "HOW-TO.team.md",
