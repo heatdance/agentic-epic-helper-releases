@@ -27,6 +27,7 @@ stats/epic-stats/raw/
 # Release notes — command scratch (see .cursor/commands/release-notes.md)
 automation/temp/release-notes/
 automation/temp/release-map/
+automation/temp/clean/
 
 # epic-helper — per-epic orchestrator scratch (see docs/epic-helper-contract.json)
 epics/*/helper/
