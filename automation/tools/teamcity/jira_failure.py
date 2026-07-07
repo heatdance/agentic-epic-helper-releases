@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Failure comment on CRTQA (Jira DC Bearer PAT)."""
+"""Failure comment on CRTQA (no API attachment)."""
 
 from __future__ import annotations
 
@@ -20,7 +20,7 @@ def main() -> int:
     qa = os.environ.get("QA_TASK_KEY", "").strip()
     token = os.environ.get("JIRA_API_TOKEN", "").strip()
     base = os.environ.get("JIRA_BASE_URL", "https://jira.in.devexperts.com").rstrip("/")
-    build_url = os.environ.get("TEAMCITY_BUILD_URL", "unknown").strip()
+    build_url = os.environ.get("TEAMCITY_BUILD_URL", "").strip() or "unknown"
 
     if not qa:
         _fail("QA_TASK_KEY required")
@@ -28,9 +28,13 @@ def main() -> int:
         _fail("JIRA_API_TOKEN required")
 
     comment = (
-        f"Corner Epic QA: pipeline failed for epic *{epic}*. "
-        f"See build log: {build_url}"
+        f"Corner Epic QA: pipeline failed for {epic}.\n\n"
+        f"Build: {build_url}\n\n"
+        f"Open the build log for the failing step. "
+        f"If the run got far enough, partial outputs may be in TeamCity artifacts epic-work."
     )
+
+    print(f"Jira failure comment on {qa} (epic {epic})")
     url = f"{base}/rest/api/2/issue/{qa}/comment"
     req = Request(
         url,
