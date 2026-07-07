@@ -3,20 +3,44 @@
 from __future__ import annotations
 
 import json
+import os
 import subprocess
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from crtqa_console_openssh import openssh_credentials_present, probe_console_openssh
+
 SCHEMA_VERSION = 1
 CONSOLE_GATE = "crtqa_dx_console_session"
+CI_DOC = "automation/docs/crtqa-console-ci.md"
 
 
 def repo_root_from_here() -> Path:
     return Path(__file__).resolve().parent.parent.parent
 
 
-def probe_console_multiplex(repo: Path | None = None) -> tuple[bool, str, dict[str, Any]]:
+def _console_transport(repo: Path) -> str:
+    explicit = os.environ.get("CRTQA_CONSOLE_TRANSPORT", "").strip().lower()
+    if explicit in ("openssh", "plink"):
+        return explicit
+    if sys.platform != "win32":
+        return "openssh"
+    if openssh_credentials_present():
+        return "openssh"
+    return "plink"
+
+
+def probe_console(repo: Path | None = None) -> tuple[bool, str, dict[str, Any]]:
+    root = repo or repo_root_from_here()
+    transport = _console_transport(root)
+    if transport == "openssh":
+        return probe_console_openssh(root)
+    return probe_console_multiplex_plink(root)
+
+
+def probe_console_multiplex_plink(repo: Path | None = None) -> tuple[bool, str, dict[str, Any]]:
     root = repo or repo_root_from_here()
     status_script = root / "automation" / "tools" / "crtqa-console" / "Get-CrtqaConsoleStatus.ps1"
     if not status_script.is_file():
@@ -47,15 +71,33 @@ def probe_console_multiplex(repo: Path | None = None) -> tuple[bool, str, dict[s
     return False, str(symptom)[:500], gate_doc
 
 
+def _recovery_actions(transport: str) -> list[str]:
+    if transport == "openssh":
+        return [
+            "Set TeamCity secrets CRTQA_SSH_PRIVATE_KEY + CRTQA_SUDO_PASSWORD (see crtqa-console-ci.md).",
+            "Export CRTQA_CONSOLE_TRANSPORT=openssh on the build agent step.",
+            "Re-run python automation/tools/crtqa_console_probe.py on dxAgent.",
+            "Then GROUND: <KEY> or full Pipeline.",
+        ]
+    return [
+        "Run /crtqa-console start (desktop SSH password dialog ~30s; agent cannot complete this for you).",
+        "Re-run python automation/tools/crtqa_console_probe.py to confirm pass.",
+        "Then /epic-helper resume or GROUND: <KEY>.",
+    ]
+
+
 def build_console_gate_results(*, repo: Path | None = None) -> dict[str, Any]:
     checked_at = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    console_ok, console_symptom, _ = probe_console_multiplex(repo)
+    root = repo or repo_root_from_here()
+    transport = _console_transport(root)
+    console_ok, console_symptom, gate_doc = probe_console(root)
 
     if console_ok:
         gate = {
             "gate_id": CONSOLE_GATE,
             "status": "pass",
             "symptom": console_symptom,
+            "transport": transport,
             "required_for_epic": True,
             "recovery": None,
         }
@@ -64,17 +106,15 @@ def build_console_gate_results(*, repo: Path | None = None) -> dict[str, Any]:
             "gate_id": CONSOLE_GATE,
             "status": "fail",
             "symptom": console_symptom,
+            "transport": transport,
             "required_for_epic": True,
             "recovery": {
                 "gate_id": CONSOLE_GATE,
                 "symptom": console_symptom,
-                "required_when_note": "epic-helper and GROUND require crtqa console multiplex.",
-                "actions": [
-                    "Run /crtqa-console start (desktop SSH password dialog ~30s; agent cannot complete this for you).",
-                    "Re-run python automation/tools/crtqa_console_probe.py to confirm pass.",
-                    "Then /epic-helper resume or GROUND: <KEY>.",
-                ],
+                "required_when_note": "epic-helper and GROUND require crtqa dx console.",
+                "actions": _recovery_actions(transport),
                 "documentation_refs": [
+                    CI_DOC,
                     "automation/tools/crtqa-console/README.md",
                     ".cursor/commands/crtqa-console.md",
                 ],
@@ -86,8 +126,10 @@ def build_console_gate_results(*, repo: Path | None = None) -> dict[str, Any]:
         "schema_version": SCHEMA_VERSION,
         "checked_at": checked_at,
         "overall": overall,
+        "transport": transport,
         "blocking_fail": not console_ok,
         "gates": [gate],
+        "gate_status": gate_doc,
     }
     doc["checklist_markdown"] = format_console_checklist_markdown(doc)
     return doc
