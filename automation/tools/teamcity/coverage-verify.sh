@@ -20,5 +20,5 @@ python3 automation/tools/coverage_verify.py \
   --strict-topology \
   --strict-principal \
   --ref "$REF" \
-  --coverage "$COV"
+  --coverage "$COV" || exit 1
 echo "COVERAGE verify OK"

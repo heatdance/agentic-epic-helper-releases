@@ -17,5 +17,5 @@ python3 automation/tools/epic_prep_verify.py \
   --mode ref \
   --strict-topology \
   --strict-principal \
-  --ref "$REF"
+  --ref "$REF" || exit 1
 echo "EPIC-PREP verify OK"

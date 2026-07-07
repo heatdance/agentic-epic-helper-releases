@@ -1,24 +1,8 @@
 #!/usr/bin/env bash
-# Console gate for Pipeline (VCS checkout). TeamCity step exports CRTQA_* env vars first.
-set -u
+set -eu
 
-export CRTQA_CONSOLE_TRANSPORT="${CRTQA_CONSOLE_TRANSPORT:-openssh}"
-
-KEYFILE=$(mktemp /tmp/crtqa-ssh-XXXXXX) || exit 1
-chmod 600 "$KEYFILE"
-cleanup() { rm -f "$KEYFILE"; }
-trap cleanup EXIT
-
-B64="${CRTQA_SSH_PRIVATE_KEY_B64:-}"
-if [ -z "$B64" ]; then
-  echo "ERROR: CRTQA_SSH_PRIVATE_KEY_B64 empty"
-  exit 1
-fi
-
-printf '%s' "$B64" | base64 -d > "$KEYFILE"
-export CRTQA_SSH_KEY_PATH="$KEYFILE"
-
-echo "Console gate transport=$CRTQA_CONSOLE_TRANSPORT user=${CRTQA_SSH_USER:-?}"
+# shellcheck source=automation/tools/teamcity/crtqa-openssh-env.sh
+source automation/tools/teamcity/crtqa-openssh-env.sh
 
 python3 automation/tools/crtqa_console_probe.py --format text
 RC=$?

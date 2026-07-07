@@ -15,5 +15,5 @@ if [ ! -f "$COV" ] || [ ! -f "$REF" ]; then
   exit 1
 fi
 
-python3 automation/tools/ground_verify.py --mode emit --coverage "$COV" --ref "$REF"
+python3 automation/tools/ground_verify.py --mode emit --coverage "$COV" --ref "$REF" || exit 1
 echo "GROUND verify OK"

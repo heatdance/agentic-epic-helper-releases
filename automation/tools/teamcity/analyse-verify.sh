@@ -26,5 +26,5 @@ python3 automation/tools/analysis_verify.py \
   --strict-principal \
   --analysis "$ANALYSIS" \
   --coverage "$COV" \
-  --ref "$REF"
+  --ref "$REF" || exit 1
 echo "ANALYSE verify OK"
