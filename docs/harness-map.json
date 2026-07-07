@@ -133,6 +133,27 @@
           "mcp_hint": "Console-only gate for epic-helper cold start and GROUND preflight. Run crtqa_console_probe.py; recovery /crtqa-console start. No Postgres tunnel in v3 chain."
         },
         {
+          "id": "corner_epic_qa_ci",
+          "keywords": [
+            "teamcity",
+            "dxCity",
+            "dxcity",
+            "CornerEpicQa",
+            "Corner Epic QA",
+            "Agent: Coverage",
+            "CRTQA dispatch",
+            "epic-work",
+            "CornerTrader_QATooling",
+            "automation/CI"
+          ],
+          "read": [
+            "automation/CI/README.md",
+            "automation/CI/architecture.md",
+            "automation/CI/pipeline-steps.md"
+          ],
+          "mcp_hint": "Internal dxCity CI: Jira comment on CRTQA triggers EPIC-PREP through ANALYSE on Stash team branch. Not in public export. Console OpenSSH: automation/docs/crtqa-console-ci.md. No Jira attach v1."
+        },
+        {
           "id": "jq_json",
           "keywords": [
             "jq",

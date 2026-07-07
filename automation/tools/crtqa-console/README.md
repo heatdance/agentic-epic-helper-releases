@@ -51,6 +51,8 @@ pwsh -NoProfile -File automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps
 
 Slash commands: [`.cursor/commands/crtqa-console.md`](../../../.cursor/commands/crtqa-console.md) (`start` | `status` | `probe` | `stop`). Console gate: [`crtqa_console_probe.py`](../crtqa_console_probe.py) (epic-helper + GROUND).
 
+**Linux CI (dxCity):** OpenSSH transport on build agents — [automation/CI/README.md](../../CI/README.md) (full pipeline) · [automation/docs/crtqa-console-ci.md](../../docs/crtqa-console-ci.md) (console gate only).
+
 ## Security / limitations
 
 | Topic | Notes |

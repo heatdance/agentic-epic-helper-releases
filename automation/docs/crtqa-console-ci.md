@@ -1,6 +1,8 @@
 # CRTQA console gate — Linux CI (dxCity / OpenSSH)
 
-Headless **step 6** (GROUND preflight) on **Linux build agents** (`dxAgent*`). Windows desktop flow (`/crtqa-console start` + PuTTY multiplex) stays unchanged for local IDE work.
+**Full pipeline context:** [automation/CI/README.md](../CI/README.md) (Dispatch, Pipeline steps, Jira, artifacts).
+
+Headless **console gate** (Pipeline step 6) and **GROUND preflight** on **Linux build agents** (`dxAgent*`). Windows desktop flow (`/crtqa-console start` + PuTTY multiplex) stays unchanged for local IDE work.
 
 ## Problem
 
@@ -15,7 +17,11 @@ Headless **step 6** (GROUND preflight) on **Linux build agents** (`dxAgent*`). W
 | OpenSSH probe | `automation/tools/crtqa_console_openssh.py` |
 | Router | `automation/tools/crtqa_console_common.py` (`CRTQA_CONSOLE_TRANSPORT` / auto on Linux) |
 | CLI gate | `automation/tools/crtqa_console_probe.py` |
-| TeamCity script | `automation/tools/crtqa-console/ci-gate-step.sh` |
+| TeamCity wrapper | `automation/tools/teamcity/console-gate-wrapper.sh` |
+| CRTQA env helper | `automation/tools/teamcity/crtqa-openssh-env.sh` |
+| Standalone step script | `automation/tools/crtqa-console/ci-gate-step.sh` |
+
+Pipeline wiring (step numbers, GROUND env): [automation/CI/pipeline-steps.md](../CI/pipeline-steps.md).
 
 ## One-time setup
 
@@ -37,7 +43,7 @@ If infra provides **passwordless** `sudo su - ctqa` for the service user, leave 
 
 ### 3. TeamCity parameters
 
-Create on **Console Gate** test build and later on **Corner Epic QA Pipeline**:
+Create on **Console Gate** test build and on **Corner Epic QA Pipeline** (steps 6 and 7):
 
 | Parameter | Type | Notes |
 |-----------|------|--------|
@@ -71,15 +77,11 @@ Defaults otherwise come from `automation/tools/crtqa-console/crtqa-console.confi
 Create **`Corner Epic QA Console Gate`** under QA Tooling:
 
 1. **No VCS required** if you paste the script; or attach same Stash VCS root (`team`) after pushing harness changes.
-2. **One build step** — Command Line — paste contents of [`ci-gate-step.sh`](../tools/crtqa-console/ci-gate-step.sh).
+2. **One build step** — Command Line — run [`console-gate-wrapper.sh`](../tools/teamcity/console-gate-wrapper.sh) from harness checkout, or paste [`ci-gate-step.sh`](../tools/crtqa-console/ci-gate-step.sh).
 3. Fill parameters above.
-4. **Run** — expect exit **0** and log line `openssh + dx show console_guide OK`.
+4. **Run** — expect exit **0** and log line `Console gate OK` / `openssh + dx show console_guide OK`.
 
-Green gate → plug the same step into Pipeline as **step 6** before GROUND agent.
-
-## Pipeline step 6 (copy when gate test is green)
-
-Paste the full [`ci-gate-step.sh`](../tools/crtqa-console/ci-gate-step.sh) (same as standalone Console Gate build). TeamCity infers parameters only from `%PARAM%` tokens present in that file — keep the list to four names above.
+Green gate → same env is used in Pipeline step 6 and sourced again for GROUND step 7.
 
 ## Local smoke (Linux or WSL with VPN)
 
@@ -101,6 +103,7 @@ python3 automation/tools/crtqa_console_probe.py --format both
 | `SSH echo failed` | VPN, firewall, wrong user, key not in authorized_keys |
 | `dx probe exit N` | Wrong sudo password, `ctqa` user missing, `dx` not on PATH |
 | `too little stdout` | Console hung or auth failed silently — check stderr in `temp/crtqa-console/gate-status.json` on agent |
+| GROUND fails after green gate | GROUND step did not source `crtqa-openssh-env.sh` — see [pipeline-steps.md](../CI/pipeline-steps.md) |
 
 ## Security
 

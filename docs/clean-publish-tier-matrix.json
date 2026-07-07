@@ -362,6 +362,24 @@
       "personal": { "action": "keep" },
       "team": { "action": "keep" },
       "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/CI/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/tools/teamcity/**",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
+    },
+    {
+      "match": "automation/docs/crtqa-console-ci.md",
+      "personal": { "action": "keep" },
+      "team": { "action": "keep" },
+      "public": { "action": "delete" }
     }
   ],
   "default": {

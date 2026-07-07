@@ -65,5 +65,6 @@ Paths for operator discipline ([grounding-integration.json](grounding-integratio
 | `/release-notes` command + contract + `release_notes.py` | keep | delete | delete |
 | `stats/epic-stats/**` + epic-stats command/rollup | keep | delete | delete |
 | `docs/project.json`, `qa-project.json`, `corner-platform-map.json` | keep | **keep** | example stubs only |
+| `automation/CI/**`, `automation/tools/teamcity/**`, `crtqa-console-ci.md` | keep | **keep** | **delete** (internal dxCity CI) |
 
 Phase **S1** merges this matrix with `git ls-files` into `automation/temp/clean/file-map.json`.
