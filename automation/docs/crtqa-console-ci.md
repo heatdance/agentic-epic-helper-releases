@@ -43,8 +43,16 @@ Create on **Console Gate** test build and later on **Corner Epic QA Pipeline**:
 |-----------|------|--------|
 | `CRTQA_CONSOLE_TRANSPORT` | text | `openssh` |
 | `CRTQA_SSH_USER` | text | Linux login on CRTQA (overrides config `sshUser`) |
-| `CRTQA_SSH_PRIVATE_KEY` | password | Full PEM private key (multiline) |
+| `CRTQA_SSH_PRIVATE_KEY_B64` | password | Base64 of PEM file (one line) — **only** key param in CI script |
 | `CRTQA_SUDO_PASSWORD` | password | Sudo password for SSH user |
+
+**Encode key on Windows (PowerShell):**
+
+```powershell
+[Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:USERPROFILE\.ssh\crtqa-ci")) | Set-Clipboard
+```
+
+Paste into **`CRTQA_SSH_PRIVATE_KEY_B64`** (password parameter). Do **not** add `%CRTQA_SSH_PRIVATE_KEY%` to the build script — TeamCity auto-creates required parameters from every `%…%` token in the step text.
 
 Optional: `CRTQA_SSH_HOST`, `CRTQA_SUDO_UNIX_USER` (default `ctqa`), `CRTQA_REMOTE_DX_COMMAND` (default `dx run console`).
 
@@ -71,21 +79,7 @@ Green gate → plug the same step into Pipeline as **step 6** before GROUND agen
 
 ## Pipeline step 6 (copy when gate test is green)
 
-```bash
-export CRTQA_CONSOLE_TRANSPORT=openssh
-export CRTQA_SSH_USER="%CRTQA_SSH_USER%"
-
-KEYFILE=$(mktemp)
-chmod 600 "$KEYFILE"
-printf '%s' "%CRTQA_SSH_PRIVATE_KEY%" > "$KEYFILE"
-export CRTQA_SSH_KEY_PATH="$KEYFILE"
-export CRTQA_SUDO_PASSWORD="%CRTQA_SUDO_PASSWORD%"
-
-python3 automation/tools/crtqa_console_probe.py --format text
-RC=$?
-rm -f "$KEYFILE"
-exit $RC
-```
+Paste the full [`ci-gate-step.sh`](../tools/crtqa-console/ci-gate-step.sh) (same as standalone Console Gate build). TeamCity infers parameters only from `%PARAM%` tokens present in that file — keep the list to four names above.
 
 ## Local smoke (Linux or WSL with VPN)
 
@@ -102,7 +96,8 @@ python3 automation/tools/crtqa_console_probe.py --format both
 | Symptom | Likely fix |
 |---------|------------|
 | `CRTQA_SUDO_PASSWORD not set` | Add TeamCity password parameter |
-| `CRTQA_SSH_PRIVATE_KEY not set` | Add PEM to password parameter |
+| `CRTQA_SSH_PRIVATE_KEY_B64` / invalid PEM | Re-encode key; one line, no spaces |
+| Spurious `name` parameter in TeamCity | Remove old build step; never put example `%tokens%` in script comments |
 | `SSH echo failed` | VPN, firewall, wrong user, key not in authorized_keys |
 | `dx probe exit N` | Wrong sudo password, `ctqa` user missing, `dx` not on PATH |
 | `too little stdout` | Console hung or auth failed silently — check stderr in `temp/crtqa-console/gate-status.json` on agent |

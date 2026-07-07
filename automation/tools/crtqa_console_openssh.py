@@ -25,6 +25,7 @@ _MOTD_MARKERS = (
     "authorized clients",
     "Unauthorized access",
     "law enforcement",
+    "Permanently added",
 )
 
 
@@ -90,9 +91,21 @@ def load_console_config(repo: Path) -> dict[str, Any]:
 def openssh_credentials_present() -> bool:
     if os.environ.get("CRTQA_SSH_KEY_PATH"):
         return True
+    if os.environ.get("CRTQA_SSH_PRIVATE_KEY_B64"):
+        return True
     if os.environ.get("CRTQA_SSH_PRIVATE_KEY"):
         return True
     return False
+
+
+def _write_pem_temp_file(pem: str) -> tuple[Path, tempfile.NamedTemporaryFile]:
+    tmp = tempfile.NamedTemporaryFile(prefix="crtqa-ssh-", suffix=".key", delete=False)
+    tmp.write(pem.replace("\r\n", "\n").encode("utf-8"))
+    tmp.flush()
+    tmp.close()
+    path = Path(tmp.name)
+    path.chmod(stat.S_IRUSR | stat.S_IWUSR)
+    return path, tmp
 
 
 def _resolve_ssh_key_path() -> tuple[Path | None, tempfile.NamedTemporaryFile | None]:
@@ -103,17 +116,19 @@ def _resolve_ssh_key_path() -> tuple[Path | None, tempfile.NamedTemporaryFile | 
             return path, None
         raise FileNotFoundError(f"CRTQA_SSH_KEY_PATH not found: {explicit}")
 
+    b64 = os.environ.get("CRTQA_SSH_PRIVATE_KEY_B64", "").strip()
+    if b64:
+        try:
+            pem = base64.b64decode(b64).decode("utf-8")
+        except (OSError, ValueError) as exc:
+            raise ValueError(f"CRTQA_SSH_PRIVATE_KEY_B64 decode failed: {exc}") from exc
+        return _write_pem_temp_file(pem)
+
     pem = os.environ.get("CRTQA_SSH_PRIVATE_KEY", "")
     if not pem.strip():
         return None, None
 
-    tmp = tempfile.NamedTemporaryFile(prefix="crtqa-ssh-", suffix=".key", delete=False)
-    tmp.write(pem.replace("\r\n", "\n").encode("utf-8"))
-    tmp.flush()
-    tmp.close()
-    path = Path(tmp.name)
-    path.chmod(stat.S_IRUSR | stat.S_IWUSR)
-    return path, tmp
+    return _write_pem_temp_file(pem)
 
 
 def _ssh_extra_args() -> list[str]:
@@ -272,8 +287,8 @@ def probe_console_openssh(repo: Path | None = None) -> tuple[bool, str, dict[str
         return False, gate["detail"], gate
 
     if echo.returncode != 0 or "crtqa_ssh_ok" not in (echo.stdout or ""):
-        err = (echo.stderr or echo.stdout or "").strip()
-        gate["detail"] = f"SSH echo failed (exit {echo.returncode}): {err[:400]}"
+        err = _summarize_remote_failure(echo)
+        gate["detail"] = f"SSH echo failed (exit {echo.returncode}): {err}"
         write_gate_status(root, {**gate, "overall": "fail"})
         return False, gate["detail"], gate
 
