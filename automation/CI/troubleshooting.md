@@ -16,8 +16,9 @@
 | Symptom | Fix |
 |---------|-----|
 | `Harness checkout OK` missing | VCS root / branch not `team`; Stash credentials on TeamCity |
-| `jq not on PATH` | Install jq on dxAgent image (`winget` / package manager) |
-| `uvx (or uv) not on PATH` | Install [uv](https://github.com/astral-sh/uv) on agent pool |
+| `jq not on PATH` | Install jq on dxAgent image (bootstrap cannot install without root) |
+| `curl or wget required` | Install curl on dxAgent image |
+| `uv install finished but uvx/uv still not on PATH` | Check `$HOME` writable; inspect step 1 bootstrap log |
 | `JIRA_API_TOKEN empty` | Set Pipeline password param (step 1 + agents) |
 | Jira smoke HTTP 401/403 | Bearer PAT scope; same token as comment steps |
 | Agent not Linux | Console gate requires OpenSSH on agent |

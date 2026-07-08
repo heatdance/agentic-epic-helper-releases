@@ -60,9 +60,20 @@ def _check_required(paths: list[Path]) -> int:
     return 3
 
 
+def _mcp_command() -> tuple[str, list[str]]:
+    """Resolve MCP launcher from bootstrap (absolute uvx path on dxAgent)."""
+    uvx_bin = (os.environ.get("UVX_BIN") or "uvx").strip()
+    uvx_mode = (os.environ.get("UVX_MODE") or "uvx").strip()
+    pkg_args = ["--with", "fakeredis<2.35", "mcp-atlassian-with-bitbucket"]
+    if uvx_mode == "uv-x":
+        return uvx_bin, ["x", *pkg_args]
+    return uvx_bin, pkg_args
+
+
 def _build_options(repo_root: Path):
     from cursor_sdk import AgentOptions, LocalAgentOptions, StdioMcpServerConfig
 
+    mcp_cmd, mcp_args = _mcp_command()
     return AgentOptions(
         api_key=os.environ["CURSOR_API_KEY"],
         model=os.environ.get("AGENT_MODEL", "composer-2.5"),
@@ -72,8 +83,8 @@ def _build_options(repo_root: Path):
         ),
         mcp_servers={
             "user-mcp-atlassian": StdioMcpServerConfig(
-                command="uvx",
-                args=["--with", "fakeredis<2.35", "mcp-atlassian-with-bitbucket"],
+                command=mcp_cmd,
+                args=mcp_args,
                 env=_mcp_env(),
             ),
         },

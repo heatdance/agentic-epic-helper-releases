@@ -22,9 +22,14 @@ Twelve TeamCity build steps map to scripts under [`automation/tools/teamcity/`](
 [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) (same TeamCity step name as v1):
 
 1. Existing harness checks (`AGENTS.md`, verifiers, `epics/`, `.cursor/rules`, `.cursor/pipelines`).
-2. `command -v jq` and `uvx` (or `uv`).
-3. [`write-mcp-config.py`](../tools/teamcity/write-mcp-config.py) — writes **gitignored** `.cursor/mcp.json` using **`JIRA_API_TOKEN`** for all three MCP PAT env vars.
-4. [`mcp-smoke.sh`](../tools/teamcity/mcp-smoke.sh) — Jira REST `GET issue/{EPIC_KEY}` (fail step 1 before any agent if PAT/network broken).
+2. `command -v jq` (must exist on agent image).
+3. [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) — **self-healing** on dxAgent:
+   - installs `uv`/`uvx` to `$HOME/.local/bin` via astral installer if missing;
+   - `pip install --user cursor-sdk`;
+   - warms MCP wheel cache (`mcp-atlassian-with-bitbucket`);
+   - writes `.teamcity-ci/bootstrap.env` for later steps (each step is a fresh shell).
+4. [`write-mcp-config.py`](../tools/teamcity/write-mcp-config.py) — gitignored `.cursor/mcp.json` from **`JIRA_API_TOKEN`**.
+5. [`mcp-smoke.sh`](../tools/teamcity/mcp-smoke.sh) — Jira REST smoke on `EPIC_KEY`.
 
 ## Agent runner (steps 2, 4, 7, 9)
 

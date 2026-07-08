@@ -39,14 +39,15 @@ Optional overrides: `CRTQA_SSH_HOST`, `CRTQA_SUDO_UNIX_USER`, `JIRA_BASE_URL`, `
 
 ### Agent host prerequisites (dxAgent pool)
 
-| Tool | Purpose |
-|------|---------|
-| `python3` 3.10+ | Verifiers + `cursor-sdk` |
-| `jq` | Harness playbooks / JSON inspection |
-| `uv` / `uvx` | `mcp-atlassian-with-bitbucket` stdio server |
-| Network | Jira, Confluence, Stash, Cursor API |
+| Tool | Purpose | Bootstrap |
+|------|---------|-----------|
+| `python3` 3.10+ | Verifiers + `cursor-sdk` | required on image |
+| `jq` | Harness playbooks / JSON inspection | required on image (no self-install) |
+| `curl` or `wget` | Install `uv` on first build | required on image |
+| `uv` / `uvx` | `mcp-atlassian-with-bitbucket` | **auto-installed** by step 1 [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) to `$HOME/.local/bin` |
+| Network | Jira, Confluence, Stash, Cursor API, astral.sh | required |
 
-Step 1 [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) **fail-fast** if `jq` or `uvx`/`uv` missing.
+Step 1 also installs **`cursor-sdk`** via pip and warms the MCP wheel cache. Later steps source the same bootstrap marker (`.teamcity-ci/bootstrap.env`) so each fresh TeamCity shell gets the correct `PATH` and `UVX_BIN`.
 
 ## Encode SSH key (Windows PowerShell)
 

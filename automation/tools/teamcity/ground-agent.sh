@@ -8,8 +8,6 @@ source automation/tools/teamcity/agent-env.sh
 # shellcheck source=automation/tools/teamcity/crtqa-openssh-env.sh
 source automation/tools/teamcity/crtqa-openssh-env.sh
 
-python3 -m pip install --user -q cursor-sdk
-
 EPIC="$EPIC_KEY"
 PROMPT=$(cat <<EOF
 GROUND: ${EPIC}

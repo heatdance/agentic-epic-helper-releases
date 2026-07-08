@@ -4,8 +4,6 @@ set -euo pipefail
 # shellcheck source=automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/agent-env.sh
 
-python3 -m pip install --user -q cursor-sdk
-
 EPIC="$EPIC_KEY"
 PROMPT=$(cat <<EOF
 COVERAGE: ${EPIC} strict_topology=yes strict_principal=yes

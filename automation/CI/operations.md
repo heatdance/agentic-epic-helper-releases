@@ -75,7 +75,7 @@ After merging agent bootstrap + runner scripts to **`team`**:
 | **Pipeline** text param | `AGENT_MAX_WAIT_MINUTES` = **`45`** (raise if EPIC-PREP times out) |
 | **Pipeline** password | `JIRA_API_TOKEN` — same PAT for comments + MCP (no extra Confluence/Bitbucket passwords) |
 | **Dispatch** text param | `DISPATCH_LOOKBACK_MINUTES` = **`120`** |
-| **dxAgent pool** | `jq`, `uv`/`uvx`, Python 3.10+, outbound Jira/Confluence/Stash/Cursor |
+| **dxAgent pool** | `jq`, `curl`, Python 3.10+, writable `$HOME`, outbound Jira/Confluence/Stash/Cursor/**astral.sh** |
 | **Verify** | Manual Pipeline `EPIC_KEY=CRT-670` — step 1 smoke + step 2 creates `CRT-670-ref.json` before verify |
 
 Steps 2–12 names unchanged; VCS picks up new scripts from Stash `team`.
