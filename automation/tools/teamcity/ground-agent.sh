@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
-set -eu
+set -euo pipefail
 
-EPIC="${EPIC_KEY:?EPIC_KEY empty}"
-if [ -z "${CURSOR_API_KEY:-}" ]; then
-  echo "ERROR: CURSOR_API_KEY is empty"
-  exit 1
-fi
+# shellcheck source=automation/tools/teamcity/agent-env.sh
+source automation/tools/teamcity/agent-env.sh
 
 # GROUND probes dx console — same OpenSSH secrets as console gate (step 6).
 # shellcheck source=automation/tools/teamcity/crtqa-openssh-env.sh
@@ -13,29 +10,20 @@ source automation/tools/teamcity/crtqa-openssh-env.sh
 
 python3 -m pip install --user -q cursor-sdk
 
-export EPIC_KEY="$EPIC"
+EPIC="$EPIC_KEY"
+PROMPT=$(cat <<EOF
+GROUND: ${EPIC}
 
-python3 -c "
-import os, sys
-from cursor_sdk import Agent, AgentOptions, LocalAgentOptions
+CI addendum: CRTQA console Phase 0 is already done (Pipeline step 6 console gate passed).
+Do not use Invoke-CrtqaDxConsole.ps1 or desktop multiplex — use OpenSSH transport with exported CRTQA_SSH_* / CRTQA_SUDO_PASSWORD env and crtqa_console_probe.py per playbook.
+Follow .cursor/pipelines/ground.md end-to-end for epic ${EPIC}.
+Mutate runtime_probes on console-tagged checks in epics/${EPIC}/${EPIC}-coverage.json; ground_verify.py --mode emit must pass.
+Delete epics/${EPIC}/temp/ when done.
+EOF
+)
 
-epic = os.environ['EPIC_KEY']
-# Linux CI: openssh env already exported; playbook must use crtqa_console / openssh not desktop multiplex.
-prompt = (
-    f'GROUND: {epic} '
-    'Use CRTQA_CONSOLE_TRANSPORT=openssh and existing CRTQA_SSH_* / CRTQA_SUDO_PASSWORD env. '
-    'Run runtime probes for every console-tagged check; ground_verify --mode emit must pass.'
-)
-result = Agent.prompt(
-    prompt,
-    AgentOptions(
-        api_key=os.environ['CURSOR_API_KEY'],
-        model='composer-2.5',
-        local=LocalAgentOptions(cwd=os.getcwd()),
-    ),
-)
-print('status:', result.status)
-if result.status != 'finished':
-    sys.exit(2)
-print('GROUND agent finished')
-"
+python3 automation/tools/teamcity/run_pipeline_agent.py \
+  --prompt "$PROMPT" \
+  --require "epics/%EPIC_KEY%/%EPIC_KEY%-coverage.json"
+
+echo "GROUND agent finished"

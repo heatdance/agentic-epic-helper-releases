@@ -4,7 +4,7 @@
 
 1. QA posts **`Agent: Coverage`** on CRTQA task (summary must contain `CRT-###`).
 2. Dispatch runs (cron or manual) — queues Pipeline if comment is new.
-3. Pipeline runs ~15–90 min depending on epic size.
+3. Pipeline runs ~15–180 min depending on epic size and `AGENT_MAX_WAIT_MINUTES`.
 4. On success: Jira comment + `epic-work` artifacts.
 5. QA downloads coverage markdown/JSON from TeamCity; continues manual review in harness or Jira.
 
@@ -64,6 +64,21 @@ Hourly during business hours UTC. Adjust lookback (`DISPATCH_LOOKBACK_MINUTES`) 
 1. Pause Dispatch schedule.
 2. Cancel queued Pipeline builds in TeamCity if needed.
 3. Re-enable after verification.
+
+## MCP patch rollout (operator checklist)
+
+After merging agent bootstrap + runner scripts to **`team`**:
+
+| Where | Action |
+|-------|--------|
+| **Pipeline** build timeout | **180 min** |
+| **Pipeline** text param | `AGENT_MAX_WAIT_MINUTES` = **`45`** (raise if EPIC-PREP times out) |
+| **Pipeline** password | `JIRA_API_TOKEN` — same PAT for comments + MCP (no extra Confluence/Bitbucket passwords) |
+| **Dispatch** text param | `DISPATCH_LOOKBACK_MINUTES` = **`120`** |
+| **dxAgent pool** | `jq`, `uv`/`uvx`, Python 3.10+, outbound Jira/Confluence/Stash/Cursor |
+| **Verify** | Manual Pipeline `EPIC_KEY=CRT-670` — step 1 smoke + step 2 creates `CRT-670-ref.json` before verify |
+
+Steps 2–12 names unchanged; VCS picks up new scripts from Stash `team`.
 
 ## Stash push workflow
 

@@ -84,6 +84,16 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D9 — MCP + project rules mandatory for CI agents
+
+**Decision:** Pipeline agent steps use [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py) with **inline** `user-mcp-atlassian` stdio MCP and `setting_sources=["project"]`. Step 1 bootstraps gitignored `.cursor/mcp.json` and Jira smoke. Single **`JIRA_API_TOKEN`** PAT feeds MCP and Jira comment scripts.
+
+**Rationale:** Bare `Agent.prompt` + `LocalAgentOptions(cwd=…)` only did not load `.cursor/rules/` (pipeline-router) or Atlassian MCP; playbooks require MCP for Jira/Confluence/Bitbucket. `status: finished` without `epics/<KEY>/*` was a false green before `--require` post-checks.
+
+**Status:** Accepted (MCP patch).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

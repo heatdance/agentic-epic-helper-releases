@@ -1,33 +1,26 @@
 #!/usr/bin/env bash
-set -u
+set -euo pipefail
 
-EPIC="${EPIC_KEY:-}"
-if [ -z "$EPIC" ]; then
-  echo "ERROR: EPIC_KEY is empty"
-  exit 1
-fi
-if [ -z "${CURSOR_API_KEY:-}" ]; then
-  echo "ERROR: CURSOR_API_KEY is empty"
-  exit 1
-fi
+# shellcheck source=automation/tools/teamcity/agent-env.sh
+source automation/tools/teamcity/agent-env.sh
 
 python3 -m pip install --user -q cursor-sdk
 
-python3 -c "
-import os, sys
-from cursor_sdk import Agent, AgentOptions, LocalAgentOptions
+EPIC="$EPIC_KEY"
+PROMPT=$(cat <<EOF
+ANALYSE: ${EPIC} strict_topology=yes strict_principal=yes
 
-epic = os.environ['EPIC_KEY']
-result = Agent.prompt(
-    f'ANALYSE: {epic}',
-    AgentOptions(
-        api_key=os.environ['CURSOR_API_KEY'],
-        model='composer-2.5',
-        local=LocalAgentOptions(cwd=os.getcwd()),
-    ),
+Follow the playbook .cursor/pipelines/analysis.md end-to-end for epic ${EPIC}.
+Use user-mcp-atlassian MCP only for authoritative discovery.
+Requires epics/${EPIC}/${EPIC}-coverage.json with runtime_probes when console checks exist.
+Write epics/${EPIC}/${EPIC}-analysis.json and epics/${EPIC}/${EPIC}-analysis.md.
+Delete epics/${EPIC}/temp/ when done.
+EOF
 )
-print('status:', result.status)
-if result.status != 'finished':
-    sys.exit(2)
-print('ANALYSE agent finished')
-"
+
+python3 automation/tools/teamcity/run_pipeline_agent.py \
+  --prompt "$PROMPT" \
+  --require "epics/%EPIC_KEY%/%EPIC_KEY%-analysis.json" \
+  --require "epics/%EPIC_KEY%/%EPIC_KEY%-analysis.md"
+
+echo "ANALYSE agent finished"

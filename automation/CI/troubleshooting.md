@@ -16,7 +16,13 @@
 | Symptom | Fix |
 |---------|-----|
 | `Harness checkout OK` missing | VCS root / branch not `team`; Stash credentials on TeamCity |
+| `jq not on PATH` | Install jq on dxAgent image (`winget` / package manager) |
+| `uvx (or uv) not on PATH` | Install [uv](https://github.com/astral-sh/uv) on agent pool |
+| `JIRA_API_TOKEN empty` | Set Pipeline password param (step 1 + agents) |
+| Jira smoke HTTP 401/403 | Bearer PAT scope; same token as comment steps |
 | Agent not Linux | Console gate requires OpenSSH on agent |
+| Agent `finished` but verify «file not found» | Pre-patch bare SDK — upgrade `team` scripts; runner exit **3** if `--require` missing |
+| `required output file(s) missing` (exit 3) | Agent did not write artefact — read agent log; increase `AGENT_MAX_WAIT_MINUTES` |
 
 ## Pipeline — verifiers false green
 
@@ -58,7 +64,9 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 |---------|-----|
 | `CURSOR_API_KEY is empty` | Set password param on Pipeline |
 | Agent status not `finished` | Read agent log; retry; check API quota |
-| Long runtime / timeout | Increase build timeout (~90 min) |
+| `agent wait exceeded N minutes` | Raise `AGENT_MAX_WAIT_MINUTES` (default 45) and build timeout (180 min) |
+| MCP calls absent in agent log | Ensure step 1 green; runner uses inline MCP — not bare `Agent.prompt` |
+| Strict verifier fail after artefacts exist | Expected — agent ran playbook; quality gate failed (topology/principal/draft_truth) |
 
 ## Stash
 

@@ -4,24 +4,48 @@ Twelve TeamCity build steps map to scripts under [`automation/tools/teamcity/`](
 
 | # | Step name (suggested) | Script | Verifier / notes |
 |---|------------------------|--------|------------------|
-| 1 | Verify harness checkout | [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) | Asserts `AGENTS.md`, `automation/tools`, `epics/` |
-| 2 | EPIC-PREP agent | [`epic-prep-agent.sh`](../tools/teamcity/epic-prep-agent.sh) | Cursor SDK; prompt `EPIC-PREP: {EPIC} strict_topology=yes strict_principal=yes` |
+| 1 | Verify harness checkout | [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) | Harness tree + **`jq`** + **`uvx`** + writes gitignored `.cursor/mcp.json` + Jira smoke |
+| 2 | EPIC-PREP agent | [`epic-prep-agent.sh`](../tools/teamcity/epic-prep-agent.sh) | [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py); MCP + project rules; requires `-ref.json` |
 | 3 | EPIC-PREP verify | [`epic-prep-verify.sh`](../tools/teamcity/epic-prep-verify.sh) | `epic_prep_verify.py` — **`|| exit 1`** |
-| 4 | COVERAGE agent | [`coverage-agent.sh`](../tools/teamcity/coverage-agent.sh) | Cursor SDK; `COVERAGE: {EPIC}` |
+| 4 | COVERAGE agent | [`coverage-agent.sh`](../tools/teamcity/coverage-agent.sh) | Runner; `strict_topology=yes strict_principal=yes`; requires ref + coverage JSON/MD |
 | 5 | COVERAGE verify | [`coverage-verify.sh`](../tools/teamcity/coverage-verify.sh) | `coverage_verify.py --mode draft_truth` — **`|| exit 1`** |
 | 6 | Console gate | [`console-gate-wrapper.sh`](../tools/teamcity/console-gate-wrapper.sh) | Sources [`crtqa-openssh-env.sh`](../tools/teamcity/crtqa-openssh-env.sh); `crtqa_console_probe.py` |
-| 7 | GROUND agent | [`ground-agent.sh`](../tools/teamcity/ground-agent.sh) | **Must source CRTQA env** (same as step 6) before agent |
+| 7 | GROUND agent | [`ground-agent.sh`](../tools/teamcity/ground-agent.sh) | CRTQA OpenSSH env + runner; CI addendum (Phase 0 done; no desktop multiplex) |
 | 8 | GROUND verify | [`ground-verify.sh`](../tools/teamcity/ground-verify.sh) | `ground_verify.py --mode emit` — **`|| exit 1`** |
-| 9 | ANALYSE agent | [`analyse-agent.sh`](../tools/teamcity/analyse-agent.sh) | Cursor SDK; `ANALYSE: {EPIC}` |
+| 9 | ANALYSE agent | [`analyse-agent.sh`](../tools/teamcity/analyse-agent.sh) | Runner; `strict_topology=yes strict_principal=yes`; requires analysis JSON/MD |
 | 10 | ANALYSE verify | [`analyse-verify.sh`](../tools/teamcity/analyse-verify.sh) | `analysis_verify.py --mode draft_truth` — **`|| exit 1`** |
 | 11 | Jira success comment | [`jira-success.sh`](../tools/teamcity/jira-success.sh) | [`jira_success.py`](../tools/teamcity/jira_success.py) |
 | 12 | Jira failure comment | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | **Execution condition:** `not(success())` only |
+
+## Step 1 — agent bootstrap
+
+[`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) (same TeamCity step name as v1):
+
+1. Existing harness checks (`AGENTS.md`, verifiers, `epics/`, `.cursor/rules`, `.cursor/pipelines`).
+2. `command -v jq` and `uvx` (or `uv`).
+3. [`write-mcp-config.py`](../tools/teamcity/write-mcp-config.py) — writes **gitignored** `.cursor/mcp.json` using **`JIRA_API_TOKEN`** for all three MCP PAT env vars.
+4. [`mcp-smoke.sh`](../tools/teamcity/mcp-smoke.sh) — Jira REST `GET issue/{EPIC_KEY}` (fail step 1 before any agent if PAT/network broken).
+
+## Agent runner (steps 2, 4, 7, 9)
+
+All `*-agent.sh` scripts call [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py):
+
+| Feature | Behavior |
+|---------|----------|
+| MCP | Inline `StdioMcpServerConfig` for `user-mcp-atlassian` (same env as step 1) |
+| Project rules | `setting_sources=["project"]` — loads `.cursor/rules/` (pipeline-router) |
+| Timeout | `AGENT_MAX_WAIT_MINUTES` (default 45) |
+| Post-check | `--require` paths with `%EPIC_KEY%` expansion |
+| Exit codes | **1** SDK error · **2** status ≠ `finished` or timeout · **3** missing required files |
+
+`Agent.prompt` without MCP/project settings produced `status: finished` with **no** `epics/<KEY>/` artefacts — runner closes that gap.
 
 ## Environment per step
 
 | Steps | Required env / params |
 |-------|------------------------|
-| 2–5, 9–10 | `EPIC_KEY`, `CURSOR_API_KEY` |
+| 1 | `JIRA_API_TOKEN`; `EPIC_KEY` for smoke (optional on manual checkout-only) |
+| 2–5, 9–10 | `EPIC_KEY`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES` (optional) |
 | 6–8 | `CRTQA_SSH_USER`, `CRTQA_SSH_PRIVATE_KEY_B64`, `CRTQA_SUDO_PASSWORD`, `CRTQA_CONSOLE_TRANSPORT=openssh` |
 | 11–12 | `EPIC_KEY`, `QA_TASK_KEY`, `JIRA_API_TOKEN`, `TEAMCITY_BUILD_URL` |
 
