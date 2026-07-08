@@ -21,7 +21,15 @@ Posted when the build completed steps 1–10 successfully.
 
 **TeamCity Execute step:** `Only if all previous steps were successful` (default).
 
-Requires `TEAMCITY_BUILD_URL` (from `%teamcity.build.url%` in the step script).
+**Custom script:** `bash automation/tools/teamcity/jira-success.sh`
+
+`TEAMCITY_BUILD_URL` is resolved automatically from env, `teamcity.build.url` in TeamCity properties ([`jira-env.sh`](../tools/teamcity/jira-env.sh), D13). Optional belt: `export TEAMCITY_BUILD_URL="%teamcity.build.url%"` in the step script.
+
+Preflight line in the build log (no secrets):
+
+```
+Jira preflight: epic=CRT-657 qa=CRTQA-10236 build_url=set token=set
+```
 
 Template (from `jira_success.py`):
 
@@ -40,6 +48,8 @@ After HTTP 201, [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh)
 Posted when the build **failed** before a success comment was posted.
 
 **TeamCity Execute step:** `Even if some of the previous steps failed`.
+
+**Custom script:** `bash automation/tools/teamcity/jira-failure.sh`
 
 ### dxCity UI limitation
 
@@ -76,4 +86,4 @@ Dispatch passes `COMMENT_ID` for traceability. v1 Jira scripts do not reference 
 
 ## Manual Pipeline test
 
-Set `QA_TASK_KEY` and `EPIC_KEY` manually; `COMMENT_ID` may be empty. Jira steps still run if token and build URL are set.
+Set `QA_TASK_KEY` and `EPIC_KEY` manually; `COMMENT_ID` may be empty. Jira steps still run when token is set; build URL is auto-resolved from TeamCity properties when not exported.

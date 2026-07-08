@@ -57,7 +57,7 @@ See [secrets-and-params.md](secrets-and-params.md) for full list.
 
 **Dispatch:** `JIRA_API_TOKEN`, `PIPELINE_BUILD_TYPE_ID`, `DISPATCH_LOOKBACK_MINUTES`, `TRIGGER_PHRASE`, `TC_REST_TOKEN`, optional `TC_SERVER_URL`.
 
-**Pipeline:** `EPIC_KEY`, `QA_TASK_KEY`, `COMMENT_ID`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES`, CRTQA OpenSSH params, plus TeamCity built-in `teamcity.build.url` (exposed as `TEAMCITY_BUILD_URL` in Jira steps).
+**Pipeline:** `EPIC_KEY`, `QA_TASK_KEY`, `COMMENT_ID`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES`, CRTQA OpenSSH params, plus TeamCity built-in `teamcity.build.url` (auto-resolved to `TEAMCITY_BUILD_URL` by [`jira-env.sh`](../tools/teamcity/jira-env.sh) — see D13).
 
 ### Expose secrets to all steps (required for MCP patch)
 
@@ -70,23 +70,24 @@ dxCity may not inject **password** configuration parameters into the environment
 | `env.JIRA_API_TOKEN` | `%JIRA_API_TOKEN%` |
 | `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
 | `env.EPIC_KEY` | `%EPIC_KEY%` |
+| `env.QA_TASK_KEY` | `%QA_TASK_KEY%` |
 
 Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
 
-Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders.
+Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders. **`TEAMCITY_BUILD_URL`** is resolved from `teamcity.build.url` in that file when not in env (D13).
 
 ## Step 11 / 12 — Jira comments (mutually exclusive)
 
 dxCity **Parameter-based Execution Condition** (equals / contains) **cannot** express `not(success())`. Use **Execute step** + script guard instead.
 
-| Step | Execute step setting | Script behaviour |
-|------|----------------------|------------------|
-| **11** JIRA success | **Only if all previous steps were successful** | Posts success; writes `.teamcity-ci/jira-success.posted` |
-| **12** JIRA fail | **Even if some of the previous steps failed** | Skips comment if success marker exists ([`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh)) |
+| Step | Execute step setting | Custom script (Command Line) | Script behaviour |
+|------|----------------------|------------------------------|------------------|
+| **11** JIRA success | **Only if all previous steps were successful** | `bash automation/tools/teamcity/jira-success.sh` | Posts success; writes `.teamcity-ci/jira-success.posted` |
+| **12** JIRA fail | **Even if some of the previous steps failed** | `bash automation/tools/teamcity/jira-failure.sh` | Skips comment if success marker exists ([`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh)) |
 
 On a green build, step 12 may still **appear** in the log but should log `SKIP failure Jira comment` — not `comment status: 201` for failure.
 
-Details: [jira-integration.md](jira-integration.md) · ADR [decisions.md](decisions.md) D12.
+Details: [jira-integration.md](jira-integration.md) · ADR [decisions.md](decisions.md) D12 · build URL self-resolve D13.
 
 ## Stash access
 

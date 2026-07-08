@@ -44,6 +44,7 @@ Executable wrappers under [`automation/tools/teamcity/`](../tools/teamcity/). Pi
 
 | Script | Python | Role |
 |--------|--------|------|
+| [`jira-env.sh`](../tools/teamcity/jira-env.sh) | [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) | Load params, resolve `TEAMCITY_BUILD_URL`, preflight |
 | [`jira-success.sh`](../tools/teamcity/jira-success.sh) | `jira_success.py` | Success comment on CRTQA |
 | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | `jira_failure.py` | Failure comment on CRTQA |
 | [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) | — | Marker `.teamcity-ci/jira-success.posted` — step 12 skips if step 11 posted |

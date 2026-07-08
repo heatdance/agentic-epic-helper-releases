@@ -9,6 +9,8 @@ import sys
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+from read_teamcity_params import resolve_teamcity_build_url
+
 
 def _fail(msg: str, code: int = 1) -> None:
     print(f"ERROR: {msg}", file=sys.stderr)
@@ -20,7 +22,11 @@ def main() -> int:
     qa = os.environ.get("QA_TASK_KEY", "").strip()
     token = os.environ.get("JIRA_API_TOKEN", "").strip()
     base = os.environ.get("JIRA_BASE_URL", "https://jira.in.devexperts.com").rstrip("/")
-    build_url = os.environ.get("TEAMCITY_BUILD_URL", "").strip() or "unknown"
+    build_url = (
+        os.environ.get("TEAMCITY_BUILD_URL", "").strip()
+        or resolve_teamcity_build_url()
+        or "unknown"
+    )
 
     if not qa:
         _fail("QA_TASK_KEY required")

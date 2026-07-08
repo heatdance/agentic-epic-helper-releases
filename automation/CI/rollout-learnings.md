@@ -12,6 +12,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | `3a730ae` | `read_teamcity_params.py` — password params into env |
 | `3c2e643` | Verbose agent step logging (`tool_call`, `REQUIRE OK`, `run_stats`) |
 | `792f519` | `jira-notify-guard.sh` — skip failure comment when success posted |
+| *(D13)* | `jira-env.sh` + `teamcity.build.url` alias — Jira steps 11/12 self-resolve build URL |
 
 ## Incident matrix
 
@@ -27,6 +28,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | 8 | `git push stash` Permission denied | SSH key not on Stash | Infra / operator | [operations.md](operations.md) |
 | 9 | Stale `epics/` on incremental checkout | Agent reuses work dir; old artefacts pass `--require` | `3c2e643` STALE warn | [troubleshooting.md](troubleshooting.md) |
 | 10 | Fast green build (~9 min) suspicious | Agent stub + verifiers may still pass minimal shape | — | [operations.md](operations.md) «green ≠ gold» |
+| 11 | Steps 11/12 fail after green QA (CRTQA-10236/10244) | `TEAMCITY_BUILD_URL` not in env; step script may be empty | D13 — `jira-env.sh`, properties alias | [teamcity-setup.md](teamcity-setup.md), [troubleshooting.md](troubleshooting.md) |
 
 ## dxCity vs GitHub
 

@@ -51,7 +51,10 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | `HTTP 403` on attach | Expected — v1 comment-only |
 | Success + failure comments on green build | Set step 11/12 **Execute step** per [teamcity-setup.md](teamcity-setup.md); push `jira-notify-guard` (`792f519`); step 12 logs `SKIP failure Jira comment` |
 | Steps run after early failure | Enable **Stop build on failure** on Pipeline |
-| `TEAMCITY_BUILD_URL required` | Export `%teamcity.build.url%` in Jira steps |
+| Step 11/12 instant `exit 1`, no script output | Step must invoke `bash automation/tools/teamcity/jira-success.sh` / `jira-failure.sh` — not an empty custom script |
+| `Jira preflight: … build_url=MISSING` | Push harness with D13 (`jira-env.sh`); optional `export TEAMCITY_BUILD_URL="%teamcity.build.url%"` in step script |
+| `TEAMCITY_BUILD_URL required` | Same as above; [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) reads `teamcity.build.url` from properties |
+| `QA_TASK_KEY empty` | Add `env.QA_TASK_KEY=%QA_TASK_KEY%` on Pipeline; Dispatch must pass `QA_TASK_KEY` |
 
 ## Artifacts
 

@@ -1,20 +1,16 @@
 #!/usr/bin/env bash
-set -eu
+set -euo pipefail
 
 REPO_ROOT="${REPO_ROOT:-$PWD}"
-# shellcheck source=automation/tools/teamcity/load-teamcity-params.sh
-source "${REPO_ROOT}/automation/tools/teamcity/load-teamcity-params.sh"
-_corner_tc_load_params
+
+# shellcheck source=automation/tools/teamcity/jira-env.sh
+source "${REPO_ROOT}/automation/tools/teamcity/jira-env.sh"
+_corner_jira_load_env
+_corner_jira_require_success
 
 # shellcheck source=automation/tools/teamcity/jira-notify-guard.sh
 source "${REPO_ROOT}/automation/tools/teamcity/jira-notify-guard.sh"
 _jira_notify_skip_if_failure_posted
-
-export EPIC_KEY="${EPIC_KEY:?EPIC_KEY empty}"
-export QA_TASK_KEY="${QA_TASK_KEY:?QA_TASK_KEY empty}"
-export JIRA_API_TOKEN="${JIRA_API_TOKEN:?JIRA_API_TOKEN empty}"
-export JIRA_BASE_URL="${JIRA_BASE_URL:-https://jira.in.devexperts.com}"
-export TEAMCITY_BUILD_URL="${TEAMCITY_BUILD_URL:-}"
 
 python3 automation/tools/teamcity/jira_success.py
 _jira_notify_mark_success_posted

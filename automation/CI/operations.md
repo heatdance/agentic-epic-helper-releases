@@ -3,7 +3,7 @@
 ## Operator onboarding (first-time / after MCP patch)
 
 1. **Push harness** to Stash `team` (`git push stash refs/heads/team:refs/heads/team`) — dxCity VCS reads Stash, not GitHub mirror. If SSH blocked, see [rollout-learnings.md](rollout-learnings.md).
-2. **Pipeline parameters** — [secrets-and-params.md](secrets-and-params.md): `env.JIRA_API_TOKEN`, `env.CURSOR_API_KEY`, `env.EPIC_KEY`; timeout **180 min**; `AGENT_MAX_WAIT_MINUTES=45`.
+2. **Pipeline parameters** — [secrets-and-params.md](secrets-and-params.md): `env.JIRA_API_TOKEN`, `env.CURSOR_API_KEY`, `env.EPIC_KEY`, `env.QA_TASK_KEY`; timeout **180 min**; `AGENT_MAX_WAIT_MINUTES=45`.
 3. **Pipeline settings** — [teamcity-setup.md](teamcity-setup.md): stop build on failure; step 11/12 Execute step matrix.
 4. **Dispatch** — `DISPATCH_LOOKBACK_MINUTES=120`.
 5. **Smoke run** — Manual Pipeline `EPIC_KEY=CRT-###`; step 1: bootstrap + Jira smoke; step 2: `mcp_tool_started>0`, `REQUIRE OK`; step 3: verify OK.
@@ -101,6 +101,21 @@ After merging agent bootstrap + runner scripts to **`team`**:
 | **Verify** | Manual Pipeline `EPIC_KEY=CRT-670` — step 1 smoke + step 2 creates `CRT-670-ref.json` before verify |
 
 Steps 2–12 names unchanged; VCS picks up new scripts from Stash `team`.
+
+## Jira notify patch (D13 — operator checklist)
+
+After merging `jira-env.sh` + `teamcity.build.url` alias to **`team`**:
+
+| Where | Action |
+|-------|--------|
+| **Pipeline** env | Add `env.QA_TASK_KEY=%QA_TASK_KEY%` if not already set |
+| **Step 11** Custom script | `bash automation/tools/teamcity/jira-success.sh` (not empty inline) |
+| **Step 12** Custom script | `bash automation/tools/teamcity/jira-failure.sh` |
+| **Step 11** Execute step | Only if all previous steps were successful |
+| **Step 12** Execute step | Even if some of the previous steps failed |
+| **Smoke rerun** | Manual Pipeline: `EPIC_KEY=CRT-657`, `QA_TASK_KEY=CRTQA-10236` — expect step 11 `Jira preflight: … build_url=set`, `comment status: 201`, step 12 `SKIP failure Jira comment` |
+
+See [decisions.md](decisions.md) D13 · [rollout-learnings.md](rollout-learnings.md) incident 11.
 
 ## Stash push workflow
 

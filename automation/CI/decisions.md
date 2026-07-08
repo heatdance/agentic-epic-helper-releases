@@ -124,6 +124,16 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D13 — Jira build URL self-resolve
+
+**Decision:** Steps 11/12 load env via [`jira-env.sh`](../tools/teamcity/jira-env.sh). [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) maps TeamCity built-in `teamcity.build.url` → `TEAMCITY_BUILD_URL` when the env var is empty. [`jira_success.py`](../tools/teamcity/jira_success.py) / [`jira_failure.py`](../tools/teamcity/jira_failure.py) call the same resolver as belt-and-suspenders.
+
+**Rationale:** QA pipeline steps 1–10 succeeded but Jira notify failed instantly when operators did not manually export `%teamcity.build.url%` in step 11/12 UI. Built-in TeamCity URL is always in the properties file — scripts should not depend on per-step copy-paste.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

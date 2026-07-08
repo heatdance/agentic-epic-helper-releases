@@ -11,7 +11,7 @@
 | Agents | [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py) — inline MCP, project rules, `--require`, verbose logs |
 | Bootstrap | [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) — self-install `uv`, `cursor-sdk` on dxAgent |
 | Secrets | `env.JIRA_API_TOKEN` + [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) |
-| Jira notify | Step 11/12 Execute-step matrix + [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) |
+| Jira notify | [`jira-env.sh`](../tools/teamcity/jira-env.sh) + step 11/12 Execute-step matrix + [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) |
 
 Rollout incidents and commits: [rollout-learnings.md](rollout-learnings.md). Script inventory: [scripts-reference.md](scripts-reference.md).
 
