@@ -130,7 +130,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 **Console gate:** [`crtqa_console_probe.py`](automation/tools/crtqa_console_probe.py) — epic-helper cold start and GROUND; recovery **`/crtqa-console start`**. Not a blocking gate for TEST-PREP generation.
 
-**Corner Epic QA CI (dxCity):** Unattended **subset** triggered by **`Agent: Coverage`** on **CRTQA** — **EPIC-PREP → COVERAGE → console gate → GROUND → ANALYSE** only; **no** human coverage review, **no** DISCOVER/PREP/CLOSE. Deliverables via TeamCity artifacts + Jira comment ([`automation/CI/README.md`](../automation/CI/README.md)). Playbook semantics unchanged; CI is not a substitute for `/epic-helper` or human Smart Checklist review.
+**Corner Epic QA CI (dxCity):** Unattended **subset** triggered by **`Agent: Coverage`** on **CRTQA** — **EPIC-PREP → COVERAGE → console gate → GROUND → ANALYSE** only; **no** human coverage review, **no** DISCOVER/PREP/CLOSE. Agents use inline Atlassian MCP + project rules via [`run_pipeline_agent.py`](../automation/tools/teamcity/run_pipeline_agent.py) and dxAgent bootstrap ([`automation/CI/README.md`](../automation/CI/README.md)). Deliverables via TeamCity artifacts + Jira comment. Playbook semantics unchanged; CI is not a substitute for `/epic-helper` or human Smart Checklist review.
 
 ---
 

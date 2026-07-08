@@ -2,7 +2,7 @@
 
 ## Overview
 
-Two TeamCity configurations cooperate: **Dispatch** discovers work in Jira; **Pipeline** checks out the harness, runs Cursor agents for four pipeline stages, probes CRTQA console over OpenSSH, verifies each stage, and posts a Jira comment.
+Two TeamCity configurations cooperate: **Dispatch** discovers work in Jira; **Pipeline** checks out the harness, bootstraps agent tooling, runs Cursor agents for four pipeline stages, probes CRTQA console over OpenSSH, verifies each stage, and posts a Jira comment.
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
 | **Local `cursor.corner`** | Full harness development (personal/team/public tiers via `CLEAN:`) |
 | **Stash `AI/agentic-feature-helper` branch `team`** | What dxCity Pipeline checks out |
 
-TeamCity VCS root must track **`team`** on Stash. Maintainer pushes harness changes there before expecting CI to pick them up (or rely on default branch + VCS trigger if enabled).
+TeamCity VCS root must track **`team`** on Stash. Maintainer pushes harness changes there before expecting CI to pick them up. GitHub `team` remote is a mirror only — see [rollout-learnings.md](rollout-learnings.md).
 
 ## Dispatch → Pipeline handoff
 
@@ -48,14 +48,14 @@ Dedup is **Dispatch-only**: `dispatch-state/processed_comment_ids.txt` stores li
 
 ## Pipeline internal flow
 
-1. Verify harness tree (`AGENTS.md`, verifiers, `epics/`).
-2. **EPIC-PREP** agent + `epic_prep_verify.py`.
+1. **Verify + bootstrap** — harness tree, `jq`, self-install `uv`/`cursor-sdk`, `.cursor/mcp.json`, Jira smoke ([`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh)).
+2. **EPIC-PREP** agent ([`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py)) + `epic_prep_verify.py`.
 3. **COVERAGE** agent + `coverage_verify.py --mode draft_truth`.
 4. **Console gate** — `crtqa_console_probe.py` via OpenSSH (Linux agents).
 5. **GROUND** agent (with same CRTQA env as step 4) + `ground_verify.py --mode emit`.
 6. **ANALYSE** agent + `analysis_verify.py --mode draft_truth`.
-7. Jira success comment (green build).
-8. Jira failure comment — **only when build not successful** (`not(success())`).
+7. **Jira success** comment (step 11) — green path only.
+8. **Jira failure** comment (step 12) — failed path; script guard if step 11 already posted — see [jira-integration.md](jira-integration.md).
 
 ## Optional Console Gate build
 
@@ -68,16 +68,9 @@ Standalone configuration runs only [`console-gate-wrapper.sh`](../tools/teamcity
 | Trigger | Operator slash command | Jira comment on CRTQA |
 | Human gates | Env + coverage review + scenario groups | **None in v1** |
 | Chain | Full draft+truth through CLOSE | Stops at **ANALYSE** |
-| Console | Desktop multiplex or OpenSSH | **OpenSSH only** (Linux agent) |
-| Output | Epic folder + operator review | TeamCity **`epic-work`** + Jira comment |
+| MCP / rules | Cursor project + MCP | Inline MCP + `setting_sources=["project"]` in runner |
+| Deliverables | Epic folder in repo | TeamCity **`epic-work`** artifact + Jira comment |
 
-CI is **unattended first pass** for coverage + analysis drafts, not a replacement for human Smart Checklist review or test prep.
+## Green build ≠ gold quality
 
-## Agent runtime
-
-Pipeline steps invoke **Cursor SDK** (`cursor-sdk` Python package) with `CURSOR_API_KEY`, model `composer-2.5`, prompts matching pipeline triggers (`EPIC-PREP:`, `COVERAGE:`, etc.). Verifiers enforce harness contracts after each agent step.
-
-## State and concurrency
-
-- **Dispatch:** artifact `dispatch-state/**` published each run; next run merges via artifact dependency `dispatch-state/** => dispatch-state.in`.
-- **Pipeline:** **1 parallel build** recommended — multiple CRTQA comments queue sequentially; each build uses its own checkout and `epics/<EPIC_KEY>/` tree.
+A **successful** TeamCity build means verifiers exited 0 and Jira success posted. It does **not** guarantee operator-gold coverage or analysis — strict gates catch shape errors, not completeness. Fast runs with low `mcp_tool_started` or small artefact files warrant human review — see [operations.md](operations.md).

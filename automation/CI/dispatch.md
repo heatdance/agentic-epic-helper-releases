@@ -20,7 +20,7 @@ Each Dispatch run:
 project = CRTQA AND updated >= -{LOOKBACK}m ORDER BY updated DESC
 ```
 
-`LOOKBACK` comes from parameter `DISPATCH_LOOKBACK_MINUTES` (e.g. `60` for hourly cron with margin).
+`LOOKBACK` comes from parameter `DISPATCH_LOOKBACK_MINUTES`. **Recommended: `120`** for hourly cron (`0 0 7-17 * * ?`) — covers cron interval (60 min) plus queue/agent delay. Values below ~60 miss comments that aged out of the JQL window before the next Dispatch run.
 
 ## Parameters
 
@@ -28,7 +28,7 @@ project = CRTQA AND updated >= -{LOOKBACK}m ORDER BY updated DESC
 |-----------|------|---------|
 | `JIRA_API_TOKEN` | password | Bearer PAT |
 | `PIPELINE_BUILD_TYPE_ID` | text | `CornerTrader_QATooling_CornerEpicQaPipeline` |
-| `DISPATCH_LOOKBACK_MINUTES` | text | `60` |
+| `DISPATCH_LOOKBACK_MINUTES` | text | **`120`** |
 | `TRIGGER_PHRASE` | text | `Agent: Coverage` |
 | `TC_REST_TOKEN` | password | dxCity personal access token (trigger build) |
 | `TC_SERVER_URL` | text | `https://dxcity.in.devexperts.com` (optional default) |

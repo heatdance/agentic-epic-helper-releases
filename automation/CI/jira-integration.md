@@ -13,9 +13,15 @@ Authorization: Bearer {JIRA_API_TOKEN}
 POST /rest/api/2/issue/{QA_TASK_KEY}/comment
 ```
 
+Single PAT (`JIRA_API_TOKEN`) for comments and MCP — see [secrets-and-params.md](secrets-and-params.md).
+
 ## Success comment (step 11)
 
-Posted only on **successful** build. Requires `TEAMCITY_BUILD_URL` (from `%teamcity.build.url%`).
+Posted when the build completed steps 1–10 successfully.
+
+**TeamCity Execute step:** `Only if all previous steps were successful` (default).
+
+Requires `TEAMCITY_BUILD_URL` (from `%teamcity.build.url%` in the step script).
 
 Template (from `jira_success.py`):
 
@@ -27,11 +33,24 @@ Build: {TEAMCITY_BUILD_URL}
 TeamCity artifacts: download epic-work from the build (contains `{EPIC}-coverage.md` and JSON).
 ```
 
-No «started» or progress comments in v1 — only final success or failure.
+After HTTP 201, [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) writes `.teamcity-ci/jira-success.posted`.
 
 ## Failure comment (step 12)
 
-Posted when build **not successful** (`not(success())` execution condition).
+Posted when the build **failed** before a success comment was posted.
+
+**TeamCity Execute step:** `Even if some of the previous steps failed`.
+
+### dxCity UI limitation
+
+The **Parameter-based Execution Condition** dialog (equals / contains / …) **cannot** express `not(success())`. Do **not** use that dialog for step 12.
+
+| Mechanism | Purpose |
+|-----------|---------|
+| Execute step settings (11 vs 12) | Step 11 skipped when prior steps failed; step 12 can still run |
+| [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) | If step 11 posted success, step 12 **skips** failure comment (logs `SKIP failure Jira comment`) |
+
+On a green build you may still see step 12 **start** in the log — but it should not post a failure comment after guard + `792f519`.
 
 Template (from `jira_failure.py`):
 
@@ -43,9 +62,11 @@ Build: {TEAMCITY_BUILD_URL}
 Open the build log for the failing step. If the run got far enough, partial outputs may be in TeamCity artifacts epic-work.
 ```
 
+See [teamcity-setup.md](teamcity-setup.md#step-11--12--jira-comments-mutually-exclusive).
+
 ## No API attachment (v1)
 
-File attach via Jira REST returned **HTTP 403** with operator PAT (manual UI attach still works). v1 delivers files via **TeamCity artifacts only** — see [decisions.md](decisions.md).
+File attach via Jira REST returned **HTTP 403** with operator PAT (manual UI attach still works). v1 delivers files via **TeamCity artifacts only** — see [decisions.md](decisions.md) D3.
 
 QA downloads `{EPIC}-coverage.md` and JSON from **`epic-work`** on the build page.
 

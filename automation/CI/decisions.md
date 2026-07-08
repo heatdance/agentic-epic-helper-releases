@@ -94,6 +94,36 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D10 — Self-healing dxAgent bootstrap
+
+**Decision:** Step 1 runs [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) to install `uv`/`uvx` and `cursor-sdk` on the agent when missing, warm MCP wheels, and write `.teamcity-ci/bootstrap.env` for later steps.
+
+**Rationale:** dxAgent images do not ship `uv`; failing step 1 blocked the entire chain. Image-level prereqs reduced to `jq`, `curl`/`wget`, writable `$HOME`.
+
+**Status:** Accepted (`749977d`).
+
+---
+
+## D11 — TeamCity password params exposed as env
+
+**Decision:** Pipeline exposes `env.JIRA_API_TOKEN=%JIRA_API_TOKEN%` (and `env.CURSOR_API_KEY`, `env.EPIC_KEY`) on the build configuration. Scripts also read `TEAMCITY_BUILD_PROPERTIES_FILE` via [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py).
+
+**Rationale:** dxCity does not inject password configuration parameters into VCS-hosted script environments unless referenced as env vars or properties file.
+
+**Status:** Accepted (`3a730ae`).
+
+---
+
+## D12 — Jira notify without `not(success())` in dxCity UI
+
+**Decision:** Step 11/12 mutual exclusion uses **Execute step** dropdown settings plus [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) marker file. Parameter-based execution conditions in dxCity UI **cannot** express `not(success())`.
+
+**Rationale:** Operators only see parameter equals/contains dialogs — not build-status expressions. Script guard prevents duplicate failure comments when step 12 runs on green builds.
+
+**Status:** Accepted (`792f519`). Optional future: single `jira-notify.sh` TeamCity step.
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

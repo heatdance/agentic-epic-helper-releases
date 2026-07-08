@@ -4,6 +4,17 @@
 
 **BLUF:** Comment **`Agent: Coverage`** on a **CRTQA** task triggers unattended harness work on dxCity: **EPIC-PREP → COVERAGE → Console gate → GROUND → ANALYSE**. Deliverables land in TeamCity artifacts **`epic-work`**; Jira gets a **comment only** (no API attachment in v1).
 
+## Current stack (post MCP patch)
+
+| Layer | Implementation |
+|-------|----------------|
+| Agents | [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py) — inline MCP, project rules, `--require`, verbose logs |
+| Bootstrap | [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) — self-install `uv`, `cursor-sdk` on dxAgent |
+| Secrets | `env.JIRA_API_TOKEN` + [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) |
+| Jira notify | Step 11/12 Execute-step matrix + [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) |
+
+Rollout incidents and commits: [rollout-learnings.md](rollout-learnings.md). Script inventory: [scripts-reference.md](scripts-reference.md).
+
 ## Trigger
 
 | Item | Value |
@@ -38,15 +49,17 @@ git push stash refs/heads/team:refs/heads/team
 | Doc | Contents |
 |-----|----------|
 | [architecture.md](architecture.md) | Components, data flow, vs `/epic-helper` |
-| [teamcity-setup.md](teamcity-setup.md) | VCS, agents, cron, artifacts, parallelism |
+| [teamcity-setup.md](teamcity-setup.md) | VCS, agents, cron, artifacts, Jira steps, stop-on-failure |
 | [pipeline-steps.md](pipeline-steps.md) | 12 steps → scripts + verifiers |
-| [dispatch.md](dispatch.md) | JQL, dedup, REST queue, manual Run |
+| [scripts-reference.md](scripts-reference.md) | All `automation/tools/teamcity/` files |
+| [rollout-learnings.md](rollout-learnings.md) | Session incidents + patch matrix |
+| [dispatch.md](dispatch.md) | JQL, dedup, REST queue, lookback 120 |
 | [secrets-and-params.md](secrets-and-params.md) | Password/text parameters, anti-patterns |
-| [jira-integration.md](jira-integration.md) | Success/fail comment templates |
+| [jira-integration.md](jira-integration.md) | Success/fail comment templates + dxCity UI limits |
 | [artifacts.md](artifacts.md) | `epic-work` layout |
-| [operations.md](operations.md) | Run Dispatch vs Pipeline, rerun, dedup reset |
-| [troubleshooting.md](troubleshooting.md) | Known failures from v1 rollout |
-| [decisions.md](decisions.md) | ADR: scope, comment-only, chain stop |
+| [operations.md](operations.md) | Onboarding, green vs gold, rerun, dedup |
+| [troubleshooting.md](troubleshooting.md) | Known failures + reading agent logs |
+| [decisions.md](decisions.md) | ADR D1–D12 |
 
 ## Scripts (executable)
 

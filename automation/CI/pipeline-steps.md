@@ -15,7 +15,7 @@ Twelve TeamCity build steps map to scripts under [`automation/tools/teamcity/`](
 | 9 | ANALYSE agent | [`analyse-agent.sh`](../tools/teamcity/analyse-agent.sh) | Runner; `strict_topology=yes strict_principal=yes`; requires analysis JSON/MD |
 | 10 | ANALYSE verify | [`analyse-verify.sh`](../tools/teamcity/analyse-verify.sh) | `analysis_verify.py --mode draft_truth` — **`|| exit 1`** |
 | 11 | Jira success comment | [`jira-success.sh`](../tools/teamcity/jira-success.sh) | [`jira_success.py`](../tools/teamcity/jira_success.py) |
-| 12 | Jira failure comment | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | **Execution condition:** `not(success())` only |
+| 12 | Jira failure comment | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | Execute: **Even if failed**; [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) skips if step 11 posted — see [jira-integration.md](jira-integration.md) |
 
 ## Step 1 — agent bootstrap
 

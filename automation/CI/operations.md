@@ -1,5 +1,27 @@
 # Operations — Corner Epic QA CI
 
+## Operator onboarding (first-time / after MCP patch)
+
+1. **Push harness** to Stash `team` (`git push stash refs/heads/team:refs/heads/team`) — dxCity VCS reads Stash, not GitHub mirror. If SSH blocked, see [rollout-learnings.md](rollout-learnings.md).
+2. **Pipeline parameters** — [secrets-and-params.md](secrets-and-params.md): `env.JIRA_API_TOKEN`, `env.CURSOR_API_KEY`, `env.EPIC_KEY`; timeout **180 min**; `AGENT_MAX_WAIT_MINUTES=45`.
+3. **Pipeline settings** — [teamcity-setup.md](teamcity-setup.md): stop build on failure; step 11/12 Execute step matrix.
+4. **Dispatch** — `DISPATCH_LOOKBACK_MINUTES=120`.
+5. **Smoke run** — Manual Pipeline `EPIC_KEY=CRT-###`; step 1: bootstrap + Jira smoke; step 2: `mcp_tool_started>0`, `REQUIRE OK`; step 3: verify OK.
+6. **End-to-end** — New `Agent: Coverage` on CRTQA → Run Dispatch → confirm `queued=1`.
+
+Session incident history: [rollout-learnings.md](rollout-learnings.md).
+
+## Green build vs gold quality
+
+TeamCity **Success** means all steps exited 0 (including verifiers) and step 11 posted Jira success. It does **not** guarantee operator-gold EPIC-PREP/COVERAGE/ANALYSE.
+
+| Signal | Action |
+|--------|--------|
+| Build green in &lt;15 min | Download `epic-work`; check file sizes and `mcp_tool_started` in step 2 log |
+| `mcp_tool_started=0` | Treat as failed playbook execution — rerun after fixing MCP/env |
+| Verify OK but thin coverage | Human review in IDE; optional `/epic-helper` or manual `COVERAGE:` |
+| `REQUIRE OK … STALE` | Trigger clean checkout or delete `epics/<KEY>/` on agent before rerun |
+
 ## Normal flow
 
 1. QA posts **`Agent: Coverage`** on CRTQA task (summary must contain `CRT-###`).

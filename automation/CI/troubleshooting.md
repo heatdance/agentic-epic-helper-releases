@@ -49,7 +49,8 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 |---------|-----|
 | `HTTP 401` on comment | Use Bearer PAT, not Basic |
 | `HTTP 403` on attach | Expected — v1 comment-only |
-| Success + failure comments | Step 12 missing `not(success())` — add execution condition; scripts skip failure if success marker exists |
+| Success + failure comments on green build | Set step 11/12 **Execute step** per [teamcity-setup.md](teamcity-setup.md); push `jira-notify-guard` (`792f519`); step 12 logs `SKIP failure Jira comment` |
+| Steps run after early failure | Enable **Stop build on failure** on Pipeline |
 | `TEAMCITY_BUILD_URL required` | Export `%teamcity.build.url%` in Jira steps |
 
 ## Artifacts
@@ -75,4 +76,21 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 
 | Symptom | Fix |
 |---------|-----|
-| `Permission denied (publickey)` on push | Configure SSH key for Stash; contact AI project admin for repo access |
+| `Permission denied (publickey)` on push | Configure SSH key for Stash; GitHub `team` mirror does not feed dxCity VCS — see [rollout-learnings.md](rollout-learnings.md) |
+
+## Reading agent step logs
+
+Agent steps (2, 4, 7, 9) emit structured lines from [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py):
+
+| Log line | Healthy signal | Red flag |
+|----------|----------------|----------|
+| `runner: mcp_cmd=… uvx` | MCP launcher resolved | empty / wrong path |
+| `tool_call: jira_get_issue (running)` | MCP used | — |
+| `run_stats: … mcp_tool_started=0` | — | No Atlassian MCP calls |
+| `wall_seconds: …` | EPIC-PREP often **300+** | `< 300` + WARN typical minimum |
+| `REQUIRE OK: … (N bytes, mtime=…)` | File created this step | **STALE** = reused checkout |
+| `status: finished` + exit 0 | Agent + `--require` passed | Step 3 verify is still the quality gate |
+| exit **3** | — | Missing required file |
+| exit **2** | — | Not finished or timeout |
+
+**Step 3+ verify** remains authoritative for schema/strict gates — agent exit 0 ≠ gold quality. See [operations.md](operations.md#green-build-vs-gold-quality).

@@ -149,7 +149,12 @@
           "read": [
             "automation/CI/README.md",
             "automation/CI/architecture.md",
-            "automation/CI/pipeline-steps.md"
+            "automation/CI/pipeline-steps.md",
+            "automation/CI/teamcity-setup.md",
+            "automation/CI/troubleshooting.md",
+            "automation/CI/decisions.md",
+            "automation/CI/rollout-learnings.md",
+            "automation/CI/scripts-reference.md"
           ],
           "mcp_hint": "Internal dxCity CI: Jira comment on CRTQA triggers EPIC-PREP through ANALYSE on Stash team branch. Not in public export. Console OpenSSH: automation/docs/crtqa-console-ci.md. No Jira attach v1."
         },

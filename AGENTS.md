@@ -40,7 +40,7 @@ Verifiers under [automation/tools/](automation/tools/) — see [automation/docs/
 
 | Tool | Path |
 |------|------|
-| Corner Epic QA CI (dxCity) | [automation/CI/README.md](automation/CI/README.md) · [teamcity scripts](automation/tools/teamcity/) |
+| Corner Epic QA CI (dxCity) | [automation/CI/README.md](automation/CI/README.md) · [rollout-learnings](automation/CI/rollout-learnings.md) · [scripts-reference](automation/CI/scripts-reference.md) · [teamcity scripts](automation/tools/teamcity/) |
 | `/crtqa-console` | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) |
 | Console gate probe | [crtqa_console_probe.py](automation/tools/crtqa_console_probe.py) |
 | `/epic-helper` affordances | [epic_helper_affordances.py](automation/tools/epic_helper_affordances.py) |
