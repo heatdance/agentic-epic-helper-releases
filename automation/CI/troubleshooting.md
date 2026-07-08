@@ -66,7 +66,9 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | `CURSOR_API_KEY is empty` | Set password param on Pipeline |
 | Agent status not `finished` | Read agent log; retry; check API quota |
 | `agent wait exceeded N minutes` | Raise `AGENT_MAX_WAIT_MINUTES` (default 45) and build timeout (180 min) |
-| MCP calls absent in agent log | Ensure step 1 green; runner uses inline MCP — not bare `Agent.prompt` |
+| MCP calls absent in agent log | Ensure step 1 green; runner uses inline MCP — look for `mcp_tool_started=0` WARN |
+| `REQUIRE OK … STALE` | Reused agent checkout — file from prior build; run clean checkout or delete `epics/<KEY>/` |
+| `finished in Ns (< …s typical minimum)` | Suspiciously fast agent — check `mcp_tool_started`, artefact size, step 3 verify |
 | Strict verifier fail after artefacts exist | Expected — agent ran playbook; quality gate failed (topology/principal/draft_truth) |
 
 ## Stash

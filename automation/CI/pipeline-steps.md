@@ -43,7 +43,7 @@ All `*-agent.sh` scripts call [`run_pipeline_agent.py`](../tools/teamcity/run_pi
 | Post-check | `--require` paths with `%EPIC_KEY%` expansion |
 | Exit codes | **1** SDK error · **2** status ≠ `finished` or timeout · **3** missing required files |
 
-`Agent.prompt` without MCP/project settings produced `status: finished` with **no** `epics/<KEY>/` artefacts — runner closes that gap.
+`Agent.prompt` without MCP/project settings produced `status: finished` with **no** `epics/<KEY>/` artefacts — runner closes that gap. TeamCity step logs also emit `tool_call`, `REQUIRE OK` (size/mtime), `token_usage`, `run_stats`, and WARN on zero MCP calls / fast finish / stale files.
 
 ## Environment per step
 
