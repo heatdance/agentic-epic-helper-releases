@@ -71,7 +71,28 @@ Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`,
 
 Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders.
 
-## Step 12 execution condition
+## Step 11 / 12 — Jira comments (mutually exclusive)
+
+| Step | When it must run | TeamCity execution condition |
+|------|------------------|------------------------------|
+| **11** JIRA success | Green build only | *(default)* previous steps succeeded — or explicit `success()` |
+| **12** JIRA fail | **Failed build only** | **`not(success())`** — **required** |
+
+### Fix duplicate success + failure comments
+
+If both steps run on a green build, step 12 has **no** execution condition in TeamCity.
+
+**dxCity UI:** Pipeline → Build Steps → **Step 12** (JIRA fail) → **Execution conditions** → Add:
+
+```
+not(success())
+```
+
+Save. On the next green build, step 12 should show **Skipped** in the log.
+
+Scripts also use [jira-notify-guard.sh](../tools/teamcity/jira-notify-guard.sh): if step 11 posted success, step 12 exits without commenting (belt when TC condition is missing).
+
+## Step 12 execution condition (reference)
 
 Failure Jira step must run **only on failed builds**:
 

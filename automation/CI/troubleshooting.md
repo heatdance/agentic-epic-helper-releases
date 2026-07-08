@@ -49,7 +49,7 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 |---------|-----|
 | `HTTP 401` on comment | Use Bearer PAT, not Basic |
 | `HTTP 403` on attach | Expected — v1 comment-only |
-| Success + failure comments | Step 12 missing `not(success())` condition |
+| Success + failure comments | Step 12 missing `not(success())` — add execution condition; scripts skip failure if success marker exists |
 | `TEAMCITY_BUILD_URL required` | Export `%teamcity.build.url%` in Jira steps |
 
 ## Artifacts
