@@ -62,7 +62,7 @@ The **Parameter-based Execution Condition** dialog (equals / contains / …) **c
 
 On a green build you may still see step 12 **start** in the log — but it should not post a failure comment after guard + `792f519`.
 
-Template (from `jira_failure.py`):
+Template (from `jira_failure.py`) — **generic** (no epic-work on agent):
 
 ```
 Corner Epic QA: pipeline failed for {EPIC_KEY}.
@@ -70,6 +70,22 @@ Corner Epic QA: pipeline failed for {EPIC_KEY}.
 Build: {TEAMCITY_BUILD_URL}
 
 Open the build log for the failing step. If the run got far enough, partial outputs may be in TeamCity artifacts epic-work.
+```
+
+**Partial** (when `epics/{EPIC}/` contains ref and/or coverage JSON — D14):
+
+```
+Corner Epic QA: pipeline failed for {EPIC_KEY} (partial outputs available).
+
+Build: {TEAMCITY_BUILD_URL}
+
+Partial artifacts in this build (download epic-work from TeamCity):
+- {EPIC}-ref.json: yes/no
+- {EPIC}-coverage.json: yes/no
+…
+
+If step 5 COVERAGE verify failed, check for forbidden oracle enum tokens in smart_checklist_markdown …
+Rerun: Manual Pipeline with the same EPIC_KEY and QA_TASK_KEY …
 ```
 
 See [teamcity-setup.md](teamcity-setup.md#step-11--12--jira-comments-mutually-exclusive).

@@ -134,6 +134,16 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D14 — COVERAGE verify UX (prompt addendum + partial Jira fail)
+
+**Decision:** [`coverage-agent.sh`](../tools/teamcity/coverage-agent.sh) CI addendum forbids internal oracle enum tokens in `smart_checklist_markdown`. [`jira_failure.py`](../tools/teamcity/jira_failure.py) `build_failure_comment()` emits a **partial** comment when `epics/{EPIC}/` contains ref and/or coverage JSON, listing present/missing artefacts and verify rerun hints. **`coverage_verify.py` unchanged.**
+
+**Rationale:** CRTQA-10194 / CRT-659 failed step 5 with `forbidden oracle token` after agent exit 0 — quality gate is correct; operators need prevention (A) and actionable failure notify (B) without weakening draft_truth gates.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

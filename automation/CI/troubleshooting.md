@@ -56,12 +56,19 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | `TEAMCITY_BUILD_URL required` | Same as above; [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) reads `teamcity.build.url` from properties |
 | `QA_TASK_KEY empty` | Add `env.QA_TASK_KEY=%QA_TASK_KEY%` on Pipeline; Dispatch must pass `QA_TASK_KEY` |
 
+## Pipeline — COVERAGE verify
+
+| Symptom | Fix |
+|---------|-----|
+| `forbidden oracle token` in step 5 | Expected quality gate — agent put enum (e.g. `first_tier_quote`) in Smart Checklist markdown; download epic-work, fix `-coverage.md`, rerun COVERAGE agent or Pipeline (D14 addendum in step 4 prompt) |
+| Agent OK, verify fail, epic-work present | Step 12 posts **partial** Jira comment listing which artefacts exist (D14) |
+
 ## Artifacts
 
 | Symptom | Fix |
 |---------|-----|
 | Empty Artifacts tab | Refresh page; check log for `Publishing N files` |
-| Partial epic-work on fail | Expected if fail late — use log + partial JSON |
+| Partial epic-work on fail | Expected if fail late — use log + partial JSON; step 12 partial comment lists present files (D14) |
 
 ## Cursor agent
 

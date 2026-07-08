@@ -13,6 +13,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | `3c2e643` | Verbose agent step logging (`tool_call`, `REQUIRE OK`, `run_stats`) |
 | `792f519` | `jira-notify-guard.sh` — skip failure comment when success posted |
 | *(D13)* | `jira-env.sh` + `teamcity.build.url` alias — Jira steps 11/12 self-resolve build URL |
+| *(D14)* | COVERAGE CI addendum + partial failure Jira comment — verifier unchanged |
 
 ## Incident matrix
 
@@ -29,6 +30,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | 9 | Stale `epics/` on incremental checkout | Agent reuses work dir; old artefacts pass `--require` | `3c2e643` STALE warn | [troubleshooting.md](troubleshooting.md) |
 | 10 | Fast green build (~9 min) suspicious | Agent stub + verifiers may still pass minimal shape | — | [operations.md](operations.md) «green ≠ gold» |
 | 11 | Steps 11/12 fail after green QA (CRTQA-10236/10244) | `TEAMCITY_BUILD_URL` not in env; step script may be empty | D13 — `jira-env.sh`, properties alias | [teamcity-setup.md](teamcity-setup.md), [troubleshooting.md](troubleshooting.md) |
+| 12 | COVERAGE verify fail after agent OK (CRTQA-10194/CRT-659) | Forbidden oracle enum in `smart_checklist_markdown` | D14 — prompt addendum + partial Jira fail comment | [troubleshooting.md](troubleshooting.md), [decisions.md](decisions.md) D14 |
 
 ## dxCity vs GitHub
 
