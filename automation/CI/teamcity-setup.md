@@ -14,7 +14,7 @@ Place both under **QA Tooling** project on dxCity (`https://dxcity.in.devexperts
 
 | Setting | Recommended value |
 |---------|-------------------|
-| Build timeout | ~90 minutes |
+| Build timeout | **180 minutes** |
 | Max parallel builds | **1** (queue multiple epics sequentially) |
 | Artifact paths | `epics/%EPIC_KEY% => epic-work` |
 | Publish artifacts | **Even if build fails** |
@@ -54,6 +54,22 @@ See [secrets-and-params.md](secrets-and-params.md) for full list.
 **Dispatch:** `JIRA_API_TOKEN`, `PIPELINE_BUILD_TYPE_ID`, `DISPATCH_LOOKBACK_MINUTES`, `TRIGGER_PHRASE`, `TC_REST_TOKEN`, optional `TC_SERVER_URL`.
 
 **Pipeline:** `EPIC_KEY`, `QA_TASK_KEY`, `COMMENT_ID`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, CRTQA OpenSSH params, plus TeamCity built-in `teamcity.build.url` (exposed as `TEAMCITY_BUILD_URL` in Jira steps).
+
+### Expose secrets to all steps (required for MCP patch)
+
+dxCity may not inject **password** configuration parameters into the environment of VCS-hosted scripts unless they are also exposed as environment variables.
+
+**Recommended (one-time, build configuration):** Parameters → Add → **Environment variable**:
+
+| Name | Value |
+|------|-------|
+| `env.JIRA_API_TOKEN` | `%JIRA_API_TOKEN%` |
+| `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
+| `env.EPIC_KEY` | `%EPIC_KEY%` |
+
+Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
+
+Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders.
 
 ## Step 12 execution condition
 

@@ -4,6 +4,11 @@
 
 set -u
 
+REPO_ROOT="${REPO_ROOT:-$PWD}"
+# shellcheck source=automation/tools/teamcity/load-teamcity-params.sh
+source "${REPO_ROOT}/automation/tools/teamcity/load-teamcity-params.sh"
+_corner_tc_load_params
+
 export CRTQA_CONSOLE_TRANSPORT="${CRTQA_CONSOLE_TRANSPORT:-openssh}"
 export CRTQA_SSH_USER="${CRTQA_SSH_USER:?CRTQA_SSH_USER empty}"
 

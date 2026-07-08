@@ -7,6 +7,10 @@ set -u
 
 export REPO_ROOT="${REPO_ROOT:-$PWD}"
 
+# shellcheck source=automation/tools/teamcity/load-teamcity-params.sh
+source "${REPO_ROOT}/automation/tools/teamcity/load-teamcity-params.sh"
+_corner_tc_load_params
+
 # Each TeamCity step is a fresh shell — re-apply bootstrap PATH/tools from step 1 marker.
 # shellcheck source=automation/tools/teamcity/bootstrap-agent-env.sh
 source "${REPO_ROOT}/automation/tools/teamcity/bootstrap-agent-env.sh"

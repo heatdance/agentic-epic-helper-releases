@@ -19,7 +19,7 @@
 | `jq not on PATH` | Install jq on dxAgent image (bootstrap cannot install without root) |
 | `curl or wget required` | Install curl on dxAgent image |
 | `uv install finished but uvx/uv still not on PATH` | Check `$HOME` writable; inspect step 1 bootstrap log |
-| `JIRA_API_TOKEN empty` | Set Pipeline password param (step 1 + agents) |
+| `JIRA_API_TOKEN empty` | Add password param on Pipeline **and** `env.JIRA_API_TOKEN=%JIRA_API_TOKEN%`; or ensure step references `%JIRA_API_TOKEN%` |
 | Jira smoke HTTP 401/403 | Bearer PAT scope; same token as comment steps |
 | Agent not Linux | Console gate requires OpenSSH on agent |
 | Agent `finished` but verify «file not found» | Pre-patch bare SDK — upgrade `team` scripts; runner exit **3** if `--require` missing |

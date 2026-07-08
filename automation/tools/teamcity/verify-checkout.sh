@@ -4,6 +4,11 @@ set -euo pipefail
 REPO_ROOT="${REPO_ROOT:-$PWD}"
 export REPO_ROOT
 
+# TeamCity: password params may be absent from env until loaded from properties file.
+# shellcheck source=automation/tools/teamcity/load-teamcity-params.sh
+source automation/tools/teamcity/load-teamcity-params.sh
+_corner_tc_load_params
+
 echo "PWD=${REPO_ROOT}"
 test -f AGENTS.md
 test -d automation/tools
