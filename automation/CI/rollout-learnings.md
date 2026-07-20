@@ -14,6 +14,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | `792f519` | `jira-notify-guard.sh` — skip failure comment when success posted |
 | *(D13)* | `jira-env.sh` + `teamcity.build.url` alias — Jira steps 11/12 self-resolve build URL |
 | *(D14)* | COVERAGE CI addendum + partial failure Jira comment — verifier unchanged |
+| *(D15)* | `jira-notify-guard.sh` return 0 on continue — `set -e` safe |
 
 ## Incident matrix
 
@@ -31,6 +32,7 @@ Session record: incidents during v1 dxCity rollout, patches on branch `team`, an
 | 10 | Fast green build (~9 min) suspicious | Agent stub + verifiers may still pass minimal shape | — | [operations.md](operations.md) «green ≠ gold» |
 | 11 | Steps 11/12 fail after green QA (CRTQA-10236/10244) | `TEAMCITY_BUILD_URL` not in env; step script may be empty | D13 — `jira-env.sh`, properties alias | [teamcity-setup.md](teamcity-setup.md), [troubleshooting.md](troubleshooting.md) |
 | 12 | COVERAGE verify fail after agent OK (CRTQA-10194/CRT-659) | Forbidden oracle enum in `smart_checklist_markdown` | D14 — prompt addendum + partial Jira fail comment | [troubleshooting.md](troubleshooting.md), [decisions.md](decisions.md) D14 |
+| 13 | Steps 11/12 exit 1 after `Jira preflight: … set` (CRTQA-10028 / CRT-634) | Guard `return 1` under `set -e` before POST | D15 — guard continue returns 0 | [jira-integration.md](jira-integration.md), [troubleshooting.md](troubleshooting.md) |
 
 ## dxCity vs GitHub
 

@@ -144,6 +144,16 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D15 — Jira notify guard must return 0 to continue
+
+**Decision:** [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) skip helpers **return 0** when the peer marker is absent (continue to POST). Only when a marker exists do they `exit 0` (skip comment).
+
+**Rationale:** Callers `jira-success.sh` / `jira-failure.sh` use `set -e`. The original `return 1` “do not skip” idiom aborted the step immediately after preflight — steps 1–10 green, no Jira comment (CRTQA-10028 / CRT-634).
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

@@ -58,7 +58,7 @@ The **Parameter-based Execution Condition** dialog (equals / contains / …) **c
 | Mechanism | Purpose |
 |-----------|---------|
 | Execute step settings (11 vs 12) | Step 11 skipped when prior steps failed; step 12 can still run |
-| [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) | If step 11 posted success, step 12 **skips** failure comment (logs `SKIP failure Jira comment`) |
+| [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) | If step 11 posted success, step 12 **skips** failure comment (logs `SKIP failure Jira comment`; continue path returns **0** under `set -e` — D15) |
 
 On a green build you may still see step 12 **start** in the log — but it should not post a failure comment after guard + `792f519`.
 

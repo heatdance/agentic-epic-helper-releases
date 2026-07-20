@@ -55,6 +55,7 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | `Jira preflight: … build_url=MISSING` | Push harness with D13 (`jira-env.sh`); optional `export TEAMCITY_BUILD_URL="%teamcity.build.url%"` in step script |
 | `TEAMCITY_BUILD_URL required` | Same as above; [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) reads `teamcity.build.url` from properties |
 | `QA_TASK_KEY empty` | Add `env.QA_TASK_KEY=%QA_TASK_KEY%` on Pipeline; Dispatch must pass `QA_TASK_KEY` |
+| Step 11/12: only `Jira preflight: … set`, then exit 1; no `comment status` | `jira-notify-guard.sh` used `return 1` when marker absent → `set -e` aborted before Python (D15) | Push fix on `team`; expect `Jira success comment on …` / `comment status: 201` |
 
 ## Pipeline — COVERAGE verify
 
