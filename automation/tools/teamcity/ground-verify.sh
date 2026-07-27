@@ -5,14 +5,17 @@ set -u
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "GROUND verify"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
+source automation/tools/teamcity/corner-tc-epic-paths.sh
+
 EPIC="${EPIC_KEY:-}"
 if [ -z "$EPIC" ]; then
   echo "ERROR: EPIC_KEY is empty"
   exit 1
 fi
 
-COV="epics/${EPIC}/${EPIC}-coverage.json"
-REF="epics/${EPIC}/${EPIC}-ref.json"
+COV="$(corner_tc_resolve_json "$EPIC" coverage)"
+REF="$(corner_tc_resolve_json "$EPIC" ref)"
 
 if [ ! -f "$COV" ] || [ ! -f "$REF" ]; then
   echo "ERROR: missing $COV or $REF"

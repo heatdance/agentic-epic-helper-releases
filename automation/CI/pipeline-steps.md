@@ -72,9 +72,9 @@ Agents write under `epics/%EPIC_KEY%/` at repo root. Artifact rule publishes tha
 
 Typical green-run files (count may vary):
 
-- `{EPIC}-ref.json`
-- `{EPIC}-coverage.json` + `{EPIC}-coverage.md`
-- `{EPIC}-analysis.json` + `{EPIC}-analysis.md`
+- `dependencies/{EPIC}-ref.json`
+- `dependencies/{EPIC}-coverage.json` + `{EPIC}-coverage.md` (markdown at epic root)
+- `dependencies/{EPIC}-analysis.json` + `dependencies/{EPIC}-analysis.md`
 
 ## Playbook references
 

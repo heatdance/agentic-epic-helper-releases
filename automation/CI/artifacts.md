@@ -14,11 +14,11 @@ Exact file count depends on epic and agent behaviour; verified v1 success publis
 
 | File | Description |
 |------|-------------|
-| `{EPIC}-ref.json` | EPIC-PREP handoff |
-| `{EPIC}-coverage.json` | Coverage draft+truth |
-| `{EPIC}-coverage.md` | Human Smart Checklist markdown |
-| `{EPIC}-analysis.json` | ANALYSE output |
-| `{EPIC}-analysis.md` | Analysis markdown |
+| `dependencies/{EPIC}-ref.json` | EPIC-PREP handoff |
+| `dependencies/{EPIC}-coverage.json` | Coverage draft+truth |
+| `{EPIC}-coverage.md` | Human Smart Checklist markdown (epic root) |
+| `dependencies/{EPIC}-analysis.json` | ANALYSE output |
+| `dependencies/{EPIC}-analysis.md` | Analysis markdown |
 
 GROUND mutates `runtime_probes` inside coverage JSON — no separate GROUND-only markdown at epic root in default chain.
 
