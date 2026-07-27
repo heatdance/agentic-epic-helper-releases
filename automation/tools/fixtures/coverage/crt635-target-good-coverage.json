@@ -1,0 +1,186 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-635",
+  "coverage_pass": 1,
+  "draft_truth_round": 1,
+  "archetype": "widget_ui",
+  "emit_layout": "shell_first",
+  "epic_verification_focus": {
+    "statement": "Verify FX_SPOT fills on Adaptive Transactions and Trade History when user holds an FX_SPOT position.",
+    "source": "epic_ref_proposed"
+  },
+  "obligations_coverage": {
+    "obl-s001": { "obligation_id": "obl-s001", "status": "covered", "check_id": "chk-s001" },
+    "obl-s002": { "obligation_id": "obl-s002", "status": "covered", "check_id": "chk-s002" },
+    "obl-001": { "obligation_id": "obl-001", "status": "covered", "check_id": "chk-001" },
+    "obl-002": { "obligation_id": "obl-002", "status": "covered", "check_id": "chk-002" },
+    "obl-003": { "obligation_id": "obl-003", "status": "covered", "check_id": "chk-003" },
+    "obl-004": { "obligation_id": "obl-004", "status": "covered", "check_id": "chk-004" },
+    "obl-005": { "obligation_id": "obl-005", "status": "covered", "check_id": "chk-005" },
+    "obl-006": { "obligation_id": "obl-006", "status": "covered", "check_id": "chk-006" },
+    "obl-007": { "obligation_id": "obl-007", "status": "covered", "check_id": "chk-007" },
+    "obl-008": { "obligation_id": "obl-008", "status": "covered", "check_id": "chk-008" },
+    "obl-009": { "obligation_id": "obl-009", "status": "covered", "check_id": "chk-009" },
+    "obl-010": { "obligation_id": "obl-010", "status": "covered", "check_id": "chk-010" },
+    "obl-011": { "obligation_id": "obl-011", "status": "covered", "check_id": "chk-011" }
+  },
+  "checks": [
+    {
+      "id": "chk-s001",
+      "section": "## Prerequisites",
+      "scenario_line": "- [CRT-635] Console — open at least one FX_SPOT position",
+      "obligation_ids": ["obl-s001"],
+      "requirement_keys": ["CRT-635"],
+      "verification_role": "primary",
+      "coverage_thread": "environment_setup",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-s002",
+      "section": "## Prerequisites",
+      "scenario_line": "- [CRT-635] Adaptive — Transactions and Trade History show the FX_SPOT position",
+      "obligation_ids": ["obl-s002"],
+      "requirement_keys": ["CRT-635"],
+      "verification_role": "primary",
+      "coverage_thread": "environment_setup",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-001",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction card",
+      "scenario_line": "- [DXINV-025] Side shows Buy or Sell, green for Buy and red for Sell",
+      "obligation_ids": ["obl-001"],
+      "requirement_keys": ["DXINV-025"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-002",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction card",
+      "scenario_line": "- [DXINV-025] Quantity is unsigned",
+      "obligation_ids": ["obl-002"],
+      "requirement_keys": ["DXINV-025"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-003",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction card",
+      "scenario_line": "- [DXINV-025] Fill price shows account currency symbol, native format",
+      "obligation_ids": ["obl-003"],
+      "requirement_keys": ["DXINV-025"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-004",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction card",
+      "scenario_line": "- [DXINV-025] Transaction date, Symbol, Account name are present",
+      "obligation_ids": ["obl-004"],
+      "requirement_keys": ["DXINV-025"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-005",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction details card",
+      "scenario_line": "- [DXINV-236] renders collapsed by default",
+      "obligation_ids": ["obl-005"],
+      "requirement_keys": ["DXINV-236"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-006",
+      "section": "## Adaptive — Transactions",
+      "subsection": "### Transaction details card",
+      "scenario_line": "- [DXINV-236] Cash effect unsigned, 2 decimals, account currency",
+      "obligation_ids": ["obl-006"],
+      "requirement_keys": ["DXINV-236"],
+      "topology_surface_id": "jss-001",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-007",
+      "section": "## Adaptive — Trade History",
+      "subsection": "### Trade card",
+      "scenario_line": "- [DXINV-CB-92] Side coloring, Quantity unsigned, Total cost signed",
+      "obligation_ids": ["obl-007"],
+      "requirement_keys": ["DXINV-CB-92"],
+      "topology_surface_id": "jss-002",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-008",
+      "section": "## Adaptive — Trade History",
+      "subsection": "### Trade card",
+      "scenario_line": "- [DXINV-CB-92] Quantity is unsigned",
+      "obligation_ids": ["obl-008"],
+      "requirement_keys": ["DXINV-CB-92"],
+      "topology_surface_id": "jss-002",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-009",
+      "section": "## Adaptive — Trade History",
+      "subsection": "### Trade card",
+      "scenario_line": "- [DXINV-CB-92] Total cost is signed",
+      "obligation_ids": ["obl-009"],
+      "requirement_keys": ["DXINV-CB-92"],
+      "topology_surface_id": "jss-002",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-010",
+      "section": "## Adaptive — Trade History",
+      "subsection": "### Trade details card",
+      "scenario_line": "- [DXINV-CB-95] Realized PL signed, red negative, green positive",
+      "obligation_ids": ["obl-010"],
+      "requirement_keys": ["DXINV-CB-95"],
+      "topology_surface_id": "jss-002",
+      "verification_role": "primary",
+      "detail_lines": []
+    },
+    {
+      "id": "chk-011",
+      "section": "## Adaptive — Trade History",
+      "subsection": "### Trade details card",
+      "scenario_line": "- [DXINV-CB-95] Fees and Commission unsigned",
+      "obligation_ids": ["obl-011"],
+      "requirement_keys": ["DXINV-CB-95"],
+      "topology_surface_id": "jss-002",
+      "verification_role": "primary",
+      "detail_lines": []
+    }
+  ],
+  "coverage_matrix": [
+    {
+      "id": "m-001",
+      "capability": "adaptive_fx_spot",
+      "verification_role": "primary",
+      "requirement_keys": ["DXINV-025", "DXINV-236", "DXINV-CB-92", "DXINV-CB-95"]
+    }
+  ],
+  "scenario_coverage_map": [
+    { "scenario_row_id": "scr-001", "check_id": "chk-001", "disposition": "covered" }
+  ],
+  "grounding_audit": { "by_check_id": [], "ungrounded_check_ids": [] },
+  "anti_pattern_findings": [],
+  "explicitly_out_of_scope": [],
+  "validation_log": [],
+  "smart_checklist_markdown": "# CRT-635 — Smart Checklist\n\n## Prerequisites\n\n- [CRT-635] Console — open at least one FX_SPOT position\n\n- [CRT-635] Adaptive — Transactions and Trade History show the FX_SPOT position\n\n## Adaptive — Transactions\n\n### Transaction card\n\n- [DXINV-025] Side shows Buy or Sell, green for Buy and red for Sell\n\n- [DXINV-025] Quantity is unsigned\n\n- [DXINV-025] Fill price shows account currency symbol, native format\n\n- [DXINV-025] Transaction date, Symbol, Account name are present\n\n### Transaction details card\n\n- [DXINV-236] renders collapsed by default\n\n- [DXINV-236] Cash effect unsigned, 2 decimals, account currency\n\n## Adaptive — Trade History\n\n### Trade card\n\n- [DXINV-CB-92] Side coloring, Quantity unsigned, Total cost signed\n\n- [DXINV-CB-92] Quantity is unsigned\n\n- [DXINV-CB-92] Total cost is signed\n\n### Trade details card\n\n- [DXINV-CB-95] Realized PL signed, red negative, green positive\n\n- [DXINV-CB-95] Fees and Commission unsigned\n"
+}

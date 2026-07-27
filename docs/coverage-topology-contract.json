@@ -72,7 +72,11 @@
         "webbroker_dealer": "WebBroker (dealer)",
         "webbroker_client": "WebBroker (client)"
       },
-      "trailing_sections": ["## Cross-surface invariants"]
+      "trailing_sections": ["## Cross-surface invariants"],
+      "forbid_rounding_section": true,
+      "rounding_section_heading": "## Rounding and display policy",
+      "format_assertions_live_in_field_subsection": true,
+      "_note": "Currency/sign/2dp claims belong next to the field check under the card/details ### subsection — not a separate Rounding H2 (that spine is formula_first only)."
     }
   },
   "ref_consumers": [

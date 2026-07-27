@@ -297,6 +297,72 @@ def _req_snippet_ok(ref: dict[str, Any], key: str) -> bool:
     return False
 
 
+def _req_row(ref: dict[str, Any], key: str) -> dict[str, Any] | None:
+    for row in ref.get("requirements") or []:
+        if isinstance(row, dict) and str(row.get("key") or "") == key:
+            return row
+    return None
+
+
+def _line_matches_stub(line: str, stub_patterns: list[Any]) -> bool:
+    for pat in stub_patterns:
+        if not pat:
+            continue
+        if re.search(str(pat), line, re.I):
+            return True
+    return False
+
+
+def _subsection_head_tokens(subsection: str) -> list[str]:
+    """Normalize ### heading: drop parentheticals, keep contentful tokens."""
+    plain = subsection.lstrip("#").strip().lower()
+    plain = re.sub(r"\([^)]*\)", " ", plain)
+    plain = re.sub(r"[—–\-:/|]+", " ", plain)
+    stop = {
+        "the",
+        "a",
+        "an",
+        "and",
+        "or",
+        "for",
+        "with",
+        "of",
+        "to",
+        "in",
+        "on",
+        "fx",
+        "spot",
+        "adaptive",
+        "widget",
+        "widgets",
+    }
+    tokens = [t for t in re.findall(r"[a-z0-9]+", plain) if t not in stop and len(t) > 1]
+    return tokens
+
+
+def _redundant_context_match(subsection: str, scenario_line: str) -> bool:
+    """True when scenario_line repeats the subsection's head noun phrase tokens."""
+    tokens = _subsection_head_tokens(subsection)
+    if len(tokens) < 2:
+        return False
+    line = scenario_line.lower()
+    line = re.sub(r"^\s*-\s*(\[[^\]]+\]\s*)?", " ", line)
+    # Prefer last two content tokens as the head noun group (e.g. transaction card).
+    head = tokens[-2:]
+    return all(t in line for t in head)
+
+
+def _extract_bang_reason(line: str) -> str | None:
+    m = re.match(r"^\s*-\s*!\s*reason:\s*(.+?)\s*$", line, re.I)
+    if not m:
+        return None
+    return m.group(1).strip()
+
+
+def _is_availability_check(line: str, stub_patterns: list[Any]) -> bool:
+    return _line_matches_stub(line, stub_patterns)
+
+
 def verify_atomic_checks(
     coverage: dict[str, Any], ref: dict[str, Any], contract: dict[str, Any]
 ) -> list[str]:
@@ -308,6 +374,26 @@ def verify_atomic_checks(
         for c in (coverage.get("checks") or [])
         if isinstance(c, dict) and c.get("id")
     }
+    stub_patterns = list(contract.get("tag_level_stub_patterns") or [])
+    atomic_rules = contract.get("atomic_check_rules") or {}
+    deferral_rules = contract.get("deferral_reason_rules") or {}
+    forbidden_enums = {
+        str(x).strip().lower()
+        for x in (contract.get("forbidden_deferral_reason_enums") or [])
+    }
+    avail_rules = contract.get("availability_placement") or {}
+    inv_rules = contract.get("invariants_section_rules") or {}
+    prereq_heading = str(
+        avail_rules.get("prerequisites_section_heading")
+        or atomic_rules.get("prerequisites_section_heading")
+        or "## Prerequisites"
+    )
+    inv_heading = str(
+        inv_rules.get("heading")
+        or (contract.get("section_requirements") or {}).get(
+            "invariants_section_heading", "## Invariants under configuration change"
+        )
+    )
 
     for oid, obl in primary.items():
         entry = cov_map.get(oid)
@@ -326,29 +412,151 @@ def verify_atomic_checks(
                 f"check {cid}: expected exactly one obligation_id {oid}, got {obl_ids!r}"
             )
 
-    stub_patterns = contract.get("tag_level_stub_patterns") or []
-    for chk in coverage.get("checks") or []:
-        if not isinstance(chk, dict):
-            continue
-        line = str(chk.get("scenario_line") or "")
-        rkeys = chk.get("requirement_keys") or []
-        if not any(_req_snippet_ok(ref, str(k)) for k in rkeys):
-            continue
-        for pat in stub_patterns:
-            if re.search(pat, line, re.I):
-                errors.append(
-                    f"tag_level_stub_check: check {chk.get('id')}: stub wording with ok snippet"
-                )
-                break
+    checks = [c for c in (coverage.get("checks") or []) if isinstance(c, dict)]
+    stub_always = atomic_rules.get("stub_check_always_errors_on_primary", True)
+    token_match = atomic_rules.get("redundant_context_token_match", True)
 
-        subsection = str(chk.get("subsection") or "").strip()
-        if subsection:
-            sub_plain = subsection.lstrip("#").strip().lower()
-            line_lower = line.lower()
-            if sub_plain and sub_plain in line_lower:
+    for chk in checks:
+        line = str(chk.get("scenario_line") or "")
+        role = chk.get("verification_role")
+        cid = chk.get("id")
+
+        # SD2: stub wording on primary always fails (snippet status irrelevant).
+        if role == "primary" and stub_always and _line_matches_stub(line, stub_patterns):
+            if not SCENARIO_BANG_ONLY.match(line):
                 errors.append(
-                    f"redundant_context_prefix: check {chk.get('id')}: "
+                    f"tag_level_stub_check: check {cid}: stub wording on primary check"
+                )
+
+        # SD5: token-based redundant context (drop parentheticals).
+        subsection = str(chk.get("subsection") or "").strip()
+        if subsection and token_match and _redundant_context_match(subsection, line):
+            errors.append(
+                f"redundant_context_prefix: check {cid}: "
+                "scenario_line repeats subsection context"
+            )
+        elif subsection and not token_match:
+            sub_plain = subsection.lstrip("#").strip().lower()
+            if sub_plain and sub_plain in line.lower():
+                errors.append(
+                    f"redundant_context_prefix: check {cid}: "
                     "scenario_line repeats subsection context"
+                )
+
+        # SD4: human deferral reasons — forbid bare snippet_failure_reason enums.
+        amb = chk.get("ambiguity") if isinstance(chk.get("ambiguity"), dict) else {}
+        reason_candidates: list[str] = []
+        bang_reason = _extract_bang_reason(line)
+        if bang_reason:
+            reason_candidates.append(bang_reason)
+        amb_reason = str(amb.get("reason") or "").strip()
+        if amb_reason and amb_reason not in reason_candidates:
+            reason_candidates.append(amb_reason)
+        for reason in reason_candidates:
+            low = reason.lower().strip().rstrip(".")
+            if low in forbidden_enums:
+                errors.append(
+                    f"machine_deferral_reason: check {cid}: "
+                    f"forbidden bare enum {reason!r} — use a human sentence naming the key"
+                )
+                continue
+            if deferral_rules.get("require_human_sentence", True):
+                min_chars = int(deferral_rules.get("min_reason_chars") or 24)
+                if len(reason) < min_chars or " " not in reason.strip():
+                    errors.append(
+                        f"machine_deferral_reason: check {cid}: "
+                        "deferral reason must be a human sentence, not a machine token"
+                    )
+
+        # SD3: availability belongs in Prerequisites for widget_ui without config_vs_position.
+        if (
+            role == "primary"
+            and avail_rules.get("widget_ui_without_config_vs_position") == "prerequisites"
+            and _is_availability_check(line, stub_patterns)
+            and not SCENARIO_BANG_ONLY.match(line)
+        ):
+            has_cvp = any(
+                isinstance(o, dict) and o.get("config_vs_position")
+                for o in (ref.get("obligations_proposed") or [])
+            )
+            section = str(chk.get("section") or "").strip()
+            if not has_cvp and section != prereq_heading:
+                errors.append(
+                    f"availability_misplaced: check {cid}: "
+                    f"availability check must live under {prereq_heading!r}"
+                )
+
+    # SD2: single_stub_subsection — lone stub under a ### is invalid.
+    if atomic_rules.get("single_stub_subsection_errors", True):
+        by_sub: dict[str, list[dict[str, Any]]] = {}
+        for chk in checks:
+            if chk.get("verification_role") != "primary":
+                continue
+            line = str(chk.get("scenario_line") or "")
+            if SCENARIO_BANG_ONLY.match(line):
+                continue
+            sub = str(chk.get("subsection") or "").strip()
+            if not sub:
+                continue
+            by_sub.setdefault(sub, []).append(chk)
+        for sub, group in by_sub.items():
+            if len(group) != 1:
+                continue
+            only = group[0]
+            if _line_matches_stub(str(only.get("scenario_line") or ""), stub_patterns):
+                errors.append(
+                    f"single_stub_subsection: subsection {sub!r} has only stub check "
+                    f"{only.get('id')}"
+                )
+
+    # SD3: invariants section only when ref has config_vs_position.
+    if inv_rules.get("allow_only_when_ref_has_config_vs_position", True):
+        has_cvp = any(
+            isinstance(o, dict) and o.get("config_vs_position")
+            for o in (ref.get("obligations_proposed") or [])
+        )
+        if not has_cvp:
+            for chk in checks:
+                if str(chk.get("section") or "").strip() == inv_heading:
+                    errors.append(
+                        f"invariants_section_without_config_vs_position: check {chk.get('id')} "
+                        f"under {inv_heading!r} but ref has no config_vs_position"
+                    )
+                    break
+
+    # SD1: observable_yield → enough non-availability primary checks per key.
+    if atomic_rules.get("observable_yield_min_primary_checks", True):
+        for row in ref.get("requirements") or []:
+            if not isinstance(row, dict):
+                continue
+            key = str(row.get("key") or "")
+            if not key or row.get("snippet_status") != "ok":
+                continue
+            try:
+                yield_n = int(row.get("observable_yield") or 0)
+            except (TypeError, ValueError):
+                yield_n = 0
+            if yield_n < 2:
+                continue
+            field_checks = 0
+            for chk in checks:
+                if chk.get("verification_role") != "primary":
+                    continue
+                rkeys = [str(k) for k in (chk.get("requirement_keys") or [])]
+                if key not in rkeys:
+                    continue
+                line = str(chk.get("scenario_line") or "")
+                if SCENARIO_BANG_ONLY.match(line):
+                    continue
+                if avail_rules.get("does_not_count_toward_observable_yield", True) and _is_availability_check(
+                    line, stub_patterns
+                ):
+                    continue
+                field_checks += 1
+            if field_checks < yield_n:
+                errors.append(
+                    f"observable_yield_shortfall: requirement {key} "
+                    f"observable_yield={yield_n} but only {field_checks} field-level primary check(s)"
                 )
 
     return errors
@@ -463,6 +671,18 @@ def verify_strict_topology(
             )
             if heading not in md_body:
                 errors.append(f"shell_first markdown missing section {heading!r}")
+
+        # SD6: Rounding H2 is formula_first only; shell_first keeps format next to fields.
+        if spine.get("forbid_rounding_section", False):
+            rounding_h = str(
+                spine.get("rounding_section_heading")
+                or "## Rounding and display policy"
+            )
+            if rounding_h in md_body:
+                errors.append(
+                    f"rounding_section_on_shell_first: {rounding_h!r} forbidden when "
+                    "emit_layout=shell_first — keep currency/sign/2dp with the field check"
+                )
 
     ref_oracle_ids = {
         str(r.get("id"))

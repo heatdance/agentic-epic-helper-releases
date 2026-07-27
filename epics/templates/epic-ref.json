@@ -117,7 +117,8 @@
     "extract_mode": null,
     "jira_context": null,
     "snippet_status": "ok | missing | failed",
-    "snippet_failure_reason": "yogi_extract_empty | no_cookie | macro_shape_unsupported | page_id_unresolved | mcp_export_failed | other"
+    "snippet_failure_reason": "yogi_extract_empty | no_cookie | macro_shape_unsupported | page_id_unresolved | mcp_export_failed | other",
+    "observable_yield": "integer >= 0; count of distinct UI parameters / table rows recognized in snippet_text (EPIC-PREP 3c). When snippet_status=ok and observable_yield>=2, require >= that many primary_candidate field obligations (availability / environment_setup do not count)."
   },
   "traversal": {
     "nested_refs": [],

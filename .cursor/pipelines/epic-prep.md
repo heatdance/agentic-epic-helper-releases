@@ -127,8 +127,8 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
    - Bind **`linked_delivery_note_ids`** when step **3h** will emit matching **`delivery_notes`** (may back-fill in **3i**).
 4. Use **disambiguation_notes** — e.g. instrument-type config change ≠ account group assignment ≠ position-state invariant.
 5. **0 obligations** is valid when snippet is purely procedural with no testable obligation; log in subprocess output `notes`.
-6. **`widget_ui` / UI-heavy `mixed` atomic rule:** when `snippet_text` names **≥2** UI parameters / table rows (Side, Quantity, Description, fees, card sections, etc.), emit **one `primary_candidate` obligation per observable** — not one obligation per entire requirement key. Card-level availability (`renders`, `not omitted`) may be separate `invariant` / `parity` obligations but **do not** replace field obligations.
-7. When `snippet_status` is **failed**: emit **one** `deferral_candidate` with `deferral_reason` — **no** field obligations for that key.
+6. **`widget_ui` / UI-heavy `mixed` atomic rule:** when `snippet_text` names **≥2** UI parameters / table rows (Side, Quantity, Description, fees, card sections, etc.), emit **one `primary_candidate` obligation per observable** — not one obligation per entire requirement key. Card-level availability (`renders`, `not omitted`) may be separate `invariant` / `parity` obligations but **do not** replace field obligations. Set **`requirements[].observable_yield`** to the count of distinct parameters recognized; verifier requires **≥ `observable_yield`** field obligations (availability / `environment_setup` do **not** count).
+7. When `snippet_status` is **failed**: emit **one** `deferral_candidate` with **human** `deferral_reason` (name the key and what is unavailable — **never** bare enum `mcp_export_failed` / `no_cookie` alone) — **no** field obligations for that key.
 
 Merge slices into ref **`obligations_proposed[]`** (dedupe by statement similarity; keep distinct kinds separate).
 

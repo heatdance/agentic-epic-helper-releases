@@ -16,20 +16,29 @@ ENABLED_TOOLS = (
 )
 
 
-def _env(name: str, default: str) -> str:
+def _env(name: str, default: str = "") -> str:
     return (os.environ.get(name) or default).strip()
 
 
-def main() -> int:
-    token = (os.environ.get("JIRA_API_TOKEN") or "").strip()
-    if not token:
+def _require_token(name: str) -> str:
+    value = _env(name)
+    if not value:
         print(
-            "ERROR: JIRA_API_TOKEN empty (used for Atlassian MCP PAT).\n"
-            "TeamCity: add password parameter JIRA_API_TOKEN on Pipeline config, or set\n"
-            "  env.JIRA_API_TOKEN = %JIRA_API_TOKEN% under Environment variables.",
+            f"ERROR: {name} empty.\n"
+            f"TeamCity: add password parameter {name} on Pipeline config, and set\n"
+            f"  env.{name} = %{name}% under Environment variables.\n"
+            "Data Center requires a separate PAT per application "
+            "(Jira / Confluence / Bitbucket-Stash).",
             file=sys.stderr,
         )
-        return 1
+        raise SystemExit(1)
+    return value
+
+
+def main() -> int:
+    jira_token = _require_token("JIRA_API_TOKEN")
+    confluence_token = _require_token("CONFLUENCE_API_TOKEN")
+    bitbucket_token = _require_token("BITBUCKET_API_TOKEN")
 
     jira_url = _env("ATLASSIAN_MCP_JIRA_URL", _env("JIRA_BASE_URL", "https://jira.in.devexperts.com"))
     confluence_url = _env("ATLASSIAN_MCP_CONFLUENCE_URL", "https://confluence.in.devexperts.com")
@@ -51,13 +60,13 @@ def main() -> int:
                 "args": ["--with", "fakeredis<2.35", "mcp-atlassian-with-bitbucket"],
                 "env": {
                     "CONFLUENCE_URL": confluence_url.rstrip("/"),
-                    "CONFLUENCE_PERSONAL_TOKEN": token,
+                    "CONFLUENCE_PERSONAL_TOKEN": confluence_token,
                     "CONFLUENCE_SSL_VERIFY": "false",
                     "JIRA_URL": jira_url.rstrip("/"),
-                    "JIRA_PERSONAL_TOKEN": token,
+                    "JIRA_PERSONAL_TOKEN": jira_token,
                     "JIRA_SSL_VERIFY": "false",
                     "BITBUCKET_URL": bitbucket_url.rstrip("/"),
-                    "BITBUCKET_PERSONAL_TOKEN": token,
+                    "BITBUCKET_PERSONAL_TOKEN": bitbucket_token,
                     "BITBUCKET_SSL_VERIFY": "false",
                     "READ_ONLY_MODE": "true",
                     "ENABLED_TOOLS": ENABLED_TOOLS,
@@ -69,7 +78,9 @@ def main() -> int:
     out = Path(".cursor") / "mcp.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(cfg, indent=2) + "\n", encoding="utf-8")
-    print(f"Wrote {out} (user-mcp-atlassian only)")
+    print(
+        f"Wrote {out} (user-mcp-atlassian; separate Jira/Confluence/Bitbucket PATs)"
+    )
     return 0
 
 

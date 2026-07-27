@@ -61,5 +61,22 @@ python automation/tools/coverage_verify.py --mode reinforce --strict-principal `
 | `coverage-639-formula-reinforce-principal-minimal.*` | Pass-2 principal; deferral skip-deepen |
 | `coverage-reinforce-principal-bad-missing-fixture-merge.json` | `--mode reinforce --strict-principal` exit **1** |
 | `coverage-principal-bad-blanket-deferral.*` | `--strict-principal` exit **1** |
+| `crt635-skeleton-bad-*` | Build-43 stub skeleton — `--mode obligations` exit **1** (`tag_level_stub_check`, `single_stub_subsection`, `machine_deferral_reason`, `availability_misplaced`) |
+| `crt635-target-good-*` | Target semantics (Prerequisites availability + field checks, no Rounding H2) — `--mode obligations` / `--mode emit --strict-topology` exit **0** |
+| `crt635-*-minimal.*` | Compact CRT-635 smoke for atomic field emit |
 
-Contracts: [docs/coverage-principal-contract.json](../../../docs/coverage-principal-contract.json), [docs/coverage-reinforce-principal-contract.json](../../../docs/coverage-reinforce-principal-contract.json).
+```powershell
+# Negative — stub skeleton (expect exit 1)
+python automation/tools/coverage_verify.py --mode obligations `
+  --coverage automation/tools/fixtures/coverage/crt635-skeleton-bad-coverage.json `
+  --ref automation/tools/fixtures/coverage/crt635-skeleton-bad-ref.json `
+  --md automation/tools/fixtures/coverage/crt635-skeleton-bad.md
+
+# Positive — target form (expect exit 0)
+python automation/tools/coverage_verify.py --mode obligations `
+  --coverage automation/tools/fixtures/coverage/crt635-target-good-coverage.json `
+  --ref automation/tools/fixtures/coverage/crt635-target-good-ref.json `
+  --md automation/tools/fixtures/coverage/crt635-target-good.md
+```
+
+Contracts: [docs/coverage-principal-contract.json](../../../docs/coverage-principal-contract.json), [docs/coverage-reinforce-principal-contract.json](../../../docs/coverage-reinforce-principal-contract.json), [docs/coverage-obligation-contract.json](../../../docs/coverage-obligation-contract.json).

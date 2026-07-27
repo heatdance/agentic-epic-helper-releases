@@ -20,7 +20,12 @@
 | `curl or wget required` | Install curl on dxAgent image |
 | `uv install finished but uvx/uv still not on PATH` | Check `$HOME` writable; inspect step 1 bootstrap log |
 | `JIRA_API_TOKEN empty` | Add password param on Pipeline **and** `env.JIRA_API_TOKEN=%JIRA_API_TOKEN%`; or ensure step references `%JIRA_API_TOKEN%` |
+| `CONFLUENCE_API_TOKEN empty` / Confluence smoke HTTP 401 | Add **separate** Confluence DC PAT + `env.CONFLUENCE_API_TOKEN=%CONFLUENCE_API_TOKEN%` — do **not** reuse Jira PAT (D17) |
+| `BITBUCKET_API_TOKEN empty` / Stash smoke HTTP 401 | Add **separate** Stash HTTP access token + `env.BITBUCKET_API_TOKEN=%BITBUCKET_API_TOKEN%` (D17) |
 | Jira smoke HTTP 401/403 | Bearer PAT scope; same token as comment steps |
+| Green build, stub checklist / `mcp_export_failed` deferrals | Pre-D17 single-PAT failure mode; upgrade `team` + set Confluence/Bitbucket PATs; coverage_verify now rejects stub skeletons |
+| `ci-strict rejects deferral_accepted` | Expected when snippets failed under CI; fix Confluence auth, do not set `ALLOW_SNIPPET_DEFERRAL` unless intentionally waiving |
+| `refusing Jira success comment: requirement snippets not ok` | EPIC-PREP did not get ok snippets — fix PATs and re-run; success notify blocked by design (D17) |
 | Agent not Linux | Console gate requires OpenSSH on agent |
 | Agent `finished` but verify «file not found» | Pre-patch bare SDK — upgrade `team` scripts; runner exit **3** if `--require` missing |
 | `required output file(s) missing` (exit 3) | Agent did not write artefact — read agent log; increase `AGENT_MAX_WAIT_MINUTES` |

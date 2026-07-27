@@ -1,46 +1,24 @@
 # QA handoff — Corner Trader workspace
 
-Last updated: 2026-07-27.
+Last updated: 2026-07-27 (D17 consolidation).
 
 ## Current focus
 
-**Corner Epic QA CI (dxCity)** — cherry-pick harness v7 (atomic coverage draft + `dependencies/` layout) onto Stash `team` for CI pickup.
+**Push to Stash `team`:** fail-hard Atlassian auth (separate Confluence/Bitbucket PATs) + checklist semantic gates SD1–SD6 + `--ci-strict` + jira_success snippet gate (D17).
 
-**Coverage draft quality (2026-07-27):** Atomic field-level obligations in EPIC-PREP (`assertion_fragment`, `emit_subsection`); COVERAGE 1:1 obligation→check; collapsed Smart Checklist emit (no `## Primary focus` in paste); pre-CLOSE JSON under `epics/<KEY>/dependencies/`, human paste `epics/<KEY>/<KEY>-coverage.md` only. epic-helper **v7** — [docs/epic-artifact-layout.json](docs/epic-artifact-layout.json).
+## Resume
 
-## Corner Epic QA CI — state
+- Branch `_stash-team-merge` → push `stash _stash-team-merge:team`
+- After push: add TeamCity `CONFLUENCE_API_TOKEN` / `BITBUCKET_API_TOKEN` + env wiring; re-run CRT-635
 
-| Area | Status |
-|------|--------|
-| Docs | `automation/CI/` synced — rollout-learnings, scripts-reference, D10–D12 |
-| Code | MCP runner, bootstrap, param loader, agent logging, jira-notify-guard |
-| Dispatch | Operator set `DISPATCH_LOOKBACK_MINUTES=120` |
-| Pipeline CRT-670 | Green build reported; ~9 min — verify artefact quality manually |
-| Stash VCS | Push in progress — `personal:team` non-fast-forward; cherry-pick onto `stash/team` |
+## Next
 
-## TeamCity operator TODO
-
-- [ ] `env.JIRA_API_TOKEN`, `env.CURSOR_API_KEY`, `env.EPIC_KEY` on Pipeline
-- [ ] Build timeout 180 min; `AGENT_MAX_WAIT_MINUTES=45`
-- [ ] **Stop build on failure** on Pipeline
-- [ ] Step 11: Execute **Only if all previous steps successful**
-- [ ] Step 12: Execute **Even if some previous steps failed** (guard prevents duplicate Jira)
-- [ ] Confirm Stash `team` revision matches harness v7 after push
-
-## Next steps
-
-1. Finish cherry-pick; push `_stash-team-merge:team` to Stash.
-2. Re-run Pipeline or Dispatch for CRT-670 / new CRTQA comment with full logging.
-3. Optional: single `jira-notify.sh` TeamCity step; Dispatch `maxResults` bump.
+1. Operator: TC password params + `env.*` for Confluence/Bitbucket
+2. Re-run Pipeline for CRT-635; expect field-level coverage.md
+3. Optional calibrate gold from successful CI artefacts
 
 ## Pointers
 
-- CI entry: [automation/CI/README.md](automation/CI/README.md)
-- Session matrix: [automation/CI/rollout-learnings.md](automation/CI/rollout-learnings.md)
-- Operator onboarding: [automation/CI/operations.md](automation/CI/operations.md)
-- Epic layout: [docs/epic-artifact-layout.json](docs/epic-artifact-layout.json)
-
-## Blockers
-
-- Stash `team` diverged from `personal` — merge via cherry-pick, not force-push
-- dxCity UI has no `not(success())` — rely on Execute step + `jira-notify-guard.sh` (D12)
+- D17: [automation/CI/decisions.md](automation/CI/decisions.md)
+- Research: [automation/temp/ci-quality-research-crt635.md](automation/temp/ci-quality-research-crt635.md) (local scratch)
+- Fixtures: `crt635-skeleton-bad-*` / `crt635-target-good-*`

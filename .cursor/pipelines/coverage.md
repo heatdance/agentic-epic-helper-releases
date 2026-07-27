@@ -52,7 +52,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 | `##` / `###` | Sections and subsections. Prefer **one E2E thread per major `##` section** (prerequisites → checks → variants). |
 | `- ` | **One scenario per line** — **one primary observable outcome** per line. |
 | `> ` | **Details**: execution variants, grep examples, formulas, Figma/Slack links, secondary evidence — not a separate scenario when the outcome is the same family. **Operator hints only** — prefixes from [`docs/coverage-operator-hints.json`](../../docs/coverage-operator-hints.json) (`Oracle`, `Harness`, `Verified`, `Prerequisite`, `Contrast`, `Note`). |
-| `!` | **Ambiguity only** — include a **short reason** (e.g. `! reason: insufficient context in requirements`). Do **not** use vague “TBD” on executable lines. |
+| `!` | **Ambiguity only** — include a **short human reason** naming the requirement key and what is unavailable (e.g. `! reason: DXINV-025 field specs unavailable — Confluence auth failed`). Do **not** paste bare machine enums (`mcp_export_failed`, `no_cookie`, …). Do **not** use vague “TBD” on executable lines. |
 
 **Operator vs linker lines**: Machine audit strings (`> Discover:`, fixture ids, affordance ids, obligation ids) belong in **`checks[].linker_trace_lines[]`** on **`-coverage.json` only** — **never** in **`smart_checklist_markdown`** or **`-coverage.md`**. Expand human setup/harness hints from [`docs/coverage-operator-hints.json`](../../docs/coverage-operator-hints.json) when COVERAGE-REINFORCE merges discover fixtures.
 
@@ -63,6 +63,8 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 **Scope**: cover only epic scope; minimal cross-cutting with a one-line rationale when shared layers are touched.
 
 **Epic verification focus (directional epics)**: Linked requirements often describe **both** branches of a configuration (e.g. FIFO vs WeightedAvg). The checklist must follow **`epic_verification_focus`** in `<KEY>-coverage.json` — **Jira narrative** (summary/description) wins over broad branching spec text unless `focus=` explicitly narrows. **`epic_verification_focus.statement`** is **JSON-only** for machine audit — **do not** paste `## Primary focus` into **`-coverage.md`**. Collapse setup into **`## Prerequisites`** (2–4 bullets). Do **not** emit symmetric peer sections for both branches when the epic describes a **one-way** change or a **single instrument class** unless both branches are `verification_role: primary` in the matrix.
+
+**`widget_ui` / `shell_first` placement**: Card/trade **availability** (“card is available”) belongs under **`## Prerequisites`**, not as the sole check under a surface `###` subsection. Field observables (Side, Quantity, Fill price, …) are one `-` each under the matching `###`. Currency / sign / 2dp claims live **with the field check** — do **not** open **`## Rounding and display policy`** on `shell_first` (that H2 is `formula_first` only). A subsection whose only primary line matches stub wording (`card is available`, …) is invalid — emit a keyed `!` deferral instead of a skeleton stub.
 
 **Out-of-epic fork prose**: For matrix rows with **`verification_role: out_of_epic`**, do **not** paste **non-target branch formulas** in checklist **`>`** lines or extra `-` lines. Confine fork description to **`explicitly_out_of_scope`** (consolidated bullet) unless Jira/AC **explicitly** requires in-checklist contrast; then at most one `### Contrast` subsection per prior rules.
 

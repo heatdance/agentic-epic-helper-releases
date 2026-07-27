@@ -10,6 +10,8 @@ from pathlib import Path
 # Password + text params used across Pipeline steps (config or env.* in properties file).
 KEYS = (
     "JIRA_API_TOKEN",
+    "CONFLUENCE_API_TOKEN",
+    "BITBUCKET_API_TOKEN",
     "CURSOR_API_KEY",
     "EPIC_KEY",
     "QA_TASK_KEY",
@@ -26,6 +28,7 @@ KEYS = (
     "ATLASSIAN_MCP_CONFLUENCE_URL",
     "ATLASSIAN_MCP_BITBUCKET_URL",
     "TEAMCITY_BUILD_URL",
+    "ALLOW_SNIPPET_DEFERRAL",
 )
 
 # TeamCity built-in property names mapped to export keys when the target env var is empty.

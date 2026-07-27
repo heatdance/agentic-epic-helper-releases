@@ -9,11 +9,13 @@
     {
       "key": "DXINV-025",
       "snippet_status": "ok",
+      "observable_yield": 2,
       "snippet_text": "Trade-type Transaction Info: Side Buy/Sell colored; Quantity unsigned; Description; Fill price with currency; company logo; Symbol; Transaction date; Account name."
     },
     {
       "key": "DXINV-236",
       "snippet_status": "ok",
+      "observable_yield": 1,
       "snippet_text": "Transaction details card collapsed by default; expanded view available; Cash effect unsigned 2dp with currency."
     }
   ],

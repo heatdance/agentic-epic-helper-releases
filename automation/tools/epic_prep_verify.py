@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -185,6 +186,22 @@ def _deferral_accepted(ref: dict[str, Any]) -> bool:
         if isinstance(entry, str) and "deferral_accepted" in entry.lower():
             return True
     return False
+
+
+RECOVERABLE_SNIPPET_FAILURES = frozenset({"mcp_export_failed", "no_cookie"})
+
+
+def _ci_strict_blocks_deferral(*, ci_strict: bool) -> bool:
+    """True when CI must reject deferral_accepted for failed snippets."""
+    if not ci_strict:
+        return False
+    if (os.environ.get("ALLOW_SNIPPET_DEFERRAL") or "").strip().lower() in (
+        "1",
+        "true",
+        "yes",
+    ):
+        return False
+    return True
 
 
 def _epic_has_quote_keywords(ref: dict[str, Any]) -> bool:
@@ -641,6 +658,29 @@ def _snippet_has_parameter_table(snippet: str) -> bool:
     return len(PARAM_TABLE_RE.findall(snippet)) >= 2
 
 
+def _count_snippet_observables(snippet: str) -> int:
+    """Distinct parameter-like tokens in snippet (observable_yield helper)."""
+    found = {m.group(0).lower() for m in PARAM_TABLE_RE.finditer(snippet or "")}
+    return len(found)
+
+
+def _is_availability_obligation(obl: dict[str, Any]) -> bool:
+    text = " ".join(
+        [
+            str(obl.get("assertion_fragment") or ""),
+            str(obl.get("statement") or ""),
+        ]
+    ).lower()
+    patterns = (
+        "card is available",
+        "details card is available",
+        "trade card is available",
+        "is present and visible",
+        "not omitted",
+    )
+    return any(p in text for p in patterns)
+
+
 def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
     """widget_ui: multi-parameter snippets need field-level obligations."""
     errors: list[str] = []
@@ -663,23 +703,49 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
     for key, row in req_by_key.items():
         status = row.get("snippet_status")
         snippet = str(row.get("snippet_text") or "")
-        if status != "ok" or not _snippet_has_parameter_table(snippet):
+        if status != "ok":
             continue
+
+        try:
+            yield_n = int(row.get("observable_yield")) if row.get("observable_yield") is not None else None
+        except (TypeError, ValueError):
+            yield_n = None
+        if yield_n is None:
+            # Backfill from snippet when agent omitted the field.
+            inferred = _count_snippet_observables(snippet)
+            yield_n = inferred if inferred >= 2 else 0
+            if inferred >= 2 and row.get("observable_yield") is None:
+                # Soft signal: prefer explicit field, but still enforce via inferred count.
+                pass
+
+        if yield_n < 2 and not _snippet_has_parameter_table(snippet):
+            continue
+
+        min_needed = max(yield_n, 2) if _snippet_has_parameter_table(snippet) or yield_n >= 2 else 0
+        if min_needed < 2:
+            continue
+
         obls = obls_by_key.get(key) or []
         primary = [
             o
             for o in obls
             if o.get("disposition") == "primary_candidate"
             and o.get("kind") not in ("explicit_deferral",)
+            and o.get("kind") != "environment_setup"
+            and not _is_availability_obligation(o)
         ]
-        if len(primary) < 2:
+        if len(primary) < min_needed:
+            errors.append(
+                f"observable_yield_shortfall: {key} needs >= {min_needed} "
+                f"primary_candidate field obligation(s) "
+                f"(observable_yield={yield_n}), got {len(primary)}"
+            )
+        elif len(primary) < 2 and _snippet_has_parameter_table(snippet):
             errors.append(
                 f"requirement_tag_only_obligation: {key} snippet has parameter table "
                 f"but only {len(primary)} primary_candidate obligation(s)"
             )
         for obl in primary:
-            if obl.get("kind") == "environment_setup":
-                continue
             frag = str(obl.get("assertion_fragment") or "").strip()
             if not frag:
                 errors.append(
@@ -695,6 +761,8 @@ def verify_ref(
     kinds_doc: dict[str, Any],
     strict_topology: bool,
     strict_principal: bool,
+    *,
+    ci_strict: bool = False,
 ) -> list[str]:
     errors: list[str] = []
     schema_v = int(ref.get("schema_version") or 0)
@@ -704,6 +772,7 @@ def verify_ref(
     valid_kinds = set(kinds_doc.get("kinds") or VALID_KINDS)
     linked = _jira_linked_keys(ref)
     defer_ok = _deferral_accepted(ref)
+    block_deferral = _ci_strict_blocks_deferral(ci_strict=ci_strict)
 
     for row in ref.get("requirements") or []:
         if not isinstance(row, dict):
@@ -712,11 +781,24 @@ def verify_ref(
         if key not in linked:
             continue
         status = row.get("snippet_status")
-        if status != "ok" and not defer_ok:
+        if status == "ok":
+            continue
+        reason = str(row.get("snippet_failure_reason") or "").strip()
+        if defer_ok and not block_deferral:
+            continue
+        if defer_ok and block_deferral:
+            # Prefer naming recoverable reasons; still fail all non-ok under ci-strict.
+            tag = reason if reason in RECOVERABLE_SNIPPET_FAILURES else (reason or "unknown")
             errors.append(
                 f"requirements {key}: snippet_status {status!r} "
-                "(need ok or validation_log deferral_accepted)"
+                f"(ci-strict rejects deferral_accepted for {tag}; "
+                "set ALLOW_SNIPPET_DEFERRAL=yes to override)"
             )
+            continue
+        errors.append(
+            f"requirements {key}: snippet_status {status!r} "
+            "(need ok or validation_log deferral_accepted)"
+        )
 
     obligations = ref.get("obligations_proposed") or []
     if not isinstance(obligations, list):
@@ -824,6 +906,12 @@ def main() -> int:
         action="store_true",
         help="Require principal hints (downstream_hints, threads, focus) on emit",
     )
+    ap.add_argument(
+        "--ci-strict",
+        action="store_true",
+        help="Reject self-issued deferral_accepted for failed snippets "
+        "(TeamCity / CORNER_CI=1). Override with ALLOW_SNIPPET_DEFERRAL=yes.",
+    )
     args = ap.parse_args()
 
     ref = _load_json(args.ref.resolve())
@@ -839,6 +927,9 @@ def main() -> int:
 
     strict_topo = args.strict_topology or args.mode == "topology"
     strict_princ = args.strict_principal or args.mode == "principal"
+    ci_strict = bool(args.ci_strict) or (
+        (os.environ.get("CORNER_CI") or "").strip() in ("1", "true", "yes")
+    )
 
     if args.mode == "scenario":
         errors = verify_scenario_inventory(ref)
@@ -847,10 +938,15 @@ def main() -> int:
     elif args.mode == "principal":
         errors = verify_principal(ref, strict=True)
     elif args.mode == "ref":
-        errors = verify_ref(ref, kinds_doc, strict_topo, strict_princ)
+        errors = verify_ref(
+            ref, kinds_doc, strict_topo, strict_princ, ci_strict=ci_strict
+        )
     else:
         errors = verify_reconcile(ref)
-        errors = verify_ref(ref, kinds_doc, strict_topo, strict_princ) + errors
+        errors = (
+            verify_ref(ref, kinds_doc, strict_topo, strict_princ, ci_strict=ci_strict)
+            + errors
+        )
 
     if errors:
         print(f"epic_prep_verify ({args.mode}) failures:", file=sys.stderr)

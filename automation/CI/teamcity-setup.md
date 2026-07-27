@@ -57,7 +57,7 @@ See [secrets-and-params.md](secrets-and-params.md) for full list.
 
 **Dispatch:** `JIRA_API_TOKEN`, `PIPELINE_BUILD_TYPE_ID`, `DISPATCH_LOOKBACK_MINUTES`, `TRIGGER_PHRASE`, `TC_REST_TOKEN`, optional `TC_SERVER_URL`.
 
-**Pipeline:** `EPIC_KEY`, `QA_TASK_KEY`, `COMMENT_ID`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES`, CRTQA OpenSSH params, plus TeamCity built-in `teamcity.build.url` (auto-resolved to `TEAMCITY_BUILD_URL` by [`jira-env.sh`](../tools/teamcity/jira-env.sh) — see D13).
+**Pipeline:** `EPIC_KEY`, `QA_TASK_KEY`, `COMMENT_ID`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `CONFLUENCE_API_TOKEN`, `BITBUCKET_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES`, CRTQA OpenSSH params, plus TeamCity built-in `teamcity.build.url` (auto-resolved to `TEAMCITY_BUILD_URL` by [`jira-env.sh`](../tools/teamcity/jira-env.sh) — see D13).
 
 ### Expose secrets to all steps (required for MCP patch)
 
@@ -68,13 +68,15 @@ dxCity may not inject **password** configuration parameters into the environment
 | Name | Value |
 |------|-------|
 | `env.JIRA_API_TOKEN` | `%JIRA_API_TOKEN%` |
+| `env.CONFLUENCE_API_TOKEN` | `%CONFLUENCE_API_TOKEN%` |
+| `env.BITBUCKET_API_TOKEN` | `%BITBUCKET_API_TOKEN%` |
 | `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
 | `env.EPIC_KEY` | `%EPIC_KEY%` |
 | `env.QA_TASK_KEY` | `%QA_TASK_KEY%` |
 | `env.CRTQA_SSH_HOST` | `%CRTQA_SSH_HOST%` *(optional — defaults from `crtqa-console.config.json` `environments.<defaultEnvironment>.sshHost`)* |
 | `env.CORNER_CI_STEP` | *(empty — set at runtime by step scripts via `setParameter`)* |
 
-Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
+Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CONFLUENCE_API_TOKEN`, `BITBUCKET_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
 
 Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders. **`TEAMCITY_BUILD_URL`** is resolved from `teamcity.build.url` in that file when not in env (D13).
 

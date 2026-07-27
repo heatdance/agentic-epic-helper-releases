@@ -21,14 +21,18 @@ Never commit tokens, PATs, SSH private keys, or sudo passwords to git. Store as 
 | `QA_TASK_KEY` | text | e.g. `CRTQA-10241` |
 | `COMMENT_ID` | text | Jira comment id (empty OK on manual Run) |
 | `CURSOR_API_KEY` | password | Cursor SDK / agent API |
-| `JIRA_API_TOKEN` | password | **Single PAT** — Jira comments **and** Atlassian MCP (`JIRA` / `CONFLUENCE` / `BITBUCKET` tokens) |
+| `JIRA_API_TOKEN` | password | Jira REST + MCP `JIRA_PERSONAL_TOKEN` (comments + issue fetch) |
+| `CONFLUENCE_API_TOKEN` | password | Confluence DC PAT → MCP `CONFLUENCE_PERSONAL_TOKEN` (**required**; not interchangeable with Jira PAT) |
+| `BITBUCKET_API_TOKEN` | password | Stash/Bitbucket DC PAT → MCP `BITBUCKET_PERSONAL_TOKEN` (**required**) |
 | `AGENT_MAX_WAIT_MINUTES` | text | Per agent step wait timeout; default **`45`** |
 | `CRTQA_CONSOLE_TRANSPORT` | text | `openssh` |
 | `CRTQA_SSH_USER` | text | SSH login on CRTQA host |
 | `CRTQA_SSH_PRIVATE_KEY_B64` | password | Base64-encoded PEM (single line) |
 | `CRTQA_SUDO_PASSWORD` | password | Sudo password for `su - ctqa` |
 
-Optional overrides: `CRTQA_SSH_HOST`, `CRTQA_SUDO_UNIX_USER`, `JIRA_BASE_URL`, `ATLASSIAN_MCP_JIRA_URL`, `ATLASSIAN_MCP_CONFLUENCE_URL`, `ATLASSIAN_MCP_BITBUCKET_URL`.
+Optional overrides: `CRTQA_SSH_HOST`, `CRTQA_SUDO_UNIX_USER`, `JIRA_BASE_URL`, `ATLASSIAN_MCP_JIRA_URL`, `ATLASSIAN_MCP_CONFLUENCE_URL`, `ATLASSIAN_MCP_BITBUCKET_URL`, `ALLOW_SNIPPET_DEFERRAL` (CI only — `yes` to allow non-ok snippets with `deferral_accepted`; default off).
+
+**Do not** reuse one Jira PAT for Confluence/Stash on Data Center — that produced build-43 stub checklists (401). Step 1 smoke probes all three.
 
 ### Build settings (operator)
 

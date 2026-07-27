@@ -71,7 +71,7 @@ Exit **0** = pass.
 | Mode | Checks |
 |------|--------|
 | **matrix** | `schema_version` ≥ 2; matrix ids; roles vs focus |
-| **obligations** | matrix + **`obligations_coverage`** row-complete vs ref primaries; invariant/rounding sections |
+| **obligations** | matrix + **`obligations_coverage`** row-complete vs ref primaries; invariant/rounding sections; **semantic gates** (stub wording, single-stub subsection, machine deferral enums, availability placement, `observable_yield` shortfall, redundant context tokens) |
 | **checks** | obligations + basic check shape |
 | **emit** | matrix + markdown focus verbatim + no temp/CRTQA + **operator md hygiene** (no platform reuse heading; no `> Discover:`/`> Discovery:`; no machine lines in `detail_lines`) |
 | **principal** | Principal contract only (focus copy, threads, keyed deferrals) |

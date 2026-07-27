@@ -6,10 +6,13 @@ from __future__ import annotations
 import json
 import os
 import sys
+from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
 from read_teamcity_params import resolve_teamcity_build_url
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
 
 
 def _fail(msg: str, code: int = 1) -> None:
@@ -32,6 +35,42 @@ def _post_comment(*, base: str, qa: str, token: str, body: str) -> None:
         print("comment status:", resp.status)
 
 
+def _resolve_ref(epic: str) -> Path:
+    candidates = (
+        REPO_ROOT / "epics" / epic / "dependencies" / f"{epic}-ref.json",
+        REPO_ROOT / "epics" / epic / "context" / f"{epic}-ref.json",
+        REPO_ROOT / "epics" / epic / f"{epic}-ref.json",
+    )
+    for path in candidates:
+        if path.is_file():
+            return path
+    return candidates[0]
+
+
+def _failed_snippet_keys(epic: str) -> list[str]:
+    """Return requirement keys with snippet_status != ok."""
+    ref_path = _resolve_ref(epic)
+    if not ref_path.is_file():
+        _fail(f"ref missing for success gate: {ref_path}")
+    try:
+        ref = json.loads(ref_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        _fail(f"cannot read ref {ref_path}: {exc}")
+    if not isinstance(ref, dict):
+        _fail(f"invalid ref JSON: {ref_path}")
+
+    failed: list[str] = []
+    for row in ref.get("requirements") or []:
+        if not isinstance(row, dict):
+            continue
+        key = str(row.get("key") or "").strip()
+        if not key:
+            continue
+        if row.get("snippet_status") != "ok":
+            failed.append(f"{key}:{row.get('snippet_status') or 'missing'}")
+    return failed
+
+
 def main() -> int:
     epic = os.environ.get("EPIC_KEY", "").strip()
     qa = os.environ.get("QA_TASK_KEY", "").strip()
@@ -47,6 +86,14 @@ def main() -> int:
         _fail(
             "TEAMCITY_BUILD_URL required "
             "(set env or ensure teamcity.build.url in TeamCity properties)"
+        )
+
+    bad = _failed_snippet_keys(epic)
+    if bad:
+        _fail(
+            "refusing Jira success comment: requirement snippets not ok — "
+            + ", ".join(bad)
+            + " (fix Confluence/Bitbucket PATs and re-run EPIC-PREP)"
         )
 
     md_name = f"{epic}-coverage.md"

@@ -42,9 +42,23 @@ def _env(name: str, default: str) -> str:
 
 
 def _mcp_env() -> dict[str, str]:
-    token = (os.environ.get("JIRA_API_TOKEN") or "").strip()
-    if not token:
-        raise RuntimeError("JIRA_API_TOKEN empty (Atlassian MCP PAT)")
+    jira_token = (os.environ.get("JIRA_API_TOKEN") or "").strip()
+    confluence_token = (os.environ.get("CONFLUENCE_API_TOKEN") or "").strip()
+    bitbucket_token = (os.environ.get("BITBUCKET_API_TOKEN") or "").strip()
+    missing = [
+        name
+        for name, val in (
+            ("JIRA_API_TOKEN", jira_token),
+            ("CONFLUENCE_API_TOKEN", confluence_token),
+            ("BITBUCKET_API_TOKEN", bitbucket_token),
+        )
+        if not val
+    ]
+    if missing:
+        raise RuntimeError(
+            "missing Atlassian PATs (Data Center requires one per app): "
+            + ", ".join(missing)
+        )
 
     jira_url = _env("ATLASSIAN_MCP_JIRA_URL", _env("JIRA_BASE_URL", "https://jira.in.devexperts.com"))
     confluence_url = _env("ATLASSIAN_MCP_CONFLUENCE_URL", "https://confluence.in.devexperts.com")
@@ -52,13 +66,13 @@ def _mcp_env() -> dict[str, str]:
 
     return {
         "CONFLUENCE_URL": confluence_url.rstrip("/"),
-        "CONFLUENCE_PERSONAL_TOKEN": token,
+        "CONFLUENCE_PERSONAL_TOKEN": confluence_token,
         "CONFLUENCE_SSL_VERIFY": "false",
         "JIRA_URL": jira_url.rstrip("/"),
-        "JIRA_PERSONAL_TOKEN": token,
+        "JIRA_PERSONAL_TOKEN": jira_token,
         "JIRA_SSL_VERIFY": "false",
         "BITBUCKET_URL": bitbucket_url.rstrip("/"),
-        "BITBUCKET_PERSONAL_TOKEN": token,
+        "BITBUCKET_PERSONAL_TOKEN": bitbucket_token,
         "BITBUCKET_SSL_VERIFY": "false",
         "READ_ONLY_MODE": "true",
         "ENABLED_TOOLS": ENABLED_TOOLS,

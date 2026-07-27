@@ -18,6 +18,8 @@ if [ -z "$EPIC" ]; then
   exit 1
 fi
 
+export CORNER_CI=1
+
 REF="$(corner_tc_resolve_json "$EPIC" ref)"
 if [ ! -f "$REF" ]; then
   echo "ERROR: $REF not created by EPIC-PREP agent"
@@ -28,6 +30,7 @@ python3 automation/tools/epic_prep_verify.py \
   --mode ref \
   --strict-topology \
   --strict-principal \
+  --ci-strict \
   --ref "$REF" || exit 1
 corner_tc_mark_step_ok "03-epic-prep-verify" "EPIC-PREP verify"
 echo "EPIC-PREP verify OK"

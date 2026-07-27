@@ -168,6 +168,22 @@ Downstream steps fail fast with `ERROR: contract violation: ...` when required u
 
 ---
 
+## D17 — Per-app Atlassian PATs + fail-hard snippet honesty
+
+**Decision:**
+
+1. TeamCity Pipeline requires **three** password params: `JIRA_API_TOKEN`, `CONFLUENCE_API_TOKEN`, `BITBUCKET_API_TOKEN` — wired separately into MCP `*_PERSONAL_TOKEN` env (no silent reuse of the Jira PAT for Confluence/Stash on Data Center).
+2. Step 1 [`mcp-smoke.sh`](../tools/teamcity/mcp-smoke.sh) probes Jira issue + Confluence `/rest/api/user/current` + Stash `CAN/corner` — fail fast on 401/403.
+3. [`epic_prep_verify.py --ci-strict`](../tools/epic_prep_verify.py) (TeamCity EPIC-PREP verify) rejects self-issued `validation_log.deferral_accepted` when snippets failed (override only via `ALLOW_SNIPPET_DEFERRAL=yes`).
+4. [`jira_success.py`](../tools/teamcity/jira_success.py) refuses “coverage is ready” when any `requirements[].snippet_status != ok`.
+5. Coverage semantic gates (SD1–SD6) reject tag-level stub skeletons and bare machine `! reason:` enums.
+
+**Rationale:** Pipeline build 43 for CRT-635 was green with a stub Smart Checklist because one Jira PAT returned Confluence/Stash **401**, the agent wrote `deferral_accepted`, and notify posted success. Auth fix alone is insufficient without honesty gates.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

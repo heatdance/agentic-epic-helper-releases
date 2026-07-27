@@ -45,23 +45,61 @@
     "setup_thread_missing_checks",
     "focus_drift_from_ref_proposed",
     "tag_level_stub_check",
+    "single_stub_subsection",
     "redundant_context_prefix",
     "collapsed_intro_violation",
-    "obligation_without_atomic_check"
+    "obligation_without_atomic_check",
+    "machine_deferral_reason",
+    "availability_misplaced",
+    "invariants_section_without_config_vs_position",
+    "observable_yield_shortfall",
+    "rounding_section_on_shell_first"
   ],
   "tag_level_stub_patterns": [
     "card is available",
     "is present and visible",
     "must expose .+ per linked",
     "details card is available",
-    "trade card is available"
+    "trade card is available",
+    "transaction card is available",
+    "transaction details card is available",
+    "trade details card is available"
   ],
+  "forbidden_deferral_reason_enums": [
+    "mcp_export_failed",
+    "no_cookie",
+    "yogi_extract_empty",
+    "page_id_unresolved",
+    "macro_shape_unsupported",
+    "other"
+  ],
+  "deferral_reason_rules": {
+    "forbid_bare_snippet_failure_enums": true,
+    "require_human_sentence": true,
+    "min_reason_chars": 24,
+    "prefer_requirement_key_in_reason": true,
+    "_note": "Paste '! reason:' must name what is unavailable and which key; never dump snippet_failure_reason enums alone."
+  },
+  "availability_placement": {
+    "widget_ui_without_config_vs_position": "prerequisites",
+    "prerequisites_section_heading": "## Prerequisites",
+    "does_not_count_toward_observable_yield": true,
+    "_note": "Card/trade availability is a setup gate for widget_ui, not a field-level check under surface subsections."
+  },
+  "invariants_section_rules": {
+    "heading": "## Invariants under configuration change",
+    "allow_only_when_ref_has_config_vs_position": true
+  },
   "atomic_check_rules": {
     "one_primary_obligation_per_check": true,
     "scenario_line_from_assertion_fragment": true,
     "subsection_from_emit_subsection": true,
     "forbid_primary_focus_in_paste": true,
-    "prerequisites_section_heading": "## Prerequisites"
+    "prerequisites_section_heading": "## Prerequisites",
+    "stub_check_always_errors_on_primary": true,
+    "single_stub_subsection_errors": true,
+    "redundant_context_token_match": true,
+    "observable_yield_min_primary_checks": true
   },
   "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"],
   "reinforce_allowed_inputs": {

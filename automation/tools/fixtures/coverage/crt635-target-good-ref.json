@@ -1,0 +1,231 @@
+{
+  "schema_version": 4,
+  "epic_key": "CRT-635",
+  "epic": {
+    "key": "CRT-635",
+    "summary": "Support FX_SPOT in the widgets 'Transactions' and 'Trade History'"
+  },
+  "epic_archetype": {
+    "value": "widget_ui",
+    "source": "jira_scenarios"
+  },
+  "requirements": [
+    {
+      "key": "DXINV-025",
+      "snippet_status": "ok",
+      "observable_yield": 4,
+      "snippet_text": "Trade-type Transaction Info: Side Buy/Sell colored; Quantity unsigned; Fill price with currency; Symbol; Transaction date; Account name."
+    },
+    {
+      "key": "DXINV-236",
+      "snippet_status": "ok",
+      "observable_yield": 2,
+      "snippet_text": "Transaction details card collapsed by default; Cash effect unsigned 2dp with currency."
+    },
+    {
+      "key": "DXINV-CB-92",
+      "snippet_status": "ok",
+      "observable_yield": 3,
+      "snippet_text": "Trade card: Side colored; Quantity unsigned; Total cost signed."
+    },
+    {
+      "key": "DXINV-CB-95",
+      "snippet_status": "ok",
+      "observable_yield": 2,
+      "snippet_text": "Trade details: Realized PL signed colored; Fees and Commission unsigned."
+    }
+  ],
+  "obligations_proposed": [
+    {
+      "id": "obl-s001",
+      "kind": "environment_setup",
+      "disposition": "primary_candidate",
+      "statement": "Console — open at least one FX_SPOT position",
+      "assertion_fragment": "Console — open at least one FX_SPOT position",
+      "requirement_keys": ["CRT-635"],
+      "downstream_hints": { "coverage_thread": "environment_setup", "needs_environment_provision": true }
+    },
+    {
+      "id": "obl-s002",
+      "kind": "environment_setup",
+      "disposition": "primary_candidate",
+      "statement": "Adaptive shows FX_SPOT position in Transactions and Trade History",
+      "assertion_fragment": "Adaptive — Transactions and Trade History show the FX_SPOT position",
+      "requirement_keys": ["CRT-635"],
+      "downstream_hints": { "coverage_thread": "environment_setup" }
+    },
+    {
+      "id": "obl-001",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Side shows Buy or Sell with green for Buy and red for Sell",
+      "assertion_fragment": "Side shows Buy or Sell, green for Buy and red for Sell",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "evidence_anchor": { "field": "Side", "source": "yogi_snippet" },
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-002",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Quantity is unsigned",
+      "assertion_fragment": "Quantity is unsigned",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "evidence_anchor": { "field": "Quantity", "source": "yogi_snippet" },
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-003",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Fill price shows account currency symbol, native format",
+      "assertion_fragment": "Fill price shows account currency symbol, native format",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "evidence_anchor": { "field": "Fill price", "source": "yogi_snippet" },
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-004",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Transaction date, Symbol, Account name are present",
+      "assertion_fragment": "Transaction date, Symbol, Account name are present",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-005",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Details card renders collapsed by default",
+      "assertion_fragment": "renders collapsed by default",
+      "emit_subsection": "### Transaction details card",
+      "requirement_keys": ["DXINV-236"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-006",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Cash effect unsigned, 2 decimals, account currency",
+      "assertion_fragment": "Cash effect unsigned, 2 decimals, account currency",
+      "emit_subsection": "### Transaction details card",
+      "requirement_keys": ["DXINV-236"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-007",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Side coloring on trade card",
+      "assertion_fragment": "Side coloring, Quantity unsigned, Total cost signed",
+      "emit_subsection": "### Trade card",
+      "requirement_keys": ["DXINV-CB-92"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-008",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Quantity unsigned on trade card",
+      "assertion_fragment": "Quantity is unsigned",
+      "emit_subsection": "### Trade card",
+      "requirement_keys": ["DXINV-CB-92"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-009",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Total cost signed on trade card",
+      "assertion_fragment": "Total cost is signed",
+      "emit_subsection": "### Trade card",
+      "requirement_keys": ["DXINV-CB-92"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-010",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Realized PL signed colored",
+      "assertion_fragment": "Realized PL signed, red negative, green positive",
+      "emit_subsection": "### Trade details card",
+      "requirement_keys": ["DXINV-CB-95"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    },
+    {
+      "id": "obl-011",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Fees and Commission unsigned",
+      "assertion_fragment": "Fees and Commission unsigned",
+      "emit_subsection": "### Trade details card",
+      "requirement_keys": ["DXINV-CB-95"],
+      "downstream_hints": { "coverage_thread": "surface_quotes" }
+    }
+  ],
+  "obligations_reconcile": { "epic_summary_aligned": true, "conflicts": [] },
+  "verification_focus_proposed": {
+    "statement": "Verify FX_SPOT fills on Adaptive Transactions and Trade History when user holds an FX_SPOT position.",
+    "source": "jira_summary"
+  },
+  "verification_topology": {
+    "jira_scenario_surfaces": [
+      {
+        "id": "jss-001",
+        "shell": "adaptive",
+        "widget": "Transactions",
+        "obligation_ids": ["obl-001", "obl-002", "obl-003", "obl-004", "obl-005", "obl-006"]
+      },
+      {
+        "id": "jss-002",
+        "shell": "adaptive",
+        "widget": "Trade History",
+        "obligation_ids": ["obl-007", "obl-008", "obl-009", "obl-010", "obl-011"]
+      }
+    ],
+    "scenario_capability_rows": [
+      {
+        "id": "scr-001",
+        "jira_surface_id": "jss-001",
+        "source_quote": "Adaptive Transactions FX_SPOT cards",
+        "surface": "adaptive_transactions",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": ["DXINV-025", "DXINV-236"],
+        "obligation_ids": ["obl-001", "obl-002", "obl-003", "obl-004", "obl-005", "obl-006"]
+      },
+      {
+        "id": "scr-002",
+        "jira_surface_id": "jss-002",
+        "source_quote": "Adaptive Trade History FX_SPOT cards",
+        "surface": "adaptive_trade_history",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": ["DXINV-CB-92", "DXINV-CB-95"],
+        "obligation_ids": ["obl-007", "obl-008", "obl-009", "obl-010", "obl-011"]
+      }
+    ],
+    "principal_coverage_threads": [
+      {
+        "thread_id": "pct-001",
+        "title": "Prerequisites",
+        "coverage_thread": "environment_setup",
+        "obligation_ids": ["obl-s001", "obl-s002"]
+      }
+    ]
+  },
+  "client_shell_impact": {
+    "adaptive": { "status": "affected", "source": "jira_field" },
+    "corner_trader": { "status": "not_applicable", "source": "jira_field" }
+  },
+  "synthesis": {
+    "problem_gist": "FX_SPOT cards in Adaptive",
+    "problem_gist_source": "from_jira_field"
+  },
+  "validation_log": []
+}
