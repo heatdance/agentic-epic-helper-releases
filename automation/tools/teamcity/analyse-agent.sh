@@ -4,6 +4,10 @@ set -euo pipefail
 # shellcheck source=automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/agent-env.sh
 
+# shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
+source automation/tools/teamcity/corner-tc-overview.sh
+corner_tc_step_begin "ANALYSE agent"
+
 EPIC="$EPIC_KEY"
 PROMPT=$(cat <<EOF
 ANALYSE: ${EPIC} strict_topology=yes strict_principal=yes

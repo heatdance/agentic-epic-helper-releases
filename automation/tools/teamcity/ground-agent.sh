@@ -4,6 +4,10 @@ set -euo pipefail
 # shellcheck source=automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/agent-env.sh
 
+# shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
+source automation/tools/teamcity/corner-tc-overview.sh
+corner_tc_step_begin "GROUND agent"
+
 # GROUND probes dx console — same OpenSSH secrets as console gate (step 6).
 # shellcheck source=automation/tools/teamcity/crtqa-openssh-env.sh
 source automation/tools/teamcity/crtqa-openssh-env.sh

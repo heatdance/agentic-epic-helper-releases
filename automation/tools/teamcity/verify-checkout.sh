@@ -9,6 +9,10 @@ export REPO_ROOT
 source automation/tools/teamcity/load-teamcity-params.sh
 _corner_tc_load_params
 
+# shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
+source automation/tools/teamcity/corner-tc-overview.sh
+corner_tc_step_begin "Verify harness checkout"
+
 echo "PWD=${REPO_ROOT}"
 test -f AGENTS.md
 test -d automation/tools

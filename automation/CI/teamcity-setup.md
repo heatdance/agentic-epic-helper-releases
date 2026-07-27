@@ -71,10 +71,22 @@ dxCity may not inject **password** configuration parameters into the environment
 | `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
 | `env.EPIC_KEY` | `%EPIC_KEY%` |
 | `env.QA_TASK_KEY` | `%QA_TASK_KEY%` |
+| `env.CORNER_CI_STEP` | *(empty — set at runtime by step scripts via `setParameter`)* |
 
 Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
 
 Scripts also call [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) to read `TEAMCITY_BUILD_PROPERTIES_FILE` when env is still empty — belt and suspenders. **`TEAMCITY_BUILD_URL`** is resolved from `teamcity.build.url` in that file when not in env (D13).
+
+### Overview status (EPIC + failed step)
+
+Pipeline steps 1–10 call [`corner-tc-overview.sh`](../tools/teamcity/corner-tc-overview.sh) `corner_tc_step_begin` (records step name in `CORNER_CI_STEP`). Steps 11/12 set TeamCity **Status** text:
+
+| Outcome | Example Status column |
+|---------|------------------------|
+| Green | `CRT-671 - Success` |
+| Red | `CRT-671 - failed at COVERAGE verify` |
+
+Optional (UI only): **General Settings → Build number format** `%EPIC_KEY% #%build.counter%` — epic also visible in Build # column.
 
 ## Step 11 / 12 — Jira comments (mutually exclusive)
 

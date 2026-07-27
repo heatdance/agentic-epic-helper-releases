@@ -12,5 +12,9 @@ _corner_jira_require_failure
 source "${REPO_ROOT}/automation/tools/teamcity/jira-notify-guard.sh"
 _jira_notify_skip_if_success_posted
 
+# shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
+source "${REPO_ROOT}/automation/tools/teamcity/corner-tc-overview.sh"
+corner_tc_status_failure
+
 python3 automation/tools/teamcity/jira_failure.py
 _jira_notify_mark_failure_posted

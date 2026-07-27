@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 set -u
 
+# shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
+source automation/tools/teamcity/corner-tc-overview.sh
+corner_tc_step_begin "ANALYSE verify"
+
 EPIC="${EPIC_KEY:-}"
 if [ -z "$EPIC" ]; then
   echo "ERROR: EPIC_KEY is empty"
