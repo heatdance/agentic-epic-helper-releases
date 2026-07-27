@@ -46,7 +46,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 | Artefact | Role |
 |----------|------|
-| **Coverage** (`-coverage.json` / Smart Checklist) | **Full** manual-ideal checklist—what could be verified in principle. **Must not hallucinate:** ground only in available requirements and tool-backed text. **Operator paste** (`-coverage.md`, `-tests.md`): human hints in **`checks[].detail_lines`** only. **Machine trace** (`> Discover:`, fixture/affordance ids, **`platform_reuse_annex`**) stays in JSON only — see [docs/coverage-operator-hints.json](coverage-operator-hints.json). |
+| **Coverage** (`dependencies/<KEY>-coverage.json` + root Smart Checklist) | **Full** manual-ideal checklist with **atomic observables** (one obligation → one check for `widget_ui`). **Paste** (`<KEY>-coverage.md` at epic root only): collapsed **`## Prerequisites`**, `###` subsection grouping, short bullets — **no** `## Primary focus` in paste; focus stays in JSON. **Must not hallucinate** or emit tag-level stubs when snippets are OK. Operator hints in **`checks[].detail_lines`** only. Machine trace in JSON only — [docs/coverage-operator-hints.json](coverage-operator-hints.json). |
 | **E2E test drafts** (`TEST-PREP` output) | **Fewer** scenario-group tests (`scenario_groups[]` → one bundle each): plain-English **intent** actions, requirement-linked results, formulas when inferable — **not** fake CRTQA executable steps. |
 
 **Not** one Jira test per checklist bullet by default; **not** one giant bundle that exceeds a reasonable manual session.
@@ -63,7 +63,7 @@ This file is the **canonical doctrine** for **how** we use pipelines, calibratio
 
 **Checklist IDs vs quality:** `reverse_validation.coverage_gaps` can be empty while **topic-level** E2E quality is still wrong—**chk** completeness is necessary, not sufficient. **TEST-PREP v3.1** adds mechanical gates (`test_prep_verify.py`: one Action/Result per `case_outline` row for ladder/rounding bundles, duplicate-action detection, excluded primary ↔ `coverage_gaps[]`, plan class lint)—still not sufficient for human-test gold quality.
 
-**Obligations handoff (EPIC-PREP → COVERAGE):** **EPIC-PREP** emits **`obligations_proposed[]`** (ref schema v4) from per-requirement subprocesses — invariants, ladders, rounding, etc. **COVERAGE** must **row-complete** every **`primary_candidate`** in **`obligations_coverage`** (coverage schema v2) as a **primary** check, keyed deferral, or **`excluded_checks_with_reason`** — not blanket Dimensions `!` lines. Verifiers: [`epic_prep_verify.py`](../automation/tools/epic_prep_verify.py), [`coverage_verify.py`](../automation/tools/coverage_verify.py). **Production** pipelines **must not** ingest CRTQA tests as structural inputs.
+**Obligations handoff (EPIC-PREP → COVERAGE):** **EPIC-PREP** emits field-level **`obligations_proposed[]`** (`assertion_fragment`, `emit_subsection`) for UI parameter tables. **COVERAGE** maps **1 primary obligation → 1 atomic check**; verifiers reject tag-level stubs and redundant subsection prefixes. Layout: [docs/epic-artifact-layout.json](epic-artifact-layout.json). Emit: [coverage_md_sync.py](../automation/tools/coverage_md_sync.py).
 
 ---
 

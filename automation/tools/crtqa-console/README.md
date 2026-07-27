@@ -21,8 +21,10 @@ Windows-first tooling to reach **`dx run console`** on CRTQA hosts using **PuTTY
 ## Typical cold session
 
 ```powershell
-# 1 operator modal (shows Windows Forms, not vscode secret API):
+# 1 operator modal (Environment qa|uat + username + password):
 pwsh -NoProfile -File automation/tools/crtqa-console/Start-CrtqaConsoleSession.ps1
+# optional pre-select UAT in the dialog:
+pwsh -NoProfile -File automation/tools/crtqa-console/Start-CrtqaConsoleSession.ps1 -Environment uat
 
 # 2 agent batches (SSH reuse via multiplex; sudo uses DPAPI per call).
 # From repo root — either dot-source in the *current* pwsh (array syntax safe):
@@ -31,6 +33,7 @@ pwsh -NoProfile -File automation/tools/crtqa-console/Start-CrtqaConsoleSession.p
 pwsh -NoProfile -Command "& { Set-Location '$PWD'; . ./automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1 -Commands @('help','exit') }"
 ```
 
+Hosts / sudo users come from **`environments.qa`** / **`environments.uat`** in **`crtqa-console.config.json`** (override fields in **`crtqa-console.local.json`**). Session state records `environment` + `sshHost` in `session.active.json`.
 Status (agents, no password dialog):
 
 ```powershell

@@ -8,17 +8,17 @@ Gate **`-analysis.json`** schema v2. Contracts: [`docs/analysis-gap-contract.jso
 
 ```powershell
 python automation/tools/analysis_verify.py --mode gaps `
-  --analysis epics/CRT-642/CRT-642-analysis.json
+  --analysis epics/dependencies/CRT-642/CRT-642-analysis.json
 
 python automation/tools/analysis_verify.py --mode downstream `
-  --analysis epics/CRT-642/CRT-642-analysis.json
+  --analysis epics/dependencies/CRT-642/CRT-642-analysis.json
 ```
 
 **After writing `.md` (phase 10 emit):**
 
 ```powershell
 python automation/tools/analysis_verify.py --mode emit `
-  --analysis epics/CRT-642/CRT-642-analysis.json `
+  --analysis epics/dependencies/CRT-642/CRT-642-analysis.json `
   --md epics/CRT-642/CRT-642-analysis.md
 ```
 
@@ -26,9 +26,9 @@ python automation/tools/analysis_verify.py --mode emit `
 
 ```powershell
 python automation/tools/analysis_verify.py --mode emit --strict-topology `
-  --analysis epics/CRT-594/CRT-594-analysis.json `
-  --ref epics/CRT-594/CRT-594-ref.json `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
+  --analysis epics/dependencies/CRT-594/CRT-594-analysis.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
   --md epics/CRT-594/CRT-594-analysis.md
 ```
 
@@ -37,7 +37,7 @@ python automation/tools/analysis_verify.py --mode emit --strict-topology `
 ```powershell
 python automation/tools/analysis_verify.py --mode emit --strict-topology `
   --analysis automation/tools/fixtures/analysis/analysis-594-shell-minimal.json `
-  --ref epics/CRT-594/CRT-594-ref.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
   --coverage automation/tools/fixtures/coverage/coverage-594-shell-minimal.json `
   --md automation/tools/fixtures/analysis/analysis-594-shell-minimal.md
 
@@ -93,9 +93,9 @@ When ref has deferral obligations or principal fields (`verification_focus_propo
 
 ```powershell
 python automation/tools/analysis_verify.py --mode emit --strict-principal `
-  --analysis epics/CRT-639/CRT-639-analysis.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
+  --analysis epics/dependencies/CRT-639/CRT-639-analysis.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
   --md epics/CRT-639/CRT-639-analysis.md
 ```
 

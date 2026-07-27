@@ -70,6 +70,14 @@ OPERATOR_PREFIX_RE = re.compile(
 )
 MACHINE_LINE_RE = re.compile(r"^\s*>\s*(Discover|Discovery):", re.M | re.I)
 PLATFORM_REUSE_HEADING = "## Platform reuse candidates (verify in Jira)"
+PRIMARY_FOCUS_HEADING = "## Primary focus"
+TAG_STUB_PATTERNS = [
+    re.compile(r"card is available", re.I),
+    re.compile(r"is present and visible", re.I),
+    re.compile(r"must expose .+ per linked", re.I),
+    re.compile(r"details card is available", re.I),
+    re.compile(r"trade card is available", re.I),
+]
 
 
 def _operator_hints() -> dict[str, Any]:
@@ -276,6 +284,80 @@ def verify_obligations(
         if aid in anti_ids:
             errors.append(f"anti_pattern_findings contains {aid}")
 
+    if ref:
+        errors.extend(verify_atomic_checks(coverage, ref, contract))
+
+    return errors
+
+
+def _req_snippet_ok(ref: dict[str, Any], key: str) -> bool:
+    for row in ref.get("requirements") or []:
+        if isinstance(row, dict) and str(row.get("key") or "") == key:
+            return row.get("snippet_status") == "ok"
+    return False
+
+
+def verify_atomic_checks(
+    coverage: dict[str, Any], ref: dict[str, Any], contract: dict[str, Any]
+) -> list[str]:
+    errors: list[str] = []
+    primary = _primary_obligations(ref)
+    cov_map = coverage.get("obligations_coverage") or {}
+    checks_by_id = {
+        str(c.get("id")): c
+        for c in (coverage.get("checks") or [])
+        if isinstance(c, dict) and c.get("id")
+    }
+
+    for oid, obl in primary.items():
+        entry = cov_map.get(oid)
+        if not isinstance(entry, dict):
+            continue
+        if entry.get("status") != "covered":
+            continue
+        cid = entry.get("check_id")
+        if not cid or str(cid) not in checks_by_id:
+            errors.append(f"obligation_without_atomic_check: {oid} missing check_id")
+            continue
+        chk = checks_by_id[str(cid)]
+        obl_ids = chk.get("obligation_ids") or []
+        if len(obl_ids) != 1 or str(obl_ids[0]) != oid:
+            errors.append(
+                f"check {cid}: expected exactly one obligation_id {oid}, got {obl_ids!r}"
+            )
+
+    stub_patterns = contract.get("tag_level_stub_patterns") or []
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        line = str(chk.get("scenario_line") or "")
+        rkeys = chk.get("requirement_keys") or []
+        if not any(_req_snippet_ok(ref, str(k)) for k in rkeys):
+            continue
+        for pat in stub_patterns:
+            if re.search(pat, line, re.I):
+                errors.append(
+                    f"tag_level_stub_check: check {chk.get('id')}: stub wording with ok snippet"
+                )
+                break
+
+        subsection = str(chk.get("subsection") or "").strip()
+        if subsection:
+            sub_plain = subsection.lstrip("#").strip().lower()
+            line_lower = line.lower()
+            if sub_plain and sub_plain in line_lower:
+                errors.append(
+                    f"redundant_context_prefix: check {chk.get('id')}: "
+                    "scenario_line repeats subsection context"
+                )
+
+    return errors
+
+
+def verify_collapsed_intro(md_body: str) -> list[str]:
+    errors: list[str] = []
+    if PRIMARY_FOCUS_HEADING in md_body:
+        errors.append("collapsed_intro_violation: ## Primary focus must not appear in paste")
     return errors
 
 
@@ -1117,16 +1199,12 @@ def verify_emit(
     if ungrounded:
         errors.append(f"ungrounded_check_ids not empty: {ungrounded}")
 
-    focus = coverage.get("epic_verification_focus") or {}
-    focus_stmt = (focus.get("statement") or "").strip() if isinstance(focus, dict) else ""
     md_body = _md_body(coverage, md_path)
-
-    if focus_stmt and focus_stmt not in md_body:
-        errors.append("epic_verification_focus.statement not verbatim in markdown")
 
     if not md_body.strip():
         errors.append("smart_checklist_markdown empty")
 
+    errors.extend(verify_collapsed_intro(md_body))
     errors.extend(_verify_operator_md_hygiene(md_body))
     checks = coverage.get("checks") or []
     if isinstance(checks, list):

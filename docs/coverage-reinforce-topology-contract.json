@@ -11,7 +11,7 @@
       "environment.client_shell_impact"
     ],
     "helper_slice": "epics/<KEY>/helper/affordances-slice.json",
-    "merge_base": "epics/<KEY>/<KEY>-coverage.json pass 1"
+    "merge_base": "epics/<KEY>/dependencies/<KEY>-coverage.json pass 1"
   },
   "merge_rules": {
     "oracle_binding": {

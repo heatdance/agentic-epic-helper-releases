@@ -1,0 +1,105 @@
+{
+  "schema_version": 4,
+  "epic_key": "CRT-635",
+  "epic_archetype": {
+    "value": "widget_ui",
+    "source": "jira_scenarios"
+  },
+  "requirements": [
+    {
+      "key": "DXINV-025",
+      "snippet_status": "ok",
+      "snippet_text": "Trade-type Transaction Info: Side Buy/Sell colored; Quantity unsigned; Description; Fill price with currency; company logo; Symbol; Transaction date; Account name."
+    },
+    {
+      "key": "DXINV-236",
+      "snippet_status": "ok",
+      "snippet_text": "Transaction details card collapsed by default; expanded view available; Cash effect unsigned 2dp with currency."
+    }
+  ],
+  "obligations_proposed": [
+    {
+      "id": "obl-001",
+      "kind": "parity",
+      "statement": "FX_SPOT Trade transaction card Side shows Buy or Sell with green for Buy and red for Sell",
+      "assertion_fragment": "Side shows Buy or Sell with green for Buy and red for Sell",
+      "emit_subsection": "### Transaction card (FX_SPOT Trade — Transaction Info)",
+      "requirement_keys": ["DXINV-025"],
+      "evidence_anchor": { "field": "Side", "source": "yogi_snippet" },
+      "disposition": "primary_candidate",
+      "downstream_hints": { "coverage_thread": "surface_quotes", "personas": ["retail"] }
+    },
+    {
+      "id": "obl-002",
+      "kind": "parity",
+      "statement": "FX_SPOT Trade transaction card Quantity is unsigned",
+      "assertion_fragment": "Quantity is unsigned",
+      "emit_subsection": "### Transaction card (FX_SPOT Trade — Transaction Info)",
+      "requirement_keys": ["DXINV-025"],
+      "evidence_anchor": { "field": "Quantity", "source": "yogi_snippet" },
+      "disposition": "primary_candidate",
+      "downstream_hints": { "coverage_thread": "surface_quotes", "personas": ["retail"] }
+    },
+    {
+      "id": "obl-003",
+      "kind": "parity",
+      "statement": "FX_SPOT Trade transaction details card renders collapsed by default",
+      "assertion_fragment": "renders collapsed by default",
+      "emit_subsection": "### Transaction details card",
+      "requirement_keys": ["DXINV-236"],
+      "evidence_anchor": { "field": "collapsed default", "source": "yogi_snippet" },
+      "disposition": "primary_candidate",
+      "downstream_hints": { "coverage_thread": "surface_quotes", "personas": ["retail"] }
+    },
+    {
+      "id": "obl-004",
+      "kind": "environment_setup",
+      "statement": "Console — open at least one FX_SPOT position before Adaptive widget verification",
+      "assertion_fragment": "Console — open at least one FX_SPOT position",
+      "requirement_keys": ["CRT-635"],
+      "evidence_anchor": "jira AC console fills",
+      "disposition": "primary_candidate",
+      "downstream_hints": {
+        "coverage_thread": "environment_setup",
+        "needs_environment_provision": true,
+        "personas": ["console"]
+      }
+    }
+  ],
+  "obligations_reconcile": { "epic_summary_aligned": true, "conflicts": [] },
+  "verification_focus_proposed": {
+    "statement": "Verify FX_SPOT fills on Adaptive Transactions and Trade History when user holds an FX_SPOT position.",
+    "source": "jira_summary"
+  },
+  "verification_topology": {
+    "jira_scenario_surfaces": [
+      {
+        "id": "jss-001",
+        "shell": "adaptive",
+        "widget": "Transactions",
+        "obligation_ids": ["obl-001", "obl-002", "obl-003"]
+      }
+    ],
+    "scenario_capability_rows": [
+      {
+        "id": "scr-001",
+        "jira_surface_id": "jss-001",
+        "source_quote": "Adaptive Transactions FX_SPOT transaction cards",
+        "surface": "adaptive_transactions",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": ["DXINV-025", "DXINV-236"],
+        "obligation_ids": ["obl-001", "obl-002", "obl-003"]
+      }
+    ]
+  },
+  "client_shell_impact": {
+    "adaptive": { "status": "affected", "source": "jira_field" },
+    "corner_trader": { "status": "not_applicable", "source": "jira_field" }
+  },
+  "synthesis": {
+    "problem_gist": "FX_SPOT cards in Adaptive Transactions",
+    "problem_gist_source": "from_jira_field"
+  },
+  "validation_log": []
+}

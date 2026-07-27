@@ -4,8 +4,8 @@
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode scenario_intent `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
-  --tests epics/CRT-594/CRT-594-tests.json
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
+  --tests epics/dependencies/CRT-594/CRT-594-tests.json
 ```
 
 **Legacy** modes (`plan`, `explore`, `draft`, `merge`, `tests`, `crtqa_outline`) below.
@@ -22,7 +22,7 @@ Gate **verification plan** (temp), **verification exploration** (8a¾), **8c mer
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode plan `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
   --plan epics/CRT-639/temp/test-prep-plan.json
 ```
 
@@ -30,9 +30,9 @@ python automation/tools/test_prep_verify.py --mode plan `
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode explore `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
   --plan epics/CRT-639/temp/test-prep-plan.json `
-  --precon epics/CRT-639/CRT-639-precon.json `
+  --precon epics/dependencies/CRT-639/CRT-639-precon.json `
   --bundle-id tb-003
 ```
 
@@ -40,12 +40,12 @@ python automation/tools/test_prep_verify.py --mode explore `
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode draft `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
-  --tests epics/CRT-639/CRT-639-tests.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
+  --tests epics/dependencies/CRT-639/CRT-639-tests.json `
   --bundle-id tb-002 `
   --plan epics/CRT-639/temp/test-prep-plan.json `
-  --precon epics/CRT-639/CRT-639-precon.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --precon epics/dependencies/CRT-639/CRT-639-precon.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology `
   --strict-principal
 ```
@@ -54,11 +54,11 @@ python automation/tools/test_prep_verify.py --mode draft `
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode merge `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
-  --tests epics/CRT-639/CRT-639-tests.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
+  --tests epics/dependencies/CRT-639/CRT-639-tests.json `
   --plan epics/CRT-639/temp/test-prep-plan.json `
-  --precon epics/CRT-639/CRT-639-precon.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --precon epics/dependencies/CRT-639/CRT-639-precon.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology `
   --strict-principal
 ```
@@ -67,11 +67,11 @@ python automation/tools/test_prep_verify.py --mode merge `
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode tests `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
-  --tests epics/CRT-639/CRT-639-tests.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
+  --tests epics/dependencies/CRT-639/CRT-639-tests.json `
   --plan epics/CRT-639/temp/test-prep-plan.json `
-  --precon epics/CRT-639/CRT-639-precon.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --precon epics/dependencies/CRT-639/CRT-639-precon.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology `
   --strict-principal
 ```
@@ -80,10 +80,10 @@ python automation/tools/test_prep_verify.py --mode tests `
 
 ```powershell
 python automation/tools/test_prep_verify.py --mode principal `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
-  --precon epics/CRT-594/CRT-594-precon.json `
-  --tests epics/CRT-594/CRT-594-tests.json `
-  --ref epics/CRT-594/CRT-594-ref.json
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
+  --precon epics/dependencies/CRT-594/CRT-594-precon.json `
+  --tests epics/dependencies/CRT-594/CRT-594-tests.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json
 ```
 
 Legacy tests without **`sources.topology_loaded`** may omit **`--strict-topology`**. Legacy without **`sources.principal_loaded`** may omit **`--strict-principal`**.
@@ -100,7 +100,7 @@ python automation/tools/test_prep_verify.py --mode tests `
   --tests "$fix/test_prep/tests-639-formula-minimal.json" `
   --plan "$fix/test_prep/plan-639-formula-minimal.json" `
   --precon "$fix/precon/precon-639-formula-minimal.json" `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology
 
 python automation/tools/test_prep_verify.py --mode tests `
@@ -108,7 +108,7 @@ python automation/tools/test_prep_verify.py --mode tests `
   --tests "$fix/test_prep/tests-594-shell-minimal.json" `
   --plan "$fix/test_prep/plan-594-shell-minimal.json" `
   --precon "$fix/precon/precon-594-shell-minimal.json" `
-  --ref epics/CRT-594/CRT-594-ref.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
   --strict-topology
 ```
 

@@ -1,18 +1,22 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-  Start PuTTY connection-sharing upstream (-share -N) for CRTQA SSH; store sudo credential (DPAPI) for dx batches.
+  Start PuTTY connection-sharing upstream (-share -N) for CT QA/UAT SSH; store sudo credential (DPAPI) for dx batches.
 
 .DESCRIPTION
-  1. Windows Forms dialog collects SSH Linux login + password once (masked). Desktop UI—not Cursor IDE's built-in password InputBox (that would need an extension/API).
+  1. Windows Forms dialog: Environment (qa|uat), SSH Linux login + password (masked).
   2. Starts hidden `plink … -ssh -pwfile FILE -share -batch -N user@host` as upstream.
   3. Writes DPAPI ciphertext of the password onto temp/crtqa-console for sudo batches (reuse until Stop).
 
   Subsequent `Invoke-CrtqaDxConsole.ps1` reuses multiplex SSH (`-share`); sudo password decrypted per batch unless host uses NOPASSWD.
+
+.PARAMETER Environment
+  Optional pre-select: qa | uat (skips changing default in dialog if passed; dialog still shows picker).
 #>
 [CmdletBinding()]
 param(
-    [string] $ConfigRoot = $PSScriptRoot
+    [string] $ConfigRoot = $PSScriptRoot,
+    [string] $Environment
 )
 
 Set-StrictMode -Version Latest
@@ -30,13 +34,42 @@ New-DirectoryForce -Path $secureRoot
 
 if (-not (Test-Path -LiteralPath $cfg.plinkPath)) { throw "plink not found at $($cfg.plinkPath)" }
 
-$cred = Invoke-CrtqaCredentialForm -DefaultUsername $cfg.sshUser -Title 'CRTQA — SSH login & password (once)'
+$envIds = @()
+$envLabels = @{}
+if ($cfg.PSObject.Properties.Name -contains 'environments' -and $null -ne $cfg.environments) {
+    foreach ($p in $cfg.environments.PSObject.Properties) {
+        $envIds += $p.Name
+        $lab = if ($p.Value.PSObject.Properties.Name -contains 'label') { [string]$p.Value.label } else { '' }
+        $envLabels[$p.Name] = $lab
+    }
+}
+else {
+    $envIds = @('qa', 'uat')
+}
+
+$defaultEnv = if (-not [string]::IsNullOrWhiteSpace($Environment)) {
+    $Environment
+}
+elseif ($cfg.PSObject.Properties.Name -contains 'defaultEnvironment' -and $cfg.defaultEnvironment) {
+    [string]$cfg.defaultEnvironment
+}
+else {
+    'qa'
+}
+
+$cred = Invoke-CrtqaCredentialForm `
+    -DefaultUsername $cfg.sshUser `
+    -Title 'CT console — environment, SSH login & password' `
+    -EnvironmentIds $envIds `
+    -EnvironmentLabels $envLabels `
+    -DefaultEnvironment $defaultEnv
 if ($null -eq $cred -or [string]::IsNullOrWhiteSpace($cred.Username) -or [string]::IsNullOrWhiteSpace($cred.Password)) {
     Write-Host '[Start-CrtqaConsoleSession] Cancelled.'
     exit 1
 }
 
-$sshTarget = '{0}@{1}' -f $cred.Username, $cfg.sshHost
+$resolved = Resolve-CrtqaEnvironment -Config $cfg -EnvironmentId $cred.EnvironmentId
+$sshTarget = '{0}@{1}' -f $cred.Username, $resolved.SshHost
 $entropy = Get-CrtqaEntropy -ConfigRoot $ConfigRoot -Additional $sshTarget
 
 $statePath = Join-Path $secureRoot 'session.active.json'
@@ -59,6 +92,8 @@ try {
     $pwFile = New-RestrictedTempPasswordFile -Password $credPwd
     $credPwd = ''
 
+    Write-Host ("[Start-CrtqaConsoleSession] Environment={0} ({1}) host={2} sudo={3}" -f `
+            $resolved.EnvironmentId, $resolved.Label, $resolved.SshHost, $resolved.SudoUnixUser) -ForegroundColor Cyan
     Write-Host '[Start-CrtqaConsoleSession] Bringing up plink multiplex upstream (-share -N)…' -ForegroundColor Green
     try {
         $null = Start-Process -FilePath $cfg.plinkPath -ArgumentList @('-ssh', '-shareexists', $sshTarget) -PassThru -Wait `
@@ -93,12 +128,15 @@ finally {
 
 $sshUserOnly = ($sshTarget -split '@')[0]
 $state = @{
-    version         = 2
+    version         = 3
     transport       = 'plink-share'
+    environment     = $resolved.EnvironmentId
+    environmentLabel = $resolved.Label
+    platformMapId   = $resolved.PlatformMapId
     sshTarget       = $sshTarget
-    sshHost         = $cfg.sshHost
+    sshHost         = $resolved.SshHost
     sshUser         = $sshUserOnly
-    sudoUnixUser    = $cfg.sudoUnixUser
+    sudoUnixUser    = $resolved.SudoUnixUser
     remoteDxCommand = $cfg.remoteDxCommand
     termForRemote   = $cfg.termForRemote
     plinkPath       = $cfg.plinkPath
@@ -109,6 +147,5 @@ $state = @{
 }
 Write-Utf8NoBom -LiteralPath $statePath -Text ($state | ConvertTo-Json -Depth 8)
 
-Write-Host "[Start-CrtqaConsoleSession] Ready. session.active.json + multiplex PID $($masterProc.Id)." -ForegroundColor Green
+Write-Host "[Start-CrtqaConsoleSession] Ready. env=$($resolved.EnvironmentId) session.active.json + multiplex PID $($masterProc.Id)." -ForegroundColor Green
 Write-Host 'Invoke: .\Invoke-CrtqaDxConsole.ps1 -Commands @("help","exit")' -ForegroundColor Cyan
-

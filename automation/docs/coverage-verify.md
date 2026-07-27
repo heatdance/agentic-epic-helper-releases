@@ -8,8 +8,8 @@ Gate **`-coverage.json`** schema v2 **`obligations_coverage`**. Contracts: [`doc
 
 ```powershell
 python automation/tools/coverage_verify.py --mode obligations `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --md epics/CRT-639/CRT-639-coverage.md
 ```
 
@@ -17,7 +17,7 @@ python automation/tools/coverage_verify.py --mode obligations `
 
 ```powershell
 python automation/tools/coverage_verify.py --mode emit `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
   --md epics/CRT-639/CRT-639-coverage.md
 ```
 
@@ -25,8 +25,8 @@ python automation/tools/coverage_verify.py --mode emit `
 
 ```powershell
 python automation/tools/coverage_verify.py --mode emit --strict-topology `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
-  --ref epics/CRT-594/CRT-594-ref.json `
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
   --md epics/CRT-594/CRT-594-coverage.md
 ```
 
@@ -53,12 +53,12 @@ python automation/tools/coverage_verify.py --mode principal `
 ```powershell
 python automation/tools/coverage_verify.py --mode obligations `
   --coverage automation/tools/fixtures/coverage/coverage-639-formula-minimal.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --md automation/tools/fixtures/coverage/coverage-639-formula-minimal.md
 
 python automation/tools/coverage_verify.py --mode emit --strict-topology `
   --coverage automation/tools/fixtures/coverage/coverage-594-shell-minimal.json `
-  --ref epics/CRT-594/CRT-594-ref.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
   --md automation/tools/fixtures/coverage/coverage-594-shell-minimal.md
 ```
 

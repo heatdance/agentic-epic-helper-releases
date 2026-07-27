@@ -1,8 +1,17 @@
 {
   "plinkPath": "C:\\Program Files\\PuTTY\\plink.exe",
-  "sshHost": "ctqa.prosp.devexperts.com",
   "sshUser": "your-linux-login",
-  "sudoUnixUser": "ctqa",
+  "defaultEnvironment": "qa",
+  "environments": {
+    "qa": {
+      "sshHost": "ctqa.prosp.devexperts.com",
+      "sudoUnixUser": "ctqa"
+    },
+    "uat": {
+      "sshHost": "ctuat.prosp.devexperts.com",
+      "sudoUnixUser": "ctuat"
+    }
+  },
   "remoteDxCommand": "dx run console",
   "termForRemote": "xterm"
 }

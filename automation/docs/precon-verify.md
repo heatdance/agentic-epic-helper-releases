@@ -8,20 +8,20 @@ Playbook: [`.cursor/pipelines/test-precon.md`](../../.cursor/pipelines/test-prec
 
 ```powershell
 python automation/tools/precon_verify.py `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
   --precon epics/CRT-639/temp/precon-ledger.json `
-  --discover epics/CRT-639/CRT-639-discover.json `
-  --ref epics/CRT-639/CRT-639-ref.json
+  --discover epics/dependencies/CRT-639/CRT-639-discover.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json
 ```
 
 **Before emit (topology-aware epics):**
 
 ```powershell
 python automation/tools/precon_verify.py `
-  --coverage epics/CRT-639/CRT-639-coverage.json `
-  --precon epics/CRT-639/CRT-639-precon.json `
-  --discover epics/CRT-639/CRT-639-discover.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --coverage epics/dependencies/CRT-639/CRT-639-coverage.json `
+  --precon epics/dependencies/CRT-639/CRT-639-precon.json `
+  --discover epics/dependencies/CRT-639/CRT-639-discover.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology `
   --strict-principal `
   --md epics/CRT-639/CRT-639-precon.md
@@ -33,10 +33,10 @@ Legacy precon without **`sources.topology_loaded`** may omit **`--strict-topolog
 
 ```powershell
 python automation/tools/precon_verify.py --mode principal `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
-  --precon epics/CRT-594/CRT-594-precon.json `
-  --discover epics/CRT-594/CRT-594-discover.json `
-  --ref epics/CRT-594/CRT-594-ref.json
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
+  --precon epics/dependencies/CRT-594/CRT-594-precon.json `
+  --discover epics/dependencies/CRT-594/CRT-594-discover.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json
 ```
 
 Exit **0** = pass. Non-zero = re-run Phase **4R/4D/4C** subprocesses (max **3** cluster iterations).
@@ -48,7 +48,7 @@ python automation/tools/precon_verify.py `
   --coverage automation/tools/fixtures/coverage/coverage-639-formula-reinforce-minimal.json `
   --precon automation/tools/fixtures/precon/precon-639-formula-minimal.json `
   --discover automation/tools/fixtures/discover/discover-639-formula-minimal.json `
-  --ref epics/CRT-639/CRT-639-ref.json `
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json `
   --strict-topology `
   --md automation/tools/fixtures/precon/precon-639-formula-minimal.md
 
@@ -56,7 +56,7 @@ python automation/tools/precon_verify.py `
   --coverage automation/tools/fixtures/coverage/coverage-594-shell-reinforce-minimal.json `
   --precon automation/tools/fixtures/precon/precon-594-shell-minimal.json `
   --discover automation/tools/fixtures/discover/discover-594-shell-minimal.json `
-  --ref epics/CRT-594/CRT-594-ref.json `
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json `
   --strict-topology `
   --md automation/tools/fixtures/precon/precon-594-shell-minimal.md
 ```

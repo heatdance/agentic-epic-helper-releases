@@ -33,6 +33,8 @@ $multiplexEchoOk = $false
 $plinkPath = $null
 $sshTarget = $null
 $masterProcessId = $null
+$environment = $null
+$sshHost = $null
 $detail = @()
 
 if ($sessionPresent) {
@@ -40,6 +42,8 @@ if ($sessionPresent) {
     $plinkPath = [string]$state.plinkPath
     $sshTarget = [string]$state.sshTarget
     $masterProcessId = $state.masterProcessId
+    if ($state.PSObject.Properties.Name -contains 'environment') { $environment = [string]$state.environment }
+    if ($state.PSObject.Properties.Name -contains 'sshHost') { $sshHost = [string]$state.sshHost }
     if ($null -ne $masterProcessId) {
         try {
             $proc = Get-Process -Id ([int]$masterProcessId) -ErrorAction Stop
@@ -70,6 +74,8 @@ $gate = @{
     schema_version    = 1
     checked_at        = [DateTime]::UtcNow.ToString('o')
     overall           = if ($overallOk) { 'pass' } else { 'fail' }
+    environment       = $environment
+    ssh_host          = $sshHost
     session_present   = $sessionPresent
     master_pid_alive  = $masterPidAlive
     multiplex_echo_ok = $multiplexEchoOk
@@ -79,7 +85,9 @@ $gate = @{
 Write-Utf8NoBom -LiteralPath $gatePath -Text ($gate | ConvertTo-Json -Depth 6)
 
 if (-not $Quiet) {
-    Write-Host "[Get-CrtqaConsoleStatus] overall=$($gate.overall) session=$sessionPresent pid=$masterPidAlive echo=$multiplexEchoOk" -ForegroundColor $(if ($overallOk) { 'Green' } else { 'Yellow' })
+    $envPart = if ($environment) { " env=$environment" } else { '' }
+    $hostPart = if ($sshHost) { " host=$sshHost" } else { '' }
+    Write-Host "[Get-CrtqaConsoleStatus] overall=$($gate.overall)$envPart$hostPart session=$sessionPresent pid=$masterPidAlive echo=$multiplexEchoOk" -ForegroundColor $(if ($overallOk) { 'Green' } else { 'Yellow' })
     if ($detail.Count -gt 0) { Write-Host $gate.detail }
     Write-Host "Wrote: $gatePath"
 }

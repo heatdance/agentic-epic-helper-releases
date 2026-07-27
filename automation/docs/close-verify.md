@@ -24,7 +24,7 @@ python automation/tools/close_verify.py --mode preflight --epic-dir epics/CRT-63
 python automation/tools/close_verify.py --mode ladder_l0 --epic-dir epics/CRT-639 --bundle-id tb-001
 
 python automation/tools/close_verify.py --mode findings \
-  --epic-dir epics/CRT-639 --close epics/CRT-639/CRT-639-close.json
+  --epic-dir epics/CRT-639 --close epics/dependencies/CRT-639/CRT-639-close.json
 
 python automation/tools/close_verify.py --mode emit \
   --epic-dir epics/CRT-639 \
@@ -62,14 +62,14 @@ Requires all five JSON artefacts. Skips when no principal handoff (`sources.prin
 
 ```bash
 python automation/tools/close_archive.py --epic-dir epics/CRT-639 \
-  --close epics/CRT-639/CRT-639-close.json
+  --close epics/dependencies/CRT-639/CRT-639-close.json
 ```
 
 ## jq slices (per bundle, L0)
 
 ```bash
-jq '.test_bundles[] | select(.bundle_id=="tb-001")' epics/CRT-639/CRT-639-tests.json
-jq '.checks[].id' epics/CRT-639/CRT-639-coverage.json
+jq '.test_bundles[] | select(.bundle_id=="tb-001")' epics/dependencies/CRT-639/CRT-639-tests.json
+jq '.checks[].id' epics/dependencies/CRT-639/CRT-639-coverage.json
 ```
 
 See [automation/docs/jq.md](jq.md) for canonical filters.

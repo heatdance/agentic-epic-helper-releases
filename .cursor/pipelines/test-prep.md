@@ -21,18 +21,18 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 | Artefact | Required |
 |----------|----------|
-| `{EpicDir}<KEY>-coverage.json` | **Yes** — **`sources.coverage_frozen_at`** and **`scenario_groups[]`** must be set |
-| `{EpicDir}<KEY>-ref.json` | **Recommended** |
-| `{EpicDir}<KEY>-discover.json` | **Optional** — linker hints only |
-| `{EpicDir}<KEY>-analysis.json` | **Optional** — deferrals / suppressions |
-| `{EpicDir}<KEY>-precon.json` | **Must not load** in v3 production path |
+| `{EpicDir}dependencies/<KEY>-coverage.json` | **Yes** — **`sources.coverage_frozen_at`** and **`scenario_groups[]`** must be set |
+| `{EpicDir}dependencies/<KEY>-ref.json` | **Recommended** |
+| `{EpicDir}dependencies/<KEY>-discover.json` | **Optional** — linker hints only |
+| `{EpicDir}dependencies/<KEY>-analysis.json` | **Optional** — deferrals / suppressions |
+| `{EpicDir}dependencies/<KEY>-precon.json` | **Must not load** in v3 production path |
 
 If **`coverage_frozen_at`** or **`scenario_groups[]`** missing → **STOP** (instruct human **`coverage_review`** + **`COVERAGE:`** phase 8.6).
 
 ### Outputs
 
-- **`{EpicDir}<KEY>-tests.json`** — [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **schema_version 4**.
-- **`{EpicDir}<KEY>-tests.md`** — mapping + draft bodies for human / Jira paste.
+- **`{EpicDir}dependencies/<KEY>-tests.json`** — [`epics/templates/tests-ref.json`](../../epics/templates/tests-ref.json) **schema_version 4**.
+- **`{EpicDir}dependencies/<KEY>-tests.md`** — mapping + draft bodies for human / Jira paste.
 
 **Ephemeral**: **`{EpicDir}temp/`** only — **`test-prep-plan.json`**, **`test-prep-draft-<bundle_id>.json`**. **Delete** before run complete.
 
@@ -70,8 +70,8 @@ If **`coverage_frozen_at`** or **`scenario_groups[]`** missing → **STOP** (ins
 ### 1. Load (jq project first)
 
 ```bash
-jq '{scenario_groups, sources: .sources | {coverage_frozen_at}}' epics/<KEY>/<KEY>-coverage.json
-jq '.checks[] | select(.verification_role=="primary") | {id, scenario_line, requirement_keys, delivery_status, runtime_probes, grounding_certainty}' epics/<KEY>/<KEY>-coverage.json
+jq '{scenario_groups, sources: .sources | {coverage_frozen_at}}' epics/<KEY>/dependencies/<KEY>-coverage.json
+jq '.checks[] | select(.verification_role=="primary") | {id, scenario_line, requirement_keys, delivery_status, runtime_probes, grounding_certainty}' epics/<KEY>/dependencies/<KEY>-coverage.json
 ```
 
 Optional: discover linker slices, analysis **`exploration_suppressed[]`**, ref oracle rules for formula inference.
@@ -122,7 +122,7 @@ Orchestrator merges temp drafts into **`-tests.json`**. Set **`sources.draft_pro
 ### 9. Verify
 
 ```powershell
-python automation/tools/test_prep_verify.py --mode scenario_intent --ref {EpicDir}<KEY>-ref.json --coverage {EpicDir}<KEY>-coverage.json --tests {EpicDir}<KEY>-tests.json
+python automation/tools/test_prep_verify.py --mode scenario_intent --ref {EpicDir}dependencies/<KEY>-ref.json --coverage {EpicDir}dependencies/<KEY>-coverage.json --tests {EpicDir}dependencies/<KEY>-tests.json
 ```
 
 Fix failing bundles (max **3** epic iterations).

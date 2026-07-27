@@ -9,7 +9,7 @@
 
 **Scope**: **one Epic** per run. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc).
 
-**Outputs**: Updates **`{EpicDir}<KEY>-coverage.json`** in place (probes + `>` lines only). **No** new `-ground.json` in v1.
+**Outputs**: Updates **`{EpicDir}dependencies/<KEY>-coverage.json`** in place (probes + `>` lines only). **No** new `-ground.json` in v1.
 
 **Ephemeral**: `{EpicDir}temp/ground-probe-*.log` — **delete** before finish; persist sanitized probe rows on coverage only.
 
@@ -17,8 +17,8 @@
 
 ## Preconditions
 
-- **`{EpicDir}<KEY>-coverage.json`** with **`coverage_pass`** **1** or **2**.
-- **`{EpicDir}<KEY>-ref.json`**.
+- **`{EpicDir}dependencies/<KEY>-coverage.json`** with **`coverage_pass`** **1** or **2**.
+- **`{EpicDir}dependencies/<KEY>-ref.json`**.
 - **PREPARE**: `python automation/tools/crtqa_console_probe.py` — exit **0** unless operator **`probe_waive=yes`**.
 - **Console**: [`/crtqa-console start`](../../.cursor/commands/crtqa-console.md) before probes unless waived.
 
@@ -51,7 +51,7 @@
 
 ### 4. Finalize
 
-- Run **`python automation/tools/ground_verify.py --mode emit --coverage {EpicDir}<KEY>-coverage.json --ref {EpicDir}<KEY>-ref.json`** — exit **0** required.
+- Run **`python automation/tools/ground_verify.py --mode emit --coverage {EpicDir}dependencies/<KEY>-coverage.json --ref {EpicDir}dependencies/<KEY>-ref.json`** — exit **0** required.
 - **Delete** `{EpicDir}temp/` entirely.
 
 ---

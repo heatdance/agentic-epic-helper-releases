@@ -12,7 +12,7 @@
     "disposition": "covered | deferred | excluded"
   },
   "epic_key": null,
-  "epic_ref_path": "epics/<EPIC-KEY>/<EPIC-KEY>-ref.json",
+  "epic_ref_path": "epics/<EPIC-KEY>/dependencies/<EPIC-KEY>-ref.json",
   "sources": {
     "jira_fetched_at": null,
     "epic_ref_loaded_at": null,

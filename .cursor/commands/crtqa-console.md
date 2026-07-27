@@ -32,13 +32,19 @@ pwsh -NoProfile -File automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps
 
 ## A. Cold session handshake (`start`)
 
-1. Windows **desktop dialog**: operator enters **Linux / AD-style SSH username + password**.
-2. Script starts **`plink … -pwfile TMP -share -batch -N user@host`**, then writes:
-   - `temp/crtqa-console/session.active.json` (no secrets)
+1. Windows **desktop dialog**: operator picks **Environment** (**qa** | **uat**), then enters **Linux / AD-style SSH username + password**.
+2. Script resolves `sshHost` / `sudoUnixUser` from `environments.*` in config, starts **`plink … -pwfile TMP -share -batch -N user@host`**, then writes:
+   - `temp/crtqa-console/session.active.json` (no secrets; includes `environment`, `sshHost`)
    - `temp/crtqa-console/session-credential.dpapi` (sudo batches)
 
-After **`start`**, SSH layer is reusable via **`plink -share`**. **sudo** still uses DPAPI per **Invoke** unless infra grants **NOPASSWD**.
+Optional: `Start-CrtqaConsoleSession.ps1 -Environment uat` pre-selects UAT in the dialog.
 
+| Env | SSH host (default) | sudo user (default) |
+|-----|--------------------|---------------------|
+| **qa** | `ctqa.prosp.devexperts.com` | `ctqa` |
+| **uat** | `ctuat.prosp.devexperts.com` | `ctuat` |
+
+After **`start`**, SSH layer is reusable via **`plink -share`**. **sudo** still uses DPAPI per **Invoke** unless infra grants **NOPASSWD**.
 ## B. Status and probe (agents)
 
 - **`status`** — read-only; writes `temp/crtqa-console/gate-status.json`; exit 0/1.

@@ -3,8 +3,8 @@
 Rebuild coverage Smart Checklist markdown from checks[]; operator md hygiene.
 
 Examples:
-  python automation/tools/coverage_md_sync.py --coverage epics/CRT-594/CRT-594-coverage.json --write
-  python automation/tools/coverage_md_sync.py --coverage epics/CRT-594/CRT-594-coverage.json --check
+  python automation/tools/coverage_md_sync.py --coverage epics/CRT-594/dependencies/CRT-594-coverage.json --write
+  python automation/tools/coverage_md_sync.py --coverage epics/CRT-594/dependencies/CRT-594-coverage.json --check
 """
 
 from __future__ import annotations
@@ -105,46 +105,104 @@ def _section_order(checks: list[dict[str, Any]]) -> list[str]:
     return seen
 
 
+PREREQUISITES_HEADING = "## Prerequisites"
+PRIMARY_FOCUS_HEADING = "## Primary focus"
+NARRATIVE_ONLY_SECTION_MARKERS = (
+    "## Functional configuration",
+    "## Data setup —",
+    PRIMARY_FOCUS_HEADING,
+)
+SETUP_THREAD_VALUES = frozenset({"environment_setup"})
+
+
+def _is_prerequisites_check(chk: dict[str, Any]) -> bool:
+    section = str(chk.get("section") or "").strip()
+    if section == PREREQUISITES_HEADING:
+        return True
+    thread = str(chk.get("coverage_thread") or "")
+    if thread in SETUP_THREAD_VALUES:
+        return True
+    if section.startswith("## Data setup"):
+        return True
+    return False
+
+
+def _subsection_order(checks: list[dict[str, Any]]) -> list[str]:
+    seen: list[str] = []
+    for chk in checks:
+        sub = str(chk.get("subsection") or "").strip()
+        if sub and sub not in seen:
+            seen.append(sub)
+    return seen
+
+
+def _emit_check_lines(chk: dict[str, Any], lines: list[str]) -> None:
+    scenario = str(chk.get("scenario_line") or "").strip()
+    if scenario:
+        lines.append(scenario)
+    for dl in chk.get("detail_lines") or []:
+        dl_s = str(dl).strip()
+        if dl_s:
+            lines.append(dl_s)
+
+
 def build_smart_checklist_markdown(coverage: dict[str, Any]) -> str:
     epic_key = str(coverage.get("epic_key") or "EPIC")
-    focus = coverage.get("epic_verification_focus") or {}
-    focus_stmt = (
-        str(focus.get("statement") or "").strip()
-        if isinstance(focus, dict)
-        else ""
-    )
     checks = [c for c in (coverage.get("checks") or []) if isinstance(c, dict)]
 
-    title_line = f"# {epic_key}"
+    title_line = f"# {epic_key} — Smart Checklist"
     existing_md = str(coverage.get("smart_checklist_markdown") or "")
     for line in existing_md.splitlines():
         if line.startswith("# "):
             title_line = line.strip()
+            if "Smart Checklist" not in title_line:
+                title_line = f"{title_line} — Smart Checklist"
             break
 
     lines: list[str] = [title_line, ""]
 
-    if focus_stmt:
-        lines.extend(["## Primary focus", "", f"- {focus_stmt}", ""])
+    prereq_checks = [c for c in checks if _is_prerequisites_check(c)]
+    body_checks = [c for c in checks if not _is_prerequisites_check(c)]
 
-    sections = _section_order(checks)
-    primary_focus_heading = "## Primary focus"
+    if prereq_checks:
+        lines.append(PREREQUISITES_HEADING)
+        lines.append("")
+        for chk in prereq_checks:
+            _emit_check_lines(chk, lines)
+            lines.append("")
+        while lines and lines[-1] == "":
+            lines.pop()
+        lines.append("")
+
+    sections = _section_order(body_checks)
     for section in sections:
-        if section == primary_focus_heading:
+        if any(section.startswith(marker) for marker in NARRATIVE_ONLY_SECTION_MARKERS):
             continue
-        section_checks = [c for c in checks if str(c.get("section") or "").strip() == section]
+        section_checks = [
+            c for c in body_checks if str(c.get("section") or "").strip() == section
+        ]
         if not section_checks:
             continue
         lines.append(section)
         lines.append("")
+        subsections = _subsection_order(section_checks)
+        for sub in subsections:
+            sub_checks = [
+                c
+                for c in section_checks
+                if str(c.get("subsection") or "").strip() == sub
+            ]
+            if not sub_checks:
+                continue
+            lines.append(sub)
+            lines.append("")
+            for chk in sub_checks:
+                _emit_check_lines(chk, lines)
+            lines.append("")
         for chk in section_checks:
-            scenario = str(chk.get("scenario_line") or "").strip()
-            if scenario:
-                lines.append(scenario)
-            for dl in chk.get("detail_lines") or []:
-                dl_s = str(dl).strip()
-                if dl_s:
-                    lines.append(dl_s)
+            if str(chk.get("subsection") or "").strip():
+                continue
+            _emit_check_lines(chk, lines)
             lines.append("")
 
     while lines and lines[-1] == "":
@@ -309,7 +367,13 @@ def main() -> int:
         with cov_path.open("w", encoding="utf-8", newline="\n") as f:
             json.dump(coverage, f, indent=2, ensure_ascii=False)
             f.write("\n")
-        md_path = args.md or cov_path.with_suffix(".md")
+        if args.md:
+            md_path = args.md
+        elif cov_path.parent.name == "dependencies":
+            key = str(coverage.get("epic_key") or cov_path.stem.split("-", 1)[0])
+            md_path = cov_path.parent.parent / f"{key}-coverage.md"
+        else:
+            md_path = cov_path.with_suffix(".md")
         md_path.write_text(md_body, encoding="utf-8", newline="\n")
         print(f"Wrote {cov_path}")
         print(f"Wrote {md_path}")

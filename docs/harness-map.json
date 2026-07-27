@@ -391,6 +391,7 @@
             "docs/coverage-topology-contract.json",
             "docs/coverage-principal-contract.json",
             "docs/coverage-operator-hints.json",
+            "docs/epic-artifact-layout.json",
             "docs/epic-prep-topology-contract.json",
             "automation/docs/coverage-verify.md",
             "automation/tools/coverage_md_sync.py",
@@ -399,7 +400,7 @@
             "docs/qa-project.json",
             "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Requires -ref.json schema v4 obligations_proposed (+ optional epic_archetype/verification_topology/principal threads). Copy focus from verification_focus_proposed; materialize principal_coverage_threads H2 spine; keyed deferrals. Operator md: detail_lines only; linker_trace_lines + platform_reuse_annex JSON-only. coverage_verify obligations+emit+--mode draft_truth / --strict-topology / --strict-principal; coverage_md_sync.py --write. Phase 7 merges epic-ref implementation.hits. No CRTQA in production. fix_breadth=yes optional. Durable: -coverage.json schema v2 + .md; delete EpicDir temp/."
+          "mcp_hint": "Requires dependencies/<KEY>-ref.json schema v4 with field-level obligations (assertion_fragment). Atomic 1:1 obligation→check; collapsed paste via coverage_md_sync.py (no ## Primary focus). Root <KEY>-coverage.md only. coverage_verify obligations+emit; --strict-topology / --strict-principal. delete EpicDir temp/."
         },
         {
           "id": "draft_truth_pipeline",
@@ -486,6 +487,7 @@
           ],
           "read": [
             "docs/epic-helper-contract.json",
+            "docs/epic-artifact-layout.json",
             ".cursor/commands/epic-helper.md",
             "automation/docs/epic-helper.md",
             "docs/harness-principles.md",

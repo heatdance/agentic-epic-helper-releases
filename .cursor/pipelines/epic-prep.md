@@ -23,7 +23,7 @@ Before any filesystem work, parse `<KEY>` from the **same user message line** as
 
 Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 
-**Output**: `{EpicDir}<KEY>-ref.json` (copy from [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)). **Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort).
+**Output**: `{EpicDir}dependencies/<KEY>-ref.json` (copy from [`epics/templates/epic-ref.json`](../../epics/templates/epic-ref.json)). **Human paste** (later): `{EpicDir}<KEY>-coverage.md` at epic root only per [`docs/epic-artifact-layout.json`](../../docs/epic-artifact-layout.json). **Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort).
 
 ---
 
@@ -43,7 +43,7 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 1. Ensure `{EpicDir}` exists.
 2. Create `{EpicDir}temp/`.
 3. **Allowed in `temp/` only** (examples): `jira-issue.json` (raw MCP issue), `yogi-<REQKEY>.json` (storage exports), **`epic-obligation-<REQKEY>.json`** (per-requirement obligation slices), **`epic-topology-scenario-<slug>.json`** (per-section scenario surface slices), **`epic-topology-oracle-<slug>.json`** (pricing oracle slices), **`epic-obligation-reconcile.json`** (merge scratch), `xt-candidates.json` (search results metadata), `bitbucket-*.json` (raw search exports), scratch notes. **Do not** commit secrets; no cookies in files.
-4. Work: merge durable facts into `{EpicDir}<KEY>-ref.json`.
+4. Work: merge durable facts into `{EpicDir}dependencies/<KEY>-ref.json`.
 5. **Exit**: delete `{EpicDir}temp/` recursively (`Remove-Item -Recurse` on Windows, `rm -rf` on Unix).
 6. **Self-check**: `<KEY>-ref.json` must **not** contain the substring `/temp/` (no stale paths).
 
@@ -56,8 +56,8 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 ### 1. Jira — fetch Epic
 
 - MCP fetch the issue by key; save raw JSON to `temp/jira-issue.json` (optional but recommended for audit).
-- If **`{EpicDir}<KEY>-ref.json` already exists**, **MUST** project with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file — then read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
-- Copy template → `{EpicDir}<KEY>-ref.json`.
+- If **`{EpicDir}dependencies/<KEY>-ref.json` already exists**, **MUST** project with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file — then read **`sources.bitbucket_repo`** (and optionally prior **`implementation.hits`**) for merge hints **before** overwriting.
+- Copy template → `{EpicDir}dependencies/<KEY>-ref.json`.
 - Fill `epic` (`key`, `url`, `summary`, `status`, `labels`, `issue_type`) and `sources.jira_fetched_at` (ISO-8601).
 - Parse optional **`repo=`** from the user message (same token shape as [`coverage.md`](coverage.md)). **Repo resolution** for `sources.bitbucket_repo` (first match wins): trigger **`repo=`** → **prior** ref’s `sources.bitbucket_repo` (from the pre-overwrite read above) → [`docs/project.json`](../../docs/project.json) **`bitbucket.default_repo`** if non-null. If still unresolved, leave null for step **5b** (optional search skipped).
 
@@ -119,7 +119,7 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 
 1. **Input pack** (subprocess only): that row + Epic summary/description sentences mentioning **`key`** only.
 2. **Output**: write `temp/epic-obligation-<REQKEY>.json` with shape `{ "requirement_key": "<KEY>", "obligations_proposed": [ … ] }`.
-3. Each obligation: `id` (`obl-###` unique epic-wide), `kind` from [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json), `statement`, `requirement_keys[]`, `evidence_anchor`, optional `config_vs_position`, `disposition` (`primary_candidate` | `deferral_candidate`), `deferral_reason` when deferral, **`downstream_hints`** per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json):
+3. Each obligation: `id` (`obl-###` unique epic-wide), `kind` from [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json), `statement`, **`assertion_fragment`** (short observable for checklist bullet — no repeated widget/card context), **`emit_subsection`** (optional `### …` heading for COVERAGE grouping), `requirement_keys[]`, `evidence_anchor` (string or `{ field, excerpt, source }`), optional `config_vs_position`, `disposition` (`primary_candidate` | `deferral_candidate`), `deferral_reason` when deferral, **`downstream_hints`** per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json):
    - **`config_vs_position: account_group_assignment`** + **`primary_candidate`** → **`needs_dual_account_contrast: true`**; **`coverage_thread`**: `environment_setup` or `invariants` per statement.
    - **`kind: environment_setup`** → **`needs_environment_provision: true`**, **`coverage_thread: environment_setup`**.
    - **`kind: explicit_deferral`** or **`disposition: deferral_candidate`** → **`coverage_thread: deferral_only`**; require **`deferral_reason`**.
@@ -127,6 +127,8 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
    - Bind **`linked_delivery_note_ids`** when step **3h** will emit matching **`delivery_notes`** (may back-fill in **3i**).
 4. Use **disambiguation_notes** — e.g. instrument-type config change ≠ account group assignment ≠ position-state invariant.
 5. **0 obligations** is valid when snippet is purely procedural with no testable obligation; log in subprocess output `notes`.
+6. **`widget_ui` / UI-heavy `mixed` atomic rule:** when `snippet_text` names **≥2** UI parameters / table rows (Side, Quantity, Description, fees, card sections, etc.), emit **one `primary_candidate` obligation per observable** — not one obligation per entire requirement key. Card-level availability (`renders`, `not omitted`) may be separate `invariant` / `parity` obligations but **do not** replace field obligations.
+7. When `snippet_status` is **failed**: emit **one** `deferral_candidate` with `deferral_reason` — **no** field obligations for that key.
 
 Merge slices into ref **`obligations_proposed[]`** (dedupe by statement similarity; keep distinct kinds separate).
 
@@ -262,7 +264,7 @@ Per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-co
 - Resolve **config_vs_position** conflicts using [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json) **disambiguation_notes** (e.g. do not classify group-change avg-price invariant as “skip config scenarios”).
 - Every **`primary_candidate`** must be cited in reconcile narrative or listed in **`conflicts`** with resolution.
 - Optional **`focus=`** from trigger merges here; log in `validation_log`.
-- Run **`python automation/tools/epic_prep_verify.py --mode reconcile --ref {EpicDir}<KEY>-ref.json`**. On failure: fix and retry (**max 2** iterations); then proceed to finalize.
+- Run **`python automation/tools/epic_prep_verify.py --mode reconcile --ref {EpicDir}dependencies/<KEY>-ref.json`**. On failure: fix and retry (**max 2** iterations); then proceed to finalize.
 
 ### 8. Finalize
 
@@ -272,9 +274,9 @@ Per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-co
 - Set **`schema_version`: 4** on the ref.
 - Ensure **`epic_archetype`** and **`verification_topology`** are populated per steps **2c**, **3f–3h** (null **`verification_topology`** object is invalid on **new** emits — use empty arrays inside the object).
 - Ensure **`verification_focus_proposed`** and **`principal_coverage_threads`** per step **3i** when trigger includes **`strict_principal=yes`** or operator expects principal handoff.
-- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}<KEY>-ref.json --strict-topology`** on **new** EPIC-PREP emits (after topology rollout). Legacy refs without topology pass **`ref`** without **`--strict-topology`** until re-prepped.
+- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}dependencies/<KEY>-ref.json --strict-topology`** on **new** EPIC-PREP emits (after topology rollout). Legacy refs without topology pass **`ref`** without **`--strict-topology`** until re-prepped.
 - When trigger includes **`strict_principal=yes`**, also run **`--strict-principal`** on the same command line.
-- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}<KEY>-ref.json`** — **block** delete of `temp/` and run completion until exit **0**.
+- Run **`python automation/tools/epic_prep_verify.py --mode ref --ref {EpicDir}dependencies/<KEY>-ref.json`** — **block** delete of `temp/` and run completion until exit **0**.
 - Validate JSON.
 - **Delete** `{EpicDir}temp/`.
 - Confirm `<KEY>-ref.json` contains no `/temp/` substring.

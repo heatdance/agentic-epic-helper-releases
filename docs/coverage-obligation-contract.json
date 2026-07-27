@@ -43,8 +43,26 @@
     "invariant_obligation_in_dimensions_only",
     "deferral_without_obligation_id",
     "setup_thread_missing_checks",
-    "focus_drift_from_ref_proposed"
+    "focus_drift_from_ref_proposed",
+    "tag_level_stub_check",
+    "redundant_context_prefix",
+    "collapsed_intro_violation",
+    "obligation_without_atomic_check"
   ],
+  "tag_level_stub_patterns": [
+    "card is available",
+    "is present and visible",
+    "must expose .+ per linked",
+    "details card is available",
+    "trade card is available"
+  ],
+  "atomic_check_rules": {
+    "one_primary_obligation_per_check": true,
+    "scenario_line_from_assertion_fragment": true,
+    "subsection_from_emit_subsection": true,
+    "forbid_primary_focus_in_paste": true,
+    "prerequisites_section_heading": "## Prerequisites"
+  },
   "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"],
   "reinforce_allowed_inputs": {
     "_comment": "COVERAGE-REINFORCE: only — production COVERAGE still forbids -discover.json",
@@ -67,7 +85,7 @@
       "epics/<KEY>/helper/affordances-slice.json",
       "epics/<KEY>/helper/operator-feedback.md"
     ],
-    "merge_base": "epics/<KEY>/<KEY>-coverage.json",
+    "merge_base": "epics/<KEY>/dependencies/<KEY>-coverage.json",
     "emit_fields": [
       "coverage_pass",
       "reinforced_at",

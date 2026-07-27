@@ -77,7 +77,7 @@ if ((Test-Path $helperContract) -and (Get-Command jq -ErrorAction SilentlyContin
   if ($LASTEXITCODE -ne 0) { Fail "epic_helper_contract_valid" "invalid JSON" }
   else {
     $hv = jq -r '.epicHelper.version // empty' $helperContract 2>$null
-    if ($hv -eq "6") { Pass "epic_helper_contract_valid" } else { Fail "epic_helper_contract_valid" "epicHelper.version=$hv expected 6" }
+    if ($hv -eq "7") { Pass "epic_helper_contract_valid" } else { Fail "epic_helper_contract_valid" "epicHelper.version=$hv expected 7" }
   }
 } elseif (-not (Test-Path $helperContract)) {
   Fail "epic_helper_contract_valid" "missing $helperContract"

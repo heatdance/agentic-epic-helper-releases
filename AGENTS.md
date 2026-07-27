@@ -16,8 +16,9 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 | Corner QA scope | [docs/qa-project.json](docs/qa-project.json) |
 | Environments / repos | [docs/corner-platform-map.json](docs/corner-platform-map.json) |
 | Tiered context | [docs/harness-map.json](docs/harness-map.json) |
+| Epic artifact layout (pre-CLOSE) | [docs/epic-artifact-layout.json](docs/epic-artifact-layout.json) · [automation/tools/epic_paths.py](automation/tools/epic_paths.py) |
 | Harness doctrine | [docs/harness-principles.md](docs/harness-principles.md) |
-| Epic orchestrator | [docs/epic-helper-contract.json](docs/epic-helper-contract.json) |
+| Epic orchestrator | [docs/epic-helper-contract.json](docs/epic-helper-contract.json) (**v7**) |
 | Calibrate contract | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
 
 ### Pipelines (agent playbooks)
@@ -32,7 +33,7 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 
 ### Epics
 
-Templates: [epics/templates/](epics/templates/). Per-epic work under `epics/<KEY>/` (your clones; not committed to team remote).
+Templates: [epics/templates/](epics/templates/). Per-epic work under `epics/<KEY>/` (your clones; not committed to team remote). Pre-CLOSE layout: JSON in `epics/<KEY>/dependencies/`, human paste `epics/<KEY>/<KEY>-coverage.md` at epic root — [docs/epic-artifact-layout.json](docs/epic-artifact-layout.json).
 
 ### Automation tools
 

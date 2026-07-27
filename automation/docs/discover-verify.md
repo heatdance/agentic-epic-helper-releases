@@ -1,14 +1,14 @@
 # TEST-DISCOVER — linker verifier (draft_truth_v2)
 
-Mechanical gate before emitting **`{EpicDir}<KEY>-discover.json`**. **Linker mode** — no browser probes. Doctrine: [docs/harness-principles.md](../../docs/harness-principles.md) §8. Contract: [docs/discover-linker-contract.json](../../docs/discover-linker-contract.json).
+Mechanical gate before emitting **`{EpicDir}dependencies/<KEY>-discover.json`**. **Linker mode** — no browser probes. Doctrine: [docs/harness-principles.md](../../docs/harness-principles.md) §8. Contract: [docs/discover-linker-contract.json](../../docs/discover-linker-contract.json).
 
 ## CLI (generation default)
 
 ```powershell
 python automation/tools/discover_verify.py `
   --mode linker `
-  --coverage epics/CRT-594/CRT-594-coverage.json `
-  --discover epics/CRT-594/CRT-594-discover.json
+  --coverage epics/dependencies/CRT-594/CRT-594-coverage.json `
+  --discover epics/dependencies/CRT-594/CRT-594-discover.json
 ```
 
 Requires **`coverage.sources.coverage_frozen_at`**.

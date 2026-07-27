@@ -1,5 +1,5 @@
 {
-  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/<KEY>-ref.json. EPIC-PREP v4: obligations_proposed[], obligations_reconcile, downstream_hints, verification_focus_proposed, principal_coverage_threads, verification_topology. COVERAGE consumes obligations + topology + principal hints. schema_version 4. See docs/epic-obligation-kinds.json, docs/epic-prep-topology-contract.json, docs/epic-prep-principal-contract.json.",
+  "_comment": "Schema template. Final artifact: epics/<EPIC-KEY>/dependencies/<KEY>-ref.json. EPIC-PREP v4: obligations_proposed[], obligations_reconcile, downstream_hints, verification_focus_proposed, principal_coverage_threads, verification_topology. COVERAGE consumes obligations + topology + principal hints. schema_version 4. Human paste: epics/<KEY>/<KEY>-coverage.md at epic root only. See docs/epic-artifact-layout.json.",
   "schema_version": 4,
   "epic": {
     "key": null,
@@ -129,8 +129,15 @@
     "id": "obl-001",
     "kind": "invariant | ladder | formula | config_posture | environment_setup | settlement | rounding | parity | explicit_deferral",
     "statement": "Human-readable obligation (what must be verified)",
+    "assertion_fragment": "Short observable for checklist bullet (no repeated subsection context)",
+    "emit_subsection": "### Transaction card (FX_SPOT Trade — Transaction Info)",
     "requirement_keys": ["CRT-1234"],
     "evidence_anchor": "snippet excerpt or jira field reference",
+    "_evidence_anchor_object": {
+      "source": "yogi_snippet | jira_description",
+      "field": "optional parameter name from requirement table",
+      "excerpt": "short quote"
+    },
     "config_vs_position": "instrument_type_config | account_group_assignment | position_state | routing_or_markup | not_applicable",
     "disposition": "primary_candidate | deferral_candidate",
     "deferral_reason": null,

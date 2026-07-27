@@ -19,9 +19,9 @@ Resolve **`{EpicDir}`** = `epics/<KEY>/`.
 
 **Prerequisites:**
 
-- `{EpicDir}<KEY>-ref.json` (schema v4)
-- `{EpicDir}<KEY>-coverage.json` + `.md` (pass 1)
-- `{EpicDir}<KEY>-discover.json` (schema v3, `discover_verify.py` OK)
+- `{EpicDir}dependencies/<KEY>-ref.json` (schema v4)
+- `{EpicDir}dependencies/<KEY>-coverage.json` + `.md` (pass 1)
+- `{EpicDir}dependencies/<KEY>-discover.json` (schema v3, `discover_verify.py` OK)
 
 **`/epic-helper` path (required when helper session active):**
 
@@ -32,7 +32,7 @@ Resolve **`{EpicDir}`** = `epics/<KEY>/`.
 
 ```powershell
 python automation/tools/epic_helper_affordances.py `
-  --discover {EpicDir}<KEY>-discover.json `
+  --discover {EpicDir}dependencies/<KEY>-discover.json `
   --out {EpicDir}helper/affordances-slice.json `
   --strict-topology `
   --strict-principal
@@ -80,7 +80,7 @@ jq '{
   provision_fixtures: [.fixture_needs[]? | select(.derivation == "ref_principal_provision" or ((.linked_obligation_ids | length) > 0)) | {id, kind, linked_check_ids, linked_obligation_ids, setup_depth, notes}],
   principal_loaded: .sources.principal_loaded,
   deferral_skips: [.validation_log[]? | select(.step == "phaseE_skipped_deferral_keyed")]
-}' epics/<KEY>/<KEY>-discover.json
+}' epics/<KEY>/dependencies/<KEY>-discover.json
 ```
 
 - Build **reinforce work queue:** primary checks × linked affordances; collect delivery **`tooling_blocked`** ledger rows into **skip-deepen** set; collect deferral-keyed rows from **`phaseE_skipped_deferral_keyed`** into **skip-deepen** set.
@@ -133,20 +133,20 @@ Append **`validation_log`** **`reinforce-2-oracle`**, **`reinforce-2-skipped-del
 ```text
 python automation/tools/coverage_verify.py \
   --mode obligations \
-  --coverage {EpicDir}<KEY>-coverage.json \
-  --ref {EpicDir}<KEY>-ref.json
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json \
+  --ref {EpicDir}dependencies/<KEY>-ref.json
 
 python automation/tools/coverage_verify.py \
   --mode emit --strict-topology \
-  --coverage {EpicDir}<KEY>-coverage.json \
-  --ref {EpicDir}<KEY>-ref.json \
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json \
+  --ref {EpicDir}dependencies/<KEY>-ref.json \
   --md {EpicDir}<KEY>-coverage.md
 
 python automation/tools/coverage_verify.py \
   --mode reinforce \
-  --coverage {EpicDir}<KEY>-coverage.json \
-  --ref {EpicDir}<KEY>-ref.json \
-  --discover {EpicDir}<KEY>-discover.json \
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json \
+  --ref {EpicDir}dependencies/<KEY>-ref.json \
+  --discover {EpicDir}dependencies/<KEY>-discover.json \
   --strict-topology \
   --strict-principal
 ```

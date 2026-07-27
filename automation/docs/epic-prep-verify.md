@@ -8,21 +8,21 @@ Gate **`-ref.json`** schema v4 **`obligations_proposed[]`**, optional **`verific
 
 ```powershell
 python automation/tools/epic_prep_verify.py --mode ref `
-  --ref epics/CRT-639/CRT-639-ref.json
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json
 ```
 
 **New emits (topology required):**
 
 ```powershell
 python automation/tools/epic_prep_verify.py --mode ref --strict-topology `
-  --ref epics/CRT-594/CRT-594-ref.json
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json
 ```
 
 **Principal handoff (opt-in trigger `strict_principal=yes`):**
 
 ```powershell
 python automation/tools/epic_prep_verify.py --mode ref --strict-topology --strict-principal `
-  --ref epics/CRT-594/CRT-594-ref.json
+  --ref epics/dependencies/CRT-594/CRT-594-ref.json
 ```
 
 **Topology-only:**
@@ -43,7 +43,7 @@ python automation/tools/epic_prep_verify.py --mode principal `
 
 ```powershell
 python automation/tools/epic_prep_verify.py --mode reconcile `
-  --ref epics/CRT-639/CRT-639-ref.json
+  --ref epics/dependencies/CRT-639/CRT-639-ref.json
 ```
 
 **Fixtures (regression):**

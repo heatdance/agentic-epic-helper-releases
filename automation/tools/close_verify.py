@@ -32,6 +32,7 @@ _TOOLS_DIR = Path(__file__).resolve().parent
 if str(_TOOLS_DIR) not in sys.path:
     sys.path.insert(0, str(_TOOLS_DIR))
 from test_prep_verify import verify_strict_test_prep_principal  # noqa: E402
+from epic_paths import dependencies_dir, resolve_json  # noqa: E402
 TEMP_PATH_RE = re.compile(r"(?:^|[/\\])temp(?:[/\\]|$)|/temp/", re.I)
 CRTQA_KEY_RE = re.compile(r"\bCRTQA-\d+\b", re.I)
 SECRET_LIKE_RE = re.compile(
@@ -803,10 +804,14 @@ def _epic_key_from_dir(epic_dir: Path) -> str | None:
     name = epic_dir.name
     if re.match(r"^[A-Z]+-\d+$", name):
         return name
-    for p in epic_dir.glob("*-ref.json"):
-        stem = p.stem
-        if stem.endswith("-ref"):
-            return stem[: -len("-ref")]
+    deps = epic_dir / "dependencies"
+    for base in (deps, epic_dir):
+        if not base.is_dir() and base != epic_dir:
+            continue
+        for p in base.glob("*-ref.json"):
+            stem = p.stem
+            if stem.endswith("-ref"):
+                return stem[: -len("-ref")]
     ctx = epic_dir / "context"
     if ctx.is_dir():
         for p in ctx.glob("*-ref.json"):
@@ -817,8 +822,13 @@ def _epic_key_from_dir(epic_dir: Path) -> str | None:
 
 
 def _artifact_paths(epic_dir: Path, key: str, archived: bool) -> dict[str, Path]:
-    base = epic_dir / "context" if archived else epic_dir
-    return {
+    if archived:
+        base = epic_dir / "context"
+    else:
+        base = dependencies_dir(key)
+        if not base.is_absolute():
+            base = epic_dir / "dependencies"
+    paths = {
         "ref": base / f"{key}-ref.json",
         "coverage": base / f"{key}-coverage.json",
         "discover": base / f"{key}-discover.json",
@@ -826,6 +836,12 @@ def _artifact_paths(epic_dir: Path, key: str, archived: bool) -> dict[str, Path]
         "tests": base / f"{key}-tests.json",
         "analysis": base / f"{key}-analysis.json",
     }
+    if not archived:
+        for stem in ("ref", "coverage", "discover", "tests", "analysis", "precon"):
+            leg = epic_dir / f"{key}-{stem}.json"
+            if leg.is_file() and not paths[stem].is_file():
+                paths[stem] = leg
+    return paths
 
 
 def _is_archived(epic_dir: Path, key: str) -> bool:
@@ -881,17 +897,31 @@ def verify_preflight(epic_dir: Path, contract: dict[str, Any]) -> list[str]:
 
     paths = _artifact_paths(epic_dir, key, archived=False)
     pre = contract.get("preflight") or {}
+    artifact_loc = pre.get("artifact_location") or "dependencies"
+    deps = epic_dir / "dependencies"
     required = pre.get("required_artifacts") or []
     for pattern in required:
         name = pattern.replace("{epic_key}", key)
-        if not (epic_dir / name).is_file():
+        if artifact_loc == "dependencies":
+            candidates = [deps / name, epic_dir / name]
+        else:
+            candidates = [epic_dir / name]
+        if not any(p.is_file() for p in candidates):
             errors.append(f"missing required artifact: {name}")
 
     optional = pre.get("optional_artifacts") or []
     for pattern in optional:
         name = pattern.replace("{epic_key}", key)
-        if not (epic_dir / name).is_file():
+        if artifact_loc == "dependencies":
+            candidates = [deps / name, epic_dir / name]
+        else:
+            candidates = [epic_dir / name]
+        if not any(p.is_file() for p in candidates):
             errors.append(f"WARN optional missing: {name}")
+
+    cov_md = epic_dir / f"{key}-coverage.md"
+    if not cov_md.is_file():
+        errors.append(f"missing root coverage md: {key}-coverage.md")
 
     for label, p in paths.items():
         if label == "analysis":
@@ -1168,10 +1198,16 @@ def verify_archive(epic_dir: Path, key: str, close_path: Path | None) -> list[st
             errors.append(f"context missing {name}")
         if (epic_dir / name).is_file():
             errors.append(f"stale root json should be archived: {name}")
+        deps_stale = epic_dir / "dependencies" / name
+        if deps_stale.is_file():
+            errors.append(f"stale dependencies json should be archived: {name}")
 
     precon_ctx = ctx / f"{key}-precon.json"
     if precon_ctx.is_file() and (epic_dir / f"{key}-precon.json").is_file():
         errors.append(f"stale root json should be archived: {key}-precon.json")
+    deps_precon = epic_dir / "dependencies" / f"{key}-precon.json"
+    if precon_ctx.is_file() and deps_precon.is_file():
+        errors.append(f"stale dependencies json should be archived: {key}-precon.json")
 
     close_in_ctx = ctx / f"{key}-close.json"
     if close_path and close_path.is_file():

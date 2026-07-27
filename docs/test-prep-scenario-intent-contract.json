@@ -52,7 +52,7 @@
     "forbidden": "action/result rows for deferred primary checks"
   },
   "verifier_mode": "scenario_intent",
-  "verifier_command": "python automation/tools/test_prep_verify.py --mode scenario_intent --ref epics/<KEY>/<KEY>-ref.json --coverage epics/<KEY>/<KEY>-coverage.json --tests epics/<KEY>/<KEY>-tests.json",
+  "verifier_command": "python automation/tools/test_prep_verify.py --mode scenario_intent --ref epics/<KEY>/dependencies/<KEY>-ref.json --coverage epics/<KEY>/dependencies/<KEY>-coverage.json --tests epics/<KEY>/dependencies/<KEY>-tests.json",
   "forbidden_ui_patterns": [
     "\\bWatchlist\\b",
     "\\bPosition Book\\b",

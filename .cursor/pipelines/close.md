@@ -28,7 +28,7 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 **Prerequisites** (preflight — **STOP** if missing):
 
-- `{EpicDir}<KEY>-ref.json`, `-coverage.json`, `-discover.json`, `-tests.json` from upstream pipelines (`-precon.json` optional legacy).
+- `{EpicDir}dependencies/<KEY>-ref.json`, `-coverage.json`, `-discover.json`, `-tests.json` from upstream pipelines (`-precon.json` optional legacy).
 - **Optional:** `-analysis.json` (if absent, regenerate **analysis.md** stub per contract).
 - **`{EpicDir}temp/`** must **not** exist.
 
@@ -83,7 +83,7 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 - Parse `<KEY>`, `heal=no`, `strict_topology=yes`, `strict_principal=yes`.
 - Run `python automation/tools/close_verify.py --mode preflight --epic-dir {EpicDir}`.
 - If epic already has `context/<KEY>-ref.json` → **STOP** (closed epic; see [HOW-TO.md](../../HOW-TO.md)).
-- Initialize `{EpicDir}temp/` and in-progress `{EpicDir}<KEY>-close.json` from template.
+- Initialize `{EpicDir}temp/` and in-progress `{EpicDir}dependencies/<KEY>-close.json` from template.
 - Append `validation_log` step `0`.
 
 ### L0–L4. Ladder (per bundle, per level)
@@ -138,7 +138,7 @@ When the trigger includes **`strict_principal=yes`**:
 
 1. Compute `epic_verdict` from findings severities (contract **`verdict_rules`**).
 2. If heal enabled (default): apply **whitelist** corrections to JSON files at **root** paths; record each in `corrections[]`.
-3. Run `close_verify.py --mode finalize --close {EpicDir}<KEY>-close.json`.
+3. Run `close_verify.py --mode finalize --close {EpicDir}dependencies/<KEY>-close.json`.
 4. **Regenerate** three md from JSON (playbooks in contract **`md_regen_sources`**):
    - coverage.md ← coverage.json
    - analysis.md ← analysis.json or stub when absent
@@ -149,7 +149,7 @@ When the trigger includes **`strict_principal=yes`**:
 ### G. Archive
 
 1. Write final `<KEY>-close.json` at root (if not already).
-2. Run `python automation/tools/close_archive.py --epic-dir {EpicDir} --close {EpicDir}<KEY>-close.json` (moves JSON to `context/`; if present, gitignored `{EpicDir}helper/` → `{EpicDir}context/helper/` per [`epic-helper-contract.json`](../../docs/epic-helper-contract.json)).
+2. Run `python automation/tools/close_archive.py --epic-dir {EpicDir} --close {EpicDir}dependencies/<KEY>-close.json` (moves JSON to `context/`; if present, gitignored `{EpicDir}helper/` → `{EpicDir}context/helper/` per [`epic-helper-contract.json`](../../docs/epic-helper-contract.json)).
 3. Run `close_verify.py --mode archive` then `--mode emit --close {EpicDir}context/<KEY>-close.json`.
 4. **Delete** `{EpicDir}temp/`.
 5. Append `validation_log` step `archive` (complete).

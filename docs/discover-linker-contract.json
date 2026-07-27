@@ -27,7 +27,7 @@
     "verification_affordances[] with harness_location_ref or pattern_ref or oracle_binding for UI/console checks",
     "fixture_needs[] setup_depth classified_only max"
   ],
-  "verifier": "python automation/tools/discover_verify.py --mode linker --coverage epics/<KEY>/<KEY>-coverage.json --discover epics/<KEY>/<KEY>-discover.json",
+  "verifier": "python automation/tools/discover_verify.py --mode linker --coverage epics/<KEY>/dependencies/<KEY>-coverage.json --discover epics/<KEY>/dependencies/<KEY>-discover.json",
   "emit_dod": [
     "coverage.sources.coverage_frozen_at set",
     "no probe_executed or fe_credentials on discover json",

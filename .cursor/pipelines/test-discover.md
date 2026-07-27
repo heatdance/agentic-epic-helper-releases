@@ -22,8 +22,8 @@ Resolve **`{EpicDir}`** = `epics/<KEY>/`.
 
 **Prerequisites (hard stop):**
 
-- `{EpicDir}<KEY>-ref.json` (schema v4)
-- `{EpicDir}<KEY>-coverage.json` with **`sources.coverage_frozen_at`** set (human gate / helper path)
+- `{EpicDir}dependencies/<KEY>-ref.json` (schema v4)
+- `{EpicDir}dependencies/<KEY>-coverage.json` with **`sources.coverage_frozen_at`** set (human gate / helper path)
 
 If **`coverage_frozen_at`** missing: **STOP** — complete human coverage review first.
 
@@ -94,10 +94,10 @@ Run **only** when **`crtqa_index=yes`** on trigger. Otherwise **`reference_index
 ```powershell
 python automation/tools/discover_verify.py `
   --mode linker `
-  --coverage {EpicDir}<KEY>-coverage.json `
-  --discover {EpicDir}<KEY>-discover.json `
-  [--ref {EpicDir}<KEY>-ref.json] `
-  [--analysis {EpicDir}<KEY>-analysis.json] `
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json `
+  --discover {EpicDir}dependencies/<KEY>-discover.json `
+  [--ref {EpicDir}dependencies/<KEY>-ref.json] `
+  [--analysis {EpicDir}dependencies/<KEY>-analysis.json] `
   [--strict-topology] `
   [--strict-principal]
 ```

@@ -13,7 +13,7 @@
   "topology_provenance": {
     "type": "object",
     "properties": {
-      "ref_path": "epics/<KEY>/<KEY>-ref.json",
+      "ref_path": "epics/<KEY>/dependencies/<KEY>-ref.json",
       "fields_consumed": [
         "epic_archetype.value",
         "verification_topology.jira_scenario_surfaces",

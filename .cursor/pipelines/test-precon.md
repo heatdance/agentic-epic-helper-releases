@@ -28,17 +28,17 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 | Artefact | Required |
 |----------|----------|
-| `{EpicDir}<KEY>-coverage.json` | **Yes** — if missing: **STOP**; instruct **`COVERAGE: <KEY>`** |
-| `{EpicDir}<KEY>-discover.json` | **Optional** — linker slices when present |
-| `{EpicDir}<KEY>-ref.json` | **Recommended** |
-| `{EpicDir}<KEY>-analysis.json` | Optional |
+| `{EpicDir}dependencies/<KEY>-coverage.json` | **Yes** — if missing: **STOP**; instruct **`COVERAGE: <KEY>`** |
+| `{EpicDir}dependencies/<KEY>-discover.json` | **Optional** — linker slices when present |
+| `{EpicDir}dependencies/<KEY>-ref.json` | **Recommended** |
+| `{EpicDir}dependencies/<KEY>-analysis.json` | Optional |
 
 **Frozen coverage:** **`sources.coverage_frozen_at`** should be set (draft+truth path).
 
 ### Outputs
 
-- **`{EpicDir}<KEY>-precon.json`** — [`epics/templates/precon-ref.json`](../../epics/templates/precon-ref.json) **schema_version 5**.
-- **`{EpicDir}<KEY>-precon.md`** — Jira wiki paste body only (no preamble/footer; generated in phase 5).
+- **`{EpicDir}dependencies/<KEY>-precon.json`** — [`epics/templates/precon-ref.json`](../../epics/templates/precon-ref.json) **schema_version 5**.
+- **`{EpicDir}dependencies/<KEY>-precon.md`** — Jira wiki paste body only (no preamble/footer; generated in phase 5).
 
 **Out of scope:** creating/updating Jira issues via API; **mutating** console/DB during PRECON; trade **ladders** in precon steps; CRTQA Pre-Condition search as **authoring** SoT.
 
@@ -137,7 +137,7 @@ jq '{
   provision_obligations: [.obligations_proposed[]? | select(.downstream_hints.needs_environment_provision == true or .kind == "environment_setup") | {id, downstream_hints}],
   personas: [.obligations_proposed[]?.downstream_hints.personas[]?] | unique,
   dual_contrast: [.obligations_proposed[]? | select(.downstream_hints.needs_dual_account_contrast == true) | .id]
-}' epics/<KEY>/<KEY>-ref.json
+}' epics/<KEY>/dependencies/<KEY>-ref.json
 ```
 
    - **`-analysis.json`** (v2): `jq '.gaps[]'`, `jq '.resolved_gaps[]'`, `jq '.exploration_suppressed[]'` — seed **`case_outline[]`** from **`resolved_gaps`** + high-confidence **`gaps[]`** with `pointers.check_id`; skip checks in **`exploration_suppressed`** with **`blocks_fixture_probe: true`**; extend deferral for **`delivery_known_fail`** / **`delivery_excluded`** / **`deferral_obligation_keyed`**
@@ -278,9 +278,9 @@ WebBroker: three numbered steps when **`user_management_create_form`** view grou
 ```powershell
 python automation/tools/precon_verify.py `
   --mode draft_truth `
-  --coverage {EpicDir}<KEY>-coverage.json `
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json `
   --precon {EpicDir}temp/precon-ledger.json `
-  --ref {EpicDir}<KEY>-ref.json
+  --ref {EpicDir}dependencies/<KEY>-ref.json
 ```
 
 Optional **`--discover`** when linker file present. Optional **`--strict-topology`** / **`--strict-principal`**.
@@ -293,8 +293,8 @@ On pass: proceed to Phase **5**.
 
 ### Phase 5 — Emit
 
-1. Merge ledger → **`{EpicDir}<KEY>-precon.json`** (**schema_version 5**); set **`precon_status: complete | incomplete`**.
-2. Generate **`{EpicDir}<KEY>-precon.md`** from ledger **only**:
+1. Merge ledger → **`{EpicDir}dependencies/<KEY>-precon.json`** (**schema_version 5**); set **`precon_status: complete | incomplete`**.
+2. Generate **`{EpicDir}dependencies/<KEY>-precon.md`** from ledger **only**:
    - Cluster **`title`** as heading.
    - **`h3.`** per surface section (`Configuration through console` / `WebBroker`).
    - Numbered **`1.`** steps from **`body`**; WebBroker user/account/group as **three** steps when grounded; **`{code}`** from **`code_examples[]`**; sub-bullets from **`branch_notes[]`** (platform URL allowed).
@@ -305,13 +305,13 @@ On pass: proceed to Phase **5**.
 
 ```powershell
 python automation/tools/precon_verify.py `
-  --coverage {EpicDir}<KEY>-coverage.json `
-  --precon {EpicDir}<KEY>-precon.json `
-  --discover {EpicDir}<KEY>-discover.json `
-  --ref {EpicDir}<KEY>-ref.json `
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json `
+  --precon {EpicDir}dependencies/<KEY>-precon.json `
+  --discover {EpicDir}dependencies/<KEY>-discover.json `
+  --ref {EpicDir}dependencies/<KEY>-ref.json `
   --strict-topology `
   --strict-principal `
-  --md {EpicDir}<KEY>-precon.md
+  --md {EpicDir}dependencies/<KEY>-precon.md
 ```
 
 When topology not loaded (legacy precon), omit **`--strict-topology`**; when principal not loaded (legacy metrics-only), omit **`--strict-principal`**. Archetype **`command_patterns`** rules still apply from coverage **`archetype`** / **`emit_layout`**. Opt-in trigger **`strict_principal=yes`** enables **`--strict-principal`** per [`docs/precon-principal-contract.json`](../../docs/precon-principal-contract.json).

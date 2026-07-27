@@ -136,6 +136,11 @@ VALID_CONFIG_VS = frozenset(
         "not_applicable",
     }
 )
+PARAM_TABLE_RE = re.compile(
+    r"\b(Side|Quantity|Description|Fill price|Commission|Fees|Taxes|Symbol|"
+    r"Account name|Transaction date|Realized PL|Total cost|Cash effect)\b",
+    re.I,
+)
 QUOTE_KEYWORDS = re.compile(
     r"\b(bid|ask|tier|textconfiguration|midpoint|mark|quote)\b", re.I
 )
@@ -632,6 +637,59 @@ def verify_scenario_inventory(ref: dict[str, Any]) -> list[str]:
     return errors
 
 
+def _snippet_has_parameter_table(snippet: str) -> bool:
+    return len(PARAM_TABLE_RE.findall(snippet)) >= 2
+
+
+def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
+    """widget_ui: multi-parameter snippets need field-level obligations."""
+    errors: list[str] = []
+    arch = (ref.get("epic_archetype") or {}).get("value")
+    if arch not in ("widget_ui", "mixed"):
+        return errors
+
+    req_by_key: dict[str, dict[str, Any]] = {}
+    for row in ref.get("requirements") or []:
+        if isinstance(row, dict) and row.get("key"):
+            req_by_key[str(row["key"])] = row
+
+    obls_by_key: dict[str, list[dict[str, Any]]] = {}
+    for obl in ref.get("obligations_proposed") or []:
+        if not isinstance(obl, dict):
+            continue
+        for rk in obl.get("requirement_keys") or []:
+            obls_by_key.setdefault(str(rk), []).append(obl)
+
+    for key, row in req_by_key.items():
+        status = row.get("snippet_status")
+        snippet = str(row.get("snippet_text") or "")
+        if status != "ok" or not _snippet_has_parameter_table(snippet):
+            continue
+        obls = obls_by_key.get(key) or []
+        primary = [
+            o
+            for o in obls
+            if o.get("disposition") == "primary_candidate"
+            and o.get("kind") not in ("explicit_deferral",)
+        ]
+        if len(primary) < 2:
+            errors.append(
+                f"requirement_tag_only_obligation: {key} snippet has parameter table "
+                f"but only {len(primary)} primary_candidate obligation(s)"
+            )
+        for obl in primary:
+            if obl.get("kind") == "environment_setup":
+                continue
+            frag = str(obl.get("assertion_fragment") or "").strip()
+            if not frag:
+                errors.append(
+                    f"obligation {obl.get('id')}: assertion_fragment required for "
+                    f"widget_ui field obligation ({key})"
+                )
+
+    return errors
+
+
 def verify_ref(
     ref: dict[str, Any],
     kinds_doc: dict[str, Any],
@@ -706,6 +764,7 @@ def verify_ref(
 
     errors.extend(verify_topology(ref, strict_topology))
     errors.extend(verify_principal(ref, strict_principal))
+    errors.extend(verify_widget_ui_atomic_obligations(ref))
     if (ref.get("verification_topology") or {}).get("scenario_capability_rows") is not None:
         errors.extend(verify_scenario_inventory(ref))
     return errors

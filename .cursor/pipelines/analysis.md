@@ -21,8 +21,8 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 **Outputs**:
 
-- `{EpicDir}<KEY>-analysis.json` — machine contract (authoritative for downstream).
-- `{EpicDir}<KEY>-analysis.md` — **gaps-first** human view (+ optional **Actions**, **Known issues** when token set).
+- `{EpicDir}dependencies/<KEY>-analysis.json` — machine contract (authoritative for downstream).
+- `{EpicDir}dependencies/<KEY>-analysis.md` — **gaps-first** human view (+ optional **Actions**, **Known issues** when token set).
 
 **Side effects** (tool-backed only, phase **9**):
 
@@ -36,8 +36,8 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 
 ## Preconditions
 
-- **Required:** `{EpicDir}<KEY>-coverage.json` from **`COVERAGE:`**. If missing → **STOP** → instruct `COVERAGE: <KEY>`.
-- **Required:** `{EpicDir}<KEY>-ref.json` when gaps need requirement/snippet context (almost always). When ref has **`verification_topology`**, consume **`delivery_notes`** and **`pricing_oracle_rules`** per [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json) — do **not** re-emit COVERAGE shell layout gaps.
+- **Required:** `{EpicDir}dependencies/<KEY>-coverage.json` from **`COVERAGE:`**. If missing → **STOP** → instruct `COVERAGE: <KEY>`.
+- **Required:** `{EpicDir}dependencies/<KEY>-ref.json` when gaps need requirement/snippet context (almost always). When ref has **`verification_topology`**, consume **`delivery_notes`** and **`pricing_oracle_rules`** per [`docs/analysis-topology-contract.json`](../../docs/analysis-topology-contract.json) — do **not** re-emit COVERAGE shell layout gaps.
 - **user-mcp-atlassian** for optional known-issues search and Confluence resolve in **4b**.
 - **Yogi** (optional): [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md) for phase **4b** `--storage-file` path.
 - **jq** before loading full ref/coverage: [automation/docs/jq.md](../../automation/docs/jq.md).
@@ -66,16 +66,16 @@ Resolve **`{EpicDir}`** like [`epic-prep.md`](epic-prep.md).
 - **MUST** `jq` project `-coverage.json` and `-ref.json` before full load. Recommended topology slice:
 
 ```bash
-jq '{ verification_topology: { delivery_notes, pricing_oracle_rules } }' epics/<KEY>/<KEY>-ref.json
+jq '{ verification_topology: { delivery_notes, pricing_oracle_rules } }' epics/<KEY>/dependencies/<KEY>-ref.json
 jq '{
   deferral_obligations: [.obligations_proposed[] | select(.kind == "explicit_deferral" or .disposition == "deferral_candidate") | {id, deferral_reason, requirement_keys}],
   delivery_links: [.verification_topology.delivery_notes[]? | {id, linked_obligation_ids}]
-}' epics/<KEY>/<KEY>-ref.json
-jq '{ emit_layout, checks: [.checks[] | { id, delivery_status, oracle_rule_id, topology_surface_id }] }' epics/<KEY>/<KEY>-coverage.json
+}' epics/<KEY>/dependencies/<KEY>-ref.json
+jq '{ emit_layout, checks: [.checks[] | { id, delivery_status, oracle_rule_id, topology_surface_id }] }' epics/<KEY>/dependencies/<KEY>-coverage.json
 jq '{
   obligations_coverage: [.obligations_coverage | to_entries[] | select(.value.status == "deferred_in_check") | {obligation_id: .key, check_id: .value.check_id}],
   deferral_checks: [.checks[] | select(.ambiguity.flag == "!" or .calculation_contract == "deferred_ambiguous") | {id, obligation_ids}]
-}' epics/<KEY>/<KEY>-coverage.json
+}' epics/<KEY>/dependencies/<KEY>-coverage.json
 ```
 
 - Set `sources.coverage_loaded`, `sources.ref_loaded`, paths, `epic_key`.
@@ -265,8 +265,8 @@ Append `validation_log` step `9`.
 
 ### 10. Emit
 
-1. Write `{EpicDir}<KEY>-analysis.json` (`schema_version: 2`).
-2. Write `{EpicDir}<KEY>-analysis.md`:
+1. Write `{EpicDir}dependencies/<KEY>-analysis.json` (`schema_version: 2`).
+2. Write `{EpicDir}dependencies/<KEY>-analysis.md`:
 
 ```markdown
 ## Gaps
@@ -289,19 +289,19 @@ Append `validation_log` step `9`.
 3. Run:
 
 ```text
-python automation/tools/analysis_verify.py --mode gaps --analysis {EpicDir}<KEY>-analysis.json
-python automation/tools/analysis_verify.py --mode downstream --analysis {EpicDir}<KEY>-analysis.json
-python automation/tools/analysis_verify.py --mode emit --analysis {EpicDir}<KEY>-analysis.json --md {EpicDir}<KEY>-analysis.md
+python automation/tools/analysis_verify.py --mode gaps --analysis {EpicDir}dependencies/<KEY>-analysis.json
+python automation/tools/analysis_verify.py --mode downstream --analysis {EpicDir}dependencies/<KEY>-analysis.json
+python automation/tools/analysis_verify.py --mode emit --analysis {EpicDir}dependencies/<KEY>-analysis.json --md {EpicDir}dependencies/<KEY>-analysis.md
 ```
 
 When ref has **`verification_topology`** with **`delivery_notes`** or **`pricing_oracle_rules`**, also run:
 
 ```text
 python automation/tools/analysis_verify.py --mode emit --strict-topology \
-  --analysis {EpicDir}<KEY>-analysis.json \
-  --ref {EpicDir}<KEY>-ref.json \
-  --coverage {EpicDir}<KEY>-coverage.json \
-  --md {EpicDir}<KEY>-analysis.md
+  --analysis {EpicDir}dependencies/<KEY>-analysis.json \
+  --ref {EpicDir}dependencies/<KEY>-ref.json \
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json \
+  --md {EpicDir}dependencies/<KEY>-analysis.md
 ```
 
 When trigger includes **`strict_principal=yes`** or ref has deferral obligations / principal fields, also run **`--strict-principal`** on the same command line (requires **`--ref`** and **`--coverage`**).

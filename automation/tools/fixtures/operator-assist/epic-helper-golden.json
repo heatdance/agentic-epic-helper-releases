@@ -1,0 +1,30 @@
+{
+  "expectHelperVersion": 7,
+  "cases": [
+    {
+      "id": "cold_start_env_fail",
+      "operator_message": "/epic-helper CRT-9999",
+      "expect_behavior": "crtqa_console_probe; awaiting_gate env; no EPIC-PREP; no console start from helper"
+    },
+    {
+      "id": "resume_one_stage",
+      "operator_message": "/epic-helper resume",
+      "expect_behavior": "read session.json; run exactly one pipeline stage; hard stop after verifier or gate"
+    },
+    {
+      "id": "coverage_review_freeze",
+      "operator_message": "/epic-helper resume add Order History DB oracle checks",
+      "expect_behavior": "append operator-feedback.md; set coverage_frozen_at; edit scenario_groups; next stage discover linker (one turn)"
+    },
+    {
+      "id": "discover_linker_no_creds",
+      "operator_message": "/epic-helper resume (after coverage_review)",
+      "expect_behavior": "TEST-DISCOVER linker only; no discover_creds gate; no browser"
+    },
+    {
+      "id": "anti_one_shot",
+      "operator_message": "/epic-helper resume (after epic_prep complete)",
+      "expect_behavior": "COVERAGE only; must not chain GROUND or ANALYSE in same turn"
+    }
+  ]
+}

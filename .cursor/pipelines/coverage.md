@@ -17,11 +17,11 @@
 
 Resolve **`{EpicDir}`** = `epics/<KEY>/` per [`epic-prep.md`](epic-prep.md).
 
-**Prerequisite**: `{EpicDir}<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first. Do not fabricate requirement snippets.
+**Prerequisite**: `{EpicDir}dependencies/<KEY>-ref.json` **must** already exist (from [`EPIC-PREP:`](epic-prep.md)). If missing: **stop** and instruct the user to run `EPIC-PREP: <KEY>` first. Do not fabricate requirement snippets.
 
 **Outputs**:
 
-- `{EpicDir}<KEY>-coverage.json` — structured artifact (from [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json)).
+- `{EpicDir}dependencies/<KEY>-coverage.json` — structured artifact (from [`epics/templates/coverage-ref.json`](../../epics/templates/coverage-ref.json)).
 - `{EpicDir}<KEY>-coverage.md` — Jira Smart Checklist paste (`smart_checklist_markdown` body + optional header).
 
 **Ephemeral**: `{EpicDir}temp/` — **must be deleted** before the run is considered complete (success or abort). Durable files must **not** contain **`/temp/`** or **`temp/`** as a path segment in any persisted string.
@@ -37,7 +37,7 @@ Resolve **`{EpicDir}`** = `epics/<KEY>/` per [`epic-prep.md`](epic-prep.md).
 
 **Context anchors**: [`docs/project.json`](../../docs/project.json) (CT **342168339**, XT **402589545**), [`docs/qa-project.json`](../../docs/qa-project.json) (QAPORTAL Corner **497097273** subtree; **Corner Trader + Adaptive** client shells per `product_outline`), [`docs/corner-platform-map.json`](../../docs/corner-platform-map.json) (environment hosts, Jira index, Stash defaults).
 
-**Epic ref**: Read **`client_shell_impact`** from `{EpicDir}<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note. When ref includes **`epic_archetype`** and **`verification_topology`** (EPIC-PREP steps **2c**, **3f**–**3h**), **MUST** consume per [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json) — copy archetype, set **`emit_layout`**, seed scenario surfaces, bind oracle/delivery on checks — **do not re-infer** archetype or ignore delivery/oracle handoff. When ref includes **`verification_focus_proposed`** / **`principal_coverage_threads`** (EPIC-PREP step **3i**), **MUST** consume per [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json) — copy focus verbatim, materialize thread H2 spine, keyed deferrals.
+**Epic ref**: Read **`client_shell_impact`** from `{EpicDir}dependencies/<KEY>-ref.json` (EPIC-PREP step 2b) when building **surfaces** and **cross-surface** checks; if missing, treat as gap — log in `validation_log` and use `qa_default_both` reasoning only with explicit note. When ref includes **`epic_archetype`** and **`verification_topology`** (EPIC-PREP steps **2c**, **3f**–**3h**), **MUST** consume per [`docs/coverage-topology-contract.json`](../../docs/coverage-topology-contract.json) — copy archetype, set **`emit_layout`**, seed scenario surfaces, bind oracle/delivery on checks — **do not re-infer** archetype or ignore delivery/oracle handoff. When ref includes **`verification_focus_proposed`** / **`principal_coverage_threads`** (EPIC-PREP step **3i**), **MUST** consume per [`docs/coverage-principal-contract.json`](../../docs/coverage-principal-contract.json) — copy focus verbatim, materialize thread H2 spine, keyed deferrals.
 
 **Format norms**: [Smart Checklist markdown](#smart-checklist-markdown-normative) (this file).
 
@@ -62,7 +62,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 **Scope**: cover only epic scope; minimal cross-cutting with a one-line rationale when shared layers are touched.
 
-**Epic verification focus (directional epics)**: Linked requirements often describe **both** branches of a configuration (e.g. FIFO vs WeightedAvg). The checklist must follow **`epic_verification_focus`** in `<KEY>-coverage.json` — **Jira narrative** (summary/description) wins over broad branching spec text unless `focus=` explicitly narrows. The **first substantive `##` after any title/header block** must expose **`epic_verification_focus.statement` verbatim** — either as the **`##` heading text** itself **or** as `## Primary focus` with **exactly one** following **`-`** line that **copies** `epic_verification_focus.statement` **without paraphrase**. Do **not** emit symmetric peer sections for both branches when the epic describes a **one-way** change or a **single instrument class** unless both branches are `verification_role: primary` in the matrix.
+**Epic verification focus (directional epics)**: Linked requirements often describe **both** branches of a configuration (e.g. FIFO vs WeightedAvg). The checklist must follow **`epic_verification_focus`** in `<KEY>-coverage.json` — **Jira narrative** (summary/description) wins over broad branching spec text unless `focus=` explicitly narrows. **`epic_verification_focus.statement`** is **JSON-only** for machine audit — **do not** paste `## Primary focus` into **`-coverage.md`**. Collapse setup into **`## Prerequisites`** (2–4 bullets). Do **not** emit symmetric peer sections for both branches when the epic describes a **one-way** change or a **single instrument class** unless both branches are `verification_role: primary` in the matrix.
 
 **Out-of-epic fork prose**: For matrix rows with **`verification_role: out_of_epic`**, do **not** paste **non-target branch formulas** in checklist **`>`** lines or extra `-` lines. Confine fork description to **`explicitly_out_of_scope`** (consolidated bullet) unless Jira/AC **explicitly** requires in-checklist contrast; then at most one `### Contrast` subsection per prior rules.
 
@@ -80,7 +80,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 2. Create `{EpicDir}temp/` if raw exports are needed.
 3. **Allowed in `temp/` only**: e.g. `jira-epic.json`, `yogi-*.json`, `bitbucket-*.json`, **`coverage-section-<slug>.json`** (per-section subprocess drafts), scratch. **No cookies or tokens** in committed files.
 4. **Section subprocess fan-out (phase 9)**: orchestrator merges `temp/coverage-section-*.json` into durable **`checks[]`** — parent **MUST NOT** one-shot all sections in one chat turn.
-5. Merge durable facts into `{EpicDir}<KEY>-coverage.json` and write `{EpicDir}<KEY>-coverage.md`.
+5. Merge durable facts into `{EpicDir}dependencies/<KEY>-coverage.json` and write `{EpicDir}<KEY>-coverage.md`.
 6. **Delete** `{EpicDir}temp/` recursively before finishing.
 7. **Self-check**: `<KEY>-coverage.json` and `.md` must **not** contain **`/temp/`** or **`temp/`** path segments (same bar as [`test-prep.md`](test-prep.md) durable JSON hygiene).
 
@@ -94,10 +94,10 @@ Prefer **deterministic structure** and **stable requirement-facing wording** cop
 
 ### 1. Load epic ref + Jira refresh
 
-- **MUST** project `{EpicDir}<KEY>-ref.json` with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file into context; then read fields needed for coverage (`requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`**, **`epic_archetype`**, **`verification_topology`** from EPIC-PREP). Recommended jq slice for topology (store in working memory or `temp/ref-topology-slice.json` — **do not** persist secrets):
+- **MUST** project `{EpicDir}dependencies/<KEY>-ref.json` with `jq` per [automation/docs/jq.md](../../automation/docs/jq.md) before loading the full file into context; then read fields needed for coverage (`requirements[]`, `synthesis`, **`client_shell_impact`**, `traversal.xt_refs`, `design.figma`, **`implementation.hits`**, **`epic_archetype`**, **`verification_topology`** from EPIC-PREP). Recommended jq slice for topology (store in working memory or `temp/ref-topology-slice.json` — **do not** persist secrets):
 
 ```bash
-jq '{ epic_archetype, verification_topology, verification_focus_proposed, principal_coverage_threads: .verification_topology.principal_coverage_threads, obligations_proposed: [.obligations_proposed[] | {id, kind, disposition, deferral_reason, downstream_hints}] }' epics/<KEY>/<KEY>-ref.json
+jq '{ epic_archetype, verification_topology, verification_focus_proposed, principal_coverage_threads: .verification_topology.principal_coverage_threads, obligations_proposed: [.obligations_proposed[] | {id, kind, disposition, deferral_reason, downstream_hints}] }' epics/<KEY>/dependencies/<KEY>-ref.json
 ```
 
 - If **`client_shell_impact`** is null/missing, append **`validation_log`** + **`anti_pattern_findings`** (`fix_hint`: re-run EPIC-PREP for step 2b) and proceed with conservative surface defaults noted in phase 4/9.
@@ -290,6 +290,7 @@ jq '{ epic_archetype, verification_topology, verification_focus_proposed, princi
 
 **`widget_ui` / `mixed` (UI-heavy)**
 
+- **Atomic obligation mapping (required):** each ref **`primary_candidate`** obligation → **exactly one** `checks[]` row with **`obligation_ids: [obl-###]`**. Copy **`emit_subsection`** → **`checks[].subsection`**; **`scenario_line`** → `- [REQ] {assertion_fragment}` from obligation (or short statement when fragment absent). **Forbidden** tag-level stubs when snippet is OK: `card is available`, `is present and visible`, `must expose … per linked requirements` without a named observable ([`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json) `tag_level_stub_patterns`).
 - When **`emit_layout: shell_first`**: align **`-`** checks to the **surface `##`** section for each **`jira_scenario_surfaces`** row; set optional **`topology_surface_id`** (`jss-###`) on checks for verifier binding.
 - **Oracle binding**: When ref has **`pricing_oracle_rules[]`**, set **`checks[].oracle_rule_id`** to matching rule **`id`**; put surface-specific oracle in **`>`** hints (e.g. **first tier** for Positions/Derivatives, **TextConfiguration tier closest ≥ qty** for Watchlist/OE) — avoid generic “tier-appropriate” on every line.
 - **Delivery honesty**: Map ref **`delivery_notes[]`** to affected checks — set **`delivery_status`**: `known_fail` → **`failed`** (markdown **`[FAILED]`** on scenario line); `excluded` → **`excluded`** (markdown **`x`** or “excluded” wording); `waived` / `pending_verification` → **`deferred`**. **Distinct** from requirement **`!`** ambiguity deferral.
@@ -358,8 +359,8 @@ Candidate dimensions (each requires the evidence gate above):
 
 ```text
 python automation/tools/coverage_verify.py --mode obligations \
-  --coverage {EpicDir}<KEY>-coverage.json \
-  --ref {EpicDir}<KEY>-ref.json
+  --coverage {EpicDir}dependencies/<KEY>-coverage.json \
+  --ref {EpicDir}dependencies/<KEY>-ref.json
 ```
 
 Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant section, or **`excluded_checks_with_reason`** on failure.
@@ -368,11 +369,11 @@ Block phase **14** until exit **0**. Fix **`obligations_coverage`**, invariant s
 
 - Set **`schema_version`: 2** on coverage JSON.
 - Set **`emit_layout`**, **`topology_provenance`**, optional **`platform_reuse_annex`** when topology path was used.
-- Set `smart_checklist_markdown` to the full checklist string — assembled **only** from **`checks[].scenario_line`** + **`checks[].detail_lines`** (no **`platform_reuse_annex`**, no **`linker_trace_lines`**). **Self-check**: first substantive **`##`** after any title/header matches the **verbatim** **`epic_verification_focus.statement`** rule in [Smart Checklist markdown](#smart-checklist-markdown-normative) (no paraphrase); **`shell_first`**: surface **`##`** order matches ref **`jira_scenario_surfaces`**; **`coverage_matrix[].id`** ordering matches phase **4** deterministic scheme; every **`out_of_epic`** matrix row has a matching **`explicitly_out_of_scope`** rationale (or consolidated single bullet per theme); no unjustified **`verification_role`** drift versus logged evidence; no **`> Discover:`** / platform reuse heading in markdown body.
-- Write `{EpicDir}<KEY>-coverage.md` (optional top lines: checklist title, XRay folder hint — functional only).
-- Write `{EpicDir}<KEY>-coverage.json` (validate JSON).
-- Run **`python automation/tools/coverage_verify.py --mode emit --coverage {EpicDir}<KEY>-coverage.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
-- When ref has **`epic_archetype`** + **`verification_topology`**, also run **`python automation/tools/coverage_verify.py --mode emit --strict-topology --coverage {EpicDir}<KEY>-coverage.json --ref {EpicDir}<KEY>-ref.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
+- Run **`python automation/tools/coverage_md_sync.py --coverage {EpicDir}dependencies/<KEY>-coverage.json --write --md {EpicDir}<KEY>-coverage.md`** to build collapsed paste markdown from **`checks[]`** (`##` / `###` grouping, **`## Prerequisites`**, no `## Primary focus`).
+- Set **`smart_checklist_markdown`** on JSON from the same builder (canonical: [`automation/tools/coverage_md_sync.py`](../../automation/tools/coverage_md_sync.py)). **Self-check**: no `## Primary focus` in paste; **`shell_first`**: surface **`##`** order matches ref **`jira_scenario_surfaces`**; **`coverage_matrix[].id`** ordering matches phase **4**; every **`out_of_epic`** matrix row has **`explicitly_out_of_scope`** rationale; no **`> Discover:`** / platform reuse heading in markdown body.
+- Write `{EpicDir}<KEY>-coverage.md` at epic root; write `{EpicDir}dependencies/<KEY>-coverage.json`.
+- Run **`python automation/tools/coverage_verify.py --mode emit --coverage {EpicDir}dependencies/<KEY>-coverage.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
+- When ref has **`epic_archetype`** + **`verification_topology`**, also run **`python automation/tools/coverage_verify.py --mode emit --strict-topology --coverage {EpicDir}dependencies/<KEY>-coverage.json --ref {EpicDir}dependencies/<KEY>-ref.json --md {EpicDir}<KEY>-coverage.md`** — block finish until exit **0**.
 - When trigger includes **`strict_principal=yes`** or ref has **`verification_focus_proposed`** + **`principal_coverage_threads`**, also run **`--strict-principal`** on the same command line.
 - **Delete** `{EpicDir}temp/`.
 

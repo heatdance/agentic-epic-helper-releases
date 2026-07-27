@@ -1,9 +1,22 @@
 {
-  "comment": "Defaults for CRTQA dxCore console hop. Override with crtqa-console.local.json (gitignored) in the same folder.",
+  "comment": "Defaults for CRTQA/CTUAT dxCore console hop. Override with crtqa-console.local.json (gitignored) in the same folder. Start dialog picks environment qa|uat (hosts from environments.*).",
   "plinkPath": "C:\\Program Files\\PuTTY\\plink.exe",
-  "sshHost": "ctqa.prosp.devexperts.com",
   "sshUser": "arodzevich",
-  "sudoUnixUser": "ctqa",
   "remoteDxCommand": "dx run console",
-  "termForRemote": "xterm"
+  "termForRemote": "xterm",
+  "defaultEnvironment": "qa",
+  "environments": {
+    "qa": {
+      "label": "QA (ctqa)",
+      "sshHost": "ctqa.prosp.devexperts.com",
+      "sudoUnixUser": "ctqa",
+      "platformMapId": "ct_qa"
+    },
+    "uat": {
+      "label": "UAT (ctuat)",
+      "sshHost": "ctuat.prosp.devexperts.com",
+      "sudoUnixUser": "ctuat",
+      "platformMapId": "ct_uat"
+    }
+  }
 }
