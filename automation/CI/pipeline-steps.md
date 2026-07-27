@@ -60,7 +60,7 @@ All `*-agent.sh` scripts call [`run_pipeline_agent.py`](../tools/teamcity/run_pi
 |-------|------------------------|
 | 1 | `JIRA_API_TOKEN`; `EPIC_KEY` for smoke (optional on manual checkout-only) |
 | 2–5, 9–10 | `EPIC_KEY`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES` (optional) |
-| 6–8 | `CRTQA_SSH_USER`, `CRTQA_SSH_HOST`, `CRTQA_SSH_PRIVATE_KEY_B64`, `CRTQA_SUDO_PASSWORD`, `CRTQA_CONSOLE_TRANSPORT=openssh` |
+| 6–8 | `CRTQA_SSH_USER`, `CRTQA_SSH_PRIVATE_KEY_B64`, `CRTQA_SUDO_PASSWORD`, `CRTQA_CONSOLE_TRANSPORT=openssh`; `CRTQA_SSH_HOST` optional (defaults from `crtqa-console.config.json`) |
 | 11–12 | `EPIC_KEY`, `QA_TASK_KEY`, `JIRA_API_TOKEN`; `TEAMCITY_BUILD_URL` auto-resolved from `teamcity.build.url` (D13) |
 
 TeamCity injects `%EPIC_KEY%`, `%QA_TASK_KEY%`, etc. Step scripts: `bash automation/tools/teamcity/jira-success.sh` / `jira-failure.sh`. Optional belt: `export TEAMCITY_BUILD_URL="%teamcity.build.url%"`.

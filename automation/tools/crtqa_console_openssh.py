@@ -60,6 +60,36 @@ def repo_root_from_here() -> Path:
     return Path(__file__).resolve().parent.parent.parent
 
 
+def resolve_console_environment(
+    cfg: dict[str, Any],
+    *,
+    environment_id: str | None = None,
+) -> dict[str, str]:
+    """Resolve sshHost/sudoUnixUser from environments.<id> or legacy top-level fields."""
+    env_key = (
+        environment_id
+        or os.environ.get("CRTQA_ENVIRONMENT", "").strip()
+        or str(cfg.get("defaultEnvironment") or "").strip()
+    )
+    environments = cfg.get("environments")
+    if env_key and isinstance(environments, dict):
+        block = environments.get(env_key)
+        if isinstance(block, dict):
+            host = str(block.get("sshHost") or "").strip()
+            sudo = str(block.get("sudoUnixUser") or "").strip()
+            if host:
+                return {
+                    "environment": env_key,
+                    "sshHost": host,
+                    "sudoUnixUser": sudo or "ctqa",
+                }
+    return {
+        "environment": env_key,
+        "sshHost": str(cfg.get("sshHost") or "").strip(),
+        "sudoUnixUser": str(cfg.get("sudoUnixUser") or "ctqa").strip() or "ctqa",
+    }
+
+
 def load_console_config(repo: Path) -> dict[str, Any]:
     path = repo / CONFIG_REL
     if not path.is_file():
@@ -72,10 +102,20 @@ def load_console_config(repo: Path) -> dict[str, Any]:
         overlay = json.loads(local.read_text(encoding="utf-8"))
         if isinstance(overlay, dict):
             cfg.update(overlay)
-    cfg["sshHost"] = os.environ.get("CRTQA_SSH_HOST") or cfg.get("sshHost") or ""
+    resolved = resolve_console_environment(cfg)
+    cfg["sshHost"] = (
+        os.environ.get("CRTQA_SSH_HOST") or resolved.get("sshHost") or cfg.get("sshHost") or ""
+    )
+    if isinstance(cfg["sshHost"], str):
+        cfg["sshHost"] = cfg["sshHost"].strip()
     cfg["sshUser"] = os.environ.get("CRTQA_SSH_USER") or cfg.get("sshUser") or ""
+    if isinstance(cfg["sshUser"], str):
+        cfg["sshUser"] = cfg["sshUser"].strip()
     cfg["sudoUnixUser"] = (
-        os.environ.get("CRTQA_SUDO_UNIX_USER") or cfg.get("sudoUnixUser") or "ctqa"
+        os.environ.get("CRTQA_SUDO_UNIX_USER")
+        or resolved.get("sudoUnixUser")
+        or cfg.get("sudoUnixUser")
+        or "ctqa"
     )
     cfg["remoteDxCommand"] = (
         os.environ.get("CRTQA_REMOTE_DX_COMMAND")

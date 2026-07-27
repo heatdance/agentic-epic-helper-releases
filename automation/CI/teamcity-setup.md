@@ -71,7 +71,7 @@ dxCity may not inject **password** configuration parameters into the environment
 | `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
 | `env.EPIC_KEY` | `%EPIC_KEY%` |
 | `env.QA_TASK_KEY` | `%QA_TASK_KEY%` |
-| `env.CRTQA_SSH_HOST` | `%CRTQA_SSH_HOST%` |
+| `env.CRTQA_SSH_HOST` | `%CRTQA_SSH_HOST%` *(optional — defaults from `crtqa-console.config.json` `environments.<defaultEnvironment>.sshHost`)* |
 | `env.CORNER_CI_STEP` | *(empty — set at runtime by step scripts via `setParameter`)* |
 
 Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.

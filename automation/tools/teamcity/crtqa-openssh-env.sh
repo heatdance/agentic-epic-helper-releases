@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Source from TeamCity steps: exports OpenSSH CRTQA env for console gate + GROUND.
-# Requires: CRTQA_SSH_USER, CRTQA_SSH_PRIVATE_KEY_B64, CRTQA_SUDO_PASSWORD
+# Requires: CRTQA_SSH_PRIVATE_KEY_B64, CRTQA_SUDO_PASSWORD (host/user from config when unset).
 
 set -u
 
@@ -12,7 +12,32 @@ _corner_tc_load_params
 # shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
 source "${REPO_ROOT}/automation/tools/teamcity/corner-tc-preflight.sh"
 
+_corner_crtqa_apply_config_defaults() {
+  # shellcheck disable=SC1090
+  eval "$(REPO_ROOT="${REPO_ROOT}" python3 <<'PY'
+import os
+import shlex
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(os.environ["REPO_ROOT"]) / "automation" / "tools"))
+from crtqa_console_openssh import load_console_config
+
+cfg = load_console_config(Path(os.environ["REPO_ROOT"]))
+exports = []
+if not os.environ.get("CRTQA_SSH_HOST") and cfg.get("sshHost"):
+    exports.append(f"export CRTQA_SSH_HOST={shlex.quote(str(cfg['sshHost']))}")
+if not os.environ.get("CRTQA_SSH_USER") and cfg.get("sshUser"):
+    exports.append(f"export CRTQA_SSH_USER={shlex.quote(str(cfg['sshUser']))}")
+if not os.environ.get("CRTQA_SUDO_UNIX_USER") and cfg.get("sudoUnixUser"):
+    exports.append(f"export CRTQA_SUDO_UNIX_USER={shlex.quote(str(cfg['sudoUnixUser']))}")
+print("\n".join(exports))
+PY
+)"
+}
+
 export CRTQA_CONSOLE_TRANSPORT="${CRTQA_CONSOLE_TRANSPORT:-openssh}"
+_corner_crtqa_apply_config_defaults
 corner_tc_require_env CRTQA_SSH_USER CRTQA_SSH_HOST CRTQA_SSH_PRIVATE_KEY_B64 CRTQA_SUDO_PASSWORD
 export CRTQA_SSH_USER="${CRTQA_SSH_USER:?CRTQA_SSH_USER empty}"
 export CRTQA_SSH_HOST="${CRTQA_SSH_HOST:?CRTQA_SSH_HOST empty}"

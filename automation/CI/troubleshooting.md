@@ -37,7 +37,7 @@
 | Symptom | Fix |
 |---------|-----|
 | `CRTQA_SSH_PRIVATE_KEY_B64 empty` | Set B64 password param |
-| `ERROR: contract violation: env CRTQA_SSH_HOST is required` | Add Pipeline param `CRTQA_SSH_HOST` and expose `env.CRTQA_SSH_HOST=%CRTQA_SSH_HOST%` |
+| `ERROR: contract violation: env CRTQA_SSH_HOST is required` | Push harness with config host resolver; optional override via `CRTQA_SSH_HOST` / `CRTQA_ENVIRONMENT` |
 | Invalid PEM / SSH fail | Re-encode key; single line B64 |
 | Gate OK, GROUND fails `runtime_probes` | Ensure step 7 sources `crtqa-openssh-env.sh` |
 | Spurious TeamCity `name` parameter | Remove `%TOKEN%` from script comments |
