@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "_comment": "Obligation kinds for EPIC-PREP obligations_proposed[] and COVERAGE mapping. Playbook: .cursor/pipelines/epic-prep.md. Coverage contract: docs/coverage-obligation-contract.json.",
   "kinds": [
     "invariant",
@@ -25,7 +25,10 @@
     "position_state": "Metrics on an open position (avg price, open P/L) must not change when only group/markup context changes.",
     "routing_or_markup": "Quote/routing/markup path changes without position metric rewrite. When snippets name UI surfaces and bid/ask/tier/mark streams, EPIC-PREP step 3g should emit verification_topology.pricing_oracle_rules[] rows (see docs/epic-prep-topology-contract.json)—do not rely on obligation prose alone for per-widget oracle binding."
   },
-  "disposition_values": ["primary_candidate", "deferral_candidate"],
+  "disposition_values": [
+    "primary_candidate",
+    "deferral_candidate"
+  ],
   "coverage_mapping_hint": {
     "invariant": {
       "section": "## Invariants under configuration change",
@@ -44,7 +47,7 @@
       "verification_class": "config_posture"
     },
     "environment_setup": {
-      "section": "## Data setup — account groups and quote publication",
+      "section": "## Data setup",
       "verification_class": "config_posture",
       "needs_environment_provision": true
     },
@@ -65,5 +68,17 @@
       "verification_class": null
     }
   },
-  "subprocess_id_pattern": "obl-{nnn}"
+  "subprocess_id_pattern": "obl-{nnn}",
+  "variation_kinds": [
+    "positive",
+    "negative",
+    "boundary",
+    "absence",
+    "structural"
+  ],
+  "_variation_note": "kind = assertion type (rounding/parity/…). variation.kind = test case polarity. For widget_ui, availability wording must not use kind parity — use invariant under Prerequisites.",
+  "widget_ui_rules": {
+    "forbid_parity_on_availability": true,
+    "availability_kind": "invariant"
+  }
 }

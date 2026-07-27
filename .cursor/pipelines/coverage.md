@@ -64,7 +64,7 @@ Jira **Smart Checklist** body: scenario-based lines aligned with this pipeline�
 
 **Epic verification focus (directional epics)**: Linked requirements often describe **both** branches of a configuration (e.g. FIFO vs WeightedAvg). The checklist must follow **`epic_verification_focus`** in `<KEY>-coverage.json` — **Jira narrative** (summary/description) wins over broad branching spec text unless `focus=` explicitly narrows. **`epic_verification_focus.statement`** is **JSON-only** for machine audit — **do not** paste `## Primary focus` into **`-coverage.md`**. Collapse setup into **`## Prerequisites`** (2–4 bullets). Do **not** emit symmetric peer sections for both branches when the epic describes a **one-way** change or a **single instrument class** unless both branches are `verification_role: primary` in the matrix.
 
-**`widget_ui` / `shell_first` placement**: Card/trade **availability** (“card is available”) belongs under **`## Prerequisites`**, not as the sole check under a surface `###` subsection. Field observables (Side, Quantity, Fill price, …) are one `-` each under the matching `###`. Currency / sign / 2dp claims live **with the field check** — do **not** open **`## Rounding and display policy`** on `shell_first` (that H2 is `formula_first` only). A subsection whose only primary line matches stub wording (`card is available`, …) is invalid — emit a keyed `!` deferral instead of a skeleton stub.
+**`widget_ui` / `shell_first` placement**: Card/trade **availability** (“card is available”) belongs under **`## Prerequisites`**, not as the sole check under a surface `###` subsection — use **`kind: invariant`**, never **`parity`**. Field observables are one `-` each under the matching `###` (**one check per variation obligation** from EPIC-PREP). Currency / sign / 2dp claims live **with the field check** as a `>` oracle line copied from inventory `spec_text` — do **not** open **`## Rounding and display policy`** on `shell_first` (that H2 is `formula_first` only). Setup H2 is **`## Data setup`** (neutral). End with **`## Not attempted`** when out-of-scope or unmatched catalogue cells exist. A subsection whose only primary line matches stub wording (`card is available`, …) is invalid — emit a keyed `!` deferral instead of a skeleton stub.
 
 **Out-of-epic fork prose**: For matrix rows with **`verification_role: out_of_epic`**, do **not** paste **non-target branch formulas** in checklist **`>`** lines or extra `-` lines. Confine fork description to **`explicitly_out_of_scope`** (consolidated bullet) unless Jira/AC **explicitly** requires in-checklist contrast; then at most one `### Contrast` subsection per prior rules.
 
@@ -302,9 +302,9 @@ jq '{ epic_archetype, verification_topology, verification_focus_proposed, princi
 
 ### 10. Dimensions pass
 
-Add explicit `-` checks **only when supported by evidence** — Jira epic text, **`requirements[].snippet_text`**, **`implementation_hits`**, or matching **`obligations_proposed[]`** row — that this epic **changes** or **must validate** that dimension. **Do not** add generic dimension lines “for coverage” without that signal (record **`anti_pattern_findings`** `dimension_without_evidence` if the model would otherwise pad).
+Add explicit `-` checks **only when supported by evidence** — Jira epic text, **`requirements[].snippet_text`**, **`implementation_hits`**, matching **`obligations_proposed[]`** row, **or** a **`variation`** object whose **`rule_id`** is in [`docs/variation-catalogue.json`](../../docs/variation-catalogue.json) (`variation_catalogue_rule`) — that this epic **changes** or **must validate** that dimension. **Do not** add generic dimension lines “for coverage” without that signal (record **`anti_pattern_findings`** `dimension_without_evidence` if the model would otherwise pad).
 
-**Contract** ([`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)): **Forbid** blanket lines such as **`! reason: epic silent on multi-account`** / **multi-group quote permutations** when ref contains **`primary_candidate`** **`invariant`** with **`config_vs_position`** `position_state` or `account_group_assignment` — those belong under **Invariants** (phase **4b**), not Dimensions.
+**Contract** ([`docs/coverage-obligation-contract.json`](../../docs/coverage-obligation-contract.json)): **Forbid** blanket lines such as **`! reason: epic silent on multi-account`** / **multi-group quote permutations** when ref contains **`primary_candidate`** **`invariant`** with **`config_vs_position`** `position_state` or **`account_group_assignment`** — those belong under **Invariants** (phase **4b**), not Dimensions.
 
 Candidate dimensions (each requires the evidence gate above):
 
@@ -314,8 +314,15 @@ Candidate dimensions (each requires the evidence gate above):
 - **FX conversion** — instrument vs account vs portfolio currency when multi-currency applies and epic implies.
 - **Order mark vs position mark**; **pre-trade validation** vs **open position** metrics separately when epic implies.
 - **Explain margin** / **perspective metrics** when referenced in requirements.
+- **Catalogue-mandated variations** already emitted as obligations in EPIC-PREP — map 1:1; do **not** drop them as “padding”.
 
 - Append `validation_log`: step `10`.
+
+### 10b. Oracle detail lines + Not attempted (variation)
+
+- For each primary check whose obligation has **`variation`**: require **≥1** `>` detail line that copies a distinctive substring of the inventory **`spec_text`** for that parameter (sign / color / currency / precision / “only if”). Verifier: `variation_oracle_detail_required`.
+- Set **`needs_setup: true`** when catalogue rule or variation kind needs seeded data (`negative`, `absence`, multi-fill).
+- Emit **`## Not attempted`** when `explicitly_out_of_scope` or any requirement `unmatched_spec_patterns` is non-empty — short bullets so the engineer sees where to extend. Do **not** hide gaps.
 
 ### 11. Scope prune
 

@@ -184,6 +184,23 @@ Downstream steps fail fast with `ERROR: contract violation: ...` when required u
 
 ---
 
+## D18 — Variation-based coverage (obligation = variation)
+
+**Decision:**
+
+1. EPIC-PREP extracts **`parameter_inventory[]`** from snippet structure (not a field-name whitelist) and applies [`docs/variation-catalogue.json`](../../docs/variation-catalogue.json) so each mandated variation becomes one `obligations_proposed[]` row with **`variation: { rule_id, kind, parameter }`**.
+2. COVERAGE keeps **1:1** obligation→check; Dimensions may cite **`variation_catalogue_rule`**; each variation check needs a `>` oracle line from inventory `spec_text`; paste may end with **`## Not attempted`**.
+3. **`page_id`** via MCP `confluence_search` is first-class; **`page_id_unresolved`** is recoverable and **not deferrable** after search.
+4. GROUND probes setup/console checks (including `chk-s*` / `environment_setup`); optional **`data_setup_recipe`**.
+5. Verifiers print **`mandated_variations` / `emitted` / `unmatched_patterns`** and **`variation_density`** (TeamCity build statistics).
+6. Root `-coverage.md` remains machine-generated; engineer-final Smart Checklist lives on CRTQA (one pipeline pass).
+
+**Rationale:** Formulation bans (SD1–SD6) cleaned structure but agents minimized text. Useful coverage is basic positive/negative/boundary variations per requirement group, not a paraphrase of the spec — and not a full middle-QA edge-case catalogue.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

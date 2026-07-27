@@ -26,7 +26,14 @@
   "topology_provenance": null,
   "_topology_provenance": {
     "ref_path": "epics/<KEY>/<KEY>-ref.json",
-    "fields_consumed": ["epic_archetype.value", "verification_topology.jira_scenario_surfaces", "verification_topology.shell_roles", "verification_topology.pricing_oracle_rules", "verification_topology.delivery_notes", "verification_topology.platform_reuse_candidates"],
+    "fields_consumed": [
+      "epic_archetype.value",
+      "verification_topology.jira_scenario_surfaces",
+      "verification_topology.shell_roles",
+      "verification_topology.pricing_oracle_rules",
+      "verification_topology.delivery_notes",
+      "verification_topology.platform_reuse_candidates"
+    ],
     "archetype_source": "copied_from_ref | inferred",
     "copied_at": "ISO-8601"
   },
@@ -38,7 +45,9 @@
       {
         "thread_id": "pct-001",
         "section_heading": "## Data setup — account groups and quote publication",
-        "obligation_ids": ["obl-001"]
+        "obligation_ids": [
+          "obl-001"
+        ]
       }
     ],
     "copied_at": "ISO-8601"
@@ -49,18 +58,32 @@
   "_epic_verification_focus": {
     "statement": "1–3 sentences: what this epic primarily verifies (Jira narrative wins over broad requirement branching unless focus= override).",
     "source": "jira_summary | jira_description | epic_ref_synthesis | epic_ref_proposed | user_trigger_focus",
-    "keywords": ["optional tokens e.g. FX_SPOT", "WeightedAvg"]
+    "keywords": [
+      "optional tokens e.g. FX_SPOT",
+      "WeightedAvg"
+    ]
   },
   "coverage_matrix": [],
   "_coverage_matrix_item": {
     "id": "matrix-row-001",
     "capability": "short name, e.g. Initial Margin",
-    "semantic_variants": ["e.g. midpoint vs order-time mark"],
+    "semantic_variants": [
+      "e.g. midpoint vs order-time mark"
+    ],
     "verification_role": "primary | supporting | out_of_epic",
     "_verification_role": "primary: top-level checks; supporting: detail lines or one contrast subsection; out_of_epic: explicitly_out_of_scope only, no top-level - for this row alone",
     "aggregation_level": "position | account | portfolio | null",
-    "surfaces": ["console", "webbroker", "dxtrade5", "adaptive", "api"],
-    "requirement_keys": ["CRT-593", "DXINV-CB-25"],
+    "surfaces": [
+      "console",
+      "webbroker",
+      "dxtrade5",
+      "adaptive",
+      "api"
+    ],
+    "requirement_keys": [
+      "CRT-593",
+      "DXINV-CB-25"
+    ],
     "notes_from_epic": "verbatim or paraphrase from Jira table/scenarios"
   },
   "xt_confluence_hits": [],
@@ -101,7 +124,9 @@
     "section": "## section heading",
     "subsection": "### optional",
     "scenario_line": "- [KEY] One observable outcome (platform prefix if needed)",
-    "detail_lines": ["> execution variant or formula expansion"],
+    "detail_lines": [
+      "> execution variant or formula expansion"
+    ],
     "linker_trace_lines": [],
     "_linker_trace_lines": "Machine audit only (> Discover:, fixture ids, affordance ids). Never copied into smart_checklist_markdown or -coverage.md.",
     "ambiguity": null,
@@ -133,7 +158,9 @@
     },
     "probe_waived": false,
     "_probe_waived": "true only when GROUND: probe_waive=yes on trigger",
-    "implementation_hit_ids": []
+    "implementation_hit_ids": [],
+    "needs_setup": false,
+    "_needs_setup_note": "True when variation needs seeded data (negative PL, empty field, etc.)"
   },
   "excluded_checks_with_reason": [],
   "_excluded_checks_with_reason_item": {
@@ -151,8 +178,12 @@
     "by_check_id": [],
     "_by_check_id_item": {
       "check_id": "chk-001",
-      "evidence_keys": ["CRT-856"],
-      "evidence_impl_ids": ["impl-001"],
+      "evidence_keys": [
+        "CRT-856"
+      ],
+      "evidence_impl_ids": [
+        "impl-001"
+      ],
       "status": "grounded | ungrounded",
       "_status_note": "Use ungrounded when check is misaligned with epic_verification_focus (e.g. top-level - for out_of_epic-only branch); note in validation_log step 12"
     },
@@ -174,11 +205,21 @@
   "_scenario_group_item": {
     "group_id": "sg-001",
     "title": "Issuing orders",
-    "check_ids": ["chk-001", "chk-002"],
+    "check_ids": [
+      "chk-001",
+      "chk-002"
+    ],
     "combinatorics": "variant_sequence | single_flow | matrix",
     "source": "principal_thread | section | operator_merge",
     "source_ref": "optional pct-001 or ## section heading"
   },
   "smart_checklist_markdown": null,
-  "_smart_checklist_markdown": "Full markdown for Jira Smart Checklist; duplicate of sibling <KEY>-coverage.md body."
+  "_smart_checklist_markdown": "Full markdown for Jira Smart Checklist; duplicate of sibling <KEY>-coverage.md body.",
+  "data_setup_recipe": [],
+  "_data_setup_recipe": {
+    "step": "resolve|seed|verify|teardown",
+    "command": "console command",
+    "expected_fragment": "substring of successful output",
+    "source_probe_id": "gp-001"
+  }
 }

@@ -26,7 +26,9 @@
   "_verification_focus_proposed": {
     "statement": "1–3 sentences; Jira-derived primary focus for COVERAGE to copy without paraphrase",
     "source": "jira_summary | jira_description | synthesis | operator_focus",
-    "keywords": ["FX_SPOT"]
+    "keywords": [
+      "FX_SPOT"
+    ]
   },
   "verification_topology": null,
   "_verification_topology": {
@@ -38,14 +40,31 @@
       "widget": "Watchlist",
       "metric": "bid_ask | mark | backup_price | config | null",
       "source_quote": "Verbatim Jira scenario bullet",
-      "obligation_ids": ["obl-001"]
+      "obligation_ids": [
+        "obl-001"
+      ]
     },
     "shell_roles": {
-      "console": { "status": "in_scope | not_applicable", "evidence": null },
-      "dxtrade5": { "status": "in_scope | not_applicable", "evidence": null },
-      "adaptive": { "status": "in_scope | not_applicable", "evidence": null },
-      "webbroker_dealer": { "status": "in_scope | not_applicable", "evidence": null },
-      "webbroker_client": { "status": "in_scope | not_applicable", "evidence": null }
+      "console": {
+        "status": "in_scope | not_applicable",
+        "evidence": null
+      },
+      "dxtrade5": {
+        "status": "in_scope | not_applicable",
+        "evidence": null
+      },
+      "adaptive": {
+        "status": "in_scope | not_applicable",
+        "evidence": null
+      },
+      "webbroker_dealer": {
+        "status": "in_scope | not_applicable",
+        "evidence": null
+      },
+      "webbroker_client": {
+        "status": "in_scope | not_applicable",
+        "evidence": null
+      }
     },
     "pricing_oracle_rules": [],
     "_pricing_oracle_rule_item": {
@@ -54,9 +73,13 @@
       "metric": "bid_ask | mark | midpoint | backup_price | close_price",
       "volume_control": "order_default_qty | order_qty | position_qty | first_tier | not_applicable",
       "oracle_rule": "first_tier_quote | text_configuration_closest_gte_qty | midpoint_invariant | mark_from_midpoint | console_show_prices_first_tier | console_agent_event_quote | console_agent_event_text_configuration | backup_midpoint_at_eod | unresolved",
-      "requirement_keys": ["CRT-1714"],
+      "requirement_keys": [
+        "CRT-1714"
+      ],
       "evidence_anchor": "snippet excerpt",
-      "obligation_ids": ["obl-001"],
+      "obligation_ids": [
+        "obl-001"
+      ],
       "disposition": "primary_candidate | deferral_candidate"
     },
     "delivery_notes": [],
@@ -66,15 +89,21 @@
       "status": "known_fail | excluded | waived | pending_verification",
       "source": "jira_comment | jira_description | operator_focus | post_implementation",
       "evidence": "Verbatim citation required for known_fail/excluded",
-      "linked_obligation_ids": ["obl-002"],
-      "linked_surface_ids": ["jss-004"]
+      "linked_obligation_ids": [
+        "obl-002"
+      ],
+      "linked_surface_ids": [
+        "jss-004"
+      ]
     },
     "principal_coverage_threads": [],
     "_principal_coverage_thread_item": {
       "thread_id": "pct-001",
       "title": "Data setup — account groups and quote publication",
       "coverage_thread": "environment_setup | functional_config | mapping_routing | surface_quotes | invariants | backup_eod | dimensions | deferral_only",
-      "obligation_ids": ["obl-001"],
+      "obligation_ids": [
+        "obl-001"
+      ],
       "required_when": "widget_ui_setup_thread | widget_ui_invariants_thread | widget_ui_backup_thread | null"
     },
     "platform_reuse_candidates": [],
@@ -118,7 +147,17 @@
     "jira_context": null,
     "snippet_status": "ok | missing | failed",
     "snippet_failure_reason": "yogi_extract_empty | no_cookie | macro_shape_unsupported | page_id_unresolved | mcp_export_failed | other",
-    "observable_yield": "integer >= 0; count of distinct UI parameters / table rows recognized in snippet_text (EPIC-PREP 3c). When snippet_status=ok and observable_yield>=2, require >= that many primary_candidate field obligations (availability / environment_setup do not count)."
+    "observable_yield": "integer >= 0; count of distinct UI parameters / table rows recognized in snippet_text (EPIC-PREP 3c). When snippet_status=ok and observable_yield>=2, require >= that many primary_candidate field obligations (availability / environment_setup do not count).",
+    "parameter_inventory": [
+      {
+        "name": "Side",
+        "spec_text": "Buy/Sell. Green for Buy, red for Sell",
+        "source_line": "Side — Buy/Sell. Colored..."
+      }
+    ],
+    "unmatched_spec_patterns": [],
+    "_parameter_inventory_note": "Structural extract from snippet_text; apply docs/variation-catalogue.json",
+    "_observable_yield_note": "Equals mandated_variations count from inventory+catalogue; verifier recomputes"
   },
   "traversal": {
     "nested_refs": [],
@@ -132,7 +171,9 @@
     "statement": "Human-readable obligation (what must be verified)",
     "assertion_fragment": "Short observable for checklist bullet (no repeated subsection context)",
     "emit_subsection": "### Transaction card (FX_SPOT Trade — Transaction Info)",
-    "requirement_keys": ["CRT-1234"],
+    "requirement_keys": [
+      "CRT-1234"
+    ],
     "evidence_anchor": "snippet excerpt or jira field reference",
     "_evidence_anchor_object": {
       "source": "yogi_snippet | jira_description",
@@ -148,8 +189,18 @@
       "needs_environment_provision": false,
       "needs_dual_account_contrast": false,
       "linked_delivery_note_ids": [],
-      "personas": ["console", "retail"]
-    }
+      "personas": [
+        "console",
+        "retail"
+      ]
+    },
+    "variation": {
+      "rule_id": "signed_colored",
+      "kind": "negative",
+      "parameter": "Realized PL"
+    },
+    "needs_setup": true,
+    "_variation_note": "One obligation per catalogue-mandated variation; assertion_fragment = concrete case"
   },
   "obligations_reconcile": {
     "epic_summary_aligned": true,

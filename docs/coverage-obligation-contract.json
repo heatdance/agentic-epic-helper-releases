@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "_comment": "COVERAGE obligation closure vs epic-ref obligations_proposed[]. Playbook: .cursor/pipelines/coverage.md. Kinds: docs/epic-obligation-kinds.json.",
+  "schema_version": 2,
+  "_comment": "COVERAGE obligation closure vs epic-ref obligations_proposed[]. Playbook: .cursor/pipelines/coverage.md. Kinds: docs/epic-obligation-kinds.json. D18: variation catalogue, oracle detail lines, Not attempted, neutral Data setup.",
   "row_complete_rule": "Every obligations_proposed[] row with disposition primary_candidate must appear in obligations_coverage with status covered or excluded_with_reason (with obligation_id on exclusion).",
   "obligations_coverage_status": [
     "covered",
@@ -23,17 +23,19 @@
   "section_requirements": {
     "invariants_section_heading": "## Invariants under configuration change",
     "rounding_section_heading": "## Rounding and display policy",
-    "environment_setup_section_heading": "## Data setup — account groups and quote publication",
+    "environment_setup_section_heading": "## Data setup",
     "require_invariants_section_when": "ref.obligations_proposed has any kind invariant with disposition primary_candidate",
     "require_rounding_section_when": "ref.obligations_proposed has any kind rounding with disposition primary_candidate",
-    "require_environment_setup_section_when": "ref.verification_topology.principal_coverage_threads has coverage_thread environment_setup OR ref.obligations_proposed has kind environment_setup with disposition primary_candidate"
+    "require_environment_setup_section_when": "ref.verification_topology.principal_coverage_threads has coverage_thread environment_setup OR ref.obligations_proposed has kind environment_setup with disposition primary_candidate",
+    "not_attempted_section_heading": "## Not attempted"
   },
   "deferral_obligations_coverage_status": "deferred_in_check",
   "dimensions_phase_rules": {
     "allow_dimension_line_only_when": [
       "jira_epic_text_mentions_dimension",
       "matching_obligation_id_in_ref",
-      "snippet_text_mentions_dimension"
+      "snippet_text_mentions_dimension",
+      "variation_catalogue_rule"
     ],
     "forbid_generic_deferral_when": "ref contains primary_candidate invariant with config_vs_position position_state or account_group_assignment"
   },
@@ -53,7 +55,10 @@
     "availability_misplaced",
     "invariants_section_without_config_vs_position",
     "observable_yield_shortfall",
-    "rounding_section_on_shell_first"
+    "rounding_section_on_shell_first",
+    "variation_shortfall",
+    "missing_variation_oracle_detail",
+    "parity_on_availability"
   ],
   "tag_level_stub_patterns": [
     "card is available",
@@ -99,9 +104,17 @@
     "stub_check_always_errors_on_primary": true,
     "single_stub_subsection_errors": true,
     "redundant_context_token_match": true,
-    "observable_yield_min_primary_checks": true
+    "observable_yield_min_primary_checks": true,
+    "variation_oracle_detail_required": true,
+    "variation_oracle_from_spec_text": true,
+    "not_attempted_section_when_unmatched_or_out_of_scope": true
   },
-  "excluded_checks_item_fields": ["check_id", "reason", "obligation_id", "evidence"],
+  "excluded_checks_item_fields": [
+    "check_id",
+    "reason",
+    "obligation_id",
+    "evidence"
+  ],
   "reinforce_allowed_inputs": {
     "_comment": "COVERAGE-REINFORCE: only — production COVERAGE still forbids -discover.json",
     "playbook": ".cursor/pipelines/coverage-reinforce.md",
@@ -133,5 +146,10 @@
     ],
     "topology_contract": "docs/coverage-reinforce-topology-contract.json",
     "principal_contract": "docs/coverage-reinforce-principal-contract.json"
+  },
+  "variation_rules": {
+    "catalogue": "docs/variation-catalogue.json",
+    "oracle_detail_min": 1,
+    "needs_setup_field": "needs_setup"
   }
 }

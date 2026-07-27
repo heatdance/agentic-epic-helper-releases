@@ -30,7 +30,8 @@
 
 ### 0. Console gate
 
-- Run **`crtqa_console_probe.py`** when console checks exist.
+- Run **`crtqa_console_probe.py`** when console checks exist (including **setup** / **`chk-s*`** / **`environment_setup`** / **`needs_setup`** rows — D18; do not skip them).
+- When probes succeed, fill **`data_setup_recipe[]`** (`resolve` → `seed` → `verify` → `teardown`) using **only** `verified_syntax` / observed output fragments — never invent commands.
 - On failure: **STOP** unless **`probe_waive=yes`** (log in **`validation_log`**).
 
 ### 1. Identify console-tagged checks

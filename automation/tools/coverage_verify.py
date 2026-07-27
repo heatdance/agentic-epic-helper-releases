@@ -34,6 +34,19 @@ import sys
 from pathlib import Path
 from typing import Any
 
+try:
+    from variation_catalogue import (  # type: ignore
+        extract_parameter_inventory,
+        mandated_variations_for_inventory,
+        obligation_variation_key,
+    )
+except ImportError:  # pragma: no cover
+    from automation.tools.variation_catalogue import (  # type: ignore
+        extract_parameter_inventory,
+        mandated_variations_for_inventory,
+        obligation_variation_key,
+    )
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONTRACT_PATH = REPO_ROOT / "docs" / "coverage-obligation-contract.json"
 TOPOLOGY_CONTRACT_PATH = REPO_ROOT / "docs" / "coverage-topology-contract.json"
@@ -286,6 +299,7 @@ def verify_obligations(
 
     if ref:
         errors.extend(verify_atomic_checks(coverage, ref, contract))
+        errors.extend(_verify_not_attempted_section(coverage, ref, md_path, contract))
 
     return errors
 
@@ -524,7 +538,7 @@ def verify_atomic_checks(
                     )
                     break
 
-    # SD1: observable_yield → enough non-availability primary checks per key.
+    # SD1 / D18: mandated variations from inventory+catalogue (not declared yield alone).
     if atomic_rules.get("observable_yield_min_primary_checks", True):
         for row in ref.get("requirements") or []:
             if not isinstance(row, dict):
@@ -532,10 +546,16 @@ def verify_atomic_checks(
             key = str(row.get("key") or "")
             if not key or row.get("snippet_status") != "ok":
                 continue
-            try:
-                yield_n = int(row.get("observable_yield") or 0)
-            except (TypeError, ValueError):
-                yield_n = 0
+            inv = row.get("parameter_inventory")
+            if not isinstance(inv, list) or not inv:
+                inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+            mandated, _unmatched = mandated_variations_for_inventory(inv)
+            yield_n = len(mandated)
+            if yield_n < 1:
+                try:
+                    yield_n = int(row.get("observable_yield") or 0)
+                except (TypeError, ValueError):
+                    yield_n = 0
             if yield_n < 2:
                 continue
             field_checks = 0
@@ -556,9 +576,115 @@ def verify_atomic_checks(
             if field_checks < yield_n:
                 errors.append(
                     f"observable_yield_shortfall: requirement {key} "
-                    f"observable_yield={yield_n} but only {field_checks} field-level primary check(s)"
+                    f"mandated_variations={yield_n} but only {field_checks} field-level primary check(s)"
                 )
 
+    # D18: variation checks need oracle detail from spec_text
+    if atomic_rules.get("variation_oracle_detail_required", False):
+        obl_by_id = {
+            str(o.get("id")): o
+            for o in (ref.get("obligations_proposed") or [])
+            if isinstance(o, dict) and o.get("id")
+        }
+        # Map requirement key → inventory specs
+        inv_by_key: dict[str, list[dict[str, Any]]] = {}
+        for row in ref.get("requirements") or []:
+            if not isinstance(row, dict) or not row.get("key"):
+                continue
+            inv = row.get("parameter_inventory")
+            if not isinstance(inv, list) or not inv:
+                inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+            inv_by_key[str(row["key"])] = inv
+        for chk in checks:
+            if chk.get("verification_role") != "primary":
+                continue
+            oids = chk.get("obligation_ids") or []
+            if not oids:
+                continue
+            obl = obl_by_id.get(str(oids[0]))
+            if not obl or not obligation_variation_key(obl):
+                continue
+            details = chk.get("detail_lines") or []
+            detail_blob = "\n".join(str(d) for d in details).lower()
+            if not detail_blob.strip():
+                errors.append(
+                    f"missing_variation_oracle_detail: check {chk.get('id')} "
+                    "needs >=1 > detail line from inventory spec_text"
+                )
+                continue
+            # Prefer substring from matched parameter's spec_text
+            var = obl.get("variation") or {}
+            param = str(var.get("parameter") or "").split(":")[0].split(" and ")[0].strip()
+            specs: list[str] = []
+            for rk in obl.get("requirement_keys") or []:
+                for inv_row in inv_by_key.get(str(rk), []):
+                    name = str(inv_row.get("name") or "")
+                    if param.lower() in name.lower() or name.lower() in param.lower():
+                        specs.append(str(inv_row.get("spec_text") or ""))
+            # Token check: at least one distinctive token from spec or assertion hint words
+            tokens = []
+            for sp in specs:
+                for tok in ("signed", "unsigned", "not signed", "currency", "green", "red", "digit", "native", "collapsed", "available"):
+                    if tok in sp.lower():
+                        tokens.append(tok)
+            if tokens and not any(t in detail_blob for t in tokens):
+                errors.append(
+                    f"missing_variation_oracle_detail: check {chk.get('id')} "
+                    f"detail_lines must echo inventory spec tokens {tokens[:4]}"
+                )
+
+    return errors
+
+
+def _variation_density(coverage: dict[str, Any], ref: dict[str, Any]) -> tuple[int, int]:
+    """Return (variation_checks, mandated)."""
+    mandated_n = 0
+    for row in ref.get("requirements") or []:
+        if not isinstance(row, dict) or row.get("snippet_status") != "ok":
+            continue
+        inv = row.get("parameter_inventory")
+        if not isinstance(inv, list) or not inv:
+            inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+        mandated, _ = mandated_variations_for_inventory(inv)
+        mandated_n += len(mandated)
+    obl_by_id = {
+        str(o.get("id")): o
+        for o in (ref.get("obligations_proposed") or [])
+        if isinstance(o, dict) and o.get("id")
+    }
+    var_checks = 0
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict) or chk.get("verification_role") != "primary":
+            continue
+        oids = chk.get("obligation_ids") or []
+        if not oids:
+            continue
+        obl = obl_by_id.get(str(oids[0]))
+        if obl and obligation_variation_key(obl):
+            var_checks += 1
+    return var_checks, mandated_n
+
+
+def _verify_not_attempted_section(
+    coverage: dict[str, Any], ref: dict[str, Any], md_path: Path | None, contract: dict[str, Any]
+) -> list[str]:
+    errors: list[str] = []
+    atomic = contract.get("atomic_check_rules") or {}
+    if not atomic.get("not_attempted_section_when_unmatched_or_out_of_scope", False):
+        return errors
+    heading = (contract.get("section_requirements") or {}).get(
+        "not_attempted_section_heading", "## Not attempted"
+    )
+    need = bool(coverage.get("explicitly_out_of_scope"))
+    for row in ref.get("requirements") or []:
+        if isinstance(row, dict) and row.get("unmatched_spec_patterns"):
+            need = True
+            break
+    if not need:
+        return errors
+    md_body = _md_body(coverage, md_path)
+    if heading not in md_body:
+        errors.append(f"smart_checklist_markdown missing section {heading!r}")
     return errors
 
 
@@ -1567,6 +1693,20 @@ def main() -> int:
         return 1
 
     print(f"OK coverage_verify mode={args.mode}")
+    if args.mode == "obligations" and args.ref:
+        ref_obj = _load_json(args.ref.resolve())
+        if ref_obj:
+            var_n, mand_n = _variation_density(coverage, ref_obj)
+            dens = f"{(var_n / mand_n):.2f}" if mand_n else "n/a"
+            print(
+                f"variation_density={dens} variation_checks={var_n} mandated={mand_n}"
+            )
+            print(
+                f"##teamcity[buildStatisticValue key='corner.variation_checks' value='{var_n}']"
+            )
+            print(
+                f"##teamcity[buildStatisticValue key='corner.mandated_variations' value='{mand_n}']"
+            )
     return 0
 
 

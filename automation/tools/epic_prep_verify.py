@@ -137,14 +137,24 @@ VALID_CONFIG_VS = frozenset(
         "not_applicable",
     }
 )
-PARAM_TABLE_RE = re.compile(
-    r"\b(Side|Quantity|Description|Fill price|Commission|Fees|Taxes|Symbol|"
-    r"Account name|Transaction date|Realized PL|Total cost|Cash effect)\b",
-    re.I,
-)
 QUOTE_KEYWORDS = re.compile(
     r"\b(bid|ask|tier|textconfiguration|midpoint|mark|quote)\b", re.I
 )
+
+try:
+    from variation_catalogue import (  # type: ignore
+        extract_parameter_inventory,
+        mandated_variations_for_inventory,
+        obligation_variation_key,
+        variation_key,
+    )
+except ImportError:  # pragma: no cover
+    from automation.tools.variation_catalogue import (  # type: ignore
+        extract_parameter_inventory,
+        mandated_variations_for_inventory,
+        obligation_variation_key,
+        variation_key,
+    )
 
 
 def _load_json(path: Path) -> dict[str, Any] | None:
@@ -188,7 +198,11 @@ def _deferral_accepted(ref: dict[str, Any]) -> bool:
     return False
 
 
-RECOVERABLE_SNIPPET_FAILURES = frozenset({"mcp_export_failed", "no_cookie"})
+RECOVERABLE_SNIPPET_FAILURES = frozenset(
+    {"mcp_export_failed", "no_cookie", "page_id_unresolved"}
+)
+# page_id_unresolved must not be waived via deferral_accepted (CI or local).
+NON_DEFERRABLE_SNIPPET_FAILURES = frozenset({"page_id_unresolved"})
 
 
 def _ci_strict_blocks_deferral(*, ci_strict: bool) -> bool:
@@ -654,16 +668,6 @@ def verify_scenario_inventory(ref: dict[str, Any]) -> list[str]:
     return errors
 
 
-def _snippet_has_parameter_table(snippet: str) -> bool:
-    return len(PARAM_TABLE_RE.findall(snippet)) >= 2
-
-
-def _count_snippet_observables(snippet: str) -> int:
-    """Distinct parameter-like tokens in snippet (observable_yield helper)."""
-    found = {m.group(0).lower() for m in PARAM_TABLE_RE.finditer(snippet or "")}
-    return len(found)
-
-
 def _is_availability_obligation(obl: dict[str, Any]) -> bool:
     text = " ".join(
         [
@@ -677,12 +681,45 @@ def _is_availability_obligation(obl: dict[str, Any]) -> bool:
         "trade card is available",
         "is present and visible",
         "not omitted",
+        "available for fx_spot",
+        "available when the user",
     )
     return any(p in text for p in patterns)
 
 
+def collect_variation_metrics(ref: dict[str, Any]) -> dict[str, int]:
+    """Aggregate mandated / emitted / unmatched for build stats."""
+    mandated_n = 0
+    unmatched_n = 0
+    emitted_n = 0
+    for row in ref.get("requirements") or []:
+        if not isinstance(row, dict) or row.get("snippet_status") != "ok":
+            continue
+        inv = row.get("parameter_inventory")
+        if not isinstance(inv, list) or not inv:
+            inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+        mandated, unmatched = mandated_variations_for_inventory(inv)
+        mandated_n += len(mandated)
+        unmatched_n += len(unmatched)
+        unmatched_decl = row.get("unmatched_spec_patterns")
+        if isinstance(unmatched_decl, list):
+            unmatched_n = max(unmatched_n, len(unmatched_decl))
+    for obl in ref.get("obligations_proposed") or []:
+        if not isinstance(obl, dict):
+            continue
+        if obl.get("disposition") != "primary_candidate":
+            continue
+        if obligation_variation_key(obl):
+            emitted_n += 1
+    return {
+        "mandated_variations": mandated_n,
+        "emitted_variations": emitted_n,
+        "unmatched_patterns": unmatched_n,
+    }
+
+
 def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
-    """widget_ui: multi-parameter snippets need field-level obligations."""
+    """widget_ui: inventory + variation catalogue → one obligation per mandated variation."""
     errors: list[str] = []
     arch = (ref.get("epic_archetype") or {}).get("value")
     if arch not in ("widget_ui", "mixed"):
@@ -697,6 +734,17 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
     for obl in ref.get("obligations_proposed") or []:
         if not isinstance(obl, dict):
             continue
+        # Forbid parity on availability wording for widget_ui
+        if (
+            arch == "widget_ui"
+            and obl.get("kind") == "parity"
+            and obl.get("disposition") == "primary_candidate"
+            and _is_availability_obligation(obl)
+        ):
+            errors.append(
+                f"parity_on_availability: {obl.get('id')} uses availability wording; "
+                "use kind invariant under Prerequisites for widget_ui"
+            )
         for rk in obl.get("requirement_keys") or []:
             obls_by_key.setdefault(str(rk), []).append(obl)
 
@@ -706,24 +754,39 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
         if status != "ok":
             continue
 
+        inv = row.get("parameter_inventory")
+        if not isinstance(inv, list) or not inv:
+            inv = extract_parameter_inventory(snippet)
+        if len(inv) < 1:
+            continue
+
+        mandated, unmatched = mandated_variations_for_inventory(inv)
+        if unmatched:
+            names = ", ".join(f"{u.get('name')}" for u in unmatched[:8])
+            print(
+                f"WARN unmatched_spec_patterns: {key} has {len(unmatched)} "
+                f"inventory cell(s) with no catalogue rule ({names})",
+                file=sys.stderr,
+            )
+
+        min_needed = len(mandated)
+        if min_needed < 1:
+            continue
+
+        # Declared observable_yield must not undercut mandated count
         try:
-            yield_n = int(row.get("observable_yield")) if row.get("observable_yield") is not None else None
+            declared = (
+                int(row["observable_yield"])
+                if row.get("observable_yield") is not None
+                else None
+            )
         except (TypeError, ValueError):
-            yield_n = None
-        if yield_n is None:
-            # Backfill from snippet when agent omitted the field.
-            inferred = _count_snippet_observables(snippet)
-            yield_n = inferred if inferred >= 2 else 0
-            if inferred >= 2 and row.get("observable_yield") is None:
-                # Soft signal: prefer explicit field, but still enforce via inferred count.
-                pass
-
-        if yield_n < 2 and not _snippet_has_parameter_table(snippet):
-            continue
-
-        min_needed = max(yield_n, 2) if _snippet_has_parameter_table(snippet) or yield_n >= 2 else 0
-        if min_needed < 2:
-            continue
+            declared = None
+        if declared is not None and declared < min_needed:
+            errors.append(
+                f"observable_yield_undercut: {key} declared observable_yield={declared} "
+                f"but mandated_variations={min_needed}"
+            )
 
         obls = obls_by_key.get(key) or []
         primary = [
@@ -734,17 +797,8 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
             and o.get("kind") != "environment_setup"
             and not _is_availability_obligation(o)
         ]
-        if len(primary) < min_needed:
-            errors.append(
-                f"observable_yield_shortfall: {key} needs >= {min_needed} "
-                f"primary_candidate field obligation(s) "
-                f"(observable_yield={yield_n}), got {len(primary)}"
-            )
-        elif len(primary) < 2 and _snippet_has_parameter_table(snippet):
-            errors.append(
-                f"requirement_tag_only_obligation: {key} snippet has parameter table "
-                f"but only {len(primary)} primary_candidate obligation(s)"
-            )
+
+        covered_keys: set[str] = set()
         for obl in primary:
             frag = str(obl.get("assertion_fragment") or "").strip()
             if not frag:
@@ -752,6 +806,40 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
                     f"obligation {obl.get('id')}: assertion_fragment required for "
                     f"widget_ui field obligation ({key})"
                 )
+            vk = obligation_variation_key(obl)
+            if vk:
+                covered_keys.add(vk)
+            elif min_needed >= 2:
+                errors.append(
+                    f"obligation {obl.get('id')}: missing variation "
+                    f"{{rule_id, kind, parameter}} for {key}"
+                )
+
+        missing = [
+            m
+            for m in mandated
+            if variation_key(m) not in covered_keys
+        ]
+        # Soft match: if obligation count >= mandated and all have variation, OK
+        # Strict: list uncovered mandated variations by name
+        if missing and len(primary) < min_needed:
+            detail = "; ".join(
+                f"{m.get('parameter')}/{m.get('kind')}/{m.get('rule_id')}"
+                for m in missing[:12]
+            )
+            errors.append(
+                f"variation_shortfall: {key} needs >= {min_needed} "
+                f"variation obligations, got {len(primary)}; "
+                f"uncovered: {detail}"
+            )
+        elif missing and len(covered_keys) < min_needed:
+            detail = "; ".join(
+                f"{m.get('parameter')}/{m.get('kind')}/{m.get('rule_id')}"
+                for m in missing[:12]
+            )
+            errors.append(
+                f"variation_shortfall: {key} uncovered mandated variations: {detail}"
+            )
 
     return errors
 
@@ -784,6 +872,12 @@ def verify_ref(
         if status == "ok":
             continue
         reason = str(row.get("snippet_failure_reason") or "").strip()
+        if reason in NON_DEFERRABLE_SNIPPET_FAILURES:
+            errors.append(
+                f"requirements {key}: snippet_status {status!r} "
+                f"(page_id_unresolved is not deferrable — resolve via confluence_search)"
+            )
+            continue
         if defer_ok and not block_deferral:
             continue
         if defer_ok and block_deferral:
@@ -956,7 +1050,16 @@ def main() -> int:
 
     n_obl = len(ref.get("obligations_proposed") or [])
     arch = (ref.get("epic_archetype") or {}).get("value", "n/a")
-    print(f"OK epic_prep_verify mode={args.mode} obligations={n_obl} archetype={arch}")
+    metrics = collect_variation_metrics(ref)
+    print(
+        f"OK epic_prep_verify mode={args.mode} obligations={n_obl} archetype={arch} "
+        f"mandated_variations={metrics['mandated_variations']} "
+        f"emitted={metrics['emitted_variations']} "
+        f"unmatched_patterns={metrics['unmatched_patterns']}"
+    )
+    # TeamCity service message for build statistics
+    for k, v in metrics.items():
+        print(f"##teamcity[buildStatisticValue key='corner.{k}' value='{v}']")
     return 0
 
 

@@ -3,39 +3,36 @@
 ## Prerequisites
 
 - [CRT-635] Console — open at least one FX_SPOT position
-
-- [CRT-635] Adaptive — Transactions and Trade History show the FX_SPOT position
+> Prerequisite: console fill for FX_SPOT before Adaptive checks
 
 ## Adaptive — Transactions
 
 ### Transaction card
 
-- [DXINV-025] Side shows Buy or Sell, green for Buy and red for Sell
-
-- [DXINV-025] Quantity is unsigned
-
-- [DXINV-025] Fill price shows account currency symbol, native format
-
-- [DXINV-025] Transaction date, Symbol, Account name are present
+- [DXINV-025] Quantity from negative source displays without a minus sign
+> Not signed — source-negative quantity displays without a minus sign
+- [DXINV-025] Fill price shows account currency symbol
+> Displayed with account currency symbol
 
 ### Transaction details card
 
-- [DXINV-236] renders collapsed by default
-
-- [DXINV-236] Cash effect unsigned, 2 decimals, account currency
+- [DXINV-236] Cash effect displays without a minus sign
+> Not signed
 
 ## Adaptive — Trade History
 
 ### Trade card
 
-- [DXINV-CB-92] Side coloring, Quantity unsigned, Total cost signed
-
-- [DXINV-CB-92] Quantity is unsigned
-
-- [DXINV-CB-92] Total cost is signed
+- [DXINV-CB-92] Quantity from negative source displays without a minus sign
+> Not signed
+- [DXINV-CB-92] Total cost shows account currency symbol
+> Displayed with account currency symbol
 
 ### Trade details card
 
-- [DXINV-CB-95] Realized PL signed, red negative, green positive
-
-- [DXINV-CB-95] Fees and Commission unsigned
+- [DXINV-CB-95] negative Realized PL shows minus sign and red
+> Signed. Colored: red for negative, green for positive
+- [DXINV-CB-95] positive Realized PL shows green
+> Signed. Colored: red for negative, green for positive
+- [DXINV-CB-95] Fees and Commission display without a minus sign
+> Not signed

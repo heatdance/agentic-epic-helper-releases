@@ -97,21 +97,28 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
 ### 3. Requirements (3.2) — Yogi
 
 - Collect requirement keys from the **Requirement Yogi** custom field if present; else regex for `/requirements/` URLs and `req-CRT-…` / similar in description and comments (best-effort). Treat this set as **`jira_linked_keys`** for finalize gating (step 8).
-- For each key: [`automation/tools/yogi-tool/yogi_resolve.py`](../../automation/tools/yogi-tool/yogi_resolve.py) → `short_url`, `anchor`; obtain `page_id` via `--follow` + cookie or canonical URL from human/browser.
+- For each key: [`automation/tools/yogi-tool/yogi_resolve.py`](../../automation/tools/yogi-tool/yogi_resolve.py) → `short_url`, `anchor`.
+- **Obtain `page_id` (first-class paths, any one succeeds)**:
+  1. `--follow` + cookie / canonical URL from human or browser when available.
+  2. **MCP `confluence_search`** (narrow CQL: space + title/text for the requirement key or widget page title) → take `page_id` from the hit — **equal** to cookie follow. Required path in CI when cookie/browser are absent (CB-style keys often lack resolvable short URLs).
+  3. Known `page_id` already on the Yogi URL / Jira custom field.
 - For each `(page_id, key)`: [`yogi_snippet.py`](../../automation/tools/yogi-tool/yogi_snippet.py) → append to `requirements[]` with `snippet_text`, `extract_mode`.
 - **Confluence method**: **MCP `confluence_get_page` (storage) + `yogi_snippet.py --storage-file`** is a **first-class success path**, equal to live REST + `yogi_snippet`. Set **`sources.confluence_method`** to `snippet` / `mcp` / `mixed` accordingly. Do **not** treat MCP-only extraction as a “failed” or inferior path in **`validation_log`** prose unless the row is still empty after retries.
 - **Snippet status (required on every row)**:
   - If extract succeeds: **`snippet_status`**: `ok`; **`snippet_failure_reason`**: omit or `null`.
   - If `snippet_text` is null or empty: **`snippet_status`**: `missing` or `failed`; set **`snippet_failure_reason`** to one of: `yogi_extract_empty`, `no_cookie`, `macro_shape_unsupported`, `page_id_unresolved`, `mcp_export_failed`, `other` (with short detail in `validation_log` if needed).
+- After a successful extract: fill **`parameter_inventory[]`** (`name`, `spec_text`, `source_line`) from the snippet structure (markdown table rows or `Name — Spec` / `Name: Spec` lines) — do **not** invent names absent from the snippet. Apply [`docs/variation-catalogue.json`](../../docs/variation-catalogue.json); list unmatched cells in **`unmatched_spec_patterns[]`**.
 - **Never fabricate** `snippet_text`.
 
 ### 3b. Snippet completion retry (before Design)
 
 - After the initial pass in step 3, for each `requirements[]` row whose **`key`** is in **`jira_linked_keys`** and where `snippet_text` is still null or empty **and** `snippet_failure_reason` is in the **recoverable** set below, run **exactly one** additional attempt before proceeding to step 4:
-  - **Recoverable reasons**: `mcp_export_failed`, `no_cookie` (when MCP storage export is available in this session), `yogi_extract_empty` (one MCP + `--storage-file` attempt if not already tried for that key).
-  - **Retry action**: MCP `confluence_get_page` (storage) → save to `temp/` → `yogi_snippet.py --storage-file` per [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md). Update the row’s `snippet_text`, `snippet_status`, and `snippet_failure_reason` after the attempt.
+  - **Recoverable reasons**: `mcp_export_failed`, `no_cookie` (when MCP storage export is available in this session), `yogi_extract_empty` (one MCP + `--storage-file` attempt if not already tried for that key), **`page_id_unresolved`** (when MCP `confluence_search` is available — resolve `page_id` then export storage).
+  - **Retry action for missing page_id**: MCP `confluence_search` → set `page_id` → MCP `confluence_get_page` (storage) → `yogi_snippet.py --storage-file`.
+  - **Retry action when page_id known**: MCP `confluence_get_page` (storage) → save to `temp/` → `yogi_snippet.py --storage-file` per [`automation/docs/yogi-url-resolve.md`](../../automation/docs/yogi-url-resolve.md). Update the row’s `snippet_text`, `snippet_status`, and `snippet_failure_reason` after the attempt.
 - Append **`validation_log`**: `{ "step": "3b_snippet_retry", "at": "<ISO8601>", "action": "<keys retried and outcome summary>" }`.
-- Rows with **`macro_shape_unsupported`**, **`page_id_unresolved`**, or persistent **`other`** after retry need explicit handling: either document **`deferral_accepted`** in `validation_log` (step 8) or keep `failed` and **block finalize** per step 8.
+- Rows with **`macro_shape_unsupported`** or persistent **`other`** after retry need explicit handling: either document **`deferral_accepted`** in `validation_log` (step 8) or keep `failed` and **block finalize** per step 8.
+- **`page_id_unresolved` after search retry is not deferrable** when MCP search was available — keep `failed` and **block finalize** (list keys). Do not paper over with `deferral_accepted`.
 
 ### 3c. Obligation extraction — per-requirement subprocess (mandatory)
 
@@ -127,8 +134,8 @@ Normative paths use **`{EpicDir}`** as directory prefix ending in `/<KEY>/`.
    - Bind **`linked_delivery_note_ids`** when step **3h** will emit matching **`delivery_notes`** (may back-fill in **3i**).
 4. Use **disambiguation_notes** — e.g. instrument-type config change ≠ account group assignment ≠ position-state invariant.
 5. **0 obligations** is valid when snippet is purely procedural with no testable obligation; log in subprocess output `notes`.
-6. **`widget_ui` / UI-heavy `mixed` atomic rule:** when `snippet_text` names **≥2** UI parameters / table rows (Side, Quantity, Description, fees, card sections, etc.), emit **one `primary_candidate` obligation per observable** — not one obligation per entire requirement key. Card-level availability (`renders`, `not omitted`) may be separate `invariant` / `parity` obligations but **do not** replace field obligations. Set **`requirements[].observable_yield`** to the count of distinct parameters recognized; verifier requires **≥ `observable_yield`** field obligations (availability / `environment_setup` do **not** count).
-7. When `snippet_status` is **failed**: emit **one** `deferral_candidate` with **human** `deferral_reason` (name the key and what is unavailable — **never** bare enum `mcp_export_failed` / `no_cookie` alone) — **no** field obligations for that key.
+6. **`widget_ui` / UI-heavy `mixed` atomic rule (variation-based):** for each `parameter_inventory[]` row, apply [`docs/variation-catalogue.json`](../../docs/variation-catalogue.json) and emit **one `primary_candidate` obligation per mandated variation** (not one per entire requirement key, and not a bare paraphrase of the whole table). Set **`variation`**: `{ "rule_id", "kind" (`positive`|`negative`|`boundary`|`absence`|`structural`), "parameter" }`. **`assertion_fragment`** names the **concrete case** (e.g. negative Realized PL shows minus and red), not a restatement of the whole parameter cell. Apply catalogue **`collapse`** so identical cells share one representative check listing field names. Card-level availability (`renders`, `not omitted`) → **`kind: invariant`** under Prerequisites — **forbidden** as `kind: parity` for `widget_ui`. Set **`requirements[].observable_yield`** to **`mandated_variations` count** from inventory+catalogue (verifier recomputes; declared value must not undercut). Availability / `environment_setup` do **not** count toward the yield.
+7. When `snippet_status` is **failed**: emit **one** `deferral_candidate` with **human** `deferral_reason` (name the key and what is unavailable — **never** bare enum `mcp_export_failed` / `no_cookie` / `page_id_unresolved` alone) — **no** field obligations for that key. Prefer fixing page_id via step **3b** over deferral.
 
 Merge slices into ref **`obligations_proposed[]`** (dedupe by statement similarity; keep distinct kinds separate).
 
@@ -268,7 +275,7 @@ Per [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-co
 
 ### 8. Finalize
 
-- **Snippet finalize gate**: Do **not** delete `temp/` or treat the run as complete while any `requirements[]` row whose **`key`** is in **`jira_linked_keys`** (step 3) has **`snippet_status`** `missing` or `failed`, **unless** `validation_log` contains an explicit **`deferral_accepted`** entry for this epic (short reason, e.g. macro unsupported, page unresolved, or human-approved skip). Keys never collected into `requirements[]` are out of scope for this gate.
+- **Snippet finalize gate**: Do **not** delete `temp/` or treat the run as complete while any `requirements[]` row whose **`key`** is in **`jira_linked_keys`** (step 3) has **`snippet_status`** `missing` or `failed`, **unless** `validation_log` contains an explicit **`deferral_accepted`** entry for this epic (short reason, e.g. macro unsupported or human-approved skip). **Do not** accept `deferral_accepted` for **`page_id_unresolved`** when MCP `confluence_search` was available — list unresolved keys and fail. Keys never collected into `requirements[]` are out of scope for this gate.
 - Set `sources.confluence_method` (`snippet` / `mcp` / `mixed`) as appropriate.
 - Ensure **`sources.bitbucket_repo`** reflects the resolved workspace/slug (step **1** / **5b**) for downstream **COVERAGE** when the user omits `repo=` on the coverage trigger.
 - Set **`schema_version`: 4** on the ref.

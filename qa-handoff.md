@@ -1,24 +1,24 @@
 # QA handoff — Corner Trader workspace
 
-Last updated: 2026-07-27 (D17 consolidation).
+Last updated: 2026-07-27 (D18 variation-based coverage).
 
 ## Current focus
 
-**Push to Stash `team`:** fail-hard Atlassian auth (separate Confluence/Bitbucket PATs) + checklist semantic gates SD1–SD6 + `--ci-strict` + jira_success snippet gate (D17).
+**D18:** obligation = catalogue variation (not spec paraphrase); `parameter_inventory` + `docs/variation-catalogue.json`; page_id via `confluence_search`; GROUND probes setup checks; `variation_density` in verifier/TeamCity stats.
 
 ## Resume
 
-- Branch `_stash-team-merge` → push `stash _stash-team-merge:team`
-- After push: add TeamCity `CONFLUENCE_API_TOKEN` / `BITBUCKET_API_TOKEN` + env wiring; re-run CRT-635
+- Implement/push D18 on `_stash-team-merge` → `stash/team`
+- Operator: re-run CRT-635 after push; confirm Confluence+Bitbucket PATs still set (D17)
 
 ## Next
 
-1. Operator: TC password params + `env.*` for Confluence/Bitbucket
-2. Re-run Pipeline for CRT-635; expect field-level coverage.md
-3. Optional calibrate gold from successful CI artefacts
+1. Push D18; re-run Pipeline CRT-635
+2. Expect: ok snippets for CB keys via search, variation_density in logs, field variations with `>` oracle lines
+3. Engineer extends paste on CRTQA (repo md remains machine)
 
 ## Pointers
 
-- D17: [automation/CI/decisions.md](automation/CI/decisions.md)
-- Research: [automation/temp/ci-quality-research-crt635.md](automation/temp/ci-quality-research-crt635.md) (local scratch)
-- Fixtures: `crt635-skeleton-bad-*` / `crt635-target-good-*`
+- D18: [automation/CI/decisions.md](automation/CI/decisions.md)
+- Catalogue: [docs/variation-catalogue.json](docs/variation-catalogue.json)
+- Fixtures: `crt635-target-good-*`, `crt635-skeleton-bad-*`, `crt677-watchlist-portability-ref.json`

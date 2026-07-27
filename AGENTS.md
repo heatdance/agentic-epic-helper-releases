@@ -20,6 +20,7 @@ Short map for coding agents on the **team** repository. **Progressive disclosure
 | Harness doctrine | [docs/harness-principles.md](docs/harness-principles.md) |
 | Epic orchestrator | [docs/epic-helper-contract.json](docs/epic-helper-contract.json) (**v7**) |
 | Calibrate contract | [docs/calibrate-contract.json](docs/calibrate-contract.json) |
+| Variation catalogue (D18) | [docs/variation-catalogue.json](docs/variation-catalogue.json) · [variation_catalogue.py](automation/tools/variation_catalogue.py) |
 
 ### Pipelines (agent playbooks)
 

@@ -1,6 +1,6 @@
 # EPIC-PREP — mechanical verifier
 
-Gate **`-ref.json`** schema v4 **`obligations_proposed[]`**, optional **`verification_topology`**, and optional **principal hints**. Playbook: [`.cursor/pipelines/epic-prep.md`](../../.cursor/pipelines/epic-prep.md). Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Topology: [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json). Principal: [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json).
+Gate **`-ref.json`** schema v4 **`obligations_proposed[]`**, optional **`verification_topology`**, and optional **principal hints**. Playbook: [`.cursor/pipelines/epic-prep.md`](../../.cursor/pipelines/epic-prep.md). Kinds: [`docs/epic-obligation-kinds.json`](../../docs/epic-obligation-kinds.json). Topology: [`docs/epic-prep-topology-contract.json`](../../docs/epic-prep-topology-contract.json). Principal: [`docs/epic-prep-principal-contract.json`](../../docs/epic-prep-principal-contract.json). Variations: [`docs/variation-catalogue.json`](../../docs/variation-catalogue.json) (D18 — prints `mandated_variations` / `emitted` / `unmatched_patterns`; `--ci-strict` / `page_id_unresolved` non-deferrable).
 
 ## CLI
 

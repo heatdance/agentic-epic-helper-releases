@@ -45,5 +45,6 @@ Committed org maps (update only if your team agrees): [docs/project.json](docs/p
 - [epics/README.md](epics/README.md) · [epics/templates/](epics/templates/)
 - [automation/docs/](automation/docs/) · [automation/tools/](automation/tools/)
 - [automation/CI/](automation/CI/) — Corner Epic QA on dxCity (team/personal only)
+- [docs/variation-catalogue.json](docs/variation-catalogue.json) — spec-cell → mandated checklist variations (D18)
 
 Publish tier matrix (maintainer reference on upstream): not applicable in this repo.

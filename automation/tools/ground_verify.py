@@ -43,21 +43,52 @@ def _load_json(path: Path) -> dict[str, Any] | None:
 
 
 def _is_console_check(chk: dict[str, Any]) -> bool:
-    if chk.get("verification_role") not in (None, "primary"):
-        return False
-    cid = str(chk.get("id") or "")
-    if cid.startswith("chk-s"):
-        return False
-    if chk.get("coverage_thread") == "environment_setup":
-        return False
+    """Detect checks that need console probes (including setup / chk-s*)."""
+    if chk.get("verification_role") not in (None, "primary", "supporting"):
+        # Still allow setup rows without verification_role
+        if chk.get("coverage_thread") != "environment_setup" and not chk.get("needs_setup"):
+            if not str(chk.get("id") or "").startswith("chk-s"):
+                return False
     blob = " ".join(
         [
             str(chk.get("section") or ""),
             str(chk.get("scenario_line") or ""),
             "\n".join(str(x) for x in (chk.get("detail_lines") or [])),
+            str(chk.get("coverage_thread") or ""),
         ]
     )
+    if chk.get("needs_setup") is True:
+        return True
+    if chk.get("coverage_thread") == "environment_setup" and CONSOLE_HINT.search(blob):
+        return True
+    if str(chk.get("id") or "").startswith("chk-s") and CONSOLE_HINT.search(blob):
+        return True
     return bool(CONSOLE_HINT.search(blob))
+
+
+def _verify_data_setup_recipe(coverage: dict[str, Any]) -> list[str]:
+    errors: list[str] = []
+    recipe = coverage.get("data_setup_recipe")
+    if recipe is None:
+        return errors
+    if not isinstance(recipe, list):
+        return ["data_setup_recipe must be an array"]
+    allowed_steps = {"resolve", "seed", "verify", "teardown"}
+    for i, step in enumerate(recipe):
+        if not isinstance(step, dict):
+            errors.append(f"data_setup_recipe[{i}]: not an object")
+            continue
+        st = str(step.get("step") or "")
+        if st not in allowed_steps:
+            errors.append(f"data_setup_recipe[{i}]: invalid step {st!r}")
+        cmd = str(step.get("command") or "").strip()
+        if not cmd:
+            errors.append(f"data_setup_recipe[{i}]: command required")
+        # Only allow commands that came from successful probes when probes exist
+        frag = str(step.get("expected_fragment") or "").strip()
+        if st in ("seed", "verify") and not frag:
+            errors.append(f"data_setup_recipe[{i}]: expected_fragment required for {st}")
+    return errors
 
 
 def verify_emit(coverage: dict[str, Any], ref: dict[str, Any]) -> list[str]:
@@ -106,6 +137,8 @@ def verify_emit(coverage: dict[str, Any], ref: dict[str, Any]) -> list[str]:
         errors.append(
             "smart_checklist_markdown must not contain > Discover: or > Discovery: lines"
         )
+
+    errors.extend(_verify_data_setup_recipe(coverage))
 
     def walk(obj: Any, path: str = "$") -> None:
         if isinstance(obj, str):
