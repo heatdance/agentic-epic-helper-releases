@@ -13,6 +13,10 @@ _corner_tc_load_params
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "Verify harness checkout"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_state_reset
+
 echo "PWD=${REPO_ROOT}"
 test -f AGENTS.md
 test -d automation/tools
@@ -39,4 +43,5 @@ python3 automation/tools/teamcity/write-mcp-config.py
 # shellcheck source=automation/tools/teamcity/mcp-smoke.sh
 source automation/tools/teamcity/mcp-smoke.sh
 
+corner_tc_mark_step_ok "01-verify-checkout" "Verify harness checkout"
 echo "Harness checkout + agent bootstrap OK"

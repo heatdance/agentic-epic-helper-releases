@@ -5,6 +5,10 @@ set -u
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "EPIC-PREP verify"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "02-epic-prep-agent" "EPIC-PREP agent"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -25,4 +29,5 @@ python3 automation/tools/epic_prep_verify.py \
   --strict-topology \
   --strict-principal \
   --ref "$REF" || exit 1
+corner_tc_mark_step_ok "03-epic-prep-verify" "EPIC-PREP verify"
 echo "EPIC-PREP verify OK"

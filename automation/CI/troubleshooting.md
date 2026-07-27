@@ -24,6 +24,7 @@
 | Agent not Linux | Console gate requires OpenSSH on agent |
 | Agent `finished` but verify «file not found» | Pre-patch bare SDK — upgrade `team` scripts; runner exit **3** if `--require` missing |
 | `required output file(s) missing` (exit 3) | Agent did not write artefact — read agent log; increase `AGENT_MAX_WAIT_MINUTES` |
+| `ERROR: contract violation: upstream step marker missing` | Upstream step failed or TeamCity executed steps out-of-order; inspect first failing step and `.teamcity-ci/state/*.ok` |
 
 ## Pipeline — verifiers false green
 
@@ -36,6 +37,7 @@
 | Symptom | Fix |
 |---------|-----|
 | `CRTQA_SSH_PRIVATE_KEY_B64 empty` | Set B64 password param |
+| `ERROR: contract violation: env CRTQA_SSH_HOST is required` | Add Pipeline param `CRTQA_SSH_HOST` and expose `env.CRTQA_SSH_HOST=%CRTQA_SSH_HOST%` |
 | Invalid PEM / SSH fail | Re-encode key; single line B64 |
 | Gate OK, GROUND fails `runtime_probes` | Ensure step 7 sources `crtqa-openssh-env.sh` |
 | Spurious TeamCity `name` parameter | Remove `%TOKEN%` from script comments |

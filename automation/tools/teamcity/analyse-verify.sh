@@ -5,6 +5,10 @@ set -u
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "ANALYSE verify"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "09-analyse-agent" "ANALYSE agent"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -34,4 +38,5 @@ python3 automation/tools/analysis_verify.py \
   --analysis "$ANALYSIS" \
   --coverage "$COV" \
   --ref "$REF" || exit 1
+corner_tc_mark_step_ok "10-analyse-verify" "ANALYSE verify"
 echo "ANALYSE verify OK"

@@ -19,9 +19,9 @@ Place both under **QA Tooling** project on dxCity (`https://dxcity.in.devexperts
 | Artifact paths | `epics/%EPIC_KEY% => epic-work` |
 | Publish artifacts | **Even if build fails** |
 | Agent requirement | Linux (OpenSSH console gate) |
-| **Failure conditions** | **Stop build on failure** (do not continue steps 2–12 after step 1 fails) |
+| **Failure conditions** | **Stop build on failure** (must stop downstream steps on first failing step, except step 12 notify path) |
 
-Without stop-on-failure, failed step 1 still runs subsequent steps — confusing logs and wasted agent time.
+Without stop-on-failure, failed steps can still trigger downstream chain execution — confusing logs and wasted agent time.
 
 ## Dispatch settings
 
@@ -71,6 +71,7 @@ dxCity may not inject **password** configuration parameters into the environment
 | `env.CURSOR_API_KEY` | `%CURSOR_API_KEY%` |
 | `env.EPIC_KEY` | `%EPIC_KEY%` |
 | `env.QA_TASK_KEY` | `%QA_TASK_KEY%` |
+| `env.CRTQA_SSH_HOST` | `%CRTQA_SSH_HOST%` |
 | `env.CORNER_CI_STEP` | *(empty — set at runtime by step scripts via `setParameter`)* |
 
 Keep the underlying **password** parameters (`JIRA_API_TOKEN`, `CURSOR_API_KEY`, …) as today.
@@ -87,6 +88,14 @@ Pipeline steps 1–10 call [`corner-tc-overview.sh`](../tools/teamcity/corner-tc
 | Red | `CRT-671 - failed at COVERAGE verify` |
 
 Optional (UI only): **General Settings → Build number format** `%EPIC_KEY% #%build.counter%` — epic also visible in Build # column.
+
+### Script-level step contracts (defense in depth)
+
+Pipeline wrappers enforce upstream dependencies via `.teamcity-ci/state/*.ok` markers:
+
+- Shared checks: [`corner-tc-preflight.sh`](../tools/teamcity/corner-tc-preflight.sh)
+- Marker state: [`corner-tc-state.sh`](../tools/teamcity/corner-tc-state.sh)
+- If TeamCity UI settings drift, downstream steps fail fast with `ERROR: contract violation: ...`.
 
 ## Step 11 / 12 — Jira comments (mutually exclusive)
 

@@ -8,6 +8,10 @@ source automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "EPIC-PREP agent"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "01-verify-checkout" "Verify harness checkout"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -27,4 +31,5 @@ python3 automation/tools/teamcity/run_pipeline_agent.py \
   --prompt "$PROMPT" \
   --require "epics/%EPIC_KEY%/dependencies/%EPIC_KEY%-ref.json"
 
+corner_tc_mark_step_ok "02-epic-prep-agent" "EPIC-PREP agent"
 echo "EPIC-PREP agent finished"

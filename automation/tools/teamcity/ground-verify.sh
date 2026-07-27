@@ -5,6 +5,10 @@ set -u
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "GROUND verify"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "07-ground-agent" "GROUND agent"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -23,4 +27,5 @@ if [ ! -f "$COV" ] || [ ! -f "$REF" ]; then
 fi
 
 python3 automation/tools/ground_verify.py --mode emit --coverage "$COV" --ref "$REF" || exit 1
+corner_tc_mark_step_ok "08-ground-verify" "GROUND verify"
 echo "GROUND verify OK"

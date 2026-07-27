@@ -9,6 +9,8 @@ Executable wrappers under [`automation/tools/teamcity/`](../tools/teamcity/). Pi
 | [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) | Step 1 | Harness tree + bootstrap + mcp.json + Jira smoke |
 | [`corner-tc-overview.sh`](../tools/teamcity/corner-tc-overview.sh) | Steps 1–12 | `setParameter` + `buildStatus` — EPIC and human step in overview Status |
 | [`corner-tc-epic-paths.sh`](../tools/teamcity/corner-tc-epic-paths.sh) | Agent + verify steps | `dependencies/` JSON paths via [`epic_paths.py`](../epic_paths.py) |
+| [`corner-tc-preflight.sh`](../tools/teamcity/corner-tc-preflight.sh) | Steps 1–12 | Shared contract checks (`require_env`, `require_file`, `require_step_ok`) |
+| [`corner-tc-state.sh`](../tools/teamcity/corner-tc-state.sh) | Steps 1–12 | Writes and reads `.teamcity-ci/state/*.ok` upstream markers |
 | [`bootstrap-agent-env.sh`](../tools/teamcity/bootstrap-agent-env.sh) | Step 1, agent steps | Install `uv`/`uvx`, `cursor-sdk`, MCP wheel cache; writes `.teamcity-ci/bootstrap.env` |
 | [`load-teamcity-params.sh`](../tools/teamcity/load-teamcity-params.sh) | All steps needing secrets | Loads password params from `TEAMCITY_BUILD_PROPERTIES_FILE` when env empty |
 | [`read_teamcity_params.py`](../tools/teamcity/read_teamcity_params.py) | Via load-teamcity-params | Emits safe shell exports for PAT/text params |
@@ -56,6 +58,7 @@ Executable wrappers under [`automation/tools/teamcity/`](../tools/teamcity/). Pi
 | Path | Purpose |
 |------|---------|
 | `.teamcity-ci/bootstrap.env` | PATH, `UVX_BIN` for later steps |
+| `.teamcity-ci/state/*.ok` | Step success markers used by script preflight gates |
 | `.teamcity-ci/jira-success.posted` | Jira mutual-exclusion marker |
 | `.cursor/mcp.json` | Generated MCP config (gitignored) |
 | `epics/{EPIC}/` | Pipeline deliverables → `epic-work` artifact |

@@ -8,6 +8,10 @@ source automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "COVERAGE agent"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "03-epic-prep-verify" "EPIC-PREP verify"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -39,4 +43,5 @@ python3 automation/tools/teamcity/run_pipeline_agent.py \
   --require "epics/%EPIC_KEY%/dependencies/%EPIC_KEY%-coverage.json" \
   --require "epics/%EPIC_KEY%/%EPIC_KEY%-coverage.md"
 
+corner_tc_mark_step_ok "04-coverage-agent" "COVERAGE agent"
 echo "COVERAGE agent finished"

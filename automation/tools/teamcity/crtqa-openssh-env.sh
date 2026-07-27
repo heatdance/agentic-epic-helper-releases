@@ -9,8 +9,13 @@ REPO_ROOT="${REPO_ROOT:-$PWD}"
 source "${REPO_ROOT}/automation/tools/teamcity/load-teamcity-params.sh"
 _corner_tc_load_params
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source "${REPO_ROOT}/automation/tools/teamcity/corner-tc-preflight.sh"
+
 export CRTQA_CONSOLE_TRANSPORT="${CRTQA_CONSOLE_TRANSPORT:-openssh}"
+corner_tc_require_env CRTQA_SSH_USER CRTQA_SSH_HOST CRTQA_SSH_PRIVATE_KEY_B64 CRTQA_SUDO_PASSWORD
 export CRTQA_SSH_USER="${CRTQA_SSH_USER:?CRTQA_SSH_USER empty}"
+export CRTQA_SSH_HOST="${CRTQA_SSH_HOST:?CRTQA_SSH_HOST empty}"
 
 B64="${CRTQA_SSH_PRIVATE_KEY_B64:-}"
 if [ -z "$B64" ]; then
@@ -35,4 +40,4 @@ if [ "${CRTQA_KEYFILE_CLEANUP:-}" = "1" ]; then
   trap cleanup_crtqa_keyfile EXIT
 fi
 
-echo "CRTQA openssh env ready user=$CRTQA_SSH_USER keyfile=$CRTQA_SSH_KEY_PATH"
+echo "CRTQA openssh env ready user=$CRTQA_SSH_USER host=$CRTQA_SSH_HOST keyfile=$CRTQA_SSH_KEY_PATH"

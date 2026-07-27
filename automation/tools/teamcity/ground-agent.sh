@@ -8,6 +8,10 @@ source automation/tools/teamcity/agent-env.sh
 source automation/tools/teamcity/corner-tc-overview.sh
 corner_tc_step_begin "GROUND agent"
 
+# shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
+source automation/tools/teamcity/corner-tc-preflight.sh
+corner_tc_require_step_ok "06-console-gate" "Console gate"
+
 # shellcheck source=automation/tools/teamcity/corner-tc-epic-paths.sh
 source automation/tools/teamcity/corner-tc-epic-paths.sh
 
@@ -32,4 +36,5 @@ python3 automation/tools/teamcity/run_pipeline_agent.py \
   --prompt "$PROMPT" \
   --require "epics/%EPIC_KEY%/dependencies/%EPIC_KEY%-coverage.json"
 
+corner_tc_mark_step_ok "07-ground-agent" "GROUND agent"
 echo "GROUND agent finished"

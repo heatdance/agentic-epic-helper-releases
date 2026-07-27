@@ -154,6 +154,20 @@ ADR-style record of v1 scope. Change via operator entrust + doc update.
 
 ---
 
+## D16 — Script-level step contracts via state markers
+
+**Decision:** TeamCity wrappers enforce upstream dependencies in-script using shared helpers:
+- [`corner-tc-preflight.sh`](../tools/teamcity/corner-tc-preflight.sh) for env/file/upstream assertions.
+- [`corner-tc-state.sh`](../tools/teamcity/corner-tc-state.sh) for `.teamcity-ci/state/*.ok` markers.
+
+Downstream steps fail fast with `ERROR: contract violation: ...` when required upstream markers are absent.
+
+**Rationale:** TeamCity UI settings can drift (`Stop build on failure`, step execute modes). Contract checks in scripts prevent hidden coupling and late cascading failures.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

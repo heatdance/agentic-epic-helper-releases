@@ -17,6 +17,15 @@ Twelve TeamCity build steps map to scripts under [`automation/tools/teamcity/`](
 | 11 | Jira success comment | [`jira-success.sh`](../tools/teamcity/jira-success.sh) | [`jira_success.py`](../tools/teamcity/jira_success.py) |
 | 12 | Jira failure comment | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | Execute: **Even if failed**; [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) skips if step 11 posted — see [jira-integration.md](jira-integration.md) |
 
+## Script contract gates (state markers)
+
+All steps use shared contract helpers:
+
+- [`corner-tc-preflight.sh`](../tools/teamcity/corner-tc-preflight.sh) — env/file/upstream assertions.
+- [`corner-tc-state.sh`](../tools/teamcity/corner-tc-state.sh) — writes `.teamcity-ci/state/<step>.ok`.
+
+Downstream steps fail fast with `ERROR: contract violation: ...` when upstream markers are missing.
+
 ## Step 1 — agent bootstrap
 
 [`verify-checkout.sh`](../tools/teamcity/verify-checkout.sh) (same TeamCity step name as v1):
@@ -51,7 +60,7 @@ All `*-agent.sh` scripts call [`run_pipeline_agent.py`](../tools/teamcity/run_pi
 |-------|------------------------|
 | 1 | `JIRA_API_TOKEN`; `EPIC_KEY` for smoke (optional on manual checkout-only) |
 | 2–5, 9–10 | `EPIC_KEY`, `CURSOR_API_KEY`, `JIRA_API_TOKEN`, `AGENT_MAX_WAIT_MINUTES` (optional) |
-| 6–8 | `CRTQA_SSH_USER`, `CRTQA_SSH_PRIVATE_KEY_B64`, `CRTQA_SUDO_PASSWORD`, `CRTQA_CONSOLE_TRANSPORT=openssh` |
+| 6–8 | `CRTQA_SSH_USER`, `CRTQA_SSH_HOST`, `CRTQA_SSH_PRIVATE_KEY_B64`, `CRTQA_SUDO_PASSWORD`, `CRTQA_CONSOLE_TRANSPORT=openssh` |
 | 11–12 | `EPIC_KEY`, `QA_TASK_KEY`, `JIRA_API_TOKEN`; `TEAMCITY_BUILD_URL` auto-resolved from `teamcity.build.url` (D13) |
 
 TeamCity injects `%EPIC_KEY%`, `%QA_TASK_KEY%`, etc. Step scripts: `bash automation/tools/teamcity/jira-success.sh` / `jira-failure.sh`. Optional belt: `export TEAMCITY_BUILD_URL="%teamcity.build.url%"`.
