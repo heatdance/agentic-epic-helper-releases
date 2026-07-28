@@ -16,6 +16,7 @@ corner_tc_step_begin "Verify harness checkout"
 # shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
 source automation/tools/teamcity/corner-tc-preflight.sh
 corner_tc_state_reset
+rm -f "${REPO_ROOT}/.teamcity-ci/jira-success.posted" "${REPO_ROOT}/.teamcity-ci/jira-failure.posted"
 
 echo "PWD=${REPO_ROOT}"
 test -f AGENTS.md

@@ -15,6 +15,13 @@ _jira_notify_skip_if_success_posted
 # shellcheck source=automation/tools/teamcity/corner-tc-preflight.sh
 source "${REPO_ROOT}/automation/tools/teamcity/corner-tc-preflight.sh"
 
+# Hard green-stop: if ANALYSE verify is OK in this build,
+# never post Jira failure even if stale markers exist in checkout.
+if corner_tc_has_step_ok "10-analyse-verify"; then
+  echo "SKIP failure Jira comment: analyse verify marker present (green path)"
+  exit 0
+fi
+
 # shellcheck source=automation/tools/teamcity/corner-tc-overview.sh
 source "${REPO_ROOT}/automation/tools/teamcity/corner-tc-overview.sh"
 if [ -z "${CORNER_CI_STEP:-}" ]; then
