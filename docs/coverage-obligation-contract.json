@@ -89,6 +89,7 @@
     "widget_ui_without_config_vs_position": "prerequisites",
     "prerequisites_section_heading": "## Prerequisites",
     "does_not_count_toward_observable_yield": true,
+    "exempt_only_when_check_obligation_config_vs_position": true,
     "_note": "Card/trade availability is a setup gate for widget_ui, not a field-level check under surface subsections."
   },
   "invariants_section_rules": {
@@ -107,6 +108,8 @@
     "observable_yield_min_primary_checks": true,
     "variation_oracle_detail_required": true,
     "variation_oracle_from_spec_text": true,
+    "variation_oracle_detail_distinct": true,
+    "forbid_empty_markdown_sections": true,
     "not_attempted_section_when_unmatched_or_out_of_scope": true
   },
   "excluded_checks_item_fields": [

@@ -36,13 +36,13 @@ from typing import Any
 
 try:
     from variation_catalogue import (  # type: ignore
-        extract_parameter_inventory,
+        effective_inventory,
         mandated_variations_for_inventory,
         obligation_variation_key,
     )
 except ImportError:  # pragma: no cover
     from automation.tools.variation_catalogue import (  # type: ignore
-        extract_parameter_inventory,
+        effective_inventory,
         mandated_variations_for_inventory,
         obligation_variation_key,
     )
@@ -297,6 +297,8 @@ def verify_obligations(
         if aid in anti_ids:
             errors.append(f"anti_pattern_findings contains {aid}")
 
+    errors.extend(verify_markdown_sections(coverage, md_path, contract))
+
     if ref:
         errors.extend(verify_atomic_checks(coverage, ref, contract))
         errors.extend(_verify_not_attempted_section(coverage, ref, md_path, contract))
@@ -397,6 +399,11 @@ def verify_atomic_checks(
     }
     avail_rules = contract.get("availability_placement") or {}
     inv_rules = contract.get("invariants_section_rules") or {}
+    all_obl_by_id = {
+        str(o.get("id")): o
+        for o in (ref.get("obligations_proposed") or [])
+        if isinstance(o, dict) and o.get("id")
+    }
     prereq_heading = str(
         avail_rules.get("prerequisites_section_heading")
         or atomic_rules.get("prerequisites_section_heading")
@@ -489,15 +496,25 @@ def verify_atomic_checks(
             and _is_availability_check(line, stub_patterns)
             and not SCENARIO_BANG_ONLY.match(line)
         ):
-            has_cvp = any(
-                isinstance(o, dict) and o.get("config_vs_position")
-                for o in (ref.get("obligations_proposed") or [])
-            )
+            # D19: exemption is per check, not per ref. A ref-wide config_vs_position
+            # obligation elsewhere must not license availability checks in other sections.
+            if avail_rules.get("exempt_only_when_check_obligation_config_vs_position", True):
+                cvp = any(
+                    isinstance(all_obl_by_id.get(str(oid)), dict)
+                    and all_obl_by_id[str(oid)].get("config_vs_position")
+                    for oid in (chk.get("obligation_ids") or [])
+                )
+            else:
+                cvp = any(
+                    isinstance(o, dict) and o.get("config_vs_position")
+                    for o in (ref.get("obligations_proposed") or [])
+                )
             section = str(chk.get("section") or "").strip()
-            if not has_cvp and section != prereq_heading:
+            if not cvp and section != prereq_heading:
                 errors.append(
                     f"availability_misplaced: check {cid}: "
-                    f"availability check must live under {prereq_heading!r}"
+                    f"availability check must live under {prereq_heading!r} "
+                    f"(section {section!r})"
                 )
 
     # SD2: single_stub_subsection — lone stub under a ### is invalid.
@@ -546,9 +563,7 @@ def verify_atomic_checks(
             key = str(row.get("key") or "")
             if not key or row.get("snippet_status") != "ok":
                 continue
-            inv = row.get("parameter_inventory")
-            if not isinstance(inv, list) or not inv:
-                inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+            inv, _undercut = effective_inventory(row)
             mandated, _unmatched = mandated_variations_for_inventory(inv)
             yield_n = len(mandated)
             if yield_n < 1:
@@ -591,9 +606,7 @@ def verify_atomic_checks(
         for row in ref.get("requirements") or []:
             if not isinstance(row, dict) or not row.get("key"):
                 continue
-            inv = row.get("parameter_inventory")
-            if not isinstance(inv, list) or not inv:
-                inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+            inv, _undercut = effective_inventory(row)
             inv_by_key[str(row["key"])] = inv
         for chk in checks:
             if chk.get("verification_role") != "primary":
@@ -633,6 +646,104 @@ def verify_atomic_checks(
                     f"detail_lines must echo inventory spec tokens {tokens[:4]}"
                 )
 
+    # D19: copying one spec line onto every variation satisfies the oracle rule
+    # without telling the reader what to expect in each case.
+    if atomic_rules.get("variation_oracle_detail_distinct", True):
+        obl_map = {
+            str(o.get("id")): o
+            for o in (ref.get("obligations_proposed") or [])
+            if isinstance(o, dict) and o.get("id")
+        }
+        by_param: dict[str, list[tuple[str, str]]] = {}
+        for chk in checks:
+            if chk.get("verification_role") != "primary":
+                continue
+            if SCENARIO_BANG_ONLY.match(str(chk.get("scenario_line") or "")):
+                continue
+            oids = chk.get("obligation_ids") or []
+            obl = obl_map.get(str(oids[0])) if oids else None
+            if not obl or not obligation_variation_key(obl):
+                continue
+            details = [str(d).strip() for d in (chk.get("detail_lines") or []) if str(d).strip()]
+            if not details:
+                continue
+            param = str((obl.get("variation") or {}).get("parameter") or "").split(":")[0].strip()
+            if not param:
+                continue
+            by_param.setdefault(param, []).append(
+                (str(chk.get("id")), "\n".join(details).lower())
+            )
+
+        for param, rows in by_param.items():
+            owners_by_blob: dict[str, list[str]] = {}
+            for cid, blob in rows:
+                owners_by_blob.setdefault(blob, []).append(cid)
+            for blob, owners in owners_by_blob.items():
+                if len(owners) > 1:
+                    errors.append(
+                        f"duplicate_variation_oracle_detail: checks {', '.join(owners[:6])} "
+                        f"cover different variations of {param!r} with identical detail_lines "
+                        f"({blob.splitlines()[0][:60]!r}); state the expected outcome per variation"
+                    )
+            for cid, blob in rows:
+                first = param.split(" and ")[0].strip().lower()
+                if first and first not in blob:
+                    errors.append(
+                        f"variation_oracle_detail_unlabelled: check {cid} detail_lines must name "
+                        f"the parameter {param!r} so the line is readable on its own"
+                    )
+
+    return errors
+
+
+EMPTY_SECTION_ALLOWLIST = ("## Not attempted",)
+
+
+def verify_markdown_sections(
+    coverage: dict[str, Any], md_path: Path | None, contract: dict[str, Any]
+) -> list[str]:
+    """D19: a heading with no content under it is a promise the paste does not keep."""
+    rules = contract.get("atomic_check_rules") or {}
+    if not rules.get("forbid_empty_markdown_sections", True):
+        return []
+    md_body = _md_body(coverage, md_path)
+    if not md_body.strip():
+        return []
+
+    errors: list[str] = []
+    h2: str | None = None
+    h2_content = False
+    h3: str | None = None
+    h3_content = False
+
+    def close(heading: str | None, content: bool) -> None:
+        if heading and not content and not heading.startswith(EMPTY_SECTION_ALLOWLIST):
+            errors.append(
+                f"empty_markdown_section: {heading!r} has no checks or detail lines under it"
+            )
+
+    for raw in md_body.splitlines():
+        line = raw.strip()
+        if line.startswith("### "):
+            close(h3, h3_content)
+            h3, h3_content = line, False
+            h2_content = True
+            continue
+        if line.startswith("## "):
+            close(h3, h3_content)
+            h3, h3_content = None, False
+            close(h2, h2_content)
+            h2, h2_content = line, False
+            continue
+        if line.startswith("# ") or not line:
+            continue
+        if h3 is not None:
+            h3_content = True
+        else:
+            h2_content = True
+
+    close(h3, h3_content)
+    close(h2, h2_content)
     return errors
 
 
@@ -642,9 +753,7 @@ def _variation_density(coverage: dict[str, Any], ref: dict[str, Any]) -> tuple[i
     for row in ref.get("requirements") or []:
         if not isinstance(row, dict) or row.get("snippet_status") != "ok":
             continue
-        inv = row.get("parameter_inventory")
-        if not isinstance(inv, list) or not inv:
-            inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+        inv, _undercut = effective_inventory(row)
         mandated, _ = mandated_variations_for_inventory(inv)
         mandated_n += len(mandated)
     obl_by_id = {

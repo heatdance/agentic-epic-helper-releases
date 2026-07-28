@@ -357,5 +357,39 @@
     "problem_gist": "FX_SPOT cards in Adaptive",
     "problem_gist_source": "from_jira_field"
   },
-  "validation_log": []
+  "validation_log": [],
+  "requirement_passes": [
+    {
+      "requirement_key": "DXINV-025",
+      "subprocess": true,
+      "snippet_chars": 73,
+      "source_chars": 73,
+      "inventory_rows": 2,
+      "mandated_variations": 2
+    },
+    {
+      "requirement_key": "DXINV-236",
+      "subprocess": true,
+      "snippet_chars": 24,
+      "source_chars": 24,
+      "inventory_rows": 1,
+      "mandated_variations": 1
+    },
+    {
+      "requirement_key": "DXINV-CB-92",
+      "subprocess": true,
+      "snippet_chars": 73,
+      "source_chars": 73,
+      "inventory_rows": 2,
+      "mandated_variations": 2
+    },
+    {
+      "requirement_key": "DXINV-CB-95",
+      "subprocess": true,
+      "snippet_chars": 109,
+      "source_chars": 109,
+      "inventory_rows": 3,
+      "mandated_variations": 3
+    }
+  ]
 }

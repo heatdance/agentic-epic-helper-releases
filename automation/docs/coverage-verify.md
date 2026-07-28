@@ -71,7 +71,7 @@ Exit **0** = pass.
 | Mode | Checks |
 |------|--------|
 | **matrix** | `schema_version` ≥ 2; matrix ids; roles vs focus |
-| **obligations** | matrix + **`obligations_coverage`** row-complete vs ref primaries; invariant/rounding sections; **semantic gates** (stub wording, single-stub subsection, machine deferral enums, availability placement, `observable_yield` shortfall, redundant context tokens) |
+| **obligations** | matrix + **`obligations_coverage`** row-complete vs ref primaries; invariant/rounding sections; **semantic gates** (stub wording, single-stub subsection, machine deferral enums, availability placement, `observable_yield` shortfall, redundant context tokens, oracle detail rules, empty markdown sections) |
 | **checks** | obligations + basic check shape |
 | **emit** | matrix + markdown focus verbatim + no temp/CRTQA + **operator md hygiene** (no platform reuse heading; no `> Discover:`/`> Discovery:`; no machine lines in `detail_lines`) |
 | **principal** | Principal contract only (focus copy, threads, keyed deferrals) |
@@ -111,6 +111,18 @@ When set (or **`--mode principal`**):
 - Each **`principal_coverage_threads[]`** obligation has a check in the matching section or **`coverage_thread`**
 - Each deferral obligation → **`deferred_in_check`** + keyed check with **`obligation_ids`**, or documented exclusion
 - Forbidden blanket deferral patterns without **`obligation_ids`** when ref has deferrals
+
+## Oracle detail and placement gates
+
+Applied on **`obligations`** / **`checks`** ([decisions.md](../CI/decisions.md) D18–D19):
+
+| Error | Meaning |
+|-------|---------|
+| `missing_variation_oracle_detail` | Variation check has no `>` line, or none echoing the inventory `spec_text` tokens. |
+| `variation_oracle_detail_unlabelled` | Detail line does not name its parameter, so the bullet cannot be read on its own. |
+| `duplicate_variation_oracle_detail` | Two variations of the same parameter carry identical detail text instead of the expected outcome for each case. |
+| `availability_misplaced` | Availability check outside **`## Prerequisites`** without `config_vs_position` on **its own** obligation — relabelling `parity` → `invariant` does not license the move. |
+| `empty_markdown_section` | Heading emitted with no checks or detail lines under it (`## Not attempted` excepted; it has its own rule). |
 
 ## Backward compatibility
 

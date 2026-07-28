@@ -201,6 +201,22 @@ Downstream steps fail fast with `ERROR: contract violation: ...` when required u
 
 ---
 
+## D19 — Derived truth beats declared numbers
+
+**Decision:**
+
+1. **`parameter_inventory[]`** is re-derived from **`snippet_text`** on every run and unioned with the declared list; derived `spec_text` wins on name collision and omissions fail (**`parameter_inventory_undercut`**). A declared inventory may only add to the source, never narrow it.
+2. **`requirement_passes[]`** records one entry per requirement with `snippet_status: ok`; `epic_prep_verify` recomputes `snippet_chars` and `inventory_rows` and fails on a missing or stale entry, making the mandatory step **3c** fan-out checkable.
+3. **`snippet_text`** below **60%** of attested `source_chars` fails (**`snippet_truncated`**), so a truncated transcription cannot lower breadth thresholds from below.
+4. Availability placement is exempted **per check**, not per ref: an availability line outside **`## Prerequisites`** needs `config_vs_position` on its own obligation (**`availability_misplaced`**). Relabelling `parity` → `invariant` no longer moves it into `## Invariants under configuration change`.
+5. Oracle detail lines must **name their parameter** (**`variation_oracle_detail_unlabelled`**) and **differ between variations of the same parameter** (**`duplicate_variation_oracle_detail`**). A heading emitted with nothing under it fails (**`empty_markdown_section`**).
+
+**Rationale:** D18 moved the breadth threshold from a declared `observable_yield` to a declared `parameter_inventory` — the same loophole under a new name. Build 46 transcribed two rows of a multi-row table, mandated two variations, and passed every gate; four availability checks moved from `parity` to `invariant` under the Invariants heading while `## Prerequisites` shipped empty, and one spec line was copy-pasted as the oracle for four different checks. Thresholds must come from what the source shows, not from what the agent says it found.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |
@@ -209,3 +225,6 @@ Downstream steps fail fast with `ERROR: contract violation: ...` when required u
 | Stash repo visibility | Infra / AI project admins |
 | `fix_breadth` CI loop | Optional Round 2 — not v1 |
 | Full `/epic-helper` parity | Requires human gates automation |
+| Verifier-side Confluence fetch | `source_chars` is agent-attested; a verifier that re-fetches the page would make snippet completeness fully deterministic |
+| Per-step `AGENT_MODEL` | Raise the model on EPIC-PREP extraction once D19 gates prove breadth is gate-bound, not model-bound |
+| Fixture sweep drift | Four documented commands in `automation/tools/fixtures/coverage/README.md` fail at HEAD (missing `epics/CRT-594` ref, `## Primary focus` in two principal fixtures, reinforce `oracle_rule` mentions) |

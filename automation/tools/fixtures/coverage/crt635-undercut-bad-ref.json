@@ -1,0 +1,121 @@
+{
+  "schema_version": 4,
+  "epic_key": "CRT-635",
+  "_fixture_intent": "D19 negative: declared parameter_inventory narrower than snippet_text, truncated snippet vs source_chars, and one requirement with no recorded pass",
+  "epic": {
+    "key": "CRT-635",
+    "summary": "Trade cards (undercut fixture)"
+  },
+  "epic_archetype": {
+    "value": "widget_ui",
+    "source": "jira_scenarios"
+  },
+  "requirements": [
+    {
+      "key": "DXINV-025",
+      "snippet_status": "ok",
+      "observable_yield": 2,
+      "snippet_text": "| Parameter | Format |\n| Side | Buy or Sell |\n| Quantity | Not signed |\n| Fill price | Displayed with account currency symbol |\n| Total cost | Signed. Colored: Green for positive, Red for negative |\n| Description | Instrument description as is |",
+      "parameter_inventory": [
+        {
+          "name": "Quantity",
+          "spec_text": "Not signed",
+          "source_line": "| Quantity | Not signed |"
+        },
+        {
+          "name": "Fill price",
+          "spec_text": "Displayed with account currency symbol",
+          "source_line": "| Fill price | Displayed with account currency symbol |"
+        }
+      ],
+      "unmatched_spec_patterns": []
+    },
+    {
+      "key": "DXINV-236",
+      "snippet_status": "ok",
+      "observable_yield": 1,
+      "snippet_text": "Cash effect — Not signed",
+      "parameter_inventory": [
+        {
+          "name": "Cash effect",
+          "spec_text": "Not signed",
+          "source_line": "Cash effect — Not signed"
+        }
+      ],
+      "unmatched_spec_patterns": []
+    }
+  ],
+  "obligations_proposed": [
+    {
+      "id": "obl-001",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Quantity unsigned",
+      "assertion_fragment": "Quantity displays without a minus sign",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "variation": {
+        "rule_id": "unsigned",
+        "kind": "negative",
+        "parameter": "Quantity"
+      }
+    },
+    {
+      "id": "obl-002",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Fill price currency symbol",
+      "assertion_fragment": "Fill price shows account currency symbol",
+      "emit_subsection": "### Transaction card",
+      "requirement_keys": ["DXINV-025"],
+      "variation": {
+        "rule_id": "currency_symbol",
+        "kind": "positive",
+        "parameter": "Fill price"
+      }
+    },
+    {
+      "id": "obl-003",
+      "kind": "parity",
+      "disposition": "primary_candidate",
+      "statement": "Cash effect unsigned",
+      "assertion_fragment": "Cash effect displays without a minus sign",
+      "emit_subsection": "### Transaction details card",
+      "requirement_keys": ["DXINV-236"],
+      "variation": {
+        "rule_id": "unsigned",
+        "kind": "negative",
+        "parameter": "Cash effect"
+      }
+    }
+  ],
+  "obligations_reconcile": { "epic_summary_aligned": true, "conflicts": [] },
+  "verification_focus_proposed": {
+    "statement": "Transaction card formatting",
+    "source": "jira_summary"
+  },
+  "verification_topology": {
+    "jira_scenario_surfaces": [],
+    "scenario_capability_rows": [],
+    "principal_coverage_threads": []
+  },
+  "client_shell_impact": {
+    "adaptive": { "status": "affected", "source": "jira_field" },
+    "corner_trader": { "status": "not_applicable", "source": "jira_field" }
+  },
+  "synthesis": {
+    "problem_gist": "Transaction card formatting",
+    "problem_gist_source": "from_jira_field"
+  },
+  "validation_log": [],
+  "requirement_passes": [
+    {
+      "requirement_key": "DXINV-025",
+      "subprocess": true,
+      "snippet_chars": 246,
+      "source_chars": 900,
+      "inventory_rows": 2,
+      "mandated_variations": 2
+    }
+  ]
+}

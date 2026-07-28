@@ -79,5 +79,15 @@
     "problem_gist": "Watchlist formatting",
     "problem_gist_source": "from_jira_field"
   },
-  "validation_log": []
+  "validation_log": [],
+  "requirement_passes": [
+    {
+      "requirement_key": "DXINV-WL-1",
+      "subprocess": true,
+      "snippet_chars": 61,
+      "source_chars": 61,
+      "inventory_rows": 2,
+      "mandated_variations": 2
+    }
+  ]
 }

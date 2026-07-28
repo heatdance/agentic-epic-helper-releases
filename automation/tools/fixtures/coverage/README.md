@@ -64,6 +64,8 @@ python automation/tools/coverage_verify.py --mode reinforce --strict-principal `
 | `crt635-skeleton-bad-*` | Build-43 stub skeleton — `--mode obligations` exit **1** (`tag_level_stub_check`, `single_stub_subsection`, `machine_deferral_reason`, `availability_misplaced`) |
 | `crt635-target-good-*` | Target semantics (Prerequisites availability + field checks, no Rounding H2) — `--mode obligations` / `--mode emit --strict-topology` exit **0** |
 | `crt635-*-minimal.*` | Compact CRT-635 smoke for atomic field emit |
+| `crt635-undercut-bad-ref.json` | D19 negative — `epic_prep_verify --mode ref` exit **1** (`parameter_inventory_undercut`, `snippet_truncated`, `requirement_pass_missing`, `requirement_pass_stale`) |
+| `crt677-watchlist-portability-ref.json` | Non-CRT-635 portability — variation gates on a Watchlist epic; `--mode ref` exit **0** |
 
 ```powershell
 # Negative — stub skeleton (expect exit 1)
@@ -77,6 +79,14 @@ python automation/tools/coverage_verify.py --mode obligations `
   --coverage automation/tools/fixtures/coverage/crt635-target-good-coverage.json `
   --ref automation/tools/fixtures/coverage/crt635-target-good-ref.json `
   --md automation/tools/fixtures/coverage/crt635-target-good.md
+
+# D19 negative — inventory undercut and truncated snippet (expect exit 1)
+python automation/tools/epic_prep_verify.py --mode ref `
+  --ref automation/tools/fixtures/coverage/crt635-undercut-bad-ref.json
+
+# D19 portability — same gates on a non-CRT-635 epic (expect exit 0)
+python automation/tools/epic_prep_verify.py --mode ref `
+  --ref automation/tools/fixtures/coverage/crt677-watchlist-portability-ref.json
 ```
 
 Contracts: [docs/coverage-principal-contract.json](../../../docs/coverage-principal-contract.json), [docs/coverage-reinforce-principal-contract.json](../../../docs/coverage-reinforce-principal-contract.json), [docs/coverage-obligation-contract.json](../../../docs/coverage-obligation-contract.json).

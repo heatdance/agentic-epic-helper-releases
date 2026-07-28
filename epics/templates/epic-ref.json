@@ -224,6 +224,17 @@
     "source_phase": "epic_prep"
   },
   "validation_log": [],
+  "requirement_passes": [],
+  "_requirement_passes_item": {
+    "requirement_key": "DXINV-025",
+    "subprocess": true,
+    "snippet_chars": 812,
+    "source_chars": 860,
+    "inventory_rows": 9,
+    "mandated_variations": 12,
+    "completed_at": null,
+    "_note": "One entry per requirement with snippet_status ok; snippet_chars and inventory_rows are recomputed by epic_prep_verify, snippet_chars must be >= 60% of source_chars"
+  },
   "sources": {
     "jira_fetched_at": null,
     "confluence_method": null,

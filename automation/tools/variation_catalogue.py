@@ -102,6 +102,48 @@ def extract_parameter_inventory(snippet: str) -> list[dict[str, str]]:
     return out
 
 
+def effective_inventory(row: dict[str, Any]) -> tuple[list[dict[str, str]], list[str]]:
+    """Inventory used by gates: declared rows unioned with rows derived from the snippet.
+
+    The snippet is the source of truth, so a declared row may add to it but never
+    narrow it: derived spec_text wins on name collision, and derived names absent
+    from the declared list are reported as undercut.
+    """
+    derived = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+    declared_raw = row.get("parameter_inventory")
+    declared = (
+        [r for r in declared_raw if isinstance(r, dict) and r.get("name")]
+        if isinstance(declared_raw, list)
+        else []
+    )
+    if not declared:
+        return derived, []
+
+    merged: dict[str, dict[str, str]] = {}
+    order: list[str] = []
+    for src in (declared, derived):
+        for r in src:
+            name = str(r.get("name") or "").strip()
+            spec = str(r.get("spec_text") or "").strip()
+            if not name or not spec:
+                continue
+            key = _norm(name)
+            if key not in merged:
+                order.append(key)
+                merged[key] = {"name": name, "spec_text": spec}
+                continue
+            if src is derived:
+                merged[key] = {"name": name, "spec_text": spec}
+
+    declared_keys = {_norm(str(r.get("name") or "")) for r in declared}
+    undercut = [
+        str(r.get("name") or "")
+        for r in derived
+        if _norm(str(r.get("name") or "")) not in declared_keys
+    ]
+    return [merged[k] for k in order], undercut
+
+
 def _rule_matches(rule: dict[str, Any], spec_norm: str) -> bool:
     match_any = [_norm(x) for x in (rule.get("match_any") or []) if x]
     if not match_any:

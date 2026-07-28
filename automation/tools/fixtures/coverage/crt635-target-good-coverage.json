@@ -104,7 +104,7 @@
       ],
       "verification_role": "primary",
       "detail_lines": [
-        "> Displayed with account currency symbol"
+        "> Fill price — Displayed with account currency symbol (account currency, not instrument currency)"
       ]
     },
     {
@@ -121,7 +121,7 @@
       "verification_role": "primary",
       "needs_setup": true,
       "detail_lines": [
-        "> Not signed"
+        "> Cash effect — Not signed: a source-negative cash effect renders without a minus sign"
       ]
     },
     {
@@ -138,7 +138,7 @@
       "verification_role": "primary",
       "needs_setup": true,
       "detail_lines": [
-        "> Not signed"
+        "> Quantity — Not signed: a source-negative quantity renders without a minus sign"
       ]
     },
     {
@@ -154,7 +154,7 @@
       ],
       "verification_role": "primary",
       "detail_lines": [
-        "> Displayed with account currency symbol"
+        "> Total cost — Displayed with account currency symbol"
       ]
     },
     {
@@ -171,7 +171,7 @@
       "verification_role": "primary",
       "needs_setup": true,
       "detail_lines": [
-        "> Signed. Colored: red for negative, green for positive"
+        "> Realized PL — Signed. Colored: red for negative — expect a minus sign and red text"
       ]
     },
     {
@@ -188,7 +188,7 @@
       "verification_role": "primary",
       "needs_setup": true,
       "detail_lines": [
-        "> Signed. Colored: red for negative, green for positive"
+        "> Realized PL — Signed. Colored: green for positive — expect no minus sign and green text"
       ]
     },
     {
@@ -205,11 +205,11 @@
       "verification_role": "primary",
       "needs_setup": true,
       "detail_lines": [
-        "> Not signed"
+        "> Fees and Commission — Not signed: both render without a minus sign"
       ]
     }
   ],
-  "smart_checklist_markdown": "# CRT-635 — Smart Checklist\n\n## Prerequisites\n\n- [CRT-635] Console — open at least one FX_SPOT position\n> Prerequisite: console fill for FX_SPOT before Adaptive checks\n\n## Adaptive — Transactions\n\n### Transaction card\n\n- [DXINV-025] Quantity from negative source displays without a minus sign\n> Not signed — source-negative quantity displays without a minus sign\n- [DXINV-025] Fill price shows account currency symbol\n> Displayed with account currency symbol\n\n### Transaction details card\n\n- [DXINV-236] Cash effect displays without a minus sign\n> Not signed\n\n## Adaptive — Trade History\n\n### Trade card\n\n- [DXINV-CB-92] Quantity from negative source displays without a minus sign\n> Not signed\n- [DXINV-CB-92] Total cost shows account currency symbol\n> Displayed with account currency symbol\n\n### Trade details card\n\n- [DXINV-CB-95] negative Realized PL shows minus sign and red\n> Signed. Colored: red for negative, green for positive\n- [DXINV-CB-95] positive Realized PL shows green\n> Signed. Colored: red for negative, green for positive\n- [DXINV-CB-95] Fees and Commission display without a minus sign\n> Not signed\n",
+  "smart_checklist_markdown": "# CRT-635 — Smart Checklist\n\n## Prerequisites\n\n- [CRT-635] Console — open at least one FX_SPOT position\n> Prerequisite: console fill for FX_SPOT before Adaptive checks\n\n## Adaptive — Transactions\n\n### Transaction card\n\n- [DXINV-025] Quantity from negative source displays without a minus sign\n> Not signed — source-negative quantity displays without a minus sign\n- [DXINV-025] Fill price shows account currency symbol\n> Fill price — Displayed with account currency symbol (account currency, not instrument currency)\n\n### Transaction details card\n\n- [DXINV-236] Cash effect displays without a minus sign\n> Cash effect — Not signed: a source-negative cash effect renders without a minus sign\n\n## Adaptive — Trade History\n\n### Trade card\n\n- [DXINV-CB-92] Quantity from negative source displays without a minus sign\n> Quantity — Not signed: a source-negative quantity renders without a minus sign\n- [DXINV-CB-92] Total cost shows account currency symbol\n> Total cost — Displayed with account currency symbol\n\n### Trade details card\n\n- [DXINV-CB-95] negative Realized PL shows minus sign and red\n> Realized PL — Signed. Colored: red for negative — expect a minus sign and red text\n- [DXINV-CB-95] positive Realized PL shows green\n> Realized PL — Signed. Colored: green for positive — expect no minus sign and green text\n- [DXINV-CB-95] Fees and Commission display without a minus sign\n> Fees and Commission — Not signed: both render without a minus sign\n",
   "anti_pattern_findings": [],
   "excluded_checks_with_reason": [],
   "explicitly_out_of_scope": [],

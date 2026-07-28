@@ -63,10 +63,26 @@ Exit **0** = pass. Max **2** reconcile iterations on failure per playbook.
 
 | Mode | Checks |
 |------|--------|
-| **ref** | `schema_version` ≥ 4; obligations shape; snippet finalize gate; no `/temp/`; no CRTQA keys; topology when `--strict-topology`; principal when `--strict-principal` |
+| **ref** | `schema_version` ≥ 4; obligations shape; snippet finalize gate; variation and requirement-pass gates (below); no `/temp/`; no CRTQA keys; topology when `--strict-topology`; principal when `--strict-principal` |
 | **topology** | `epic_archetype` + `verification_topology` contract only |
 | **principal** | Principal contract only (`verification_focus_proposed`, `downstream_hints`, threads, delivery links, archetype rules) |
 | **reconcile** | **ref** checks + `obligations_reconcile.epic_summary_aligned`; primary obligations reviewed |
+
+## Variation and requirement-pass gates (`widget_ui` / `mixed`)
+
+Thresholds come from the snippet, not from declared fields ([decisions.md](../CI/decisions.md) D18–D19):
+
+| Error | Meaning |
+|-------|---------|
+| `parameter_inventory_undercut` | Declared `parameter_inventory[]` omits rows that the verifier derives from `snippet_text`. A declared inventory may add rows, never drop them. |
+| `snippet_truncated` | `snippet_text` is under 60% of the attested `requirement_passes[].source_chars` — transcribe the whole parameter table. |
+| `requirement_passes missing` / `requirement_pass_missing` | No per-requirement pass recorded for a requirement with `snippet_status: ok`; step **3c** must fan out one subprocess per requirement. |
+| `requirement_pass_stale` | Recorded `snippet_chars` or `inventory_rows` disagrees with what the verifier recomputes from the ref. |
+| `observable_yield_undercut` | Declared `observable_yield` is below the catalogue-mandated variation count. |
+| `variation_shortfall` | Fewer variation obligations than mandated, or mandated variations left uncovered. |
+| `parity_on_availability` | Availability wording emitted as `kind: parity`; use `kind: invariant` under `## Prerequisites`. |
+
+`WARN unmatched_spec_patterns` is advisory: inventory cells with no catalogue rule, which COVERAGE surfaces under `## Not attempted`.
 
 ## `--strict-principal` (opt-in)
 

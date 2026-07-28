@@ -143,14 +143,14 @@ QUOTE_KEYWORDS = re.compile(
 
 try:
     from variation_catalogue import (  # type: ignore
-        extract_parameter_inventory,
+        effective_inventory,
         mandated_variations_for_inventory,
         obligation_variation_key,
         variation_key,
     )
 except ImportError:  # pragma: no cover
     from automation.tools.variation_catalogue import (  # type: ignore
-        extract_parameter_inventory,
+        effective_inventory,
         mandated_variations_for_inventory,
         obligation_variation_key,
         variation_key,
@@ -695,9 +695,7 @@ def collect_variation_metrics(ref: dict[str, Any]) -> dict[str, int]:
     for row in ref.get("requirements") or []:
         if not isinstance(row, dict) or row.get("snippet_status") != "ok":
             continue
-        inv = row.get("parameter_inventory")
-        if not isinstance(inv, list) or not inv:
-            inv = extract_parameter_inventory(str(row.get("snippet_text") or ""))
+        inv, _undercut = effective_inventory(row)
         mandated, unmatched = mandated_variations_for_inventory(inv)
         mandated_n += len(mandated)
         unmatched_n += len(unmatched)
@@ -754,9 +752,12 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
         if status != "ok":
             continue
 
-        inv = row.get("parameter_inventory")
-        if not isinstance(inv, list) or not inv:
-            inv = extract_parameter_inventory(snippet)
+        inv, undercut = effective_inventory(row)
+        if undercut:
+            errors.append(
+                f"parameter_inventory_undercut: {key} omits {len(undercut)} row(s) present "
+                f"in snippet_text ({', '.join(undercut[:8])})"
+            )
         if len(inv) < 1:
             continue
 
@@ -839,6 +840,87 @@ def verify_widget_ui_atomic_obligations(ref: dict[str, Any]) -> list[str]:
             )
             errors.append(
                 f"variation_shortfall: {key} uncovered mandated variations: {detail}"
+            )
+
+    return errors
+
+
+# The inventory gate compares declared rows against snippet_text, so a truncated
+# snippet would move the loophole one level down: few rows in, few rows expected.
+SNIPPET_MIN_SOURCE_RATIO = 0.6
+
+
+def verify_requirement_passes(ref: dict[str, Any]) -> list[str]:
+    """D19: one recorded pass per resolved requirement, with recomputable numbers.
+
+    The playbook fans out one subprocess per requirement; a single sweep over all
+    requirements produces thin inventories. Recomputing snippet_chars and
+    inventory_rows here makes a skipped or copy-pasted pass fail instead of pass.
+    """
+    errors: list[str] = []
+    arch = (ref.get("epic_archetype") or {}).get("value")
+    if arch not in ("widget_ui", "mixed"):
+        return errors
+
+    resolved = {
+        str(row["key"]): row
+        for row in (ref.get("requirements") or [])
+        if isinstance(row, dict) and row.get("key") and row.get("snippet_status") == "ok"
+    }
+    if not resolved:
+        return errors
+
+    passes_raw = ref.get("requirement_passes")
+    if not isinstance(passes_raw, list) or not passes_raw:
+        errors.append(
+            "requirement_passes missing: EPIC-PREP must record one per-requirement pass "
+            f"for {len(resolved)} resolved requirement(s)"
+        )
+        return errors
+
+    by_key: dict[str, dict[str, Any]] = {}
+    for entry in passes_raw:
+        if isinstance(entry, dict) and entry.get("requirement_key"):
+            by_key[str(entry["requirement_key"])] = entry
+
+    for key, row in resolved.items():
+        entry = by_key.get(key)
+        if entry is None:
+            errors.append(
+                f"requirement_pass_missing: {key} resolved but has no requirement_passes entry"
+            )
+            continue
+
+        snippet = str(row.get("snippet_text") or "")
+        declared_chars = entry.get("snippet_chars")
+        if not isinstance(declared_chars, int):
+            errors.append(f"requirement_pass_invalid: {key} snippet_chars must be an integer")
+        elif abs(declared_chars - len(snippet)) > max(16, len(snippet) // 20):
+            errors.append(
+                f"requirement_pass_stale: {key} snippet_chars={declared_chars} "
+                f"but snippet_text is {len(snippet)} chars"
+            )
+
+        inv, _undercut = effective_inventory(row)
+        declared_rows = entry.get("inventory_rows")
+        if not isinstance(declared_rows, int):
+            errors.append(f"requirement_pass_invalid: {key} inventory_rows must be an integer")
+        elif declared_rows != len(inv):
+            errors.append(
+                f"requirement_pass_stale: {key} inventory_rows={declared_rows} "
+                f"but effective inventory has {len(inv)} row(s)"
+            )
+
+        source_chars = entry.get("source_chars")
+        if not isinstance(source_chars, int) or source_chars < 1:
+            errors.append(
+                f"requirement_pass_invalid: {key} source_chars must be the character count "
+                "of the fetched source section"
+            )
+        elif len(snippet) < SNIPPET_MIN_SOURCE_RATIO * source_chars:
+            errors.append(
+                f"snippet_truncated: {key} snippet_text is {len(snippet)} chars of "
+                f"source_chars={source_chars}; transcribe the whole parameter table"
             )
 
     return errors
@@ -941,6 +1023,7 @@ def verify_ref(
     errors.extend(verify_topology(ref, strict_topology))
     errors.extend(verify_principal(ref, strict_principal))
     errors.extend(verify_widget_ui_atomic_obligations(ref))
+    errors.extend(verify_requirement_passes(ref))
     if (ref.get("verification_topology") or {}).get("scenario_capability_rows") is not None:
         errors.extend(verify_scenario_inventory(ref))
     return errors
