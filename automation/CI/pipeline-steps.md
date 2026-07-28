@@ -8,7 +8,7 @@ Twelve TeamCity build steps map to scripts under [`automation/tools/teamcity/`](
 | 2 | EPIC-PREP agent | [`epic-prep-agent.sh`](../tools/teamcity/epic-prep-agent.sh) | [`run_pipeline_agent.py`](../tools/teamcity/run_pipeline_agent.py); MCP + project rules; requires `-ref.json` |
 | 3 | EPIC-PREP verify | [`epic-prep-verify.sh`](../tools/teamcity/epic-prep-verify.sh) | `epic_prep_verify.py` — **`|| exit 1`** |
 | 4 | COVERAGE agent | [`coverage-agent.sh`](../tools/teamcity/coverage-agent.sh) | Runner; `strict_topology=yes strict_principal=yes`; CI addendum forbids oracle enums in markdown (D14) |
-| 5 | COVERAGE verify | [`coverage-verify.sh`](../tools/teamcity/coverage-verify.sh) | `coverage_verify.py --mode draft_truth` — **`|| exit 1`** |
+| 5 | COVERAGE verify | [`coverage-verify.sh`](../tools/teamcity/coverage-verify.sh) | `coverage_verify.py --mode draft_truth` **then** `--mode obligations` (semantic gates + `variation_density` live only in the second) — **`|| exit 1`** |
 | 6 | Console gate | [`console-gate-wrapper.sh`](../tools/teamcity/console-gate-wrapper.sh) | Sources [`crtqa-openssh-env.sh`](../tools/teamcity/crtqa-openssh-env.sh); `crtqa_console_probe.py` |
 | 7 | GROUND agent | [`ground-agent.sh`](../tools/teamcity/ground-agent.sh) | CRTQA OpenSSH env + runner; CI addendum (Phase 0 done; no desktop multiplex) |
 | 8 | GROUND verify | [`ground-verify.sh`](../tools/teamcity/ground-verify.sh) | `ground_verify.py --mode emit` — **`|| exit 1`** |

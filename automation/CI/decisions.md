@@ -210,8 +210,11 @@ Downstream steps fail fast with `ERROR: contract violation: ...` when required u
 3. **`snippet_text`** below **60%** of attested `source_chars` fails (**`snippet_truncated`**), so a truncated transcription cannot lower breadth thresholds from below.
 4. Availability placement is exempted **per check**, not per ref: an availability line outside **`## Prerequisites`** needs `config_vs_position` on its own obligation (**`availability_misplaced`**). Relabelling `parity` → `invariant` no longer moves it into `## Invariants under configuration change`.
 5. Oracle detail lines must **name their parameter** (**`variation_oracle_detail_unlabelled`**) and **differ between variations of the same parameter** (**`duplicate_variation_oracle_detail`**). A heading emitted with nothing under it fails (**`empty_markdown_section`**).
+6. **CI step 5 runs both coverage modes.** `--mode draft_truth` covers breadth and scenario mapping only; every semantic gate (stub wording, availability placement, variation oracles, empty sections) and the `variation_density` statistic live in `--mode obligations`, which the step never invoked. [`coverage-verify.sh`](../tools/teamcity/coverage-verify.sh) now runs `draft_truth` then `obligations`, and passes `--md` so the lint reads the actual paste file.
 
 **Rationale:** D18 moved the breadth threshold from a declared `observable_yield` to a declared `parameter_inventory` — the same loophole under a new name. Build 46 transcribed two rows of a multi-row table, mandated two variations, and passed every gate; four availability checks moved from `parity` to `invariant` under the Invariants heading while `## Prerequisites` shipped empty, and one spec line was copy-pasted as the oracle for four different checks. Thresholds must come from what the source shows, not from what the agent says it found.
+
+The mode gap explains why the earlier coverage gates appeared to have no effect: the build-43 stub skeleton fixture returns `OK coverage_verify mode=draft_truth` while `--mode obligations` reports **20** violations on the same files. SD1–SD6 (D17) and the D18 variation gates were shipped but unreachable from CI — the prep-side gates ran because step 3 uses `--mode ref`.
 
 **Status:** Accepted (2026-07).
 

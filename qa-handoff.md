@@ -8,14 +8,16 @@ Last updated: 2026-07-28 (D19 derived truth beats declared numbers).
 
 **D18** stays in force (obligation = catalogue variation, `docs/variation-catalogue.json`, `variation_density` metrics) — D19 closes the loopholes that let build 46 pass with 9 field checks.
 
+**CI mode gap (found while wiring D19):** step 5 ran only `coverage_verify --mode draft_truth`, so every coverage-side semantic gate from D17 onward was unreachable — the build-43 stub fixture passes `draft_truth` and fails `obligations` with 20 violations. Step 5 now runs both modes and passes `--md`.
+
 ## Resume
 
-- Push D19 on `_stash-team-merge` → `stash/team`, then re-run Pipeline CRT-635
+- D19 pushed to `stash/team`; re-run Pipeline CRT-635
 - Confluence + Bitbucket PATs must still be set (D17)
 
 ## Next
 
-1. Re-run CRT-635 and read the build statistics: `corner.mandated_variations` should rise well above the previous 8–9 once the full parameter tables are transcribed
+1. Re-run CRT-635 and read the log lines `OK epic_prep_verify … mandated_variations=…` (step 3) and `variation_density=… variation_checks=… mandated=…` (step 5); the same numbers land in build statistics as `corner.mandated_variations` / `corner.variation_checks`
 2. If EPIC-PREP now fails on `parameter_inventory_undercut` or `snippet_truncated`, that is the gate working — the fix is a fuller transcription, not a lower threshold
 3. Only if `mandated_variations` stays low with all gates green: raise `AGENT_MODEL` on the EPIC-PREP step (default `composer-2.5` in `run_pipeline_agent.py`)
 4. Engineer extends the paste on CRTQA; repo `-coverage.md` stays machine-generated
