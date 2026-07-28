@@ -26,6 +26,7 @@
 | Green build, stub checklist / `mcp_export_failed` deferrals | Pre-D17 single-PAT failure mode; upgrade `team` + set Confluence/Bitbucket PATs; coverage_verify now rejects stub skeletons |
 | `ci-strict rejects deferral_accepted` | Expected when snippets failed under CI; fix Confluence auth, do not set `ALLOW_SNIPPET_DEFERRAL` unless intentionally waiving |
 | `refusing Jira success comment: requirement snippets not ok` | EPIC-PREP did not get ok snippets — fix PATs and re-run; success notify blocked by design (D17) |
+| `ERROR: ref missing for success gate: …/automation/epics/<KEY>/…` | Pre-D19 `jira_success.py` resolved the repo root one level too deep, so step 11 always failed on green builds (step 12 stays silent via the analyse-verify green-stop, leaving no Jira comment at all). Upgrade `team`; the path is now `<checkout>/epics/<KEY>/…` |
 | Agent not Linux | Console gate requires OpenSSH on agent |
 | Agent `finished` but verify «file not found» | Pre-patch bare SDK — upgrade `team` scripts; runner exit **3** if `--require` missing |
 | `required output file(s) missing` (exit 3) | Agent did not write artefact — read agent log; increase `AGENT_MAX_WAIT_MINUTES` |

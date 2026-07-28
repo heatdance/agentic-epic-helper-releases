@@ -12,7 +12,9 @@ from urllib.request import Request, urlopen
 
 from read_teamcity_params import resolve_teamcity_build_url
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+# This file sits three levels below the repo root (automation/tools/teamcity/),
+# so parents[2] resolves to automation/ and hid every epic under automation/epics/.
+REPO_ROOT = Path(os.environ.get("REPO_ROOT") or Path(__file__).resolve().parents[3])
 
 
 def _fail(msg: str, code: int = 1) -> None:
@@ -35,11 +37,12 @@ def _post_comment(*, base: str, qa: str, token: str, body: str) -> None:
         print("comment status:", resp.status)
 
 
-def _resolve_ref(epic: str) -> Path:
+def _resolve_ref(epic: str, repo_root: Path | None = None) -> Path:
+    root = repo_root or REPO_ROOT
     candidates = (
-        REPO_ROOT / "epics" / epic / "dependencies" / f"{epic}-ref.json",
-        REPO_ROOT / "epics" / epic / "context" / f"{epic}-ref.json",
-        REPO_ROOT / "epics" / epic / f"{epic}-ref.json",
+        root / "epics" / epic / "dependencies" / f"{epic}-ref.json",
+        root / "epics" / epic / "context" / f"{epic}-ref.json",
+        root / "epics" / epic / f"{epic}-ref.json",
     )
     for path in candidates:
         if path.is_file():
