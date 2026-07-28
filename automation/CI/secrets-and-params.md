@@ -25,6 +25,7 @@ Never commit tokens, PATs, SSH private keys, or sudo passwords to git. Store as 
 | `CONFLUENCE_API_TOKEN` | password | Confluence DC PAT → MCP `CONFLUENCE_PERSONAL_TOKEN` (**required**; not interchangeable with Jira PAT) |
 | `BITBUCKET_API_TOKEN` | password | Stash/Bitbucket DC PAT → MCP `BITBUCKET_PERSONAL_TOKEN` (**required**) |
 | `AGENT_MAX_WAIT_MINUTES` | text | Per agent step wait timeout; default **`45`** |
+| `AGENT_MODEL` | text | Optional. Cursor model id for pipeline agents; default **`composer-2.5`**. Set on Pipeline + `env.AGENT_MODEL=%AGENT_MODEL%` when the default returns immediate `status: error` |
 | `CRTQA_CONSOLE_TRANSPORT` | text | `openssh` |
 | `CRTQA_SSH_USER` | text | SSH login on CRTQA host |
 | `CRTQA_SSH_PRIVATE_KEY_B64` | password | Base64-encoded PEM (single line) |

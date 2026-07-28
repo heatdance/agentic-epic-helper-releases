@@ -154,9 +154,31 @@ def _consume_run_stream(run, deadline_mono: float, stats: RunLogStats) -> None:
             if turn_usage is not None:
                 _log_usage(turn_usage)
 
+        elif msg_type == "status":
+            # SDKStatusMessage — often the only place a mid-run failure reason appears.
+            st = getattr(message, "status", "?")
+            text = getattr(message, "message", None) or getattr(message, "text", None) or ""
+            line = f"stream_status: {st}"
+            if text:
+                line = f"{line} — {text}"
+            print(line, file=sys.stderr if str(st).lower() in {"error", "failed"} else sys.stdout)
+
+        elif msg_type == "system":
+            subtype = getattr(message, "subtype", None) or ""
+            model = getattr(message, "model", None) or ""
+            print(f"stream_system: subtype={subtype!r} model={model!r}")
+
+        elif msg_type == "task":
+            st = getattr(message, "status", "?")
+            text = getattr(message, "text", None) or getattr(message, "message", None) or ""
+            print(f"stream_task: {st} {text}".rstrip())
+
         elif msg_type == "error":
             text = getattr(message, "message", None) or getattr(message, "text", None) or message
             print(f"agent_error_event: {text}", file=sys.stderr)
+
+        elif msg_type is not None:
+            print(f"stream_event: type={msg_type!r}")
 
 
 def _report_required_files(paths: list[Path], step_started_unix: float) -> tuple[int, bool]:
@@ -221,18 +243,27 @@ def _build_options(repo_root: Path):
 
 
 def _log_run_failure(result: object, run: object, *, status: object) -> None:
-    """Print SDK fields that explain a non-finished run (status: error / cancelled / …)."""
+    """Print SDK fields that explain a non-finished run (status: error / cancelled / …).
+
+    RunResult has no dedicated error field — only status + optional result text.
+    The useful reason usually arrived earlier as stream type=status/system; dump
+    whatever is left on the objects, then try conversation().
+    """
     print(f"ERROR: agent run did not finish (status={status!r})", file=sys.stderr)
     for label, obj in (("result", result), ("run", run)):
         if obj is None:
             continue
         for attr in (
             "id",
+            "agent_id",
             "result",
+            "model",
+            "duration_ms",
+            "created_at",
+            "git",
             "error",
             "message",
             "failure_reason",
-            "git",
         ):
             if not hasattr(obj, attr):
                 continue
@@ -241,7 +272,7 @@ def _log_run_failure(result: object, run: object, *, status: object) -> None:
             except Exception as exc:  # noqa: BLE001 - diagnostics must not raise
                 print(f"  {label}.{attr}: <unreadable: {exc}>", file=sys.stderr)
                 continue
-            if value is None or value == "":
+            if value is None or value == "" or value == 0:
                 continue
             text = str(value).strip()
             if not text:
@@ -249,6 +280,25 @@ def _log_run_failure(result: object, run: object, *, status: object) -> None:
             if len(text) > 800:
                 text = text[:800] + "…"
             print(f"  {label}.{attr}: {text}", file=sys.stderr)
+
+    if run is None:
+        return
+    try:
+        if hasattr(run, "supports") and not run.supports("conversation"):
+            reason = ""
+            if hasattr(run, "unsupported_reason"):
+                reason = run.unsupported_reason("conversation") or ""
+            print(f"  conversation: unsupported ({reason})", file=sys.stderr)
+            return
+        turns = run.conversation()
+        print(f"  conversation_turns: {len(turns) if turns is not None else 0}", file=sys.stderr)
+        for i, turn in enumerate(list(turns or [])[:8]):
+            text = str(turn).strip()
+            if len(text) > 400:
+                text = text[:400] + "…"
+            print(f"  conversation[{i}]: {text}", file=sys.stderr)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  conversation: <unreadable: {exc}>", file=sys.stderr)
 
 
 def main(argv: list[str] | None = None) -> int:
