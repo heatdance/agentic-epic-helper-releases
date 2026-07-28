@@ -84,7 +84,8 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | Symptom | Fix |
 |---------|-----|
 | `CURSOR_API_KEY is empty` | Set password param on Pipeline |
-| Agent status not `finished` | Read agent log; retry; check API quota |
+| Agent status not `finished` | Read agent log for `ERROR: agent run did not finish` + dumped `result.*` / `agent_error_event:`; retry; check API quota / `AGENT_MODEL` |
+| `status: error` in ~5s, `tool_started=0` | Cursor runtime failed before any tool — not a harness gate. Check `CURSOR_API_KEY`, model availability (`AGENT_MODEL`, default `composer-2.5`), account quota; re-run. Runner dumps `result.*` fields when present |
 | `agent wait exceeded N minutes` | Raise `AGENT_MAX_WAIT_MINUTES` (default 45) and build timeout (180 min) |
 | MCP calls absent in agent log | Ensure step 1 green; runner uses inline MCP — look for `mcp_tool_started=0` WARN |
 | `REQUIRE OK … STALE` | Reused agent checkout — file from prior build; run clean checkout or delete `epics/<KEY>/` |

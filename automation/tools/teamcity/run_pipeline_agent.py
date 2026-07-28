@@ -220,6 +220,37 @@ def _build_options(repo_root: Path):
     ), mcp_cmd, mcp_args
 
 
+def _log_run_failure(result: object, run: object, *, status: object) -> None:
+    """Print SDK fields that explain a non-finished run (status: error / cancelled / …)."""
+    print(f"ERROR: agent run did not finish (status={status!r})", file=sys.stderr)
+    for label, obj in (("result", result), ("run", run)):
+        if obj is None:
+            continue
+        for attr in (
+            "id",
+            "result",
+            "error",
+            "message",
+            "failure_reason",
+            "git",
+        ):
+            if not hasattr(obj, attr):
+                continue
+            try:
+                value = getattr(obj, attr)
+            except Exception as exc:  # noqa: BLE001 - diagnostics must not raise
+                print(f"  {label}.{attr}: <unreadable: {exc}>", file=sys.stderr)
+                continue
+            if value is None or value == "":
+                continue
+            text = str(value).strip()
+            if not text:
+                continue
+            if len(text) > 800:
+                text = text[:800] + "…"
+            print(f"  {label}.{attr}: {text}", file=sys.stderr)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Run a Corner pipeline Cursor agent step")
     parser.add_argument("--prompt", required=True, help="Agent prompt (pipeline trigger text)")
@@ -288,8 +319,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"agent_create: {time.monotonic() - create_started:.1f}s")
 
         run = agent.send(args.prompt)
-        run_id = getattr(run, "run_id", None) or getattr(run, "id", None)
-        agent_id = getattr(run, "agent_id", None) or getattr(agent, "id", None)
+        run_id = getattr(run, "id", None) or getattr(run, "run_id", None)
+        agent_id = getattr(agent, "id", None) or getattr(run, "agent_id", None)
         if run_id:
             print(f"run_id: {run_id}")
         if agent_id:
@@ -345,6 +376,10 @@ def main(argv: list[str] | None = None) -> int:
         print(f"assistant_final_preview: {preview}{'…' if len(preview) >= 500 else ''}")
 
     if status != "finished":
+        # Status "error" means the run started but failed mid-flight; CursorAgentError
+        # is the other path (never started). Dump whatever the SDK left on result/run
+        # so the next CI log is not just "status: error".
+        _log_run_failure(result, run, status=status)
         return 2
 
     exit_code, any_stale = _report_required_files(required, step_started_unix)
