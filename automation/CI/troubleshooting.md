@@ -86,6 +86,7 @@ See [crtqa-console-ci.md](../docs/crtqa-console-ci.md) for full console table.
 | `CURSOR_API_KEY is empty` | Set password param on Pipeline |
 | Agent status not `finished` | Read agent log for `ERROR: agent run did not finish` + dumped `result.*` / `agent_error_event:`; retry; check API quota / `AGENT_MODEL` |
 | `status: error` in ~5s, `tool_started=0` | Cursor runtime failed before any tool — not a harness gate. `RunResult` has **no** error string (only `status`); look for `stream_status:` / `stream_system:` in the same step. Check `CURSOR_API_KEY`, model availability (`AGENT_MODEL`, default `composer-2.5`), account quota; re-run |
+| `stream_status: ERROR — You've reached your normal usage limit` | **Cursor account quota exhausted** for the API key on Pipeline (`CURSOR_API_KEY`). Harness and Stash are fine. Ask the Cursor admin to raise the limit, wait for the billing period reset, or point `CURSOR_API_KEY` at another account with remaining usage — then re-run. Changing `AGENT_MODEL` will not help if the pool is shared |
 | `agent wait exceeded N minutes` | Raise `AGENT_MAX_WAIT_MINUTES` (default 45) and build timeout (180 min) |
 | MCP calls absent in agent log | Ensure step 1 green; runner uses inline MCP — look for `mcp_tool_started=0` WARN |
 | `REQUIRE OK … STALE` | Reused agent checkout — file from prior build; run clean checkout or delete `epics/<KEY>/` |
