@@ -10,14 +10,19 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+from jira_comment import (
+    STATUS_FAILED,
+    artifact_status,
+    coverage_metrics,
+    last_completed_stage,
+    render_comment,
+    resolve_epic_json,
+)
 from read_teamcity_params import resolve_teamcity_build_url
 
-EPIC_ARTIFACTS = (
-    "ref.json",
-    "coverage.json",
-    "coverage.md",
-    "analysis.json",
-    "analysis.md",
+RERUN_ACTION = (
+    "open the build log at the failing step, then rerun Manual Pipeline with the "
+    "same EPIC_KEY and QA_TASK_KEY"
 )
 
 
@@ -26,66 +31,47 @@ def _fail(msg: str, code: int = 1) -> None:
     raise SystemExit(code)
 
 
-def _artifact_status(epic_dir: Path, epic: str) -> dict[str, bool]:
-    return {
-        name: (epic_dir / f"{epic}-{name}").is_file()
-        for name in EPIC_ARTIFACTS
-    }
+def _stage(repo_root: Path, current_step: str | None) -> str:
+    if current_step:
+        return f"failed at {current_step}"
+    last_ok = last_completed_stage(repo_root / ".teamcity-ci" / "state")
+    return f"failed after {last_ok}" if last_ok else "failed before the first step marker"
 
 
-def _generic_failure_comment(*, epic: str, build_url: str) -> str:
-    return (
-        f"Corner Epic QA: pipeline failed for {epic}.\n\n"
-        f"Build: {build_url}\n\n"
-        f"Open the build log for the failing step. "
-        f"If the run got far enough, partial outputs may be in TeamCity artifacts epic-work."
-    )
-
-
-def build_failure_comment(*, epic: str, build_url: str, repo_root: Path) -> str:
-    if epic == "?":
-        return _generic_failure_comment(epic=epic, build_url=build_url)
-
+def build_failure_comment(
+    *,
+    epic: str,
+    build_url: str,
+    repo_root: Path,
+    current_step: str | None = None,
+) -> str:
     epic_dir = repo_root / "epics" / epic
-    if not epic_dir.is_dir():
-        return _generic_failure_comment(epic=epic, build_url=build_url)
+    have_epic_dir = epic != "?" and epic_dir.is_dir()
+    status = artifact_status(epic_dir, epic) if have_epic_dir else None
 
-    status = _artifact_status(epic_dir, epic)
-    has_partial = status["ref.json"] or status["coverage.json"]
-    if not has_partial:
-        return _generic_failure_comment(epic=epic, build_url=build_url)
-
-    lines = [
-        f"Corner Epic QA: pipeline failed for {epic} (partial outputs available).",
-        "",
-        f"Build: {build_url}",
-        "",
-        "Partial artifacts in this build (download epic-work from TeamCity):",
-    ]
-    for name in EPIC_ARTIFACTS:
-        flag = "yes" if status[name] else "no"
-        lines.append(f"- {epic}-{name}: {flag}")
-
-    lines.extend(
-        [
-            "",
-            "Open the build log for the failing step.",
-        ]
-    )
-    if status["coverage.json"]:
-        lines.append(
-            "If step 5 COVERAGE verify failed, check for forbidden oracle enum tokens "
-            "in smart_checklist_markdown (e.g. first_tier_quote) — use human-readable "
-            "> Oracle: lines in -coverage.md only."
+    notes: list[str] = []
+    metrics = None
+    if status and status["coverage.json"]:
+        metrics = coverage_metrics(
+            repo_root,
+            resolve_epic_json(epic_dir, epic, "ref"),
+            resolve_epic_json(epic_dir, epic, "coverage"),
         )
-    lines.extend(
-        [
-            "",
-            "Rerun: Manual Pipeline with the same EPIC_KEY and QA_TASK_KEY, "
-            "or edit -coverage.md and re-run coverage_verify locally.",
-        ]
+        notes.append(
+            "on a COVERAGE verify failure, check smart_checklist_markdown for forbidden "
+            "oracle enum tokens and use human-readable > lines in -coverage.md only"
+        )
+
+    return render_comment(
+        status=STATUS_FAILED,
+        epic=epic,
+        build_url=build_url,
+        stage=_stage(repo_root, current_step),
+        artifacts=status,
+        metrics=metrics,
+        next_action=RERUN_ACTION,
+        notes=tuple(notes),
     )
-    return "\n".join(lines)
 
 
 def main() -> int:
@@ -105,7 +91,12 @@ def main() -> int:
     if not token:
         _fail("JIRA_API_TOKEN required")
 
-    comment = build_failure_comment(epic=epic, build_url=build_url, repo_root=repo_root)
+    comment = build_failure_comment(
+        epic=epic,
+        build_url=build_url,
+        repo_root=repo_root,
+        current_step=os.environ.get("CORNER_CI_STEP", "").strip() or None,
+    )
 
     print(f"Jira failure comment on {qa} (epic {epic})")
     url = f"{base}/rest/api/2/issue/{qa}/comment"

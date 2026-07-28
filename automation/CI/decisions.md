@@ -220,6 +220,16 @@ The mode gap explains why the earlier coverage gates appeared to have no effect:
 
 ---
 
+## D20 — One shape for Jira comments
+
+**Decision:** Steps 11 and 12 render through [`jira_comment.py`](../tools/teamcity/jira_comment.py) `render_comment` with a fixed block order — header `Corner Epic QA - <KEY> - <ready|failed>`, then `Build`, `Stage`, `Artifacts` (all five deliverables, always listed), optional `Coverage` metrics, `Next`, and optional `Note` lines. `Stage` comes from `CORNER_CI_STEP` or the highest-numbered step marker; `Coverage` recomputes `mandated` / `emitted` / `checks` / `density` / `unmatched` from the ref and coverage JSON and is omitted rather than allowed to fail the step.
+
+**Rationale:** A CRTQA ticket accumulated three layouts — a one-line success, a generic failure, and a partial failure with an artifact table — so the reader could not tell at a glance how far a run got or whether output quality changed between runs. Fixing the shape also puts the variation numbers where the engineer already looks, instead of only in the build log.
+
+**Status:** Accepted (2026-07).
+
+---
+
 ## Deferred / revisit
 
 | Item | Notes |

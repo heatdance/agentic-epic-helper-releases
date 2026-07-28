@@ -747,8 +747,8 @@ def verify_markdown_sections(
     return errors
 
 
-def _variation_density(coverage: dict[str, Any], ref: dict[str, Any]) -> tuple[int, int]:
-    """Return (variation_checks, mandated)."""
+def variation_density(coverage: dict[str, Any], ref: dict[str, Any]) -> tuple[int, int]:
+    """Return (variation_checks, mandated). Also used by the Jira comment steps."""
     mandated_n = 0
     for row in ref.get("requirements") or []:
         if not isinstance(row, dict) or row.get("snippet_status") != "ok":
@@ -1805,7 +1805,7 @@ def main() -> int:
     if args.mode == "obligations" and args.ref:
         ref_obj = _load_json(args.ref.resolve())
         if ref_obj:
-            var_n, mand_n = _variation_density(coverage, ref_obj)
+            var_n, mand_n = variation_density(coverage, ref_obj)
             dens = f"{(var_n / mand_n):.2f}" if mand_n else "n/a"
             print(
                 f"variation_density={dens} variation_checks={var_n} mandated={mand_n}"

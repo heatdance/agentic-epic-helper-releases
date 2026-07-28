@@ -15,7 +15,7 @@ from jira_failure import build_failure_comment  # noqa: E402
 
 
 class BuildFailureCommentTests(unittest.TestCase):
-    def test_partial_when_ref_and_coverage_exist(self) -> None:
+    def test_lists_every_artifact_when_epic_dir_exists(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             epic_dir = root / "epics" / "CRT-659"
@@ -27,14 +27,35 @@ class BuildFailureCommentTests(unittest.TestCase):
                 epic="CRT-659",
                 build_url="https://dxcity.example/build/1",
                 repo_root=root,
+                current_step="COVERAGE verify",
             )
 
-        self.assertIn("partial outputs available", comment)
-        self.assertIn("CRT-659-coverage.json: yes", comment)
-        self.assertIn("CRT-659-analysis.json: no", comment)
-        self.assertIn("forbidden oracle enum tokens", comment)
+        self.assertIn("Corner Epic QA - CRT-659 - failed", comment)
+        self.assertIn("Stage: failed at COVERAGE verify", comment)
+        self.assertIn("- CRT-659-coverage.json: yes", comment)
+        self.assertIn("- CRT-659-analysis.json: no", comment)
+        self.assertIn("Next: open the build log", comment)
+        self.assertIn("Note: on a COVERAGE verify failure", comment)
 
-    def test_generic_when_no_epic_dir(self) -> None:
+    def test_stage_falls_back_to_last_marker(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            (root / "epics" / "CRT-659").mkdir(parents=True)
+            state = root / ".teamcity-ci" / "state"
+            state.mkdir(parents=True)
+            (state / "03-epic-prep-verify.ok").write_text(
+                "2026-07-28T09:00:00Z | EPIC-PREP verify\n", encoding="utf-8"
+            )
+
+            comment = build_failure_comment(
+                epic="CRT-659",
+                build_url="https://dxcity.example/build/1",
+                repo_root=root,
+            )
+
+        self.assertIn("Stage: failed after EPIC-PREP verify", comment)
+
+    def test_no_epic_dir_keeps_the_same_shape(self) -> None:
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             comment = build_failure_comment(
@@ -43,9 +64,9 @@ class BuildFailureCommentTests(unittest.TestCase):
                 repo_root=root,
             )
 
-        self.assertNotIn("partial outputs available", comment)
-        self.assertIn("pipeline failed for CRT-659", comment)
-        self.assertIn("partial outputs may be in TeamCity artifacts epic-work", comment)
+        self.assertIn("Corner Epic QA - CRT-659 - failed", comment)
+        self.assertIn("Artifacts: none in this build", comment)
+        self.assertIn("Stage: failed before the first step marker", comment)
 
     def test_generic_when_epic_unknown(self) -> None:
         comment = build_failure_comment(
@@ -53,8 +74,8 @@ class BuildFailureCommentTests(unittest.TestCase):
             build_url="unknown",
             repo_root=Path("."),
         )
-        self.assertNotIn("partial outputs available", comment)
-        self.assertIn("pipeline failed for ?", comment)
+        self.assertIn("Corner Epic QA - ? - failed", comment)
+        self.assertIn("Artifacts: none in this build", comment)
 
 
 if __name__ == "__main__":

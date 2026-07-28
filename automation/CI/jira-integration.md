@@ -15,6 +15,34 @@ POST /rest/api/2/issue/{QA_TASK_KEY}/comment
 
 Single PAT (`JIRA_API_TOKEN`) for comments and MCP — see [secrets-and-params.md](secrets-and-params.md).
 
+## Comment shape (both steps)
+
+Success and failure render through the same builder, [`jira_comment.py`](../tools/teamcity/jira_comment.py) `render_comment`, so a CRTQA ticket reads as one series instead of three layouts. Block order is fixed and every block is always present:
+
+```
+Corner Epic QA - {EPIC_KEY} - {ready|failed}
+
+Build: {TEAMCITY_BUILD_URL}
+Stage: {green through … | failed at … | failed after …}
+Artifacts: epic-work
+- {EPIC}-ref.json: yes|no
+- {EPIC}-coverage.json: yes|no
+- {EPIC}-coverage.md: yes|no
+- {EPIC}-analysis.json: yes|no
+- {EPIC}-analysis.md: yes|no
+Coverage: mandated=27 emitted=27 checks=24 density=0.89 unmatched=3
+Next: {one action}
+Note: {conditional hint, may repeat}
+```
+
+| Block | Source |
+|-------|--------|
+| Header | `EPIC_KEY` + outcome; grep `Corner Epic QA - <KEY> -` to scan ticket history |
+| `Stage` | `CORNER_CI_STEP` when the failing step set it, otherwise the highest-numbered `.teamcity-ci/state/NN-*.ok` marker |
+| `Artifacts` | Presence per deliverable, checked in `dependencies/`, `context/`, then the epic root. Always listed — never dropped when files are missing; `Artifacts: none in this build` when the epic folder is absent |
+| `Coverage` | `collect_variation_metrics` + `variation_density` recomputed from the ref and coverage JSON. Omitted when it cannot be computed — a notification step must not fail over a metric |
+| `Next` | Single action: extend the checklist (ready) or open the log and rerun (failed) |
+
 ## Success comment (step 11)
 
 Posted when the build completed steps 1–10 successfully.
@@ -31,15 +59,7 @@ Preflight line in the build log (no secrets):
 Jira preflight: epic=CRT-657 qa=CRTQA-10236 build_url=set token=set
 ```
 
-Template (from `jira_success.py`):
-
-```
-Corner Epic QA: coverage for {EPIC_KEY} is ready.
-
-Build: {TEAMCITY_BUILD_URL}
-
-TeamCity artifacts: download epic-work from the build (contains `{EPIC}-coverage.md` and JSON).
-```
+Status is `ready`, `Stage` reads `green through {last marker}`, and `Next` points the engineer at `epic-work` to extend `{EPIC}-coverage.md` on the ticket — the repo copy stays machine-generated. The gate still refuses to post when any requirement `snippet_status` is not `ok` (D17).
 
 After HTTP 201, [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) writes `.teamcity-ci/jira-success.posted`.
 
@@ -62,31 +82,7 @@ The **Parameter-based Execution Condition** dialog (equals / contains / …) **c
 
 On a green build you may still see step 12 **start** in the log — but it should not post a failure comment after guard + `792f519`.
 
-Template (from `jira_failure.py`) — **generic** (no epic-work on agent):
-
-```
-Corner Epic QA: pipeline failed for {EPIC_KEY}.
-
-Build: {TEAMCITY_BUILD_URL}
-
-Open the build log for the failing step. If the run got far enough, partial outputs may be in TeamCity artifacts epic-work.
-```
-
-**Partial** (when `epics/{EPIC}/` contains ref and/or coverage JSON — D14):
-
-```
-Corner Epic QA: pipeline failed for {EPIC_KEY} (partial outputs available).
-
-Build: {TEAMCITY_BUILD_URL}
-
-Partial artifacts in this build (download epic-work from TeamCity):
-- {EPIC}-ref.json: yes/no
-- {EPIC}-coverage.json: yes/no
-…
-
-If step 5 COVERAGE verify failed, check for forbidden oracle enum tokens in smart_checklist_markdown …
-Rerun: Manual Pipeline with the same EPIC_KEY and QA_TASK_KEY …
-```
+Status is `failed` and the layout is identical to the success comment — there is no longer a separate “generic” versus “partial” template. The artifact list shows what the run produced before it stopped, `Coverage:` appears when coverage JSON exists, and the oracle-token hint is appended as a `Note:` line rather than changing the shape.
 
 See [teamcity-setup.md](teamcity-setup.md#step-11--12--jira-comments-mutually-exclusive).
 

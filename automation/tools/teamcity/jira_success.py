@@ -10,6 +10,14 @@ from pathlib import Path
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+from jira_comment import (
+    STATUS_READY,
+    artifact_status,
+    coverage_metrics,
+    last_completed_stage,
+    render_comment,
+    resolve_epic_json,
+)
 from read_teamcity_params import resolve_teamcity_build_url
 
 # This file sits three levels below the repo root (automation/tools/teamcity/),
@@ -39,15 +47,7 @@ def _post_comment(*, base: str, qa: str, token: str, body: str) -> None:
 
 def _resolve_ref(epic: str, repo_root: Path | None = None) -> Path:
     root = repo_root or REPO_ROOT
-    candidates = (
-        root / "epics" / epic / "dependencies" / f"{epic}-ref.json",
-        root / "epics" / epic / "context" / f"{epic}-ref.json",
-        root / "epics" / epic / f"{epic}-ref.json",
-    )
-    for path in candidates:
-        if path.is_file():
-            return path
-    return candidates[0]
+    return resolve_epic_json(root / "epics" / epic, epic, "ref")
 
 
 def _failed_snippet_keys(epic: str) -> list[str]:
@@ -99,12 +99,22 @@ def main() -> int:
             + " (fix Confluence/Bitbucket PATs and re-run EPIC-PREP)"
         )
 
-    md_name = f"{epic}-coverage.md"
-    comment = (
-        f"Corner Epic QA: coverage for {epic} is ready.\n\n"
-        f"Build: {build_url}\n\n"
-        f"TeamCity artifacts: download epic-work from the build "
-        f"(contains `{md_name}` and JSON)."
+    epic_dir = REPO_ROOT / "epics" / epic
+    comment = render_comment(
+        status=STATUS_READY,
+        epic=epic,
+        build_url=build_url,
+        stage=f"green through {last_completed_stage(REPO_ROOT / '.teamcity-ci' / 'state') or 'ANALYSE verify'}",
+        artifacts=artifact_status(epic_dir, epic),
+        metrics=coverage_metrics(
+            REPO_ROOT,
+            _resolve_ref(epic),
+            resolve_epic_json(epic_dir, epic, "coverage"),
+        ),
+        next_action=(
+            f"download epic-work and extend {epic}-coverage.md on this ticket "
+            "— the repo copy is machine-generated and is not edited in place"
+        ),
     )
 
     print(f"Jira success comment on {qa} (epic {epic})")

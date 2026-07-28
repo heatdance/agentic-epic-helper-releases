@@ -52,6 +52,7 @@ Executable wrappers under [`automation/tools/teamcity/`](../tools/teamcity/). Pi
 | [`jira-success.sh`](../tools/teamcity/jira-success.sh) | `jira_success.py` | Success comment on CRTQA |
 | [`jira-failure.sh`](../tools/teamcity/jira-failure.sh) | `jira_failure.py` | Failure comment on CRTQA |
 | [`jira-notify-guard.sh`](../tools/teamcity/jira-notify-guard.sh) | — | Marker `.teamcity-ci/jira-success.posted` — step 12 skips if step 11 posted |
+| — | [`jira_comment.py`](../tools/teamcity/jira_comment.py) | Shared comment shape for both steps: header, `Stage`, artifact list, `Coverage` metrics, `Next` (D20) |
 
 ## Ephemeral paths (build workspace, not committed)
 
