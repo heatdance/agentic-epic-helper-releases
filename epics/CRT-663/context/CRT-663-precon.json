@@ -1,0 +1,812 @@
+{
+  "schema_version": 5,
+  "epic_key": "CRT-663",
+  "precon_status": "complete",
+  "exploration_budgets": {
+    "max_cluster_iterations": 3,
+    "max_fe_nav_cycles_per_surface": 6,
+    "max_console_commands": 12
+  },
+  "exploration_gaps": [],
+  "sources": {
+    "coverage_path": "epics/CRT-663/CRT-663-coverage.json",
+    "coverage_loaded": true,
+    "discover_path": "epics/CRT-663/CRT-663-discover.json",
+    "discover_loaded": true,
+    "ref_path": "epics/CRT-663/CRT-663-ref.json",
+    "ref_loaded": true,
+    "analysis_path": "epics/CRT-663/CRT-663-analysis.json",
+    "analysis_loaded": true,
+    "precon_run_started_at": "2026-06-08T11:49:47Z",
+    "cold_gate_skip_token_used": false,
+    "cold_gate_resolved_at": "2026-06-08T11:49:47Z",
+    "fe_exploration_waived": false,
+    "optional_jira_audit": {
+      "performed": false,
+      "steps_provenance": "not_used_for_authoring",
+      "note": "Greenfield: existing CRTQA Pre-Conditions are not structural input."
+    }
+  },
+  "fe_credentials": {
+    "dxtrade5": "supplied",
+    "webbroker": "supplied",
+    "adaptive": "not_required"
+  },
+  "fe_ui_sessions": {
+    "dxtrade5": "authenticated",
+    "webbroker": "authenticated",
+    "adaptive": "authenticated"
+  },
+  "environment": {
+    "tier": "ct_qa",
+    "client_shell_impact": {
+      "corner_trader": {
+        "status": "affected",
+        "note": "dxTrade5 and WebBroker client-area widgets named in Epic."
+      },
+      "adaptive": {
+        "status": "affected",
+        "note": "Cross-surface parity includes Adaptive orders, transactions, positions."
+      }
+    }
+  },
+  "session_placeholders": {
+    "console_principal": "<username>",
+    "account_code": "<account_code>",
+    "instrument_example": "EURUSD.spot"
+  },
+  "command_patterns": {
+    "ladder_step": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> at <price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
+      "show positions"
+    ],
+    "fx_spot_market_order": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> mkt fok",
+      "show order last"
+    ],
+    "fx_spot_limit_order": [
+      "use <account_code>",
+      "buy <qty> <instrument_symbol> at <off_market_price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+    ],
+    "fx_spot_stop_order": [
+      "use <account_code>",
+      "stp_order buy <qty> <instrument_symbol> stop=<stop_price> limit=<limit_price> gtc",
+      "show order last",
+      "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+    ]
+  },
+  "test_skeleton": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-663: FX Spot account and instrument configuration",
+      "covers_check_ids": [
+        "chk-001",
+        "chk-002"
+      ],
+      "covers_sections": [
+        "## Primary focus",
+        "## Prerequisites and test data"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-001",
+          "title": "Epic scope: FX_SPOT orders, transfers, positions visibility",
+          "intent": "Cross-surface display for one .spot instrument and order\u2192transfer\u2192position workflow"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-002",
+          "title": "Console FX Spot market, limit, and stop orders on EURUSD.spot",
+          "intent": "Prerequisite orders exist for widget parity (console-only creation path)",
+          "pattern_ref": "fx_spot_limit_order"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-663: dxTrade5 Orders, Transactions, Positions widgets",
+      "covers_check_ids": [
+        "chk-003",
+        "chk-004",
+        "chk-005",
+        "chk-006"
+      ],
+      "covers_sections": [
+        "## dxTrade5 \u2014 Orders, Transactions, Positions"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-003",
+          "title": "Orders widget FX Spot row",
+          "intent": "Status, symbol, side, quantity, filled qty visible"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-004",
+          "title": "Order History for .spot order",
+          "intent": "All statuses in chart flyout history band"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-005",
+          "title": "Account Transactions TRADE for fill",
+          "intent": "TRADE activity tied to test order"
+        },
+        {
+          "case_id": "c04",
+          "check_id": "chk-006",
+          "title": "Positions widget net qty after fill",
+          "intent": "Non-zero position row when account has FX Spot exposure"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-663: WebBroker Client Area and dealer books",
+      "covers_check_ids": [
+        "chk-007",
+        "chk-008",
+        "chk-009"
+      ],
+      "covers_sections": [
+        "## WebBroker \u2014 Client Area and dealer books"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "webbroker"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-007",
+          "title": "Client Area and dealer Order book parity",
+          "intent": "Same .spot order status/symbol/side/qty/filled qty"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-008",
+          "title": "Client Area Account Transactions TRADE",
+          "intent": "FX_SPOT TRADE matches dxTrade5 for same fill"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-009",
+          "title": "Client Area and dealer Position book",
+          "intent": "Position row when qty \u2260 0"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-004",
+      "proposed_title": "CRT-663: Adaptive cross-surface parity",
+      "covers_check_ids": [
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013"
+      ],
+      "covers_sections": [
+        "## Cross-surface parity \u2014 Adaptive (orders, transfers, positions)"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "adaptive",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-010",
+          "title": "Adaptive Working Orders WORKING row",
+          "intent": "Matches dxTrade5 Orders and WB Order book"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-011",
+          "title": "Adaptive orders for other statuses",
+          "intent": "Filled/cancelled/rejected parity across shells"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-012",
+          "title": "Adaptive Trade History fill",
+          "intent": "Symbol, quantity, time match web Transactions"
+        },
+        {
+          "case_id": "c04",
+          "check_id": "chk-013",
+          "title": "Adaptive Positions qty/side/symbol",
+          "intent": "Matches dxTrade5 Positions and WB Position book"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-005",
+      "proposed_title": "CRT-663: WebBroker dealer manual trade invariant",
+      "covers_check_ids": [
+        "chk-016"
+      ],
+      "covers_sections": [
+        "## Invariants under configuration change"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "webbroker",
+        "console"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-016",
+          "title": "Dealer manual trade on routed FX Spot order",
+          "intent": "COMPLETED order plus TRADE and position rows consistent on all shells; ET path is auto fill/reject only"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-006",
+      "proposed_title": "CRT-663: Margin liquidation closing order invariant",
+      "covers_check_ids": [
+        "chk-017"
+      ],
+      "covers_sections": [
+        "## Invariants under configuration change"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "webbroker",
+        "dxtrade5"
+      ],
+      "ladder_in_test": false,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-017",
+          "title": "Margin liquidation FX Spot closing market order",
+          "intent": "Closing order visible in Orders/Order book with liquidation origin marker"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-007",
+      "proposed_title": "CRT-663: Market FX Spot flow (atomic)",
+      "covers_check_ids": [
+        "chk-018",
+        "chk-019",
+        "chk-020"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Market FX Spot flow (atomic)"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker",
+        "adaptive"
+      ],
+      "ladder_in_test": true,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-018",
+          "title": "Market order visibility (atomic)",
+          "intent": "Order status/symbol/side/qty/filled qty on all shells",
+          "pattern_ref": "fx_spot_market_order"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-019",
+          "title": "Market TRADE row (atomic)",
+          "intent": "TRADE in Account Transactions and Trade History",
+          "pattern_ref": "fx_spot_market_order"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-020",
+          "title": "Market position update (atomic)",
+          "intent": "Net qty/side/symbol after Market fill",
+          "pattern_ref": "fx_spot_market_order"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-008",
+      "proposed_title": "CRT-663: Limit FX Spot flow (atomic)",
+      "covers_check_ids": [
+        "chk-021",
+        "chk-022",
+        "chk-023"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Limit FX Spot flow (atomic)"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker",
+        "adaptive"
+      ],
+      "ladder_in_test": true,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-021",
+          "title": "Limit order COMPLETED visibility (atomic)",
+          "intent": "Order row on all shells after off-market fill",
+          "pattern_ref": "fx_spot_limit_order"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-022",
+          "title": "Limit TRADE row (atomic)",
+          "intent": "TRADE leg separate from order/position checks",
+          "pattern_ref": "fx_spot_limit_order"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-023",
+          "title": "Limit position update (atomic)",
+          "intent": "Position net qty after Limit fill",
+          "pattern_ref": "fx_spot_limit_order"
+        }
+      ]
+    },
+    {
+      "bundle_id": "tb-009",
+      "proposed_title": "CRT-663: Stop FX Spot flow (atomic)",
+      "covers_check_ids": [
+        "chk-024",
+        "chk-025",
+        "chk-026"
+      ],
+      "covers_sections": [
+        "## E2E \u2014 Stop FX Spot flow (atomic)"
+      ],
+      "precon_cluster_id": "pc-001",
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker",
+        "adaptive"
+      ],
+      "ladder_in_test": true,
+      "case_outline": [
+        {
+          "case_id": "c01",
+          "check_id": "chk-024",
+          "title": "Stop order visibility (atomic)",
+          "intent": "Triggered Stop order on all shells",
+          "pattern_ref": "fx_spot_stop_order"
+        },
+        {
+          "case_id": "c02",
+          "check_id": "chk-025",
+          "title": "Stop TRADE row (atomic)",
+          "intent": "TRADE after Stop fill",
+          "pattern_ref": "fx_spot_stop_order"
+        },
+        {
+          "case_id": "c03",
+          "check_id": "chk-026",
+          "title": "Stop position update (atomic)",
+          "intent": "Position after Stop fill",
+          "pattern_ref": "fx_spot_stop_order"
+        }
+      ]
+    }
+  ],
+  "precon_clusters": [
+    {
+      "id": "pc-001",
+      "title": "CRT-663: Account & FX Spot configuration",
+      "jira_issue_key": null,
+      "surfaces": [
+        "console",
+        "webbroker",
+        "dxtrade5",
+        "adaptive"
+      ],
+      "satisfies_fixture_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "satisfies_check_ids": [
+        "chk-001",
+        "chk-002"
+      ],
+      "served_bundle_ids": [
+        "tb-001",
+        "tb-002",
+        "tb-003",
+        "tb-004",
+        "tb-005",
+        "tb-006",
+        "tb-007",
+        "tb-008",
+        "tb-009"
+      ],
+      "exploration_log": [
+        {
+          "at": "2026-06-08T11:50:55Z",
+          "surface": "console",
+          "action": "Replay discover probe: show console_guide output=MARKDOWN",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "discover_probe",
+          "discover_fixture_id": "fix-001",
+          "replay_of": "discover_probe",
+          "view_id": "console_guide_family",
+          "commands_seen": [
+            "show console_guide output=MARKDOWN",
+            "buy",
+            "stp_order",
+            "corner_subtype set_allowed",
+            "pub_to_realtime"
+          ]
+        },
+        {
+          "at": "2026-06-08T11:51:02Z",
+          "surface": "console",
+          "action": "Precon drill: help buy and FX Spot order command families",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-001",
+          "replay_of": "precon_deepen",
+          "view_id": "console_guide_family",
+          "commands_seen": [
+            "help buy",
+            "buy",
+            "stp_order",
+            "show order last",
+            "show positions"
+          ]
+        },
+        {
+          "at": "2026-06-08T11:51:15Z",
+          "surface": "console",
+          "action": "Precon drill: show account_group_hierarchy",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-002",
+          "replay_of": "precon_deepen",
+          "view_id": "account_instrument_show",
+          "commands_seen": [
+            "show account_group_hierarchy"
+          ],
+          "progress_note": "Hierarchy shows RAG-CH, CAG-CH, CornerTraderFxConfiguration Opportunity on CTQA."
+        },
+        {
+          "at": "2026-06-08T11:51:28Z",
+          "surface": "console",
+          "action": "Precon drill: show profiles domains=ExternalExecution",
+          "outcome": "pass",
+          "login_state": "shell_only",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-002",
+          "replay_of": "precon_deepen",
+          "view_id": "account_instrument_show",
+          "commands_seen": [
+            "show profiles domains=ExternalExecution"
+          ],
+          "progress_note": "Profiles include FIX_AUTO and IG_DMA execution destinations."
+        },
+        {
+          "at": "2026-06-08T11:51:48Z",
+          "surface": "dxtrade5",
+          "action": "Precon drill: open Positions widget; capture metric column headers",
+          "outcome": "pass",
+          "login_state": "authenticated",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-002",
+          "replay_of": "precon_deepen",
+          "view_id": "positions_widget_open",
+          "url_path": "/",
+          "widgets_seen": [
+            "Positions",
+            "Avg Fill Price",
+            "Open P/L",
+            "% PL Gross",
+            "Mark",
+            "Instrument",
+            "Side",
+            "Position Qty"
+          ]
+        },
+        {
+          "at": "2026-06-08T11:52:12Z",
+          "surface": "webbroker",
+          "action": "Precon drill: Trading workspace Order Book and Position Book menu labels",
+          "outcome": "pass",
+          "login_state": "authenticated",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-003",
+          "replay_of": "precon_deepen",
+          "view_id": "position_book_drilled",
+          "url_path": "/webbroker/",
+          "widgets_seen": [
+            "Order Book",
+            "Position Book",
+            "Transactions",
+            "Account List"
+          ]
+        },
+        {
+          "at": "2026-06-08T11:52:20Z",
+          "surface": "webbroker",
+          "action": "Precon drill: User Management create-user form field labels",
+          "outcome": "pass",
+          "login_state": "authenticated",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-003",
+          "replay_of": "precon_deepen",
+          "view_id": "user_management_create_form",
+          "url_path": "/webbroker/",
+          "widgets_seen": [
+            "User Management",
+            "New User",
+            "Login",
+            "Domain",
+            "Full name",
+            "Email"
+          ]
+        },
+        {
+          "at": "2026-06-08T11:52:28Z",
+          "surface": "adaptive",
+          "action": "Precon drill: Portfolio tab Working Orders, Positions, Trade History for .spot instrument",
+          "outcome": "pass",
+          "login_state": "authenticated",
+          "depth_level": "precon_drill",
+          "discover_fixture_id": "fix-002",
+          "replay_of": "precon_deepen",
+          "view_id": "adaptive_portfolio_orders",
+          "url_path": "/adaptive/",
+          "widgets_seen": [
+            "Portfolio",
+            "Positions",
+            "Working Orders",
+            "Trade History",
+            "EURUSD.spot"
+          ]
+        }
+      ],
+      "steps": [
+        {
+          "order": 1,
+          "surface": "console",
+          "intent": "open_console_session",
+          "body": "Connect to dxCore console on CTQA (for example dx run console as the CTQA operator). Confirm the session responds to help.",
+          "code_examples": [],
+          "branch_notes": [],
+          "provenance": "archetype",
+          "generalization": "full",
+          "exploration_grounding": "Multiplex session healthy; show console_guide lists buy, stp_order, corner_subtype, pub_to_realtime on deployed build."
+        },
+        {
+          "order": 2,
+          "surface": "console",
+          "intent": "create_or_select_account",
+          "body": "Create a dedicated test user and account for this epic run, or select an existing client account already configured for FX Spot visibility. Run create broker_client for broker CH or BS when creating new credentials (name=<username> and a newly generated secret per help create); do not reuse the operator login account.",
+          "code_examples": [
+            "help create broker_client",
+            "create broker_client name=<username> broker=CH currency=USD"
+          ],
+          "branch_notes": [
+            "Use broker BS instead of CH when validating the BS routing line."
+          ],
+          "provenance": "exploration",
+          "generalization": "partial",
+          "exploration_grounding": "create broker_client present in console_guide command list."
+        },
+        {
+          "order": 3,
+          "surface": "console",
+          "intent": "fx_spot_subtype_allowed",
+          "body": "Allow FX_SPOT instruments for the test account: corner_subtype set_allowed account=<clearing_code>:<account_code> allowedsubtypes=FX_SPOT. Run help corner_subtype on CTQA to confirm syntax for your build.",
+          "code_examples": [
+            "help corner_subtype set_allowed",
+            "corner_subtype set_allowed account=<clearing_code>:<account_code> allowedsubtypes=FX_SPOT"
+          ],
+          "branch_notes": [],
+          "provenance": "exploration",
+          "generalization": "partial",
+          "exploration_grounding": "corner_subtype set_allowed listed in deployed console_guide."
+        },
+        {
+          "order": 4,
+          "surface": "console",
+          "intent": "account_group_membership",
+          "body": "Add the account to the broker CAG group and a CornerTraderFxConfiguration group (for example Opportunity): run show account_group_hierarchy, locate CAG-CH (or CAG-BS) under the broker RAG node, then update account_group_members key=<cag_group_key> add_accounts=<account_id>. Add the CornerTraderFxConfiguration group key=<fx_config_group_key> (grep Opportunity in hierarchy output).",
+          "code_examples": [
+            "show account_group_hierarchy",
+            "update account_group_members key=<cag_group_key> add_accounts=<account_id>",
+            "update account_group_members key=<fx_config_group_key> add_accounts=<account_id>"
+          ],
+          "branch_notes": [
+            "Hierarchy shows Opportunity and CAG-CH under RAG-CH on CTQA; resolve keys from live hierarchy, not from a prior session."
+          ],
+          "provenance": "exploration",
+          "generalization": "partial",
+          "exploration_grounding": "Live hierarchy shows RAG-CH, CAG-CH, and CornerTraderFxConfiguration Opportunity group."
+        },
+        {
+          "order": 5,
+          "surface": "console",
+          "intent": "execution_routing",
+          "body": "Configure ExternalExecution routing for FX_SPOT at account level. Run show profiles domains=ExternalExecution to inspect FIX_AUTO vs ET routing. Assign the profile matching your test policy (FIX auto-fill or ET FIX path for FX Spot).",
+          "code_examples": [
+            "show profiles domains=ExternalExecution",
+            "assign profile account=<clearing_code>:<account_code> profile=<profile_name>"
+          ],
+          "branch_notes": [
+            "Sample profiles on CTQA include FIX_AUTO and IG_DMA execution destinations under ExternalExecution domain."
+          ],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "show profiles domains=ExternalExecution returned FIX_AUTO and IG_DMA destinations on CTQA."
+        },
+        {
+          "order": 6,
+          "surface": "console",
+          "intent": "publish_quote",
+          "body": "Publish a realtime quote for the FX spot instrument planned for tests (EURUSD.spot for your CornerTraderFxConfiguration group). Run help pub_to_realtime on CTQA for the exact instrument string and publisher arguments.",
+          "code_examples": [
+            "help pub_to_realtime",
+            "pub_to_realtime <instrument> <arguments per help>"
+          ],
+          "branch_notes": [],
+          "provenance": "archetype",
+          "generalization": "partial",
+          "exploration_grounding": "pub_to_realtime present in deployed console command list."
+        },
+        {
+          "order": 7,
+          "surface": "console",
+          "intent": "place_fx_spot_orders",
+          "body": "On the configured account, place or locate FX Spot market, limit, and stop orders on EURUSD.spot using console commands. For limit and stop orders use prices significantly off the current market so the order can route and fill when manually completed. For market orders use the market command family per help buy; note the retail UI market path may be defect-sensitive while console-issued orders still drive visibility checks.",
+          "code_examples": [
+            "use <account_code>",
+            "buy <qty> EURUSD.spot mkt fok",
+            "buy <qty> EURUSD.spot at <off_market_price> gtc",
+            "stp_order buy <qty> EURUSD.spot stop=<stop_price> limit=<limit_price> gtc",
+            "show order last",
+            "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now"
+          ],
+          "branch_notes": [
+            "Run help buy and help stp_order on CTQA to confirm exact parameter names for market, limit, and stop families."
+          ],
+          "provenance": "exploration",
+          "generalization": "partial",
+          "exploration_grounding": "Console guide includes buy, stp_order, show order last, execution trade, and show positions families."
+        },
+        {
+          "order": 8,
+          "surface": "webbroker",
+          "intent": "webbroker_dealer_login",
+          "body": "Log in to the CTQA WebBroker dealer UI at https://ctqa.prosp.devexperts.com/webbroker/ with a dealer principal that has user-management and client-area view rights.",
+          "code_examples": [],
+          "branch_notes": [],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "Dealer shell shows Trading, Client Area, and User Management after authentication."
+        },
+        {
+          "order": 9,
+          "surface": "webbroker",
+          "intent": "webbroker_client_area_access",
+          "body": "Open Client Area for the test account and confirm Orders, Account Transactions, and Positions widgets are available from the header flyout. Open Trading workspace and confirm Order Book and Position Book widgets are available for dealer-side verification.",
+          "code_examples": [],
+          "branch_notes": [
+            "Client Area flyout lists Positions, Orders, and Account Transactions; Trading menu lists Order Book and Position Book."
+          ],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "Authenticated dealer shell exposes Client Area books and Trading Order Book / Position Book labels."
+        },
+        {
+          "order": 10,
+          "surface": "webbroker",
+          "intent": "webbroker_account_setup",
+          "body": "When creating a new client account, use User Management: open New User and confirm field labels (Login, Domain, Full name, Email). Create the client account with Allowed Instruments FX_SPOT, initial balance, CornerTraderFxConfiguration group aligned with console setup, and CAG membership matching console configuration.",
+          "code_examples": [],
+          "branch_notes": [
+            "Skip user creation when reusing an existing FX Spot-configured client account."
+          ],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "User Management reachable with create-user form labels Login, Domain, Full name, Email."
+        },
+        {
+          "order": 11,
+          "surface": "dxtrade5",
+          "intent": "dxtrade5_retail_login",
+          "body": "Log in to CTQA dxTrade5 at https://ctqa.prosp.devexperts.com/ with the client credentials for the test account. Confirm Orders, Account Transactions, Positions, and Order History widgets are on the default layout or add them from the widget gallery.",
+          "code_examples": [],
+          "branch_notes": [],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "Retail shell shows Positions widget with Avg Fill Price, Open P/L, % PL Gross, and Mark column headers."
+        },
+        {
+          "order": 12,
+          "surface": "adaptive",
+          "intent": "adaptive_client_login",
+          "body": "Open CTQA Adaptive at https://ctqa.prosp.devexperts.com/adaptive/ with the client principal for the test account. Confirm Portfolio, Working Orders, Trade History, and Positions views list EURUSD.spot rows when the account has FX Spot activity.",
+          "code_examples": [],
+          "branch_notes": [
+            "When switching Adaptive user context in CTQA, set the application token per environment policy (do not store credentials in test artefacts)."
+          ],
+          "provenance": "exploration",
+          "generalization": "full",
+          "exploration_grounding": "Adaptive Portfolio shows Working Orders, Positions, and Trade History sections with .spot instrument rows."
+        }
+      ]
+    }
+  ],
+  "excluded_checks_with_reason": [],
+  "precon_verify_passed": true,
+  "validation_log": [
+    {
+      "step": "phase0",
+      "note": "crtqa_env_probe pass; postgres tunnel; console multiplex pass"
+    },
+    {
+      "step": "phase0b",
+      "note": "dxtrade5 and webbroker creds supplied on prior helper resume (not persisted)"
+    },
+    {
+      "step": "phase0c",
+      "note": "Post-login smoke pass dxtrade5, webbroker, adaptive"
+    },
+    {
+      "step": "phase1",
+      "note": "Loaded coverage pass-2, discover, ref, analysis"
+    },
+    {
+      "step": "phase2_skeleton",
+      "note": "Nine bundles tb-001..tb-009; atomic E2E market/limit/stop"
+    },
+    {
+      "step": "phase3_clusters",
+      "note": "pc-001 console+dxtrade5+webbroker+adaptive"
+    },
+    {
+      "step": "phase4a_pc-001",
+      "note": "4R/4D/4C exploration_log with precon_drill view_ids"
+    },
+    {
+      "step": "phase5_emit",
+      "note": "precon_verify.py exit 0"
+    }
+  ],
+  "anti_pattern_findings": []
+}

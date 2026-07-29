@@ -1,0 +1,70 @@
+{
+  "id": "1680303",
+  "key": "CRTQA-898",
+  "summary": "[Test cases review] [CRT-347] Update encoding of 55 FIX tag for US Options - Ready",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1680303/worklog/6244566",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-02-13T07:54:25.798+0000",
+        "updated": "2025-02-13T07:54:31.122+0000",
+        "started": "2025-02-13T06:00:00.000+0000",
+        "timeSpent": "20m",
+        "timeSpentSeconds": 1200,
+        "id": "6244566",
+        "issueId": "1680303"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "1h",
+    "remainingEstimate": "40m",
+    "timeSpent": "20m",
+    "originalEstimateSeconds": 3600,
+    "remainingEstimateSeconds": 2400,
+    "timeSpentSeconds": 1200
+  },
+  "customfield_11250": null,
+  "customfield_10006": null
+}

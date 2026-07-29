@@ -1,0 +1,4112 @@
+{
+  "expand": "schema,names",
+  "startAt": 250,
+  "maxResults": 50,
+  "total": 390,
+  "issues": [
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1927973",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1927973",
+      "key": "CRTQA-10104",
+      "fields": {
+        "summary": "Liquidation in chunks for CFDs - Change max liquidation qty for CFD&CFD_STOCK&CFD_FOREX",
+        "issuelinks": [
+          {
+            "id": "3300230",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300230",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1928999",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1928999",
+      "key": "CRTQA-10108",
+      "fields": {
+        "summary": "Liquidation in chunks for CFDs - Check liquidation when Position's qty \u2264 max liquidation qty",
+        "issuelinks": [
+          {
+            "id": "3300239",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300239",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929514",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929514",
+      "key": "CRTQA-10120",
+      "fields": {
+        "summary": "  Liquidation in chunks for CFDs - Check liquidation when max liquidation qty is not set",
+        "issuelinks": [
+          {
+            "id": "3300231",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300231",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929554",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929554",
+      "key": "CRTQA-10121",
+      "fields": {
+        "summary": "Liquidation in chunks for CFDs - Check max liquidation qty does not affect the issuance of orders",
+        "issuelinks": [
+          {
+            "id": "3300232",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300232",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929574",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929574",
+      "key": "CRTQA-10122",
+      "fields": {
+        "summary": "Liquidation in chunks for CFDs - Liquidation waits for trading hours",
+        "issuelinks": [
+          {
+            "id": "3300233",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300233",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1929989",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1929989",
+      "key": "CRTQA-10123",
+      "fields": {
+        "summary": "Liquidation in chunks for CFDs - Check liquidation status in review when one order is not executed",
+        "issuelinks": [
+          {
+            "id": "3300234",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3300234",
+            "inwardIssue": {
+              "id": "1914278",
+              "key": "CRT-669",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1914278",
+              "fields": {
+                "summary": "Liquidation in chunks for CFDs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1933989",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1933989",
+      "key": "CRTQA-10138",
+      "fields": {
+        "summary": "WebBroker - Check login when there is expired account",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1934084",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1934084",
+      "key": "CRTQA-10139",
+      "fields": {
+        "summary": "CT Adaptive - Instruments - Check Scrolling to Options",
+        "issuelinks": [
+          {
+            "id": "3307511",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3307511",
+            "inwardIssue": {
+              "id": "1888302",
+              "key": "CAN-11494",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1888302",
+              "fields": {
+                "summary": "[CT Adaptive] Search - Scrolling to Options Not Working After Clicking Hyperlink from Search",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1940343",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1940343",
+      "key": "CRTQA-10169",
+      "fields": {
+        "summary": "[Corner] New ALGO - Check US OPTION SYMBOL in IPF matches dxFeed",
+        "issuelinks": [
+          {
+            "id": "3318764",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3318764",
+            "inwardIssue": {
+              "id": "1788890",
+              "key": "CRT-537",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1788890",
+              "fields": {
+                "summary": "Update STOCK ETF generation ALGO for new SIX and XETRA instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1940347",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1940347",
+      "key": "CRTQA-10170",
+      "fields": {
+        "summary": "[Corner] New ALGO - Check US OPTION on INDEX: underlying matches INDEX.SYMBOL",
+        "issuelinks": [
+          {
+            "id": "3318765",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3318765",
+            "inwardIssue": {
+              "id": "1788890",
+              "key": "CRT-537",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1788890",
+              "fields": {
+                "summary": "Update STOCK ETF generation ALGO for new SIX and XETRA instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1940371",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1940371",
+      "key": "CRTQA-10171",
+      "fields": {
+        "summary": "[Corner] New ALGO - Check non-US OPTION underlying",
+        "issuelinks": [
+          {
+            "id": "3318763",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3318763",
+            "inwardIssue": {
+              "id": "1788890",
+              "key": "CRT-537",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1788890",
+              "fields": {
+                "summary": "Update STOCK ETF generation ALGO for new SIX and XETRA instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1946964",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1946964",
+      "key": "CRTQA-10187",
+      "fields": {
+        "summary": "Transactions - Check BUST Trade",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1953582",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1953582",
+      "key": "CRTQA-10215",
+      "fields": {
+        "summary": "Watchlist - Check List view",
+        "issuelinks": [
+          {
+            "id": "3349425",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3349425",
+            "outwardIssue": {
+              "id": "1957828",
+              "key": "XT-8365",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1957828",
+              "fields": {
+                "summary": "[Corner] Watchlist - List view - There is NO 'Quick add symbol'",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3362771",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3362771",
+            "outwardIssue": {
+              "id": "1964413",
+              "key": "XT-8445",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1964413",
+              "fields": {
+                "summary": "[Corner] Watchlist - List view - Net change % value = 0 for all FX_spot instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344256",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344256",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1953590",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1953590",
+      "key": "CRTQA-10216",
+      "fields": {
+        "summary": "Watchlist - Check Grid view",
+        "issuelinks": [
+          {
+            "id": "3344071",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344071",
+            "outwardIssue": {
+              "id": "1950814",
+              "key": "XT-8230",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950814",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view - Adding new instrument works wrongly sometimes",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3349364",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3349364",
+            "outwardIssue": {
+              "id": "1957813",
+              "key": "XT-8364",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1957813",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view does NOT open for big watchlists",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3349121",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3349121",
+            "outwardIssue": {
+              "id": "1957682",
+              "key": "XT-8358",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1957682",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view - Unidentified numbers appear next to the symbol",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344077",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344077",
+            "outwardIssue": {
+              "id": "1952315",
+              "key": "XT-8251",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1952315",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view - Spread is calculated incorrectly on Grid view",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344259",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344259",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1953600",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1953600",
+      "key": "CRTQA-10217",
+      "fields": {
+        "summary": "[Corner] Watchlist -  List view - Check Order Entry opens from Watchlist",
+        "issuelinks": [
+          {
+            "id": "3344260",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344260",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1953616",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1953616",
+      "key": "CRTQA-10218",
+      "fields": {
+        "summary": "[Corner] Watchlist - Grid view - Check Order Entry opens from Watchlist",
+        "issuelinks": [
+          {
+            "id": "3344262",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344262",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1953634",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1953634",
+      "key": "CRTQA-10219",
+      "fields": {
+        "summary": "[Corner] Watchlist - Grid view - Check dropdown values",
+        "issuelinks": [
+          {
+            "id": "3344263",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344263",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1954610",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1954610",
+      "key": "CRTQA-10223",
+      "fields": {
+        "summary": "[Corner] Watchlist - Check switching between views",
+        "issuelinks": [
+          {
+            "id": "3344049",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344049",
+            "outwardIssue": {
+              "id": "1950511",
+              "key": "XT-8219",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950511",
+              "fields": {
+                "summary": "[Corner] Watchlist - Impossible to switch between workspaces after switching on Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344054",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344054",
+            "outwardIssue": {
+              "id": "1950528",
+              "key": "XT-8220",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950528",
+              "fields": {
+                "summary": "[Corner] Watchlist - Icon is displayed incorrectly after switching workspaces/views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344064",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344064",
+            "outwardIssue": {
+              "id": "1950535",
+              "key": "XT-8221",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950535",
+              "fields": {
+                "summary": "[Corner] Watchlist - watchlist mode is not remembered after updating the page",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344255",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344255",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1954695",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1954695",
+      "key": "CRTQA-10231",
+      "fields": {
+        "summary": "[Corner] Watchlist - FX_spot - Check that the data is shown only for accounts in certain groups",
+        "issuelinks": [
+          {
+            "id": "3344115",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344115",
+            "outwardIssue": {
+              "id": "1950690",
+              "key": "XT-8226",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1950690",
+              "fields": {
+                "summary": "[Corner] Watchlist - FX_spot prices shows when account is NOT in CornerTraderFxConfiguration groups",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10003",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/inprogress.png",
+                  "name": "In development",
+                  "id": "10003",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344257",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344257",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1954701",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1954701",
+      "key": "CRTQA-10232",
+      "fields": {
+        "summary": "[Corner] Watchlist - Grid view - Check by hovering symbol: instrument description is shown",
+        "issuelinks": [
+          {
+            "id": "3344128",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344128",
+            "outwardIssue": {
+              "id": "1951535",
+              "key": "XT-8242",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951535",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view - By hovering symbol: instrument description is NOT shown",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344258",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344258",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1954720",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1954720",
+      "key": "CRTQA-10239",
+      "fields": {
+        "summary": "[Corner] Watchlist - Grid view - Check Context menu",
+        "issuelinks": [
+          {
+            "id": "3344179",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344179",
+            "outwardIssue": {
+              "id": "1951590",
+              "key": "XT-8243",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951590",
+              "fields": {
+                "summary": "[Corner] Watchlist - Grid view - Context menu is different from the design",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3344261",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3344261",
+            "inwardIssue": {
+              "id": "1862614",
+              "key": "CRT-607",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1862614",
+              "fields": {
+                "summary": "Watchlist List and Grid views",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1963326",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1963326",
+      "key": "CRTQA-10257",
+      "fields": {
+        "summary": "dxTF - Positions - Check general view and design",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970437",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970437",
+      "key": "CRTQA-10303",
+      "fields": {
+        "summary": "dxCore - FX Settings widget - Check CornerTraderFxConfiguration domain and group",
+        "issuelinks": [
+          {
+            "id": "3378841",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378841",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970442",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970442",
+      "key": "CRTQA-10304",
+      "fields": {
+        "summary": "WB - FX Settings - Check minTolerance/maxTradableQty values",
+        "issuelinks": [
+          {
+            "id": "3374515",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3374515",
+            "outwardIssue": {
+              "id": "1969143",
+              "key": "XT-8531",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1969143",
+              "fields": {
+                "summary": "[Corner] minTolerance/maxTradableQty - the names of these fields are NOT the same",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378842",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378842",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970450",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970450",
+      "key": "CRTQA-10305",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check FX Spot Suffix section",
+        "issuelinks": [
+          {
+            "id": "3374559",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3374559",
+            "outwardIssue": {
+              "id": "1956077",
+              "key": "XT-8324",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1956077",
+              "fields": {
+                "summary": "[Corner] FX Settings - FxSpotSuffix - Cancel button is NOT always enabled",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378843",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378843",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970495",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970495",
+      "key": "CRTQA-10306",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check Min Tolerance, in pips section",
+        "issuelinks": [
+          {
+            "id": "3375254",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3375254",
+            "outwardIssue": {
+              "id": "1951347",
+              "key": "XT-8236",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951347",
+              "fields": {
+                "summary": "FX Settings widget: add validation to Min Tolerance and Max Tradable Quantity settings",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378844",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378844",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970567",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970567",
+      "key": "CRTQA-10307",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check Max Tradable Quantity section",
+        "issuelinks": [
+          {
+            "id": "3375400",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3375400",
+            "outwardIssue": {
+              "id": "1951347",
+              "key": "XT-8236",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1951347",
+              "fields": {
+                "summary": "FX Settings widget: add validation to Min Tolerance and Max Tradable Quantity settings",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10010",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/up.png",
+                  "name": "Waiting for test",
+                  "id": "10010",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378845",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378845",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970899",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970899",
+      "key": "CRTQA-10308",
+      "fields": {
+        "summary": "WB - Min Tolerance - Check uploading file ",
+        "issuelinks": [
+          {
+            "id": "3376198",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3376198",
+            "outwardIssue": {
+              "id": "1956086",
+              "key": "XT-8325",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1956086",
+              "fields": {
+                "summary": "[Corner] FX Settings - minTolerance/maxTradableQty - drag\u2011and\u2011drop is not working properly",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378846",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378846",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970930",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970930",
+      "key": "CRTQA-10310",
+      "fields": {
+        "summary": "WB - Max Tradable Quantity - Check uploading file",
+        "issuelinks": [
+          {
+            "id": "3376231",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3376231",
+            "outwardIssue": {
+              "id": "1956086",
+              "key": "XT-8325",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1956086",
+              "fields": {
+                "summary": "[Corner] FX Settings - minTolerance/maxTradableQty - drag\u2011and\u2011drop is not working properly",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378847",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378847",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970934",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970934",
+      "key": "CRTQA-10311",
+      "fields": {
+        "summary": "WB - Min Tolerance - Check downloading file",
+        "issuelinks": [
+          {
+            "id": "3378848",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378848",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1970937",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1970937",
+      "key": "CRTQA-10312",
+      "fields": {
+        "summary": "WB - Max Tradable Quantity  - Check downloading file",
+        "issuelinks": [
+          {
+            "id": "3378849",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378849",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971011",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971011",
+      "key": "CRTQA-10313",
+      "fields": {
+        "summary": "Min Tolerance - Check 6101 tag when Min Tolerance set only for Instrument level",
+        "issuelinks": [
+          {
+            "id": "3378850",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378850",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971012",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971012",
+      "key": "CRTQA-10314",
+      "fields": {
+        "summary": "Min Tolerance - Check 6101 tag when Min Tolerance set in FX Settings widget",
+        "issuelinks": [
+          {
+            "id": "3378851",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378851",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971013",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971013",
+      "key": "CRTQA-10315",
+      "fields": {
+        "summary": "WB - Min Tolerance - Check there is NO 6101 tag for limit orders",
+        "issuelinks": [
+          {
+            "id": "3378852",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378852",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971015",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971015",
+      "key": "CRTQA-10316",
+      "fields": {
+        "summary": "Max Tradable Quantity - Check it\u2019s NOT possible to issue an order when order qty > max tradable quantity",
+        "issuelinks": [
+          {
+            "id": "3377419",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3377419",
+            "outwardIssue": {
+              "id": "1971604",
+              "key": "CAN-14503",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971604",
+              "fields": {
+                "summary": "[CT Adaptive] Max Tradable Quantity - Wrong error message when order qty > max tradable quantity ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378853",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378853",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1971016",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1971016",
+      "key": "CRTQA-10317",
+      "fields": {
+        "summary": "Max Tradable Quantity - Check it\u2019s possible to issue an order when order qty < max tradable quantity",
+        "issuelinks": [
+          {
+            "id": "3378854",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378854",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972090",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972090",
+      "key": "CRTQA-10321",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check changing FX Spot Suffix for different groups",
+        "issuelinks": [
+          {
+            "id": "3378855",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378855",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972386",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972386",
+      "key": "CRTQA-10323",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check validation for file format for minTolerance and maxTradableQty",
+        "issuelinks": [
+          {
+            "id": "3378856",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378856",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972389",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972389",
+      "key": "CRTQA-10324",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check validation for header names for minTolerance and maxTradableQty",
+        "issuelinks": [
+          {
+            "id": "3378857",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378857",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972393",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972393",
+      "key": "CRTQA-10325",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check validation for mandatory columns for minTolerance and maxTradableQty",
+        "issuelinks": [
+          {
+            "id": "3378819",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378819",
+            "outwardIssue": {
+              "id": "1969246",
+              "key": "XT-8537",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1969246",
+              "fields": {
+                "summary": "[Corner] FX Settings - minTolerance/maxTradableQty - It is possible to upload the file with empty mandatory columns",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10003",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/inprogress.png",
+                  "name": "In development",
+                  "id": "10003",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378858",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378858",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972396",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972396",
+      "key": "CRTQA-10326",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check validation for non-existent instrument for minTolerance and maxTradableQty",
+        "issuelinks": [
+          {
+            "id": "3378821",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378821",
+            "outwardIssue": {
+              "id": "1969820",
+              "key": "XT-8548",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1969820",
+              "fields": {
+                "summary": "[Corner] FX Settings - minTolerance/maxTradableQty - not-found symbol are NOT showing in the hint ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378859",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378859",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972399",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972399",
+      "key": "CRTQA-10327",
+      "fields": {
+        "summary": "WB - FX Settings widget - Check validation for incorrect values for minTolerance and maxTradableQty",
+        "issuelinks": [
+          {
+            "id": "3380392",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3380392",
+            "outwardIssue": {
+              "id": "1973418",
+              "key": "XT-8613",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973418",
+              "fields": {
+                "summary": "[Corner] FX Settings - minTolerance/maxTradableQty - The system accepts invalid values",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3378860",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3378860",
+            "outwardIssue": {
+              "id": "1886633",
+              "key": "CRT-637",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1886633",
+              "fields": {
+                "summary": "Default Price Tolerance and Max Order Size for FX_SPOT",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972867",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972867",
+      "key": "CRTQA-10329",
+      "fields": {
+        "summary": "CT Adaptive - Search - Check that the widgets disappear during the search",
+        "issuelinks": [
+          {
+            "id": "3379581",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379581",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972868",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972868",
+      "key": "CRTQA-10330",
+      "fields": {
+        "summary": "CT Adaptive - Account page - Verify default view",
+        "issuelinks": [
+          {
+            "id": "3379578",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379578",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972869",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972869",
+      "key": "CRTQA-10331",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Check Buy/Sell for Equities Not in Portfolio",
+        "issuelinks": [
+          {
+            "id": "3379647",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379647",
+            "outwardIssue": {
+              "id": "1794839",
+              "key": "CAN-9063",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794839",
+              "fields": {
+                "summary": "CT Adaptive - Instrument page - Both Buy and Sell options are displayed for all the instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379580",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379580",
+            "inwardIssue": {
+              "id": "1794839",
+              "key": "CAN-9063",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794839",
+              "fields": {
+                "summary": "CT Adaptive - Instrument page - Both Buy and Sell options are displayed for all the instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379579",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379579",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972871",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972871",
+      "key": "CRTQA-10332",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Check Buy/Sell for Equities in User's Portfolio",
+        "issuelinks": [
+          {
+            "id": "3379577",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379577",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972872",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972872",
+      "key": "CRTQA-10333",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Check Buy/Sell for Non-Equity Instruments",
+        "issuelinks": [
+          {
+            "id": "3379575",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379575",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972873",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972873",
+      "key": "CRTQA-10334",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Verify default view for Transaction tab",
+        "issuelinks": [
+          {
+            "id": "3379576",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379576",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972874",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972874",
+      "key": "CRTQA-10335",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Portfolio - Not displayed when both widgets inside are not displayed",
+        "issuelinks": [
+          {
+            "id": "3379572",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379572",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972875",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972875",
+      "key": "CRTQA-10336",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Verify default view for Portfolio tab ",
+        "issuelinks": [
+          {
+            "id": "3379646",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379646",
+            "outwardIssue": {
+              "id": "1794764",
+              "key": "CAN-9061",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794764",
+              "fields": {
+                "summary": "CT Adaptive - Instrument page - Portfolio tab does NOT have Account selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379574",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379574",
+            "inwardIssue": {
+              "id": "1794764",
+              "key": "CAN-9061",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794764",
+              "fields": {
+                "summary": "CT Adaptive - Instrument page - Portfolio tab does NOT have Account selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379573",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379573",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    }
+  ],
+  "warningMessages": null,
+  "names": null,
+  "schema": null
+}

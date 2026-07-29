@@ -1,0 +1,371 @@
+{
+  "schema_version": 4,
+  "epic_key": "CRT-639",
+  "taxonomy_note": "Regression drafts for weighted-average FX Spot cash settlement (CRT-639).",
+  "sources": {
+    "jira_fetched_at": "2026-05-19T12:50:44Z",
+    "tests_run_started_at": "2026-05-19T12:50:44Z",
+    "ref_path": "epics/CRT-639/CRT-639-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-639/CRT-639-coverage.json",
+    "coverage_loaded": true,
+    "coverage_md_path": "epics/CRT-639/CRT-639-coverage.md",
+    "analysis_path": "epics/CRT-639/CRT-639-analysis.json",
+    "analysis_loaded": true,
+    "discover_path": "epics/CRT-639/CRT-639-discover.json",
+    "discover_loaded": true,
+    "discover_blocked_acknowledged": false,
+    "precon_path": "epics/CRT-639/CRT-639-precon.json",
+    "precon_loaded": true,
+    "precon_jira_title": null,
+    "map_only": false,
+    "draft_profile": "crtqa_outline",
+    "shape_ref": null,
+    "generation_mode": true,
+    "fe_ui_sessions": {
+      "dxtrade5": "authenticated",
+      "webbroker": "authenticated",
+      "adaptive": "authenticated"
+    },
+    "fe_exploration_waived": false,
+    "exploration_complete": true,
+    "note": "exploration_complete true when all bundles passed explore verify."
+  },
+  "jira_test_search": {
+    "at": "2026-05-19T12:50:44Z",
+    "skipped": true,
+    "note": "generation_mode_greenfield",
+    "queries": []
+  },
+  "existing_tests_considered": [],
+  "excluded_checks_with_reason": [
+    {
+      "check_id": "chk-004",
+      "reason": "analysis_exploration_suppressed",
+      "evidence": "XT-7911 blocks CRT-1738 numeric ladder oracle; discover disposition scope_gap."
+    },
+    {
+      "check_id": "chk-012",
+      "reason": "analysis_exploration_suppressed",
+      "evidence": "Nested rounding keys in CRT-1738 unresolved; blocks_fixture_probe."
+    },
+    {
+      "check_id": "chk-016",
+      "reason": "analysis_exploration_suppressed",
+      "evidence": "Ambiguity/blocked primary; discover disposition scope_gap."
+    }
+  ],
+  "test_bundles": [
+    {
+      "bundle_id": "tb-001",
+      "proposed_title": "CRT-639: FX_SPOT WeightedAvg configuration and instrument posture",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-001",
+        "chk-002",
+        "chk-003"
+      ],
+      "covers_sections": [
+        "## Primary focus",
+        "## Functional configuration and prerequisites"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "config_posture"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_open"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "user_management_create_form"
+        },
+        {
+          "surface": "adaptive",
+          "depth_level": "prep_verify_view",
+          "view_id": "portfolio_positions_summary"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-19T12:50:44Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-639-precon.md cluster *Account & system configuration* before executing this test."
+        ],
+        "actions": [
+          "Epic scope: WeightedAvg FX_SPOT cash settlement: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon).",
+          "Flat position before ladder: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon).",
+          "FX_SPOT subtype WeightedAvg on instrument: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon).",
+          "Flat position before ladder: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon).",
+          "Reproducible configuration across shells: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon).",
+          "Flat position before ladder: Confirm WeightedAvg FX_SPOT posture for <account_code> (Functional Configuration row, instrument subtype, group membership per precon)."
+        ],
+        "results": [
+          "Configuration matches CRT-1741 intent: End-to-end scope for CRT-1741 posture and metric families. [CRT-1741, CRT-1738]",
+          "Configuration matches CRT-1741 intent: Ladder vignette 1 for chk-001. [CRT-1741, CRT-1738]",
+          "Configuration matches CRT-1741 intent: Instrument posture matches CRT-1741. [CRT-1741]",
+          "Configuration matches CRT-1741 intent: Ladder vignette 1 for chk-002. [CRT-1741]",
+          "Configuration matches CRT-1741 intent: Same classification on dxTrade5, WebBroker, and Adaptive. [CRT-1741]",
+          "Configuration matches CRT-1741 intent: Ladder vignette 1 for chk-003. [CRT-1741]"
+        ],
+        "peculiarities": [
+          "Resolve <cag_group_key> and <fx_config_group_key> from live show account_group_hierarchy on CTQA."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-002",
+      "proposed_title": "CRT-639: Weighted-average ladder and invariants",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-005",
+        "chk-006",
+        "chk-007",
+        "chk-010",
+        "chk-011"
+      ],
+      "covers_sections": [
+        "## Weighted-average ladder \u2014 average fill, realized P/L, crossing zero (CRT-1738 & CRT-1740)",
+        "## Invariants under configuration change"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "stateful_ladder",
+        "invariant_under_change"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "prep_verify_view",
+          "view_id": "position_metrics_family"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-19T12:50:44Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-639-precon.md cluster *Account & system configuration* before executing this test."
+        ],
+        "actions": [
+          "WeightedAvg window resets after zero cross: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Flat position before ladder: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "First opening buy at <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Second opening buy at different <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Sell through zero to flat: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Flat position before ladder: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "First opening buy at <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Second opening buy at different <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Sell through zero to flat: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Multiple zero crossings in one session: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Flat position before ladder: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "First opening buy at <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Second opening buy at different <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Sell through zero to flat: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Realized P/L from average position price: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Flat position before ladder: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "First opening buy at <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Second opening buy at different <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Sell through zero to flat: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Opening trades only in average: Establish open FX_SPOT position on <account_code>, then read average fill via show position_metrics_from_publisher; record values before any config change.",
+          "Flat position before ladder: Establish open FX_SPOT position on <account_code>, then read average fill via show position_metrics_from_publisher; record values before any config change."
+        ],
+        "results": [
+          "Position metrics and net size match WeightedAvg rules for WeightedAvg window resets after zero cross. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Flat position before ladder. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for First opening buy at <price>. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Second opening buy at different <price>. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Sell through zero to flat. [CRT-1740, CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Flat position before ladder. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for First opening buy at <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Second opening buy at different <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Sell through zero to flat. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Multiple zero crossings in one session. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Flat position before ladder. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for First opening buy at <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Second opening buy at different <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Sell through zero to flat. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Realized P/L from average position price. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Flat position before ladder. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for First opening buy at <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Second opening buy at different <price>. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1738] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Sell through zero to flat. [CRT-1738] [oracle:TBD]",
+          "Average fill and realized P/L behavior match invariant: WeightedAvg-configured instruments. [CRT-1738]",
+          "Average fill and realized P/L behavior match invariant: Ladder vignette 1 for chk-011. [CRT-1738]"
+        ],
+        "peculiarities": [
+          "Use command_patterns.ladder_step from precon; literary execution trade only during PREP.",
+          "WeightedAvg opening-side average; realized on closes from average position price.",
+          "[oracle:TBD] for cent-level ladder numerics pending XT-7911.",
+          "Resolve <cag_group_key> and <fx_config_group_key> from live show account_group_hierarchy on CTQA."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    },
+    {
+      "bundle_id": "tb-003",
+      "proposed_title": "CRT-639: Open P/L and percent PL gross formulas",
+      "jira_issue_key": null,
+      "covers_check_ids": [
+        "chk-008",
+        "chk-009"
+      ],
+      "covers_sections": [
+        "## Open P/L and % P/L gross (WeightedAvg path)"
+      ],
+      "related_existing_tests": [],
+      "verification_classes_summary": [
+        "derived_metric",
+        "stateful_ladder"
+      ],
+      "verification_exploration_summary": [
+        {
+          "surface": "console",
+          "depth_level": "precon_drill",
+          "view_id": "position_metrics_family"
+        },
+        {
+          "surface": "dxtrade5",
+          "depth_level": "prep_verify_view",
+          "view_id": "positions_widget_open"
+        },
+        {
+          "surface": "webbroker",
+          "depth_level": "prep_verify_view",
+          "view_id": "position_book_drilled"
+        }
+      ],
+      "precon_cluster_refs": [
+        "pc-001"
+      ],
+      "authoring": {
+        "subprocess": true,
+        "subprocess_completed": true,
+        "completed_at": "2026-05-19T12:50:44Z"
+      },
+      "draft": {
+        "preconditions": [
+          "Complete environment setup per CRT-639-precon.md cluster *Account & system configuration* before executing this test."
+        ],
+        "actions": [
+          "Open P/L from mark minus average fill: After ladder on <account_code>, read Avg Fill Price, Open P/L, % PL Gross on dxTrade5 Positions and WebBroker Position Book; note mark source.",
+          "Flat position before ladder: After ladder on <account_code>, read Avg Fill Price, Open P/L, % PL Gross on dxTrade5 Positions and WebBroker Position Book; note mark source.",
+          "First opening buy at <price>: After ladder on <account_code>, read Avg Fill Price, Open P/L, % PL Gross on dxTrade5 Positions and WebBroker Position Book; note mark source.",
+          "Percent PL gross denominator: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Flat position before ladder: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "First opening buy at <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Second opening buy at different <price>: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Partial close without sign flip: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher",
+          "Sell through zero to flat: use <account_code>; buy <qty> <instrument_symbol> at <price> gtc; show order last; execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now; show position_metrics_from_publisher"
+        ],
+        "results": [
+          "Open P/L and % PL gross match formulas in Peculiarities within [tolerance:TBD]. [CRT-1743]",
+          "Open P/L and % PL gross match formulas in Peculiarities within [tolerance:TBD]. [CRT-1743]",
+          "Open P/L and % PL gross match formulas in Peculiarities within [tolerance:TBD]. [CRT-1743]",
+          "Position metrics and net size match WeightedAvg rules for Percent PL gross denominator. [CRT-1742] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Flat position before ladder. [CRT-1742] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for First opening buy at <price>. [CRT-1742] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Second opening buy at different <price>. [CRT-1742] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Partial close without sign flip. [CRT-1742] [oracle:TBD]",
+          "Position metrics and net size match WeightedAvg rules for Sell through zero to flat. [CRT-1742] [oracle:TBD]"
+        ],
+        "peculiarities": [
+          "Open P/L = position_qty * (mark_price - average_fill_price) * multiplier (CRT-1743).",
+          "Percent PL gross = (Open PL / ABS(SUM(average_price * qty * multiplier))) * 100 (CRT-1742).",
+          "UI labels: dxTrade5 Avg Fill Price, Open P/L, % PL Gross; WebBroker Avg Price.",
+          "Use command_patterns.ladder_step from precon; literary execution trade only during PREP.",
+          "WeightedAvg opening-side average; realized on closes from average position price.",
+          "[oracle:TBD] for cent-level ladder numerics pending XT-7911."
+        ]
+      },
+      "automation": {
+        "feasibility": "manual",
+        "blocked_reason": null,
+        "notes": null
+      }
+    }
+  ],
+  "reverse_validation": {
+    "coverage_gaps": [],
+    "orphan_bundles": [],
+    "notes": []
+  },
+  "draft_red_flags": [],
+  "validation_log": [
+    {
+      "step": "6-skip-crtqa-search",
+      "note": "generation_mode_greenfield"
+    },
+    {
+      "step": "8a",
+      "note": "Adopted test_skeleton tb-001..tb-003"
+    },
+    {
+      "step": "phase0",
+      "note": "crtqa_env_probe pass; console multiplex pass"
+    },
+    {
+      "step": "phase0b",
+      "note": "dxtrade5 and webbroker creds supplied (not persisted)"
+    },
+    {
+      "step": "phase0c",
+      "note": "FE smoke authenticated dxtrade5 and webbroker"
+    },
+    {
+      "step": "8a-half-verify",
+      "note": "plan verify pass"
+    },
+    {
+      "step": "8a-three-quarter-verify",
+      "note": "explore verify pass all bundles"
+    },
+    {
+      "step": "8b",
+      "note": "drafts per bundle and per-check tb-002"
+    },
+    {
+      "step": "8c",
+      "note": "merge complete"
+    },
+    {
+      "step": "phase11_emit",
+      "note": "tests verify pass"
+    }
+  ],
+  "anti_pattern_findings": []
+}

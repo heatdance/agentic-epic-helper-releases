@@ -1,0 +1,26 @@
+{
+  "id": "1432419",
+  "key": "CRTQA-1508",
+  "summary": "[Release notes] [CRT-93] Add Clearing Code to Reconciliation, and Transactions widget - dxMC",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {
+    "originalEstimate": "4h",
+    "remainingEstimate": "4h",
+    "originalEstimateSeconds": 14400,
+    "remainingEstimateSeconds": 14400
+  },
+  "customfield_11250": 4.0,
+  "customfield_10006": null
+}

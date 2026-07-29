@@ -1,0 +1,152 @@
+{
+  "id": "1476385",
+  "key": "CRTQA-1318",
+  "summary": "[Release notes] [CRT-100] Fix inconsistencies in trade ids - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 3,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1476385/worklog/5472391",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2024-02-06T09:24:49.380+0000",
+        "updated": "2024-02-06T09:25:03.259+0000",
+        "started": "2024-02-05T15:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "5472391",
+        "issueId": "1476385"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1476385/worklog/5472392",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2024-02-06T09:25:08.674+0000",
+        "updated": "2024-02-06T09:25:14.436+0000",
+        "started": "2024-02-06T09:00:00.000+0000",
+        "timeSpent": "3h",
+        "timeSpentSeconds": 10800,
+        "id": "5472392",
+        "issueId": "1476385"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1476385/worklog/5488307",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=nickolay.perevalov",
+          "name": "nickolay.perevalov",
+          "key": "nickolay.perevalov",
+          "emailAddress": "nickolay.perevalov@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=nickolay.perevalov&avatarId=86065",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=nickolay.perevalov&avatarId=86065",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=nickolay.perevalov&avatarId=86065",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=nickolay.perevalov&avatarId=86065"
+          },
+          "displayName": "Nickolay Perevalov",
+          "active": true,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2024-02-13T15:04:55.823+0000",
+        "updated": "2024-02-13T15:05:03.439+0000",
+        "started": "2024-02-13T09:00:00.000+0000",
+        "timeSpent": "4h 30m",
+        "timeSpentSeconds": 16200,
+        "id": "5488307",
+        "issueId": "1476385"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "6h",
+    "remainingEstimate": "5h 20m",
+    "timeSpent": "1d 1h",
+    "originalEstimateSeconds": 21600,
+    "remainingEstimateSeconds": 19200,
+    "timeSpentSeconds": 32400
+  },
+  "customfield_11250": 6.0,
+  "customfield_10006": null
+}

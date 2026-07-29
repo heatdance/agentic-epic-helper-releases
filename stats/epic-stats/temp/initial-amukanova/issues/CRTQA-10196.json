@@ -1,0 +1,26 @@
+{
+  "id": "1947802",
+  "key": "CRTQA-10196",
+  "summary": "[CORNER][Epic Validation] CRT-659: Order Default Settings",
+  "status": {
+    "name": "Open",
+    "category": "new"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {
+    "originalEstimate": "4d 3h",
+    "remainingEstimate": "4d 3h",
+    "originalEstimateSeconds": 126000,
+    "remainingEstimateSeconds": 126000
+  },
+  "customfield_11250": 35.0,
+  "customfield_10006": null
+}

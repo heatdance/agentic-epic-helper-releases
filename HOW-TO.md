@@ -1,40 +1,78 @@
-# Corner QA — how to run the main processes
+# Corner QA — how to
 
-This workspace is a **Corner Trader QA harness** for humans and AI agents: prepare epics, draft coverage and tests, and archive artefacts under `epics/<KEY>/`. **Workspace rules load automatically** in Cursor.
-
-**Organization-wide Cursor MCP**: [AI with Cursor](https://confluence.in.devexperts.com/spaces/QAPORTAL/pages/497112528/AI+with+Cursor) on QAPORTAL.
-
-### Operator prerequisites
-
-- **jq** on system **PATH** (`winget install --id jqlang.jq -e` on Windows). [automation/docs/jq.md](automation/docs/jq.md).
-- **MCP:** configure `user-mcp-atlassian` per [AGENTS.md](AGENTS.md).
+This repo is a **QA harness** for Corner Trader epics: draft coverage and test plans under `epics/<KEY>/`, then archive when done. Cursor rules load automatically.
 
 **Detail:** [AGENTS.md](AGENTS.md) · [docs/draft-truth-contract.json](docs/draft-truth-contract.json) · [docs/harness-principles.md](docs/harness-principles.md)
+
+**Prerequisites:** **jq** on PATH (`winget install --id jqlang.jq -e` on Windows). Atlassian MCP per [AGENTS.md](AGENTS.md).
 
 ---
 
 ## Epic workflow (start here)
 
-**Recommended:** `/epic-helper CRT-1234` then `/epic-helper resume` — one stage per turn. Spec: [`.cursor/commands/epic-helper.md`](.cursor/commands/epic-helper.md).
+**Recommended:** run the full chain with the orchestrator:
 
-**Chain:** EPIC-PREP → COVERAGE → GROUND (needs console) → ANALYSE → **you review coverage + scenario groups** → TEST-DISCOVER (linker, no browser) → TEST-PREP (scenario intent drafts, no console) → CLOSE.
+```text
+/epic-helper CRT-1234
+/epic-helper resume
+```
 
-**Console** (`/crtqa-console start`): epic-helper cold start, GROUND, and manual test runs — not TEST-PREP generation.
+One pipeline stage runs per agent turn. Full command spec: [`.cursor/commands/epic-helper.md`](.cursor/commands/epic-helper.md).
 
-Individual triggers: see pipeline table in [epics/README.md](epics/README.md).
+**What happens (plain English):**
 
-### Legacy (not in default chain)
+1. **Prepare the epic** — map requirements (`EPIC-PREP`).
+2. **Draft the checklist** — Smart Checklist (`COVERAGE`).
+3. **Ground console syntax** — live CTQA console probes on coverage (`GROUND`) — **needs console** (`/crtqa-console start`).
+4. **Audit gaps** — what's missing or blocked (`ANALYSE`); optional second coverage pass.
+5. **You review coverage** — merge toward gold, edit **scenario groups**, freeze coverage (human gate).
+6. **Link checks to surfaces** — deterministic map, no browser (`TEST-DISCOVER`).
+7. **Draft test plans** — scenario intent, not final CRTQA steps (`TEST-PREP`) — **no env gate**.
+8. **Archive** — integrity check + move JSON to `context/` (`CLOSE`).
 
-`TEST-PRECON:`, `COVERAGE-REINFORCE:` — calibrate/benchmark only.
+**When you need the console** (`/crtqa-console start`): **epic-helper** cold start, **GROUND**, and when **you** run tests manually. Not required to **generate** TEST-PREP drafts.
+
+You can run individual triggers (below) without `/epic-helper`.
 
 ---
 
-## Calibrate (prod vs operator gold)
+## Pipeline quick reference
 
-After **`CLOSE:`** and gold under **`.cursor/calibrate/<KEY>-gold/`** (local, not in repo):
+One epic per chat. Paste trigger + key on the first line.
 
-1. **`/epic-calibrate`** in Cursor.
-2. Answer questionnaire (epic key).
-3. **`NO_ACTIONABLE_DELTA`** = success; **`DELTA_REVIEW`** = discuss harness in separate chat.
+| Trigger | Purpose | You need |
+|---------|---------|----------|
+| `EPIC-PREP:` | Requirement map | Jira key |
+| `COVERAGE:` | Smart Checklist | `-ref.json` |
+| `GROUND:` | Console probes on coverage | `/crtqa-console start` |
+| `ANALYSE:` | Gap audit | `-coverage.json` after GROUND |
+| `TEST-DISCOVER:` | Linker map (no browser) | Frozen coverage + `scenario_groups[]` |
+| `TEST-PREP:` | Scenario intent test drafts | Frozen coverage; outputs **drafts for humans** |
+| `CLOSE:` | Archive + integrity | ref, coverage, discover, tests at epic root |
 
-**Docs:** [automation/docs/calibrate.md](automation/docs/calibrate.md)
+Playbooks: [.cursor/pipelines/](.cursor/pipelines/) · Layout: [epics/README.md](epics/README.md)
+
+### Legacy (not in default chain)
+
+| Trigger | Note |
+|---------|------|
+| `TEST-PRECON:` | Calibrate/benchmark only — **not** in `/epic-helper` v4 |
+| `COVERAGE-REINFORCE:` | Opt-in pass-2 coverage — conflicts with frozen coverage |
+
+---
+
+## Other slash commands
+
+| Command | Use |
+|---------|-----|
+| `/crtqa-console start` | Start multiplexed dxCore console (epic-helper + GROUND) |
+| `/epic-calibrate` | After CLOSE — compare prod vs gold (optional) |
+| `/epic-stats` | Personal TCD stats — [stats/epic-stats/README.md](stats/epic-stats/README.md) |
+| `/release-notes` | Release notes from Jira (personal branch) |
+| `/clean-release` | Publish harness (`CLEAN:` playbook) — **`personal` branch only** |
+
+---
+
+## Maintainer only
+
+**`CLEAN:`** on branch **`personal`** only — publish personal / team / public tiers. [`.cursor/pipelines/clean.md`](.cursor/pipelines/clean.md)

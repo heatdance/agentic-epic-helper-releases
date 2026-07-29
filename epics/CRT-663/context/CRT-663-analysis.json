@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "epic_key": "CRT-663",
+  "sources": {
+    "jira_fetched_at": "2026-06-08T10:00:00Z",
+    "ref_path": "epics/CRT-663/CRT-663-ref.json",
+    "ref_loaded": true,
+    "coverage_path": "epics/CRT-663/CRT-663-coverage.json",
+    "coverage_loaded": true,
+    "known_issues_enabled": false,
+    "resolve_enabled": true,
+    "note": "Mechanical queue empty; operator-driven anti_pattern gaps from coverage_review feedback."
+  },
+  "summary": {
+    "text": "Verify FX_SPOT orders, transfers, and positions that exist on the account are visible and consistent in dxTrade5 client-area widgets, WebBroker client-area books, and Adaptive client views—using console-issued orders on a single FX Spot instrument and the order→transfer→position workflow.",
+    "derived_from": ["coverage.epic_verification_focus"]
+  },
+  "gaps": [
+    {
+      "id": "gap-001",
+      "kind": "anti_pattern",
+      "confidence": "high",
+      "summary": "chk-014 and chk-015 bundle order COMPLETED + TRADE in Transactions + position update in one scenario line — violates atomicity for statistical failure localization.",
+      "pointers": {
+        "check_id": "chk-014",
+        "obligation_id": "obl-010"
+      },
+      "evidence": "checks[chk-014].scenario_line; checks[chk-015].scenario_line — combined order/transfer/position assertions",
+      "recommended_action": "rerun_coverage",
+      "status": "open"
+    },
+    {
+      "id": "gap-002",
+      "kind": "anti_pattern",
+      "confidence": "high",
+      "summary": "Stop order E2E flow missing from coverage — only Market (chk-014) and Limit (chk-015) listed; Pre-Trade Validations and ET FIX (NewOrderSingle OrdType 3) support Stop for FX Spot.",
+      "pointers": {
+        "check_id": null,
+        "obligation_id": "obl-010"
+      },
+      "evidence": "coverage.md E2E section; CT Pre-Trade Validations (354980873) Market/Limit/Stop; ET FIX integration (529180233) Stop via NewOrderSingle",
+      "recommended_action": "rerun_coverage",
+      "status": "open"
+    },
+    {
+      "id": "gap-003",
+      "kind": "human_ba",
+      "confidence": "high",
+      "summary": "chk-016 labels dealer manual fill but ET FX Spot execution is FIX auto-only (ExecutionReport fill/reject; no partial fills). Manual trade is dxCore dealer action (Order Statuses transitions 17/23), not ET provider manual intervention.",
+      "pointers": {
+        "check_id": "chk-016",
+        "obligation_id": "obl-011"
+      },
+      "evidence": "checks[chk-016].scenario_line; CT ET FIX integration page 529180233; CT Order Statuses page 518004439 transitions 17/23",
+      "recommended_action": "rerun_coverage",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-004",
+      "kind": "human_ba",
+      "confidence": "medium",
+      "summary": "Market FX Spot E2E (chk-014) may be env-blocked by known market-order defect — operator still wants UI-driving scenarios; reinforce should keep atomic checks and mark market path as defect-sensitive.",
+      "pointers": {
+        "check_id": "chk-014",
+        "obligation_id": "obl-010"
+      },
+      "evidence": "operator-feedback.md 2026-06-08; chk-014 scenario_line",
+      "recommended_action": "ignore_for_discover",
+      "status": "open"
+    },
+    {
+      "id": "gap-005",
+      "kind": "human_ba",
+      "confidence": "medium",
+      "summary": "Liquidation (chk-017) is valid auto order-chain for FX Spot — Margin Liquidation spawns market closing orders with FX_SPOT quote parameters; other liquidation types (expiring option, physical futures) are out of FX Spot visibility scope.",
+      "pointers": {
+        "check_id": "chk-017",
+        "obligation_id": "obl-012"
+      },
+      "evidence": "CT Margin Call and Liquidations page 345714164 §2.1 FX_SPOT market closing orders; chk-017 scenario_line",
+      "recommended_action": "ignore_for_discover",
+      "status": "confirmed_gap"
+    },
+    {
+      "id": "gap-006",
+      "kind": "human_ba",
+      "confidence": "medium",
+      "summary": "FX Spot rollover (529175690) creates transfer activity without client order placement — optional separate transfer-visibility scenario; not covered in pass-1 E2E section.",
+      "pointers": {
+        "check_id": null,
+        "obligation_id": "obl-003"
+      },
+      "evidence": "CT FX Spot Rollover Process page 529175690; obligations obl-003/obl-004 transfer parity",
+      "recommended_action": "human_ba",
+      "status": "open"
+    }
+  ],
+  "resolved_gaps": [],
+  "exploration_suppressed": [
+    {
+      "check_id": "chk-014",
+      "reason": "analysis_gap",
+      "blocks_fixture_probe": false,
+      "until_action": "rerun_coverage"
+    }
+  ],
+  "coverage_writebacks": [],
+  "actions": {
+    "rerun_coverage": true,
+    "rerun_epic_prep": false,
+    "focus_hint": "COVERAGE-REINFORCE: split E2E per order type (Market/Limit/Stop) into atomic order/trade/position checks; reframe chk-016 as WebBroker manual trade not ET fill; keep chk-017 liquidation; note market-order defect on Market path.",
+    "human_notes": [
+      "ET provider: no manual fill tool for FX Spot — dealer manual trade only.",
+      "Auto order chains: margin liquidation (in scope); rollover transfers (optional); option/futures liquidation types out of scope."
+    ]
+  },
+  "questions": [],
+  "known_issues_search": {
+    "at": null,
+    "queries": []
+  },
+  "known_issues": [],
+  "unmapped_known_issues": [],
+  "coverage_mutations": [],
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "Loaded CRT-663 ref+coverage via jq; mechanical queue empty."
+    },
+    {
+      "step": "2",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "Work queue: 0 mechanical; 6 operator/Confluence-backed gaps queued."
+    },
+    {
+      "step": "3",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "Emitted 6 gaps (4 high, 2 medium); rerun_coverage true."
+    },
+    {
+      "step": "4b",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "Confluence resolve: ET FIX 529180233, Order Statuses 518004439, Margin Liquidations 345714164 — evidence for gaps 003/005."
+    },
+    {
+      "step": "5",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "exploration_suppressed: chk-014 soft note for market defect (blocks_fixture_probe false)."
+    },
+    {
+      "step": "10",
+      "at": "2026-06-08T10:00:00Z",
+      "action": "Emit analysis.json + gaps-first .md."
+    }
+  ]
+}

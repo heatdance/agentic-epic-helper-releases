@@ -1,0 +1,730 @@
+{
+  "schema_version": 4,
+  "epic": {
+    "key": "CRT-594",
+    "url": "https://jira.in.devexperts.com/browse/CRT-594",
+    "summary": "FX_SPOT Pricing (groups and mapping to dxFeed)",
+    "status": "Pending resolution",
+    "labels": [
+      "ct_ph5"
+    ],
+    "issue_type": "Epic"
+  },
+  "business_context": "FX Spot tier-based prices from ET via dxFeed mapped per account group (CornerTraderFxConfiguration / FxSpotSuffix) to group-qualified dxFeed symbols; group-specific bid/ask on client UIs; backup/EOD midpoint capture.",
+  "synthesis": {
+    "problem_gist": "FX_SPOT pricing depends on account group and order volume; system maps tier-based dxFeed streams per FxSpotSuffix to UI quotes across dxTrade5, Adaptive, and WebBroker Client Area.",
+    "problem_gist_source": "from_jira_field",
+    "impact_areas": [
+      {
+        "text": "CornerTraderFxConfiguration account groups and FxSpotSuffix",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "dxFeed Quote and TextConfiguration tier streams",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "Cross-surface quote display and backup/EOD pricing",
+        "source": "from_jira_field"
+      }
+    ],
+    "keywords": [
+      {
+        "text": "FX_SPOT",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "FxSpotSuffix",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "Scenarios",
+        "source": "from_jira_field"
+      }
+    ]
+  },
+  "epic_archetype": {
+    "value": "widget_ui",
+    "source": "jira_scenarios",
+    "evidence": "Epic Scenarios enumerate Watchlist, Position Book, Instrument page, Derivatives, Client Area quote checks."
+  },
+  "verification_topology": {
+    "jira_scenario_surfaces": [
+      {
+        "id": "jss-001",
+        "surface": "dxtrade5_watchlist",
+        "shell": "dxtrade5",
+        "widget": "Watchlist",
+        "metric": "bid_ask",
+        "source_quote": "Check that in client UIs quotes are shown according to the account group in: Watchlist",
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "jss-002",
+        "surface": "dxtrade5_position_book",
+        "shell": "dxtrade5",
+        "widget": "Position Book",
+        "metric": "bid_ask",
+        "source_quote": "Check that in client UIs quotes are shown according to the account group in: Position Book",
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "jss-003",
+        "surface": "adaptive_instrument_page",
+        "shell": "adaptive",
+        "widget": "Instrument page",
+        "metric": "bid_ask",
+        "source_quote": "Instrument page (Adaptive)",
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "jss-004",
+        "surface": "dxtrade5_derivatives",
+        "shell": "dxtrade5",
+        "widget": "Derivatives",
+        "metric": "bid_ask",
+        "source_quote": "Derivatives",
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "jss-005",
+        "surface": "webbroker_client_area",
+        "shell": "webbroker_client",
+        "widget": "Client Area",
+        "metric": "bid_ask",
+        "source_quote": "Client Area in Webbroker",
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "jss-006",
+        "surface": "webbroker_backup_prices",
+        "shell": "webbroker_dealer",
+        "widget": "Backup Prices",
+        "metric": "backup_price",
+        "source_quote": "check that FX_SPOT is added to the Asset type filter in 'Backup Prices' widget",
+        "obligation_ids": [
+          "obl-004"
+        ]
+      }
+    ],
+    "scenario_capability_rows": [
+      {
+        "id": "scr-001",
+        "jira_surface_id": "jss-001",
+        "source_quote": "Check that in client UIs quotes are shown according to the account group in: Watchlist",
+        "surface": "dxtrade5_watchlist",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1714"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-002",
+        "jira_surface_id": "jss-002",
+        "source_quote": "Check that in client UIs quotes are shown according to the account group in: Position Book",
+        "surface": "dxtrade5_position_book",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1713"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-003",
+        "jira_surface_id": "jss-003",
+        "source_quote": "Instrument page (Adaptive)",
+        "surface": "adaptive_instrument_page",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1717"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-004",
+        "jira_surface_id": "jss-004",
+        "source_quote": "Derivatives",
+        "surface": "dxtrade5_derivatives",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1713"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-005",
+        "jira_surface_id": "jss-005",
+        "source_quote": "Client Area in Webbroker",
+        "surface": "webbroker_client_area",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1761"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-006",
+        "jira_surface_id": "jss-006",
+        "source_quote": "check that FX_SPOT is added to the Asset type filter in 'Backup Prices' widget",
+        "surface": "webbroker_backup_prices",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1621"
+        ],
+        "obligation_ids": [
+          "obl-004"
+        ]
+      },
+      {
+        "id": "scr-007",
+        "platform_reuse_id": "prc-001",
+        "source_quote": "EOD backup trading day — daily_data_recorder captures midpoint as closePrice for FX_SPOT",
+        "surface": "backup_eod",
+        "capability_kind": "platform_invariant",
+        "promotion": "platform_invariant",
+        "linked_requirement_keys": [
+          "CRT-1621",
+          "CRT-1623"
+        ],
+        "obligation_ids": [
+          "obl-004"
+        ]
+      },
+      {
+        "id": "scr-008",
+        "platform_reuse_id": "prc-002",
+        "source_quote": "Non-trading day — published quotes do not affect backup price for FX_SPOT",
+        "surface": "backup_non_trading_day",
+        "capability_kind": "platform_invariant",
+        "promotion": "platform_invariant",
+        "linked_requirement_keys": [
+          "CRT-1621"
+        ],
+        "obligation_ids": [
+          "obl-004"
+        ]
+      },
+      {
+        "id": "scr-009",
+        "platform_reuse_id": "prc-003",
+        "source_quote": "Mark price column equals midpoint for FX_SPOT on Positions",
+        "surface": "fx_spot_mark",
+        "capability_kind": "platform_invariant",
+        "promotion": "platform_invariant",
+        "linked_requirement_keys": [
+          "CRT-1714"
+        ],
+        "obligation_ids": [
+          "obl-002"
+        ]
+      },
+      {
+        "id": "scr-010",
+        "source_quote": "Midpoint invariant across account groups while spreads may differ",
+        "surface": "cross_group",
+        "capability_kind": "cross_surface",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1717"
+        ],
+        "obligation_ids": [
+          "obl-003"
+        ]
+      },
+      {
+        "id": "scr-011",
+        "source_quote": "dxCore show prices bid/ask from first TextConfiguration tier",
+        "surface": "console_show_prices",
+        "capability_kind": "cross_surface",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1761"
+        ],
+        "obligation_ids": [
+          "obl-001"
+        ]
+      }
+    ],
+    "shell_roles": {
+      "console": {
+        "status": "in_scope",
+        "evidence": "dxCore show prices, agent_event_from, group hierarchy"
+      },
+      "dxtrade5": {
+        "status": "in_scope",
+        "evidence": "Jira scenarios Watchlist, Position Book, Derivatives"
+      },
+      "adaptive": {
+        "status": "in_scope",
+        "evidence": "Jira scenario Instrument page (Adaptive)"
+      },
+      "webbroker_dealer": {
+        "status": "in_scope",
+        "evidence": "User Management FX Category; Backup Prices widget"
+      },
+      "webbroker_client": {
+        "status": "in_scope",
+        "evidence": "Client Area in Webbroker scenario"
+      }
+    },
+    "pricing_oracle_rules": [
+      {
+        "id": "por-001",
+        "surface": "dxtrade5_watchlist",
+        "metric": "bid_ask",
+        "volume_control": "order_default_qty",
+        "oracle_rule": "text_configuration_closest_gte_qty",
+        "requirement_keys": [
+          "CRT-1714"
+        ],
+        "evidence_anchor": "TextConfiguration tier closest >= quantity for volume-sensitive surfaces",
+        "obligation_ids": [
+          "obl-002"
+        ],
+        "disposition": "primary_candidate"
+      },
+      {
+        "id": "por-002",
+        "surface": "dxtrade5_positions",
+        "metric": "bid_ask",
+        "volume_control": "first_tier",
+        "oracle_rule": "first_tier_quote",
+        "requirement_keys": [
+          "CRT-1713"
+        ],
+        "evidence_anchor": "Quote stream uses first tier for Positions/Derivatives widgets per operator final tests",
+        "obligation_ids": [
+          "obl-002"
+        ],
+        "disposition": "primary_candidate"
+      },
+      {
+        "id": "por-003",
+        "surface": "dxtrade5_derivatives",
+        "metric": "bid_ask",
+        "volume_control": "first_tier",
+        "oracle_rule": "first_tier_quote",
+        "requirement_keys": [
+          "CRT-1713"
+        ],
+        "evidence_anchor": "First tier TextConfiguration quotes on Derivatives widget",
+        "obligation_ids": [
+          "obl-002"
+        ],
+        "disposition": "primary_candidate"
+      },
+      {
+        "id": "por-004",
+        "surface": "console_show_prices",
+        "metric": "bid_ask",
+        "volume_control": "first_tier",
+        "oracle_rule": "console_show_prices_first_tier",
+        "requirement_keys": [
+          "CRT-1761",
+          "CRT-1718"
+        ],
+        "evidence_anchor": "show prices bid/ask from first TextConfiguration tier",
+        "obligation_ids": [
+          "obl-001"
+        ],
+        "disposition": "primary_candidate"
+      },
+      {
+        "id": "por-005",
+        "surface": "cross_group",
+        "metric": "midpoint",
+        "volume_control": "not_applicable",
+        "oracle_rule": "midpoint_invariant",
+        "requirement_keys": [
+          "CRT-1717"
+        ],
+        "evidence_anchor": "Same midpoint across groups while spreads may differ",
+        "obligation_ids": [
+          "obl-003"
+        ],
+        "disposition": "primary_candidate"
+      },
+      {
+        "id": "por-006",
+        "surface": "fx_spot_mark",
+        "metric": "mark",
+        "volume_control": "not_applicable",
+        "oracle_rule": "mark_from_midpoint",
+        "requirement_keys": [
+          "CRT-1714"
+        ],
+        "evidence_anchor": "Mark price equals midpoint for FX_SPOT",
+        "obligation_ids": [
+          "obl-002"
+        ],
+        "disposition": "primary_candidate"
+      }
+    ],
+    "delivery_notes": [],
+    "principal_coverage_threads": [
+      {
+        "thread_id": "pct-001",
+        "title": "Data setup — account groups and quote publication",
+        "coverage_thread": "environment_setup",
+        "obligation_ids": [
+          "obl-001",
+          "obl-005"
+        ],
+        "required_when": "widget_ui_setup_thread"
+      },
+      {
+        "thread_id": "pct-002",
+        "title": "Surface quotes and tier oracle rules",
+        "coverage_thread": "surface_quotes",
+        "obligation_ids": [
+          "obl-002",
+          "obl-003"
+        ],
+        "required_when": null
+      },
+      {
+        "thread_id": "pct-003",
+        "title": "Backup and EOD midpoint capture",
+        "coverage_thread": "backup_eod",
+        "obligation_ids": [
+          "obl-004"
+        ],
+        "required_when": "widget_ui_backup_thread"
+      }
+    ],
+    "platform_reuse_candidates": [
+      {
+        "id": "prc-001",
+        "topic": "EOD backup trading day",
+        "suggested_crtqa_pattern": "Platform regression TC family for daily_data_recorder EOD backup (multi-asset incl FX_SPOT)",
+        "confidence": "high",
+        "evidence": "Epic backup requirements CRT-1621 CRT-1623 CRT-1624",
+        "binding": "suggestion_only"
+      },
+      {
+        "id": "prc-002",
+        "topic": "Non-trading day backup",
+        "suggested_crtqa_pattern": "Platform regression TC for non-trading day backup price unchanged",
+        "confidence": "high",
+        "evidence": "Backup price when no regular session",
+        "binding": "suggestion_only"
+      },
+      {
+        "id": "prc-003",
+        "topic": "Mark price column",
+        "suggested_crtqa_pattern": "Positions Mark column regression TC for FX_SPOT instrument type",
+        "confidence": "medium",
+        "evidence": "Mark price in Positions widget checks",
+        "binding": "suggestion_only"
+      }
+    ]
+  },
+  "verification_focus_proposed": {
+    "statement": "Verify FX_SPOT group-specific bid/ask on named client surfaces (Watchlist, Position Book, Instrument page, Derivatives, Client Area), tier/oracle rules per widget, midpoint invariant across groups, and backup/EOD midpoint capture.",
+    "source": "jira_description",
+    "keywords": [
+      "FX_SPOT",
+      "account group",
+      "FxSpotSuffix",
+      "backup"
+    ]
+  },
+  "client_shell_impact": {
+    "corner_trader": {
+      "status": "affected",
+      "note": "Corner Trader: affected (jira_scenarios) — Watchlist, Position Book, Derivatives quote display.",
+      "evidence": "Jira scenarios name dxTrade5 widgets for group-specific FX_SPOT quotes."
+    },
+    "adaptive": {
+      "status": "affected",
+      "note": "Adaptive: affected (jira_field) — Instrument page scenario.",
+      "evidence": "Instrument page (Adaptive) in Jira scenarios."
+    },
+    "source": "jira_field"
+  },
+  "design": {
+    "figma": [],
+    "other_design": [],
+    "notes": "no_figma_urls_in_jira_description",
+    "ui_artifacts_in_jira": "none"
+  },
+  "requirements": [
+    {
+      "key": "CRT-1761",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1761",
+      "anchor": "req-CRT-1761",
+      "jira_context": null,
+      "page_id": "518015112",
+      "snippet_text": "FX SPOT Pricing Scheme maps dxFeed group-qualified symbols (currency pair + FxSpotSuffix) to CT EURUSD.spot UI symbols; account-group suffix drives dxFeed subscription.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null,
+      "extract_mode": "mcp"
+    },
+    {
+      "key": "CRT-1714",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1714",
+      "anchor": "req-CRT-1714",
+      "jira_context": null,
+      "page_id": "518015112",
+      "snippet_text": "TextConfiguration delivers the full tiered book from dxFeed; tiers include volume, bid/ask, quoteId, settlDate; volumes in the array are NOT sorted; tier selection uses closest >= quantity on Watchlist/OE surfaces.",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null,
+      "extract_mode": "mcp"
+    },
+    {
+      "key": "CRT-1717",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1717",
+      "anchor": "req-CRT-1717",
+      "jira_context": null,
+      "page_id": "518015112",
+      "snippet_text": "ET Trader applies CB markup on bid/ask in volume and category dimensions and sends tiered prices per instrument for each category (Energy vs Opportunity examples with same midpoint, different spreads).",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null,
+      "extract_mode": "mcp"
+    },
+    {
+      "key": "CRT-1713",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1713",
+      "anchor": "req-CRT-1713",
+      "jira_context": null,
+      "page_id": "518015112",
+      "snippet_text": "dxFeed Quote price events use the first tier (min volume) per account group; DX appends group suffix to subscribe (e.g. EUR/USD.ENERGY:ETFX for EURUSD.spot Energy account).",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null,
+      "extract_mode": "mcp"
+    },
+    {
+      "key": "CRT-1621",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1621",
+      "anchor": "req-CRT-1621",
+      "jira_context": null,
+      "snippet_text": "FX_SPOT: If there was a regular session on the day when job triggered (The date of day should be detected in the Time Zone of job trigger): S ystem should save midpoint price of market data at the moment of EOD Time as closePrice for the day. Midpoint can be taken from the quotes of any group ( ). It's assumed that all groups have the same midpoint and only spreads are different ( ) If there was NO regular session on the day when job triggered: Backup price should be saved (it's considered that backup price stores midpoint at the end of trading session on the last trading day, unless rewritten manually). Note: For all pairs regular session ends at 22:00 London time on Friday, instruments are not traded till Sunday evening. Quotes saved at 22:00 on Friday should be kept during non-trading hours. 1.2 EOD Price provider All places that are using EOD Prices, such as 1) Financing, 2) EOD Report, should use following algorithm to get prices for any instrument: closePrice saved during EOD snapshot should be used if closePrice is unavailable, then backup price should be used 2. Reports generation job 2.1. Scheduled Job Reports should be generated each day by reporting application using standard dxCore APIs at a configured time (set in eodReportGenerationSchedule@PreciseCalibrationDomain ). Report should contain data for the last finished clearing day ended at time set in clearingDayEndTimeWithTimeZone@PreciseCalibrationDomain setting . E.g. if endOfDay Time is 16:00 and endOfDay TimeZone is America/New York, then if report is scheduled for 16:30 America/New York, on 20.02.2022 at 16:30 it should return data for the clearing day of 19.02.2022 16:00 - 20.02.2022 16:00 America/New York. Clearing day is 20.02.2022. 2.2. Manually requested job Reports should be available for generation by manual request from dxMC 'job monitor' widget. If re-run \"with the same date\" is selected for the job, then report should contain data for the same clearing day that was initially used in selected job request. If run with specific data is selected for the job, then report should contain data for the following period: start date is selected date - 1 , start time is clearingDayEndTimeWithTimeZone@PreciseCalibrationDomain , end date is selected date , end time is clearingDayEndTimeWithTimeZone@PreciseCalibrationDomain . E.g. if endOfDay Time is 16:00 and endOfDay TimeZone is America/New York, then if job was run with selected date 20.02.2022, it should return data for the clearing day of 19.02.2022 16:00 - 20.02.2022 16:00 America/New York. Clearing day is 20.02.2022. If endOfDay Time is 00:00, then report should be generated for the same day, e.g. if 20.02.2022 is requested, then report should be generated for 00:00 20.02.2022 - 00:00 21.02.2022 in related time zone) If snapshot for selected date is not found (clearing day is not finished yet), then job should return error \"Historical data is missing as metrics snapshot is not performed yet\". 2.3. Report format All dates in report should be in time zone set in clearingDayEndTimeWithTimeZone@PreciseCalibrationDomain parameter. Files should be generated in csv format and placed to configured SFTP servers. System should generate 4 files: Balances Positions Trades Transfers Portfolios Details are in 2.3.1. Invalid Data During report generation there might be an error in data calculation, caused by following reasons: Data should be calculated/retrieved but operation failed, e.g. there are no end prices to calculate metrics. In such case system should return empty field. Data shouldn't be calculated/retrieved because this field is not applicable for one of the following account types: Cash account - account with Cash type category Margin account - account without Cash type category and having Trade type = Equity Futures account - account having Trade type = Futures In this case system should remain field empty. Type of accounts for which field is not applicable is mentioned in related tables below. 3. Portfolio code and broker code in all reports All EOD reports should contain following columns: portfolio_code should be filled with account clearing code broker_code should be filled with broker code (CH for Switzerland, BS for Bahamas, root broker for dealer users created under root broker according to ) 4. EOD Accounts report File name: YYYY.MM.DD_EodAccounts.csv, e.g. 2022.10.31_EodAccounts.csv, where date is a clearing day. Generation : System should retrieve all historical accounts with metrics on the platform at the moment of first metrics snapshot that happened after requested clearing day and for each account gets/calculates needed data. Following accounts should be taken: only LIVE accounts non-simulated accounts exclude accounts in TERMINATED and EXPIRED statuses. Field name Description Example Mandatory Type 1 account_code Account Code",
+      "snippet_status": "ok",
+      "snippet_failure_reason": null,
+      "extract_mode": "inline_td",
+      "page_id": "345722716"
+    }
+  ],
+  "traversal": {
+    "nested_refs": [],
+    "cross_epic": [],
+    "xt_refs": []
+  },
+  "obligations_proposed": [
+    {
+      "id": "obl-001",
+      "kind": "config_posture",
+      "statement": "CornerTraderFxConfiguration groups exist with FxSpotSuffix and domain profiles for RAG-CH and RAG-BS brokers.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "evidence_anchor": "Jira account groups section CRT-1630 CRT-1766 CRT-1767",
+      "config_vs_position": "account_group_assignment",
+      "disposition": "primary_candidate",
+      "deferral_reason": null,
+      "implementation_hit_ids": [],
+      "downstream_hints": {
+        "coverage_thread": "environment_setup",
+        "needs_environment_provision": true,
+        "needs_dual_account_contrast": true,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "console",
+          "cross_persona"
+        ]
+      }
+    },
+    {
+      "id": "obl-002",
+      "kind": "parity",
+      "statement": "FX_SPOT bid/ask selection follows account group suffix and volume tier rules per surface.",
+      "requirement_keys": [
+        "CRT-1714",
+        "CRT-1713"
+      ],
+      "evidence_anchor": "Quote first tier vs TextConfiguration tier book; Positions/Derivatives use first tier per final operator tests",
+      "config_vs_position": "routing_or_markup",
+      "disposition": "primary_candidate",
+      "deferral_reason": null,
+      "implementation_hit_ids": [],
+      "downstream_hints": {
+        "coverage_thread": "surface_quotes",
+        "needs_environment_provision": false,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "retail",
+          "dealer"
+        ]
+      }
+    },
+    {
+      "id": "obl-003",
+      "kind": "parity",
+      "statement": "Each account sees its own group bid/ask on named UI surfaces; midpoint invariant across groups.",
+      "requirement_keys": [
+        "CRT-1717",
+        "CRT-1761"
+      ],
+      "evidence_anchor": "Jira scenarios steps 2-4",
+      "config_vs_position": "routing_or_markup",
+      "disposition": "primary_candidate",
+      "deferral_reason": null,
+      "implementation_hit_ids": [],
+      "downstream_hints": {
+        "coverage_thread": "surface_quotes",
+        "needs_environment_provision": false,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "retail",
+          "cross_persona"
+        ]
+      }
+    },
+    {
+      "id": "obl-004",
+      "kind": "settlement",
+      "statement": "FX_SPOT backup/EOD midpoint capture and Backup Prices widget asset filter.",
+      "requirement_keys": [
+        "CRT-1621"
+      ],
+      "evidence_anchor": "Jira backup prices section",
+      "config_vs_position": "not_applicable",
+      "disposition": "primary_candidate",
+      "deferral_reason": null,
+      "implementation_hit_ids": [],
+      "downstream_hints": {
+        "coverage_thread": "backup_eod",
+        "needs_environment_provision": false,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "dealer",
+          "console"
+        ]
+      }
+    },
+    {
+      "id": "obl-005",
+      "kind": "environment_setup",
+      "statement": "ET publish tier streams and instrument allow-list before UI quote observation on CTQA.",
+      "requirement_keys": [
+        "CRT-1761"
+      ],
+      "evidence_anchor": "Jira setup steps: account groups, FxConfiguration publish, routing posture",
+      "config_vs_position": "account_group_assignment",
+      "disposition": "primary_candidate",
+      "deferral_reason": null,
+      "implementation_hit_ids": [],
+      "downstream_hints": {
+        "coverage_thread": "environment_setup",
+        "needs_environment_provision": true,
+        "needs_dual_account_contrast": true,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "console"
+        ]
+      }
+    }
+  ],
+  "obligations_reconcile": {
+    "epic_summary_aligned": true,
+    "conflicts": [],
+    "focus_merge_note": null
+  },
+  "implementation": {
+    "hits": [],
+    "skipped_reason": null
+  },
+  "validation_log": [
+    {
+      "step": "2c",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "epic_archetype=widget_ui source=jira_scenarios"
+    },
+    {
+      "step": "3f",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "6 jira_scenario_surfaces from Jira Scenarios block"
+    },
+    {
+      "step": "3g",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "6 pricing_oracle_rules including first_tier vs tier-by-qty split"
+    },
+    {
+      "step": "3h",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "2 delivery_notes; 3 platform_reuse_candidates suggestion_only"
+    },
+    {
+      "step": "3i",
+      "at": "2026-06-18T12:00:00Z",
+      "action": "verification_focus_proposed; 3 principal_coverage_threads; delivery back-links"
+    },
+    {
+      "step": "3b_snippet_retry",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "mcp storage: yogi CRT-1621; MCP prose slices CRT-1761/1714/1717/1713"
+    },
+    {
+      "step": "3.4",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "precision pass — synthesis aligned to Jira CRT-594 description"
+    },
+    {
+      "step": "5b_bitbucket_prep",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "skipped helper cold start; BRO/xt recorded for COVERAGE"
+    },
+    {
+      "step": "3.5",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "xt_refs capped 0 — CT-scoped FX_SPOT epic"
+    },
+    {
+      "step": "3.6",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "xt relevance pass — no rows"
+    },
+    {
+      "step": "6b",
+      "at": "2026-06-29T14:25:18Z",
+      "action": "obligations_reconcile epic_summary_aligned=true"
+    }
+  ],
+  "sources": {
+    "jira_fetched_at": "2026-06-29T14:25:18Z",
+    "confluence_method": "mcp",
+    "bitbucket_repo": "BRO/xt",
+    "bitbucket_searched_at": null
+  }
+}

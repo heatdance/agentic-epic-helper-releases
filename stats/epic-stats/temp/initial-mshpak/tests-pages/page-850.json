@@ -1,0 +1,4343 @@
+{
+  "expand": "schema,names",
+  "startAt": 850,
+  "maxResults": 50,
+  "total": 1064,
+  "issues": [
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871485",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871485",
+      "key": "CRTQA-8724",
+      "fields": {
+        "summary": "Client Notifications - Try to enter users in the Recipients field and in csv file togerther",
+        "issuelinks": [
+          {
+            "id": "3185432",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185432",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871486",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871486",
+      "key": "CRTQA-8725",
+      "fields": {
+        "summary": "Client Notifications - Send notification to users from csv file",
+        "issuelinks": [
+          {
+            "id": "3185433",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185433",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871487",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871487",
+      "key": "CRTQA-8726",
+      "fields": {
+        "summary": "Broker to Client Notifications - Duplicate notification with with the same inputs ",
+        "issuelinks": [
+          {
+            "id": "3185436",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185436",
+            "outwardIssue": {
+              "id": "1355359",
+              "key": "WEBDEAL-2652",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1355359",
+              "fields": {
+                "summary": "[dxBrokerage] Broker to Client Notifications - Impossible to duplicate notification with the same body",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185435",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185435",
+            "outwardIssue": {
+              "id": "1355007",
+              "key": "WEBDEAL-2650",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1355007",
+              "fields": {
+                "summary": "[dxBrokerage] Broker to Client Notifications - Text is not fully shown in the detailed information window",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185434",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185434",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871488",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871488",
+      "key": "CRTQA-8727",
+      "fields": {
+        "summary": "Broker to Client Notifications - Create notification with long text  ",
+        "issuelinks": [
+          {
+            "id": "3185389",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185389",
+            "outwardIssue": {
+              "id": "1355007",
+              "key": "WEBDEAL-2650",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1355007",
+              "fields": {
+                "summary": "[dxBrokerage] Broker to Client Notifications - Text is not fully shown in the detailed information window",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185388",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185388",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871555",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871555",
+      "key": "CRTQA-8793",
+      "fields": {
+        "summary": "Broker to Client Notifications - Check widget displays all sent notification (expired or not) ",
+        "issuelinks": [
+          {
+            "id": "3185430",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185430",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871556",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871556",
+      "key": "CRTQA-8794",
+      "fields": {
+        "summary": "Broker to Client Notifications - Check Viewing of messages  if a user has not permission to view all messages",
+        "issuelinks": [
+          {
+            "id": "3185424",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185424",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871557",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871557",
+      "key": "CRTQA-8795",
+      "fields": {
+        "summary": "Broker to Client Notifications - Check 'Notifications' widget layout",
+        "issuelinks": [
+          {
+            "id": "3185425",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185425",
+            "outwardIssue": {
+              "id": "1583034",
+              "key": "XT-1937",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1583034",
+              "fields": {
+                "summary": "Broker to Clients notifications - Duplicated messages are displayed with empty body ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185426",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185426",
+            "outwardIssue": {
+              "id": "1200753",
+              "key": "DXBRO-58",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200753",
+              "fields": {
+                "summary": "[dxBro] Broker to Client Notifications",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871576",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871576",
+      "key": "CRTQA-8810",
+      "fields": {
+        "summary": "Transactions - check Trade price for transaction aggregated for multi-leg OPTIONS and FUTURES order",
+        "issuelinks": [
+          {
+            "id": "3185656",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185656",
+            "outwardIssue": {
+              "id": "1652328",
+              "key": "CRT-320",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1652328",
+              "fields": {
+                "summary": "Fix price for spreads in all transaction and trade widgets",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3185469",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185469",
+            "inwardIssue": {
+              "id": "1651934",
+              "key": "DXBRO-783",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1651934",
+              "fields": {
+                "summary": "Fix price for spreads in all transaction and trade widgets",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871585",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871585",
+      "key": "CRTQA-8819",
+      "fields": {
+        "summary": "Transaction Uploader - Check Fee types upload",
+        "issuelinks": [
+          {
+            "id": "3185736",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185736",
+            "outwardIssue": {
+              "id": "1524026",
+              "key": "XT-1010",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1524026",
+              "fields": {
+                "summary": "Transaction Uploader - Fee leg is not created during transactions upload",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185734",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185734",
+            "outwardIssue": {
+              "id": "1524149",
+              "key": "XT-1014",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1524149",
+              "fields": {
+                "summary": "Transaction Uploader - UI message shows wrong number of transactions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185735",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185735",
+            "outwardIssue": {
+              "id": "1453962",
+              "key": "DXBRO-573",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1453962",
+              "fields": {
+                "summary": "Support Commissions, Fees and Taxes for Cash transactions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871586",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871586",
+      "key": "CRTQA-8820",
+      "fields": {
+        "summary": "Transaction Uploader - Check Commission types upload",
+        "issuelinks": [
+          {
+            "id": "3185738",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185738",
+            "outwardIssue": {
+              "id": "1524058",
+              "key": "XT-1011",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1524058",
+              "fields": {
+                "summary": "Transaction Uploader - Commission types are shown as 'other commissions' instead of 'rule_names'",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185737",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185737",
+            "outwardIssue": {
+              "id": "1453962",
+              "key": "DXBRO-573",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1453962",
+              "fields": {
+                "summary": "Support Commissions, Fees and Taxes for Cash transactions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871654",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871654",
+      "key": "CRTQA-8888",
+      "fields": {
+        "summary": "Transaction Uploader - ADD a new product transaction with IMMEDIATE_SETTLEMENT",
+        "issuelinks": [
+          {
+            "id": "3185567",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185567",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871655",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871655",
+      "key": "CRTQA-8889",
+      "fields": {
+        "summary": "Transaction Uploader - UPDATE product transaction - add Cash Effect value",
+        "issuelinks": [
+          {
+            "id": "3185568",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185568",
+            "outwardIssue": {
+              "id": "1338853",
+              "key": "DXCORE-30817",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1338853",
+              "fields": {
+                "summary": "[dxBrokerage] Transaction Uploader - Impossible to update an existing transaction",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185569",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185569",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871656",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871656",
+      "key": "CRTQA-8890",
+      "fields": {
+        "summary": "Transaction Uploader - UPDATE product transaction - change Cash Effect value",
+        "issuelinks": [
+          {
+            "id": "3185558",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185558",
+            "outwardIssue": {
+              "id": "1338853",
+              "key": "DXCORE-30817",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1338853",
+              "fields": {
+                "summary": "[dxBrokerage] Transaction Uploader - Impossible to update an existing transaction",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185559",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185559",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871657",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871657",
+      "key": "CRTQA-8891",
+      "fields": {
+        "summary": "Transaction Uploader - UPDATE product transaction - change Cash Effect value",
+        "issuelinks": [
+          {
+            "id": "3185560",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185560",
+            "outwardIssue": {
+              "id": "1338853",
+              "key": "DXCORE-30817",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1338853",
+              "fields": {
+                "summary": "[dxBrokerage] Transaction Uploader - Impossible to update an existing transaction",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185561",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185561",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871658",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871658",
+      "key": "CRTQA-8892",
+      "fields": {
+        "summary": "Transaction Uploader - UPDATE product transaction - add Cash Effect value",
+        "issuelinks": [
+          {
+            "id": "3185562",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185562",
+            "outwardIssue": {
+              "id": "1338853",
+              "key": "DXCORE-30817",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1338853",
+              "fields": {
+                "summary": "[dxBrokerage] Transaction Uploader - Impossible to update an existing transaction",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185563",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185563",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871659",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871659",
+      "key": "CRTQA-8893",
+      "fields": {
+        "summary": "Transaction Uploader - ADD a new product transaction if Cash Effect is skipped ",
+        "issuelinks": [
+          {
+            "id": "3185564",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185564",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871660",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871660",
+      "key": "CRTQA-8894",
+      "fields": {
+        "summary": "Transaction Uploader - ADD a new product transaction with commission",
+        "issuelinks": [
+          {
+            "id": "3185551",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185551",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871661",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871661",
+      "key": "CRTQA-8895",
+      "fields": {
+        "summary": "Transaction Uploader - ADD a new product transaction with IMMEDIATE_SETTLEMENT",
+        "issuelinks": [
+          {
+            "id": "3185552",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185552",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871662",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871662",
+      "key": "CRTQA-8896",
+      "fields": {
+        "summary": "Transaction Uploader - ADD a new product transaction with Equity",
+        "issuelinks": [
+          {
+            "id": "3185553",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185553",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871663",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871663",
+      "key": "CRTQA-8897",
+      "fields": {
+        "summary": "Transaction Uploader - Wrong Cash Effect format - Check error message ",
+        "issuelinks": [
+          {
+            "id": "3185555",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185555",
+            "outwardIssue": {
+              "id": "1093974",
+              "key": "DXCORE-24520",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1093974",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non USD$ currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185557",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185557",
+            "outwardIssue": {
+              "id": "1099180",
+              "key": "WEBDEAL-1487",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099180",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non account currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185554",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185554",
+            "outwardIssue": {
+              "id": "1099509",
+              "key": "WEBDEAL-1486",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099509",
+              "fields": {
+                "summary": "[BE] [dxBro] Add support for NOT_IN_ACCOUNT_CURRENCY error",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185556",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185556",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871664",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871664",
+      "key": "CRTQA-8898",
+      "fields": {
+        "summary": "Transaction Uploader - Check balance after product transfers with Cash Effect uploading",
+        "issuelinks": [
+          {
+            "id": "3185537",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185537",
+            "outwardIssue": {
+              "id": "1093974",
+              "key": "DXCORE-24520",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1093974",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non USD$ currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185539",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185539",
+            "outwardIssue": {
+              "id": "1099180",
+              "key": "WEBDEAL-1487",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099180",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non account currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185535",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185535",
+            "outwardIssue": {
+              "id": "1099509",
+              "key": "WEBDEAL-1486",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099509",
+              "fields": {
+                "summary": "[BE] [dxBro] Add support for NOT_IN_ACCOUNT_CURRENCY error",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185536",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185536",
+            "outwardIssue": {
+              "id": "1227159",
+              "key": "DXBRO-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1227159",
+              "fields": {
+                "summary": "[dxBro] Transactions upload clean-up",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10857",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Under implementation",
+                  "id": "10857",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3185534",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185534",
+            "outwardIssue": {
+              "id": "1069252",
+              "key": "DXBRO-191",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1069252",
+              "fields": {
+                "summary": "[dxBro] [WebBroker] Transaction Uploader (aka Position Import)",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3185538",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185538",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871665",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871665",
+      "key": "CRTQA-8899",
+      "fields": {
+        "summary": "Transaction Uploader - Check cash legs for product transfers if Cash Effect is an empty value",
+        "issuelinks": [
+          {
+            "id": "3185541",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185541",
+            "outwardIssue": {
+              "id": "1093974",
+              "key": "DXCORE-24520",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1093974",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non USD$ currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185543",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185543",
+            "outwardIssue": {
+              "id": "1099180",
+              "key": "WEBDEAL-1487",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099180",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non account currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185540",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185540",
+            "outwardIssue": {
+              "id": "1099509",
+              "key": "WEBDEAL-1486",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099509",
+              "fields": {
+                "summary": "[BE] [dxBro] Add support for NOT_IN_ACCOUNT_CURRENCY error",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185542",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185542",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871666",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871666",
+      "key": "CRTQA-8900",
+      "fields": {
+        "summary": "Transaction Uploader - Check Cash Effect is ignored for Cash Transfers ",
+        "issuelinks": [
+          {
+            "id": "3185545",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185545",
+            "outwardIssue": {
+              "id": "1093974",
+              "key": "DXCORE-24520",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1093974",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non USD$ currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185547",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185547",
+            "outwardIssue": {
+              "id": "1099180",
+              "key": "WEBDEAL-1487",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099180",
+              "fields": {
+                "summary": "[dxBrokerage] It is possible to import cash transaction with non account currency",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185544",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185544",
+            "outwardIssue": {
+              "id": "1099509",
+              "key": "WEBDEAL-1486",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1099509",
+              "fields": {
+                "summary": "[BE] [dxBro] Add support for NOT_IN_ACCOUNT_CURRENCY error",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185546",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185546",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871667",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871667",
+      "key": "CRTQA-8901",
+      "fields": {
+        "summary": "Transaction Uploader - TRADE Activity type is mismatched with an instrument type - Check error message",
+        "issuelinks": [
+          {
+            "id": "3185548",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185548",
+            "outwardIssue": {
+              "id": "1337830",
+              "key": "DXCORE-30802",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1337830",
+              "fields": {
+                "summary": "[NoCommits][dxBrokerage] Transaction Uploader - 'Trade' Transaction can be uploaded without specifying Action type",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185549",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185549",
+            "outwardIssue": {
+              "id": "1227159",
+              "key": "DXBRO-374",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1227159",
+              "fields": {
+                "summary": "[dxBro] Transactions upload clean-up",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10857",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Under implementation",
+                  "id": "10857",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/4",
+                    "id": 4,
+                    "key": "indeterminate",
+                    "colorName": "inprogress",
+                    "name": "In Progress"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3185550",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185550",
+            "outwardIssue": {
+              "id": "1200373",
+              "key": "DXBRO-378",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1200373",
+              "fields": {
+                "summary": "[dxBro] Transaction Upload: separate field \"cash effect\" to create cash leg",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871714",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871714",
+      "key": "CRTQA-8945",
+      "fields": {
+        "summary": "Personal Data Protection - Account Statement Report - Check personal data under user from Lead admin users group with permission",
+        "issuelinks": [
+          {
+            "id": "3185762",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185762",
+            "outwardIssue": {
+              "id": "1314300",
+              "key": "WEBDEAL-2518",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314300",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report  - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185761",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185761",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871715",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871715",
+      "key": "CRTQA-8946",
+      "fields": {
+        "summary": "Personal Data Protection - Account Statement Report - Check personal data under user from Lead admin users group without permission",
+        "issuelinks": [
+          {
+            "id": "3185763",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185763",
+            "outwardIssue": {
+              "id": "1314300",
+              "key": "WEBDEAL-2518",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314300",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report  - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871716",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871716",
+      "key": "CRTQA-8947",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check personal data values under user from Lead admin users group with permissions",
+        "issuelinks": [
+          {
+            "id": "3185756",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185756",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871717",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871717",
+      "key": "CRTQA-8948",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check Filtering by protected data parameters under user from Lead admin users group",
+        "issuelinks": [
+          {
+            "id": "3185758",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185758",
+            "outwardIssue": {
+              "id": "1314357",
+              "key": "WEBDEAL-2519",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314357",
+              "fields": {
+                "summary": "[dxBrokerage] Personal Data Protection - Account list - Filtering by Full Name and Email are absent",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185757",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185757",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871718",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871718",
+      "key": "CRTQA-8949",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check personal data values under user from Lead admin users group without permission",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871719",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871719",
+      "key": "CRTQA-8950",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check Filtering by protected data parameters under user from Master Dealers group without permission",
+        "issuelinks": [
+          {
+            "id": "3185760",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185760",
+            "outwardIssue": {
+              "id": "1314357",
+              "key": "WEBDEAL-2519",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314357",
+              "fields": {
+                "summary": "[dxBrokerage] Personal Data Protection - Account list - Filtering by Full Name and Email are absent",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185759",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185759",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871720",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871720",
+      "key": "CRTQA-8951",
+      "fields": {
+        "summary": "Personal Data Protection - Account Statement Report - Check personal data under dealer-user from Master Dealers group without permission",
+        "issuelinks": [
+          {
+            "id": "3185748",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185748",
+            "outwardIssue": {
+              "id": "1355453",
+              "key": "DXTF-31100",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1355453",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report - Unable to create report",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185746",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185746",
+            "outwardIssue": {
+              "id": "1328709",
+              "key": "DXCORE-30675",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1328709",
+              "fields": {
+                "summary": "[NoCommits][dxBrokerage] Account Statement Report - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185747",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185747",
+            "outwardIssue": {
+              "id": "1314300",
+              "key": "WEBDEAL-2518",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314300",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report  - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185745",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185745",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871721",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871721",
+      "key": "CRTQA-8952",
+      "fields": {
+        "summary": "Personal Data Protection - Account Statement Report - Check personal data under dealer-user from Master Dealers group with permission",
+        "issuelinks": [
+          {
+            "id": "3185752",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185752",
+            "outwardIssue": {
+              "id": "1355453",
+              "key": "DXTF-31100",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1355453",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report - Unable to create report",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185750",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185750",
+            "outwardIssue": {
+              "id": "1328709",
+              "key": "DXCORE-30675",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1328709",
+              "fields": {
+                "summary": "[NoCommits][dxBrokerage] Account Statement Report - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185751",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185751",
+            "outwardIssue": {
+              "id": "1314300",
+              "key": "WEBDEAL-2518",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314300",
+              "fields": {
+                "summary": "[dxBrokerage] Account Statement Report  - Contact Info is absent at all",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185749",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185749",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871722",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871722",
+      "key": "CRTQA-8953",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check personal data under dealer-user from Master Dealers group without permission",
+        "issuelinks": [
+          {
+            "id": "3185754",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185754",
+            "outwardIssue": {
+              "id": "1314397",
+              "key": "WEBDEAL-2520",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1314397",
+              "fields": {
+                "summary": "[NoCommits][dxBrokerage] Personal Data Protection - Full name and email in Account list widget is visible for master_dealer WITHOUT needed permisssions ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185753",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185753",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871723",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871723",
+      "key": "CRTQA-8954",
+      "fields": {
+        "summary": "Personal Data Protection - Account list - Check personal data under dealer-user from Master Dealers group with permission",
+        "issuelinks": [
+          {
+            "id": "3185755",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185755",
+            "outwardIssue": {
+              "id": "1275698",
+              "key": "DXBRO-148",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1275698",
+              "fields": {
+                "summary": "[dxBro] Lead admin users - Personal Data Protection",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871895",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871895",
+      "key": "CRTQA-9072",
+      "fields": {
+        "summary": "Instruments - Close OPTION instrument with closed derivative",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871896",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871896",
+      "key": "CRTQA-9073",
+      "fields": {
+        "summary": "Instruments - Add new OPTION instrument - Check refreshed list",
+        "issuelinks": [
+          {
+            "id": "3185960",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185960",
+            "outwardIssue": {
+              "id": "1048989",
+              "key": "DXBRO-360",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1048989",
+              "fields": {
+                "summary": "[dxBro] Fractional shares",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3185959",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185959",
+            "outwardIssue": {
+              "id": "1114928",
+              "key": "DXBRO-60",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114928",
+              "fields": {
+                "summary": "dxMC - Instruments Widget - Amend \"Trading Enabled\" workflow",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871897",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871897",
+      "key": "CRTQA-9074",
+      "fields": {
+        "summary": "Instruments - Import OPTION instrument from CSV- Add new instrument",
+        "issuelinks": [
+          {
+            "id": "3185962",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185962",
+            "outwardIssue": {
+              "id": "1167849",
+              "key": "DXMC-2139",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1167849",
+              "fields": {
+                "summary": "[dxBrokerage] Option instrument is not imported from CSV file",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3185961",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185961",
+            "outwardIssue": {
+              "id": "1114928",
+              "key": "DXBRO-60",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114928",
+              "fields": {
+                "summary": "dxMC - Instruments Widget - Amend \"Trading Enabled\" workflow",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871898",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871898",
+      "key": "CRTQA-9075",
+      "fields": {
+        "summary": "Instruments - Import OPTION instrument from IPF - Check refreshed list",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871899",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871899",
+      "key": "CRTQA-9076",
+      "fields": {
+        "summary": "Instruments - Edit OPTION instrument - Check dialog window",
+        "issuelinks": [
+          {
+            "id": "3185963",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185963",
+            "outwardIssue": {
+              "id": "1114928",
+              "key": "DXBRO-60",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114928",
+              "fields": {
+                "summary": "dxMC - Instruments Widget - Amend \"Trading Enabled\" workflow",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871900",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871900",
+      "key": "CRTQA-9077",
+      "fields": {
+        "summary": "Instruments - Copy OPTION instrument - Enter a non-unique symbol",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871901",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871901",
+      "key": "CRTQA-9078",
+      "fields": {
+        "summary": "Instruments - Copy OPTION instrument - Check refreshed list",
+        "issuelinks": [
+          {
+            "id": "3185957",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185957",
+            "outwardIssue": {
+              "id": "1114928",
+              "key": "DXBRO-60",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114928",
+              "fields": {
+                "summary": "dxMC - Instruments Widget - Amend \"Trading Enabled\" workflow",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871902",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871902",
+      "key": "CRTQA-9079",
+      "fields": {
+        "summary": "Instruments - Close OPTION instrument with open orders",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871903",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871903",
+      "key": "CRTQA-9080",
+      "fields": {
+        "summary": "Instruments - Check \"Add Instrument' dialog window - OPTION",
+        "issuelinks": [
+          {
+            "id": "3185958",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3185958",
+            "outwardIssue": {
+              "id": "1114928",
+              "key": "DXBRO-60",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1114928",
+              "fields": {
+                "summary": "dxMC - Instruments Widget - Amend \"Trading Enabled\" workflow",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10858",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/generic.png",
+                  "name": "Pending resolution",
+                  "id": "10858",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871904",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871904",
+      "key": "CRTQA-9081",
+      "fields": {
+        "summary": "Instruments - Import OPTION instrument from CSV- Add existing instrument",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871905",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871905",
+      "key": "CRTQA-9082",
+      "fields": {
+        "summary": "Instruments - Import OPTION instrument from IPF with missed mandatory field(s)",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871906",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871906",
+      "key": "CRTQA-9083",
+      "fields": {
+        "summary": "Instruments - Import OPTION instrument from CSV with missed mandatory field(s)",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871907",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871907",
+      "key": "CRTQA-9084",
+      "fields": {
+        "summary": "Instruments - Export OPTION instrument to CSV - Check fields ",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871908",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871908",
+      "key": "CRTQA-9085",
+      "fields": {
+        "summary": "Instruments - Close OPTION instruments with open positions",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871909",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871909",
+      "key": "CRTQA-9086",
+      "fields": {
+        "summary": "Instruments - Close OPTION instrument - Check refreshed list",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1871910",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1871910",
+      "key": "CRTQA-9087",
+      "fields": {
+        "summary": "Instruments - Export OPTION instrument to IPF ",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    }
+  ],
+  "warningMessages": null,
+  "names": null,
+  "schema": null
+}

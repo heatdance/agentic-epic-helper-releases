@@ -1,0 +1,70 @@
+{
+  "id": "1460197",
+  "key": "CRTQA-1312",
+  "summary": "[Release notes] [CRT-51] Import lists of instruments to disable and enable trading - dxCore",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1460197/worklog/5453398",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=bryukhovetsky",
+          "name": "bryukhovetsky",
+          "key": "bryukhovetsky",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=bryukhovetsky&avatarId=303568",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=bryukhovetsky&avatarId=303568",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=bryukhovetsky&avatarId=303568",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=bryukhovetsky&avatarId=303568"
+          },
+          "displayName": "Artur Bryukhovetsky [DM]",
+          "active": false,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-01-30T08:18:41.200+0000",
+        "updated": "2024-01-30T08:18:47.000+0000",
+        "started": "2024-01-11T11:00:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "5453398",
+        "issueId": "1460197"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "2h 15m",
+    "remainingEstimate": "0m",
+    "timeSpent": "2h 30m",
+    "originalEstimateSeconds": 8100,
+    "remainingEstimateSeconds": 0,
+    "timeSpentSeconds": 9000
+  },
+  "customfield_11250": 5.0,
+  "customfield_10006": null
+}

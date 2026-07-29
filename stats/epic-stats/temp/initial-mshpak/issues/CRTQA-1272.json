@@ -1,0 +1,193 @@
+{
+  "id": "1656995",
+  "key": "CRTQA-1272",
+  "summary": "[Epic Testing] [CRT-308] Add Slide-In Coefficient to Position Book in dxTrade",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 4,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1656995/worklog/6180897",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-15T12:05:11.347+0000",
+        "updated": "2025-01-15T12:05:14.673+0000",
+        "started": "2025-01-14T09:30:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "6180897",
+        "issueId": "1656995"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1656995/worklog/6180898",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-15T12:05:17.016+0000",
+        "updated": "2025-01-15T12:05:17.016+0000",
+        "started": "2025-01-14T08:00:00.000+0000",
+        "timeSpent": "20m",
+        "timeSpentSeconds": 1200,
+        "id": "6180898",
+        "issueId": "1656995"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1656995/worklog/6184367",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-17T07:44:47.155+0000",
+        "updated": "2025-01-17T07:44:54.444+0000",
+        "started": "2025-01-16T13:20:00.000+0000",
+        "timeSpent": "2h 40m",
+        "timeSpentSeconds": 9600,
+        "id": "6184367",
+        "issueId": "1656995"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1656995/worklog/6186855",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-01-17T21:07:26.633+0000",
+        "updated": "2025-01-17T21:08:10.976+0000",
+        "started": "2025-01-17T13:39:00.000+0000",
+        "timeSpent": "2h 36m",
+        "timeSpentSeconds": 9360,
+        "id": "6186855",
+        "issueId": "1656995"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "20m",
+    "remainingEstimate": "0m",
+    "timeSpent": "7h 6m",
+    "originalEstimateSeconds": 1200,
+    "remainingEstimateSeconds": 0,
+    "timeSpentSeconds": 25560
+  },
+  "customfield_11250": null,
+  "customfield_10006": null
+}

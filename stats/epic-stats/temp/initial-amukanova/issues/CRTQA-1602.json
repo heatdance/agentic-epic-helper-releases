@@ -1,0 +1,119 @@
+{
+  "id": "1772701",
+  "key": "CRTQA-1602",
+  "summary": "[Epic Testing] [CRT-481]  Adding of Trades Widget (prio 2)",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 3,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772701/worklog/6511197",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=rturchin",
+          "name": "rturchin",
+          "key": "JIRAUSER54542",
+          "emailAddress": "rturchin@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER54542&avatarId=320661",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER54542&avatarId=320661",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER54542&avatarId=320661",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER54542&avatarId=320661"
+          },
+          "displayName": "Rodion Turchin",
+          "active": true,
+          "timeZone": "Europe/Lisbon"
+        },
+        "updateAuthor": {
+          "name": "rturchin",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-30T08:43:59.657+0000",
+        "updated": "2025-06-30T08:44:10.480+0000",
+        "started": "2025-06-30T13:30:00.000+0000",
+        "timeSpent": "3h 30m",
+        "timeSpentSeconds": 12600,
+        "id": "6511197",
+        "issueId": "1772701"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772701/worklog/6517082",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=rturchin",
+          "name": "rturchin",
+          "key": "JIRAUSER54542",
+          "emailAddress": "rturchin@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER54542&avatarId=320661",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER54542&avatarId=320661",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER54542&avatarId=320661",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER54542&avatarId=320661"
+          },
+          "displayName": "Rodion Turchin",
+          "active": true,
+          "timeZone": "Europe/Lisbon"
+        },
+        "updateAuthor": {
+          "name": "rturchin",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-07-01T08:22:29.665+0000",
+        "updated": "2025-07-01T08:22:31.231+0000",
+        "started": "2025-07-01T08:00:00.000+0000",
+        "timeSpent": "30m",
+        "timeSpentSeconds": 1800,
+        "id": "6517082",
+        "issueId": "1772701"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772701/worklog/6517083",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=rturchin",
+          "name": "rturchin",
+          "key": "JIRAUSER54542",
+          "emailAddress": "rturchin@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER54542&avatarId=320661",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER54542&avatarId=320661",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER54542&avatarId=320661",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER54542&avatarId=320661"
+          },
+          "displayName": "Rodion Turchin",
+          "active": true,
+          "timeZone": "Europe/Lisbon"
+        },
+        "updateAuthor": {
+          "name": "rturchin",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-07-01T08:22:35.988+0000",
+        "updated": "2025-07-01T08:22:43.422+0000",
+        "started": "2025-07-01T09:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "6517083",
+        "issueId": "1772701"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "5h",
+    "remainingEstimate": "3h 25m",
+    "timeSpent": "5h",
+    "originalEstimateSeconds": 18000,
+    "remainingEstimateSeconds": 12300,
+    "timeSpentSeconds": 18000
+  },
+  "customfield_11250": 5.0,
+  "customfield_10006": null
+}

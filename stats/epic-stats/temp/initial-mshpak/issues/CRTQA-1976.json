@@ -1,0 +1,70 @@
+{
+  "id": "1825492",
+  "key": "CRTQA-1976",
+  "summary": "[Corner][Epic Validation][CRT-544] Console command to move positions to new instrument symbols (HORN-747)",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 1,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1825492/worklog/6662208",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mshpak",
+          "name": "mshpak",
+          "key": "mshpak",
+          "emailAddress": "mshpak@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=mshpak&avatarId=320249",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=mshpak&avatarId=320249",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=mshpak&avatarId=320249",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=mshpak&avatarId=320249"
+          },
+          "displayName": "Mariia Shpak",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2025-09-18T07:44:30.824+0000",
+        "updated": "2025-09-18T07:44:37.654+0000",
+        "started": "2025-09-17T10:43:00.000+0000",
+        "timeSpent": "2h 6m",
+        "timeSpentSeconds": 7560,
+        "id": "6662208",
+        "issueId": "1825492"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "3h",
+    "remainingEstimate": "2h 30m",
+    "timeSpent": "2h 6m",
+    "originalEstimateSeconds": 10800,
+    "remainingEstimateSeconds": 9000,
+    "timeSpentSeconds": 7560
+  },
+  "customfield_11250": 3.0,
+  "customfield_10006": null
+}

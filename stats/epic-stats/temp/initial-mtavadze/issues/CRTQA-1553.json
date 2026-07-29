@@ -1,0 +1,209 @@
+{
+  "id": "1772504",
+  "key": "CRTQA-1553",
+  "summary": "[Epic Testing] [CRT-409]  Order Side Display",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 6,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6473517",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-06T13:27:31.558+0000",
+        "updated": "2025-06-06T14:44:18.886+0000",
+        "started": "2025-06-06T13:00:00.000+0000",
+        "timeSpent": "2h",
+        "timeSpentSeconds": 7200,
+        "id": "6473517",
+        "issueId": "1772504"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6478904",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-10T07:44:56.653+0000",
+        "updated": "2025-06-10T07:45:04.128+0000",
+        "started": "2025-06-09T06:00:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "6478904",
+        "issueId": "1772504"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6478914",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-10T07:46:05.017+0000",
+        "updated": "2025-06-10T07:46:11.555+0000",
+        "started": "2025-06-09T12:30:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "6478914",
+        "issueId": "1772504"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6479104",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-10T09:13:18.910+0000",
+        "updated": "2025-06-10T09:13:23.806+0000",
+        "started": "2025-06-10T06:00:00.000+0000",
+        "timeSpent": "2h 30m",
+        "timeSpentSeconds": 9000,
+        "id": "6479104",
+        "issueId": "1772504"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6479106",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-10T09:13:34.939+0000",
+        "updated": "2025-06-10T09:13:39.589+0000",
+        "started": "2025-06-10T08:50:00.000+0000",
+        "timeSpent": "1h 10m",
+        "timeSpentSeconds": 4200,
+        "id": "6479106",
+        "issueId": "1772504"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772504/worklog/6479612",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=mtavadze",
+          "name": "mtavadze",
+          "key": "JIRAUSER50170",
+          "emailAddress": "mtavadze@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50170&avatarId=320728",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50170&avatarId=320728",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50170&avatarId=320728",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50170&avatarId=320728"
+          },
+          "displayName": "Mariam Tavadze",
+          "active": true,
+          "timeZone": "Asia/Tbilisi"
+        },
+        "updateAuthor": {
+          "name": "mtavadze",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-06-10T12:27:26.339+0000",
+        "updated": "2025-06-10T12:27:31.772+0000",
+        "started": "2025-06-10T11:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "6479612",
+        "issueId": "1772504"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "5h",
+    "remainingEstimate": "3h 10m",
+    "timeSpent": "1d 4h 10m",
+    "originalEstimateSeconds": 18000,
+    "remainingEstimateSeconds": 11400,
+    "timeSpentSeconds": 43800
+  },
+  "customfield_11250": 5.0,
+  "customfield_10006": null
+}

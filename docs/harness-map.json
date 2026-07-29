@@ -133,32 +133,6 @@
           "mcp_hint": "Console-only gate for epic-helper cold start and GROUND preflight. Run crtqa_console_probe.py; recovery /crtqa-console start. No Postgres tunnel in v3 chain."
         },
         {
-          "id": "corner_epic_qa_ci",
-          "keywords": [
-            "teamcity",
-            "dxCity",
-            "dxcity",
-            "CornerEpicQa",
-            "Corner Epic QA",
-            "Agent: Coverage",
-            "CRTQA dispatch",
-            "epic-work",
-            "CornerTrader_QATooling",
-            "automation/CI"
-          ],
-          "read": [
-            "automation/CI/README.md",
-            "automation/CI/architecture.md",
-            "automation/CI/pipeline-steps.md",
-            "automation/CI/teamcity-setup.md",
-            "automation/CI/troubleshooting.md",
-            "automation/CI/decisions.md",
-            "automation/CI/rollout-learnings.md",
-            "automation/CI/scripts-reference.md"
-          ],
-          "mcp_hint": "Internal dxCity CI: Jira comment on CRTQA triggers EPIC-PREP through ANALYSE on Stash team branch. Not in public export. Console OpenSSH: automation/docs/crtqa-console-ci.md. No Jira attach v1."
-        },
-        {
           "id": "jq_json",
           "keywords": [
             "jq",
@@ -367,11 +341,9 @@
             "epics/README.md",
             "docs/project.json",
             "docs/qa-project.json",
-            "automation/docs/yogi-url-resolve.md",
-            "docs/variation-catalogue.json",
-            "automation/tools/variation_catalogue.py"
+            "automation/docs/yogi-url-resolve.md"
           ],
-          "mcp_hint": "Epic artifact schema v4: obligations_proposed[] per-requirement subprocesses (3c/3d) with downstream_hints; principal reconcile 3i (threads, focus); topology steps 2c/3f-3h; reconcile 6b; epic_prep_verify ref --strict-topology / --strict-principal on new emits. Optional focus=, strict_topology=yes, strict_principal=yes, repo=. No CRTQA or downstream artefacts as input. Yogi snippets; Bitbucket 5b; XT cap ~8. delete EpicDir temp/. D18: parameter_inventory + variation-catalogue → one obligation per mandated variation; page_id via confluence_search."
+          "mcp_hint": "Epic artifact schema v4: obligations_proposed[] per-requirement subprocesses (3c/3d) with downstream_hints; principal reconcile 3i (threads, focus); topology steps 2c/3f-3h; reconcile 6b; epic_prep_verify ref --strict-topology / --strict-principal on new emits. Optional focus=, strict_topology=yes, strict_principal=yes, repo=. No CRTQA or downstream artefacts as input. Yogi snippets; Bitbucket 5b; XT cap ~8. delete EpicDir temp/."
         },
         {
           "id": "coverage_pipeline",
@@ -400,8 +372,7 @@
             "epics/README.md",
             "docs/project.json",
             "docs/qa-project.json",
-            "automation/docs/yogi-url-resolve.md",
-            "docs/variation-catalogue.json"
+            "automation/docs/yogi-url-resolve.md"
           ],
           "mcp_hint": "Requires dependencies/<KEY>-ref.json schema v4 with field-level obligations (assertion_fragment). Atomic 1:1 obligation→check; collapsed paste via coverage_md_sync.py (no ## Primary focus). Root <KEY>-coverage.md only. coverage_verify obligations+emit; --strict-topology / --strict-principal. delete EpicDir temp/."
         },
@@ -446,7 +417,7 @@
             "automation/tools/crtqa-console/README.md",
             "docs/draft-truth-contract.json"
           ],
-          "mcp_hint": "Requires -coverage.json coverage_pass 1 + -ref.json. Console probes before ANALYSE. Mutates runtime_probes and > detail_lines only. D18: probe setup/chk-s*/needs_setup; data_setup_recipe from successful probes only."
+          "mcp_hint": "Requires -coverage.json coverage_pass 1 + -ref.json. Console probes before ANALYSE. Mutates runtime_probes and > detail_lines only."
         },
         {
           "id": "coverage_reinforce_pipeline",
@@ -693,6 +664,28 @@
           "mcp_hint": "Read docs/harness-principles.md for production-only generation, CRTQA non-reliance, coverage vs E2E, operator gold under .cursor/calibrate/."
         },
         {
+          "id": "epic_stats",
+          "keywords": [
+            "/epic-stats",
+            "epic-stats",
+            "epic stats",
+            "TCD stats",
+            "latest-mshpak",
+            "initial_assessment",
+            "latest-team",
+            "incremental_update stats"
+          ],
+          "read": [
+            "docs/epic-stats-contract.json",
+            "stats/epic-stats/README.md",
+            ".cursor/commands/epic-stats.md",
+            "automation/docs/epic-stats.md",
+            "stats/epic-stats/epic-categories.json",
+            "stats/epic-stats/temp/categories.json"
+          ],
+          "mcp_hint": "incremental_update: team_readiness.py gate + AskQuestion baselines, fetch/process_incremental per user + scope confirm, epic_stats_team_rollup.py → latest-team.md; initial/full_refresh need jira_user."
+        },
+        {
           "id": "epic_calibrate",
           "keywords": [
             "epic-calibrate",
@@ -713,6 +706,27 @@
             "docs/harness-principles.md"
           ],
           "mcp_hint": "gold_gate + gold_distinct (hard stop if gold copies prod) + compare. NO_ACTIONABLE_DELTA = success, no harness suggestions. DELTA_REVIEW only then playbook 6.6 (max 3 lessons, diff_evidence required). calibrate_verify.py --self-test."
+        },
+        {
+          "id": "release_notes",
+          "keywords": [
+            "release notes",
+            "PMOPROC",
+            "dxProject Key",
+            "CRT-650",
+            "corner-adaptive",
+            "rns-fx",
+            "rns-rb",
+            "retail banking",
+            "rns.md",
+            "/release-notes"
+          ],
+          "read": [
+            "releases/README.md",
+            "docs/release-notes-contract.json",
+            ".cursor/commands/release-notes.md"
+          ],
+          "mcp_hint": "/release-notes v4: six JQL per fixVersion (Master, FX Spot, Retail Banking); FX Epic not CRT-650/644; Master Epic in CRT-650/644; PMOPROC-1399 retail-banking lane only; fx/rb base also exclude resolved and won't fix; adaptive queries omit project=."
         },
         {
           "id": "jira_structure",
@@ -757,6 +771,35 @@
             "HOW-TO.md"
           ],
           "mcp_hint": "Harness hygiene only: corner-harness-verify.ps1 profiles, sessionStart inject, not epic pipeline verifiers."
+        },
+        {
+          "id": "clean_release",
+          "keywords": [
+            "CLEAN",
+            "CLEAN:",
+            "clean pipeline",
+            "publish harness",
+            "personal team public",
+            "agentic-epic-helper-team",
+            "agentic-epic-helper-releases",
+            "public-export",
+            "harness align",
+            "harness sync",
+            "public scrub",
+            "scope=align",
+            "clean_verify"
+          ],
+          "read": [
+            ".cursor/pipelines/clean.md",
+            "docs/clean-contract.json",
+            "docs/clean-public-style.md",
+            "docs/clean-public-content/README.md",
+            "automation/docs/clean-verify.md",
+            "automation/docs/clean-remediation.md",
+            "docs/public-export-manifest.example.json",
+            "README.md"
+          ],
+          "mcp_hint": "No MCP. personal only; sequential checkout. Phase U: clean_apply_public seeds docs/clean-public-content/, template overlays epics/templates/public/, verify public (stack scrub, readme depth, no mcp.json.example). postflight, team_tip, prune_team_remote."
         }
       ]
     },

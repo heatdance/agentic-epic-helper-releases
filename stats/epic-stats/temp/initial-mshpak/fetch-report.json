@@ -1,0 +1,10 @@
+{
+  "jira_user": "mshpak",
+  "tests_total": 1064,
+  "epics_all": 64,
+  "epics_qa": 64,
+  "qa_tasks": 123,
+  "issues_fetched": 123,
+  "excluded_epics": [],
+  "epic_meta_fetched": 64
+}

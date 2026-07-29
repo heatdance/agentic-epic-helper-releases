@@ -1,0 +1,47 @@
+{
+  "CRT-525": {
+    "summary": "Fix automatic DAY orders expiration in non-trading day",
+    "labels": [
+      "ct_ph3.4"
+    ],
+    "components": [],
+    "description": "h2. Requirements:\r\n # Turn on automatic DAY orders expiration: [https://confluence.in.devexperts.com/requirements/CT/CRT-1211]\u00a0\r\n # Do not expire DAY orders in non-trading day: [https://confluence.in.devexperts.com/requirements/CT/CRT-1248]\u00a0",
+    "fetched_utc": "2026-06-12T10:23:22Z"
+  },
+  "CRT-572": {
+    "summary": "Port Chart Trading Panel (HORN-1196)",
+    "labels": [
+      "ct_ph4"
+    ],
+    "components": [],
+    "description": "Port Chart Trading panel from product: [DXBROBL-1227] Chart Trading panel",
+    "fetched_utc": "2026-06-12T10:23:22Z"
+  },
+  "CRT-593": {
+    "summary": "FX_SPOT Metrics",
+    "labels": [
+      "ct_ph5"
+    ],
+    "components": [],
+    "description": "*Context*\r\n\r\nThe instrument, account and portfolio metrics should be reviewed to align with a new instrument type FX_SPOT.\r\n\r\n*Requirements*\r\n\r\nThe following metrics should be impacted by FX_SPOT implementation:\r\n||Impacted metrics||Requirement||\r\n|Instrument Exposure [CRT-856|https://confluence.in.devexperts.com/requirements/CT/CRT-856]|similar to CFD instruments, see [CRT-856|https://confluence.in.devexperts.com/requirements/CT/CRT-856]|\r\n|Initial Margin on instrument for positions [CRT-004|https://confluence.in.devexperts.com/requirements/CT/CRT-004]|similar to CFD positions, see [CRT-004|https://confluence.in.devexperts.com/requirements/CT/CRT-004] and [CRT-589|https://confluence.in.devexperts.com/requirements/CT/CRT-589]\u00a0|\r\n|% PL Gross (acc. currency)\r\n[CRT-1053|https://confluence.in.devexperts.com/requirements/CT/CRT-1053]|FX_SPOT should be included in Non-equity Cash Flow instruments|\r\n|*_Mark price_ _metrics_ [_CRT-1721:_|https://confluence.in.devexperts.com/requirements/CT/CRT-1721]*|\u00a0|\r\n|Mark price\u00a0|similar to CFD instruments [CRT-1622|https://confluence.in.devexperts.com/requirements/CT/CRT-1622]|\r\n|Mark price (midpoint)\u00a0\r\nOrder price\u00a0\r\nOrder cost|similar to CFD instruments [CRT-1622|https://confluence.in.devexperts.com/requirements/CT/CRT-1622]\r\nmark price should be taken from order: [CRT-1730|https://confluence.in.devexperts.com/requirements/CT/CRT-1730]\u00a0|\r\n|Order leg price|n/a|\r\n|\u0421ommission cost (pre-trade)|similar to CFD instruments|\r\n|Chart price\u00a0|will be defined in CRTBL-1469|\r\n|*_Instrument position on account [CRT-1720|https://confluence.in.devexperts.com/requirements/CT/CRT-1720]:_*|\u00a0|\r\n|Open PL (acc currency)|FX_SPOT should be included in Non-equity Cash Flow instruments|\r\n|*_Underlying on portfolio level [CRT-574|https://confluence.in.devexperts.com/requirements/CT/CRT-574]:_*|\u00a0|\r\n|Initial Margin|similar to CFD instruments [CRT-570|https://confluence.in.devexperts.com/requirements/CT/CRT-570]|\r\n|Maintenance Margin|similar to CFD instruments [CR",
+    "fetched_utc": "2026-06-12T10:23:23Z"
+  },
+  "CRT-601": {
+    "summary": "AF Effect Display in OE for FX_SPOT",
+    "labels": [
+      "ct_ph5"
+    ],
+    "components": [],
+    "description": "*Context:*\u00a0\r\n\r\nCurrently for available instrument types 'Est. AF Effect' is displayed on the order confirmation page. For FX_SPOT instrument type 'Est. AF Effect' should be displayed on the main OE form as no confirmation page is available.\u00a0\r\n\r\n*Acceptance Criteria*\r\n\r\n1. Given the User initiates an order entry for a selected FX_Spot instrument\r\n\r\nWhen the User opens the OE form\r\n\r\nThen the User sees the field 'Est. AF Effect' among the form fields.\r\n\r\n2. Given the User is on the OE form for a selected FX_SPOT instrument\u00a0\r\n\r\nWhen ask/bid prices of the instrument are updated\r\n\r\nThen 'Est. AF Effect' field value is updated as well.\r\n\r\n3. Given the User is on the OE form for a selected FX_SPOT instrument\u00a0\r\n\r\nWhen the User makes changes in the field Side or Quantity\u00a0\r\n\r\nThen 'Est. AF Effect' parameter value is updated as well.\r\n\r\n*Requirements*\r\n # Est. AF Effect value should be received from BE. Please note that for OCO group order the value should be received and displayed for each order in the group, for other group orders - for the main order only.\r\n # The value should be updated in real time (with a delay defined by FE) upon any change of:\r\nSide or Quantity or Order price (price updated due to bid/ask ticks).\r\n # On UI it should be shown as: 'Est. AF Effect'.\r\n\r\nSee:\r\n * for advanced order entry [DXINV-028|https://confluence.in.devexperts.com/requirements/CT/DXINV-028] see [DXINV-CB-293;|https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-293]\r\n * for group order [DXINV-178|https://confluence.in.devexperts.com/requirements/CT/DXINV-178] see [DXINV-CB-294|https://confluence.in.devexperts.com/requirements/CT/DXINV-CB-294].\r\n\r\n\u00a0",
+    "fetched_utc": "2026-06-12T10:23:23Z"
+  },
+  "CRT-609": {
+    "summary": "FX_SPOT chart ",
+    "labels": [
+      "ct_ph5"
+    ],
+    "components": [],
+    "description": "h2. Requirements:\u00a0\r\n\r\nCharts for FX_SPOT should be build only based on midpoint, other price types shouldn't be available: [https://confluence.in.devexperts.com/requirements/CT/CRT-1737]\u00a0\r\n\r\nAdaptive: not a part of this epic, see CRT-632\u00a0\r\nh2. Scenarios:\r\n * Open chart for FX_SPOT instrument -> chart should be build based on midpoint price. In web and client area in webbroker.\r\n * Try to change price type in settings in web: change shouldn't be available.",
+    "fetched_utc": "2026-06-12T10:23:23Z"
+  }
+}

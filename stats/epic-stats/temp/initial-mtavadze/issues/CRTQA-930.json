@@ -1,0 +1,21 @@
+{
+  "id": "1750911",
+  "key": "CRTQA-930",
+  "summary": "[Test cases automation] [CRT-389] Update option exposure calculation",
+  "status": {
+    "name": "Aborted",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "QA Task"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {},
+  "customfield_11250": null,
+  "customfield_10006": null
+}

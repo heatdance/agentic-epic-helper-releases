@@ -1,0 +1,617 @@
+{
+  "schema_version": 4,
+  "epic": {
+    "key": "CRT-671",
+    "url": "https://jira.in.devexperts.com/browse/CRT-671",
+    "summary": "Change order status from ACCEPTED to SENDING",
+    "status": "Pending resolution",
+    "labels": [
+      "ct_ph5"
+    ],
+    "issue_type": "Epic"
+  },
+  "business_context": "At dxCore ACCEPTED the order is accepted by the brokerage backend but external execution confirmation is not yet received; Corner maps this to UI label 'Sending' (replacing 'Working') across web, WebBroker, and Adaptive, including Adaptive Working orders list placement.",
+  "synthesis": {
+    "problem_gist": "Clarify pre-execution order state on client UIs: when dxCore status is ACCEPTED, display 'Sending' on dxTrade5 web, WebBroker, and Adaptive; Adaptive must list these orders under Working orders on Portfolio and Account pages.",
+    "problem_gist_source": "from_jira_field",
+    "impact_areas": [
+      {
+        "text": "dxTrade5 web Orders widget status column",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "WebBroker order book / order status display",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "Adaptive Portfolio and Account Working orders lists",
+        "source": "from_jira_field"
+      }
+    ],
+    "keywords": [
+      {
+        "text": "ACCEPTED",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "Sending",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "Working orders",
+        "source": "from_jira_field"
+      },
+      {
+        "text": "order status",
+        "source": "from_jira_field"
+      }
+    ]
+  },
+  "epic_archetype": {
+    "value": "widget_ui",
+    "source": "jira_scenarios",
+    "evidence": "Epic Scenarios verify UI order status naming on web, WebBroker, and Adaptive plus Working orders list placement."
+  },
+  "verification_focus_proposed": {
+    "statement": "Verify that when dxCore order status is ACCEPTED, client shells show UI label 'Sending' (not 'Working') on dxTrade5 web, WebBroker, and Adaptive, and that Adaptive lists Sending orders in Working orders on Portfolio and Account pages.",
+    "source": "jira_description",
+    "keywords": [
+      "ACCEPTED",
+      "Sending",
+      "Working orders",
+      "order status"
+    ]
+  },
+  "verification_topology": {
+    "jira_scenario_surfaces": [
+      {
+        "id": "jss-001",
+        "surface": "dxtrade5_orders",
+        "shell": "dxtrade5",
+        "widget": "Orders",
+        "metric": null,
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "jss-002",
+        "surface": "webbroker_order_book",
+        "shell": "webbroker_dealer",
+        "widget": "Order Book",
+        "metric": null,
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "jss-003",
+        "surface": "adaptive_orders_status",
+        "shell": "adaptive",
+        "widget": "Orders status display",
+        "metric": null,
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "jss-004",
+        "surface": "adaptive_portfolio_working_orders",
+        "shell": "adaptive",
+        "widget": "Working orders (Portfolio tab)",
+        "metric": null,
+        "source_quote": "orders with the status 'Sending' ... displayed in the list 'Working orders' on the 'Portfolio' tab",
+        "obligation_ids": [
+          "obl-002"
+        ]
+      },
+      {
+        "id": "jss-005",
+        "surface": "adaptive_account_working_orders",
+        "shell": "adaptive",
+        "widget": "Working orders (Account page)",
+        "metric": null,
+        "source_quote": "orders with the status 'Sending' ... displayed in the list 'Working orders' on ... 'Account' page",
+        "obligation_ids": [
+          "obl-002"
+        ]
+      }
+    ],
+    "shell_roles": {
+      "console": {
+        "status": "in_scope",
+        "evidence": "Scenarios require dxCore ACCEPTED state before UI check."
+      },
+      "dxtrade5": {
+        "status": "in_scope",
+        "evidence": "Jira Requirements list web; scenario checks web UI naming."
+      },
+      "adaptive": {
+        "status": "in_scope",
+        "evidence": "Jira Requirements and scenarios name Adaptive status and Working orders lists."
+      },
+      "webbroker_dealer": {
+        "status": "in_scope",
+        "evidence": "Jira Requirements list webbroker; scenario checks WebBroker UI naming."
+      },
+      "webbroker_client": {
+        "status": "not_applicable",
+        "evidence": "Epic scopes dealer WebBroker order display; no Client Area scenario."
+      }
+    },
+    "pricing_oracle_rules": [],
+    "delivery_notes": [
+      {
+        "id": "dn-001",
+        "target": "dxtrade5_orders_widget",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "XT-8496 Corner Orders widget - Orders status is displayed as Working instead of Sending",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": [
+          "jss-001"
+        ]
+      },
+      {
+        "id": "dn-002",
+        "target": "webbroker_order_book",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "XT-8494 Corner Order book widget - Orders in Sending status are not displayed",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": [
+          "jss-002"
+        ]
+      },
+      {
+        "id": "dn-003",
+        "target": "dxtrade5_order_history",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "XT-8615 Corner Order History - Status Filter Displays Incorrect Status List",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": []
+      },
+      {
+        "id": "dn-004",
+        "target": "dxtrade5_orders_actions",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "XT-8616 Corner Orders - Modify and Cancel Actions Are Not Available for Sending Orders",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": [
+          "jss-001"
+        ]
+      },
+      {
+        "id": "dn-005",
+        "target": "adaptive_order_history",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "CAN-14623 CT Adaptive - Incorrect Status Display in Order History for \"Sending\" Orders",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": [
+          "jss-003"
+        ]
+      },
+      {
+        "id": "dn-006",
+        "target": "webbroker_order_book_columns",
+        "status": "known_fail",
+        "source": "jira_comment",
+        "evidence": "XT-8216 WBBE[Order Book] Duplicated Order Status columns (OrderStatus and CtOrderStatus) for corner",
+        "linked_obligation_ids": [
+          "obl-001"
+        ],
+        "linked_surface_ids": [
+          "jss-002"
+        ]
+      }
+    ],
+    "principal_coverage_threads": [
+      {
+        "thread_id": "pct-001",
+        "title": "Order placement and ACCEPTED state reachability",
+        "coverage_thread": "environment_setup",
+        "obligation_ids": [
+          "obl-003"
+        ],
+        "required_when": "widget_ui_setup_thread"
+      },
+      {
+        "thread_id": "pct-002",
+        "title": "Cross-shell Sending label when dxCore is ACCEPTED",
+        "coverage_thread": "mapping_routing",
+        "obligation_ids": [
+          "obl-001"
+        ],
+        "required_when": null
+      },
+      {
+        "thread_id": "pct-003",
+        "title": "Adaptive Working orders list membership for Sending",
+        "coverage_thread": "surface_quotes",
+        "obligation_ids": [
+          "obl-002"
+        ],
+        "required_when": null
+      }
+    ],
+    "platform_reuse_candidates": [
+      {
+        "id": "prc-001",
+        "topic": "Order status label mapping regression",
+        "suggested_crtqa_pattern": "Platform regression TC family for dxCore-to-UI order status mapping",
+        "confidence": "medium",
+        "evidence": "XT upstream manuals reference Sending/Working mapping for ACCEPTED; Corner delta per CRT-1902.",
+        "binding": "suggestion_only"
+      }
+    ],
+    "scenario_capability_rows": [
+      {
+        "id": "scr-001",
+        "jira_surface_id": "jss-001",
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "surface": "dxtrade5_orders",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1902",
+          "CRT-1726"
+        ],
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "scr-002",
+        "jira_surface_id": "jss-002",
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "surface": "webbroker_order_book",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1902"
+        ],
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "scr-003",
+        "jira_surface_id": "jss-003",
+        "source_quote": "check its naming on UI: in web/webbroker/adaptive. It should be displayed as 'Sending'.",
+        "surface": "adaptive_orders_status",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-1902"
+        ],
+        "obligation_ids": [
+          "obl-001"
+        ]
+      },
+      {
+        "id": "scr-004",
+        "jira_surface_id": "jss-004",
+        "source_quote": "orders with the status 'Sending' ... displayed in the list 'Working orders' on the 'Portfolio' tab",
+        "surface": "adaptive_portfolio_working_orders",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-671"
+        ],
+        "obligation_ids": [
+          "obl-002"
+        ]
+      },
+      {
+        "id": "scr-005",
+        "jira_surface_id": "jss-005",
+        "source_quote": "orders with the status 'Sending' ... displayed in the list 'Working orders' on ... 'Account' page",
+        "surface": "adaptive_account_working_orders",
+        "capability_kind": "jira_scenario",
+        "promotion": "primary_candidate",
+        "linked_requirement_keys": [
+          "CRT-671"
+        ],
+        "obligation_ids": [
+          "obl-002"
+        ]
+      },
+      {
+        "id": "scr-006",
+        "platform_reuse_id": "prc-001",
+        "source_quote": "XT upstream order status manuals reference Sending label for pre-confirmation ACCEPTED.",
+        "surface": "cross_shell_order_status",
+        "capability_kind": "platform_invariant",
+        "promotion": "platform_invariant",
+        "linked_requirement_keys": [
+          "CRT-1726"
+        ],
+        "obligation_ids": [
+          "obl-001"
+        ]
+      }
+    ]
+  },
+  "client_shell_impact": {
+    "corner_trader": {
+      "status": "affected",
+      "note": "Corner Trader: affected (jira_field) — web and WebBroker order status display.",
+      "evidence": "Jira Requirements: web, webbroker; scenario checks web/webbroker UI naming as Sending."
+    },
+    "adaptive": {
+      "status": "affected",
+      "note": "Adaptive: affected (jira_field) — status label and Working orders list placement.",
+      "evidence": "Jira Requirements list adaptive; scenario names Portfolio and Account Working orders lists."
+    },
+    "source": "jira_field"
+  },
+  "design": {
+    "figma": [],
+    "other_design": [],
+    "notes": "no_figma_urls_in_jira_description",
+    "ui_artifacts_in_jira": "none"
+  },
+  "requirements": [
+    {
+      "key": "CRT-1902",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1902",
+      "anchor": "req-CRT-1902",
+      "page_id": "518004439",
+      "snippet_text": "Order has passed \"validation to execution\" (after WAITING_STOP/LIMIT/TRIGGER) and accepted to execution by the brokerage backend, however, an acceptance confirmation from the external party (for a hosted order - confirmation for a child order) has not been received yet. Order Status in dxCore: ACCEPTED; Status to be shown in GUI: Sending.",
+      "extract_mode": "definition_table_row",
+      "jira_context": "Linked from CRT-671 description; ACCEPTED → Sending GUI mapping.",
+      "snippet_status": "ok"
+    },
+    {
+      "key": "CRT-1726",
+      "short_url": "https://confluence.in.devexperts.com/requirements/CT/CRT-1726",
+      "anchor": "req-CRT-1726",
+      "page_id": "518004439",
+      "snippet_text": "The following list consists of all the statuses that an order can have: Order Status in dxCore / Status to be shown in GUI — ACCEPTED maps to Sending.",
+      "extract_mode": "after_th_td",
+      "jira_context": "Updated order statuses table referenced by CRT-671.",
+      "snippet_status": "ok"
+    }
+  ],
+  "traversal": {
+    "nested_refs": [],
+    "cross_epic": [],
+    "xt_refs": [
+      {
+        "page_id": "416527036",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=416527036",
+        "title": "XT BRO Internal/External orders details",
+        "why_relevant": "Explains internal ACCEPTED triggers external order creation — context for Sending window.",
+        "source_query_or_link": "XT search order status ACCEPTED",
+        "status": "keep",
+        "reason": "Platform context for ACCEPTED/external order lifecycle."
+      },
+      {
+        "page_id": "497105148",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=497105148",
+        "title": "Web Broker Product Manual 2026.4",
+        "why_relevant": "Documents Sending as an order status label in Web Broker UI.",
+        "source_query_or_link": "XT search order status Sending",
+        "status": "keep",
+        "reason": "Upstream WebBroker status vocabulary reference."
+      },
+      {
+        "page_id": "518004439",
+        "url": "https://confluence.in.devexperts.com/pages/viewpage.action?pageId=518004439",
+        "title": "Order Statuses and Transitions",
+        "why_relevant": "CT parent page for CRT-1726/CRT-1902 status mapping table.",
+        "source_query_or_link": "CT search order statuses",
+        "status": "keep",
+        "reason": "Authoritative CT requirement page for linked keys."
+      }
+    ]
+  },
+  "obligations_proposed": [
+    {
+      "id": "obl-001",
+      "kind": "parity",
+      "statement": "When dxCore order status is ACCEPTED, dxTrade5 web, WebBroker, and Adaptive UIs display the label 'Sending' (not 'Working').",
+      "requirement_keys": [
+        "CRT-1902",
+        "CRT-1726"
+      ],
+      "evidence_anchor": "CRT-1902 ACCEPTED → Sending; CRT-671 Requirements web/webbroker/adaptive.",
+      "config_vs_position": "not_applicable",
+      "disposition": "primary_candidate",
+      "downstream_hints": {
+        "coverage_thread": "mapping_routing",
+        "needs_environment_provision": false,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [
+          "dn-001",
+          "dn-002",
+          "dn-003",
+          "dn-004",
+          "dn-005",
+          "dn-006"
+        ],
+        "personas": [
+          "retail",
+          "dealer"
+        ]
+      }
+    },
+    {
+      "id": "obl-002",
+      "kind": "parity",
+      "statement": "On Adaptive, orders shown with UI status 'Sending' appear in the 'Working orders' list on the Portfolio tab and Account page.",
+      "requirement_keys": [
+        "CRT-671"
+      ],
+      "evidence_anchor": "CRT-671 Jira description Adaptive Working orders requirement.",
+      "config_vs_position": "not_applicable",
+      "disposition": "primary_candidate",
+      "downstream_hints": {
+        "coverage_thread": "surface_quotes",
+        "needs_environment_provision": false,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "retail"
+        ]
+      }
+    },
+    {
+      "id": "obl-003",
+      "kind": "environment_setup",
+      "statement": "Test environment can place an order and reach dxCore ACCEPTED (external confirmation pending) long enough to observe Sending UI state.",
+      "requirement_keys": [
+        "CRT-1902"
+      ],
+      "evidence_anchor": "CRT-671 scenario step 1 Issue an order; step 2 When order status in dxCore is ACCEPTED.",
+      "config_vs_position": "not_applicable",
+      "disposition": "primary_candidate",
+      "downstream_hints": {
+        "coverage_thread": "environment_setup",
+        "needs_environment_provision": true,
+        "needs_dual_account_contrast": false,
+        "linked_delivery_note_ids": [],
+        "personas": [
+          "console",
+          "retail"
+        ]
+      }
+    }
+  ],
+  "obligations_reconcile": {
+    "epic_summary_aligned": true,
+    "conflicts": [],
+    "focus_merge_note": null
+  },
+  "implementation": {
+    "hits": [
+      {
+        "id": "prep-impl-001",
+        "search_query": "BRO/xt repo root browse (search 404)",
+        "path": "dxtf/",
+        "fragment": "dxtf module present in BRO/xt monorepo",
+        "note": "dxTrade5 frontend tree likely hosts Orders widget status mapping; browse fallback after code search 404.",
+        "related_obligation_ids": [
+          "obl-001"
+        ],
+        "source_phase": "epic_prep"
+      },
+      {
+        "id": "prep-impl-002",
+        "search_query": "BRO/xt repo root browse (search 404)",
+        "path": "webbroker/",
+        "fragment": "webbroker module present in BRO/xt monorepo",
+        "note": "WebBroker order book status columns; browse fallback after code search 404.",
+        "related_obligation_ids": [
+          "obl-001"
+        ],
+        "source_phase": "epic_prep"
+      }
+    ],
+    "skipped_reason": null
+  },
+  "validation_log": [
+    {
+      "step": "1",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "jira_fetch CRT-671 Epic"
+    },
+    {
+      "step": "3",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "requirements CRT-1902 CRT-1726 from page 518004439"
+    },
+    {
+      "step": "3b_snippet_retry",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "CRT-1902 yogi macro empty; MCP storage manual table-row extract applied"
+    },
+    {
+      "step": "3c",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "obligation slices merged obl-001..003"
+    },
+    {
+      "step": "2b",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "client_shell_impact corner_trader+adaptive affected"
+    },
+    {
+      "step": "2c",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "epic_archetype=widget_ui source=jira_scenarios"
+    },
+    {
+      "step": "3f",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "jira_scenario_surfaces=5 shell_roles populated"
+    },
+    {
+      "step": "3f_half",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "scenario_capability_rows=6 (5 jira + 1 platform_invariant)"
+    },
+    {
+      "step": "3g_skipped_no_quote_keywords",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "pricing_oracle_rules=[]"
+    },
+    {
+      "step": "3h",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "delivery_notes=6 from epic validation comment"
+    },
+    {
+      "step": "3i",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "principal_coverage_threads=3 verification_focus_proposed set"
+    },
+    {
+      "step": "3.4",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "precision pass synthesis vs jira+snippets"
+    },
+    {
+      "step": "5b_bitbucket_prep",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "search_404_used_browse_fallback; 2 browse hits dxtf webbroker"
+    },
+    {
+      "step": "6",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "xt_refs=3 capped"
+    },
+    {
+      "step": "7",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "xt relevance pass all keep"
+    },
+    {
+      "step": "6b",
+      "at": "2026-06-30T07:22:16Z",
+      "action": "obligations_reconcile epic_summary_aligned=true"
+    }
+  ],
+  "sources": {
+    "jira_fetched_at": "2026-06-30T07:22:16Z",
+    "confluence_method": "mcp",
+    "bitbucket_repo": "BRO/xt",
+    "bitbucket_searched_at": "2026-06-30T07:22:16Z"
+  }
+}

@@ -1,0 +1,778 @@
+{
+  "epic_key": "CRT-663",
+  "schema_version": 3,
+  "verification_affordances": [
+    {
+      "id": "aff-001",
+      "competency": "backend",
+      "summary": "dxCore console guide and FX Spot console order family",
+      "linked_check_ids": [
+        "chk-002",
+        "chk-014",
+        "chk-015"
+      ],
+      "evidence_grade": "observed_tool_transcript",
+      "setup_role": "fixture",
+      "setup_depth": "probe_executed",
+      "artifacts": [
+        {
+          "kind": "dxcore_command_family",
+          "sanitized_detail": "console_guide exit 0"
+        }
+      ],
+      "status": "satisfied",
+      "blocked_reason": null,
+      "exploration_log": {
+        "login_state": "n/a",
+        "widgets_seen": [],
+        "depth_level": "discover_probe"
+      }
+    },
+    {
+      "id": "aff-002",
+      "competency": "frontend",
+      "summary": "dxTrade5 FX Spot Orders, Transactions, Positions widgets",
+      "linked_check_ids": [
+        "chk-003",
+        "chk-004",
+        "chk-005",
+        "chk-006",
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013",
+        "chk-014",
+        "chk-015"
+      ],
+      "evidence_grade": "observed_runtime",
+      "setup_role": "observation",
+      "setup_depth": "probe_executed",
+      "artifacts": [
+        {
+          "kind": "widget_label_list",
+          "sanitized_detail": "Positions, Orders, Account Transactions, Order History, EURUSD.spot"
+        }
+      ],
+      "status": "satisfied",
+      "blocked_reason": null,
+      "exploration_log": {
+        "login_state": "authenticated",
+        "widgets_seen": [
+          "Positions",
+          "Orders",
+          "Account Transactions",
+          "Order History",
+          "EURUSD.spot"
+        ],
+        "depth_level": "discover_probe"
+      }
+    },
+    {
+      "id": "aff-003",
+      "competency": "frontend",
+      "summary": "WebBroker Client Area FX Spot books",
+      "linked_check_ids": [
+        "chk-007",
+        "chk-008",
+        "chk-009",
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013"
+      ],
+      "evidence_grade": "observed_runtime",
+      "setup_role": "observation",
+      "setup_depth": "probe_executed",
+      "artifacts": [
+        {
+          "kind": "widget_label_list",
+          "sanitized_detail": "Client Area, Positions, Orders, Account Transactions"
+        }
+      ],
+      "status": "satisfied",
+      "blocked_reason": null,
+      "exploration_log": {
+        "login_state": "authenticated",
+        "widgets_seen": [
+          "Client Area",
+          "Positions",
+          "Orders",
+          "Account Transactions"
+        ],
+        "depth_level": "discover_probe"
+      }
+    },
+    {
+      "id": "aff-004",
+      "competency": "frontend",
+      "summary": "Adaptive portfolio, orders, positions, trade history for FX Spot",
+      "linked_check_ids": [
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013",
+        "chk-001"
+      ],
+      "evidence_grade": "observed_runtime",
+      "setup_role": "observation",
+      "setup_depth": "probe_executed",
+      "artifacts": [
+        {
+          "kind": "widget_label_list",
+          "sanitized_detail": "Portfolio, Positions, Working Orders, Trade History, EURUSD.spot"
+        }
+      ],
+      "status": "satisfied",
+      "blocked_reason": null,
+      "exploration_log": {
+        "login_state": "authenticated",
+        "widgets_seen": [
+          "Portfolio",
+          "Positions",
+          "Working Orders",
+          "Trade History",
+          "EURUSD.spot"
+        ],
+        "depth_level": "discover_probe"
+      }
+    },
+    {
+      "id": "aff-005",
+      "competency": "ops",
+      "summary": "Manual trade and liquidation paths — doc-only / scope gap",
+      "linked_check_ids": [
+        "chk-016",
+        "chk-017"
+      ],
+      "evidence_grade": "doc_only",
+      "setup_role": "none",
+      "setup_depth": "classified_only",
+      "artifacts": [
+        {
+          "kind": "confluence_anchor",
+          "sanitized_detail": "Order Statuses t17/t23; Margin Liquidations FX_SPOT closing orders"
+        }
+      ],
+      "status": "partial",
+      "blocked_reason": "not_exercised_in_ctqa_discover",
+      "exploration_log": {
+        "login_state": "n/a",
+        "widgets_seen": [],
+        "depth_level": "discover_probe"
+      }
+    }
+  ],
+  "obligation_ledger": [
+    {
+      "check_id": "chk-001",
+      "matrix_ids": [
+        "m-001",
+        "m-002",
+        "m-003"
+      ],
+      "surfaces": [
+        "dxtrade5",
+        "webbroker",
+        "adaptive",
+        "console"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui",
+        "doc_only"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-002",
+      "matrix_ids": [
+        "m-002",
+        "m-008"
+      ],
+      "surfaces": [
+        "console"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "console"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-003",
+      "matrix_ids": [
+        "m-014",
+        "m-002"
+      ],
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-004",
+      "matrix_ids": [
+        "m-014",
+        "m-006"
+      ],
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-005",
+      "matrix_ids": [
+        "m-016",
+        "m-009"
+      ],
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-006",
+      "matrix_ids": [
+        "m-015",
+        "m-007"
+      ],
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-007",
+      "matrix_ids": [
+        "m-011",
+        "m-002"
+      ],
+      "surfaces": [
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-008",
+      "matrix_ids": [
+        "m-013",
+        "m-009"
+      ],
+      "surfaces": [
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-009",
+      "matrix_ids": [
+        "m-012",
+        "m-007"
+      ],
+      "surfaces": [
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-010",
+      "matrix_ids": [
+        "m-006",
+        "m-001"
+      ],
+      "surfaces": [
+        "adaptive",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-011",
+      "matrix_ids": [
+        "m-006",
+        "m-001"
+      ],
+      "surfaces": [
+        "adaptive",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-012",
+      "matrix_ids": [
+        "m-009",
+        "m-001"
+      ],
+      "surfaces": [
+        "adaptive",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-013",
+      "matrix_ids": [
+        "m-007",
+        "m-001"
+      ],
+      "surfaces": [
+        "adaptive",
+        "dxtrade5",
+        "webbroker"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-014",
+      "matrix_ids": [
+        "m-003",
+        "m-002"
+      ],
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker",
+        "adaptive"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "console",
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-015",
+      "matrix_ids": [
+        "m-003",
+        "m-002"
+      ],
+      "surfaces": [
+        "console",
+        "dxtrade5",
+        "webbroker",
+        "adaptive"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "console",
+        "ui"
+      ],
+      "disposition": "fixture_need_mapped",
+      "disposition_note": null,
+      "affordance_ids": [
+        "aff-001",
+        "aff-002",
+        "aff-003",
+        "aff-004"
+      ],
+      "fixture_need_ids": [
+        "fix-001",
+        "fix-002",
+        "fix-003"
+      ],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-016",
+      "matrix_ids": [
+        "m-004"
+      ],
+      "surfaces": [
+        "webbroker",
+        "dxtrade5",
+        "adaptive",
+        "console"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui",
+        "doc_only"
+      ],
+      "disposition": "scope_gap",
+      "disposition_note": "WebBroker manual trade path not exercised in discover; ET FX Spot is FIX auto fill/reject only (CT page 529180233).",
+      "affordance_ids": [
+        "aff-005"
+      ],
+      "fixture_need_ids": [],
+      "prerequisite_keys": []
+    },
+    {
+      "check_id": "chk-017",
+      "matrix_ids": [
+        "m-005"
+      ],
+      "surfaces": [
+        "webbroker",
+        "dxtrade5",
+        "adaptive"
+      ],
+      "requirement_keys": [
+        "CRT-663"
+      ],
+      "calculation_contract": null,
+      "evidence_need": [
+        "ui",
+        "doc_only"
+      ],
+      "disposition": "scope_gap",
+      "disposition_note": "Margin liquidation auto-order chain documented (CT page 345714164) but not triggered in CTQA discover probe.",
+      "affordance_ids": [
+        "aff-005"
+      ],
+      "fixture_need_ids": [],
+      "prerequisite_keys": []
+    }
+  ],
+  "fixture_needs": [
+    {
+      "id": "fix-001",
+      "kind": "console_ladder_session",
+      "surfaces": [
+        "console"
+      ],
+      "linked_check_ids": [
+        "chk-002",
+        "chk-014",
+        "chk-015"
+      ],
+      "derivation": "Console-issued FX Spot orders per Epic MVP path",
+      "setup_depth": "probe_executed",
+      "affordance_ids": [
+        "aff-001"
+      ],
+      "notes": "Invoke-CrtqaDxConsole.ps1 -Probe OK; console_guide exit 0"
+    },
+    {
+      "id": "fix-002",
+      "kind": "dxtrade5_retail_positions",
+      "surfaces": [
+        "dxtrade5"
+      ],
+      "linked_check_ids": [
+        "chk-003",
+        "chk-004",
+        "chk-005",
+        "chk-006",
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013",
+        "chk-014",
+        "chk-015"
+      ],
+      "derivation": "dxTrade5 Orders/Transactions/Positions widgets for EURUSD.spot",
+      "setup_depth": "probe_executed",
+      "affordance_ids": [
+        "aff-002"
+      ],
+      "notes": "Parity account antonfx; instrument EURUSD.spot visible in Orders, Account Transactions, Positions"
+    },
+    {
+      "id": "fix-003",
+      "kind": "webbroker_dealer_client_metrics",
+      "surfaces": [
+        "webbroker"
+      ],
+      "linked_check_ids": [
+        "chk-007",
+        "chk-008",
+        "chk-009",
+        "chk-010",
+        "chk-011",
+        "chk-012",
+        "chk-013",
+        "chk-014",
+        "chk-015"
+      ],
+      "derivation": "WebBroker Client Area books for FX Spot parity",
+      "setup_depth": "probe_executed",
+      "affordance_ids": [
+        "aff-003"
+      ],
+      "notes": "Dealer login OK; Client Area navigation exposes Positions, Orders, Account Transactions labels"
+    }
+  ],
+  "client_shell_impact": null,
+  "discovery_status": "complete",
+  "source": "CRT-663-discover.json"
+}

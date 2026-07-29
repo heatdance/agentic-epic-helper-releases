@@ -1,0 +1,562 @@
+{
+  "id": "1590541",
+  "key": "CRTQA-1342",
+  "summary": "[Epic Testing] [CRT-242] New EOD reports and new fields in the current EoD files",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 13,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5879752",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-15T15:26:10.814+0000",
+        "updated": "2024-08-15T15:26:30.745+0000",
+        "started": "2024-08-15T14:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "5879752",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5880286",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-16T07:12:17.944+0000",
+        "updated": "2024-08-16T07:12:32.441+0000",
+        "started": "2024-08-16T07:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "5880286",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5883244",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-19T07:27:19.788+0000",
+        "updated": "2024-08-19T07:27:25.357+0000",
+        "started": "2024-08-16T09:00:00.000+0000",
+        "timeSpent": "6h",
+        "timeSpentSeconds": 21600,
+        "id": "5883244",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5884944",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-19T13:05:23.596+0000",
+        "updated": "2024-08-19T13:05:28.775+0000",
+        "started": "2024-08-19T07:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5884944",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5884949",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-19T13:05:42.908+0000",
+        "updated": "2024-08-19T13:05:53.608+0000",
+        "started": "2024-08-19T09:00:00.000+0000",
+        "timeSpent": "6h 30m",
+        "timeSpentSeconds": 23400,
+        "id": "5884949",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5886094",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-20T07:11:56.245+0000",
+        "updated": "2024-08-20T07:12:06.246+0000",
+        "started": "2024-08-20T07:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5886094",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5886098",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-20T07:12:31.653+0000",
+        "updated": "2024-08-20T14:36:14.977+0000",
+        "started": "2024-08-20T09:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5886098",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5887428",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-20T14:36:24.814+0000",
+        "updated": "2024-08-20T14:36:33.731+0000",
+        "started": "2024-08-20T12:15:00.000+0000",
+        "timeSpent": "2h 45m",
+        "timeSpentSeconds": 9900,
+        "id": "5887428",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5888232",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-21T08:05:29.973+0000",
+        "updated": "2024-08-21T08:05:34.659+0000",
+        "started": "2024-08-21T07:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5888232",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5889068",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-21T12:59:22.155+0000",
+        "updated": "2024-08-21T13:38:07.332+0000",
+        "started": "2024-08-21T09:00:00.000+0000",
+        "timeSpent": "6h 30m",
+        "timeSpentSeconds": 23400,
+        "id": "5889068",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5890298",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-22T08:33:13.631+0000",
+        "updated": "2024-08-22T08:33:20.569+0000",
+        "started": "2024-08-22T07:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "5890298",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5890551",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-22T09:56:17.887+0000",
+        "updated": "2024-08-22T09:56:31.125+0000",
+        "started": "2024-08-22T09:00:00.000+0000",
+        "timeSpent": "1h 30m",
+        "timeSpentSeconds": 5400,
+        "id": "5890551",
+        "issueId": "1590541"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1590541/worklog/5892342",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=amukanova",
+          "name": "amukanova",
+          "key": "amukanova",
+          "emailAddress": "amukanova@devexperts.com",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=amukanova&avatarId=320308",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=amukanova&avatarId=320308",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=amukanova&avatarId=320308",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=amukanova&avatarId=320308"
+          },
+          "displayName": "Anastasia Mukanova",
+          "active": true,
+          "timeZone": "Etc/GMT"
+        },
+        "comment": "",
+        "created": "2024-08-23T08:09:54.175+0000",
+        "updated": "2024-08-23T08:09:59.952+0000",
+        "started": "2024-08-23T07:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5892342",
+        "issueId": "1590541"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "4d",
+    "remainingEstimate": "3d 7h 25m",
+    "timeSpent": "4d 45m",
+    "originalEstimateSeconds": 115200,
+    "remainingEstimateSeconds": 113100,
+    "timeSpentSeconds": 117900
+  },
+  "customfield_11250": 32.0,
+  "customfield_10006": null
+}

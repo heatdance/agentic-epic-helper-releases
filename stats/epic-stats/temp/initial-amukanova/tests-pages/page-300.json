@@ -1,0 +1,4306 @@
+{
+  "expand": "schema,names",
+  "startAt": 300,
+  "maxResults": 50,
+  "total": 390,
+  "issues": [
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972876",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972876",
+      "key": "CRTQA-10337",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Verify default view for instruments without data",
+        "issuelinks": [
+          {
+            "id": "3379570",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379570",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972877",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972877",
+      "key": "CRTQA-10338",
+      "fields": {
+        "summary": "CT Adaptive - Instrument page - Verify default view",
+        "issuelinks": [
+          {
+            "id": "3379571",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379571",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972878",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972878",
+      "key": "CRTQA-10339",
+      "fields": {
+        "summary": "CT Adaptive - Instruments - Display of Stats Metrics for Stocks and ETF instruments",
+        "issuelinks": [
+          {
+            "id": "3379645",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379645",
+            "outwardIssue": {
+              "id": "1794167",
+              "key": "CAN-9041",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794167",
+              "fields": {
+                "summary": "CT Adaptive - Instruments - Stats - The metric 52 - week Range doesn't load",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379644",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379644",
+            "outwardIssue": {
+              "id": "1794119",
+              "key": "CAN-9040",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1794119",
+              "fields": {
+                "summary": "CT Adaptive - Instruments - Header name 'Summary' should NOT be shown",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379568",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379568",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972879",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972879",
+      "key": "CRTQA-10340",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Check display when data is unavailable",
+        "issuelinks": [
+          {
+            "id": "3379569",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379569",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972880",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972880",
+      "key": "CRTQA-10341",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Verify no zoom functionality in charts",
+        "issuelinks": [
+          {
+            "id": "3379566",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379566",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972881",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972881",
+      "key": "CRTQA-10342",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Validate crosshairs and tooltip on hover over chart",
+        "issuelinks": [
+          {
+            "id": "3379567",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379567",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972882",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972882",
+      "key": "CRTQA-10343",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Validate Chart components in each tab",
+        "issuelinks": [
+          {
+            "id": "3379564",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379564",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972883",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972883",
+      "key": "CRTQA-10344",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Verify display of tabs for each option greek",
+        "issuelinks": [
+          {
+            "id": "3379565",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379565",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972884",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972884",
+      "key": "CRTQA-10345",
+      "fields": {
+        "summary": "CT Adaptive - Option Greeks - Verify display of 'Option Greeks' widget",
+        "issuelinks": [
+          {
+            "id": "3379562",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379562",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972885",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972885",
+      "key": "CRTQA-10346",
+      "fields": {
+        "summary": "CT Adaptive - Instruments - Check Instrument Info for all instruments except Stocks and ETFs",
+        "issuelinks": [
+          {
+            "id": "3379643",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379643",
+            "outwardIssue": {
+              "id": "1792852",
+              "key": "CAN-9004",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1792852",
+              "fields": {
+                "summary": "CT Adaptive - Instrument Info - The selector should NOT be for instruments except Stock and ETFs",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379563",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379563",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972886",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972886",
+      "key": "CRTQA-10347",
+      "fields": {
+        "summary": "CT Adaptive - Instruments - Check Instrument Info for Stocks and ETFs",
+        "issuelinks": [
+          {
+            "id": "3379561",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379561",
+            "inwardIssue": {
+              "id": "1783053",
+              "key": "CRT-534",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783053",
+              "fields": {
+                "summary": "Testing of Priority 0-1 Scope",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972940",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972940",
+      "key": "CRTQA-10401",
+      "fields": {
+        "summary": "CT Adaptive - Transaction Details Card - Check the Expanded view for not Trade type",
+        "issuelinks": [
+          {
+            "id": "3379718",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379718",
+            "outwardIssue": {
+              "id": "1747290",
+              "key": "CRT-428",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747290",
+              "fields": {
+                "summary": "[Transactions] Transaction Details Card",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972941",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972941",
+      "key": "CRTQA-10402",
+      "fields": {
+        "summary": "CT Adaptive - Transaction Details Card - Check the Expanded view for Trade type",
+        "issuelinks": [
+          {
+            "id": "3379721",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379721",
+            "outwardIssue": {
+              "id": "1783028",
+              "key": "CAN-8701",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1783028",
+              "fields": {
+                "summary": "CT Adaptive - Transaction Details Card - Different precision after dot",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379719",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379719",
+            "outwardIssue": {
+              "id": "1747290",
+              "key": "CRT-428",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747290",
+              "fields": {
+                "summary": "[Transactions] Transaction Details Card",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379720",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379720",
+            "outwardIssue": {
+              "id": "1758490",
+              "key": "CRT-481",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1758490",
+              "fields": {
+                "summary": "[Trade History] Adding of Trade History Widget ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972942",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972942",
+      "key": "CRTQA-10403",
+      "fields": {
+        "summary": "CT Adaptive - Transactions - Check the Default view for Transactions tab",
+        "issuelinks": [
+          {
+            "id": "3379716",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379716",
+            "outwardIssue": {
+              "id": "1747290",
+              "key": "CRT-428",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747290",
+              "fields": {
+                "summary": "[Transactions] Transaction Details Card",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379587",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379587",
+            "inwardIssue": {
+              "id": "1755485",
+              "key": "CAN-7942",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1755485",
+              "fields": {
+                "summary": "[Corner] - Transactions redesign",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/2",
+                  "id": "2",
+                  "description": "A new feature of the product, which has yet to be developed.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15711&avatarType=issuetype",
+                  "name": "Change Request",
+                  "subtask": false,
+                  "avatarId": 15711
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972943",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972943",
+      "key": "CRTQA-10404",
+      "fields": {
+        "summary": "CT Adaptive - Order Entry - Account Selector - Check the error message when an instument is prohibited for an account ",
+        "issuelinks": [
+          {
+            "id": "3379717",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379717",
+            "outwardIssue": {
+              "id": "1747032",
+              "key": "CRT-408",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747032",
+              "fields": {
+                "summary": "[Order Entry] Account Selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972944",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972944",
+      "key": "CRTQA-10405",
+      "fields": {
+        "summary": "CT Adaptive - Order Entry - Account Selector - Check the warning message if the currency is different",
+        "issuelinks": [
+          {
+            "id": "3379714",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379714",
+            "outwardIssue": {
+              "id": "1747032",
+              "key": "CRT-408",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747032",
+              "fields": {
+                "summary": "[Order Entry] Account Selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972945",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972945",
+      "key": "CRTQA-10406",
+      "fields": {
+        "summary": "CT Adaptive - Order Entry - Account Selector - Check the sorting of the names",
+        "issuelinks": [
+          {
+            "id": "3379715",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379715",
+            "outwardIssue": {
+              "id": "1747032",
+              "key": "CRT-408",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747032",
+              "fields": {
+                "summary": "[Order Entry] Account Selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972946",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972946",
+      "key": "CRTQA-10407",
+      "fields": {
+        "summary": "CT Adaptive - Order Entry - Account Selector - Check the modal form",
+        "issuelinks": [
+          {
+            "id": "3379711",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379711",
+            "outwardIssue": {
+              "id": "1773921",
+              "key": "CAN-8400",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1773921",
+              "fields": {
+                "summary": "CT Adaptive - Order Entry - Account Selector - There are NO flag icon",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379712",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379712",
+            "outwardIssue": {
+              "id": "1768503",
+              "key": "CAN-8242",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768503",
+              "fields": {
+                "summary": "CT Adaptive - Order Entry - The modal form is named incorrectly",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379710",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379710",
+            "outwardIssue": {
+              "id": "1747032",
+              "key": "CRT-408",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747032",
+              "fields": {
+                "summary": "[Order Entry] Account Selector",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972950",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972950",
+      "key": "CRTQA-10411",
+      "fields": {
+        "summary": "CT Adaptive - New Order - Options - Check the fields that can be edited",
+        "issuelinks": [
+          {
+            "id": "3379585",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379585",
+            "inwardIssue": {
+              "id": "1772211",
+              "key": "CAN-8343",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772211",
+              "fields": {
+                "summary": "CT Adaptive - New Order - fields are not always available after selecting values in other fields",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972951",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972951",
+      "key": "CRTQA-10412",
+      "fields": {
+        "summary": "CT Adaptive - New Order - Options - Check the description for Single Spread",
+        "issuelinks": [
+          {
+            "id": "3379586",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379586",
+            "inwardIssue": {
+              "id": "1772227",
+              "key": "CAN-8346",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772227",
+              "fields": {
+                "summary": "CT Adaptive - New Order - For single option order single should not displayed in the header",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972952",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972952",
+      "key": "CRTQA-10413",
+      "fields": {
+        "summary": "CT Adaptive - Modify Orders - Check the ability to change order type",
+        "issuelinks": [
+          {
+            "id": "3379583",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379583",
+            "inwardIssue": {
+              "id": "1768806",
+              "key": "CAN-8257",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768806",
+              "fields": {
+                "summary": "CT Adaptive - Modify orders - It's NOT possible to change order type for orders in non-final statuses",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972953",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972953",
+      "key": "CRTQA-10414",
+      "fields": {
+        "summary": "CT Adaptive - Trade History - Check Price format ",
+        "issuelinks": [
+          {
+            "id": "3379705",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379705",
+            "outwardIssue": {
+              "id": "1784728",
+              "key": "CAN-8741",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1784728",
+              "fields": {
+                "summary": "CT Adaptive - Trade History - Price format for Multileg Trade - It should be native format = two digits after the dot",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379704",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379704",
+            "outwardIssue": {
+              "id": "1758490",
+              "key": "CRT-481",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1758490",
+              "fields": {
+                "summary": "[Trade History] Adding of Trade History Widget ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379584",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379584",
+            "inwardIssue": {
+              "id": "1772206",
+              "key": "CAN-8342",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772206",
+              "fields": {
+                "summary": "CT Adaptive - Trade History - Price format - It should be native format = two digits after the dot",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972954",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972954",
+      "key": "CRTQA-10415",
+      "fields": {
+        "summary": "CT Adaptive - Order Details - Check the default view",
+        "issuelinks": [
+          {
+            "id": "3379582",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379582",
+            "inwardIssue": {
+              "id": "1771875",
+              "key": "CAN-8329",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1771875",
+              "fields": {
+                "summary": "CT Adaptive - Orders - Order Details is not open",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972968",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972968",
+      "key": "CRTQA-10429",
+      "fields": {
+        "summary": "CT Adaptive - Options - Check the expiration date",
+        "issuelinks": [
+          {
+            "id": "3379594",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379594",
+            "inwardIssue": {
+              "id": "1769775",
+              "key": "CAN-8279",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1769775",
+              "fields": {
+                "summary": "CT Adaptive - Incorrect Expiration Date Displayed for Option Instruments",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972969",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972969",
+      "key": "CRTQA-10430",
+      "fields": {
+        "summary": "CT Adaptive - Order Entry - Check Mark Price and Day Price Change in %",
+        "issuelinks": [
+          {
+            "id": "3379595",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379595",
+            "inwardIssue": {
+              "id": "1768605",
+              "key": "CAN-8247",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768605",
+              "fields": {
+                "summary": "CT Adaptive - New Order - Mark Price and day price change in % are the same",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972970",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972970",
+      "key": "CRTQA-10431",
+      "fields": {
+        "summary": "CT Adaptive - Search - Check the started page opens after closing current one",
+        "issuelinks": [
+          {
+            "id": "3379592",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379592",
+            "inwardIssue": {
+              "id": "1768820",
+              "key": "CAN-8259",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768820",
+              "fields": {
+                "summary": "CT Adaptive - Instruments - When closing the current page, we must return to the page from where we started",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972971",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972971",
+      "key": "CRTQA-10432",
+      "fields": {
+        "summary": "CT Adaptive - Instruments - Check instruments description",
+        "issuelinks": [
+          {
+            "id": "3379593",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379593",
+            "inwardIssue": {
+              "id": "1768475",
+              "key": "CAN-8238",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768475",
+              "fields": {
+                "summary": "CT Adaptive - It should be STOCK instead Equity",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972972",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972972",
+      "key": "CRTQA-10433",
+      "fields": {
+        "summary": "CT Adaptive - Portfolio - Check default view for modal form for Working Orders",
+        "issuelinks": [
+          {
+            "id": "3379758",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379758",
+            "outwardIssue": {
+              "id": "1774952",
+              "key": "XT-5012",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1774952",
+              "fields": {
+                "summary": "[Corner Trader][CT Adaptive] - Orders / Order entry - Portfolio name on Account selector includes unnecessary word",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379759",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379759",
+            "outwardIssue": {
+              "id": "1774318",
+              "key": "CAN-8416",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1774318",
+              "fields": {
+                "summary": "CT Adaptive - Orders / Order entry - Portfolio name on Account selector includes unnecessary word",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/5",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/trivial.svg",
+                  "name": "Low priority",
+                  "id": "5"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379590",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379590",
+            "inwardIssue": {
+              "id": "1768789",
+              "key": "CAN-8256",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768789",
+              "fields": {
+                "summary": "CT Adaptive - Orders - All accounts must be selected if we open orders from the Portfolio",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379589",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379589",
+            "inwardIssue": {
+              "id": "1768607",
+              "key": "CAN-8248",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768607",
+              "fields": {
+                "summary": "CT Adaptive - Orders - The modal form is named incorrectly",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972973",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972973",
+      "key": "CRTQA-10434",
+      "fields": {
+        "summary": "CT Adaptive - Search - Check the default view",
+        "issuelinks": [
+          {
+            "id": "3379591",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379591",
+            "inwardIssue": {
+              "id": "1768452",
+              "key": "CAN-8234",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768452",
+              "fields": {
+                "summary": "CT Adaptive - Search - it should be the widget not the window",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/1",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/blocker.svg",
+                  "name": "ASAP (9)",
+                  "id": "1"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972981",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972981",
+      "key": "CRTQA-10442",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check back button in the modal form",
+        "issuelinks": [
+          {
+            "id": "3379751",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379751",
+            "outwardIssue": {
+              "id": "1768467",
+              "key": "CAN-8236",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768467",
+              "fields": {
+                "summary": "CT Adaptive - Watchlist - The back button does NOT work in the modal form",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379588",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379588",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972995",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972995",
+      "key": "CRTQA-10456",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check cancellation of deleting action",
+        "issuelinks": [
+          {
+            "id": "3379613",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379613",
+            "outwardIssue": {
+              "id": "1772530",
+              "key": "CAN-8352",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772530",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379525",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379525",
+            "inwardIssue": {
+              "id": "1779814",
+              "key": "XT-5129",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1779814",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379524",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379524",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972996",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972996",
+      "key": "CRTQA-10457",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check confirmation window for deleting",
+        "issuelinks": [
+          {
+            "id": "3379522",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379522",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972997",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972997",
+      "key": "CRTQA-10458",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Delete Favorites Watchlist",
+        "issuelinks": [
+          {
+            "id": "3379523",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379523",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972998",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972998",
+      "key": "CRTQA-10459",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Delete Personal Watchlist",
+        "issuelinks": [
+          {
+            "id": "3379611",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379611",
+            "outwardIssue": {
+              "id": "1772530",
+              "key": "CAN-8352",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772530",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379520",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379520",
+            "inwardIssue": {
+              "id": "1779814",
+              "key": "XT-5129",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1779814",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379519",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379519",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1972999",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1972999",
+      "key": "CRTQA-10460",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check cancellation of renaming action",
+        "issuelinks": [
+          {
+            "id": "3379521",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379521",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973000",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973000",
+      "key": "CRTQA-10461",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Try to rename Favorites Watchlist",
+        "issuelinks": [
+          {
+            "id": "3379517",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379517",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973001",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973001",
+      "key": "CRTQA-10462",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Rename Watchlist to the empty name",
+        "issuelinks": [
+          {
+            "id": "3379518",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379518",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973002",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973002",
+      "key": "CRTQA-10463",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Rename Watchlist to the not unique name",
+        "issuelinks": [
+          {
+            "id": "3379515",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379515",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973003",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973003",
+      "key": "CRTQA-10464",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Rename Watchlist to the unique name",
+        "issuelinks": [
+          {
+            "id": "3379516",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379516",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973004",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973004",
+      "key": "CRTQA-10465",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check Rename modal form",
+        "issuelinks": [
+          {
+            "id": "3379513",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379513",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973005",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973005",
+      "key": "CRTQA-10466",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check Edit Actions for Public and Index Watchlists",
+        "issuelinks": [
+          {
+            "id": "3379607",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379607",
+            "outwardIssue": {
+              "id": "1790074",
+              "key": "CAN-8895",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1790074",
+              "fields": {
+                "summary": "CT Adaptive - Indices watchlists not available",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10006",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/open.png",
+                  "name": "Reported",
+                  "id": "10006",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/2",
+                    "id": 2,
+                    "key": "new",
+                    "colorName": "default",
+                    "name": "To Do"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379608",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379608",
+            "outwardIssue": {
+              "id": "1768732",
+              "key": "CAN-8253",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768732",
+              "fields": {
+                "summary": "CT Adaptive - Watchlist - Wrong Edit Actions for Public and Index Watchlists",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379609",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379609",
+            "outwardIssue": {
+              "id": "1778704",
+              "key": "CRT-528",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1778704",
+              "fields": {
+                "summary": "[Watchlist] Watchlist Deletion",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379514",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379514",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973006",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973006",
+      "key": "CRTQA-10467",
+      "fields": {
+        "summary": "CT Adaptive - Add a New Watchlist - Check the name, which contains up to 40 symbols",
+        "issuelinks": []
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973007",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973007",
+      "key": "CRTQA-10468",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check the duplication does not carry over future modifications of the original watchlist",
+        "issuelinks": [
+          {
+            "id": "3379512",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379512",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973008",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973008",
+      "key": "CRTQA-10469",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check duplication from Public and Index",
+        "issuelinks": [
+          {
+            "id": "3379606",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379606",
+            "outwardIssue": {
+              "id": "1772546",
+              "key": "CAN-8353",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772546",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not duplicate watchlist from Public and Index",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379604",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379604",
+            "outwardIssue": {
+              "id": "1773899",
+              "key": "CAN-8398",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1773899",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Indices Watchlist section is empty and eternal loading is displayed",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379605",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379605",
+            "outwardIssue": {
+              "id": "1774936",
+              "key": "XT-5011",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1774936",
+              "fields": {
+                "summary": "[Corner Trader][CT Adaptive] Index watchlist data is not available",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379509",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379509",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973009",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973009",
+      "key": "CRTQA-10470",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check cancellation of duplicate action",
+        "issuelinks": [
+          {
+            "id": "3379511",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379511",
+            "inwardIssue": {
+              "id": "1768467",
+              "key": "CAN-8236",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1768467",
+              "fields": {
+                "summary": "CT Adaptive - Watchlist - The back button does NOT work in the modal form",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379510",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379510",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973010",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973010",
+      "key": "CRTQA-10471",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check duplicate with an existing name",
+        "issuelinks": [
+          {
+            "id": "3379506",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379506",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973011",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973011",
+      "key": "CRTQA-10472",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check the numbering for duplicates after deleting one",
+        "issuelinks": [
+          {
+            "id": "3379603",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379603",
+            "outwardIssue": {
+              "id": "1772530",
+              "key": "CAN-8352",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1772530",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist ",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379508",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379508",
+            "inwardIssue": {
+              "id": "1779814",
+              "key": "XT-5129",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1779814",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Can not delete watchlist",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10000",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/trash.png",
+                  "name": "Aborted",
+                  "id": "10000",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/2",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/critical.svg",
+                  "name": "Critical (6)",
+                  "id": "2"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          },
+          {
+            "id": "3379507",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379507",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973012",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973012",
+      "key": "CRTQA-10473",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check the numbering for duplicates",
+        "issuelinks": [
+          {
+            "id": "3379504",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379504",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973013",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973013",
+      "key": "CRTQA-10474",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check the default duplicate name",
+        "issuelinks": [
+          {
+            "id": "3379505",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379505",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    },
+    {
+      "expand": "operations,versionedRepresentations,editmeta,changelog,renderedFields",
+      "id": "1973014",
+      "self": "https://jira.in.devexperts.com/rest/api/2/issue/1973014",
+      "key": "CRTQA-10475",
+      "fields": {
+        "summary": "CT Adaptive - Edit Actions - Check duplicate not empty Watchlist",
+        "issuelinks": [
+          {
+            "id": "3379601",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379601",
+            "outwardIssue": {
+              "id": "1769422",
+              "key": "CAN-8269",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1769422",
+              "fields": {
+                "summary": "CT Adaptive - Edit Actions - Duplicating Private Watchlist Fails with Errors",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/10011",
+                  "description": "",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/resolved.png",
+                  "name": "Resolved",
+                  "id": "10011",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/3",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/major.svg",
+                  "name": "Urgent (3)",
+                  "id": "3"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/1",
+                  "id": "1",
+                  "description": "A problem which impairs or prevents the functions of the product.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15703&avatarType=issuetype",
+                  "name": "Defect Report",
+                  "subtask": false,
+                  "avatarId": 15703
+                }
+              }
+            },
+            "type": {
+              "id": "10801",
+              "name": "Defect",
+              "inward": "created by",
+              "outward": "created",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10801"
+            }
+          },
+          {
+            "id": "3379501",
+            "self": "https://jira.in.devexperts.com/rest/api/2/issueLink/3379501",
+            "inwardIssue": {
+              "id": "1747007",
+              "key": "CRT-403",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issue/1747007",
+              "fields": {
+                "summary": "[Watchlist] Edit Actions",
+                "status": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/status/6",
+                  "description": "The issue is considered finished, the resolution is correct. Issues which are closed can be reopened.",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/statuses/closed.png",
+                  "name": "Closed",
+                  "id": "6",
+                  "statusCategory": {
+                    "self": "https://jira.in.devexperts.com/rest/api/2/statuscategory/3",
+                    "id": 3,
+                    "key": "done",
+                    "colorName": "success",
+                    "name": "Done"
+                  }
+                },
+                "priority": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/priority/4",
+                  "iconUrl": "https://jira.in.devexperts.com/images/icons/priorities/minor.svg",
+                  "name": "Normal",
+                  "id": "4"
+                },
+                "issuetype": {
+                  "self": "https://jira.in.devexperts.com/rest/api/2/issuetype/48",
+                  "id": "48",
+                  "description": "Created by Jira Software - do not edit or delete. Issue type for a big user story that needs to be broken down.",
+                  "iconUrl": "https://jira.in.devexperts.com/secure/viewavatar?size=xsmall&avatarId=15707&avatarType=issuetype",
+                  "name": "Epic",
+                  "subtask": false,
+                  "avatarId": 15707
+                }
+              }
+            },
+            "type": {
+              "id": "10800",
+              "name": "Tests",
+              "inward": "tested by",
+              "outward": "tests",
+              "self": "https://jira.in.devexperts.com/rest/api/2/issueLinkType/10800"
+            }
+          }
+        ]
+      },
+      "renderedFields": null
+    }
+  ],
+  "warningMessages": null,
+  "names": null,
+  "schema": null
+}

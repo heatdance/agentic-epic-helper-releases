@@ -1,0 +1,649 @@
+{
+  "schema_version": 1,
+  "reviews": {
+    "CRT-1": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: CFD Margining.",
+      "evidence": [
+        "epic_meta:CRT-1"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-110": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: [CRT] Undefined margin rates.",
+      "evidence": [
+        "epic_meta:CRT-110"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-129": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Risk management EOD report.",
+      "evidence": [
+        "epic_meta:CRT-129"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-131": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Fix Liquidation order statuses.",
+      "evidence": [
+        "epic_meta:CRT-131"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-147": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Process raw parameter files from IG - Swap Rates Update.",
+      "evidence": [
+        "epic_meta:CRT-147"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-171": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [PenTest] Sensitive Information Sent via HTTTP GET.",
+      "evidence": [
+        "epic_meta:CRT-171"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-18": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Margin calls and liquidation.",
+      "evidence": [
+        "epic_meta:CRT-18"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-183": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: [CT ETD] Portfolio metrics.",
+      "evidence": [
+        "epic_meta:CRT-183"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-19": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Financing.",
+      "evidence": [
+        "epic_meta:CRT-19"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-232": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Detect current client country by IP and send to SocGen via FIX.",
+      "evidence": [
+        "epic_meta:CRT-232"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-236": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: CFDs Shares - updating parameters (Horn-365 High).",
+      "evidence": [
+        "epic_meta:CRT-236"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-237": {
+      "category_id": "api",
+      "rationale": "IG DMA routing change using ExpireTime for CFD_STOCK (broker integration).",
+      "evidence": [
+        "summary:IG DMA"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-242": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: New EOD reports and new fields in the current EoD files.",
+      "evidence": [
+        "epic_meta:CRT-242"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-263": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Use Index Realtime prices only for internal calculations.",
+      "evidence": [
+        "epic_meta:CRT-263"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-264": {
+      "category_id": "api",
+      "rationale": "dxFeed LAST_TRADE_TIME in IPF and platform trading-end logic (external market data).",
+      "evidence": [
+        "CRT-871",
+        "MDD-8089"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-286": {
+      "category_id": "be",
+      "rationale": "CPS commission rules per underlying for FUTURE/OPTION.",
+      "evidence": [
+        "summary:CPS commission"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-287": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Collateral Profile.",
+      "evidence": [
+        "epic_meta:CRT-287"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-290": {
+      "category_id": "fe",
+      "rationale": "DXTF charting update using Candle.bid when instrument flagged (CRT-983); client chart UI.",
+      "evidence": [
+        "epic_meta:CRT-290"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-30": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Exposure limits by instrument.",
+      "evidence": [
+        "epic_meta:CRT-30"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-303": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Exposure Coverage calculation (HORN-420).",
+      "evidence": [
+        "epic_meta:CRT-303"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-306": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Fix metrics when there is a short equity position.",
+      "evidence": [
+        "epic_meta:CRT-306"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-308": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Add Slide-In Coefficient to Position Book in dxTrade.",
+      "evidence": [
+        "epic_meta:CRT-308"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-320": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Fix price for spreads in all transaction and trade widgets.",
+      "evidence": [
+        "epic_meta:CRT-320"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-340": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Value Position CCY / %change (HORN-511).",
+      "evidence": [
+        "epic_meta:CRT-340"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-341": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal (HORN-502) - Mark Price update based on trading hours.",
+      "evidence": [
+        "epic_meta:CRT-341"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-347": {
+      "category_id": "api",
+      "rationale": "FIX tag 55 encoding update for US Options (external protocol).",
+      "evidence": [
+        "summary:FIX tag 55"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-350": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal - Liquidation improvements.",
+      "evidence": [
+        "epic_meta:CRT-350"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-367": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Client Area Improvements - Add Risk Profile to Client Area and Remove Terminated.",
+      "evidence": [
+        "epic_meta:CRT-367"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-370": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Use 37 FIX tag as External Order ID in WebBroker and DropCopy instead of 11 tag.",
+      "evidence": [
+        "epic_meta:CRT-370"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-373": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Price snapshot and backup price update schedules should depend on instrument typ.",
+      "evidence": [
+        "epic_meta:CRT-373"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-374": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Margin Utilization to be 0 when MM is 0.",
+      "evidence": [
+        "epic_meta:CRT-374"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-380": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation proposal - Fix remaining issues (instruments without close price + s.",
+      "evidence": [
+        "epic_meta:CRT-380"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-386": {
+      "category_id": "api",
+      "rationale": "Caronte venue integration: STOCK/ETF order routing and FIX encoding (CRT-1193–1199).",
+      "evidence": [
+        "CRT-1193",
+        "CRT-1194"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-389": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Update option exposure calculation (HORN-866).",
+      "evidence": [
+        "epic_meta:CRT-389"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-400": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Search] Results Display.",
+      "evidence": [
+        "epic_meta:CRT-400"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-403": {
+      "category_id": "fe",
+      "rationale": "Watchlist edit actions in client UI.",
+      "evidence": [
+        "summary:Watchlist Edit Actions"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-407": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Watchlist] List Synchronization.",
+      "evidence": [
+        "epic_meta:CRT-407"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-41": {
+      "category_id": "be",
+      "rationale": "Withdrawal balance metric and liquidation-domain limit calculation (CRT-069, CRT-091).",
+      "evidence": [
+        "CRT-069",
+        "CRT-091"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-427": {
+      "category_id": "fe",
+      "rationale": "Transactions account selector in client/dealer UI.",
+      "evidence": [
+        "summary:Account Selector"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-430": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Positions] Card Display.",
+      "evidence": [
+        "epic_meta:CRT-430"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-434": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: [Overview] New Portfolio Metrics.",
+      "evidence": [
+        "epic_meta:CRT-434"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-440": {
+      "category_id": "api",
+      "rationale": "REST API for pre-trade order validation and commission calculation.",
+      "evidence": [
+        "summary:REST API"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-455": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Adding new metrics to DXSCA-WEB API for Cornèr Invest.",
+      "evidence": [
+        "epic_meta:CRT-455"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-46": {
+      "category_id": "api",
+      "rationale": "FIX trading integration with IG OTC (CRT-096).",
+      "evidence": [
+        "CRT-096"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-467": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Search] Grouping of the Search Results.",
+      "evidence": [
+        "epic_meta:CRT-467"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-49": {
+      "category_id": "be",
+      "rationale": "Instrument master field for IG instrument ID.",
+      "evidence": [
+        "summary:IG instrument ID"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-496": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Consider adjusted EUREX options as non-standard (HORN-986).",
+      "evidence": [
+        "epic_meta:CRT-496"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-501": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): API to replicate information from Transaction widget.",
+      "evidence": [
+        "epic_meta:CRT-501"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-506": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Transactions] Adding the widget to UI.",
+      "evidence": [
+        "epic_meta:CRT-506"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-521": {
+      "category_id": "be",
+      "rationale": "Default time-in-force rules per order type (trading configuration).",
+      "evidence": [
+        "summary:Default TIF"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-525": {
+      "category_id": "be",
+      "rationale": "DAY order auto-expiration rules and allowedJobs (CRT-1211/1248); core trading engine logic.",
+      "evidence": [
+        "epic_meta:CRT-525"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-530": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): CA management between AF and DX with quantity impact (HORN-372) - Simplified ver.",
+      "evidence": [
+        "epic_meta:CRT-530"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-533": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): FIX Drop Copy - new tag for order chain ID (Esecuzione parziale e modifica ordin.",
+      "evidence": [
+        "epic_meta:CRT-533"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-536": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Extend swap rates update job with backup swap rates (HORN-522).",
+      "evidence": [
+        "epic_meta:CRT-536"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-537": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Update STOCK ETF generation ALGO for new SIX and XETRA instruments.",
+      "evidence": [
+        "epic_meta:CRT-537"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-539": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Use adjusted order leg price instead mark price during prospective calculations.",
+      "evidence": [
+        "epic_meta:CRT-539"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-544": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Console command to move positions to new instrument symbols (HORN-747).",
+      "evidence": [
+        "epic_meta:CRT-544"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-550": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Port Explain Margin to Corner (HORN-1006).",
+      "evidence": [
+        "epic_meta:CRT-550"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-563": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Add filters by Instrument fields in Order Book widget in Web Broker (HORN-1092).",
+      "evidence": [
+        "epic_meta:CRT-563"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-567": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Change for TotalCashEffect (HORN-501).",
+      "evidence": [
+        "epic_meta:CRT-567"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-569": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Web: Option trading UX/UI improvements (HORN-1196).",
+      "evidence": [
+        "epic_meta:CRT-569"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-572": {
+      "category_id": "fe",
+      "rationale": "Port Chart Trading panel from upstream (HORN-1196 / DXBROBL-1227); client trading UI.",
+      "evidence": [
+        "epic_meta:CRT-572"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-576": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Port fix for closure of arranged positions (HORN-1196).",
+      "evidence": [
+        "epic_meta:CRT-576"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-585": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: New instrument subtype - FX_SPOT, static list.",
+      "evidence": [
+        "epic_meta:CRT-585"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-588": {
+      "category_id": "be",
+      "rationale": "2FA exclusion configuration for autotest environments.",
+      "evidence": [
+        "summary:2FA exclusion"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-593": {
+      "category_id": "be",
+      "rationale": "FX_SPOT instrument/account/portfolio metrics and margin formulas (CRT-856, CRT-004, CRT-574).",
+      "evidence": [
+        "epic_meta:CRT-593"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-594": {
+      "category_id": "fe",
+      "rationale": "FX_SPOT pricing groups and mapping UI/configuration for client pricing (AI-assisted epic).",
+      "evidence": [
+        "epic_meta:CRT-594"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-596": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): [Transactions] Filtering by time range and transaction type.",
+      "evidence": [
+        "epic_meta:CRT-596"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-601": {
+      "category_id": "fe",
+      "rationale": "Est. AF Effect on FX_SPOT order-entry form; UI fields with BE-sourced values (DXINV-028).",
+      "evidence": [
+        "epic_meta:CRT-601"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-607": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Watchlist List and Grid views.",
+      "evidence": [
+        "epic_meta:CRT-607"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-609": {
+      "category_id": "fe",
+      "rationale": "FX_SPOT charts on midpoint in web and WebBroker client area (CRT-1737).",
+      "evidence": [
+        "epic_meta:CRT-609"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-613": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Return collapse/expand and cancel all buttons to dxtrade Orders widget in Webbro.",
+      "evidence": [
+        "epic_meta:CRT-613"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-617": {
+      "category_id": "api",
+      "rationale": "FX_SPOT trading and FIX integration with ET venue.",
+      "evidence": [
+        "summary:FIX Integration with ET"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-638": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Add FX Spot to instrument suggestion.",
+      "evidence": [
+        "epic_meta:CRT-638"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-642": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Non-trading hours.",
+      "evidence": [
+        "epic_meta:CRT-642"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-669": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Liquidation in chunks for CFDs.",
+      "evidence": [
+        "epic_meta:CRT-669"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-672": {
+      "category_id": "api",
+      "rationale": "Extend Apply CA Transactions API with tax, commission, and fee fields (CRT-1918–1920).",
+      "evidence": [
+        "CRT-1918",
+        "CRT-1250"
+      ],
+      "reviewed_utc": "2026-05-29T10:22:41Z"
+    },
+    "CRT-76": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Taxes support in UI.",
+      "evidence": [
+        "epic_meta:CRT-76"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-79": {
+      "category_id": "fe",
+      "rationale": "Major work is client-facing UI (dxTrade5/WebBroker/charts/OE): Align financing with IG rules.",
+      "evidence": [
+        "epic_meta:CRT-79"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    },
+    "CRT-91": {
+      "category_id": "be",
+      "rationale": "Major work is server-side logic, metrics, jobs, or risk/settlement: Portfolio statement.",
+      "evidence": [
+        "epic_meta:CRT-91"
+      ],
+      "reviewed_utc": "2026-05-29T10:21:44Z"
+    }
+  }
+}

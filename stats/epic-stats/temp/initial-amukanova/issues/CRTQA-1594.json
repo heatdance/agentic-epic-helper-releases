@@ -1,0 +1,89 @@
+{
+  "id": "1785037",
+  "key": "CRTQA-1594",
+  "summary": "[Epic Testing] [CRT-528]  Watchlist Deletion",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 2,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1785037/worklog/6539184",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=zhinova",
+          "name": "zhinova",
+          "key": "JIRAUSER50912",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50912&avatarId=306746",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50912&avatarId=306746",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50912&avatarId=306746",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50912&avatarId=306746"
+          },
+          "displayName": "Zdravka Hinova [DM]",
+          "active": false,
+          "timeZone": "Europe/Sofia"
+        },
+        "updateAuthor": {
+          "name": "zhinova",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-07-11T15:02:06.922+0000",
+        "updated": "2025-07-11T15:02:11.738+0000",
+        "started": "2025-07-11T14:00:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "6539184",
+        "issueId": "1785037"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1785037/worklog/6540575",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=zhinova",
+          "name": "zhinova",
+          "key": "JIRAUSER50912",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=JIRAUSER50912&avatarId=306746",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=JIRAUSER50912&avatarId=306746",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=JIRAUSER50912&avatarId=306746",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=JIRAUSER50912&avatarId=306746"
+          },
+          "displayName": "Zdravka Hinova [DM]",
+          "active": false,
+          "timeZone": "Europe/Sofia"
+        },
+        "updateAuthor": {
+          "name": "zhinova",
+          "active": false
+        },
+        "comment": "",
+        "created": "2025-07-14T04:48:57.282+0000",
+        "updated": "2025-07-14T04:49:07.744+0000",
+        "started": "2025-07-14T04:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "6540575",
+        "issueId": "1785037"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "2h",
+    "remainingEstimate": "1h 15m",
+    "timeSpent": "2h",
+    "originalEstimateSeconds": 7200,
+    "remainingEstimateSeconds": 4500,
+    "timeSpentSeconds": 7200
+  },
+  "customfield_11250": 2.0,
+  "customfield_10006": null
+}

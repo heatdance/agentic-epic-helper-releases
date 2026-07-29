@@ -1,0 +1,26 @@
+{
+  "id": "1663266",
+  "key": "CRTQA-1045",
+  "summary": "[Epic Testing] [CRT-320] Fix price for spreads in all transaction and trade widgets",
+  "status": {
+    "name": "Aborted",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 0,
+    "worklogs": []
+  },
+  "timetracking": {
+    "originalEstimate": "0m",
+    "remainingEstimate": "0m",
+    "originalEstimateSeconds": 0,
+    "remainingEstimateSeconds": 0
+  },
+  "customfield_11250": null,
+  "customfield_10006": null
+}

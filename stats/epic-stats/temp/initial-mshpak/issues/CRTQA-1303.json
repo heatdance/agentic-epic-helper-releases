@@ -1,0 +1,439 @@
+{
+  "id": "1379334",
+  "key": "CRTQA-1303",
+  "summary": "[Release notes] [CRT-12] Portfolio metrics",
+  "status": {
+    "name": "Closed",
+    "category": "done"
+  },
+  "issue_type": {
+    "name": "Test Execution"
+  },
+  "worklog": {
+    "startAt": 0,
+    "maxResults": 20,
+    "total": 10,
+    "worklogs": [
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5127919",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-09T16:22:30.303+0000",
+        "updated": "2023-08-09T16:22:35.590+0000",
+        "started": "2023-08-08T10:10:00.000+0000",
+        "timeSpent": "3h 50m",
+        "timeSpentSeconds": 13800,
+        "id": "5127919",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5127920",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-09T16:22:51.580+0000",
+        "updated": "2023-08-09T16:22:56.834+0000",
+        "started": "2023-08-09T07:00:00.000+0000",
+        "timeSpent": "7h",
+        "timeSpentSeconds": 25200,
+        "id": "5127920",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5131813",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-11T15:34:04.996+0000",
+        "updated": "2023-08-11T15:34:19.754+0000",
+        "started": "2023-08-10T07:10:00.000+0000",
+        "timeSpent": "6h 50m",
+        "timeSpentSeconds": 24600,
+        "id": "5131813",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5131815",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-11T15:34:25.128+0000",
+        "updated": "2023-08-11T15:34:30.100+0000",
+        "started": "2023-08-11T07:40:00.000+0000",
+        "timeSpent": "6h 20m",
+        "timeSpentSeconds": 22800,
+        "id": "5131815",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5142581",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-18T13:12:21.520+0000",
+        "updated": "2023-08-18T13:12:27.079+0000",
+        "started": "2023-08-16T12:00:00.000+0000",
+        "timeSpent": "2h",
+        "timeSpentSeconds": 7200,
+        "id": "5142581",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5143278",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-18T16:18:31.628+0000",
+        "updated": "2023-08-18T16:18:39.183+0000",
+        "started": "2023-08-14T09:50:00.000+0000",
+        "timeSpent": "3h 20m",
+        "timeSpentSeconds": 12000,
+        "id": "5143278",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5166717",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-31T15:38:24.316+0000",
+        "updated": "2023-08-31T15:38:30.973+0000",
+        "started": "2023-08-31T15:30:00.000+0000",
+        "timeSpent": "1h",
+        "timeSpentSeconds": 3600,
+        "id": "5166717",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5166721",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-08-31T15:38:39.618+0000",
+        "updated": "2023-08-31T15:38:43.936+0000",
+        "started": "2023-08-29T11:00:00.000+0000",
+        "timeSpent": "2h 20m",
+        "timeSpentSeconds": 8400,
+        "id": "5166721",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5189066",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-09-11T22:10:14.366+0000",
+        "updated": "2023-09-11T22:10:19.294+0000",
+        "started": "2023-09-06T13:10:00.000+0000",
+        "timeSpent": "3h 20m",
+        "timeSpentSeconds": 12000,
+        "id": "5189066",
+        "issueId": "1379334"
+      },
+      {
+        "self": "https://jira.in.devexperts.com/rest/api/2/issue/1379334/worklog/5189069",
+        "author": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "updateAuthor": {
+          "self": "https://jira.in.devexperts.com/rest/api/2/user?username=vlochmelis",
+          "name": "vlochmelis",
+          "key": "vlochmelis",
+          "emailAddress": "",
+          "avatarUrls": {
+            "48x48": "https://jira.in.devexperts.com/secure/useravatar?ownerId=vlochmelis&avatarId=266257",
+            "24x24": "https://jira.in.devexperts.com/secure/useravatar?size=small&ownerId=vlochmelis&avatarId=266257",
+            "16x16": "https://jira.in.devexperts.com/secure/useravatar?size=xsmall&ownerId=vlochmelis&avatarId=266257",
+            "32x32": "https://jira.in.devexperts.com/secure/useravatar?size=medium&ownerId=vlochmelis&avatarId=266257"
+          },
+          "displayName": "Vyacheslav Lochmelis [DM]",
+          "active": false,
+          "timeZone": "Europe/Moscow"
+        },
+        "comment": "",
+        "created": "2023-09-11T22:11:44.562+0000",
+        "updated": "2023-09-11T22:11:51.557+0000",
+        "started": "2023-09-05T11:20:00.000+0000",
+        "timeSpent": "5h 10m",
+        "timeSpentSeconds": 18600,
+        "id": "5189069",
+        "issueId": "1379334"
+      }
+    ]
+  },
+  "timetracking": {
+    "originalEstimate": "4d 4h",
+    "remainingEstimate": "2d 5h 40m",
+    "timeSpent": "1w 1h 10m",
+    "originalEstimateSeconds": 129600,
+    "remainingEstimateSeconds": 78000,
+    "timeSpentSeconds": 148200
+  },
+  "customfield_11250": 36.0,
+  "customfield_10006": null
+}
