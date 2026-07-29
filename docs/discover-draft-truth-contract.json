@@ -1,8 +1,0 @@
-{
-  "schema_version": 1,
-  "_comment": "TEST-DISCOVER draft+truth: map-only after human gate. Master: docs/draft-truth-contract.json",
-  "coverage_immutable": true,
-  "required_coverage_fields": ["sources.coverage_frozen_at"],
-  "forbidden": ["writing -coverage.json", "COVERAGE-REINFORCE merge"],
-  "emit_dod": ["coverage.sources.coverage_frozen_at set before discover emit"]
-}

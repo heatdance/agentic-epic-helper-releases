@@ -1,7 +1,0 @@
-{
-  "checks": [
-    {"id": "chk-001", "verification_role": "primary", "summary": "Prod summary"}
-  ],
-  "obligations_coverage": {},
-  "smart_checklist_markdown": "# Prod"
-}

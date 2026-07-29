@@ -1,8 +1,0 @@
-{
-  "test_bundles": [
-    {"bundle_id": "tb-001", "covers_check_ids": ["chk-001"], "proposed_title": "Bundle one"}
-  ],
-  "excluded_checks_with_reason": [
-    {"check_id": "chk-002", "reason": "deferred"}
-  ]
-}

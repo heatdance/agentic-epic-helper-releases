@@ -1,8 +1,0 @@
-{
-  "checks": [
-    {"id": "chk-001", "verification_role": "primary", "summary": "Gold summary differs"},
-    {"id": "chk-002", "verification_role": "primary", "summary": "Only in gold"}
-  ],
-  "obligations_coverage": {},
-  "smart_checklist_markdown": "# Gold"
-}

@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "_comment": "TEST-PREP draft+truth: packaging on frozen coverage. Master: docs/draft-truth-contract.json",
-  "requires": ["frozen coverage"],
-  "emit_dod": [
-    "test_bundles[].covers_check_ids reference existing checks only",
-    "map_only when scenario_coverage_map has uncovered primaries"
-  ]
-}

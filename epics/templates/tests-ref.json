@@ -1,7 +1,7 @@
 {
-  "_comment": "Regression test draft handoff for TEST-PREP v3.1. Default draft_profile scenario_intent (draft_truth_v3). Pre-CLOSE: epics/<KEY>/<KEY>-tests.json + .md at epic root; after CLOSE: JSON under context/, three human .md at root.",
+  "_comment": "Regression test draft handoff schema v4 (guide export). Default draft_profile executable_outline. Human-readable .md mirrors JSON at epic root until you archive. Plan in ephemeral temp only in a full harness.",
   "format_norms": {
-    "markdown": "# Test case format (Corner QA) — TEST-PREP scenario_intent (v3.1)\n\n**Default:** honest scenario drafts — not final CRTQA executable steps.\n\n## Sections\n\n1. **shared_preconditions** (once on tests.json) — setup from coverage principal thread.\n2. **Preconditions** per bundle — cite shared preconditions.\n3. **Actions** — plain English intent; variant_sequence = one step per check variant.\n4. **Results** — requirement tags [CRT-####]; formulas with formula_provenance when used.\n5. **Peculiarities** — formulas, rounding; no requirement tags.\n\n**Legacy:** `draft_profile=crtqa_outline` or `teaching` for calibrate/benchmark.\n\n**Pipeline:** `.cursor/pipelines/test-prep.md` → **8a** → **8a½** → **8b** → **8c** → emit. Verifier: **test_prep_verify.py --mode scenario_intent**."
+    "markdown": "# Test case format (guide) ΓÇö TEST-PREP shape\n\n**Executable outlines** (default profile): numbered action/result pairs aligned to a case outline, with session placeholders and explicit oracles where unknown.\n\n## Sections (required order)\n\n1. **Preconditions** ΓÇö cite your precondition doc or cluster id; keep bundle-specific session notes short.\n2. **Actions** ΓÇö numbered list; one primary action per outline row; nest drill-down bullets under that action when needed.\n3. **Results** ΓÇö observable check per action; requirement trace tags only here.\n4. **Peculiarities** ΓÇö formulas, UI labels, environment notes; no trace tags.\n\n## Placeholders\n\nUse `<session_literal>` and `[oracle:TBD]` for values your team fills at execution timeΓÇönot whole-scenario TBD.\n\n## Build your own\n\nCopy this template, define expansion rules in your repo, and add a verifier before exporting tests to your test management tool."
   },
   "schema_version": 4,
   "epic_key": null,
@@ -23,7 +23,7 @@
     "precon_loaded": false,
     "precon_jira_title": null,
     "map_only": false,
-    "draft_profile": "scenario_intent",
+    "draft_profile": "executable_outline",
     "shape_ref": null,
     "generation_mode": true,
     "fe_ui_sessions": {
@@ -33,22 +33,8 @@
     },
     "fe_exploration_waived": false,
     "exploration_complete": false,
-    "topology_loaded": false,
-    "_topology_loaded": "true when ref/coverage/precon topology fields consumed in Phase 1.",
-    "ref_topology_fields": [],
-    "_ref_topology_fields": "e.g. verification_topology.pricing_oracle_rules, platform_reuse_candidates",
-    "principal_loaded": false,
-    "_principal_loaded": "true when precon principal or ref personas consumed (Round 2 step 7).",
-    "ref_principal_fields": [],
-    "_ref_principal_fields": "e.g. downstream_hints.personas, needs_dual_account_contrast",
-    "session_placeholders": {},
-    "_session_placeholders": "optional copy from precon when principal_loaded; angle-bracket tokens only",
     "note": "exploration_complete true when all bundles passed test_prep_verify --mode explore. verification_plan[] and verification_exploration[] in temp/test-prep-plan.json only."
   },
-  "platform_reuse_annex": null,
-  "_platform_reuse_annex": "Optional markdown bullets from coverage platform_reuse_annex or ref platform_reuse_candidates (suggestion_only); JSON field only — never paste into -tests.md (emit_to_markdown false).",
-  "shared_preconditions": [],
-  "_shared_preconditions": "One block from coverage setup thread; cited by each bundle preconditions.",
   "jira_test_search": {
     "at": null,
     "skipped": true,
@@ -62,7 +48,7 @@
   },
   "existing_tests_considered": [],
   "_existing_tests_considered_item": {
-    "key": "CRTQA-10080",
+    "key": "YOUR-QA-10080",
     "summary": null,
     "note": "Generation mode: array MUST stay []. Historical reuse is out of pipeline scope."
   },
@@ -87,8 +73,6 @@
     ],
     "_verification_exploration_summary_note": "Summary only on durable bundle; full verification_exploration[] in temp/test-prep-plan.json.",
     "precon_cluster_refs": [],
-    "persona_tags": [],
-    "_persona_tags": "optional when principal_loaded; values from docs/epic-prep-principal-contract.json persona_values",
     "authoring": {
       "subprocess": true,
       "subprocess_completed": false,
@@ -100,7 +84,7 @@
       "results": [],
       "peculiarities": []
     },
-    "_draft_note": "Yogi tags only in results[]. crtqa_outline: session/oracle TBD only. No CRTQA keys. No [REQUIRES: CRTQA-*].",
+    "_draft_note": "Requirement tags only in results[]. executable_outline: session/oracle TBD only. No live issue keys in generation mode.",
     "automation": {
       "feasibility": "unknown",
       "blocked_reason": null,

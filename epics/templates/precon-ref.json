@@ -36,22 +36,8 @@
     "optional_jira_audit": {
       "performed": false,
       "steps_provenance": "not_used_for_authoring",
-      "note": "Greenfield: existing CRTQA Pre-Conditions are not structural input."
-    },
-    "topology_loaded": false,
-    "_topology_loaded": "true when ref/coverage/discover topology fields consumed in Phase 1.",
-    "ref_topology_fields": [],
-    "_ref_topology_fields": "e.g. verification_topology.shell_roles, pricing_oracle_rules, jira_scenario_surfaces",
-    "principal_loaded": false,
-    "_principal_loaded": "true when ref downstream_hints provision/personas or discover ref_principal_provision consumed (Round 2 step 6).",
-    "ref_principal_fields": [],
-    "_ref_principal_fields": "e.g. needs_environment_provision, needs_dual_account_contrast, downstream_hints.personas"
-  },
-  "principal_provenance": {
-    "_comment": "Optional when principal_loaded; documents upstream principal slice ids — no secrets.",
-    "ref_obligation_ids": [],
-    "discover_fixture_ids": [],
-    "coverage_setup_check_ids": []
+      "note": "Greenfield: existing linked pre-condition issues are not structural input unless you opt in."
+    }
   },
   "fe_credentials": {
     "dxtrade5": "missing | supplied | waived",
@@ -73,8 +59,7 @@
   "session_placeholders": {
     "console_principal": "<username>",
     "account_code": "<account_code>",
-    "instrument_example": "<instrument_symbol>",
-    "_provision_tokens": "when needs_dual_account_contrast: group_key_enrg, group_key_oppt; persona routing tokens from ref downstream_hints.personas when cluster surfaces require"
+    "instrument_example": "<instrument_symbol>"
   },
   "command_patterns": {
     "ladder_step": [
@@ -83,18 +68,6 @@
       "show order last",
       "execution trade orderkey=<orderkey> orderstatus=COMPLETED price=<price> qty=<qty> transactiontime=now",
       "show position_metrics_from_publisher"
-    ]
-  },
-  "_command_patterns_widget_example": {
-    "watchlist_tier_by_qty": [
-      "Observe Watchlist bid/ask for default order qty; compare to TextConfiguration tier closest >= qty"
-    ],
-    "position_first_tier_quote": [
-      "Observe Position Book bid/ask from first tier Quote stream only"
-    ],
-    "console_show_prices_first_tier": [
-      "show prices for <instrument_symbol>",
-      "verify bid/ask from first TextConfiguration tier"
     ]
   },
   "test_skeleton": [],
@@ -112,8 +85,7 @@
         "check_id": "chk-001",
         "title": "Short scenario title",
         "intent": "What this case proves",
-        "pattern_ref": "ladder_step",
-        "_pattern_ref_topology": "Must reference key in command_patterns; map discover oracle_binding.oracle_rule via docs/precon-topology-contract.json oracle_rule_to_pattern_ref when topology loaded"
+        "pattern_ref": "ladder_step"
       }
     ]
   },

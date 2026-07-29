@@ -1,5 +1,0 @@
-{
-  "content": {
-    "value": "<table><tr><th><div><p>PL Calculation</p><ac:structured-macro ac:name=\"requirement\"><ac:parameter ac:name=\"type\">DEFINITION</ac:parameter><ac:parameter ac:name=\"key\">CRT-1741</ac:parameter></ac:structured-macro></div></th><td><div><p>FIFO: STOCKS, ETF</p><p>Weighted Average: FOREX (FX_SPOT subtype)</p></div></td></tr></table>"
-  }
-}

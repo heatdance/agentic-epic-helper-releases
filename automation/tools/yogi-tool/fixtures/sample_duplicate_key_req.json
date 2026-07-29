@@ -1,5 +1,0 @@
-{
-  "content": {
-    "value": "<table><tr><td><span>see</span><ac:structured-macro ac:name=\"requirement\"><ac:parameter ac:name=\"freetext\">Link</ac:parameter><ac:parameter ac:name=\"type\">LINK</ac:parameter><ac:parameter ac:name=\"key\">CRT-1999</ac:parameter></ac:structured-macro>)</td></tr></table><h2><span>2.2 Weighted Average</span><ac:structured-macro ac:name=\"requirement\"><ac:parameter ac:name=\"type\">DEFINITION</ac:parameter><ac:parameter ac:name=\"key\">CRT-1999</ac:parameter></ac:structured-macro></h2><p><span>Average Price and Open PL during cash settlement are calculated by weighted average for the instrument types configured accordingly.</span></p>"
-  }
-}

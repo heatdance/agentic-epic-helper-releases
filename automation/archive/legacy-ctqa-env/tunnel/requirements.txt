@@ -1,2 +1,0 @@
-# Optional: only needed for `python ctqa_pg.py --probe-only`
-psycopg[binary]>=3.1

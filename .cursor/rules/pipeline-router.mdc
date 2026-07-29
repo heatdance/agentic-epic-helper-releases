@@ -1,36 +1,8 @@
 ---
-description: Maps pipeline trigger phrases to playbooks; one scoped unit per run; temp cleanup under epics/
+description: Public guide — no executable pipelines
 alwaysApply: true
 ---
 
-# Pipeline router
+# Pipeline router (public export)
 
-When the user’s message matches a **pipeline trigger**, run the linked **playbook** end-to-end for **one** scoped unit (e.g. one Jira Epic key). Do not improvise a different procedure—follow the playbook file.
-
-**Epic workspace:** `{EpicDir}` = `epics/<KEY>/` for all epic pipelines below.
-
-## Trigger → pipeline
-
-- **`EPIC-PREP:`** + Epic key (e.g. `EPIC-PREP: CRT-1234`; optional `repo=` for Bitbucket prep search — Cloud `workspace/slug`, internal Stash `PROJECT_KEY/repo_slug` e.g. `BRO/xt`; optional **`focus=`**; optional **`strict_topology=yes`**; optional **`strict_principal=yes`**) → pipeline id `epic-prep` → playbook [`.cursor/pipelines/epic-prep.md`](../pipelines/epic-prep.md). **Schema v4** `obligations_proposed[]` with **`downstream_hints`**, **`verification_focus_proposed`**, **`principal_coverage_threads`** via per-requirement subprocesses + step **3i**; **`epic_prep_verify.py`** before finalize; **no** CRTQA / downstream artefacts as input; delete `{EpicDir}temp/` when done.
-- **`COVERAGE:`** + Epic key (e.g. `COVERAGE: CRT-593`; optional `repo=`; optional `focus=...`; optional **`fix_breadth=yes`** after ANALYSE; optional **`strict_principal=yes`**) → pipeline id `coverage` → playbook [`.cursor/pipelines/coverage.md`](../pipelines/coverage.md). Draft+truth: **`scenario_coverage_map`**, **`coverage_pass`**, **`--mode draft_truth`**; delete `{EpicDir}temp/` when done.
-- **`GROUND:`** + Epic key (e.g. `GROUND: CRT-594`; optional **`probe_waive=yes`**; optional **`proceed`**) → pipeline id `ground` → playbook [`.cursor/pipelines/ground.md`](../pipelines/ground.md). **Requires** `-coverage.json`; runtime **`runtime_probes[]`** on console checks; **`ground_verify.py --mode emit`**; delete `{EpicDir}temp/` when done.
-- **`ANALYSE:`** + Epic key (e.g. `ANALYSE: CRT-642`; optional **`known_issues=yes`**; optional **`strict_principal=yes`**) → pipeline id `analysis` → playbook [`.cursor/pipelines/analysis.md`](../pipelines/analysis.md). **Requires** `-coverage.json` (+ GROUND probes when console checks exist); **`analysis_verify.py --mode draft_truth`** in draft+truth chain; delete `{EpicDir}temp/` when done.
-- **`TEST-DISCOVER:`** + Epic key (e.g. `TEST-DISCOVER: CRT-594`; optional **`crtqa_index=yes`**; optional **`strict_topology=yes`** / **`strict_principal=yes`**) → pipeline id `test-discover` → playbook [`.cursor/pipelines/test-discover.md`](../pipelines/test-discover.md). **Linker only** after **`coverage_frozen_at`**: deterministic ledger + affordances — **no** Phase 0, **no** browser. Verifier: **`discover_verify.py --mode linker`**. Contract: [`docs/discover-linker-contract.json`](../../docs/discover-linker-contract.json).
-- **`COVERAGE-REINFORCE:`** *(legacy opt-in)* + Epic key → playbook [`.cursor/pipelines/coverage-reinforce.md`](../pipelines/coverage-reinforce.md). **Not** in default draft+truth chain after human coverage review.
-- **`TEST-PREP:`** + Epic key (e.g. `TEST-PREP: CRT-639`; optional **`map_only=yes`**; optional **`draft_profile=crtqa_outline`** legacy calibrate/benchmark only) → pipeline id `test-prep` → playbook [`.cursor/pipelines/test-prep.md`](../pipelines/test-prep.md). **Default `scenario_intent`:** one bundle per **`scenario_groups[]`**; plain-English intent actions; **no** Phase 0 / Chrome / **`-precon.json`**. Contract: [`docs/test-prep-scenario-intent-contract.json`](../../docs/test-prep-scenario-intent-contract.json). Verifier: **`test_prep_verify.py --mode scenario_intent`**. **`-tests.json`** schema v4; delete `{EpicDir}temp/` when done.
-- **`CLOSE:`** + Epic key (e.g. `CLOSE: CRT-639`; optional **`heal=no`**; optional **`strict_topology=yes`** / **`strict_principal=yes`**) → pipeline id `close` → playbook [`.cursor/pipelines/close.md`](../pipelines/close.md). Requires `{EpicDir}<KEY>-ref.json`, `-coverage.json`, `-discover.json`, `-tests.json` at epic root (**no** `-precon.json` in v3); regenerate **three** root `.md` (coverage, analysis, tests); archive to `{EpicDir}context/`; delete `{EpicDir}temp/` when done.
-
-**Operator calibration (not a pipeline trigger):** **`/epic-calibrate`** — slash command; playbook [`.cursor/pipelines/calibrate.md`](../pipelines/calibrate.md); compares `epics/<KEY>/` to operator gold under `.cursor/calibrate/<KEY>-gold/`; does not write epic artefacts.
-
-
-**Epic orchestrator (not a single pipeline):** **`/epic-helper`**, **`/epic-helper resume`** — [`docs/epic-helper-contract.json`](../../docs/epic-helper-contract.json) **v5**; command [`.cursor/commands/epic-helper.md`](../commands/epic-helper.md). **One pipeline stage per agent turn**; no PRECON in default chain.
-
-
-**Legacy (not production chain):** **`TEST-PRECON:`** → [`.cursor/pipelines/test-precon.md`](../pipelines/test-precon.md) (calibrate/benchmark only).
-
-## Hard rules
-
-1. **One epic key** (or one primary scope) per pipeline run unless the user explicitly widens scope.
-2. **No secrets** in repo files (passwords, session cookies, tokens)—see [harness-maintenance.mdc](harness-maintenance.mdc) and Atlassian rules.
-4. **Downstream trust**: later pipelines should treat **`synthesis`** and **`traversal.xt_refs`** as provisional until steps 3.4 / 3.6 in the playbook have run; **`requirements[]`** entries are tool-backed when `snippet_text` / `page_id` are filled from Yogi/MCP, not invented. **`implementation.hits`** on the epic ref are tool-backed when populated from Bitbucket MCP in EPIC-PREP step **5b**; COVERAGE renumbers/dedupes them in phase **7**.
-
+Guide-only tree. Read `.cursor/pipelines/*-readme.md`. Implement triggers in your private harness.

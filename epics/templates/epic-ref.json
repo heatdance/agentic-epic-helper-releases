@@ -110,7 +110,7 @@
     "_platform_reuse_candidate_item": {
       "id": "prc-001",
       "topic": "EOD backup",
-      "suggested_crtqa_pattern": "Platform regression TC family for daily_data_recorder",
+      "suggested_fixture_pattern": "Platform regression TC family for daily_data_recorder",
       "confidence": "high | medium | low",
       "evidence": "Keyword or requirement trigger",
       "binding": "suggestion_only"
@@ -242,3 +242,4 @@
     "bitbucket_searched_at": null
   }
 }
+

@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# Placeholders __PW_B64__, __CMD_B64__, __SUDO__, __TERM__ filled by Invoke-CrtqaHostShell.ps1.
-# Lands in project-user login shell (ctqa/ctuat) WITHOUT `dx run console`.
-set -euo pipefail
-PW="$( printf '%s' '__PW_B64__' | base64 -d )"
-printf '%s\n' "${PW}" | sudo -S su - __SUDO__ -c "export TERM=__TERM__ ; printf '%s' '__CMD_B64__' | base64 -d | bash -s"

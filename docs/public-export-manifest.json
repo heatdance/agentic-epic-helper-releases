@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "export_version": "1.8.0",
+  "last_source_branch": "team",
+  "last_source_sha": "8bd09d3d63a182a725c769d0fd4c60893d580944",
+  "notes": "Guide-only export; shared README across tiers"
+}
