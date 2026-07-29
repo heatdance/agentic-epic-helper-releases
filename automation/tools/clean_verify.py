@@ -432,8 +432,8 @@ def mode_align(root: Path, contract: dict[str, Any]) -> int:
     registry = align.get("registry_pipeline_ids", [])
     router_path = root / ".cursor/rules/pipeline-router.mdc"
     router_text = _read_text(router_path)
-    if "CLEAN:" not in router_text:
-        return _fail("pipeline-router.mdc missing CLEAN:")
+    if "/clean" not in router_text:
+        return _fail("pipeline-router.mdc missing /clean publish note")
 
     stale = align.get("stale_triggers_forbidden", [])
     for s in stale:
@@ -451,8 +451,10 @@ def mode_align(root: Path, contract: dict[str, Any]) -> int:
 
     packages = hmap.get("tiers", [{}])[1].get("match_any_package", []) if hmap.get("tiers") else []
     ids = [p.get("id") for p in packages if isinstance(p, dict)]
-    if "clean_release" not in ids:
-        return _fail("harness-map missing clean_release package")
+    if "clean" not in ids:
+        return _fail("harness-map missing clean package")
+    if "clean_release" in ids:
+        return _fail("harness-map still has clean_release (rename to clean)")
     if "public_scrub_pipeline" in ids or "sync_pipeline" in ids:
         return _fail("harness-map still has public_scrub_pipeline or sync_pipeline")
 
@@ -460,6 +462,10 @@ def mode_align(root: Path, contract: dict[str, Any]) -> int:
     playbooks = {p.stem for p in pipelines_dir.glob("*.md") if p.is_file()}
     if "clean" not in playbooks:
         return _fail("missing .cursor/pipelines/clean.md")
+    if not (root / ".cursor/commands/clean.md").is_file():
+        return _fail("missing .cursor/commands/clean.md")
+    if (root / ".cursor/commands/clean-release.md").is_file():
+        return _fail("obsolete .cursor/commands/clean-release.md still present")
     if "public-scrub" in playbooks or "sync" in playbooks:
         return _fail("old playbooks public-scrub.md or sync.md still present")
 
@@ -479,8 +485,10 @@ def mode_align(root: Path, contract: dict[str, Any]) -> int:
                 return _fail(f"stale branch name {branch!r} in {t1}")
 
     howto = _read_text(root / "HOW-TO.md")
-    if "CLEAN:" not in howto:
-        return _fail("HOW-TO.md missing CLEAN:")
+    if "/clean" not in howto:
+        return _fail("HOW-TO.md missing /clean")
+    if "CLEAN:" in howto:
+        return _fail("HOW-TO.md still has obsolete CLEAN:")
 
     return _ok("align")
 
@@ -513,16 +521,16 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
             return _fail(f"team MCP example missing: {rel}")
 
     router = _read_text(root / ".cursor/rules/pipeline-router.mdc")
-    if "CLEAN:" in router:
-        return _fail("team router must not include CLEAN:")
+    if "/clean" in router or "CLEAN:" in router:
+        return _fail("team router must not include /clean or CLEAN:")
 
     agents = _read_text(root / "AGENTS.md")
     if "clean.md" in agents and "pipelines/clean" in agents:
         return _fail("AGENTS.md must not reference clean.md")
 
     howto = _read_text(root / "HOW-TO.md")
-    if "CLEAN:" in howto:
-        return _fail("HOW-TO.md must not contain CLEAN:")
+    if "/clean" in howto or "CLEAN:" in howto:
+        return _fail("HOW-TO.md must not contain /clean or CLEAN:")
 
     readme = _read_text(root / "README.md")
     if "agentic-epic-helper-releases" in readme:
@@ -587,8 +595,8 @@ def mode_team(root: Path, contract: dict[str, Any]) -> int:
             hmap = json.load(f)
         packages = hmap.get("tiers", [{}])[1].get("match_any_package", []) if hmap.get("tiers") else []
         ids = [p.get("id") for p in packages if isinstance(p, dict)]
-        if "clean_release" in ids:
-            return _fail("harness-map must not include clean_release on team tree")
+        if "clean" in ids or "clean_release" in ids:
+            return _fail("harness-map must not include clean/clean_release on team tree")
         if "release_notes" in ids:
             return _fail("harness-map must not include release_notes on team tree")
         for forbidden_pkg in ("epic_stats", "", ""):

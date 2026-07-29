@@ -197,7 +197,7 @@ Adapted from [grounding-kit](https://github.com/heatdance/grounding-kit); charte
 | **Conversation** | Questions, review-only | No epic or harness edits; no `qa-handoff` churn for chat-only turns |
 | **Action** | `EPIC-PREP:` … `CLOSE:`, slash commands, harness doc edits, epic artefacts | Playbooks + verifiers; update handoff before session end |
 
-**Pipeline triggers** (`EPIC-PREP:` … `CLOSE:`, `CLEAN:`, slash commands in [`grounding-integration.json`](grounding-integration.json)) are **high confidence for declared scope** — see [`.cursor/rules/intent-corner.mdc`](../.cursor/rules/intent-corner.mdc).
+**Pipeline triggers** (`EPIC-PREP:` … `CLOSE:`, slash commands including **`/clean`** in [`grounding-integration.json`](grounding-integration.json)) are **high confidence for declared scope** — see [`.cursor/rules/intent-corner.mdc`](../.cursor/rules/intent-corner.mdc).
 
 ### Action-close (harness or session work)
 

@@ -1,18 +1,21 @@
 ---
-description: Start, status, probe, or stop the multiplexed CRTQA SSH console session.
+description: Start, status, probe, host-shell, or stop the multiplexed CRTQA SSH session.
 ---
 
 # /crtqa-console
 
-Goal: operator authenticates **once per workstation session** via a desktop dialog; the **agent** reuses multiplexed **PuTTY `plink`** for **status**, **probe**, and **Invoke** batches.
+Goal: operator authenticates **once per workstation session** via a desktop dialog; the **agent** reuses multiplexed **PuTTY `plink`** for **status**, **probe**, **dx Invoke**, and **host shell** batches.
 
 **Default:** `/crtqa-console` with no subcommand = **`start`** (backward compatible).
+
+Contract + log map: [`docs/crtqa-console-contract.json`](../../docs/crtqa-console-contract.json).
 
 | User says | Agent runs | Human? |
 |-----------|------------|--------|
 | `/crtqa-console` or **`start`** | `Start-CrtqaConsoleSession.ps1` | **Yes** — password dialog |
 | **`status`** | `Get-CrtqaConsoleStatus.ps1` | No |
 | **`probe`** | `Invoke-CrtqaDxConsole.ps1 -Probe` | No |
+| **`host`** / log greps | `Invoke-CrtqaHostShell.ps1 -Commands @(...)` | No |
 | **`stop`** | `Stop-CrtqaConsoleSession.ps1` | No |
 
 All commands from **repo root**:
@@ -28,6 +31,7 @@ pwsh -NoProfile -File automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps
 
 ```powershell
 . ./automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1 -Commands @('help','exit')
+. ./automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1 -Commands @('pwd','ls log/dxweb.default.*')
 ```
 
 ## A. Cold session handshake (`start`)
@@ -50,11 +54,21 @@ After **`start`**, SSH layer is reusable via **`plink -share`**. **sudo** still 
 - **`status`** — read-only; writes `temp/crtqa-console/gate-status.json`; exit 0/1.
 - **`probe`** — non-destructive `show console_guide` + `exit` (TEST-DISCOVER Step E depth).
 
-## C. Scripted batches (`Invoke` without subcommand)
+## C. Scripted dx batches (`Invoke` without subcommand)
 
 Agents may run **`-Commands @('…','exit')`** via dot-source or child `pwsh -Command` wrapper (see README).
 
 Transcripts: **`temp/crtqa-console/invoke-*.log`**.
+
+## C2. Host shell (`host` — no `dx`)
+
+Same multiplex + `sudo su - <ctqa|ctuat>`, but lands in the **project login shell** (`/opt/ctqa` or `/opt/ctuat`) without `dx run console`. Use for **`./log/`** greps and filesystem inspection.
+
+```powershell
+. ./automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1 -Commands @('pwd','ls log/dxweb.default.*')
+```
+
+Transcripts: **`temp/crtqa-console/host-*.log`**. Log naming / component map: contract **`host_logs`**.
 
 ## D. Tear down (`stop`)
 
@@ -80,4 +94,4 @@ Kills tracked **plink** PID; removes **session.active.json** + **DPAPI credentia
 
 ## Docs
 
-[`automation/tools/crtqa-console/README.md`](../../automation/tools/crtqa-console/README.md)
+[`docs/crtqa-console-contract.json`](../../docs/crtqa-console-contract.json) · [`automation/tools/crtqa-console/README.md`](../../automation/tools/crtqa-console/README.md)

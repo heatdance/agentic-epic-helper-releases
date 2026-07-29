@@ -1,6 +1,13 @@
-# crtqa-console — multiplex SSH + scripted `dx`
+# crtqa-console — multiplex SSH + scripted `dx` / host shell
 
-Windows-first tooling to reach **`dx run console`** on CRTQA hosts using **PuTTY `plink`** without committing secrets. Agent-facing workflow, truth hierarchy, and Confluence trust levels: **[docs/dxcore-console-harness.json](../../../docs/dxcore-console-harness.json)** (T1 **`dxcore_console`** in [docs/harness-map.json](../../../docs/harness-map.json)).
+Windows-first tooling to reach CRTQA hosts using **PuTTY `plink`** without committing secrets. Two agent modes after **`/crtqa-console start`**:
+
+| Mode | Script | Lands in |
+|------|--------|----------|
+| **dx console** | `Invoke-CrtqaDxConsole.ps1` | `sudo su - <ctqa\|ctuat>` → **`dx run console`** |
+| **host shell** | `Invoke-CrtqaHostShell.ps1` | same sudo login shell **without** `dx` (project home → `./log/`) |
+
+Contract + component log map: **[docs/crtqa-console-contract.json](../../../docs/crtqa-console-contract.json)**. Doctrine / Confluence trust: **[docs/dxcore-console-harness.json](../../../docs/dxcore-console-harness.json)** (T1 **`dxcore_console`**).
 
 ## Paths (recommended)
 
@@ -9,8 +16,9 @@ Windows-first tooling to reach **`dx run console`** on CRTQA hosts using **PuTTY
 | **`Start-CrtqaConsoleSession.ps1`** | Operator + agent (`/crtqa-console start`) | One desktop dialog (**username + password**), multiplex upstream (`plink -share -N`), stash **sudo** credential via Windows **DPAPI** under `temp/crtqa-console/`. |
 | **`Get-CrtqaConsoleStatus.ps1`** | Agents | Read-only session + PID + multiplex echo; writes `temp/crtqa-console/gate-status.json`. |
 | **`Invoke-CrtqaDxConsole.ps1`** | Agents | Run non-interactive `dx` batches over **`plink -share`**; **`-Probe`** for bounded `show console_guide`; append `invoke-*.log`. |
+| **`Invoke-CrtqaHostShell.ps1`** | Agents | Non-interactive **host bash** as project user (no `dx`); greps under `./log/`; append `host-*.log`. |
 | **`Stop-CrtqaConsoleSession.ps1`** | Operators / teardown (`/crtqa-console stop`) | Kill upstream **`plink`** PID + delete state + credential blob. |
-| **`Enter-CrtqaConsole.ps1`** | Operator only | Opens an interactive TTY/`dx`; no multiplex bookkeeping. Prefer **Start/Invoke** for cold sessions.
+| **`Enter-CrtqaConsole.ps1`** | Operator only | Opens an interactive TTY/`dx`; no multiplex bookkeeping. Prefer **Start/Invoke** for cold sessions. |
 
 ## Prerequisites
 
@@ -46,13 +54,21 @@ Bounded console probe (TEST-DISCOVER Step E):
 pwsh -NoProfile -File automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1 -Probe
 ```
 
+Host shell (logs / filesystem — **no** `dx`):
+
+```powershell
+. ./automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1 -Commands @('pwd','ls log/dxweb.default.*','grep -n rolling-transactions log/dxweb.default.ctuat.log | tail -40')
+```
+
+Logs are **flat files** under `log/` (symlink to `/opt/log/<ctqa|ctuat>/log`), named `<component>.<instance>.<env>.log` — see contract `host_logs`.
+
 Cleanup:
 
 ```powershell
 pwsh -NoProfile -File automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps1
 ```
 
-Slash commands: [`.cursor/commands/crtqa-console.md`](../../../.cursor/commands/crtqa-console.md) (`start` | `status` | `probe` | `stop`). Console gate: [`crtqa_console_probe.py`](../crtqa_console_probe.py) (epic-helper + GROUND).
+Slash commands: [`.cursor/commands/crtqa-console.md`](../../../.cursor/commands/crtqa-console.md) (`start` | `status` | `probe` | `host` | `stop`). Console gate: [`crtqa_console_probe.py`](../crtqa_console_probe.py) (epic-helper + GROUND).
 
 **Linux CI (dxCity):** OpenSSH transport on build agents — [automation/CI/README.md](../../CI/README.md) (full pipeline) · [automation/docs/crtqa-console-ci.md](../../docs/crtqa-console-ci.md) (console gate only).
 

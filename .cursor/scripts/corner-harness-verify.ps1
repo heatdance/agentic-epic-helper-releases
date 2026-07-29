@@ -46,7 +46,7 @@ if (Test-Path $gi) {
   ".cursor/commands/epic-helper.md",
   ".cursor/commands/epic-stats.md",
   ".cursor/commands/epic-calibrate.md",
-  ".cursor/commands/clean-release.md",
+  ".cursor/commands/clean.md",
   ".cursor/commands/release-notes.md",
   ".cursor/commands/crtqa-console.md"
 ) | ForEach-Object {

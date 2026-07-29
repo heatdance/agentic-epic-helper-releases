@@ -42,7 +42,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 
 | Area | Path |
 |------|------|
-| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:`; optional `fix_breadth=yes`), [`ground.md`](.cursor/pipelines/ground.md) (`GROUND:`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:` **linker**), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` **scenario_intent**), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:`), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:` **legacy**), [`coverage-reinforce.md`](.cursor/pipelines/coverage-reinforce.md) (`COVERAGE-REINFORCE:` **legacy opt-in**), [`clean.md`](.cursor/pipelines/clean.md) (`CLEAN:` — **`personal` only**). **Draft+truth master:** [`docs/draft-truth-contract.json`](docs/draft-truth-contract.json) |
+| All pipelines + triggers | [`.cursor/pipelines/`](.cursor/pipelines/) — [`epic-prep.md`](.cursor/pipelines/epic-prep.md) (`EPIC-PREP:`), [`coverage.md`](.cursor/pipelines/coverage.md) (`COVERAGE:`; optional `fix_breadth=yes`), [`ground.md`](.cursor/pipelines/ground.md) (`GROUND:`), [`analysis.md`](.cursor/pipelines/analysis.md) (`ANALYSE:`), [`test-discover.md`](.cursor/pipelines/test-discover.md) (`TEST-DISCOVER:` **linker**), [`test-prep.md`](.cursor/pipelines/test-prep.md) (`TEST-PREP:` **scenario_intent**), [`close.md`](.cursor/pipelines/close.md) (`CLOSE:`), [`test-precon.md`](.cursor/pipelines/test-precon.md) (`TEST-PRECON:` **legacy**), [`coverage-reinforce.md`](.cursor/pipelines/coverage-reinforce.md) (`COVERAGE-REINFORCE:` **legacy opt-in**), [`clean.md`](.cursor/pipelines/clean.md) (`/clean` — **`personal` only**). **Draft+truth master:** [`docs/draft-truth-contract.json`](docs/draft-truth-contract.json) |
 
 ### Epics
 
@@ -64,7 +64,8 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Yogi URL resolve + lightweight snippets | [automation/docs/yogi-url-resolve.md](automation/docs/yogi-url-resolve.md) · [yogi-tool/](automation/tools/yogi-tool/) (`yogi_resolve.py`, `yogi_snippet.py`, `yogi_extract.py`) |
 | CTQA console multiplex probe | [crtqa_console_probe.py](automation/tools/crtqa_console_probe.py) — epic-helper + GROUND gate |
-| CTQA **`dx run console`** (SSH/plink) · slash **`/crtqa-console`** (`start` \| `status` \| `probe` \| `stop`) | [automation/tools/crtqa-console/README.md](automation/tools/crtqa-console/README.md) · `Start-` / `Get-CrtqaConsoleStatus` / `Invoke -Probe` / `Stop-`; interactive: `Enter-CrtqaConsole.ps1` |
+| CTQA **`dx run console`** / host shell · slash **`/crtqa-console`** | [README](automation/tools/crtqa-console/README.md) · [contract + host logs](docs/crtqa-console-contract.json) · `Start-` / `Get-CrtqaConsoleStatus` / `Invoke-CrtqaHostShell` / `Stop-` |
+| Corner Epic QA CI (dxCity) | [automation/CI/README.md](automation/CI/README.md) · [teamcity scripts](automation/tools/teamcity/) |
 | **jq** JSON projection (system PATH; agent inspect) | [automation/docs/jq.md](automation/docs/jq.md) · `winget install --id jqlang.jq -e` (Windows); rule [`.cursor/rules/jq-json.mdc`](.cursor/rules/jq-json.mdc) |
 | **Jira Structure formulas** (Roadmap QA columns + QA End Date) | [docs/jira-structure-contract.json](docs/jira-structure-contract.json) · [automation/structure/](automation/structure/) · [automation/docs/jira-structure.md](automation/docs/jira-structure.md) |
 | Agent scratch / temp | [automation/temp/](automation/temp/) |
@@ -76,7 +77,7 @@ Devexperts — **Corner Trader**. This repository is a **QA workspace**: templat
 |------|------|
 | Rules (harness) | [.cursor/rules/](.cursor/rules/) |
 | Prompt scaffolds | [.cursor/prompts/](.cursor/prompts/) (e.g. [corner-adhoc-qa.md](.cursor/prompts/corner-adhoc-qa.md) for unstructured ticket/incident questions) |
-| Custom commands | [.cursor/commands/](.cursor/commands/) — **`/epic-helper`**, **`/epic-stats`**, **`/epic-calibrate`**, **`/clean-release`**, **`/release-notes`**, **`/crtqa-console`** |
+| Custom commands | [.cursor/commands/](.cursor/commands/) — **`/epic-helper`**, **`/epic-stats`**, **`/epic-calibrate`**, **`/clean`**, **`/release-notes`**, **`/crtqa-console`** |
 | Corner harness hygiene (hooks) | [corner-harness-verify.ps1](.cursor/scripts/corner-harness-verify.ps1) · [automation/docs/corner-harness-verify.md](automation/docs/corner-harness-verify.md) |
 | Calibrate verifier | [calibrate_verify.py](automation/tools/calibrate_verify.py) · [automation/docs/calibrate.md](automation/docs/calibrate.md) |
 | EPIC-PREP verifier | [epic_prep_verify.py](automation/tools/epic_prep_verify.py) · [automation/docs/epic-prep-verify.md](automation/docs/epic-prep-verify.md) |

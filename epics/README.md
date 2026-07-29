@@ -41,7 +41,7 @@ EPIC-PREP → COVERAGE → GROUND → ANALYSE → coverage_review (+ scenario_gr
 
 # Repo-wide harness
 
-- **`CLEAN:`** — **`personal` branch only** — [`.cursor/pipelines/clean.md`](../.cursor/pipelines/clean.md)
+- **`/clean`** — **`personal` branch only** — [`.cursor/commands/clean.md`](../.cursor/commands/clean.md) · [`.cursor/pipelines/clean.md`](../.cursor/pipelines/clean.md)
 - **`/epic-calibrate`** — post-hoc prod vs gold — [automation/docs/calibrate.md](../automation/docs/calibrate.md)
 
 Router: [.cursor/rules/pipeline-router.mdc](../.cursor/rules/pipeline-router.mdc).

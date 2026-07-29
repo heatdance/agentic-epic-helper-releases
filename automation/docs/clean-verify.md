@@ -10,7 +10,7 @@ Normative contract: [docs/clean-contract.json](../../docs/clean-contract.json) (
 | `secret_scan` | Forbidden paths and secret-like strings before personal commit |
 | `semver_next` | Next public branch; `--json` → `target_branch`, `superseded_branch`, `export_version` |
 | `file_map` | Validate `automation/temp/clean/file-map.json` |
-| `align` | Personal harness: router `CLEAN:`, harness-map, HOW-TO, no stale scrub/sync |
+| `align` | Personal harness: router `/clean` note, harness-map `clean` package, HOW-TO, no stale scrub/sync |
 | `team` | Team tree strip checks on `--root` (usually `.` while on `team` branch) |
 | `team_tip` | `--sha <TEAM_SHA>` matches `team/team` (gate before Phase U) |
 | `prune_team_remote` | Delete all heads on `team` remote except `team` |

@@ -13,7 +13,7 @@ Normative pipeline: [`.cursor/pipelines/clean.md`](../../.cursor/pipelines/clean
 | `team/team` SHA ≠ latest strip export | PR never merged; public built from worktree commit |
 | `release-1.1.0` on releases | Legacy naming; U0 delete was best-effort only |
 | Local `public-1.1` tracks `release-1.1.0` | Old clone; not removed by supersede of older `public-*` |
-| MCP servers missing after full `CLEAN:` | Phase U **`clean_apply_public`** deleted gitignored **`.cursor/mcp.json`** from the shared worktree (fixed: skip when `git check-ignore`) |
+| MCP servers missing after full `/clean` | Phase U **`clean_apply_public`** deleted gitignored **`.cursor/mcp.json`** from the shared worktree (fixed: skip when `git check-ignore`) |
 
 ## Remediation steps (PowerShell)
 
@@ -71,4 +71,4 @@ git ls-remote --heads team
 git ls-remote --heads releases
 ```
 
-Then run **`CLEAN: proceed`** and confirm **`postflight`** OK.
+Then run **`/clean proceed`** and confirm **`postflight`** OK.

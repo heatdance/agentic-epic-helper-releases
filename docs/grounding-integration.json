@@ -62,17 +62,27 @@
   ],
   "pipeline_trigger_exceptions": [
     {
-      "triggers": ["EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"],
+      "triggers": [
+        "EPIC-PREP:",
+        "COVERAGE:",
+        "ANALYSE:",
+        "TEST-DISCOVER:",
+        "TEST-PRECON:",
+        "TEST-PREP:",
+        "CLOSE:"
+      ],
       "confidence": "high",
       "scope": "One epic key per run; playbook steps only; no scope widen without user"
     },
     {
-      "triggers": ["CLEAN:"],
-      "confidence": "high",
-      "scope": "Branch personal only; docs/clean-contract.json phases"
-    },
-    {
-      "triggers": ["/epic-helper", "/epic-stats", "/epic-calibrate", "/clean-release", "/release-notes", "/crtqa-console"],
+      "triggers": [
+        "/epic-helper",
+        "/epic-stats",
+        "/epic-calibrate",
+        "/clean",
+        "/release-notes",
+        "/crtqa-console"
+      ],
       "confidence": "high",
       "scope": "Per matching .cursor/commands/*.md playbook"
     }
@@ -97,7 +107,12 @@
   ],
   "remediation": {
     "status": "complete",
-    "passes_completed": ["0", "1", "2", "3"],
+    "passes_completed": [
+      "0",
+      "1",
+      "2",
+      "3"
+    ],
     "completed_when": "2026-05-25"
   },
   "commit_guidance": {

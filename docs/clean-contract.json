@@ -1,7 +1,7 @@
 {
-  "_comment": "Normative contract for CLEAN: pipeline. Referenced by .cursor/pipelines/clean.md and automation/tools/clean_verify.py.",
+  "_comment": "Normative contract for /clean publish. Referenced by .cursor/pipelines/clean.md, .cursor/commands/clean.md, and automation/tools/clean_verify.py.",
   "schema_version": 3,
-  "trigger": "CLEAN:",
+  "trigger": "/clean",
   "required_branch": "personal",
   "tier_matrix": "docs/clean-publish-tier-matrix.json",
   "entry_templates_dir": "docs/clean-entry-templates",
@@ -15,7 +15,7 @@
     },
     "team": {
       "remote": "team",
-      "url": "https://github.com/heatdance/agentic-epic-helper-team.git",
+      "url": "ssh://git@stash.in.devexperts.com:7999/ai/agentic-feature-helper.git",
       "branch": "team"
     },
     "public": {
@@ -30,7 +30,10 @@
     "export_version_from_branch": "{major}.{minor}.0",
     "auto_increment_minor": true,
     "minor_max_before_gate": 9,
-    "legacy_branches_delete": ["release-1.0.0", "release-1.1.0"],
+    "legacy_branches_delete": [
+      "release-1.0.0",
+      "release-1.1.0"
+    ],
     "legacy_branches_delete_required": true,
     "trigger_tokens": {
       "version": "version=M.N forces branch public-M.N",
@@ -47,13 +50,22 @@
   "checkout_model": "sequential",
   "branch_policy": {
     "allowed_remote_branches": {
-      "origin": ["personal"],
-      "team": ["team"],
+      "origin": [
+        "personal"
+      ],
+      "team": [
+        "team"
+      ],
       "releases_public_pattern": "^public-\\d+\\.\\d+$"
     },
-    "forbidden_remote_patterns": ["clean/*", "release-*"],
+    "forbidden_remote_patterns": [
+      "clean/*",
+      "release-*"
+    ],
     "max_public_branches_on_releases": 1,
-    "forbidden_local_patterns": ["clean/*"],
+    "forbidden_local_patterns": [
+      "clean/*"
+    ],
     "known_worktree_paths_forbidden": [
       "../cursor-corner-team-build",
       "../cursor-corner-public-build",
@@ -67,7 +79,7 @@
   },
   "tier_goals": {
     "personal": "Maintainer-only backup on origin/personal: full tree except gitignore; includes epics, qa-handoff, releases/**, /release-notes, calibrate gold; stats latest-*.md optional locally (gitignored by default).",
-    "team": "Private squad repo (agentic-epic-helper-team): shared team truth in org maps; runnable harness + /epic-helper + calibrate on clone after MCP/creds; no maintainer epics, release-notes, publish flow, stats, coaches, or teach.",
+    "team": "Private squad on Stash AI/agentic-feature-helper (branch team): shared team truth in org maps; runnable harness + /epic-helper + calibrate on clone after MCP/creds; no maintainer epics, release-notes, publish flow, stats, coaches, or teach.",
     "public": "External guide on releases/public-M.N: *-readme.md methodology; orchestrator and calibrate conceptual in HOW-TO only; no playbooks, verifiers, org truth, MCP recipes, epic-stats, coaches, teach, or release-notes."
   },
   "stats_personal_preserve": {
@@ -124,7 +136,6 @@
       ".cursor/commands/teach.md",
       ".cursor/commands/crtqa-helper.md",
       ".cursor/commands/crtqa-stats.md",
-      ".cursor/commands/clean-release.md",
       ".cursor/commands/clean.md",
       "docs/operator-assist-contract.json",
       "docs/skill-authoring-patterns.json",
@@ -172,17 +183,23 @@
       ".cursor/mcp.json.team.example"
     ],
     "router": {
-      "exclude_triggers": ["CLEAN:"]
+      "exclude_triggers": [
+        "/clean"
+      ]
     },
-    "harness_map_strip_package_ids": ["clean_release", "release_notes", "epic_stats", "operator_assist", "auto_tests_teach"],
+    "harness_map_strip_package_ids": [
+      "clean",
+      "release_notes",
+      "epic_stats",
+      "operator_assist",
+      "auto_tests_teach"
+    ],
     "entry_templates": {
-      "README.md": "README.team.md",
       "HOW-TO.md": "HOW-TO.team.md",
       "AGENTS.md": "AGENTS.team.md"
     },
     "forbidden_substrings": [
-      "CLEAN:",
-      "clean_release",
+      "/clean",
       "/release-notes",
       "release-notes-contract",
       "release_notes.py",
@@ -195,9 +212,7 @@
       "benchmark_suite",
       ".cursor/benchmark/"
     ],
-    "forbidden_substrings_allow_if": {
-      "heatdance/agentic-epic-helper": ["heatdance/agentic-epic-helper-team"]
-    }
+    "forbidden_substrings_allow_if": {}
   },
   "public": {
     "source_ref": "team/team",
@@ -236,7 +251,10 @@
       {
         "id": "pipeline_playbook",
         "match": ".cursor/pipelines/*.md",
-        "exclude": ["clean.md", "*-readme.md"],
+        "exclude": [
+          "clean.md",
+          "*-readme.md"
+        ],
         "action": "replace_with_readme",
         "readme_suffix": "-readme.md"
       },
@@ -275,7 +293,16 @@
       "close"
     ],
     "router": {
-      "exclude_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"],
+      "exclude_triggers": [
+        "/clean",
+        "EPIC-PREP:",
+        "COVERAGE:",
+        "ANALYSE:",
+        "TEST-DISCOVER:",
+        "TEST-PRECON:",
+        "TEST-PREP:",
+        "CLOSE:"
+      ],
       "mode": "guide_only"
     },
     "manifest_path": "docs/public-export-manifest.json",
@@ -285,7 +312,8 @@
       ".cursor/mcp.json",
       ".cursor/commands/release-notes.md",
       "docs/release-notes-contract.json",
-      "automation/tools/release_notes.py"
+      "automation/tools/release_notes.py",
+      ".cursor/commands/clean.md"
     ],
     "template_overlays": {
       "epics/templates/discover-ref.json": "epics/templates/public/discover-ref.json",
@@ -319,7 +347,12 @@
     ]
   },
   "blocklist": {
-    "path_patterns": ["secrets.properties", "**/crtqa-console.local.json", ".cursor/mcp.json", ".env"],
+    "path_patterns": [
+      "secrets.properties",
+      "**/crtqa-console.local.json",
+      ".cursor/mcp.json",
+      ".env"
+    ],
     "rg_patterns": [
       "jira\\.in\\.devexperts",
       "confluence\\.in\\.devexperts",
@@ -336,7 +369,16 @@
       "QAPORTAL",
       "heatdance/agentic-epic-helper(?!-releases)"
     ],
-    "rg_allow_globs": ["*.example", "*.example.json", "*-readme.md", "clean-contract.json", "clean-public-style.md", "clean-verify.md", "clean.md", "clean_verify.py"]
+    "rg_allow_globs": [
+      "*.example",
+      "*.example.json",
+      "*-readme.md",
+      "clean-contract.json",
+      "clean-public-style.md",
+      "clean-verify.md",
+      "clean.md",
+      "clean_verify.py"
+    ]
   },
   "align": {
     "registry_pipeline_ids": [
@@ -350,24 +392,59 @@
       "close",
       "clean"
     ],
-    "stale_triggers_forbidden": ["PUBLIC-SCRUB:", "SYNC:", "PUBLIC-SCRUB", "SYNC"],
-    "stale_branch_names_forbidden_in_t1": ["develop", "main", "release"],
-    "t1_files": ["AGENTS.md", "README.md", "HOW-TO.md", ".cursor/rules/qa-artifacts.mdc"]
+    "stale_triggers_forbidden": [
+      "PUBLIC-SCRUB:",
+      "SYNC:",
+      "PUBLIC-SCRUB",
+      "SYNC"
+    ],
+    "stale_branch_names_forbidden_in_t1": [
+      "develop",
+      "main",
+      "release"
+    ],
+    "t1_files": [
+      "AGENTS.md",
+      "README.md",
+      "HOW-TO.md",
+      ".cursor/rules/qa-artifacts.mdc"
+    ]
   },
   "calibrate": {
     "_comment": "Operator gold folders may stay on personal; scrub secrets in reports.",
-    "team_keep_globs": [".cursor/calibrate/README.md", ".cursor/commands/epic-calibrate.md", "docs/calibrate-contract.json"],
-    "team_delete_globs": [".cursor/calibrate/reports/**", ".cursor/calibrate/*-gold/**"]
+    "team_keep_globs": [
+      ".cursor/calibrate/README.md",
+      ".cursor/commands/epic-calibrate.md",
+      "docs/calibrate-contract.json"
+    ],
+    "team_delete_globs": [
+      ".cursor/calibrate/reports/**",
+      ".cursor/calibrate/*-gold/**"
+    ]
   },
   "router_tiers": {
     "personal": {
-      "include_triggers": ["CLEAN:", "EPIC-PREP:", "COVERAGE:", "COVERAGE-REINFORCE:", "ANALYSE:", "TEST-DISCOVER:", "TEST-PRECON:", "TEST-PREP:", "CLOSE:"]
+      "include_triggers": [
+        "/clean",
+        "EPIC-PREP:",
+        "COVERAGE:",
+        "COVERAGE-REINFORCE:",
+        "ANALYSE:",
+        "TEST-DISCOVER:",
+        "TEST-PRECON:",
+        "TEST-PREP:",
+        "CLOSE:"
+      ]
     },
     "team": {
-      "exclude_triggers": ["CLEAN:"]
+      "exclude_triggers": [
+        "/clean"
+      ]
     },
     "public": {
-      "exclude_triggers": ["CLEAN:"],
+      "exclude_triggers": [
+        "/clean"
+      ],
       "guide_only": true
     }
   }

@@ -1,6 +1,6 @@
-# Pipeline: CLEAN (align, publish personal, team, public)
+# Playbook: /clean (align, publish personal, team, public)
 
-**Trigger**: user message starts with **`CLEAN:`**. Optional tokens on the same line:
+**Trigger**: slash command **`/clean`** (see [`.cursor/commands/clean.md`](../commands/clean.md)). Optional tokens on the same line:
 
 | Token | Meaning |
 |-------|---------|
@@ -14,15 +14,15 @@
 | **`skip_personal_push=yes`** | Run align without commit/push (testing) |
 | **`proceed`** | Acknowledge dirty working tree on personal |
 
-**Scope**: One publish run from branch **`personal` only**. **Router**: [`.cursor/rules/pipeline-router.mdc`](../rules/pipeline-router.mdc). **Contract**: [`docs/clean-contract.json`](../../docs/clean-contract.json). **Verifier**: [`automation/tools/clean_verify.py`](../../automation/tools/clean_verify.py). **Style (public)**: [`docs/clean-public-style.md`](../../docs/clean-public-style.md). **Remediation (one-time)**: [`automation/docs/clean-remediation.md`](../../automation/docs/clean-remediation.md).
+**Scope**: One publish run from branch **`personal` only**. **Not** a pipeline-router epic trigger — slash-only like **`/epic-calibrate`**. **Contract**: [`docs/clean-contract.json`](../../docs/clean-contract.json). **Verifier**: [`automation/tools/clean_verify.py`](../../automation/tools/clean_verify.py). **Style (public)**: [`docs/clean-public-style.md`](../../docs/clean-public-style.md). **Remediation**: [`automation/docs/clean-remediation.md`](../../automation/docs/clean-remediation.md).
 
-**Hard invariant**: Do **not** run **`CLEAN:`** while checked out on **`team`** or **`public-*`**. End every full run on **`personal`** with **no extra worktrees** and **no `clean/*` or `release-*`** on `team` / `releases` remotes.
+**Hard invariant**: Do **not** run **`/clean`** while checked out on **`team`** or **`public-*`**. End every full run on **`personal`** with **no extra worktrees** and **no `clean/*` or `release-*`** on `team` / `releases` remotes.
 
-**Branch model (three lines only)**: `origin/personal` → `team/team` → `releases/public-M.N` (single current public line). **Sequential checkout** in this repo — **no** worktrees, **no** `clean/*` PR branches.
+**Branch model (three lines only)**: `origin/personal` → `team/team` (Stash) → `releases/public-M.N` (single current public line). **Sequential checkout** in this repo — **no** worktrees, **no** `clean/*` PR branches.
 
 **Ephemeral**: [`automation/temp/clean/`](../../automation/temp/clean/) only. Delete before team/public commits. Durable JSON must **not** reference paths under `automation/temp/clean/`.
 
-**Replaces**: former **`SYNC:`** and **`PUBLIC-SCRUB:`**. Do not invoke those triggers.
+**Replaces**: former **`CLEAN:`**, **`/clean-release`**, **`SYNC:`**, and **`PUBLIC-SCRUB:`**. Do not invoke those triggers.
 
 ---
 
@@ -30,9 +30,9 @@
 
 | Tier | Remote | Branch | Repo |
 |------|--------|--------|------|
-| Personal | `origin` | `personal` | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) |
-| Team | `team` | `team` | [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) |
-| Public | `releases` | `public-M.N` | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) |
+| Personal | `origin` | `personal` | [agentic-epic-helper](https://github.com/heatdance/agentic-epic-helper) (GitHub) |
+| Team | `team` | `team` | Stash `AI/agentic-feature-helper` (`ssh://git@stash.in.devexperts.com:7999/ai/agentic-feature-helper.git`) |
+| Public | `releases` | `public-M.N` | [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) (GitHub) |
 
 ---
 
@@ -74,7 +74,7 @@ After each tier subprocess: **`clean_verify.py --mode align`** (retry until pass
 | `test-precon` | **`TEST-PRECON:`** (LEGACY) | [test-precon.md](test-precon.md) |
 | `test-prep` | **`TEST-PREP:`** | [test-prep.md](test-prep.md) |
 | `close` | **`CLOSE:`** | [close.md](close.md) |
-| `clean` | **`CLEAN:`** | [clean.md](clean.md) (this file) |
+| `clean` | **`/clean`** | [clean.md](clean.md) (this file) |
 
 **S exit**: **`align`** OK. If **`scope=align`**, delete **`automation/temp/clean/`** when done; **stop**.
 
@@ -241,6 +241,6 @@ python automation/tools/clean_verify.py --mode postflight
 
 ## Downstream
 
-- **Contributors** clone [agentic-epic-helper-team](https://github.com/heatdance/agentic-epic-helper-team) branch **`team`** — no `clean/*` flow.
+- **Contributors** clone Stash **`AI/agentic-feature-helper`** branch **`team`** — no `/clean` on that clone.
 - **Public** consumers clone [agentic-epic-helper-releases](https://github.com/heatdance/agentic-epic-helper-releases) branch **`public-M.N`** (single current line) — guide-only.
-- **Maintainers** work on **`personal`**; re-run **`CLEAN:`** after harness changes worth publishing.
+- **Maintainers** work on **`personal`**; re-run **`/clean`** after harness changes worth publishing.

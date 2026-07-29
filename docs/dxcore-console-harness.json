@@ -20,6 +20,7 @@
     "harness_map_package": "dxcore_console",
     "related_reads": [
       "docs/harness-map.json",
+      "docs/crtqa-console-contract.json",
       "automation/tools/crtqa-console/README.md",
       ".cursor/commands/crtqa-console.md",
       ".cursor/rules/mcp-atlassian-search.mdc"
@@ -53,10 +54,12 @@
     "command_slash": "/crtqa-console",
     "warm_session": "automation/tools/crtqa-console/Start-CrtqaConsoleSession.ps1",
     "batch_invoke": "automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1",
+    "host_shell_invoke": "automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1",
     "teardown": "automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps1",
     "interactive_tty": "automation/tools/crtqa-console/Enter-CrtqaConsole.ps1",
     "config": "automation/tools/crtqa-console/crtqa-console.config.json",
-    "notes": "Transcripts append under gitignored temp/crtqa-console/ when using Invoke-* ."
+    "contract": "docs/crtqa-console-contract.json",
+    "notes": "dx batches → invoke-*.log; host shell (no dx, project home + ./log/) → host-*.log. Component log map in crtqa-console-contract.json host_logs."
   },
 
   "runtime_commands_reference": {

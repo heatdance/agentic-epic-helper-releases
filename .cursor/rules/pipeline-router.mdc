@@ -22,6 +22,8 @@ When the user’s message matches a **pipeline trigger**, run the linked **playb
 
 **Operator calibration (not a pipeline trigger):** **`/epic-calibrate`** — slash command; playbook [`.cursor/pipelines/calibrate.md`](../pipelines/calibrate.md); compares `epics/<KEY>/` to operator gold under `.cursor/calibrate/<KEY>-gold/`; does not write epic artefacts.
 
+**Publish (not a pipeline trigger):** **`/clean`** — slash command; playbook [`.cursor/pipelines/clean.md`](../pipelines/clean.md); **`personal` branch only**; publishes to Stash **`team/team`** and GitHub **`releases/public-M.N`**. Contract: [`docs/clean-contract.json`](../../docs/clean-contract.json).
+
 **Epic orchestrator (not a single pipeline):** **`/epic-helper`**, **`/epic-helper resume`** — [`docs/epic-helper-contract.json`](../../docs/epic-helper-contract.json) **v5**; command [`.cursor/commands/epic-helper.md`](../commands/epic-helper.md). **One pipeline stage per agent turn**; no PRECON in default chain.
 
 

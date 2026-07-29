@@ -1,0 +1,288 @@
+{
+  "schema_version": 1,
+  "contract_id": "crtqa-console",
+  "description": "Operator/agent multiplex SSH to CRTQA hosts: dx console batches, host shell (project user without dx), and host log map.",
+  "content_policy": "No credentials. Paths are functional layout only.",
+
+  "session": {
+    "start": "automation/tools/crtqa-console/Start-CrtqaConsoleSession.ps1",
+    "status": "automation/tools/crtqa-console/Get-CrtqaConsoleStatus.ps1",
+    "stop": "automation/tools/crtqa-console/Stop-CrtqaConsoleSession.ps1",
+    "state_dir": "temp/crtqa-console/",
+    "state_file": "temp/crtqa-console/session.active.json",
+    "credential_blob": "temp/crtqa-console/session-credential.dpapi",
+    "prerequisite": "/crtqa-console start (human password dialog) before any Invoke"
+  },
+
+  "modes": {
+    "dx_console": {
+      "id": "dx_console",
+      "script": "automation/tools/crtqa-console/Invoke-CrtqaDxConsole.ps1",
+      "remote_template": "automation/tools/crtqa-console/crtqa-invoke-remote.bash.template",
+      "hop": "SSH (plink -share) → sudo su - <sudoUnixUser> → pipe commands into `dx run console`",
+      "transcript_glob": "temp/crtqa-console/invoke-*.log",
+      "use_for": [
+        "show / update / transfer / account / instrument console verbs",
+        "runtime truth for m-settings and positions"
+      ]
+    },
+    "host_shell": {
+      "id": "host_shell",
+      "script": "automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1",
+      "remote_template": "automation/tools/crtqa-console/crtqa-host-shell-remote.bash.template",
+      "hop": "SSH (plink -share) → sudo su - <sudoUnixUser> → bash (NO dx)",
+      "transcript_glob": "temp/crtqa-console/host-*.log",
+      "landing_cwd": "login home of sudoUnixUser = project root",
+      "use_for": [
+        "read component logs under ./log/",
+        "inspect case dumps under ./case/",
+        "ls/grep/tail on host without console JVM",
+        "diagnose REST/HTTP 500s from application logs"
+      ],
+      "example": ". ./automation/tools/crtqa-console/Invoke-CrtqaHostShell.ps1 -Commands @('pwd','ls log/dxweb.default.*','grep -n rolling-transactions log/dxweb.default.ctuat.log | tail -40')"
+    }
+  },
+
+  "environments": {
+    "qa": {
+      "sshHost": "ctqa.prosp.devexperts.com",
+      "sudoUnixUser": "ctqa",
+      "project_home": "/opt/ctqa",
+      "log_physical": "/opt/log/ctqa/log",
+      "case_physical": "/opt/log/ctqa/case",
+      "env_token_in_filenames": "ctqa"
+    },
+    "uat": {
+      "sshHost": "ctuat.prosp.devexperts.com",
+      "sudoUnixUser": "ctuat",
+      "project_home": "/opt/ctuat",
+      "log_physical": "/opt/log/ctuat/log",
+      "case_physical": "/opt/log/ctuat/case",
+      "env_token_in_filenames": "ctuat"
+    }
+  },
+
+  "host_layout": {
+    "description": "After host_shell hop, cwd is project_home. Key symlinks are relative to that home.",
+    "symlinks": {
+      "log": "/opt/log/<sudoUnixUser>/log",
+      "case": "/opt/log/<sudoUnixUser>/case",
+      "dumps": "/opt/log/<sudoUnixUser>/dumps",
+      "releases": "/opt/log/<sudoUnixUser>/releases"
+    },
+    "component_dirs_in_project": "Sibling directories under project_home (dxweb/, webbroker/, server/, console/, …) hold binaries/conf; runtime logs are NOT nested there — they are flat files under ./log/."
+  },
+
+  "host_logs": {
+    "root_relative": "log/",
+    "layout": "flat_files",
+    "naming": {
+      "pattern": "<component>[._]<instance>.<env_token>.<suffix>",
+      "examples": [
+        "dxweb.default.ctuat.log",
+        "et-fix-router.market.ctuat.log",
+        "console.default.<pid>.ctuat.log",
+        "dxweb.default.ctuat.access.2026-07-29.log",
+        "_dxweb.default.ctuat.control.log"
+      ],
+      "suffixes": {
+        ".log": "Primary application log (log4j2) — stack traces, business errors",
+        ".err": "Process stderr",
+        ".out": "Process stdout",
+        ".access.YYYY-MM-DD.log": "HTTP access log (dxweb, dxtrade5, webbroker, dxmc, …)",
+        ".log.json": "Structured/json companion when enabled",
+        ".log4j2.xml": "Active logging config snapshot",
+        ".env / .stat / .start.cmd": "Runit/process metadata — usually not for app diagnosis",
+        "_.*.control.log / _.*.state.log": "Supervisor/control plane — not app business logic"
+      },
+      "notes": [
+        "Leading underscore marks control/state companion files for the same component.",
+        "console sessions include a numeric PID segment: console.default.<pid>.<env>.log",
+        "Some routers split instances: market | limitstop | realtime | delayed | dropcopy."
+      ]
+    },
+    "how_to_read": [
+      "Prefer host_shell mode (not dx_console) for log greps.",
+      "Start with: ls log/<component>.*.<env_token>.*",
+      "Then: grep -nE '<needle>' log/<component>.default.<env_token>.log | tail -N",
+      "For HTTP timing correlate .access.YYYY-MM-DD.log with .log around the same timestamp.",
+      "Do not invent /opt/.../logs/dxweb/dxweb.log paths — layout is flat under log/."
+    ],
+    "components": [
+      {
+        "id": "dxweb",
+        "role": "DX REST / dxweb (incl. /dxweb/rest/api/* such as rolling-transactions)",
+        "primary_log": "log/dxweb.default.<env>.log",
+        "access_log": "log/dxweb.default.<env>.access.YYYY-MM-DD.log",
+        "when": "HTTP 4xx/5xx from REST API, FX Spot Rollover API, auth/principal failures"
+      },
+      {
+        "id": "server",
+        "role": "dxCore server (domain/account/order core)",
+        "primary_log": "log/server.default.<env>.log",
+        "when": "Core domain failures, transfers, financing jobs, account mutations beyond console"
+      },
+      {
+        "id": "console",
+        "role": "dx run console JVM sessions",
+        "primary_log": "log/console.default.<pid>.<env>.log",
+        "when": "Scripted/interactive console crashes; usually prefer local temp/crtqa-console/invoke-*.log for agent batches"
+      },
+      {
+        "id": "webbroker",
+        "role": "Dealer WebBroker UI/backend",
+        "primary_log": "log/webbroker.default.<env>.log",
+        "access_log": "log/webbroker.default.<env>.access.YYYY-MM-DD.log",
+        "when": "Dealer UI issues, position book, dealer-side widgets"
+      },
+      {
+        "id": "webbroker-widgets",
+        "role": "Embedded WebBroker widgets host",
+        "primary_log": "log/webbroker-widgets.default.<env>.log",
+        "when": "Widget-host errors separate from webbroker shell"
+      },
+      {
+        "id": "dxtrade5",
+        "role": "Retail / dxTrade5 web trading UI",
+        "primary_log": "log/dxtrade5.default.<env>.log",
+        "access_log": "log/dxtrade5.default.<env>.access.YYYY-MM-DD.log",
+        "when": "Client trading UI HTTP/app errors"
+      },
+      {
+        "id": "dxsca-web",
+        "role": "SCA / FIX-related web bridge",
+        "primary_log": "log/dxsca-web.default.<env>.log",
+        "extras": ["inbound-messages.log", "outbound-messages.log"],
+        "when": "SCA message path debugging"
+      },
+      {
+        "id": "dxmc",
+        "role": "dxMC management/console web",
+        "primary_log": "log/dxmc.default.<env>.log",
+        "when": "Management console HTTP issues"
+      },
+      {
+        "id": "financing",
+        "role": "Financing / overnight jobs",
+        "primary_log": "log/financing.default.<env>.log",
+        "when": "send financing_request / financing job failures"
+      },
+      {
+        "id": "riskmonitor",
+        "role": "Risk monitor",
+        "primary_log": "log/riskmonitor.default.<env>.log",
+        "when": "Risk/liquidation path"
+      },
+      {
+        "id": "et-fix-router",
+        "role": "External Trading FIX routers",
+        "instances": ["market", "limitstop"],
+        "primary_log": "log/et-fix-router.<instance>.<env>.log",
+        "when": "ET market / limit-stop routing"
+      },
+      {
+        "id": "fix-router",
+        "role": "Generic FIX router",
+        "primary_log": "log/fix-router.default.<env>.log",
+        "when": "FIX routing outside ET-specific instances"
+      },
+      {
+        "id": "fix-server-dxcore",
+        "role": "FIX server (dxcore) incl. dropcopy",
+        "instances": ["dropcopy", "default"],
+        "primary_log": "log/fix-server-dxcore.<instance>.<env>.log",
+        "when": "Drop-copy / FIX server"
+      },
+      {
+        "id": "multiplexor",
+        "role": "Quote/data multiplexor",
+        "primary_log": "log/multiplexor.default.<env>.log",
+        "when": "Mux connectivity"
+      },
+      {
+        "id": "muxquote",
+        "role": "Quote mux in/out realtime/delayed",
+        "instances": ["inrealtime", "indelayed", "outrealtime", "outdelayed"],
+        "primary_log": "log/muxquote.<instance>.<env>.log",
+        "when": "Quote path issues"
+      },
+      {
+        "id": "watchlist-engine",
+        "role": "Watchlist engine",
+        "primary_log": "log/watchlist-engine.default.<env>.log",
+        "when": "Watchlist backend"
+      },
+      {
+        "id": "activator",
+        "role": "Account/instrument activator",
+        "primary_log": "log/activator.default.<env>.log",
+        "when": "Activation jobs"
+      },
+      {
+        "id": "job-scheduler",
+        "role": "Scheduled jobs (if present under project; logs may appear when component runs)",
+        "primary_log": "log/job-scheduler.default.<env>.log",
+        "when": "Scheduled job orchestration"
+      },
+      {
+        "id": "dxcore-fix-autoexecutor",
+        "role": "Auto-executor for FIX/orders",
+        "primary_log": "log/dxcore-fix-autoexecutor.default.<env>.log",
+        "when": "Autoexecution path"
+      },
+      {
+        "id": "notification-sender",
+        "role": "Outbound notifications",
+        "primary_log": "log/notification-sender.default.<env>.log",
+        "when": "Notification delivery"
+      },
+      {
+        "id": "metrics-publisher",
+        "role": "Metrics publisher",
+        "instances": ["realtime", "delayed"],
+        "primary_log": "log/metrics-publisher.<instance>.<env>.log",
+        "when": "Metrics pipeline"
+      },
+      {
+        "id": "updaters",
+        "role": "Periodic IPF/rates/hours/geoip updaters (many *-updater components)",
+        "pattern": "log/<name>-updater.default.<env>.log",
+        "examples": [
+          "interest-rates-updater",
+          "swap-rates-updater",
+          "geoip-updater",
+          "ipf-synchronizer",
+          "instrument-trading-hours-updater"
+        ],
+        "when": "Data refresh / IPF / rates jobs"
+      },
+      {
+        "id": "external_fix_routers",
+        "role": "Broker-specific FIX routers",
+        "examples": [
+          "ig-dma-fix-router",
+          "ig-otc-fix-router",
+          "ubs-fix-router",
+          "soc-gen-fix-router",
+          "caronte-fix-router"
+        ],
+        "primary_log": "log/<router>.default.<env>.log",
+        "when": "External broker FIX path"
+      }
+    ]
+  },
+
+  "agent_rules": [
+    "Use dx_console for dx verbs; use host_shell for filesystem/logs.",
+    "Never commit host transcripts with secrets; temp/crtqa-console/ is gitignored.",
+    "Before guessing log paths, read host_logs.naming + components in this contract.",
+    "Slash command /crtqa-console host … maps to Invoke-CrtqaHostShell.ps1."
+  ],
+
+  "related": [
+    "docs/dxcore-console-harness.json",
+    "automation/tools/crtqa-console/README.md",
+    ".cursor/commands/crtqa-console.md",
+    "docs/harness-map.json"
+  ]
+}

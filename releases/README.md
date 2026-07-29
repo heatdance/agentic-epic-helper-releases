@@ -1,6 +1,6 @@
 # Corner release notes (`releases/`)
 
-**Branch policy:** **`releases/**`** is **personal-branch only** (not on `team/team` or `public-*` via `CLEAN:`). Run **`/release-notes`** on branch **`personal`**.
+**Branch policy:** **`releases/**`** is **personal-branch only** (not on `team/team` or `public-*` via `/clean`). Run **`/release-notes`** on branch **`personal`**.
 
 ## Output layout
 

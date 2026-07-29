@@ -106,7 +106,7 @@ def apply(root: Path, export_version: str, source_branch: str, source_sha: str) 
 
     _apply_template_overlays(root, contract)
 
-    _copy_seed(root, "README.md")
+    # README is shared across tiers (keep); seed HOW-TO + AGENTS for public visitors
     _copy_seed(root, "HOW-TO.md")
     _copy_seed(root, "AGENTS.md")
 

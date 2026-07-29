@@ -1,33 +1,28 @@
 # QA handoff — Corner Trader workspace
 
-Last updated: 2026-07-28 (D19 derived truth beats declared numbers).
+Last updated: 2026-07-29 (back on personal; /clean replaces CLEAN; team = Stash only).
 
 ## Current focus
 
-**D19:** breadth thresholds now come from the source, not from agent-declared fields. `parameter_inventory` is re-derived from `snippet_text` and unioned with the declared list (`parameter_inventory_undercut`); `requirement_passes[]` makes the mandatory EPIC-PREP step 3c fan-out checkable; `snippet_text` under 60% of attested `source_chars` fails; availability placement is exempted per check, not per ref; oracle detail lines must name their parameter and differ between variations.
+**Branch truth:** work on **`personal`** only for latest harness. Stash **`team/team`** is intentionally not updated with these personal advances. GitHub team repo is gone; remote **`team`** points at Stash `AI/agentic-feature-helper`.
 
-**D18** stays in force (obligation = catalogue variation, `docs/variation-catalogue.json`, `variation_density` metrics) — D19 closes the loopholes that let build 46 pass with 9 field checks.
+**Publish:** use slash **`/clean`** (not `CLEAN:` / `/clean-release`). Playbook still at `.cursor/pipelines/clean.md`.
 
-**CI mode gap (found while wiring D19):** step 5 ran only `coverage_verify --mode draft_truth`, so every coverage-side semantic gate from D17 onward was unreachable — the build-43 stub fixture passes `draft_truth` and fails `obligations` with 20 violations. Step 5 now runs both modes and passes `--md`.
+**crtqa-console:** host shell (`Invoke-CrtqaHostShell.ps1`) + `docs/crtqa-console-contract.json` (`host_logs`) — WIP on personal, not pushed to team.
 
 ## Resume
 
-- D19 pushed to `stash/team`; re-run Pipeline CRT-635
-- Confluence + Bitbucket PATs must still be set (D17)
+- On branch **`personal`** (includes stash tip + maintainer layer + local WIP)
+- Do **not** push personal tip to `team` until explicitly publishing via `/clean`
 
 ## Next
 
-1. Re-run CRT-635 and read the log lines `OK epic_prep_verify … mandated_variations=…` (step 3) and `variation_density=… variation_checks=… mandated=…` (step 5); the same numbers land in build statistics as `corner.mandated_variations` / `corner.variation_checks`
-2. If EPIC-PREP now fails on `parameter_inventory_undercut` or `snippet_truncated`, that is the gate working — the fix is a fuller transcription, not a lower threshold
-3. Only if `mandated_variations` stays low with all gates green: raise `AGENT_MODEL` on the EPIC-PREP step (default `composer-2.5` in `run_pipeline_agent.py`)
-4. Engineer extends the paste on CRTQA; repo `-coverage.md` stays machine-generated
-
-## Known drift (not caused by D19)
-
-Four documented fixture commands in `automation/tools/fixtures/coverage/README.md` fail at HEAD: the 594 topology example points at `epics/CRT-594/CRT-594-ref.json` (absent on this branch), two principal fixtures carry `## Primary focus` in the paste, and the 594 reinforce fixture misses `oracle_rule` mentions in `detail_lines`. Verified against a clean HEAD worktree before the D19 edits.
+1. When ready to share with squad: `/clean scope=team` (or full) from personal — only then updates Stash team
+2. CRT-677: authenticated rolling-transactions call
+3. Optional: push `origin/personal` when ready (local is ahead of origin)
 
 ## Pointers
 
-- D18 / D19: [automation/CI/decisions.md](automation/CI/decisions.md)
-- Catalogue: [docs/variation-catalogue.json](docs/variation-catalogue.json)
-- Fixtures: `crt635-target-good-*`, `crt635-skeleton-bad-*`, `crt635-undercut-bad-ref.json`, `crt677-watchlist-portability-ref.json`
+- `/clean`: [.cursor/commands/clean.md](.cursor/commands/clean.md)
+- Console contract: [docs/crtqa-console-contract.json](docs/crtqa-console-contract.json)
+- Remotes: `origin` (personal), `team` (Stash), `releases` (public)

@@ -69,10 +69,20 @@ Playbooks: [.cursor/pipelines/](.cursor/pipelines/) · Layout: [epics/README.md]
 | `/epic-calibrate` | After CLOSE — compare prod vs gold (optional) |
 | `/epic-stats` | Personal TCD stats — [stats/epic-stats/README.md](stats/epic-stats/README.md) |
 | `/release-notes` | Release notes from Jira (personal branch) |
-| `/clean-release` | Publish harness (`CLEAN:` playbook) — **`personal` branch only** |
+| `/clean` | Publish harness (personal → Stash team → public) — **`personal` branch only** |
 
 ---
 
 ## Maintainer only
 
-**`CLEAN:`** on branch **`personal`** only — publish personal / team / public tiers. [`.cursor/pipelines/clean.md`](.cursor/pipelines/clean.md)
+**`/clean`** on branch **`personal`** only — publish personal / Stash team / public tiers. [`.cursor/commands/clean.md`](.cursor/commands/clean.md) · [`.cursor/pipelines/clean.md`](.cursor/pipelines/clean.md)
+
+### Stash push (agent / Cursor)
+
+Remote **`team`** → Stash `AI/agentic-feature-helper` (branch `team`). Git needs your SSH key unlocked in **`ssh-agent`**.
+
+1. Once (admin PowerShell): `Set-Service ssh-agent -StartupType Automatic` → `Start-Service ssh-agent`
+2. After each reboot / login: `ssh-add $env:USERPROFILE\.ssh\id_ed25519` (passphrase once)
+3. Check: `git fetch team` — then you can ask the agent to push to team
+
+Passphrase is **not** remembered across reboot unless you use a separate key without passphrase (optional trade-off). This section is **personal-only** (team HOW-TO is rewritten from templates on `/clean`).

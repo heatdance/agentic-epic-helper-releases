@@ -110,7 +110,22 @@
     "variation_oracle_from_spec_text": true,
     "variation_oracle_detail_distinct": true,
     "forbid_empty_markdown_sections": true,
-    "not_attempted_section_when_unmatched_or_out_of_scope": true
+    "not_attempted_section_when_unmatched_or_out_of_scope": true,
+    "markdown_paste_carries_declared_lines": true
+  },
+  "markdown_paste_fidelity": {
+    "enforce": true,
+    "narrative_only_section_prefixes": [
+      "## Functional configuration",
+      "## Data setup —",
+      "## Primary focus"
+    ],
+    "error_ids": [
+      "markdown_paste_missing_scenario",
+      "markdown_paste_missing_detail",
+      "markdown_paste_drift"
+    ],
+    "_note": "Published <KEY>-coverage.md must carry every scenario_line, every operator detail line and every smart_checklist_markdown line. The paste may add sections (## Not attempted); it may not drop declared content. Checks in narrative-only sections are exempt because the builder omits them. Builder: automation/tools/coverage_md_sync.py. Rationale: automation/CI/decisions.md D21."
   },
   "excluded_checks_item_fields": [
     "check_id",

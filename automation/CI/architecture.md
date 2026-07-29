@@ -29,7 +29,7 @@ flowchart LR
 
 | Workspace | Purpose |
 |-----------|---------|
-| **Local `cursor.corner`** | Full harness development (personal/team/public tiers via `CLEAN:`) |
+| **Local `cursor.corner`** | Full harness development (personal/team/public tiers via `/clean`) |
 | **Stash `AI/agentic-feature-helper` branch `team`** | What dxCity Pipeline checks out |
 
 TeamCity VCS root must track **`team`** on Stash. Maintainer pushes harness changes there before expecting CI to pick them up. GitHub `team` remote is a mirror only — see [rollout-learnings.md](rollout-learnings.md).

@@ -234,12 +234,26 @@ def migrate_discover_lines_to_trace(coverage: dict[str, Any]) -> int:
     return moved
 
 
+def hint_applies_to_epic(entry: dict[str, Any], epic_key: str) -> bool:
+    """Catalog entries carry epic-specific wording; epic_keys[] keeps them there."""
+    scope = entry.get("epic_keys")
+    if not scope:
+        return True
+    return epic_key in {str(x) for x in scope}
+
+
+def _has_operator_line(detail: list[Any]) -> bool:
+    return any(OPERATOR_PREFIX_RE.search(str(x)) for x in detail)
+
+
 def apply_fixture_operator_hints(coverage: dict[str, Any], hints: dict[str, Any]) -> None:
     """Ensure setup checks have human lines from fixture_kinds catalog when empty."""
     kinds = hints.get("fixture_kinds") or {}
     setup_kind = kinds.get("account_group_environment_setup") or {}
     operator_lines = setup_kind.get("operator_lines") or []
     if not operator_lines:
+        return
+    if not hint_applies_to_epic(setup_kind, str(coverage.get("epic_key") or "")):
         return
     for chk in coverage.get("checks") or []:
         if not isinstance(chk, dict):
@@ -248,6 +262,8 @@ def apply_fixture_operator_hints(coverage: dict[str, Any], hints: dict[str, Any]
         if not cid.startswith("chk-s"):
             continue
         detail = list(chk.get("detail_lines") or [])
+        if _has_operator_line(detail):
+            continue
         existing = {str(x).strip() for x in detail}
         for ol in operator_lines:
             ol_s = str(ol).strip()
@@ -258,8 +274,14 @@ def apply_fixture_operator_hints(coverage: dict[str, Any], hints: dict[str, Any]
 
 
 def apply_affordance_operator_hints(coverage: dict[str, Any], hints: dict[str, Any]) -> None:
-    """Replace bare Discover-only invariant/adaptive/console checks with human hints."""
+    """Replace bare Discover-only invariant/adaptive/console checks with human hints.
+
+    The mapping is positional (chk-003, chk-007, …), so it must stay inside the epic
+    the catalog wording was written for and must never overwrite a check that already
+    carries operator lines.
+    """
     patterns = hints.get("affordance_patterns") or {}
+    epic_key = str(coverage.get("epic_key") or "")
     checks_by_id = {
         str(c.get("id")): c
         for c in (coverage.get("checks") or [])
@@ -277,8 +299,13 @@ def apply_affordance_operator_hints(coverage: dict[str, Any], hints: dict[str, A
         if not chk:
             continue
         pat = patterns.get(pat_key) or {}
+        if not hint_applies_to_epic(pat, epic_key):
+            continue
         operator_lines = pat.get("operator_lines") or []
         detail = [str(x) for x in (chk.get("detail_lines") or []) if not MACHINE_PREFIX_RE.search(str(x))]
+        if _has_operator_line(detail):
+            chk["detail_lines"] = detail
+            continue
         existing = {x.strip() for x in detail}
         for ol in operator_lines:
             ol_s = str(ol).strip()

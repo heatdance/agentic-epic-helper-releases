@@ -84,6 +84,11 @@ OPERATOR_PREFIX_RE = re.compile(
 MACHINE_LINE_RE = re.compile(r"^\s*>\s*(Discover|Discovery):", re.M | re.I)
 PLATFORM_REUSE_HEADING = "## Platform reuse candidates (verify in Jira)"
 PRIMARY_FOCUS_HEADING = "## Primary focus"
+NARRATIVE_ONLY_SECTION_PREFIXES = (
+    "## Functional configuration",
+    "## Data setup —",
+    PRIMARY_FOCUS_HEADING,
+)
 TAG_STUB_PATTERNS = [
     re.compile(r"card is available", re.I),
     re.compile(r"is present and visible", re.I),
@@ -298,6 +303,7 @@ def verify_obligations(
             errors.append(f"anti_pattern_findings contains {aid}")
 
     errors.extend(verify_markdown_sections(coverage, md_path, contract))
+    errors.extend(verify_markdown_paste_fidelity(coverage, md_path, contract))
 
     if ref:
         errors.extend(verify_atomic_checks(coverage, ref, contract))
@@ -744,6 +750,71 @@ def verify_markdown_sections(
 
     close(h3, h3_content)
     close(h2, h2_content)
+    return errors
+
+
+def verify_markdown_paste_fidelity(
+    coverage: dict[str, Any], md_path: Path | None, contract: dict[str, Any]
+) -> list[str]:
+    """D21: the paste an operator copies must carry every line the JSON declares.
+
+    Other md gates read the file when it exists and the JSON field otherwise, so a
+    hand-edited paste can silently drop verified content (console recipes, oracles)
+    while every gate stays green. Extra sections in the paste are allowed.
+    """
+    rules = contract.get("markdown_paste_fidelity") or {}
+    if not rules.get("enforce", True):
+        return []
+    if md_path is None or not md_path.is_file():
+        return []
+    try:
+        published = md_path.read_text(encoding="utf-8")
+    except OSError:
+        return []
+    if not published.strip():
+        return []
+
+    pasted = {line.strip() for line in published.splitlines() if line.strip()}
+    narrative = tuple(
+        rules.get("narrative_only_section_prefixes") or NARRATIVE_ONLY_SECTION_PREFIXES
+    )
+    errors: list[str] = []
+    reported: set[str] = set()
+
+    for chk in coverage.get("checks") or []:
+        if not isinstance(chk, dict):
+            continue
+        if str(chk.get("section") or "").strip().startswith(narrative):
+            continue
+        cid = chk.get("id")
+        scenario = str(chk.get("scenario_line") or "").strip()
+        if scenario and scenario not in pasted:
+            reported.add(scenario)
+            errors.append(
+                f"markdown_paste_missing_scenario: check {cid}: scenario_line absent "
+                "from published md"
+            )
+        for i, raw in enumerate(chk.get("detail_lines") or []):
+            line = str(raw).strip()
+            if not line or MACHINE_LINE_RE.search(line):
+                continue
+            if line not in pasted:
+                reported.add(line)
+                errors.append(
+                    f"markdown_paste_missing_detail: check {cid} detail_lines[{i}] "
+                    f"absent from published md: {line[:80]!r}"
+                )
+
+    for raw in str(coverage.get("smart_checklist_markdown") or "").splitlines():
+        line = raw.strip()
+        if not line or line in pasted or line in reported:
+            continue
+        reported.add(line)
+        errors.append(
+            f"markdown_paste_drift: smart_checklist_markdown line absent from "
+            f"published md: {line[:80]!r}"
+        )
+
     return errors
 
 

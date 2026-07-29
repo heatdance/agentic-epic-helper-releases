@@ -1,13 +1,13 @@
 # CLEAN publish tier matrix
 
-Normative path → tier actions for **`CLEAN:`**. Machine-readable source: [clean-publish-tier-matrix.json](clean-publish-tier-matrix.json).
+Normative path → tier actions for **`/clean`**. Machine-readable source: [clean-publish-tier-matrix.json](clean-publish-tier-matrix.json).
 
 ## Branch intent (operator-confirmed)
 
 | Tier | Who | Goal |
 |------|-----|------|
 | **personal** | You only | Private backup: everything tracked except gitignore; **your** epics, handoff, **`releases/**` + `/release-notes`**, calibrate gold, stats, coaches, teach |
-| **team** | Squad on **private** `agentic-epic-helper-team` | Runnable harness + **`/epic-helper`** + calibrate; **no** stats, coaches, teach, epics, release-notes, or publish flow |
+| **team** | Squad on **Stash** `AI/agentic-feature-helper` (`team`) | Runnable harness + **`/epic-helper`** + calibrate; **no** stats, coaches, teach, epics, release-notes, or publish flow |
 | **public** | External readers | Guide-only **`*-readme.md`**; orchestrator + calibrate **conceptual** in HOW-TO only; **no** executable helper, stats, coaches, verifiers, org maps, or MCP recipes |
 
 Policy fields: `tier_goals` and `team.org_maps_policy` in [clean-contract.json](clean-contract.json).
@@ -16,8 +16,8 @@ Policy fields: `tier_goals` and `team.org_maps_policy` in [clean-contract.json](
 
 | Variant | Branch / remote | Entry docs |
 |---------|-----------------|------------|
-| **maintainer** | `personal` / `origin` | Live [README.md](../README.md), [HOW-TO.md](../HOW-TO.md), [AGENTS.md](../AGENTS.md) — includes three-repo table and `CLEAN:` |
-| **contributor** | `team` / `team` | Generated from [clean-entry-templates/](clean-entry-templates/) — clone `team` branch; no `CLEAN:` / `/release-notes` / stats / coaches |
+| **maintainer** | `personal` / `origin` | Live [HOW-TO.md](../HOW-TO.md), [AGENTS.md](../AGENTS.md); [README.md](../README.md) is **shared keep** across tiers |
+| **contributor** | `team` / `team` (Stash) | HOW-TO/AGENTS from [clean-entry-templates/](clean-entry-templates/); README kept unchanged |
 | **visitor** | `public-M.N` / `releases` | Guide-only; [clean_apply_public.py](../automation/tools/clean_apply_public.py) |
 
 ## Mind map (high level)

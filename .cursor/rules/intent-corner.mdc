@@ -28,8 +28,8 @@ Do not implement from keywords alone without reading the matched package or play
 |---------|------------|
 | `EPIC-PREP:` … `CLOSE:` per [pipeline-router.mdc](pipeline-router.mdc) | One epic key; playbook steps only |
 | `COVERAGE-REINFORCE:` | One epic key; [coverage-reinforce.md](../pipelines/coverage-reinforce.md) only |
-| `CLEAN:` | `personal` branch only; [docs/clean-contract.json](../../docs/clean-contract.json) |
-| `/epic-calibrate`, `/epic-stats`, `/release-notes`, `/crtqa-console`, `/epic-helper`, `/clean-release` | Per matching `.cursor/commands/*.md` |
+| `/clean` | `personal` branch only; [docs/clean-contract.json](../../docs/clean-contract.json) |
+| `/epic-calibrate`, `/epic-stats`, `/release-notes`, `/crtqa-console`, `/epic-helper` | Per matching `.cursor/commands/*.md` |
 
 **Low confidence still applies** to: second epic without trigger, extra repos, or “also refactor all docs/” without scope.
 

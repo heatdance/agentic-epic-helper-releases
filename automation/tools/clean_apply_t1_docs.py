@@ -13,7 +13,6 @@ CONTRACT = REPO_ROOT / "docs/clean-contract.json"
 TEMPLATES = REPO_ROOT / "docs/clean-entry-templates"
 
 TEAM_MAP = {
-    "README.md": "README.team.md",
     "HOW-TO.md": "HOW-TO.team.md",
     "AGENTS.md": "AGENTS.team.md",
 }
@@ -68,14 +67,14 @@ def apply_team(root: Path, contract: dict) -> None:
         text = _substitute(tmpl.read_text(encoding="utf-8"), contract)
         (root / dest).write_text(text, encoding="utf-8")
     strip_ids = contract.get("team", {}).get(
-        "harness_map_strip_package_ids", ["clean_release"]
+        "harness_map_strip_package_ids", ["clean"]
     )
     strip_harness_packages(root, strip_ids)
 
 
 def apply_public_t1(root: Path) -> None:
     """Public T1 is written by clean_apply_public; ensure harness-map strip if file remains."""
-    strip_harness_packages(root, ["clean_release", "calibrate_pipeline", "release_notes"])
+    strip_harness_packages(root, ["clean", "calibrate_pipeline", "release_notes"])
 
 
 def apply(root: Path, tier: str) -> None:

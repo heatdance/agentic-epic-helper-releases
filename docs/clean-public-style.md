@@ -1,6 +1,6 @@
 # CLEAN — public export style guide
 
-Normative prose for **Phase U** of [`CLEAN:`](.cursor/pipelines/clean.md). Agents transform the team tree into a **guide**, not a turnkey solution.
+Normative prose for **Phase U** of [`/clean`](.cursor/pipelines/clean.md). Agents transform the team tree into a **guide**, not a turnkey solution.
 
 ## Voice
 
@@ -98,4 +98,4 @@ Clone it to study how multi-phase agent playbooks, JSON artefacts, and verificat
 - [ ] No blocklist `rg` hits outside allowed globs.
 - [ ] Every former playbook has a matching `*-readme.md`.
 - [ ] README states guide-only intent.
-- [ ] No `clean.md` or `CLEAN:` trigger in public router.
+- [ ] No `clean.md` or `/clean` trigger in public router.
